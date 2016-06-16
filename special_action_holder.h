@@ -10,6 +10,7 @@ public:
 	AOLIB_OBJECT SpecialAction* GetSpecialAction(PCHAR) const;
 	AOLIB_OBJECT SpecialAction* GetSpecialAction(const IDENTITY&) const;
 	AOLIB_OBJECT IDENTITY GetSpecialActionTarget() const;
+	AOLIB_OBJECT ActionLock* GetActionLock(SpecialAction*);
 private:
 	SPECIALACTIONHOLDER special_action_holder_;
 };

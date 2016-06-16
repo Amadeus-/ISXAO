@@ -70,4 +70,9 @@ namespace isxao_classes
 		return GetSpecialActionHolderData().SpecialActionTarget;
 	}
 
+	ActionLock* SpecialActionHolder::GetActionLock(SpecialAction*)
+	{
+		return nullptr;
+	}
+
 }

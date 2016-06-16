@@ -22,4 +22,10 @@ namespace isxao_classes
 		return m.size();
 	}
 
+	ActionLock* PerkHolder::GetActionLock(SpecialAction* special_action)
+	{
+		
+	}
+
+
 }

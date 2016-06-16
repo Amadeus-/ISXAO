@@ -1669,8 +1669,8 @@ namespace AOData
 
 	typedef struct _PERKDIR
 	{
-		BYTE Unknown0x00;
-		struct _PERKROOT* pRoot;
+		BYTE Unknown0x0[0x4];		// 0x00
+		struct _PERKROOT* pRoot;	// 0x04
 		DWORD Count;
 	} PERKDIR, *PPERKDIR;
 
