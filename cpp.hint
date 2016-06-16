@@ -1,0 +1,53 @@
+#define FUNCTION_AT_ADDRESS(function,offset) __declspec(naked) function\
+{\
+	__asm{mov eax, offset};\
+	__asm{jmp eax};\
+}
+#define FUNCTION_AT_VARIABLE_ADDRESS(function,variable) __declspec(naked) function\
+{\
+	__asm{mov eax, [variable]};\
+	__asm{jmp eax};\
+}
+#define FUNCTION_AT_VIRTUAL_ADDRESS(function,virtualoffset) __declspec(naked) function\
+{\
+	__asm{mov eax, [ecx]};\
+	__asm{lea eax, [eax+virtualoffset]};\
+	__asm{mov eax, [eax]};\
+	__asm{jmp eax};\
+}
+#define DETOUR_TRAMPOLINE_EMPTY(trampoline) \
+__declspec(naked) trampoline \
+{ \
+    __asm { nop };\
+    __asm { nop };\
+    __asm { xor eax, eax };\
+    __asm { mov eax, [eax] };\
+    __asm { ret };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+    __asm { nop };\
+}
+#define DATATYPE(_class_,_variable_,_inherits_) extern class _class_ *_variable_
+#define SERVICE(_name_,_callback_,_variable_) extern HISXSERVICE _variable_;extern void __cdecl _callback_(ISXInterface *pClient, unsigned int MSG, void *lpData);

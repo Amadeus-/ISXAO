@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{6A826D85-A00F-4408-92EE-3CD4DF0437BB}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.24730.2</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ISXDK_INC);$(IncludePath)</IncludePath>
+    <LibraryPath>$(ISXDK_LIB);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ISXDK_INC);$(IncludePath)</IncludePath>
+    <LibraryPath>$(ISXDK_LIB);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <PreprocessorDefinitions>_STLP_USE_OWN_NAMESPACE;WIN32;NDEBUG;_WINDOWS;_USRDLL;ISX_EXPORTS;AOLIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+      <ExceptionHandling>Sync</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)ISXAO.dll</OutputFile>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <ImportLibrary>$(OutDir)ISXAO.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>$(ISXDK_LIB);</AdditionalLibraryDirectories>
+      <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
+      <AssemblyDebug>true</AssemblyDebug>
+      <MapExports>true</MapExports>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "D:\repos\isxao\ISXAO\Release\ISXAO.dll" "C:\Program Files (x86)\InnerSpace\Extensions\ISXDK35"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <PreprocessorDefinitions>_STLP_USE_OWN_NAMESPACE;WIN32;NDEBUG;_WINDOWS;_USRDLL;ISX_EXPORTS;AOLIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)ISXAO.dll</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <ImportLibrary>$(OutDir)ISXAO.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>$(ISXDK_LIB);</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "D:\repos\isxao\ISXAO\Release\ISXAO.dll" "C:\Program Files (x86)\InnerSpace\Extensions\ISXDK35"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="action_lock.cpp" />
+    <ClCompile Include="action_lock_type.cpp" />
+    <ClCompile Include="actor.cpp" />
+    <ClCompile Include="actor_type.cpp" />
+    <ClCompile Include="ao_type.cpp" />
+    <ClCompile Include="chat_gui_module.cpp" />
+    <ClCompile Include="chat_window_controller.cpp" />
+    <ClCompile Include="chat_window_node.cpp" />
+    <ClCompile Include="command_interpreter.cpp" />
+    <ClCompile Include="database_handler.cpp" />
+    <ClCompile Include="door.cpp" />
+    <ClCompile Include="graph_path_finder.cpp" />
+    <ClCompile Include="html_parser.cpp" />
+    <ClCompile Include="input_config.cpp" />
+    <ClCompile Include="isxao_commands.cpp" />
+    <ClCompile Include="isxao_detours.cpp" />
+    <ClCompile Include="isxao_globals.cpp" />
+    <ClCompile Include="isxao_log.cpp" />
+    <ClCompile Include="isxao_message.cpp" />
+    <ClCompile Include="isxao_dynels.cpp" />
+    <ClCompile Include="isxao_main.cpp" />
+    <ClCompile Include="isxao_type.cpp" />
+    <ClCompile Include="isxao_utilities.cpp" />
+    <ClCompile Include="bank_entry.cpp" />
+    <ClCompile Include="casting_data.cpp" />
+    <ClCompile Include="character.cpp" />
+    <ClCompile Include="character_type.cpp" />
+    <ClCompile Include="Commands.cpp" />
+    <ClCompile Include="DataTypes.cpp" />
+    <ClCompile Include="dummy_item_base.cpp" />
+    <ClCompile Include="dynel.cpp" />
+    <ClCompile Include="dynel_type.cpp" />
+    <ClCompile Include="engine_client_anarchy.cpp" />
+    <ClCompile Include="game_time.cpp" />
+    <ClCompile Include="identity_type.cpp" />
+    <ClCompile Include="inventory_data.cpp" />
+    <ClCompile Include="inventory_holder.cpp" />
+    <ClCompile Include="inventory_item.cpp" />
+    <ClCompile Include="inventory_item_type.cpp" />
+    <ClCompile Include="inventory_slot_type.cpp" />
+    <ClCompile Include="ISXAO.cpp" />
+    <ClCompile Include="LGUIAOFrame.cpp" />
+    <ClCompile Include="look_at_iir.cpp" />
+    <ClCompile Include="message.cpp" />
+    <ClCompile Include="n3_message.cpp" />
+    <ClCompile Include="nano_item.cpp" />
+    <ClCompile Include="nano_spell_type.cpp" />
+    <ClCompile Include="nano_template.cpp" />
+    <ClCompile Include="nano_template_type.cpp" />
+    <ClCompile Include="new_inventory.cpp" />
+    <ClCompile Include="npc_holder.cpp" />
+    <ClCompile Include="parser.cpp" />
+    <ClCompile Include="perk_holder.cpp" />
+    <ClCompile Include="pet.cpp" />
+    <ClCompile Include="pet_type.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="player_type.cpp" />
+    <ClCompile Include="playfield_anarchy.cpp" />
+    <ClCompile Include="playfield_type.cpp" />
+    <ClCompile Include="register_events.cpp" />
+    <ClCompile Include="resource_database.cpp" />
+    <ClCompile Include="Services.cpp" />
+    <ClCompile Include="special_action.cpp" />
+    <ClCompile Include="special_action_holder.cpp" />
+    <ClCompile Include="special_action_item.cpp" />
+    <ClCompile Include="special_action_type.cpp" />
+    <ClCompile Include="spell_template_data.cpp" />
+    <ClCompile Include="stat_holder.cpp" />
+    <ClCompile Include="targeting_module.cpp" />
+    <ClCompile Include="team_entry.cpp" />
+    <ClCompile Include="team_entry_type.cpp" />
+    <ClCompile Include="team_member_type.cpp" />
+    <ClCompile Include="team_member.cpp" />
+    <ClCompile Include="team_raid.cpp" />
+    <ClCompile Include="team_raid_type.cpp" />
+    <ClCompile Include="text_message.cpp" />
+    <ClCompile Include="TopLevelObjects.cpp" />
+    <ClCompile Include="vehicle.cpp" />
+    <ClCompile Include="weapon_holder.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="action_lock.h" />
+    <ClInclude Include="action_lock_type.h" />
+    <ClInclude Include="actor.h" />
+    <ClInclude Include="actor_type.h" />
+    <ClInclude Include="ao_type.h" />
+    <ClInclude Include="chat_gui_module.h" />
+    <ClInclude Include="chat_window_controller.h" />
+    <ClInclude Include="chat_window_node.h" />
+    <ClInclude Include="command_interpreter.h" />
+    <ClInclude Include="database_handler.h" />
+    <ClInclude Include="door.h" />
+    <ClInclude Include="html_parser.h" />
+    <ClInclude Include="info_item_remote.h" />
+    <ClInclude Include="input_config.h" />
+    <ClInclude Include="isxao_classes.h" />
+    <ClInclude Include="isxao_commands.h" />
+    <ClInclude Include="isxao_data.h" />
+    <ClInclude Include="isxao_enums.h" />
+    <ClInclude Include="isxao_game.h" />
+    <ClInclude Include="isxao_globals.h" />
+    <ClInclude Include="isxao_detours.h" />
+    <ClInclude Include="isxao_inlines.h" />
+    <ClInclude Include="isxao_internal.h" />
+    <ClInclude Include="isxao_log.h" />
+    <ClInclude Include="isxao_main.h" />
+    <ClInclude Include="bank_entry.h" />
+    <ClInclude Include="casting_data.h" />
+    <ClInclude Include="character.h" />
+    <ClInclude Include="Commands.h" />
+    <ClInclude Include="DataTypeList.h" />
+    <ClInclude Include="DataTypes.h" />
+    <ClInclude Include="dummy_item_base.h" />
+    <ClInclude Include="dynel.h" />
+    <ClInclude Include="dynel_type.h" />
+    <ClInclude Include="engine_client_anarchy.h" />
+    <ClInclude Include="game_time.h" />
+    <ClInclude Include="identity_type.h" />
+    <ClInclude Include="inventory_data.h" />
+    <ClInclude Include="inventory_holder.h" />
+    <ClInclude Include="inventory_item.h" />
+    <ClInclude Include="inventory_item_type.h" />
+    <ClInclude Include="inventory_slot.h" />
+    <ClInclude Include="inventory_slot_type.h" />
+    <ClInclude Include="ISXAO.h" />
+    <ClInclude Include="ISXAOServices.h" />
+    <ClInclude Include="isxao_type.h" />
+    <ClInclude Include="isxao_utilities.h" />
+    <ClInclude Include="LGUIAOFrame.h" />
+    <ClInclude Include="character_type.h" />
+    <ClInclude Include="look_at_iir.h" />
+    <ClInclude Include="message.h" />
+    <ClInclude Include="n3_message.h" />
+    <ClInclude Include="nano_item.h" />
+    <ClInclude Include="nano_spell_type.h" />
+    <ClInclude Include="nano_template.h" />
+    <ClInclude Include="nano_template_type.h" />
+    <ClInclude Include="new_inventory.h" />
+    <ClInclude Include="npc_holder.h" />
+    <ClInclude Include="parser.h" />
+    <ClInclude Include="graph_path_finder.h" />
+    <ClInclude Include="perk_holder.h" />
+    <ClInclude Include="pet.h" />
+    <ClInclude Include="pet_type.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="player_type.h" />
+    <ClInclude Include="playfield_type.h" />
+    <ClInclude Include="playfield_anarchy.h" />
+    <ClInclude Include="register_events.h" />
+    <ClInclude Include="resource_database.h" />
+    <ClInclude Include="Services.h" />
+    <ClInclude Include="special_action.h" />
+    <ClInclude Include="special_action_holder.h" />
+    <ClInclude Include="special_action_item.h" />
+    <ClInclude Include="special_action_type.h" />
+    <ClInclude Include="spell_template_data.h" />
+    <ClInclude Include="stat_holder.h" />
+    <ClInclude Include="targeting_module.h" />
+    <ClInclude Include="team_entry.h" />
+    <ClInclude Include="team_entry_type.h" />
+    <ClInclude Include="team_member_type.h" />
+    <ClInclude Include="team_member.h" />
+    <ClInclude Include="team_raid.h" />
+    <ClInclude Include="team_raid_type.h" />
+    <ClInclude Include="text_message.h" />
+    <ClInclude Include="TopLevelObjects.h" />
+    <ClInclude Include="vehicle.h" />
+    <ClInclude Include="weapon_holder.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

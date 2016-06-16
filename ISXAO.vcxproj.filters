@@ -1,0 +1,581 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{e5752e2c-9ea5-4028-ad09-9d96982dfead}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Source Files\LavishScript Extensions">
+      <UniqueIdentifier>{05c6aa08-62c4-47a6-8a2e-b7b0bf42185b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LavishGUI Elements">
+      <UniqueIdentifier>{38018803-4ccc-45e6-863f-f981ea75d4a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Services">
+      <UniqueIdentifier>{6d77fc04-269b-4a6b-8ffa-7d2e94c286a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{eea74d79-20c2-47d8-9cac-ad5d5ef35870}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="Header Files\LavishScript Extensions">
+      <UniqueIdentifier>{249348fd-5550-4ec1-8e87-21106bf7bc49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LavishScript Extensions\Lists">
+      <UniqueIdentifier>{4919bfc8-19d1-48c4-b1c5-6a8f0b24a280}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LavishGUI Elements">
+      <UniqueIdentifier>{13eabe6d-8415-4a49-995d-3ba799c63e56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Services">
+      <UniqueIdentifier>{037963ef-1fc9-48be-baf8-08e760a640b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Services\List">
+      <UniqueIdentifier>{295f601e-c50c-4b80-930c-7667a1fefcde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base">
+      <UniqueIdentifier>{4c6703fd-6670-489a-a167-d95b3aeb972d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base">
+      <UniqueIdentifier>{f63dcec0-4eb1-401f-a729-66a53bde5b06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LavishScript Extensions\DataTypes">
+      <UniqueIdentifier>{e6cf45b0-b076-42c6-bd82-2834d7939473}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LavishScript Extensions\DataTypes">
+      <UniqueIdentifier>{08d7edb1-0b2d-48cd-ae44-87995aa7d717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\Internal">
+      <UniqueIdentifier>{c1737125-cf66-4786-9c18-97af8eafca27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\Internal">
+      <UniqueIdentifier>{8fd851b8-cb0f-487b-9171-c7ff38d93332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\Game">
+      <UniqueIdentifier>{53e7ce5d-2fc5-48db-8c49-e6d1273964f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\Items">
+      <UniqueIdentifier>{09397668-c581-4fd0-bb2a-65d703b12ae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\Objects">
+      <UniqueIdentifier>{6588f5cd-0883-4a74-9910-25ae3210327d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\Objects\Misc">
+      <UniqueIdentifier>{e8d44829-dc2e-47fd-b568-fc39059a892c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\Game">
+      <UniqueIdentifier>{0ddc717a-238f-42d4-923e-e63ea5a13ea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\Items">
+      <UniqueIdentifier>{c920fcec-c08f-4f43-8382-b29e70fe0133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\Objects">
+      <UniqueIdentifier>{951a1e89-222f-401a-9582-8204f6f9bc3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\Objects\Misc">
+      <UniqueIdentifier>{90668eb1-4e11-4405-a54f-e00d4ca3f10c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ISXAO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands.cpp">
+      <Filter>Source Files\LavishScript Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTypes.cpp">
+      <Filter>Source Files\LavishScript Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="TopLevelObjects.cpp">
+      <Filter>Source Files\LavishScript Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="LGUIAOFrame.cpp">
+      <Filter>Source Files\LavishGUI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Services.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="engine_client_anarchy.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="game_time.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="message.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="n3_message.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="parser.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="playfield_anarchy.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="targeting_module.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="dummy_item_base.cpp">
+      <Filter>Source Files\Base\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory_item.cpp">
+      <Filter>Source Files\Base\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="nano_item.cpp">
+      <Filter>Source Files\Base\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="action_lock.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="bank_entry.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="casting_data.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory_data.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory_holder.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="nano_template.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="new_inventory.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="npc_holder.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="perk_holder.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="special_action.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="special_action_holder.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="spell_template_data.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="stat_holder.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="team_entry.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="team_raid.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="vehicle.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="actor.cpp">
+      <Filter>Source Files\Base\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="character.cpp">
+      <Filter>Source Files\Base\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="dynel.cpp">
+      <Filter>Source Files\Base\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="pet.cpp">
+      <Filter>Source Files\Base\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Source Files\Base\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="team_member.cpp">
+      <Filter>Source Files\Base\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="isxao_detours.cpp">
+      <Filter>Source Files\Base\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="isxao_dynels.cpp">
+      <Filter>Source Files\Base\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="isxao_globals.cpp">
+      <Filter>Source Files\Base\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="isxao_log.cpp">
+      <Filter>Source Files\Base\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="isxao_main.cpp">
+      <Filter>Source Files\Base\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="isxao_message.cpp">
+      <Filter>Source Files\Base\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="isxao_utilities.cpp">
+      <Filter>Source Files\Base\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="actor_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="character_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="dynel_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="identity_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory_item_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory_slot_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="nano_spell_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="nano_template_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="pet_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="player_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="team_member_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="team_raid_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="register_events.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="weapon_holder.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="command_interpreter.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="chat_window_controller.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="chat_window_node.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="playfield_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="input_config.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="door.cpp">
+      <Filter>Source Files\Base\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="team_entry_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="isxao_commands.cpp">
+      <Filter>Source Files\Base\Internal</Filter>
+    </ClCompile>
+    <ClCompile Include="ao_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="isxao_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="text_message.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="html_parser.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="chat_gui_module.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="look_at_iir.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="resource_database.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="database_handler.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="graph_path_finder.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="action_lock_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="special_action_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="special_action_item.cpp">
+      <Filter>Source Files\Base\Items</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ISXAO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypes.h">
+      <Filter>Header Files\LavishScript Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands.h">
+      <Filter>Header Files\LavishScript Extensions\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypeList.h">
+      <Filter>Header Files\LavishScript Extensions\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="TopLevelObjects.h">
+      <Filter>Header Files\LavishScript Extensions\Lists</Filter>
+    </ClInclude>
+    <ClInclude Include="LGUIAOFrame.h">
+      <Filter>Header Files\LavishGUI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="ISXAOServices.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Services.h">
+      <Filter>Header Files\Services\List</Filter>
+    </ClInclude>
+    <ClInclude Include="engine_client_anarchy.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="game_time.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="message.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="n3_message.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="parser.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="playfield_anarchy.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="targeting_module.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="dummy_item_base.h">
+      <Filter>Header Files\Base\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory_item.h">
+      <Filter>Header Files\Base\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory_slot.h">
+      <Filter>Header Files\Base\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="nano_item.h">
+      <Filter>Header Files\Base\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="action_lock.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="bank_entry.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="casting_data.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory_data.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory_holder.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="nano_template.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="new_inventory.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="npc_holder.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="perk_holder.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="special_action.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="special_action_holder.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="spell_template_data.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="stat_holder.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="team_entry.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="team_raid.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="weapon_holder.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="vehicle.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="actor.h">
+      <Filter>Header Files\Base\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="character.h">
+      <Filter>Header Files\Base\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="dynel.h">
+      <Filter>Header Files\Base\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="pet.h">
+      <Filter>Header Files\Base\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files\Base\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="team_member.h">
+      <Filter>Header Files\Base\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_classes.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_data.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_detours.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_enums.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_game.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_globals.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_inlines.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_internal.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_log.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_main.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="actor_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="character_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="dynel_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="identity_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory_item_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory_slot_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="nano_spell_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="pet_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="player_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="team_member_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="team_raid_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="nano_template_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="register_events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_utilities.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_commands.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="command_interpreter.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="chat_window_node.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="chat_window_controller.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="door.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="playfield_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="team_entry_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="input_config.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ao_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="text_message.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="html_parser.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="chat_gui_module.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="look_at_iir.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="info_item_remote.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="graph_path_finder.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="resource_database.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="database_handler.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="special_action_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="action_lock_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="special_action_item.h">
+      <Filter>Header Files\Base\Items</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
