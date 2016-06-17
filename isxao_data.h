@@ -1094,6 +1094,34 @@ namespace AOData
 
 #pragma endregion
 
+#pragma region LockIdMap
+
+	// Size = 0x18
+	typedef struct _LOCKIDNODE
+	{
+		struct _LOCKIDNODE* pLower;		// 0x00
+		struct _LOCKIDNODE* pBack;		// 0x04
+		struct _LOCKIDNODE* pHigher;	// 0x08
+		DWORD LockId;					// 0x0C
+		DWORD ActionId;					// 0x14
+	} LOCKIDNODE, *PLOCKIDNODE;
+
+	typedef struct _LOCKIDROOT
+	{
+		struct _LOCKIDNODE* pBegin;		// 0x00
+		struct _LOCKIDNODE* pNode;			// 0x04
+		struct _LOCKIDNODE* pEnd;			// 0x08
+	} LOCKIDROOT, *PLOCKIDROOT;
+
+	typedef struct _LOCKIDDIR
+	{
+		BYTE Unknown0x0[0x4];		// 0x00
+		struct _LOCKIDROOT* pRoot;	// 0x04
+		DWORD Count;
+	} LOCKIDDIR, *PLOCKIDDIR;
+
+#pragma endregion
+
 #pragma region LookAtIIR
 
 	// Size = 0x24
@@ -2059,13 +2087,20 @@ namespace AOData
 
 #pragma region SpecialActionHolder
 
+	// Size = 0xFC
+	// From Gamecode.dll
 	typedef struct _SPECIALACTIONHOLDER
 	{
 		struct _SIMPLECHAR* pClientControlChar;			// 0x00
 		BYTE Unknown0x04[0x58];							// 0x04
 		struct _IDENTITY SpecialActionTarget;			// 0x5C
-		BYTE Unknown0x64[0x20];							// 0x64
+		BYTE Unknown0x64[0x10];							// 0x64
+		PVOID pDistrictData;							// 0x74
+		PVOID pAreaData;								// 0x78
+		BYTE Unknown0x7C[0x8];							// 0x7C
 		std::list<SPECIALACTION>* pSpecialActionsList;	// 0x84
+		struct _LOCKIDDIR* pLockIdDir;					// 0x88
+		BYTE Unknown0x8C[0x70];							// 0x8C
 	} SPECIALACTIONHOLDER, *PSPECIALACTIONHOLDER;
 
 #pragma endregion

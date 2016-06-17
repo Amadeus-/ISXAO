@@ -125,6 +125,35 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		}
 		return false;
 	}
+	case SpecialAction:
+	{
+		if (ISINDEX())
+		{
+			if (ISNUMBER())
+			{
+				auto index = DWORD(GETNUMBER());
+				if ((Object.Ptr = pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialAction(index - 1)))
+				{
+					Object.Type = pSpecialActionType;
+					return true;
+				}
+				return false;
+			}
+			if ((Object.Ptr = pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialAction(argv[0])))
+			{
+				Object.Type = pSpecialActionType;
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+	case SpecialActionCount:
+	{
+		Object.DWord = pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActionCount();
+		Object.Type = pUintType;
+		break;
+	}
 	default:
 		return false;
 	}

@@ -38,6 +38,8 @@ namespace isxao_classes
 
 #include "stat_holder.h"
 
+#include "special_action_item.h"
+
 #include "special_action.h"
 
 #include "special_action_holder.h"
@@ -110,7 +112,7 @@ namespace isxao_classes
 
 #include "graph_path_finder.h"
 
-#include "special_action_item.h"
+
 
 }
 using namespace isxao_classes;

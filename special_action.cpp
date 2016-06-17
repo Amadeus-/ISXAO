@@ -18,6 +18,15 @@ namespace isxao_classes
 		return special_action_.LockedSkillId2;
 	}
 
+	DWORD SpecialAction::GetLockoutTimeRemaining() const
+	{
+		DWORD a, b;
+		DWORD *pA = &a;
+		DWORD *pB = &b;
+		pEngineClientAnarchy->N3Msg_GetActionProgress(GetIdentity(), pA, pB);
+		return a;
+	}
+
 	PCSTR SpecialAction::GetName() const
 	{
 		IDENTITY dummy_identity;
@@ -28,6 +37,14 @@ namespace isxao_classes
 	{
 		return special_action_;
 	}
+
+	SpecialActionItem* SpecialAction::GetSpecialActionItem()
+	{
+		IDENTITY dummy_identity;
+		ZeroMemory(&dummy_identity, sizeof(IDENTITY));
+		return reinterpret_cast<SpecialActionItem*>(pEngineClientAnarchy->GetItemByTemplate(GetIdentity(), dummy_identity));
+	}
+
 
 	IDENTITY SpecialAction::GetWeaponIdentity() const
 	{

@@ -2,7 +2,7 @@
 ### An [Inner Space](http://www.lavishsoft.com/) extension for [Anarchy Online](http://www.anarchy-online.com/).
 ## Commands
 
-### **Activate** 
+### Activate 
 
 #### Syntax:  
 `activate <Slot Name>`  
@@ -94,7 +94,7 @@ Activates an item that is equipped or in the general inventory.
 `activate GI_74`  
 `activate WS_BELT`
 	
-### **AOEcho**
+### AOEcho
 
 #### Syntax:  
 `AOEcho [options] [output]`  
@@ -182,14 +182,16 @@ By supplying a chattype, you are indicating to your client the color of the mess
 `ItemNormal`
 `ItemExotic`
 `ItemQuest`
-`ItemSocial`
-Defaults: The default "chat type" is `System`.  
+`ItemSocial`  
+
+###### Defaults:  
+The default "chat type" is `System`.  
 
 #### Examples: 
 `AOEcho ${Me.Name}`  
 `AOEcho -chattype red ${Target.Name}`
 	
-### **AOExecute**
+### AOExecute
 
 #### Syntax: 
 `AOExecute <Chat Command>`  
@@ -200,7 +202,7 @@ This command executes in-game AO commands. It is primarily used for executing AO
 #### Example: 
 `AOExecute /follow`
 
-### **Face**
+### Face
 
 #### Syntax: 
 `face [options]`  
@@ -221,7 +223,7 @@ This command executes in-game AO commands. It is primarily used for executing AO
 `face 300.15 -234.32`  
 `face 46.5`  
 
-### **Target**
+### Target
 
 #### Syntax: 
 `target [parameter]`
@@ -245,7 +247,7 @@ This command executes in-game AO commands. It is primarily used for executing AO
 
 ## Datatypes
 
-### **AO**
+### AO
 This datatype include miscellaneous data that is available to ISXAO that pertain to the Anarchy Online gameworld.  
 
 #### Members:  
@@ -259,7 +261,7 @@ This datatype include miscellaneous data that is available to ISXAO that pertain
 * `int Zoning`
   * Return values are: -1 = unsure, 0 = not zoning, 1 = zoning
 
-### **ActionLock**
+### ActionLock
 This datatype has data pertaining a specific locked skill or action.  
 
 #### Members:
@@ -270,7 +272,7 @@ This datatype has data pertaining a specific locked skill or action.
 * `string ToString`
   * The number of seconds of lockout time remaining.
 	
-### **Actor** (inherits from **Dynel**)
+### Actor (inherits from Dynel)
 Actor represents NPCs on the playfield that the character can affect.  
 
 #### Members:
@@ -291,7 +293,7 @@ Actor represents NPCs on the playfield that the character can affect.
 * `uint Level`
   * The actor's level. For players, this is their profession level and Shadowlands levels.
 * `variable Pet[n] or Pet[name]`
-  * Retrieves the nth pet of the actor or the first pet that matches the name or partial name provided. The return type is Pet for pets belonging to the Character and Actor for all other pets.
+  * Retrieves the *nth* (from `1 to PetCount`) pet of the actor or the first pet that matches the name or partial name provided. The return type is Pet for pets belonging to the Character and Actor for all other pets.
 * `uint PetCount`
   * The number of pets controlled by the actor.	
 * `variable Master`
@@ -373,7 +375,7 @@ Actor represents NPCs on the playfield that the character can affect.
 * `DoTarget`
   * The character will target the actor.	
 	
-### **Dynel**
+### Dynel
 Dynel represents a game object on the playfield. This includes players, monsters, doors, mission kiosks, corpses, and even some player carried weapons and containers. The main purpose of this datatype is to allow you to collect enough information to determine the correct type and then cast it to the type. There is very limited information available about these objects.  
 
 #### Members:
@@ -448,10 +450,10 @@ Dynel represents a game object on the playfield. This includes players, monsters
 * `Interact`
   * Has the effect of right clicking on the dynel. (e.g. start trade with a player, open a mission kiosk, etc.)
 	
-### **Identity**
+### Identity
 The identity serves as a globally unique identifier for all in-game objects. The HIDWORD is the object type and the LODWORD is the unique identifier.  
 
-### Members:
+#### Members:
 * `uint Type` 
   * The object type (nano, weapon, container, corpse, door, player, mission, etc.).
 * `uint Id` 
@@ -459,7 +461,7 @@ The identity serves as a globally unique identifier for all in-game objects. The
 * `string ToString` 
   * The identity.	
 	
-### **InventoryItem**
+### InventoryItem
 This datatype includes data available to ISXAO related to items.  
 
 #### Members:
@@ -508,7 +510,7 @@ This datatype includes data available to ISXAO related to items.
 * `bool MustSit` 
   * TRUE if the target of the item must be sitting in order to apply the item.
 	
-### **InventorySlot**
+### InventorySlot
 This datatype includes data available to ISXAO related to the inventory slots in which inventory items reside.  
 
 #### Members:
@@ -520,11 +522,12 @@ This datatype includes data available to ISXAO related to the inventory slots in
   * The identity of the inventory item slot.
 * `string ToString` 
   * The name of the slot.
+  * 
 #### Methods:
 * `Use` 
   * This will attempt to use the item in the inventory slot.
 	
-### **ISXAO**
+### ISXAO
 This datatype interacts with the extension itself.  
 
 #### Members:
@@ -533,7 +536,7 @@ This datatype interacts with the extension itself.
 * `string Version`
   *  Returns the ISXAO version.
 	
-### **NanoSpell**
+### NanoSpell
 This datatype includes all of the data available to ISXAO related to a nanoprogram.  
 
 #### Members:
@@ -562,7 +565,7 @@ This datatype includes all of the data available to ISXAO related to a nanoprogr
 * `Cast` 
   * Will attempt to cast the nanoprogram.
 
-### **NanoTemplate**
+### NanoTemplate
 This datatype includes all of the data available to ISXAO related to a nanoprogram running in an NCU.  
 
 #### Members:
@@ -583,7 +586,7 @@ This datatype includes all of the data available to ISXAO related to a nanoprogr
 * `Remove` 
   * Will attempt to remove the nanoprogram effect from the NCU. This will only work for things the client character could normally cancel on their own.
 	
-### **Pet** (inherits from **Actor**)
+### Pet (inherits from Actor)
 Pet represents a pet owned by the client character.  
 
 #### Members:
@@ -610,7 +613,7 @@ Pet represents a pet owned by the client character.
 * `Wait` 
   * Issues the wait command to the pet.
 		
-### **Player** (inherits from **Actor**)
+### Player (inherits from Actor)
 Player represents player characters on the playfield that the character can affect.  
 
 #### Members:
@@ -633,7 +636,7 @@ Player represents player characters on the playfield that the character can affe
 * `Invite` 
   * Attempts to invites the player to a team.
 
-### **Playfield**
+### Playfield
 This datatype includes the data available to the ISXAO about the current playfield (zone).  
 
 #### Members:
@@ -644,7 +647,7 @@ This datatype includes the data available to the ISXAO about the current playfie
 * `string ToString` 
   * The name of the playfield.
 	
-### **SpecialAction**
+### SpecialAction
 This datatype includes the data available to ISXAO about special actions available to the character. (i.e. sit/stand, brawl, perks, fling shot, etc.) 
 
 #### Members:
@@ -663,7 +666,7 @@ This datatype includes the data available to ISXAO about special actions availab
 * `Use`
   * Attempts to use the action.
 	
-### **TeamEntry**
+### TeamEntry
 This datatype includes the data available to ISXAO about a team/raid member entry.
 
 #### Members:
@@ -682,7 +685,7 @@ This datatype includes the data available to ISXAO about a team/raid member entr
 * `MakeLeader` 
   * Attempts to make the team/raid member the leader of the team.
 
-### **TeamMember** (inherits from **Player**)
+### TeamMember (inherits from Player)
 This datatype includes the data available to ISXAO about a team/raid member player.  
 
 #### Members:
@@ -705,7 +708,7 @@ This datatype includes the data available to ISXAO about a team/raid member play
 * `MakeLeader` 
   * Makes the team member the team leader if the Character is the leader.
 	
-### **TeamRaid**
+### TeamRaid
 This datatype contains the data available to ISXAO about the character's team/raid.
 
 #### Members:
@@ -716,127 +719,173 @@ This datatype contains the data available to ISXAO about the character's team/ra
 * `teamentry Leader` 
   * The leader of the team.
 * `teamentry Team[n] or Team[name]` 
-  * Retrieves the team member at the specified index (from 1 to TeamCount) or the first team meber that matches the partial name provided.
+  * Retrieves the team member at the specified index (from `1 to TeamCount`) or the first team meber that matches the partial name provided.
 * `uint TeamCount` 
   * The number of members in the team.
 * `TeamEntry Raid[n] or Raid[name]` 
-  * Retrieves the raid member at the specified index (from 1 to RaidCount) or the first raid member that matches the partial name provided.
+  * Retrieves the raid member at the specified index (from `1 to RaidCount`) or the first raid member that matches the partial name provided.
 * `uint RaidCount` 
   * The number of members in the raid.
 
 	
 ## Top-Level Objects
 
-### **AO**
+### AO
 
-Description:
-	Retrieves information about AO.
-Form:
-	ao AO
-Example:
-	echo ${AO.Zoning}
+#### Description:  
+Retrieves information about AO.  
 
-Actor
-Description:
-	Retrieves an actor from the gameworld.
-Form:
-	actor Actor[(optional)nth, <parameter>, ...]
-	Parameters
-		me - Returns the client character.
-		nth - Identifies which actor in the collection of actors to return (e.g. 2nd, 3rd, etc.). If left out, it will always return the nearest.
-		pc - Returns the nth nearest pc.
-		npc - Returns the nth nearest npc.
-		pet - Returns the nearest pet that is not the character's pet.
-		mypet - Returns your nth nearest pet.
-		nopet - Removes any pets from the search.
-		range, #, # - Returns the nth nearest actor with a level between the two values provided.
-		loc, #, # - Returns the nth nearest actor to the x and z coordinates provided.
-		radius, # - Provides the maximum search radius for the location provided by loc, #, #.
-		id, # - Returns the actor that matches the identity provided.
-		yradius, # - Provides a y-axis filter for searches.
-		notid, # - Returns the nth nearest actor that does not match the provided identity.
-		nopcnear[, #] - Returns the nth nearest actor for which there is no pc within the given radius from it. If no argument is given, then it defaults to a range of 200.
-		# - Returns the nth nearest actor with a level that matches the number provided. This argument must be preceded by an nth parameter if it is the first parameter.
-		"string" - Returns the nth nearest actor whose name matches or partial matches the string provided.
-Examples:
-	${Actor[npc]}
-	${Actor[npc, nopet]}
-	${Actor[2, npc]}
-	${Actor[me]}
-	${Actor[mypet]}
-	${Actor[2, mypet]}
-	${Actor[npc, range, 100, 118]}
-	${Actor[Boobies]}
-	${Actor[nopcnear, 15, range, 15, 20]}		
+#### Form:  
+`ao AO`  
+
+#### Example:
+`echo ${AO.Zoning}`
+
+### Actor
+
+#### Description:  
+Retrieves an actor from the gameworld.
+
+#### Form:  
+<code>actor Actor[(optional)<em>nth</em>, <parameter>, ...]</code>
+
+##### Parameters
+* `me` 
+  * Returns the client character.
+* *`nth`*
+  * Identifies which actor in the collection of actors to return (from `1 to ActorCount`). If left out, it will always return the nearest actor.
+* `pc` 
+  * Returns the *nth* nearest pc.
+* `npc` 
+  * Returns the *nth* nearest npc.
+* `pet` 
+  * Returns the *nth* nearest pet that is not the character's pet.
+* `mypet` 
+  * Returns your *nth* nearest pet.
+* `nopet` 
+  * Removes any pets from the search.
+* `range, #, #` 
+  * Returns the *nth* nearest actor with a level between the two values provided.
+* `loc, #, #` 
+  * Returns the *nth* nearest actor to the x and z coordinates provided.
+* `radius, #` 
+  * Provides the maximum search radius for the location provided by loc, #, #.
+* `id, #` 
+  * Returns the actor that matches the identity provided.
+* `yradius, #` 
+  * Provides a y-axis filter for searches.
+* `notid, #` 
+  * Returns the *nth* nearest actor that does not match the provided identity.
+* `nopcnear[, #]` 
+  * Returns the *nth* nearest actor for which there is no pc within the given radius from it. If no argument is given, then it defaults to a range of 200 units.
+* `#` 
+  * Returns the *nth* nearest actor with a level that matches the number provided. This argument must be preceded by an nth parameter if it is the first parameter.
+* `"string"` 
+  * Returns the *nth* nearest actor whose name matches or partial matches the string provided.
+
+#### Examples:  
+`${Actor[npc]}`  
+`${Actor[npc, nopet]}`  
+`${Actor[2, npc]}`  
+`${Actor[me]}`  
+`${Actor[mypet]}`  
+`${Actor[2, mypet]}`  
+`${Actor[npc, range, 100, 118]}`  
+`${Actor[Boobies]}`  
+`${Actor[nopcnear, 15, range, 15, 20]}	`	
 		
-ActorCount
-Description:
-	Retrieves the number of actors in the gameworld that match the provided search parameters.
-Form:
-	uint ActorCount[<parameter>, ...]
-	Parameters:
-		same as TLO Actor
-Example:
-	${ActorCount[nopcnear, 30, range, 15, 20]}
-		
-ISXAO
-Description:
-	Retrieves information about ISXAO.
-Form:
-	isxao ISXAO
-Examples:
-	echo ${ISXAO.Version}
-	
-Me:
-Description:
-	Retrieves information about the client character.
-Form:
-	character Me
-Example:
-	echo ${Me.Name}
-	
-NanoSpell
-Description:
-	Retrieves information about nanoprograms.
-Forms:
-	nanospell NanoSpell[#]
-		Retrieves the nanospell object for the provided NanoId. This will work for any valid NanoId, not just NanoIds for nanoprograms known by the client.
-	nanospell NanoSpell[name]
-		Retrieves the first nanospell object that matches or partially matches the provided name. This is only valid for nanoprograms that are "known" by the client at the time. Nanoprograms are "known" to the client if they have been cast by the client or another in the client's vicinity, or the nanoprogram is active in the NCU of the client or another in the client's vicinity. All nanoprograms memorized by the client character are "known" to the client after the Nanoprogram window is opened.
-Example:
-	${NanoSpell[${Me.NCU[3]}].Name}
+### ActorCount  
 
-Playfield:
-Description:
-	Retrieves information about the current playfield (zone).
-Form:
-	playfield Playfield
-Examples:
-	${Playfield.Name}
+#### Description:  
+Retrieves the number of actors in the gameworld that match the provided search parameters.  
 
-Target
-Description:
-	Retrieves information about the client's selection target.
-Form:
-	variable Target (the return type will be the type of the target: actor, player, etc.)
-Example:
-	${Target.CurrentHealth}
-	
-TeamRaid
-Description:
-	Retrieves information about the client's team/raid.
-Form:
-	teamraid TeamRaid
-Example:
-	echo ${TeamRaid.Leader.Name}
+#### Form:
+`uint ActorCount[<parameter>, ...]`
+
+##### Parameters:
+* same as TLO Actor
+
+#### Example:  
+`${ActorCount[nopcnear, 30, range, 15, 20]}`
 		
-WeaponTarget
-Description:
-	Retrieves information about the client's weapon target. This is the target of the client's weapon when auto-attack is on. It may or may not be the client's selection target.
-Form:
-	variable WeaponTarget  (the return type will be the type of the weapon target: actor, player, etc.)
-Example:
-	${WeaponTarget.CurrentHealth}
+### ISXAO
+
+#### Description:  
+Retrieves information about ISXAO.  
+
+#### Form:  
+`isxao ISXAO`  
+
+#### Examples:  
+`echo ${ISXAO.Version}`
+	
+### Me:  
+
+#### Description:  
+Retrieves information about the client character.
+
+#### Form:  
+`character Me`
+
+#### Example:  
+`echo ${Me.Name}`
+	
+### NanoSpell  
+
+#### Description:  
+Retrieves information about nanoprograms.  
+
+#### Forms: 
+* `nanospell NanoSpell[nano_id]`  
+  * Retrieves the nanospell object for the provided NanoId. This will work for any valid NanoId, not just NanoIds for nanoprograms known by the client.  
+* `nanospell NanoSpell[name]`
+  * Retrieves the first nanospell object that matches or partially matches the provided name. This is only valid for nanoprograms that are "known" by the client at the time. Nanoprograms are "known" to the client if they have been cast by the client or another in the client's vicinity, or the nanoprogram is active in the NCU of the client or another in the client's vicinity. All nanoprograms memorized by the client character are "known" to the client after the Nanoprogram window is opened.  
+
+#### Example:  
+`${NanoSpell[${Me.NCU[3]}].Name}`
+
+### Playfield:  
+
+#### Description:  
+Retrieves information about the current playfield (zone).
+
+#### Form:  
+`playfield Playfield`
+#### Examples:  
+`echo ${Playfield.Name}`
+
+### Target  
+
+#### Description:  
+Retrieves information about the client's selection target.  
+
+#### Form:  
+`variable Target` (the return type will be the type of the target: actor, player, etc.)  
+
+#### Example:  
+`echo ${Target.CurrentHealth}`
+	
+### TeamRaid  
+
+#### Description:  
+Retrieves information about the client's team/raid.  
+
+#### Form:  
+`teamraid TeamRaid`  
+
+#### Example:  
+`echo ${TeamRaid.Leader.Name}`  
+		
+### WeaponTarget  
+
+#### Description:  
+Retrieves information about the client's weapon target. This is the target of the client's weapon when auto-attack is on. It may or may not be the client's selection target.  
+
+#### Form:
+`variable WeaponTarget` (the return type will be the type of the weapon target: actor, player, etc.)  
+
+#### Example:
+`echo ${WeaponTarget.CurrentHealth}`
 	
 Events
 

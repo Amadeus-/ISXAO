@@ -83,7 +83,7 @@
       <MapExports>true</MapExports>
     </Link>
     <PostBuildEvent>
-      <Command>copy "D:\repos\isxao\ISXAO\Release\ISXAO.dll" "C:\Program Files (x86)\InnerSpace\Extensions\ISXDK35"</Command>
+      <Command>copy "D:\repos\ISXAO\Release\ISXAO.dll" "C:\Program Files (x86)\InnerSpace\Extensions\ISXDK35"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -183,6 +183,7 @@
     <ClCompile Include="special_action.cpp" />
     <ClCompile Include="special_action_holder.cpp" />
     <ClCompile Include="special_action_item.cpp" />
+    <ClCompile Include="special_action_item_type.cpp" />
     <ClCompile Include="special_action_type.cpp" />
     <ClCompile Include="spell_template_data.cpp" />
     <ClCompile Include="stat_holder.cpp" />
@@ -272,6 +273,7 @@
     <ClInclude Include="special_action.h" />
     <ClInclude Include="special_action_holder.h" />
     <ClInclude Include="special_action_item.h" />
+    <ClInclude Include="special_action_item_type.h" />
     <ClInclude Include="special_action_type.h" />
     <ClInclude Include="spell_template_data.h" />
     <ClInclude Include="stat_holder.h" />

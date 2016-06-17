@@ -1,39 +1,33 @@
 #pragma once
 
-class SpecialActionType : public LSTypeDefinition
+class SpecialActionItemType : public LSTypeDefinition
 {
 public:
 	int PersistentClass;
 
-	enum SpecialActionTypeMembers
+	enum SpecialActionItemTypeMembers
 	{
-		Identity,
-		IsLocked,
-		Item,
-		LockOutRemaining,
-		Name,
+		IsGeneralAction,
+		IsPerk,
+		IsSpecialAction
 	};
 
-	enum SpecialActionTypeMethods
+	enum SpecialActionItemTypeMethods
 	{
-		Use,
+		
 	};
 
-	SpecialActionType() : LSType("SpecialAction")
+	SpecialActionItemType() : LSType("SpecialActionItem")
 	{
-		TypeMember(Identity);
-		TypeMember(IsLocked);
-		TypeMember(Item);
-		TypeMember(LockOutRemaining);
-		TypeMember(Name);
+		TypeMember(IsGeneralAction);
+		TypeMember(IsPerk);
+		TypeMember(IsSpecialAction);
 
-		TypeMethod(Use);
-
-		PersistentClass = pISInterface->RegisterPersistentClass("SpecialAction");
+		PersistentClass = pISInterface->RegisterPersistentClass("SpecialActionItem");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 
-	~SpecialActionType()
+	~SpecialActionItemType()
 	{
 		pISInterface->InvalidatePersistentClass(PersistentClass);
 	}

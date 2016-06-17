@@ -20,7 +20,7 @@ namespace isxao_classes
 		return GetSkill(ST_ACTIONCATEGORY) == 1;
 	}
 
-	bool SpecialActionItem::IsSpecialAttack()
+	bool SpecialActionItem::IsSpecialAction()
 	{
 		return GetSkill(ST_ACTIONCATEGORY) == 3;
 	}

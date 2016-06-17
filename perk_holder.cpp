@@ -24,7 +24,7 @@ namespace isxao_classes
 
 	ActionLock* PerkHolder::GetActionLock(SpecialAction* special_action)
 	{
-		
+		return nullptr;
 	}
 
 

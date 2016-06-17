@@ -724,6 +724,25 @@ namespace isxao_utilities
 			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode, pRoot, count);
 	}
 
+	void RecursiveAddLockIdToLockIdMap(std::map<DWORD, DWORD>& m, PLOCKIDNODE pNode, PLOCKIDROOT pRoot, DWORD& count)
+	{
+		m.insert_or_assign(pNode->LockId, pNode->ActionId);
+		count--;
+		if (reinterpret_cast<PVOID>(pNode->pLower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddLockIdToLockIdMap(m, pNode->pLower, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->pHigher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddLockIdToLockIdMap(m, pNode->pHigher, pRoot, count);
+	}
+
+	void GetLockIdMap(std::map<DWORD, DWORD>& m, PLOCKIDDIR pDir)
+	{
+		auto count = pDir->Count;
+		auto pRoot = pDir->pRoot;
+		auto pNode = pRoot->pNode;
+		if (count > 0)
+			RecursiveAddLockIdToLockIdMap(m, pNode, pRoot, count);
+	}
+
 #pragma endregion
 
 #pragma region Inventory

@@ -7,46 +7,25 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	char buffer[MAX_STRING];
 	IDENTITY id;
-	IDENTITY dummy;
-	std::vector<SpecialAction*> v;
-	pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
-	FILE * pFILE;
-	fopen_s(&pFILE, "stats.txt", "a");
-	std::map<DWORD, const char *> m;
-	GetStatNameMap(m);
-	for (auto it_v = v.begin(); it_v != v.end(); ++it_v)
-	{
-		//printf("0x%.8X", (*it_v));
-		
-		auto item = (SpecialActionItem*)pEngineClientAnarchy->GetItemByTemplate((*it_v)->GetIdentity(), dummy);
-		printf("0x%.8X", item);
-		if(item)
-		{
-			sprintf_s(buffer, sizeof(buffer), "%s\n", item->GetName());
-			fputs(buffer, pFILE);
-			for (auto it = m.begin(); it != m.end(); ++it)
-			{
-				LONG stat = item->GetSkill(static_cast<AOData::Stat_e>((*it).first));
-				if(stat != 1234567890)
-				{
-					sprintf_s(buffer, "\tST_%s = %d,\n", (*it).second, /*(*it).first*/stat);
-					for (auto i = 0; i < (int)strlen(buffer); i++)
-						buffer[i] = toupper(buffer[i]);
-					fputs(buffer, pFILE);
-				}				
-			}
-		}		
-	}	
-	fclose(pFILE);
-
+	id.Type = 57008;
+	id.Id = 214068;
+	DWORD a = 0;
+	DWORD b = 0;
+	DWORD *pA = &a;
+	DWORD *pB = &b;
+	auto time = pEngineClientAnarchy->N3Msg_GetActionProgress(id, pA, pB);
+	printf("%f : %d : %d", time, a, b);
 	return 1;
 }
 
 int CMD_TESTINTERFACE(int argc, char *argv[])
 {
-
+	IDENTITY id;
+	id.Type = 57008;
+	id.Id = 49574;
+	auto result = pEngineClientAnarchy->N3Msg_GetSpecialActionState(id);
+	printf("%d - %u:%u", result, id.Type, id.Id);
 	return 0;
 }
 

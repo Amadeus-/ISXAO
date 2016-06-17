@@ -12,6 +12,12 @@ namespace isxao_classes
 		return pIndex->GetContainerUsed();
 	}
 
+	DWORD SpecialActionHolder::GetLockIdMap(std::map<DWORD, DWORD>& m) const
+	{
+		isxao_utilities::GetLockIdMap(m, GetSpecialActionHolderData().pLockIdDir);
+		return m.size();
+	}
+
 	SPECIALACTIONHOLDER SpecialActionHolder::GetSpecialActionHolderData() const
 	{
 		return special_action_holder_;
@@ -33,6 +39,15 @@ namespace isxao_classes
 			v.push_back(reinterpret_cast<SpecialAction*>(&(*it)));
 		std::sort(v.begin(), v.end(), SpecialAction::pSpecialActionCompare);
 		return v.size();
+	}
+
+	SpecialAction* SpecialActionHolder::GetSpecialAction(DWORD index) const
+	{
+		std::vector<SpecialAction*> v;
+		auto count = GetSpecialActions(v);
+		if (index < 0 || index >= count)
+			return nullptr;
+		return v[index];
 	}
 
 	SpecialAction* SpecialActionHolder::GetSpecialAction(PCHAR special_action_name) const
@@ -65,13 +80,39 @@ namespace isxao_classes
 		return nullptr;
 	}
 
+	DWORD SpecialActionHolder::GetSpecialActionCount() const
+	{
+		std::vector<SpecialAction*> v;
+		return GetSpecialActions(v);
+	}
+
 	IDENTITY SpecialActionHolder::GetSpecialActionTarget() const
 	{
 		return GetSpecialActionHolderData().SpecialActionTarget;
 	}
 
-	ActionLock* SpecialActionHolder::GetActionLock(SpecialAction*)
+	ActionLock* SpecialActionHolder::GetActionLock(SpecialAction* p_special_action) const
 	{
+		std::map<DWORD, DWORD> m;
+		GetLockIdMap(m);
+		DWORD lock_id = 0;
+		auto action_id = p_special_action->GetIdentity().Id;
+		for (auto it = m.begin(); it != m.end(); ++it)
+		{
+			if(it->second == action_id)
+			{
+				lock_id = it->first;
+				break;
+			}
+		}
+		if (lock_id)
+			return nullptr;
+		std::vector<ActionLock*> v;
+		pEngineClientAnarchy->GetClientChar()->GetStatHolder()->GetSkillLocks(v);
+		for (auto it = v.begin(); it != v.end(); ++it)
+		{
+			//if((*it)->GetActionIdentity().Type)
+		}
 		return nullptr;
 	}
 

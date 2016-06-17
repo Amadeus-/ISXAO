@@ -15,6 +15,8 @@ public:
 		NanoSpellCount,
 		EquipmentCollection,
 		EquipmentIndex,
+		SpecialAction,
+		SpecialActionCount,
 	};
 
 	enum CharacterTypeMethods
@@ -30,6 +32,8 @@ public:
 		TypeMember(NanoSpellCount);
 		TypeMember(EquipmentCollection);
 		TypeMember(EquipmentIndex);
+		TypeMember(SpecialAction);
+		TypeMember(SpecialActionCount);
 
 		PersistentClass = pISInterface->RegisterPersistentClass("Character");
 		pISInterface->SetPersistentClass(this, PersistentClass);

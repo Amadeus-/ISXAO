@@ -19,6 +19,15 @@ bool SpecialActionType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 			Object.Type = pIdentityType;
 			break;
 		}
+		case Item:
+		{
+			if((Object.Ptr = pSpecialAction->GetSpecialActionItem()))
+			{
+				Object.Type = pSpecialActionItemType;
+				return true;
+			}
+			return false;
+		}
 		case Name:
 		{
 			Object.ConstCharPtr = pSpecialAction->GetName();
@@ -31,14 +40,11 @@ bool SpecialActionType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 			Object.Type = pBoolType;
 			break;
 		}
-		case LockInfo:
+		case LockOutRemaining:
 		{
-			if((Object.Ptr = pEngineClientAnarchy->GetClientChar()->GetStatHolder()->GetSkillLock(pSpecialAction)))
-			{
-				Object.Type = pActionLockType;
-				return true;
-			}
-			return false;
+			Object.DWord = pSpecialAction->GetLockoutTimeRemaining();
+			Object.Type = pUintType;
+			break;
 		}
 		default: 
 			break;
@@ -70,7 +76,7 @@ bool SpecialActionType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMetho
 		}
 		default: break;
 		}
-#undef pNanoTemplate
+#undef pSpecialAction
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, pMethod->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{

@@ -6,6 +6,6 @@ public:
 	LONG GetSkill(DWORD);
 	bool IsGeneralAction();
 	bool IsPerk();
-	bool IsSpecialAttack();
+	bool IsSpecialAction();
 
 };
