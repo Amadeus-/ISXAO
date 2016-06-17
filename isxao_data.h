@@ -326,6 +326,30 @@ namespace AOData
 
 #pragma endregion
 	
+#pragma region GameData::AreaData
+
+	// Size = 0x5C
+	// From GameData.dll
+	typedef struct _AREADATA
+	{
+		PVOID pvTable;					// 0x00
+		BYTE Unknown0x4[0x4];			// 0x04
+		std::string* pName;				// 0x08
+		std::string* pDescription;		// 0x0C
+		std::string* pOwnerName;		// 0x10
+		std::string* pKnowledge;		// 0x14
+		DWORD MinLevel;					// 0x18
+		DWORD MaxLevel;					// 0x1C
+		PVOID pEnvironmentData;			// 0x20
+		DWORD OmniTekControl;			// 0x24
+		DWORD ClanControl;				// 0x28
+		BYTE Unknown0x2C[0x1C];			// 0x2C
+		struct _VECTOR3 Center;			// 0x48
+		BYTE Unknown0x54[0x8];			// 0x54
+	} AREADATA, *PAREADATA;
+
+#pragma endregion
+
 #pragma region BankEntry
 
 	// Size = 0x38
@@ -710,6 +734,32 @@ namespace AOData
 
 #pragma endregion
 
+#pragma region GameData::DistrictData
+
+	// Size = 0x6C
+	// From GameData.dll
+	typedef struct _DISTRICTDATA
+	{
+		PVOID pvTable;				// 0x00
+		BYTE Unknown0x4[0x8];		// 0x04
+		struct _VECTOR3 Center;		// 0x0C
+		BYTE Unknown0x18[0x24];		// 0x18
+		DWORD NPCMinLevel;			// 0x3C
+		BYTE Unknown0x40[0x4];		// 0x40
+		DWORD LandControlMinLevel;	// 0x44
+		DWORD LandControlMaxLevel;	// 0x48
+		DWORD RespawnChance;		// 0x4C
+		float RespawnTime;			// 0x50
+		DWORD FightMode;			// 0x54
+		PVOID pSpawnPointVec;		// 0x58
+		PVOID pHashSpawnPointVec;	// 0x5C
+		PVOID pSpawnInfoVec;		// 0x60
+		PVOID pWildlifeEntries;		// 0x64
+		DWORD DataFormatVersion;	// 0x68
+	} DISTRICTDATA, *PDISTRICTDATA;
+
+#pragma endregion
+
 #pragma region DummyItemBase
 
 	// Size = 0xA4
@@ -950,6 +1000,37 @@ namespace AOData
 		DWORD GridSizeZ;					// 0x2C
 		BYTE Unknown0x30[0xC];				// 0x30
 	} GRIDSPACE, *PGRIDSPACE;
+
+#pragma endregion
+
+#pragma region GameData::HashSpawnPoint
+
+	//From GameData.dll
+	// Size = 0x6C
+	typedef struct _HASHSPAWNPOINT
+	{
+		PVOID pvTable;					// 0x00
+		struct _VECTOR3 CenterPos;		// 0x04
+		float Radius;					// 0x10
+		float RotationMid;				// 0x14
+		float RotationWidth;			// 0x18
+		PVOID pvTable_ReferenceCounted;	// 0x1C
+		BYTE Unknown0x20[0x4];			// 0x20
+		DWORD Hash;						// 0x24
+		DWORD MinLevel;					// 0x28
+		DWORD MaxLevel;					// 0x2C
+		DWORD RespawnChance;			// 0x30
+		float RespawnTime;				// 0x34
+		DWORD Flags;					// 0x38
+		BYTE Unknown0x3C[0x4];			// 0x3C
+		DWORD ProximityRange;			// 0x40
+		DWORD AdditionalPoints;			// 0x44
+		BYTE Unknown0x48[0xC];			// 0x48
+		PVOID pSpells;					// 0x54
+		BYTE Unknown0x58[0xC];			// 0x58
+		DWORD MoreFlags;				// 0x64
+		DWORD Tags;						// 0x68
+	} HASHSPAWNPOINT, *PHASHSPAWNPOINT;
 
 #pragma endregion
 
@@ -2068,6 +2149,20 @@ namespace AOData
 
 
 #pragma endregion	
+
+#pragma region GameData::SpawnPoint
+
+	// From GameData.dll
+	// Size = 0x14
+	typedef struct _SPAWNPOINT
+	{
+		PVOID pvTable;		        // 0x00
+		struct _VECTOR3 CenterPos;	// 0x04
+		float Radius;				// 0x10
+	} SPAWNPOINT, *PSPAWNPOINT;
+
+
+#pragma endregion
 
 #pragma region SpecialAction
 

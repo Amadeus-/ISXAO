@@ -42,8 +42,8 @@ bool SpecialActionType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 		}
 		case LockOutRemaining:
 		{
-			Object.DWord = pSpecialAction->GetLockoutTimeRemaining();
-			Object.Type = pUintType;
+			Object.Float = pSpecialAction->GetLockoutTimeRemaining();
+			Object.Type = pfloatType;
 			break;
 		}
 		default: 

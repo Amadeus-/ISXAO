@@ -6,6 +6,8 @@ public:
 	AOLIB_OBJECT void Cast();
 	AOLIB_OBJECT float GetAttackDelay();
 	AOLIB_OBJECT DWORD GetAttackRange();
+	AOLIB_OBJECT float GetCooldownDelay();
+	AOLIB_OBJECT float GetCooldownRemaining();
 	AOLIB_OBJECT double GetFormulaProgress();
 	AOLIB_OBJECT DWORD GetFormulaRadius();
 	AOLIB_OBJECT IDENTITY GetNanoIdentity();

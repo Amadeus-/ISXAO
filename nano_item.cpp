@@ -18,6 +18,19 @@ namespace isxao_classes
 		return GetSkill(ST_ATTACKRANGE);
 	}
 
+	float NanoItem::GetCooldownDelay()
+	{
+		return GetSkill(ST_COOLDOWNTIME) / 100.0f;
+	}
+
+	float NanoItem::GetCooldownRemaining()
+	{
+		DWORD a;
+		DWORD b;
+		auto c = pEngineClientAnarchy->N3Msg_GetFormulaProgress(GetNanoIdentity(), a, b);
+		return float((1.0 - c)*b);
+	}
+
 	double NanoItem::GetFormulaProgress()
 	{
 		DWORD a;
