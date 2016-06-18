@@ -8,24 +8,20 @@
 int CMD_AO(int argc, char *argv[])
 {
 	IDENTITY id;
-	id.Type = 57008;
-	id.Id = 214068;
+	id.Type = 53019;
+	id.Id = 223325;
 	DWORD a = 0;
 	DWORD b = 0;
 	DWORD *pA = &a;
 	DWORD *pB = &b;
-	auto time = pEngineClientAnarchy->N3Msg_GetActionProgress(id, pA, pB);
+	auto time = pEngineClientAnarchy->N3Msg_GetFormulaProgress(id, a, b);
 	printf("%f : %d : %d", time, a, b);
 	return 1;
 }
 
 int CMD_TESTINTERFACE(int argc, char *argv[])
 {
-	IDENTITY id;
-	id.Type = 57008;
-	id.Id = 49574;
-	auto result = pEngineClientAnarchy->N3Msg_GetSpecialActionState(id);
-	printf("%d - %u:%u", result, id.Type, id.Id);
+	printf("0x%.8X", sizeof(string));
 	return 0;
 }
 

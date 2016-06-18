@@ -763,18 +763,18 @@ namespace isxao_detours
 		//EzDetour(n3Playfield_t__AddChildDynel, &AODetours::Playfield_t__AddChildDynel_Detour, &AODetours::Playfield_t__AddChildDynel_Trampoline);
 		//EzDetour(n3Dynel_t__SetPlayfield, &AODetours::n3Dynel_t__SetPlayfield_Detour, &AODetours::n3Dynel_t__SetPlayfield_Trampoline);
 
-		EzDetour(Client_t__ProcessMessage, &AODetours::Client_t__ProcessMessage_Detour, &AODetours::Client_t__ProcessMessage_Trampoline);
+		//EzDetour(Client_t__ProcessMessage, &AODetours::Client_t__ProcessMessage_Detour, &AODetours::Client_t__ProcessMessage_Trampoline);
 
 		//EzDetour(n3Engine_t__SetTeleportStatus, &AODetours::n3Engine_t__SetTeleportStatus_Detour, &AODetours::n3Engine_t__SetTeleportStatus_Trampoline);
 
 		//EzDetour(ChatGUIModule_c__HandleGroupAction, &AODetours::ChatGUIModule_c__HandleGroupAction_Detour, &AODetours::ChatGUIModule_c__HandleGroupAction_Trampoline);
-		EzDetour(ChatGUIModule_c__HandleGroupMessage, &AODetours::ChatGUIModule_c__HandleGroupMessage_Detour, &AODetours::ChatGUIModule_c__HandleGroupMessage_Trampoline);
+		//EzDetour(ChatGUIModule_c__HandleGroupMessage, &AODetours::ChatGUIModule_c__HandleGroupMessage_Detour, &AODetours::ChatGUIModule_c__HandleGroupMessage_Trampoline);
 		//EzDetour(ChatGUIModule_c__HandlePrivateGroupAction, &AODetours::ChatGUIModule_c__HandlePrivateGroupAction_Detour, &AODetours::ChatGUIModule_c__HandlePrivateGroupAction_Trampoline);
-		EzDetour(ChatGUIModule_c__HandlePrivateMessage, &AODetours::ChatGUIModule_c__HandlePrivateMessage_Detour, &AODetours::ChatGUIModule_c__HandlePrivateMessage_Trampoline);
+		//EzDetour(ChatGUIModule_c__HandlePrivateMessage, &AODetours::ChatGUIModule_c__HandlePrivateMessage_Detour, &AODetours::ChatGUIModule_c__HandlePrivateMessage_Trampoline);
 		//EzDetour(ChatGUIModule_c__HandleSystemMessage, &AODetours::ChatGUIModule_c__HandleSystemMessage_Detour, &AODetours::ChatGUIModule_c__HandleSystemMessage_Trampoline);
-		EzDetour(ChatGUIModule_c__HandleVicinityMessage, &AODetours::ChatGUIModule_c__HandleVicinityMessage_Detour, &AODetours::ChatGUIModule_c__HandleVicinityMessage_Trampoline);
+		//EzDetour(ChatGUIModule_c__HandleVicinityMessage, &AODetours::ChatGUIModule_c__HandleVicinityMessage_Detour, &AODetours::ChatGUIModule_c__HandleVicinityMessage_Trampoline);
 
-		EzDetour(ChatGroupController_c__sub_10083D9C, &AODetours::ChatGroupController_c__sub_10083D9C_Detour, &AODetours::ChatGroupController_c__sub_10083D9C_Trampoline);
+		//EzDetour(ChatGroupController_c__sub_10083D9C, &AODetours::ChatGroupController_c__sub_10083D9C_Detour, &AODetours::ChatGroupController_c__sub_10083D9C_Trampoline);
 
 		//EzDetour(FriendListController_c__sub_100A68E6, &AODetours::FriendListController_c__sub_100A68E6_Detour, &AODetours::FriendListController_c__sub_100A68E6_Trampoline);
 
@@ -796,7 +796,7 @@ namespace isxao_detours
 		//EzUnDetour(n3Playfield_t__AddChildDynel);
 		//EzUnDetour(n3Dynel_t__SetPlayfield);
 
-		EzUnDetour(Client_t__ProcessMessage);
+		//EzUnDetour(Client_t__ProcessMessage);
 
 		//EzUnDetour(n3Engine_t__SetTeleportStatus);
 

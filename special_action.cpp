@@ -18,23 +18,23 @@ namespace isxao_classes
 		return special_action_.LockedSkillId2;
 	}
 
-	//DWORD SpecialAction::GetLockoutTimeRemaining() const
-	//{
-	//	DWORD a, b;
-	//	DWORD *pA = &a;
-	//	DWORD *pB = &b;
-	//	pEngineClientAnarchy->N3Msg_GetActionProgress(GetIdentity(), pA, pB);
-	//	return a;
-	//}
-
-	float SpecialAction::GetLockoutTimeRemaining() const
+	DWORD SpecialAction::GetLockoutTimeRemaining() const
 	{
 		DWORD a, b;
 		DWORD *pA = &a;
 		DWORD *pB = &b;
-		auto c = pEngineClientAnarchy->N3Msg_GetActionProgress(GetIdentity(), pA, pB);
-		return float((1.0 - c)*b);
+		pEngineClientAnarchy->N3Msg_GetActionProgress(GetIdentity(), pA, pB);
+		return a;
 	}
+
+	//float SpecialAction::GetLockoutTimeRemaining() const
+	//{
+	//	DWORD a, b;
+	//	DWORD *pA = &a;
+	//	DWORD *pB = &b;
+	//	auto c = pEngineClientAnarchy->N3Msg_GetActionProgress(GetIdentity(), pA, pB);
+	//	return float((1.0 - c)*b);
+	//}
 
 	PCSTR SpecialAction::GetName() const
 	{
