@@ -441,6 +441,10 @@ namespace isxao_globals
 	AOLIB_VAR bool g_events_registered;
 	AOLIB_VAR bool g_isxao_initialized;
 	AOLIB_VAR Concurrency::concurrent_queue<PN3MESSAGEINFO> g_n3message_queue;
+	AOLIB_VAR Concurrency::concurrent_queue<PGROUPMESSAGEINFO> g_group_message_queue;
+	AOLIB_VAR Concurrency::concurrent_queue<PPRIVATEMESSAGEINFO> g_private_message_queue;
+	AOLIB_VAR Concurrency::concurrent_queue<PPRIVATEMESSAGEINFO> g_vicinity_message_queue;
+	AOLIB_VAR Concurrency::concurrent_queue<PSYSTEMCHATINFO> g_system_chat_queue;
 
 #pragma endregion
 
@@ -494,6 +498,7 @@ namespace isxao_globals
 #pragma region HTMLParser
 
 	AOLIB_VAR DWORD HTMLParser_c__HTMLParser_c;
+	AOLIB_VAR DWORD HTMLParser_c__dHTMLParser_c;
 	AOLIB_VAR DWORD HTMLParser_c__HTMLParser_c_copy;
 	AOLIB_VAR DWORD HTMLParser_c__ExtractText;
 

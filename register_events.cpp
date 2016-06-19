@@ -22,6 +22,7 @@ namespace isxao_events
 		pISInterface->RegisterEvent("AO_onFinishedCastingNano");
 		pISInterface->RegisterEvent("AO_onFollowTarget");
 		pISInterface->RegisterEvent("AO_onGamestateChanged");
+		pISInterface->RegisterEvent("AO_onGroupMessageReceived");
 		pISInterface->RegisterEvent("AO_onIncomingSystemText");
 		pISInterface->RegisterEvent("AO_onNanoApplied");
 		pISInterface->RegisterEvent("AO_onRemovePet");

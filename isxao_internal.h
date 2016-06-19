@@ -165,6 +165,53 @@ namespace isxao_internal
 
 	} N3MESSAGEINFO, *PN3MESSAGEINFO;
 
+	typedef struct _GROUPMESSAGEINFO
+	{
+		struct _IDENTITY SenderIdentity;
+		std::string SenderName;
+		std::string ChatChannel;
+		std::string Message;
+
+		_GROUPMESSAGEINFO(DWORD sender_id, string& sender_name, string& chat_channel, string& message)
+		{
+			SenderIdentity.Type = 50000;
+			SenderIdentity.Id = sender_id;
+			SenderName = sender_name;
+			ChatChannel = chat_channel;
+			Message = message;
+		}
+
+	} GROUPMESSAGEINFO, *PGROUPMESSAGEINFO;
+
+	typedef struct _PRIVATEMESSAGEINFO
+	{
+		struct _IDENTITY SenderIdentity;
+		std::string SenderName;
+		std::string Message;
+
+		_PRIVATEMESSAGEINFO(DWORD sender_id, std::string& sender_name, std::string& message)
+		{
+			SenderIdentity.Type = 50000;
+			SenderIdentity.Id = sender_id;
+			SenderName = sender_name;
+			Message = message;
+		}
+
+	} PRIVATEMESSAGEINFO, *PPRIVATEMESSAGEINFO;
+
+	typedef struct _SYSTEMCHATINFO
+	{
+		DWORD ChatType;
+		std::string Text;
+
+		_SYSTEMCHATINFO(DWORD chat_type, std::string* text)
+		{
+			ChatType = chat_type;
+			Text = *text;
+		}
+
+	} SYSTEMCHATINFO, *PSYSTEMCHATINFO;
+
 #pragma endregion
 
 }

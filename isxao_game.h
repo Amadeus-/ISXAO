@@ -280,6 +280,7 @@
 #pragma region HTMLParser
 
 #define HTMLParser_c__HTMLParser_c_x		0x15C89D
+#define HTMLParser_c__dHTMLParser_c_x		0x15B427
 #define HTMLParser_c__HTMLParser_c_copy_x	0x454A
 #define HTMLParser_c__ExtractText_x			0x15B4F0
 

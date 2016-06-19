@@ -366,10 +366,33 @@ void __cdecl PulseService(bool Broadcast, unsigned int MSG, void *lpData)
 		while (!g_n3message_queue.empty())
 		{
 			PN3MESSAGEINFO message_info;
-			g_n3message_queue.try_pop(message_info);
-			HandleN3Message(message_info);
+			if (g_n3message_queue.try_pop(message_info))
+				HandleN3Message(message_info);
 		}
-
+		while (!g_group_message_queue.empty())
+		{
+			PGROUPMESSAGEINFO group_message_info;
+			if (g_group_message_queue.try_pop(group_message_info))
+				HandleGroupMessage(group_message_info);
+		}
+		while (!g_private_message_queue.empty())
+		{
+			PPRIVATEMESSAGEINFO private_message_info;
+			if (g_private_message_queue.try_pop(private_message_info))
+				HandlePrivateMessage(private_message_info);
+		}
+		while (!g_vicinity_message_queue.empty())
+		{
+			PPRIVATEMESSAGEINFO vicinity_message_info;
+			if (g_vicinity_message_queue.try_pop(vicinity_message_info))
+				HandleVicinityMessage(vicinity_message_info);
+		}
+		while (!g_system_chat_queue.empty())
+		{
+			PSYSTEMCHATINFO system_chat_info;
+			if (g_system_chat_queue.try_pop(system_chat_info))
+				HandleSystemChat(system_chat_info);
+		}
 	}
 }
 

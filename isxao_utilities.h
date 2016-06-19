@@ -98,6 +98,14 @@ namespace isxao_utilities
 	void HandleRemovePetMessage(RemovePetMessage);
 	void HandleShieldAttackMessage(ShieldAttackMessage);
 
+	void HandleGroupMessage(PGROUPMESSAGEINFO);
+
+	void HandlePrivateMessage(PPRIVATEMESSAGEINFO);
+
+	void HandleVicinityMessage(PPRIVATEMESSAGEINFO);
+
+	void HandleSystemChat(PSYSTEMCHATINFO);
+
 #pragma endregion
 
 

@@ -395,26 +395,8 @@ namespace isxao_detours
 	{
 		if(GetGameState() == GAMESTATE_IN_GAME)
 		{
-			//FILE * pFILE;
-			//char buffer[MAX_STRING];
-			//sprintf_s(buffer, "Group Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%s\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n", m->Unknown0x04, m->SenderId, m->Sender.c_str(), m->Unknown0x28, m->Unknown0x2C, m->ChannelName.c_str(), m->Message.c_str(), m->Unknown0x68, m->Unknown0x6C, m->Unknown0x70, m->Unknown0x74);
-			//fopen_s(&pFILE, "messages.txt", "a");
-			//fputs(buffer, pFILE);
-			//fclose(pFILE);
-			char sender[MAX_STRING];
-			char message[MAX_STRING];
-			char channel[MAX_STRING];
-			char id[MAX_STRING];
-			strcpy_s(sender, MAX_STRING, m->Sender.c_str());
-			strcpy_s(message, MAX_STRING, m->Message.c_str());
-			strcpy_s(channel, MAX_STRING, m->ChannelName.c_str());
-			IDENTITY identity;
-			identity.Type = 50000;
-			identity.Id = m->SenderId;
-			sprintf_s(id, MAX_STRING, "%I64u", identity.GetCombinedIdentity());
-			char *argv[] = { sender, channel, message, id };
-			pISInterface->ExecuteEvent(GetEventId("AO_onGroupMessageReceived"), 0, 4, argv);
-			//delete argv;
+			PGROUPMESSAGEINFO group_message_info = new GROUPMESSAGEINFO(m->SenderId, m->Sender, m->ChannelName, m->Message);
+			g_group_message_queue.push(group_message_info);
 		}
 		ChatGUIModule_c__HandleGroupMessage_Trampoline(m);
 	}
@@ -447,18 +429,9 @@ namespace isxao_detours
 			//fopen_s(&pFILE,"messages.txt", "a");
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);
-			char sender[MAX_STRING];
-			char message[MAX_STRING];
-			char id[MAX_STRING];
-			strcpy_s(sender, MAX_STRING, m->Sender.c_str());
-			strcpy_s(message, MAX_STRING, m->Message.c_str());
-			IDENTITY identity;
-			identity.Type = 50000;
-			identity.Id = m->SenderId;
-			sprintf_s(id, MAX_STRING, "%I64u", identity.GetCombinedIdentity());
-			char *argv[] = { sender, message, id };
-			pISInterface->ExecuteEvent(GetEventId("AO_onTellReceived"), 0, 3, argv);
-			//delete argv;
+
+			PPRIVATEMESSAGEINFO private_message_info = new PRIVATEMESSAGEINFO(m->SenderId, m->Sender, m->Message);
+			g_private_message_queue.push(private_message_info);
 		}
 		ChatGUIModule_c__HandlePrivateMessage_Trampoline(m);
 	}
@@ -491,18 +464,20 @@ namespace isxao_detours
 			//fopen_s(&pFILE, "messages.txt", "a");
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);
-			char sender[MAX_STRING];
-			char message[MAX_STRING];
-			char id[MAX_STRING];
-			strcpy_s(sender, MAX_STRING, m->Sender.c_str());
-			strcpy_s(message, MAX_STRING, m->Message.c_str());
-			IDENTITY identity;
-			identity.Type = 50000;
-			identity.Id = m->SenderId;
-			sprintf_s(id, MAX_STRING, "%I64u", identity.GetCombinedIdentity());
-			char *argv[] = { sender, message, id };
-			pISInterface->ExecuteEvent(GetEventId("AO_onVicinityMessageReceived"), 0, 3, argv);
+			//char sender[MAX_STRING];
+			//char message[MAX_STRING];
+			//char id[MAX_STRING];
+			//strcpy_s(sender, MAX_STRING, m->Sender.c_str());
+			//strcpy_s(message, MAX_STRING, m->Message.c_str());
+			//IDENTITY identity;
+			//identity.Type = 50000;
+			//identity.Id = m->SenderId;
+			//sprintf_s(id, MAX_STRING, "%I64u", identity.GetCombinedIdentity());
+			//char *argv[] = { sender, message, id };
+			//pISInterface->ExecuteEvent(GetEventId("AO_onVicinityMessageReceived"), 0, 3, argv);
 			//delete argv;
+			PPRIVATEMESSAGEINFO vicintity_message_info = new PRIVATEMESSAGEINFO(m->SenderId, m->Sender, m->Message);
+			g_vicinity_message_queue.push(vicintity_message_info);
 		}
 		ChatGUIModule_c__HandleVicinityMessage_Trampoline(m);
 	}
@@ -515,158 +490,163 @@ namespace isxao_detours
 
 	void AODetours::ChatGroupController_c__sub_10083D9C_Detour(int group_id, string* chat_text, int unknown)
 	{
-		char text[MAX_STRING];
-		strcpy_s(text, sizeof(text), chat_text->c_str());		
-		char chat_type[MAX_STRING];
-		switch (::ChatGroup_e(group_id))
+		if (GetGameState() == GAMESTATE_IN_GAME)
 		{
-		case ::CG_SYSTEM:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "SYSTEM");
-			break;
+			//char text[MAX_STRING];
+			//strcpy_s(text, sizeof(text), chat_text->c_str());		
+			//char chat_type[MAX_STRING];
+			//switch (::ChatGroup_e(group_id))
+			//{
+			//case ::CG_SYSTEM:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "SYSTEM");
+			//	break;
+			//}
+			//case ::CG_VICINITY:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "VICINITY");
+			//	break;
+			//}
+			//case ::CG_TELL_MESSAGES:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "TELL_MESSAGES");
+			//	break;
+			//}
+			//case ::CG_YOUR_PETS:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "YOUR_PETS");
+			//	break;
+			//}
+			//case ::CG_OTHERS_PETS:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "OTHERS_PETS");
+			//	break;
+			//}
+			//case ::CG_ME_HIT_BY_ENVIRONMENT:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_ENVIRONMENT");
+			//	break;
+			//}
+			//case ::CG_ME_HIT_BY_NANO:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_NANO");
+			//	break;
+			//}
+			//case ::CG_YOUR_PET_HIT_BY_NANO:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "YOUR_PET_HIT_BY_NANO");
+			//	break;
+			//}
+			//case ::CG_OTHER_HIT_BY_NANO:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "OTHER_HIT_BY_NANO");
+			//	break;
+			//}
+			//case ::CG_YOU_HIT_OTHER_WITH_NANO:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "YOU_HIT_OTHER_WITH_NANO");
+			//	break;
+			//}
+			//case ::CG_ME_HIT_BY_MONSTER:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_MONSTER");
+			//	break;
+			//}
+			//case ::CG_ME_HIT_BY_PLAYER:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_PLAYER");
+			//	break;
+			//}
+			//case ::CG_YOU_HIT_OTHER:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "YOU_HIT_OTHER");
+			//	break;
+			//}
+			//case ::CG_YOUR_PET_HIT_BY_OTHER:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "YOUR_PET_HIT_BY_OTHER");
+			//	break;
+			//}
+			//case ::CG_OTHER_HIT_BY_OTHER:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "OTHER_HIT_BY_OTHER");
+			//	break;
+			//}
+			//case ::CG_ME_GOT_XP:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_XP");
+			//	break;
+			//}
+			//case ::CG_ME_GOT_SK:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_SK");
+			//	break;
+			//}
+			//case ::CG_YOUR_PET_HIT_BY_MONSTER:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "YOUR_PET_HIT_BY_MONSTER");
+			//	break;
+			//}
+			//case ::CG_YOUR_MISSES:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "YOUR_MISSES");
+			//	break;
+			//}
+			//case ::CG_OTHER_MISSES:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "OTHER_MISSES");
+			//	break;
+			//}
+			//case ::CG_YOU_GAVE_HEALTH:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "YOU_GAVE_HEALTH");
+			//	break;
+			//}
+			//case ::CG_ME_GOT_HEALTH:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_HEALTH");
+			//	break;
+			//}
+			//case ::CG_ME_GOT_NANO:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_NANO");
+			//	break;
+			//}
+			//case ::CG_YOU_GAVE_NANO:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "YOU_GAVE_NANO");
+			//	break;
+			//}
+			//case ::CG_ME_CAST_NANO:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "ME_CAST_NANO");
+			//	break;
+			//}
+			//case ::CG_TEAM_LOOT_MESSAGES:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "TEAM_LOOT_MESSAGES");
+			//	break;
+			//}
+			//case ::CG_VICINITY_LOOT_MESSAGES:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "VICINITY_LOOT_MESSAGES");
+			//	break;
+			//}
+			//case ::CG_RESEARCH:
+			//{
+			//	strcpy_s(chat_type, sizeof(chat_type), "RESEARCH");
+			//	break;
+			//}
+			//default:
+			//	sprintf_s(chat_type, sizeof(chat_type), "%d", group_id);
+			//	break;
+			//}
+			//char *argv[] = { chat_type, text };
+			//pISInterface->ExecuteEvent(GetEventId("AO_onIncomingSystemText"), 0, 2, argv);
+			//delete argv;
+			PSYSTEMCHATINFO system_chat_info = new SYSTEMCHATINFO(group_id, chat_text);
+			g_system_chat_queue.push(system_chat_info);
 		}
-		case ::CG_VICINITY:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "VICINITY");
-			break;
-		}
-		case ::CG_TELL_MESSAGES:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "TELL_MESSAGES");
-			break;
-		}
-		case ::CG_YOUR_PETS:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "YOUR_PETS");
-			break;
-		}
-		case ::CG_OTHERS_PETS:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "OTHERS_PETS");
-			break;
-		}
-		case ::CG_ME_HIT_BY_ENVIRONMENT:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_ENVIRONMENT");
-			break;
-		}
-		case ::CG_ME_HIT_BY_NANO:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_NANO");
-			break;
-		}
-		case ::CG_YOUR_PET_HIT_BY_NANO:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "YOUR_PET_HIT_BY_NANO");
-			break;
-		}
-		case ::CG_OTHER_HIT_BY_NANO:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "OTHER_HIT_BY_NANO");
-			break;
-		}
-		case ::CG_YOU_HIT_OTHER_WITH_NANO:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "YOU_HIT_OTHER_WITH_NANO");
-			break;
-		}
-		case ::CG_ME_HIT_BY_MONSTER:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_MONSTER");
-			break;
-		}
-		case ::CG_ME_HIT_BY_PLAYER:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_PLAYER");
-			break;
-		}
-		case ::CG_YOU_HIT_OTHER:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "YOU_HIT_OTHER");
-			break;
-		}
-		case ::CG_YOUR_PET_HIT_BY_OTHER:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "YOUR_PET_HIT_BY_OTHER");
-			break;
-		}
-		case ::CG_OTHER_HIT_BY_OTHER:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "OTHER_HIT_BY_OTHER");
-			break;
-		}
-		case ::CG_ME_GOT_XP:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_XP");
-			break;
-		}
-		case ::CG_ME_GOT_SK:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_SK");
-			break;
-		}
-		case ::CG_YOUR_PET_HIT_BY_MONSTER:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "YOUR_PET_HIT_BY_MONSTER");
-			break;
-		}
-		case ::CG_YOUR_MISSES:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "YOUR_MISSES");
-			break;
-		}
-		case ::CG_OTHER_MISSES:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "OTHER_MISSES");
-			break;
-		}
-		case ::CG_YOU_GAVE_HEALTH:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "YOU_GAVE_HEALTH");
-			break;
-		}
-		case ::CG_ME_GOT_HEALTH:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_HEALTH");
-			break;
-		}
-		case ::CG_ME_GOT_NANO:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_NANO");
-			break;
-		}
-		case ::CG_YOU_GAVE_NANO:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "YOU_GAVE_NANO");
-			break;
-		}
-		case ::CG_ME_CAST_NANO:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "ME_CAST_NANO");
-			break;
-		}
-		case ::CG_TEAM_LOOT_MESSAGES:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "TEAM_LOOT_MESSAGES");
-			break;
-		}
-		case ::CG_VICINITY_LOOT_MESSAGES:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "VICINITY_LOOT_MESSAGES");
-			break;
-		}
-		case ::CG_RESEARCH:
-		{
-			strcpy_s(chat_type, sizeof(chat_type), "RESEARCH");
-			break;
-		}
-		default:
-			sprintf_s(chat_type, sizeof(chat_type), "%d", group_id);
-			break;
-		}
-		char *argv[] = { chat_type, text };
-		pISInterface->ExecuteEvent(GetEventId("AO_onIncomingSystemText"), 0, 2, argv);
-		//delete argv;
 		ChatGroupController_c__sub_10083D9C_Trampoline(group_id, chat_text, unknown);
 	}
 
@@ -763,24 +743,24 @@ namespace isxao_detours
 		//EzDetour(n3Playfield_t__AddChildDynel, &AODetours::Playfield_t__AddChildDynel_Detour, &AODetours::Playfield_t__AddChildDynel_Trampoline);
 		//EzDetour(n3Dynel_t__SetPlayfield, &AODetours::n3Dynel_t__SetPlayfield_Detour, &AODetours::n3Dynel_t__SetPlayfield_Trampoline);
 
-		//EzDetour(Client_t__ProcessMessage, &AODetours::Client_t__ProcessMessage_Detour, &AODetours::Client_t__ProcessMessage_Trampoline);
+		EzDetour(Client_t__ProcessMessage, &AODetours::Client_t__ProcessMessage_Detour, &AODetours::Client_t__ProcessMessage_Trampoline);
 
 		//EzDetour(n3Engine_t__SetTeleportStatus, &AODetours::n3Engine_t__SetTeleportStatus_Detour, &AODetours::n3Engine_t__SetTeleportStatus_Trampoline);
 
 		//EzDetour(ChatGUIModule_c__HandleGroupAction, &AODetours::ChatGUIModule_c__HandleGroupAction_Detour, &AODetours::ChatGUIModule_c__HandleGroupAction_Trampoline);
-		//EzDetour(ChatGUIModule_c__HandleGroupMessage, &AODetours::ChatGUIModule_c__HandleGroupMessage_Detour, &AODetours::ChatGUIModule_c__HandleGroupMessage_Trampoline);
+		EzDetour(ChatGUIModule_c__HandleGroupMessage, &AODetours::ChatGUIModule_c__HandleGroupMessage_Detour, &AODetours::ChatGUIModule_c__HandleGroupMessage_Trampoline);
 		//EzDetour(ChatGUIModule_c__HandlePrivateGroupAction, &AODetours::ChatGUIModule_c__HandlePrivateGroupAction_Detour, &AODetours::ChatGUIModule_c__HandlePrivateGroupAction_Trampoline);
-		//EzDetour(ChatGUIModule_c__HandlePrivateMessage, &AODetours::ChatGUIModule_c__HandlePrivateMessage_Detour, &AODetours::ChatGUIModule_c__HandlePrivateMessage_Trampoline);
+		EzDetour(ChatGUIModule_c__HandlePrivateMessage, &AODetours::ChatGUIModule_c__HandlePrivateMessage_Detour, &AODetours::ChatGUIModule_c__HandlePrivateMessage_Trampoline);
 		//EzDetour(ChatGUIModule_c__HandleSystemMessage, &AODetours::ChatGUIModule_c__HandleSystemMessage_Detour, &AODetours::ChatGUIModule_c__HandleSystemMessage_Trampoline);
-		//EzDetour(ChatGUIModule_c__HandleVicinityMessage, &AODetours::ChatGUIModule_c__HandleVicinityMessage_Detour, &AODetours::ChatGUIModule_c__HandleVicinityMessage_Trampoline);
+		EzDetour(ChatGUIModule_c__HandleVicinityMessage, &AODetours::ChatGUIModule_c__HandleVicinityMessage_Detour, &AODetours::ChatGUIModule_c__HandleVicinityMessage_Trampoline);
 
-		//EzDetour(ChatGroupController_c__sub_10083D9C, &AODetours::ChatGroupController_c__sub_10083D9C_Detour, &AODetours::ChatGroupController_c__sub_10083D9C_Trampoline);
+		EzDetour(ChatGroupController_c__sub_10083D9C, &AODetours::ChatGroupController_c__sub_10083D9C_Detour, &AODetours::ChatGroupController_c__sub_10083D9C_Trampoline);
 
 		//EzDetour(FriendListController_c__sub_100A68E6, &AODetours::FriendListController_c__sub_100A68E6_Detour, &AODetours::FriendListController_c__sub_100A68E6_Trampoline);
 
 		//EzDetour(ChatWindowNode_c__sub_1009BB79, &AODetours::ChatWindowNode_c__sub_1009BB79_Detour, &AODetours::ChatWindowNode_c__sub_1009BB79_Trampoline);
 
-		//EzDetour(CommandInterpreter_c__ParseTextCommand, &AODetours::CommandInterpreter_c__ParseTextCommand_Detour, &AODetours::CommandInterpreter_c__ParseTextCommand_Trampoline);
+		EzDetour(CommandInterpreter_c__ParseTextCommand, &AODetours::CommandInterpreter_c__ParseTextCommand_Detour, &AODetours::CommandInterpreter_c__ParseTextCommand_Trampoline);
 	}
 
 	void AODetours::Shutdown()
@@ -796,24 +776,24 @@ namespace isxao_detours
 		//EzUnDetour(n3Playfield_t__AddChildDynel);
 		//EzUnDetour(n3Dynel_t__SetPlayfield);
 
-		//EzUnDetour(Client_t__ProcessMessage);
+		EzUnDetour(Client_t__ProcessMessage);
 
 		//EzUnDetour(n3Engine_t__SetTeleportStatus);
 
 		//EzUnDetour(ChatGUIModule_c__HandleGroupAction);
-		//EzUnDetour(ChatGUIModule_c__HandleGroupMessage);
+		EzUnDetour(ChatGUIModule_c__HandleGroupMessage);
 		//EzUnDetour(ChatGUIModule_c__HandlePrivateGroupAction);
-		//EzUnDetour(ChatGUIModule_c__HandlePrivateMessage);
+		EzUnDetour(ChatGUIModule_c__HandlePrivateMessage);
 		//EzUnDetour(ChatGUIModule_c__HandleSystemMessage);
-		//EzUnDetour(ChatGUIModule_c__HandleVicinityMessage);
+		EzUnDetour(ChatGUIModule_c__HandleVicinityMessage);
 
-		//EzUnDetour(ChatGroupController_c__sub_10083D9C);
+		EzUnDetour(ChatGroupController_c__sub_10083D9C);
 
 		//EzUnDetour(FriendListController_c__sub_100A68E6);
 
 		//EzUnDetour(ChatWindowNode_c__sub_1009BB79);
 
-		//EzUnDetour(CommandInterpreter_c__ParseTextCommand);
+		EzUnDetour(CommandInterpreter_c__ParseTextCommand);
 	}
 	
 }

@@ -1038,6 +1038,10 @@ namespace isxao_globals
 		HTMLParser_c__HTMLParser_c = HTMLParser_c__HTMLParser_c_x + hGUI;
 #endif
 
+#ifdef HTMLParser_c__dHTMLParser_c_x
+		HTMLParser_c__dHTMLParser_c = HTMLParser_c__dHTMLParser_c_x + hGUI;
+#endif
+
 #ifdef HTMLParser_c__HTMLParser_c_copy_x
 		HTMLParser_c__HTMLParser_c_copy = HTMLParser_c__HTMLParser_c_copy_x + hGUI;
 #endif
@@ -1537,6 +1541,10 @@ namespace isxao_globals
 	bool g_events_registered = false;
 	bool g_isxao_initialized = false;
 	Concurrency::concurrent_queue<PN3MESSAGEINFO> g_n3message_queue;
+	Concurrency::concurrent_queue<PGROUPMESSAGEINFO> g_group_message_queue;
+	Concurrency::concurrent_queue<PPRIVATEMESSAGEINFO> g_private_message_queue;
+	Concurrency::concurrent_queue<PPRIVATEMESSAGEINFO> g_vicinity_message_queue;
+	Concurrency::concurrent_queue<PSYSTEMCHATINFO> g_system_chat_queue;
 
 #pragma endregion
 
@@ -1587,6 +1595,7 @@ namespace isxao_globals
 #pragma region HTMLParser
 
 	DWORD HTMLParser_c__HTMLParser_c = 0;
+	DWORD HTMLParser_c__dHTMLParser_c = 0;
 	DWORD HTMLParser_c__HTMLParser_c_copy = 0;
 	DWORD HTMLParser_c__ExtractText = 0;
 

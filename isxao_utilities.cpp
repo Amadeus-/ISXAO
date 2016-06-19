@@ -1666,6 +1666,195 @@ namespace isxao_utilities
 		//delete argv;
 	}
 
+	void HandleGroupMessage(PGROUPMESSAGEINFO group_message_info)
+	{
+		char* sender = _strdup(group_message_info->SenderName.c_str());
+		char* channel = _strdup(group_message_info->ChatChannel.c_str());
+		char* message = _strdup(group_message_info->Message.c_str());
+		char id[MAX_STRING];
+		sprintf_s(id, sizeof(id), "%I64u", group_message_info->SenderIdentity.GetCombinedIdentity());
+		char *argv[] = { sender, channel, message, id };
+		pISInterface->ExecuteEvent(GetEventId("AO_onGroupMessageReceived"), 0, 4, argv);
+		delete group_message_info;
+	}
+
+	void HandlePrivateMessage(PPRIVATEMESSAGEINFO private_message_info)
+	{
+		char* sender = _strdup(private_message_info->SenderName.c_str());
+		char* message = _strdup(private_message_info->Message.c_str());
+		char id[MAX_STRING];
+		sprintf_s(id, sizeof(id), "%I64u", private_message_info->SenderIdentity.GetCombinedIdentity());
+		char *argv[] = { sender, message, id };
+		pISInterface->ExecuteEvent(GetEventId("AO_onTellReceived"), 0, 3, argv);
+		delete private_message_info;
+	}
+
+	void HandleVicinityMessage(PPRIVATEMESSAGEINFO vicinity_message_info)
+	{
+		char* sender = _strdup(vicinity_message_info->SenderName.c_str());
+		char* message = _strdup(vicinity_message_info->Message.c_str());
+		char id[MAX_STRING];
+		sprintf_s(id, sizeof(id), "%I64u", vicinity_message_info->SenderIdentity.GetCombinedIdentity());
+		char *argv[] = { sender, message, id };
+		pISInterface->ExecuteEvent(GetEventId("AO_onVicinityMessageReceived"), 0, 3, argv);
+		delete vicinity_message_info;
+	}
+
+	void HandleSystemChat(PSYSTEMCHATINFO system_chat_info)
+	{
+		char chat_type[MAX_STRING];
+		char* text = _strdup(system_chat_info->Text.c_str());
+		switch (::ChatGroup_e(system_chat_info->ChatType))
+		{
+		case ::CG_SYSTEM:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "SYSTEM");
+			break;
+		}
+		case ::CG_VICINITY:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "VICINITY");
+			break;
+		}
+		case ::CG_TELL_MESSAGES:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "TELL_MESSAGES");
+			break;
+		}
+		case ::CG_YOUR_PETS:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "YOUR_PETS");
+			break;
+		}
+		case ::CG_OTHERS_PETS:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "OTHERS_PETS");
+			break;
+		}
+		case ::CG_ME_HIT_BY_ENVIRONMENT:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_ENVIRONMENT");
+			break;
+		}
+		case ::CG_ME_HIT_BY_NANO:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_NANO");
+			break;
+		}
+		case ::CG_YOUR_PET_HIT_BY_NANO:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "YOUR_PET_HIT_BY_NANO");
+			break;
+		}
+		case ::CG_OTHER_HIT_BY_NANO:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "OTHER_HIT_BY_NANO");
+			break;
+		}
+		case ::CG_YOU_HIT_OTHER_WITH_NANO:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "YOU_HIT_OTHER_WITH_NANO");
+			break;
+		}
+		case ::CG_ME_HIT_BY_MONSTER:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_MONSTER");
+			break;
+		}
+		case ::CG_ME_HIT_BY_PLAYER:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_PLAYER");
+			break;
+		}
+		case ::CG_YOU_HIT_OTHER:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "YOU_HIT_OTHER");
+			break;
+		}
+		case ::CG_YOUR_PET_HIT_BY_OTHER:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "YOUR_PET_HIT_BY_OTHER");
+			break;
+		}
+		case ::CG_OTHER_HIT_BY_OTHER:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "OTHER_HIT_BY_OTHER");
+			break;
+		}
+		case ::CG_ME_GOT_XP:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_XP");
+			break;
+		}
+		case ::CG_ME_GOT_SK:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_SK");
+			break;
+		}
+		case ::CG_YOUR_PET_HIT_BY_MONSTER:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "YOUR_PET_HIT_BY_MONSTER");
+			break;
+		}
+		case ::CG_YOUR_MISSES:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "YOUR_MISSES");
+			break;
+		}
+		case ::CG_OTHER_MISSES:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "OTHER_MISSES");
+			break;
+		}
+		case ::CG_YOU_GAVE_HEALTH:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "YOU_GAVE_HEALTH");
+			break;
+		}
+		case ::CG_ME_GOT_HEALTH:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_HEALTH");
+			break;
+		}
+		case ::CG_ME_GOT_NANO:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_NANO");
+			break;
+		}
+		case ::CG_YOU_GAVE_NANO:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "YOU_GAVE_NANO");
+			break;
+		}
+		case ::CG_ME_CAST_NANO:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "ME_CAST_NANO");
+			break;
+		}
+		case ::CG_TEAM_LOOT_MESSAGES:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "TEAM_LOOT_MESSAGES");
+			break;
+		}
+		case ::CG_VICINITY_LOOT_MESSAGES:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "VICINITY_LOOT_MESSAGES");
+			break;
+		}
+		case ::CG_RESEARCH:
+		{
+			strcpy_s(chat_type, sizeof(chat_type), "RESEARCH");
+			break;
+		}
+		default:
+			sprintf_s(chat_type, sizeof(chat_type), "%d", chat_type);
+			break;
+		}
+		char *argv[] = { chat_type, text };
+		pISInterface->ExecuteEvent(GetEventId("AO_onIncomingSystemText"), 0, 2, argv);
+		delete system_chat_info;
+	}
+
 #pragma endregion
 
 }

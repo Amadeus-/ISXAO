@@ -7,15 +7,16 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	IDENTITY id;
-	id.Type = 53019;
-	id.Id = 223325;
-	DWORD a = 0;
-	DWORD b = 0;
-	DWORD *pA = &a;
-	DWORD *pB = &b;
-	auto time = pEngineClientAnarchy->N3Msg_GetFormulaProgress(id, a, b);
-	printf("%f : %d : %d", time, a, b);
+	//auto s = string("<font color=\'#00DE42\'>T</font>|<font color=\'#00DE42\'>G</font>|<font color=\'#00DE42\'>P</font>");
+	auto s = string("<b>chair</b>");
+	//auto h = new isxao_classes::HTMLParser(s, 0, 5, 1);
+	HTMLParser h(s, 0, 5, 1);
+	string pS;
+	h.ExtractText(&pS, 0, -1, 3);
+	printf("%d", s.length());
+	printf("%d", pS.length());
+	//delete h;
+	//delete pS;
 	return 1;
 }
 
