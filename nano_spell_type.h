@@ -7,6 +7,10 @@ public:
 
 	enum NanoSpellTypeMembers
 	{
+		CanApplyOnFriendly,
+		CanApplyOnHostile,
+		CanApplyOnSelf,
+		CanApplyOnFightingTarget,
 		CastingTime,
 		FormulaProgress,
 		FormulaRadius,
@@ -26,6 +30,10 @@ public:
 
 	NanoSpellType() : LSType("NanoSpell")
 	{
+		TypeMember(CanApplyOnFightingTarget);
+		TypeMember(CanApplyOnFriendly);
+		TypeMember(CanApplyOnHostile);
+		TypeMember(CanApplyOnSelf);
 		TypeMember(CastingTime);
 		TypeMember(FormulaProgress);
 		TypeMember(FormulaRadius);

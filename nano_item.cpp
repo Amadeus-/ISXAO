@@ -3,6 +3,26 @@
 namespace isxao_classes
 {
 	
+	bool NanoItem::CanApplyOnFightingTarget()
+	{
+		return (GetNanoCanFlags() & ICF_APPLY_ON_FIGHTING_TARGET) == 1;
+	}
+
+	bool NanoItem::CanApplyOnFriendly()
+	{
+		return (GetNanoCanFlags() & ICF_APPLY_ON_FRIENDLY) == 1;
+	}
+
+	bool NanoItem::CanApplyOnHostile()
+	{
+		return (GetNanoCanFlags() & ICF_APPLY_ON_HOSTILE) == 1;
+	}
+
+	bool NanoItem::CanApplyOnSelf()
+	{
+		return (GetNanoCanFlags() & ICF_APPLY_ON_SELF) == 1;
+	}
+
 	void NanoItem::Cast()
 	{
 		pEngineClientAnarchy->GetClientChar()->CastNanoSpell(GetNanoIdentity(), pSelectionIndicator->Identity);
@@ -18,11 +38,6 @@ namespace isxao_classes
 		return GetSkill(ST_ATTACKRANGE);
 	}
 
-	float NanoItem::GetCooldownDelay()
-	{
-		return GetSkill(ST_COOLDOWNTIME) / 100.0f;
-	}
-
 	float NanoItem::GetCooldownRemaining()
 	{
 		DWORD a;
@@ -31,10 +46,8 @@ namespace isxao_classes
 		return float((1.0 - c)*b);
 	}
 
-	double NanoItem::GetFormulaProgress()
+	double NanoItem::GetFormulaProgress(DWORD &a, DWORD &b)
 	{
-		DWORD a;
-		DWORD b;
 		return pEngineClientAnarchy->N3Msg_GetFormulaProgress(GetNanoIdentity(), a, b);
 	}
 
@@ -137,12 +150,17 @@ namespace isxao_classes
 
 	bool NanoItem::WillBreakOnAttack()
 	{
-		return (GetNanoNoneFlags() & NNF_BREAK_ON_ATTACK) == 1 || (GetNanoNoneFlags() & NNF_BREAK_ON_SPELL_ATTACK) == 1;
+		return (GetNanoNoneFlags() & NNF_BREAK_ON_ATTACK) == 1;
 	}
 
 	bool NanoItem::WillBreakOnDebuff()
 	{
 		return (GetNanoNoneFlags() & NNF_BREAK_ON_DEBUFF) == 1;
+	}
+
+	bool NanoItem::WillBreakOnSpellAttack()
+	{
+		return (GetNanoNoneFlags() * NNF_BREAK_ON_SPELL_ATTACK) == 1;
 	}
 
 }

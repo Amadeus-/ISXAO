@@ -7,16 +7,33 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	//auto s = string("<font color=\'#00DE42\'>T</font>|<font color=\'#00DE42\'>G</font>|<font color=\'#00DE42\'>P</font>");
-	auto s = string("<b>chair</b>");
-	//auto h = new isxao_classes::HTMLParser(s, 0, 5, 1);
-	HTMLParser h(s, 0, 5, 1);
-	string pS;
-	h.ExtractText(&pS, 0, -1, 3);
-	printf("%d", s.length());
-	printf("%d", pS.length());
-	//delete h;
-	//delete pS;
+	IDENTITY dummy;
+	std::vector<SpecialAction*> v;
+	pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
+
+	FILE * pFILE;
+	fopen_s(&pFILE, "stats.txt", "a");
+	for (auto it = v.begin(); it != v.end(); ++it)
+	{
+		IDENTITY id = (*it)->GetIdentity();
+		char buffer[MAX_STRING];
+		sprintf_s(buffer, sizeof(buffer), "%s\n", pEngineClientAnarchy->N3Msg_GetName(id, dummy));
+		fputs(buffer, pFILE);
+
+		for (DWORD i = 0; i < 1003; i++)
+		{
+			LONG stat = pEngineClientAnarchy->N3Msg_GetSkill(id, i, 2, dummy);
+			if(stat != 1234567890)
+			{
+				sprintf_s(buffer, "\tST_%s (%d) = %d,\n", isxao_utilities::StatToString(i), i, stat);
+				for (auto i = 0; i < (int)strlen(buffer); i++)
+					buffer[i] = toupper(buffer[i]);
+				fputs(buffer, pFILE);
+			}			
+		}		
+	}
+	fclose(pFILE);
+
 	return 1;
 }
 

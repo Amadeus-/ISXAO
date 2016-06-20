@@ -11,6 +11,7 @@ namespace isxao_utilities
 	AOLIB_API PCSTR GetSideStr(DWORD);
 	AOLIB_API PCSTR GetStatName(DWORD);
 	AOLIB_API PCSTR GetNanoSchoolStr(DWORD);
+	AOLIB_API PCSTR __cdecl StatToString(DWORD);
 
 #pragma endregion
 

@@ -117,6 +117,9 @@ namespace isxao_utilities
 		return result;
 	}
 
+#ifdef __StatToString_x
+	FUNCTION_AT_ADDRESS(PCSTR __cdecl StatToString(DWORD), __StatToString);
+#endif
 
 #pragma endregion
 

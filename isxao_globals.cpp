@@ -49,6 +49,11 @@ namespace isxao_globals
 #ifdef __RequestInfo_x
 		__RequestInfo = __RequestInfo_x + hGamecode;
 #endif
+
+#ifdef __StatToString_x
+		__StatToString = __StatToString_x + hGamecode;
+#endif
+
 #pragma endregion
 
 #pragma region EngineClientAnarchy
@@ -1146,6 +1151,7 @@ namespace isxao_globals
 	STATNAMEDIR StatNameDir;
 	STATNAMEDIR *pStatNameDir = nullptr;
 	DWORD __RequestInfo = 0;
+	DWORD __StatToString = 0;
 
 #pragma endregion
 

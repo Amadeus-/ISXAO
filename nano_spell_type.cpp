@@ -11,6 +11,30 @@ bool NanoSpellType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 #define pNanoSpell ((NanoItem*)ObjectData.Ptr)
 		switch (NanoSpellTypeMembers(Member->ID))
 		{
+		case CanApplyOnFriendly:
+		{
+			Object.DWord = pNanoSpell->CanApplyOnFriendly();
+			Object.Type = pBoolType;
+			break;
+		}
+		case CanApplyOnFightingTarget:
+		{
+			Object.DWord = pNanoSpell->CanApplyOnFightingTarget();
+			Object.Type = pBoolType;
+			break;
+		}
+		case CanApplyOnHostile:
+		{
+			Object.DWord = pNanoSpell->CanApplyOnHostile();
+			Object.Type = pBoolType;
+			break;
+		}
+		case CanApplyOnSelf:
+		{
+			Object.DWord = pNanoSpell->CanApplyOnSelf();
+			Object.Type = pBoolType;
+			break;
+		}
 		case CastingTime:
 		{
 			Object.Float = pNanoSpell->GetAttackDelay();

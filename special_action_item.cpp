@@ -3,6 +3,31 @@
 namespace isxao_classes
 {
 
+	bool SpecialActionItem::CanApplyOnFightingTarget()
+	{
+		return (GetSkill(ST_CAN) & ICF_APPLY_ON_FIGHTING_TARGET) == 1;
+	}
+
+	bool SpecialActionItem::CanApplyOnFriendly()
+	{
+		return (GetSkill(ST_CAN) & ICF_APPLY_ON_FRIENDLY) == 1;
+	}
+
+	bool SpecialActionItem::CanApplyOnHostile()
+	{
+		return (GetSkill(ST_CAN) & ICF_APPLY_ON_HOSTILE) == 1;
+	}
+
+	bool SpecialActionItem::CanApplyOnSelf()
+	{
+		return (GetSkill(ST_CAN) & ICF_APPLY_ON_SELF) == 1;
+	}
+
+	bool SpecialActionItem::CanUse()
+	{
+		return (GetSkill(ST_CAN) & ICF_USE) == 1;
+	}
+
 	LONG SpecialActionItem::GetSkill(DWORD stat)
 	{
 		IDENTITY dummy_identity;
@@ -10,9 +35,39 @@ namespace isxao_classes
 		return pEngineClientAnarchy->N3Msg_GetSkill(GetIdentity(), stat, 2, dummy_identity);
 	}
 
+	bool SpecialActionItem::IsBuff()
+	{
+		return (GetSkill(ST_FLAGS) & NNF_IS_BUFF) == 1;
+	}
+
 	bool SpecialActionItem::IsGeneralAction()
 	{
 		return GetSkill(ST_ACTIONCATEGORY) == 2;
+	}
+
+	bool SpecialActionItem::IsHostile()
+	{
+		return (GetSkill(ST_FLAGS) & NNF_IS_HOSTILE) == 1;
+	}
+
+	bool SpecialActionItem::IsNoRemoveNoNCUIsFriendly()
+	{
+		return (GetSkill(ST_FLAGS) & NNF_NO_REMOVE_NO_NCU_IS_FRIENDLY) == 1;
+	}
+
+	bool SpecialActionItem::IsNoResist()
+	{
+		return (GetSkill(ST_FLAGS) & NNF_NO_RESIST) == 1;
+	}
+
+	bool SpecialActionItem::IsNoResistNoFumble()
+	{
+		return (GetSkill(ST_FLAGS) & NNF_NO_RESIST_CANNOT_FUMBLE) == 1;
+	}
+
+	bool SpecialActionItem::IsNotRemovable()
+	{
+		return (GetSkill(ST_FLAGS) & NNF_NOT_REMOVABLE) == 1;
 	}
 
 	bool SpecialActionItem::IsPerk()
@@ -23,6 +78,21 @@ namespace isxao_classes
 	bool SpecialActionItem::IsSpecialAction()
 	{
 		return GetSkill(ST_ACTIONCATEGORY) == 3;
+	}
+
+	bool SpecialActionItem::WillBreakOnAttack()
+	{
+		return (GetSkill(ST_FLAGS) & NNF_BREAK_ON_ATTACK) == 1;
+	}
+
+	bool SpecialActionItem::WillBreakOnDebuff()
+	{
+		return (GetSkill(ST_FLAGS) & NNF_BREAK_ON_DEBUFF) == 1;
+	}
+
+	bool SpecialActionItem::WillBreakOnSpellAttack()
+	{
+		return (GetSkill(ST_FLAGS) & NNF_BREAK_ON_SPELL_ATTACK) == 1;
 	}
 
 

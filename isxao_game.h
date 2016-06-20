@@ -10,6 +10,7 @@
 #define __SetTarget_x												0x2682E		// GUI
 #define m_cStatNameDir_x											0x2E1E30	// Gamecode
 #define __RequestInfo_x												0x404A9		// Gamecode
+#define __StatToString_x											0x37162		// Gamecode
 
 #pragma endregion
 

@@ -26,6 +26,7 @@ namespace isxao_globals
 	AOLIB_VAR STATNAMEDIR StatNameDir;
 	AOLIB_VAR STATNAMEDIR *pStatNameDir;
 	AOLIB_VAR DWORD __RequestInfo;
+	AOLIB_VAR DWORD __StatToString;
 
 #pragma endregion
 
