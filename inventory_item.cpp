@@ -38,6 +38,11 @@ namespace isxao_classes
 		return GetSkill(ST_CAN);
 	}
 
+	double InventoryItem::GetItemProgress(DWORD& a, DWORD& b)
+	{
+		return pEngineClientAnarchy->N3Msg_GetItemProgress(GetIdentity(), a, b);
+	}
+
 	DWORD InventoryItem::GetMass()
 	{
 		return GetSkill(ST_VOLUMEMASS);
@@ -52,6 +57,12 @@ namespace isxao_classes
 	{
 		return GetSkill(ST_LEVEL);
 	}
+
+	PCSTR InventoryItem::GetRarity()
+	{
+		return isxao_utilities::GetItemRarityStr(GetSkill(ST_RARITY));
+	}
+
 
 	DWORD InventoryItem::GetValue()
 	{
@@ -81,6 +92,12 @@ namespace isxao_classes
 	bool InventoryItem::IsImplant()
 	{
 		return GetSkill(ST_ITEMCLASS) == IT_IMPLANT;
+	}
+
+	bool InventoryItem::IsItemDisabled()
+	{
+		IDENTITY dummy_identity;
+		return pEngineClientAnarchy->N3Msg_IsItemDisabled(GetIdentity(), dummy_identity);
 	}
 
 	bool InventoryItem::IsMisc()
@@ -118,7 +135,7 @@ namespace isxao_classes
 		return GetSkill(ST_ITEMCLASS) == IT_WEAPON;
 	}
 
-	bool InventoryItem::MustSit()
+	bool InventoryItem::MustSitToUse()
 	{
 		return (GetCanFlags() & ICF_SIT) == 1;
 	}

@@ -8,6 +8,9 @@ public:
 	AOLIB_OBJECT bool CanApplyOnSelf();
 	AOLIB_OBJECT bool CanApplyOnFightingTarget();
 	AOLIB_OBJECT bool CanUse();
+	AOLIB_OBJECT float GetAttackDelay();
+	AOLIB_OBJECT double GetSpecialActionProgress(DWORD&, DWORD&);
+	AOLIB_OBJECT DWORD GetRange();
 	AOLIB_OBJECT LONG GetSkill(DWORD);
 	AOLIB_OBJECT bool IsBuff();
 	AOLIB_OBJECT bool IsGeneralAction();

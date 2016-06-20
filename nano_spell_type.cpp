@@ -43,7 +43,9 @@ bool NanoSpellType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		}
 		case FormulaProgress:
 		{
-			Object.Float = float(pNanoSpell->GetFormulaProgress());
+			DWORD a;
+			DWORD b;
+			Object.Float = float(pNanoSpell->GetFormulaProgress(a, b));
 			Object.Type = pfloatType;
 			break;
 		}
@@ -53,10 +55,58 @@ bool NanoSpellType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			Object.Type = pUintType;
 			break;
 		}
+		case IsBuff:
+		{
+			Object.DWord = pNanoSpell->IsBuff();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsHostile:
+		{
+			Object.DWord = pNanoSpell->IsHostile();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsNoResistCannotFumble:
+		{
+			Object.DWord = pNanoSpell->IsNoResistCannotFumble();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsReady:
+		{
+			Object.DWord = pNanoSpell->IsReady();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsSelfOnly:
+		{
+			Object.DWord = pNanoSpell->IsNanoSelfOnly();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsShapeChangeNano:
+		{
+			Object.DWord = pNanoSpell->IsShapeChangeNano();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsTeamNano:
+		{
+			Object.DWord = pNanoSpell->IsTeamNano();
+			Object.Type = pBoolType;
+			break;
+		}
 		case Name:
 		{
 			Object.ConstCharPtr = pNanoSpell->GetName();
 			Object.Type = pStringType;
+			break;
+		}
+		case NanoId:
+		{
+			Object.DWord = pNanoSpell->GetNanoIdentity().Id;
+			Object.Type = pUintType;
 			break;
 		}
 		case NanoSchool:
@@ -87,6 +137,30 @@ bool NanoSpellType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		{
 			Object.Float = pNanoSpell->GetRechargeDelay();
 			Object.Type = pfloatType;
+			break;
+		}
+		case StackingOrder:
+		{
+			Object.DWord = pNanoSpell->GetStackingOrder();
+			Object.Type = pUintType;
+			break;
+		}
+		case WillBreakOnAttack:
+		{
+			Object.DWord = pNanoSpell->WillBreakOnAttack();
+			Object.Type = pBoolType;
+			break;
+		}
+		case WillBreakOnDebuff:
+		{
+			Object.DWord = pNanoSpell->WillBreakOnDebuff();
+			Object.Type = pBoolType;
+			break;
+		}
+		case WillBreakOnSpellAttack:
+		{
+			Object.DWord = pNanoSpell->WillBreakOnSpellAttack();
+			Object.Type = pBoolType;
 			break;
 		}
 		default:

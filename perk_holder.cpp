@@ -22,7 +22,7 @@ namespace isxao_classes
 		return m.size();
 	}
 
-	ActionLock* PerkHolder::GetActionLock(SpecialAction* special_action)
+	ActionLock* PerkHolder::GetActionLock(SpecialActionTemplate* special_action)
 	{
 		return nullptr;
 	}

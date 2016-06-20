@@ -3,6 +3,30 @@
 namespace isxao_classes
 {
 
+	DWORD Actor::BuildLSNCU(LSIndex* pIndex)
+	{
+		auto l = GetSpellTemplateData()->GetSpellTemplateDataData().NanoTemplateList;
+		for (auto it = l.begin(); it != l.end(); ++it)
+		{
+			auto pNanoTemplate = reinterpret_cast<NanoTemplate*>(&(*it));
+			pIndex->AddItem(reinterpret_cast<LSOBJECTDATA&>(pNanoTemplate));
+		}
+		return pIndex->GetContainerUsed();
+	}
+
+	DWORD Actor::BuildLSPets(LSIndex* pIndex)
+	{
+		std::map<IDENTITY, DWORD> pet_map;
+		if (GetPetIDs(pet_map) == 0)
+			return 0;
+		for (auto it = pet_map.begin(); it != pet_map.end(); ++it)
+		{
+			auto p_dynel = isxao_utilities::GetDynel(it->first);
+			pIndex->AddItem(reinterpret_cast<LSOBJECTDATA&>(p_dynel));
+		}
+		return pIndex->GetContainerUsed();
+	}
+
 	DWORD Actor::Casting()
 	{
 		return GetSpellTemplateData()->GetNanoBeingCast();
@@ -113,6 +137,38 @@ namespace isxao_classes
 		return GetVehicle()->GetCharMovementStatus()->IsMovingFwdBck == 1 && GetVehicle()->GetCharMovementStatus()->IsMovingStrafe == 1;
 	}
 
+	bool Actor::IsInMyTeam()
+	{
+		return IsPlayer() && IsInTeam() && (GetTeamRaid()->GetTeamIdentity() == pEngineClientAnarchy->GetClientChar()->GetTeamRaid()->GetTeamIdentity());
+	}
+
+	bool Actor::IsInTeam()
+	{
+		if(IsPlayer())
+			return GetTeamRaid()->GetTeamIdentity().Type != 0;
+		return false;
+	}
+
+	bool Actor::IsInRaid()
+	{
+		return IsPlayer() && IsInTeam() && GetTeamRaid()->GetTeamRaidIndex() != -1;
+	}
+
+	bool Actor::IsInMyRaidTeam()
+	{
+		if(IsTeamMember())
+		{
+			std::vector<TeamEntry*> v;
+			pEngineClientAnarchy->GetClientChar()->GetTeamRaid()->GetTeam(v);
+			for (auto it = v.begin(); it != v.end(); ++it)
+			{
+				if ((*it)->GetIdentity() == GetIdentity())
+					return true;
+			}
+		}		
+		return false;
+	}
+
 	bool Actor::IsInvis()
 	{
 		return !(GetSimpleCharData()->IsVisible);
@@ -138,33 +194,18 @@ namespace isxao_classes
 		return GetVehicle()->GetCharMovementStatus()->IsMovingStrafe != 1 && GetVehicle()->GetCharMovementStatus()->StrafeDirection == 4;
 	}
 	
-	bool Actor::HasPet()
+	bool Actor::IsTeamLeader()
 	{
-		if(IsCharacter())
+		if(IsPlayer())
 		{
-			std::map <IDENTITY, DWORD> pet_map;
-			if (ToCharacter()->GetPetMap(pet_map) == 0)
-				return false;
-			return true;
-		}
-		std::map<IDENTITY, PN3DYNEL> dynel_map;
-		isxao_utilities::GetDynelMap(dynel_map);
-		for (auto it = dynel_map.begin(); it != dynel_map.end(); ++it)
-		{
-			if (it->first.Type == 50000)
-			{
-				auto is_npc = pEngineClientAnarchy->N3Msg_IsNpc(it->first);
-				if (is_npc)
-				{
-					auto dynel = reinterpret_cast<Dynel*>(it->second);
-					if (dynel->GetSkill(ST_PETMASTER) == GetIdentity().Id)
-						return true;
-				}
-			}
+			auto result = false;
+			if (pEngineClientAnarchy && IsInTeam() && IsInMyTeam())
+				result = pEngineClientAnarchy->N3Msg_IsTeamLeader(GetIdentity());
+			return result;
 		}
 		return false;
 	}
-
+	
 	DWORD Actor::GetMasterId()
 	{
 		return GetSkill(ST_PETMASTER);
@@ -250,7 +291,43 @@ namespace isxao_classes
 			}
 			return pet_map.size();
 		}
-		return pEngineClientAnarchy->GetClientChar()->GetPetMap(m);
+		isxao_utilities::GetPetMap(m, ToCharacter()->GetNPCHolder()->GetNPCHolderData().pPetDir);
+		return m.size();
+	}
+
+	bool Actor::HasPet()
+	{
+		if(IsCharacter())
+		{
+			std::map <IDENTITY, DWORD> pet_map;
+			isxao_utilities::GetPetMap(pet_map, ToCharacter()->GetNPCHolder()->GetNPCHolderData().pPetDir);
+			if (pet_map.size() == 0)
+				return false;
+			return true;
+		}
+		std::map<IDENTITY, PN3DYNEL> dynel_map;
+		isxao_utilities::GetDynelMap(dynel_map);
+		for (auto it = dynel_map.begin(); it != dynel_map.end(); ++it)
+		{
+			if (it->first.Type == 50000)
+			{
+				auto is_npc = pEngineClientAnarchy->N3Msg_IsNpc(it->first);
+				if (is_npc)
+				{
+					auto dynel = reinterpret_cast<Dynel*>(it->second);
+					if (dynel->GetSkill(ST_PETMASTER) == GetIdentity().Id)
+						return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	TeamRaid* Actor::GetTeamRaid()
+	{
+		if(IsPlayer())
+			return reinterpret_cast<TeamRaid*>(GetSimpleCharData()->pTeamRaidInfo);
+		return nullptr;
 	}
 
 	WeaponHolder* Actor::GetWeaponHolder()
@@ -258,29 +335,23 @@ namespace isxao_classes
 		return reinterpret_cast<WeaponHolder*>(GetSimpleCharData()->pWeaponHolder);
 	}
 
-	DWORD Actor::BuildLSNCU(LSIndex* pIndex)
+	void Actor::Kick()
 	{
-		auto l = GetSpellTemplateData()->GetSpellTemplateDataData().NanoTemplateList;
-		for (auto it = l.begin(); it != l.end(); ++it)
-		{
-			auto pNanoTemplate = reinterpret_cast<NanoTemplate*>(&(*it));
-			pIndex->AddItem(reinterpret_cast<LSOBJECTDATA&>(pNanoTemplate));
-		}
-		return pIndex->GetContainerUsed();
+		if(IsTeamMember())
+			pEngineClientAnarchy->N3Msg_KickTeamMember(GetIdentity());
 	}
 
-	DWORD Actor::BuildLSPets(LSIndex* pIndex)
+	void Actor::MakeLeader()
 	{
-		std::map<IDENTITY, DWORD> pet_map;
-		if (GetPetIDs(pet_map) == 0)
-			return 0;
-		for (auto it = pet_map.begin(); it != pet_map.end(); ++it)
-		{
-			auto p_dynel = isxao_utilities::GetDynel(it->first);
-			pIndex->AddItem(reinterpret_cast<LSOBJECTDATA&>(p_dynel));
-		}
-		return pIndex->GetContainerUsed();
+		if(IsTeamMember())
+			pEngineClientAnarchy->GetClientChar()->MakeTeamLeader(GetIdentity());
 	}
 
+	bool Actor::SendTeamInvite()
+	{
+		if(IsPlayer())
+			return pEngineClientAnarchy->N3Msg_TeamJoinRequest(GetIdentity(), true);
+		return false;
+	}	
 
 }

@@ -19,6 +19,7 @@ public:
 		IsImplant,
 		IsMisc,
 		IsNPC,
+		IsReady,
 		IsSpirit,
 		IsStackable,
 		IsTower,
@@ -26,6 +27,7 @@ public:
 		IsUtility,
 		MustSit,
 		Name,
+		Rarity,
 	};
 
 	enum InventoryItemTypeMethods
@@ -47,6 +49,7 @@ public:
 		TypeMember(IsImplant);
 		TypeMember(IsMisc);
 		TypeMember(IsNPC);
+		TypeMember(IsReady);
 		TypeMember(IsSpirit);
 		TypeMember(IsStackable);
 		TypeMember(IsTower);
@@ -54,6 +57,7 @@ public:
 		TypeMember(IsUtility);
 		TypeMember(MustSit);
 		TypeMember(Name);
+		TypeMember(Rarity);
 
 		PersistentClass = pISInterface->RegisterPersistentClass("InventoryItem");
 		pISInterface->SetPersistentClass(this, PersistentClass);

@@ -3,6 +3,19 @@
 namespace isxao_classes
 {
 
+	DWORD SpellTemplateData::BuildLSNanoSpellList(LSIndex* pIndex) const
+	{
+		std::vector<DWORD> v;
+		GetNanoSpellList(v);
+		for (auto it = v.begin(); it != v.end(); ++it)
+		{
+			auto item = isxao_utilities::GetNanoItem((*it));
+			if (item)
+				pIndex->AddItem((LSOBJECTDATA&)item);
+		}
+		return pIndex->GetContainerUsed();
+	}
+
 	DWORD SpellTemplateData::GetActiveNanoEffects(std::vector<IDENTITY> &v) const
 	{
 		std::vector<PIDENTITY> nano_identity_vector = GetSpellTemplateDataData().ActiveNanos;

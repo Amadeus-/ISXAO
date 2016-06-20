@@ -8,7 +8,7 @@
 int CMD_AO(int argc, char *argv[])
 {
 	IDENTITY dummy;
-	std::vector<SpecialAction*> v;
+	std::vector<SpecialActionTemplate*> v;
 	pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
 
 	FILE * pFILE;

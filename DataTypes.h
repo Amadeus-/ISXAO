@@ -33,8 +33,8 @@
 
 #include "playfield_type.h"
 
-#include "special_action_type.h"
+#include "special_action_template_type.h"
 
 #include "action_lock_type.h"
 
-#include "special_action_item_type.h"
+#include "special_action_type.h"

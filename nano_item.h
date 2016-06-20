@@ -23,10 +23,10 @@ public:
 	AOLIB_OBJECT LONG GetSkill(DWORD);
 	AOLIB_OBJECT DWORD GetStackingOrder();
 	AOLIB_OBJECT bool IsBuff();
-	AOLIB_OBJECT bool IsFormulaReady();
 	AOLIB_OBJECT bool IsHostile();
 	AOLIB_OBJECT bool IsNanoSelfOnly();
 	AOLIB_OBJECT bool IsNoResistCannotFumble();
+	AOLIB_OBJECT bool IsReady();
 	AOLIB_OBJECT bool IsShapeChangeNano();
 	AOLIB_OBJECT bool IsTeamNano();
 	AOLIB_OBJECT bool WillBreakOnAttack();

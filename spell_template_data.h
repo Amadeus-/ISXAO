@@ -3,6 +3,7 @@
 class SpellTemplateData
 {
 public:
+	AOLIB_OBJECT DWORD BuildLSNanoSpellList(LSIndex*) const;
 	AOLIB_OBJECT DWORD GetActiveNanoEffects(std::vector<IDENTITY>&) const;
 	AOLIB_OBJECT CastingData* GetCastingData() const;
 	AOLIB_OBJECT DWORD GetNanoBeingCast() const;

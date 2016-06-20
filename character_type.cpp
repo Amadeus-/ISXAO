@@ -16,7 +16,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		{
 			if(ISNUMBER())
 			{
-				INVENTORYSLOT s = pCharacter->GetInventorySlot(GETNUMBER());
+				INVENTORYSLOT s = pCharacter->GetInventoryHolder()->GetInventorySlot(GETNUMBER());
 				PINVENTORYSLOT pS = static_cast<PINVENTORYSLOT>(pISInterface->GetTempBuffer(sizeof(INVENTORYSLOT), &s));
 				if((Object.Ptr = pS))
 				{
@@ -24,7 +24,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 					return true;
 				}
 			}
-			INVENTORYSLOT s = pCharacter->GetInventorySlot(argv[0]);
+			INVENTORYSLOT s = pCharacter->GetInventoryHolder()->GetInventorySlot(argv[0]);
 			if(s.SlotID.Type != 0)
 			{
 				PINVENTORYSLOT pS = static_cast<PINVENTORYSLOT>(pISInterface->GetTempBuffer(sizeof(INVENTORYSLOT), &s));
@@ -39,15 +39,38 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	}
 	case InventoryCount:
 	{
-		Object.DWord = pCharacter->GetInventoryCount();
+		Object.DWord = pCharacter->GetInventoryHolder()->GetInventoryCount();
 		Object.Type = pUintType;
 		break;
+	}
+	case GetInventory:
+	{
+		if (ISINDEX())
+		{
+			// parse first arg to get a collection:InventoryItemType
+			LSOBJECT MapObject;
+			if (!pISInterface->DataParse(argv[0], MapObject))
+				return false;
+			// we got an object, now check the type
+			if (MapObject.Type != pMapType)
+				return false;
+			// it's a collection:something, make sure it is collection:InventoryItemType
+			LSObjectCollection *pMap = (LSObjectCollection*)MapObject.Ptr;
+			if (pMap->GetType() != pInventoryItemType)
+				return false;
+			auto count = pCharacter->GetInventoryHolder()->BuildLSInventory(pMap);
+			Object.DWord = pMap->GetCount();
+			Object.Type = pUintType;
+			return true;
+		}
+		return false;
 	}
 	case NanoSpell:
 	{
 		if(ISINDEX())
 		{
-			std::vector<DWORD> v = pCharacter->GetNanoSpellList();
+			std::vector<DWORD> v;
+			pCharacter->GetSpellTemplateData()->GetNanoSpellList(v);
 			if(ISNUMBER())
 			{
 				auto index = DWORD(GETNUMBER());				
@@ -77,54 +100,51 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	}
 	case NanoSpellCount:
 	{
-		Object.DWord = pCharacter->GetNanoSpellList().size();
+		std::vector<DWORD> v;		
+		Object.DWord = pCharacter->GetSpellTemplateData()->GetNanoSpellList(v);
 		Object.Type = pUintType;
 		break;
 	}
-	case EquipmentCollection:
+	case GetNanoSpells:
 	{
 		if(ISINDEX())
 		{
-			// parse first arg to get a collection:InventoryItemType
-			LSOBJECT MapObject;
-			if (!pISInterface->DataParse(argv[0], MapObject))
-				return false;
-			// we got an object, now check the type
-			if (MapObject.Type != pMapType)
-				return false;
-			// it's a collection:something, make sure it is collection:InventoryItemType
-			LSObjectCollection *pMap = (LSObjectCollection*)MapObject.Ptr;
-			if (pMap->GetType() != pInventoryItemType)
-				return false;
-			auto count = pCharacter->BuildLSInventory(pMap);
-			Object.DWord = pMap->GetCount();
-			Object.Type = pUintType;
-			return true;
-		}
-		return false;
-	}
-	case EquipmentIndex:
-	{
-		if (ISINDEX())
-		{
-			// parse first arg to get a collection:InventoryItemType
 			LSOBJECT IndexObject;
 			if (!pISInterface->DataParse(argv[0], IndexObject))
-				return false;				
-			// we got an object, now check the type
-			if (IndexObject.Type != pIndexType)
-				return false;				
-			// it's a collection:something, make sure it is collection:InventoryItemType
-			LSIndex *pIndex = (LSIndex*)IndexObject.Ptr;
-			if (pIndex->GetType() != pInventorySlotType)
 				return false;
-			auto count = pCharacter->BuildLSInventory(pIndex);
-			Object.DWord = pIndex->GetContainerUsed();
+			if (IndexObject.Type != pIndexType)
+				return false;
+			LSIndex *pIndex = (LSIndex*)IndexObject.Ptr;
+			if (pIndex->GetType() != pNanoSpellType)
+				return false;
+			Object.DWord = pCharacter->GetSpellTemplateData()->BuildLSNanoSpellList(pIndex);
 			Object.Type = pUintType;
 			return true;
 		}
 		return false;
 	}
+	//case EquipmentIndex:
+	//{
+	//	if (ISINDEX())
+	//	{
+	//		// parse first arg to get a collection:InventoryItemType
+	//		LSOBJECT IndexObject;
+	//		if (!pISInterface->DataParse(argv[0], IndexObject))
+	//			return false;				
+	//		// we got an object, now check the type
+	//		if (IndexObject.Type != pIndexType)
+	//			return false;				
+	//		// it's a collection:something, make sure it is collection:InventoryItemType
+	//		LSIndex *pIndex = (LSIndex*)IndexObject.Ptr;
+	//		if (pIndex->GetType() != pInventorySlotType)
+	//			return false;
+	//		auto count = pCharacter->GetInventoryHolder()->BuildLSInventory(pIndex);
+	//		Object.DWord = pIndex->GetContainerUsed();
+	//		Object.Type = pUintType;
+	//		return true;
+	//	}
+	//	return false;
+	//}
 	case SpecialAction:
 	{
 		if (ISINDEX())
@@ -153,6 +173,24 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		Object.DWord = pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActionCount();
 		Object.Type = pUintType;
 		break;
+	}
+	case GetSpecialActions:
+	{
+		if (ISINDEX())
+		{
+			LSOBJECT IndexObject;
+			if (!pISInterface->DataParse(argv[0], IndexObject))
+				return false;
+			if (IndexObject.Type != pIndexType)
+				return false;
+			LSIndex *pIndex = (LSIndex*)IndexObject.Ptr;
+			if (pIndex->GetType() != pSpecialActionTemplateType)
+				return false;
+			Object.DWord = pCharacter->GetSpecialActionHolder()->BuildLSSpecialActions(pIndex);
+			Object.Type = pUintType;
+			return true;
+		}
+		return false;
 	}
 	default:
 		return false;

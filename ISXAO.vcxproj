@@ -180,11 +180,11 @@
     <ClCompile Include="register_events.cpp" />
     <ClCompile Include="resource_database.cpp" />
     <ClCompile Include="Services.cpp" />
-    <ClCompile Include="special_action.cpp" />
+    <ClCompile Include="special_action_template.cpp" />
     <ClCompile Include="special_action_holder.cpp" />
     <ClCompile Include="special_action_item.cpp" />
-    <ClCompile Include="special_action_item_type.cpp" />
     <ClCompile Include="special_action_type.cpp" />
+    <ClCompile Include="special_action_template_type.cpp" />
     <ClCompile Include="spell_template_data.cpp" />
     <ClCompile Include="stat_holder.cpp" />
     <ClCompile Include="targeting_module.cpp" />
@@ -270,11 +270,11 @@
     <ClInclude Include="register_events.h" />
     <ClInclude Include="resource_database.h" />
     <ClInclude Include="Services.h" />
-    <ClInclude Include="special_action.h" />
+    <ClInclude Include="special_action_template.h" />
     <ClInclude Include="special_action_holder.h" />
     <ClInclude Include="special_action_item.h" />
-    <ClInclude Include="special_action_item_type.h" />
     <ClInclude Include="special_action_type.h" />
+    <ClInclude Include="special_action_template_type.h" />
     <ClInclude Include="spell_template_data.h" />
     <ClInclude Include="stat_holder.h" />
     <ClInclude Include="targeting_module.h" />

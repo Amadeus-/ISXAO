@@ -83,6 +83,12 @@ bool InventoryItemType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 			Object.Type = pBoolType;
 			break;
 		}
+		case IsReady:
+		{
+			Object.DWord = !pInventoryItem->IsItemDisabled();
+			Object.Type = pBoolType;
+			break;
+		}
 		case IsSpirit:
 		{
 			Object.DWord = pInventoryItem->IsSpirit();
@@ -115,13 +121,19 @@ bool InventoryItemType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 		}
 		case MustSit:
 		{
-			Object.DWord = pInventoryItem->MustSit();
+			Object.DWord = pInventoryItem->MustSitToUse();
 			Object.Type = pBoolType;
 			break;
 		}
 		case Name:
 		{
 			Object.ConstCharPtr = pInventoryItem->GetName();
+			Object.Type = pStringType;
+			break;
+		}
+		case Rarity:
+		{
+			Object.ConstCharPtr = pInventoryItem->GetRarity();
 			Object.Type = pStringType;
 			break;
 		}

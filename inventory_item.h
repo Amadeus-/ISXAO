@@ -13,10 +13,13 @@ public:
 	AOLIB_OBJECT DWORD GetMass();
 	AOLIB_OBJECT DWORD GetNoneFlags();
 	AOLIB_OBJECT DWORD GetQL();
+	AOLIB_OBJECT PCSTR GetRarity();
 	AOLIB_OBJECT LONG GetSkill(DWORD);
 	AOLIB_OBJECT DWORD GetValue();
+	AOLIB_OBJECT double GetItemProgress(DWORD&, DWORD&);
 	AOLIB_OBJECT bool IsArmor();
 	AOLIB_OBJECT bool IsConsumable();
+	AOLIB_OBJECT bool IsItemDisabled();
 	AOLIB_OBJECT bool IsImplant();
 	AOLIB_OBJECT bool IsMisc();
 	AOLIB_OBJECT bool IsNPC();
@@ -25,5 +28,5 @@ public:
 	AOLIB_OBJECT bool IsTower();
 	AOLIB_OBJECT bool IsWeapon();
 	AOLIB_OBJECT bool IsUtility();
-	AOLIB_OBJECT bool MustSit();
+	AOLIB_OBJECT bool MustSitToUse();
 };

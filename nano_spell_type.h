@@ -12,15 +12,27 @@ public:
 		CanApplyOnSelf,
 		CanApplyOnFightingTarget,
 		CastingTime,
+		IsBuff,
+		IsHostile,
+		IsNoResistCannotFumble,
+		IsReady,
+		IsSelfOnly,
+		IsShapeChangeNano,
+		IsTeamNano,
 		FormulaProgress,
 		FormulaRadius,
 		Name,
+		NanoId,
 		NanoPointCost,
 		NanoSchool,
 		NanoStrain,
 		NCUCost,
 		Range,
 		RechargeDelay,
+		StackingOrder,
+		WillBreakOnAttack,
+		WillBreakOnDebuff,
+		WillBreakOnSpellAttack
 	};
 
 	enum NanoSpellTypeMethods
@@ -37,13 +49,25 @@ public:
 		TypeMember(CastingTime);
 		TypeMember(FormulaProgress);
 		TypeMember(FormulaRadius);
+		TypeMember(IsBuff);
+		TypeMember(IsHostile);
+		TypeMember(IsNoResistCannotFumble);
+		TypeMember(IsReady);
+		TypeMember(IsSelfOnly);
+		TypeMember(IsShapeChangeNano);
+		TypeMember(IsTeamNano);
 		TypeMember(Name);
+		TypeMember(NanoId);
 		TypeMember(NanoPointCost);
 		TypeMember(NanoSchool);
 		TypeMember(NanoStrain);
 		TypeMember(NCUCost);
 		TypeMember(Range);
 		TypeMember(RechargeDelay);
+		TypeMember(StackingOrder);
+		TypeMember(WillBreakOnAttack);
+		TypeMember(WillBreakOnDebuff);
+		TypeMember(WillBreakOnSpellAttack);
 
 		TypeMethod(Cast);
 

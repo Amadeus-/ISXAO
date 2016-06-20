@@ -242,3 +242,53 @@ bool __cdecl TLO_TEAMRAID(int argc, char *argv[], LSTYPEVAR &Dest)
 }
 
 #pragma endregion
+
+#pragma region SpecialAction
+
+bool __cdecl TLO_SPECIALACTION(int argc, char *argv[], LSTYPEVAR&Dest)
+{
+	if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	{
+		if(ISINDEX())
+		{
+			if(ISNUMBER())
+			{
+				IDENTITY dummy_identity;
+				IDENTITY identity;
+				identity.Type = 57008;
+				identity.Id = atoi(argv[0]);
+				if ((Dest.Ptr = pEngineClientAnarchy->GetItemByTemplate(identity, dummy_identity)))
+				{
+					Dest.Type = pSpecialActionType;
+					return true;
+				}
+				return false;
+			}
+			char name[MAX_STRING];
+			char search_name[MAX_STRING];
+			strcpy_s(search_name, sizeof(search_name), argv[0]);
+			_strlwr_s(search_name);
+			std::vector<SpecialActionTemplate*> v;
+			pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
+			for (auto it = v.begin(); it != v.end(); ++it)
+			{
+				strcpy_s(name, sizeof(name), (*it)->GetName());
+				_strlwr_s(name);
+				if(strstr(name, search_name))
+				{
+					if((Dest.Ptr = (*it)))
+					{
+						Dest.Type = pSpecialActionType;
+						return true;
+					}
+					return false;
+				}
+			}
+			return false;
+		}
+		return false;
+	}
+	return false;
+}
+
+#pragma endregion

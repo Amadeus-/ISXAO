@@ -8,46 +8,137 @@ bool SpecialActionType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 		return false;
 	__try
 	{
-#define pSpecialAction ((SpecialAction*)ObjectData.Ptr)
+#define pSpecialAction ((SpecialActionItem*)ObjectData.Ptr)
 		switch (SpecialActionTypeMembers(Member->ID))
-		{		
-		case Identity:
 		{
-			IDENTITY id = pSpecialAction->GetIdentity();
-			PIDENTITY pId = PIDENTITY(pISInterface->GetTempBuffer(sizeof(IDENTITY), &id));
-			Object.Ptr = pId;
-			Object.Type = pIdentityType;
+		case AttackDelay:
+		{
+			Object.Float = pSpecialAction->GetAttackDelay();
+			Object.Type = pfloatType;
 			break;
 		}
-		case Item:
+		case CanApplyOnFriendly:
 		{
-			if((Object.Ptr = pSpecialAction->GetSpecialActionItem()))
-			{
-				Object.Type = pSpecialActionItemType;
-				return true;
-			}
-			return false;
-		}
-		case Name:
-		{
-			Object.ConstCharPtr = pSpecialAction->GetName();
-			Object.Type = pStringType;
-			break;
-		}
-		case IsLocked:
-		{
-			Object.DWord = pSpecialAction->IsLocked();
+			Object.DWord = pSpecialAction->CanApplyOnFriendly();
 			Object.Type = pBoolType;
 			break;
 		}
-		case LockOutRemaining:
+		case CanApplyOnHostile:
 		{
-			Object.DWord = pSpecialAction->GetLockoutTimeRemaining();
+			Object.DWord = pSpecialAction->CanApplyOnHostile();
+			Object.Type = pBoolType;
+			break;
+		}
+		case CanApplyOnSelf:
+		{
+			Object.DWord = pSpecialAction->CanApplyOnSelf();
+			Object.Type = pBoolType;
+			break;
+		}
+		case CanApplyOnFightingTarget:
+		{
+			Object.DWord = pSpecialAction->CanApplyOnFightingTarget();
+			Object.Type = pBoolType;
+			break;
+		}
+		case CanUse:
+		{
+			Object.DWord = pSpecialAction->CanUse();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsBuff:
+		{
+			Object.DWord = pSpecialAction->IsBuff();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsGeneralAction:
+		{
+			Object.DWord = pSpecialAction->IsGeneralAction();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsHostile:
+		{
+			Object.DWord = pSpecialAction->IsHostile();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsNoRemoveNoNCUIsFriendly:
+		{
+			Object.DWord = pSpecialAction->IsNoRemoveNoNCUIsFriendly();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsNoResist:
+		{
+			Object.DWord = pSpecialAction->IsNoResist();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsNoResistNoFumble:
+		{
+			Object.DWord = pSpecialAction->IsNoResistNoFumble();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsNotRemovable:
+		{
+			Object.DWord = pSpecialAction->IsNotRemovable();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsPerk:
+		{
+			Object.DWord = pSpecialAction->IsPerk();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsSpecialAction:
+		{
+			Object.DWord = pSpecialAction->IsSpecialAction();
+			Object.Type = pBoolType;
+			break;
+		}
+		case Range:
+		{
+			Object.DWord = pSpecialAction->GetRange();
 			Object.Type = pUintType;
 			break;
 		}
-		default: 
+		case SpecialActionId:
+		{
+			Object.DWord = pSpecialAction->GetIdentity().Id;
+			Object.Type = pUintType;
 			break;
+		}
+		case SpecialActionProgress:
+		{
+			DWORD a;
+			DWORD b;
+			Object.Float = pSpecialAction->GetSpecialActionProgress(a, b);
+			break;
+		}
+		case WillBreakOnAttack:
+		{
+			Object.DWord = pSpecialAction->WillBreakOnAttack();
+			Object.Type = pBoolType;
+			break;
+		}
+		case WillBreakOnDebuff:
+		{
+			Object.DWord = pSpecialAction->WillBreakOnDebuff();
+			Object.Type = pBoolType;
+			break;
+		}
+		case WillBreakOnSpellAttack:
+		{
+			Object.DWord = pSpecialAction->WillBreakOnSpellAttack();
+			Object.Type = pBoolType;
+			break;
+		}
+		default: break;
 		}
 #undef pSpecialAction
 	}
@@ -66,17 +157,13 @@ bool SpecialActionType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMetho
 		return false;
 	__try
 	{
-#define pSpecialAction ((SpecialAction*)ObjectData.Ptr)
+#define pSpecialAction ((SpecialActionItem*)ObjectData.Ptr)
 		switch (SpecialActionTypeMethods(pMethod->ID))
 		{
-		case Use:
-		{
-			pEngineClientAnarchy->N3Msg_PerformSpecialAction(pSpecialAction->GetIdentity());
-			return true;
-		}
+
 		default: break;
 		}
-#undef pSpecialAction
+#undef pSpecialActionItem
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, pMethod->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{
@@ -91,8 +178,8 @@ bool SpecialActionType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int 
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define pSpecialAction ((SpecialAction*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64u", pSpecialAction->GetIdentity().GetCombinedIdentity());
+#define pSpecialAction ((SpecialActionItem*)ObjectData.Ptr)
+	sprintf_s(buf, buflen, "%d", pSpecialAction->GetIdentity().Id);
 #undef pSpecialAction
 
 	return true;

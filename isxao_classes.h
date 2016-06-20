@@ -11,8 +11,9 @@ namespace isxao_classes
 	class Pet;
 	class Player;
 	class ResourceDatabase;
-	class SpecialAction;
+	class SpecialActionTemplate;
 	class TeamMember;
+	class TeamRaid;
 
 #pragma endregion
 
@@ -26,13 +27,13 @@ namespace isxao_classes
 
 #include "bank_entry.h"
 
-#include "inventory_holder.h"
-
 #include "dummy_item_base.h"
 
 #include "inventory_item.h"
 
 #include "inventory_slot.h"
+
+#include "inventory_holder.h"
 	
 #include "action_lock.h"
 
@@ -40,7 +41,7 @@ namespace isxao_classes
 
 #include "special_action_item.h"
 
-#include "special_action.h"
+#include "special_action_template.h"
 
 #include "special_action_holder.h"
 

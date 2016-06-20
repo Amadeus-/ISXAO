@@ -121,6 +121,33 @@ namespace isxao_utilities
 	FUNCTION_AT_ADDRESS(PCSTR __cdecl StatToString(DWORD), __StatToString);
 #endif
 
+	PCSTR GetItemRarityStr(DWORD rarity)
+	{
+		PCSTR result = "Unknown";
+		switch(rarity)
+		{
+		case 1:
+			result = "Trash";
+			break;
+		case 2:
+			result = "Normal";
+			break;
+		case 3:
+			result = "Exotic";
+			break;
+		case 4:
+			result = "Quest";
+			break;
+		case 5:
+			result = "Social";
+			break;
+		default:
+			break;
+		}
+		return result;
+	}
+
+
 #pragma endregion
 
 #pragma region Objects

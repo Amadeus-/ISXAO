@@ -24,10 +24,9 @@ DATATYPE(NanoTemplateType, pNanoTemplateType, 0);
 DATATYPE(InventoryItemType, pInventoryItemType, 0);
 DATATYPE(InventorySlotType, pInventorySlotType, 0);
 DATATYPE(PlayfieldType, pPlayfieldType, 0);
-DATATYPE(SpecialActionType, pSpecialActionType, 0);
+DATATYPE(SpecialActionTemplateType, pSpecialActionTemplateType, 0);
 DATATYPE(ActionLockType, pActionLockType, 0);
-DATATYPE(SpecialActionItemType, pSpecialActionItemType, 0);
-
+DATATYPE(SpecialActionType, pSpecialActionType, 0);
 
 
 

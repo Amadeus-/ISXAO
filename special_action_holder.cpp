@@ -5,7 +5,7 @@ namespace isxao_classes
 
 	DWORD SpecialActionHolder::BuildLSSpecialActions(LSIndex* pIndex) const
 	{
-		std::vector<SpecialAction*> v;
+		std::vector<SpecialActionTemplate*> v;
 		GetSpecialActions(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 			pIndex->AddItem(reinterpret_cast<LSOBJECTDATA&>((*it)));
@@ -23,40 +23,40 @@ namespace isxao_classes
 		return special_action_holder_;
 	}
 
-	DWORD SpecialActionHolder::GetSpecialActions(std::vector<SpecialAction> &v) const
+	DWORD SpecialActionHolder::GetSpecialActions(std::vector<SpecialActionTemplate> &v) const
 	{
 		std::list<SPECIALACTION>* p_special_actions_vector = GetSpecialActionHolderData().pSpecialActionsList;
 		for (auto it = p_special_actions_vector->begin(); it != p_special_actions_vector->end(); ++it)
-			v.push_back(*reinterpret_cast<SpecialAction*>(&(*it)));
-		std::sort(v.begin(), v.end(), SpecialAction::SpecialActionCompare);
+			v.push_back(*reinterpret_cast<SpecialActionTemplate*>(&(*it)));
+		std::sort(v.begin(), v.end(), SpecialActionTemplate::SpecialActionCompare);
 		return v.size();
 	}
 
-	DWORD SpecialActionHolder::GetSpecialActions(std::vector<SpecialAction*> &v) const
+	DWORD SpecialActionHolder::GetSpecialActions(std::vector<SpecialActionTemplate*> &v) const
 	{
 		std::list<SPECIALACTION>* p_special_actions_vector = GetSpecialActionHolderData().pSpecialActionsList;
 		for (auto it = p_special_actions_vector->begin(); it != p_special_actions_vector->end(); ++it)
-			v.push_back(reinterpret_cast<SpecialAction*>(&(*it)));
-		std::sort(v.begin(), v.end(), SpecialAction::pSpecialActionCompare);
+			v.push_back(reinterpret_cast<SpecialActionTemplate*>(&(*it)));
+		std::sort(v.begin(), v.end(), SpecialActionTemplate::pSpecialActionCompare);
 		return v.size();
 	}
 
-	SpecialAction* SpecialActionHolder::GetSpecialAction(DWORD index) const
+	SpecialActionTemplate* SpecialActionHolder::GetSpecialAction(DWORD index) const
 	{
-		std::vector<SpecialAction*> v;
+		std::vector<SpecialActionTemplate*> v;
 		auto count = GetSpecialActions(v);
 		if (index < 0 || index >= count)
 			return nullptr;
 		return v[index];
 	}
 
-	SpecialAction* SpecialActionHolder::GetSpecialAction(PCHAR special_action_name) const
+	SpecialActionTemplate* SpecialActionHolder::GetSpecialAction(PCHAR special_action_name) const
 	{
 		char name[MAX_STRING];
 		char search_name[MAX_STRING];
 		strcpy_s(search_name, sizeof(search_name), special_action_name);
 		_strlwr_s(search_name);
-		std::vector<SpecialAction> v;
+		std::vector<SpecialActionTemplate> v;
 		GetSpecialActions(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 		{
@@ -68,9 +68,9 @@ namespace isxao_classes
 		return nullptr;
 	}
 
-	SpecialAction* SpecialActionHolder::GetSpecialAction(const IDENTITY& id) const
+	SpecialActionTemplate* SpecialActionHolder::GetSpecialAction(const IDENTITY& id) const
 	{
-		vector<SpecialAction> v;
+		vector<SpecialActionTemplate> v;
 		GetSpecialActions(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 		{
@@ -82,7 +82,7 @@ namespace isxao_classes
 
 	DWORD SpecialActionHolder::GetSpecialActionCount() const
 	{
-		std::vector<SpecialAction*> v;
+		std::vector<SpecialActionTemplate*> v;
 		return GetSpecialActions(v);
 	}
 
@@ -91,7 +91,7 @@ namespace isxao_classes
 		return GetSpecialActionHolderData().SpecialActionTarget;
 	}
 
-	ActionLock* SpecialActionHolder::GetActionLock(SpecialAction* p_special_action) const
+	ActionLock* SpecialActionHolder::GetActionLock(SpecialActionTemplate* p_special_action) const
 	{
 		std::map<DWORD, DWORD> m;
 		GetLockIdMap(m);

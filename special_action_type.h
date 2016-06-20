@@ -7,27 +7,57 @@ public:
 
 	enum SpecialActionTypeMembers
 	{
-		Identity,
-		IsLocked,
-		Item,
-		LockOutRemaining,
-		Name,
+		AttackDelay,
+		CanApplyOnFriendly,
+		CanApplyOnHostile,
+		CanApplyOnSelf,
+		CanApplyOnFightingTarget,
+		CanUse,
+		IsBuff,
+		IsGeneralAction,
+		IsHostile,
+		IsNoRemoveNoNCUIsFriendly,
+		IsNoResist,
+		IsNoResistNoFumble,
+		IsNotRemovable,
+		IsPerk,
+		IsSpecialAction,
+		Range,
+		SpecialActionId,
+		SpecialActionProgress,
+		WillBreakOnAttack,
+		WillBreakOnDebuff,
+		WillBreakOnSpellAttack,
 	};
 
 	enum SpecialActionTypeMethods
 	{
-		Use,
+		
 	};
 
 	SpecialActionType() : LSType("SpecialAction")
 	{
-		TypeMember(Identity);
-		TypeMember(IsLocked);
-		TypeMember(Item);
-		TypeMember(LockOutRemaining);
-		TypeMember(Name);
-
-		TypeMethod(Use);
+		TypeMember(AttackDelay);
+		TypeMember(CanApplyOnFriendly);
+		TypeMember(CanApplyOnHostile);
+		TypeMember(CanApplyOnSelf);
+		TypeMember(CanApplyOnFightingTarget);
+		TypeMember(CanUse);
+		TypeMember(IsBuff);
+		TypeMember(IsGeneralAction);
+		TypeMember(IsHostile);
+		TypeMember(IsNoRemoveNoNCUIsFriendly);
+		TypeMember(IsNoResist);
+		TypeMember(IsNoResistNoFumble);
+		TypeMember(IsNotRemovable);
+		TypeMember(IsPerk);
+		TypeMember(IsSpecialAction);
+		TypeMember(Range);
+		TypeMember(SpecialActionId);
+		TypeMember(SpecialActionProgress);
+		TypeMember(WillBreakOnAttack);
+		TypeMember(WillBreakOnDebuff);
+		TypeMember(WillBreakOnSpellAttack);
 
 		PersistentClass = pISInterface->RegisterPersistentClass("SpecialAction");
 		pISInterface->SetPersistentClass(this, PersistentClass);

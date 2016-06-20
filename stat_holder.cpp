@@ -12,7 +12,7 @@ namespace isxao_classes
 		return v.size();
 	}
 
-	ActionLock* StatHolder::GetSkillLock(SpecialAction* special_action) const
+	ActionLock* StatHolder::GetSkillLock(SpecialActionTemplate* special_action) const
 	{
 		std::vector<ActionLock*> v;
 		GetSkillLocks(v);

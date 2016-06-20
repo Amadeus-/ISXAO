@@ -152,9 +152,6 @@
     <ClCompile Include="perk_holder.cpp">
       <Filter>Source Files\Base\Objects\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="special_action.cpp">
-      <Filter>Source Files\Base\Objects\Misc</Filter>
-    </ClCompile>
     <ClCompile Include="special_action_holder.cpp">
       <Filter>Source Files\Base\Objects\Misc</Filter>
     </ClCompile>
@@ -308,13 +305,16 @@
     <ClCompile Include="action_lock_type.cpp">
       <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
     </ClCompile>
-    <ClCompile Include="special_action_type.cpp">
-      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
-    </ClCompile>
     <ClCompile Include="special_action_item.cpp">
       <Filter>Source Files\Base\Items</Filter>
     </ClCompile>
-    <ClCompile Include="special_action_item_type.cpp">
+    <ClCompile Include="special_action_template.cpp">
+      <Filter>Source Files\Base\Objects\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="special_action_template_type.cpp">
+      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="special_action_type.cpp">
       <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -401,9 +401,6 @@
       <Filter>Header Files\Base\Objects\Misc</Filter>
     </ClInclude>
     <ClInclude Include="perk_holder.h">
-      <Filter>Header Files\Base\Objects\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="special_action.h">
       <Filter>Header Files\Base\Objects\Misc</Filter>
     </ClInclude>
     <ClInclude Include="special_action_holder.h">
@@ -529,9 +526,6 @@
     <ClInclude Include="chat_window_controller.h">
       <Filter>Header Files\Base\Game</Filter>
     </ClInclude>
-    <ClInclude Include="door.h">
-      <Filter>Header Files\Base\Objects\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="playfield_type.h">
       <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
     </ClInclude>
@@ -571,16 +565,22 @@
     <ClInclude Include="database_handler.h">
       <Filter>Header Files\Base\Game</Filter>
     </ClInclude>
-    <ClInclude Include="special_action_type.h">
-      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
-    </ClInclude>
     <ClInclude Include="action_lock_type.h">
       <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
     </ClInclude>
     <ClInclude Include="special_action_item.h">
       <Filter>Header Files\Base\Items</Filter>
     </ClInclude>
-    <ClInclude Include="special_action_item_type.h">
+    <ClInclude Include="door.h">
+      <Filter>Header Files\Base\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="special_action_template.h">
+      <Filter>Header Files\Base\Objects\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="special_action_template_type.h">
+      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="special_action_type.h">
       <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -113,7 +113,7 @@ namespace isxao_classes
 		return GetSkill(ST_STACKINGORDER);
 	}
 
-	bool NanoItem::IsFormulaReady()
+	bool NanoItem::IsReady()
 	{
 		return pEngineClientAnarchy->N3Msg_IsFormulaReady(GetNanoIdentity());
 	}

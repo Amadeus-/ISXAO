@@ -7,31 +7,30 @@ public:
 
 	enum CharacterTypeMembers
 	{
-		//BankInventory,
-		//BankInventoryCount,
 		Inventory,
 		InventoryCount,
+		GetInventory,
 		NanoSpell,
 		NanoSpellCount,
-		EquipmentCollection,
-		EquipmentIndex,
+		GetNanoSpells,
 		SpecialAction,
 		SpecialActionCount,
+		GetSpecialActions
 	};
 
 	enum CharacterTypeMethods
 	{
-
+		CastNanoSpell,
 	};
 
 	CharacterType() : LSType("Character")
 	{
 		TypeMember(Inventory);
 		TypeMember(InventoryCount);
+		TypeMember(GetInventory);
 		TypeMember(NanoSpell);
 		TypeMember(NanoSpellCount);
-		TypeMember(EquipmentCollection);
-		TypeMember(EquipmentIndex);
+		TypeMember(GetNanoSpells);
 		TypeMember(SpecialAction);
 		TypeMember(SpecialActionCount);
 
