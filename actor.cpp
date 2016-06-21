@@ -101,6 +101,11 @@ namespace isxao_classes
 		return reinterpret_cast<SpellTemplateData*>(GetSimpleCharData()->pSpellTemplateData);
 	}
 
+	float Actor::GetScale()
+	{
+		return GetSimpleCharData()->BodyScale;
+	}
+
 	PSIMPLECHAR Actor::GetSimpleCharData()
 	{
 		return PSIMPLECHAR(GetData());
@@ -156,7 +161,7 @@ namespace isxao_classes
 
 	bool Actor::IsInMyRaidTeam()
 	{
-		if(IsTeamMember())
+		if(IsTeamMember() && IsInRaid())
 		{
 			std::vector<TeamEntry*> v;
 			pEngineClientAnarchy->GetClientChar()->GetTeamRaid()->GetTeam(v);

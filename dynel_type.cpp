@@ -147,7 +147,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case HeadingToLoc:
 		{
 			float heading;
-			if (pEngineClientAnarchy && pEngineClientAnarchy->GetClientChar() && ISINDEX() && argc == 2 && IsNumber(argv[0]) && IsNumber(argv[0]))
+			if (ISINDEX() && argc == 2 && IsNumber(argv[0]) && IsNumber(argv[1]))
 			{
 				float rawheading;
 				float x = float(atof(argv[0]));
@@ -251,7 +251,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				else if (pDynel->IsActor())
 					Object.ConstCharPtr = "Actor";
 				else if (pDynel->IsCharacter())
-					Object.ConstCharPtr = "LocalPlayer";
+					Object.ConstCharPtr = "Character";
 				else if (pDynel->IsPlayer())
 					Object.ConstCharPtr = "Player";
 				else
@@ -338,18 +338,6 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		{
 			Object.Ptr = pDynel;
 			Object.Type = pPetType;
-			break;
-		}
-		case ToPlayer:
-		{
-			Object.Ptr = pDynel;
-			Object.Type = pPlayerType;
-			break;
-		}
-		case ToTeamMember:
-		{
-			Object.Ptr = pDynel;
-			Object.Type = pTeamMemberType;
 			break;
 		}
 		default:

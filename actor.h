@@ -18,6 +18,7 @@ public:
 	AOLIB_OBJECT Actor* GetPet(PCSTR);
 	AOLIB_OBJECT DWORD GetPetCount();
 	AOLIB_OBJECT DWORD GetPetIDs(std::map<IDENTITY, DWORD>&);
+	AOLIB_OBJECT float GetScale();
 	AOLIB_OBJECT PSIMPLECHAR GetSimpleCharData();
 	AOLIB_OBJECT SpellTemplateData* GetSpellTemplateData();
 	AOLIB_OBJECT TeamRaid* GetTeamRaid();

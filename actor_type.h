@@ -9,24 +9,40 @@ public:
 	{
 		Breed,
 		Casting,
-		CharRadius,
+		CheckCollision,
 		CurrentHealth,
+		CurrentNano,
 		CurrentNCU,
+		Distance,
+		Distance2D,
 		DistancePredict,
 		Gender,
 		GetNCU,
 		GetPets,
 		GM,
 		HasPets,
+		Heading,
+		HeadingTo,
+		HeadingToLoc,
+		Identity,
+		IsAPet,
 		IsBackingUp,
 		IsCasting,
+		IsCharacter,
 		IsCrawling,
 		IsFighting,
 		IsFightingMe,
 		IsFlying,
 		IsIdle,
+		IsInfoRequestComplete,
+		IsInMyRaidTeam,
+		IsInMyTeam,
+		IsInRaid,
+		IsInTeam,
 		IsInvis,
 		IsMovingForward,
+		IsMyPet,
+		IsPlayer,
 		IsRooted,
 		IsRunning,
 		IsSitting,
@@ -37,42 +53,68 @@ public:
 		IsSwimming,
 		IsWalking,
 		Level,
+		Loc,
 		MaxHealth,
+		MaxNano,
 		Master,
-		MonsterScale,
+		Name,
 		NCU,
 		NCUCount,
 		NPCFamily,
-		NPCNumPets,
+		NearestActor,
 		PctHealth,
+		PctNano,
 		Pet,
 		PetCount,
 		Profession,
+		ProfessionLevel,
+		Radius,
 		Runspeed,
+		Scale,
 		Side,
 		Speed,
-		Velocity
+		ToCharacter,
+		ToPet,
+		Velocity,
+		VisualProfession,
+		X,
+		Y,
+		Z
 	};
 
 	enum ActorTypeMethods
 	{
 		DoFace,
-		DoTarget
+		DoTarget,
+		Interact,
+		Invite,
+		Kick,
+		MakeLeader,
+		RequestInfo
 	};
 
 	ActorType() : LSType("Actor")
 	{
 		TypeMember(Breed);
 		TypeMember(Casting);
-		TypeMember(CharRadius);
+		TypeMember(CheckCollision);
 		TypeMember(CurrentHealth);
+		TypeMember(CurrentNano);
 		TypeMember(CurrentNCU);
+		TypeMember(Distance);
+		TypeMember(Distance2D);
 		TypeMember(DistancePredict);
 		TypeMember(Gender);
 		TypeMember(GetNCU);
 		TypeMember(GetPets);
 		TypeMember(GM);
 		TypeMember(HasPets);
+		TypeMember(Heading);
+		TypeMember(HeadingTo);
+		TypeMember(HeadingToLoc);
+		TypeMember(Identity);
+		TypeMember(IsAPet);
+		TypeMember(IsCharacter);
 		TypeMember(IsBackingUp);
 		TypeMember(IsCasting);
 		TypeMember(IsCrawling);
@@ -80,8 +122,15 @@ public:
 		TypeMember(IsFightingMe);
 		TypeMember(IsFlying);
 		TypeMember(IsIdle);
+		TypeMember(IsInfoRequestComplete);
+		TypeMember(IsInMyRaidTeam);
+		TypeMember(IsInMyTeam);
+		TypeMember(IsInRaid);
+		TypeMember(IsInTeam);
 		TypeMember(IsInvis);
 		TypeMember(IsMovingForward);
+		TypeMember(IsMyPet);
+		TypeMember(IsPlayer);
 		TypeMember(IsRooted);
 		TypeMember(IsRunning);
 		TypeMember(IsSitting);
@@ -92,24 +141,41 @@ public:
 		TypeMember(IsSwimming);
 		TypeMember(IsWalking);
 		TypeMember(Level);
+		TypeMember(Loc);
 		TypeMember(Master);
 		TypeMember(MaxHealth);
-		TypeMember(MonsterScale);
+		TypeMember(MaxNano);
+		TypeMember(Name);
 		TypeMember(NCU);
 		TypeMember(NCUCount);
 		TypeMember(NPCFamily);
-		TypeMember(NPCNumPets);
+		TypeMember(NearestActor);
 		TypeMember(PctHealth);
+		TypeMember(PctNano);
 		TypeMember(Pet);
 		TypeMember(PetCount);
 		TypeMember(Profession);
+		TypeMember(ProfessionLevel);
+		TypeMember(Radius);
 		TypeMember(Runspeed);
+		TypeMember(Scale);
 		TypeMember(Side);
 		TypeMember(Speed);
+		TypeMember(ToCharacter);
+		TypeMember(ToPet);
 		TypeMember(Velocity);
+		TypeMember(VisualProfession);
+		TypeMember(X);
+		TypeMember(Y);
+		TypeMember(Z);
 
 		TypeMethod(DoTarget);
 		TypeMethod(DoFace);
+		TypeMethod(Interact);
+		TypeMethod(Invite);
+		TypeMethod(Kick);
+		TypeMethod(MakeLeader);
+		TypeMethod(RequestInfo);
 
 		PersistentClass = pISInterface->RegisterPersistentClass("Actor");
 		pISInterface->SetPersistentClass(this, PersistentClass);

@@ -11,11 +11,11 @@
 
 #include "actor_type.h"
 
-#include "player_type.h"
+//#include "player_type.h"
 
 #include "team_entry_type.h"
 
-#include "team_member_type.h"
+//#include "team_member_type.h"
 
 #include "pet_type.h"
 
@@ -35,6 +35,6 @@
 
 #include "special_action_template_type.h"
 
-#include "action_lock_type.h"
+//#include "action_lock_type.h"
 
 #include "special_action_type.h"

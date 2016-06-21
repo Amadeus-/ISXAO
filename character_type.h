@@ -15,7 +15,8 @@ public:
 		GetNanoSpells,
 		SpecialAction,
 		SpecialActionCount,
-		GetSpecialActions
+		GetSpecialActions,
+		ToActor,
 	};
 
 	enum CharacterTypeMethods
@@ -33,6 +34,8 @@ public:
 		TypeMember(GetNanoSpells);
 		TypeMember(SpecialAction);
 		TypeMember(SpecialActionCount);
+		TypeMember(GetSpecialActions);
+		TypeMember(ToActor);
 
 		PersistentClass = pISInterface->RegisterPersistentClass("Character");
 		pISInterface->SetPersistentClass(this, PersistentClass);
@@ -47,6 +50,6 @@ public:
 	//virtual bool GetMethod(LSOBJECTDATA &ObjectData, PLSTYPEMETHOD pMethod, int argc, char *argv[]);
 	virtual bool ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen);
 
-	INHERITDIRECT(pActorType)
+	//INHERITDIRECT(pActorType)
 
 };

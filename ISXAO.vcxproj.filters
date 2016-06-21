@@ -236,12 +236,6 @@
     <ClCompile Include="pet_type.cpp">
       <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
     </ClCompile>
-    <ClCompile Include="player_type.cpp">
-      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="team_member_type.cpp">
-      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
-    </ClCompile>
     <ClCompile Include="team_raid_type.cpp">
       <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
     </ClCompile>
@@ -301,9 +295,6 @@
     </ClCompile>
     <ClCompile Include="graph_path_finder.cpp">
       <Filter>Source Files\Base\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="action_lock_type.cpp">
-      <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
     </ClCompile>
     <ClCompile Include="special_action_item.cpp">
       <Filter>Source Files\Base\Items</Filter>
@@ -496,12 +487,6 @@
     <ClInclude Include="pet_type.h">
       <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
     </ClInclude>
-    <ClInclude Include="player_type.h">
-      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="team_member_type.h">
-      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
-    </ClInclude>
     <ClInclude Include="team_raid_type.h">
       <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
     </ClInclude>
@@ -564,9 +549,6 @@
     </ClInclude>
     <ClInclude Include="database_handler.h">
       <Filter>Header Files\Base\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="action_lock_type.h">
-      <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
     </ClInclude>
     <ClInclude Include="special_action_item.h">
       <Filter>Header Files\Base\Items</Filter>

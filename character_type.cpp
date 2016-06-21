@@ -84,10 +84,16 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			}
 			else
 			{
+				char name[MAX_STRING];
+				char search_name[MAX_STRING];
+				strcpy_s(search_name, sizeof(search_name), argv[0]);
+				_strlwr_s(search_name);
 				for (auto it = v.begin(); it != v.end(); ++it)
 				{
 					auto pSpell = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(*it));
-					if(!_strnicmp(GETFIRST(), pSpell->GetName(), strlen(GETFIRST())))
+					strcpy_s(name, sizeof(name), pSpell->GetName());
+					_strlwr_s(name);
+					if(strstr(name, search_name))
 					{
 						Object.Ptr = pSpell;
 						Object.Type = pNanoSpellType;
@@ -191,6 +197,12 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			return true;
 		}
 		return false;
+	}
+	case ToActor:
+	{
+		Object.Ptr = pCharacter;
+		Object.Type = pActorType;
+		break;
 	}
 	default:
 		return false;

@@ -22,12 +22,46 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			Object.DWord = pActor->Casting();
 			Object.Type = pUintType;
 			break;
-		}
-		case CharRadius:
+		}		
+		case CheckCollision:
 		{
-			Object.Int = pActor->GetSkill(::ST_CHARRADIUS);
-			Object.Type = pIntType;
-			break;
+			if (!ISINDEX())
+			{
+				if (pEngineClientAnarchy && pEngineClientAnarchy->GetClientChar())
+				{
+					Object.DWord = pEngineClientAnarchy->GetClientChar()->CheckLOS(pActor);
+					Object.Type = pBoolType;
+					return true;
+				}
+			}
+			else if (argc < 2)
+			{
+				LSOBJECT object;
+				if (!pISInterface->DataParse(argv[0], object))
+				{
+					return false;
+				}
+				if (object.Type != pPoint3fType)
+				{
+					return false;
+				}
+				PPOINT3F p = PPOINT3F(object.Ptr);
+				VECTOR3 v = Vector3FrompPoint3f(p);
+				Object.DWord = pActor->IsInLineOfSight(v);
+				Object.Type = pBoolType;
+				return true;
+			}
+			else if (argc == 3 && IsNumber(argv[0]) && IsNumber(argv[1]) && IsNumber(argv[2]))
+			{
+				VECTOR3 v;
+				v.X = float(atof(argv[0]));
+				v.Y = float(atof(argv[1]));
+				v.Z = float(atof(argv[2]));
+				Object.DWord = pActor->IsInLineOfSight(v);
+				Object.Type = pBoolType;
+				return true;
+			}
+			return false;
 		}
 		case CurrentHealth:
 		{
@@ -35,10 +69,32 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			Object.Type = pIntType;
 			break;
 		}
+		case CurrentNano:
+		{
+			Object.DWord = pActor->GetSkill(ST_CURRENTNANO);
+			Object.Type = pUintType;
+			break;
+		}
 		case CurrentNCU:
 		{
 			Object.DWord = pActor->GetSkill(::ST_CURRENTNCU);
 			Object.Type = pUintType;
+			break;
+		}
+		case Distance:
+		{
+			VECTOR3 v;
+			pEngineClientAnarchy->N3Msg_GetGlobalCharacterPosition(v);
+			Object.Float = pActor->GetDistance3DTo(v);
+			Object.Type = pfloatType;
+			break;
+		}
+		case Distance2D:
+		{
+			VECTOR3 v;
+			pEngineClientAnarchy->N3Msg_GetGlobalCharacterPosition(v);
+			Object.Float = pActor->GetDistanceTo(v);
+			Object.Type = pfloatType;
 			break;
 		}
 		case DistancePredict:
@@ -102,6 +158,123 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			Object.Type = pBoolType;
 			break;
 		}
+		case Heading:
+		{
+			float heading;
+			auto rawHeading = pActor->GetHeading();
+			if (rawHeading > 0.0f)
+				heading = float(rawHeading * 180.0f / M_PI);
+			else
+				heading = float(rawHeading * 180.0f / M_PI) + 360.0f;
+			Object.Float = heading;
+			Object.Type = pfloatType;
+			break;
+		}
+		case HeadingTo:
+		{
+			float heading;
+			if (pEngineClientAnarchy && pEngineClientAnarchy->GetClientChar())
+			{
+				VECTOR3 v;
+				pEngineClientAnarchy->N3Msg_GetGlobalCharacterPosition(v);
+				auto rawHeading = pActor->GetHeadingTo(v);
+				if (rawHeading > 0.0f)
+					heading = float(rawHeading * 180.0f / M_PI);
+				else
+					heading = float(rawHeading * 180.0f / M_PI) + 360.0f;
+				if (ISINDEX() && !ISNUMBER())
+				{
+					char arg[MAX_STRING];
+					strcpy_s(arg, MAX_STRING, argv[0]);
+					_strlwr_s(arg);
+					if (!strcmp(arg, "asstring"))
+					{
+						if (heading >= 0.0f && heading <= 11.25f || heading > 348.75f && heading <= 360.0f)
+							Object.ConstCharPtr = "N";
+						else if (heading > 11.25f && heading <= 33.75f)
+							Object.ConstCharPtr = "NNE";
+						else if (heading > 33.75f && heading <= 56.25f)
+							Object.ConstCharPtr = "NE";
+						else if (heading > 56.25f && heading <= 78.75f)
+							Object.ConstCharPtr = "ENE";
+						else if (heading > 78.75f && heading <= 101.25f)
+							Object.ConstCharPtr = "E";
+						else if (heading > 101.25f && heading <= 123.75f)
+							Object.ConstCharPtr = "ESE";
+						else if (heading > 123.75f && heading <= 146.25f)
+							Object.ConstCharPtr = "SE";
+						else if (heading > 146.25f && heading <= 168.75f)
+							Object.ConstCharPtr = "SSE";
+						else if (heading > 168.75f && heading <= 191.25f)
+							Object.ConstCharPtr = "S";
+						else if (heading > 191.25f && heading <= 213.75f)
+							Object.ConstCharPtr = "SSW";
+						else if (heading > 213.75f && heading <= 236.25f)
+							Object.ConstCharPtr = "SW";
+						else if (heading > 236.25f && heading <= 258.75f)
+							Object.ConstCharPtr = "WSW";
+						else if (heading > 258.75f && heading <= 281.25f)
+							Object.ConstCharPtr = "W";
+						else if (heading > 281.25f && heading <= 303.75f)
+							Object.ConstCharPtr = "WNW";
+						else if (heading > 303.75f && heading <= 326.25f)
+							Object.ConstCharPtr = "NW";
+						else if (heading > 326.25f && heading <= 348.75f)
+							Object.ConstCharPtr = "NNW";
+						else
+							Object.ConstCharPtr = "HeadingOutOfBounds";
+						Object.Type = pStringType;
+						return true;
+					}
+				}
+				else
+					heading = 0.0f;
+				Object.Float = heading;
+				Object.Type = pfloatType;
+				break;
+			}
+		}
+		case HeadingToLoc:
+		{
+			float heading;
+			if (ISINDEX() && argc == 2 && IsNumber(argv[0]) && IsNumber(argv[1]))
+			{
+				float rawheading;
+				float x = float(atof(argv[0]));
+				float z = float(atof(argv[1]));
+				VECTOR3 offset;
+				offset.X = x;
+				offset.Y = 0.0f;
+				offset.Z = z;
+				VECTOR3 v;
+				pEngineClientAnarchy->N3Msg_GetGlobalCharacterPosition(v);
+				rawheading = pActor->GetHeadingToLoc(v, offset);
+				if (rawheading > 0.0f)
+					heading = float(rawheading * 180.0 / M_PI);
+				else
+					heading = float(rawheading * 180.0 / M_PI) + 360.0f;
+			}
+			else
+				heading = 0.0f;
+			Object.Float = heading;
+			Object.Type = pfloatType;
+			break;
+
+		}
+		case Identity:
+		{
+			IDENTITY id = pActor->GetIdentity();
+			PIDENTITY pId = static_cast<PIDENTITY>(pISInterface->GetTempBuffer(sizeof(IDENTITY), &id));
+			Object.Ptr = pId;
+			Object.Type = pIdentityType;
+			break;
+		}
+		case IsAPet:
+		{
+			Object.DWord = pActor->IsPet();
+			Object.Type = pBoolType;
+			break;
+		}
 		case IsBackingUp:
 		{
 			Object.DWord = pActor->IsBackingUp();
@@ -111,6 +284,12 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case IsCasting:
 		{
 			Object.DWord = pActor->IsCasting();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsCharacter:
+		{
+			Object.DWord = isxao_inlines::IsClientId(pActor->GetIdentity().Id);
 			Object.Type = pBoolType;
 			break;
 		}
@@ -144,6 +323,36 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			Object.Type = pBoolType;
 			break;
 		}
+		case IsInfoRequestComplete:
+		{
+			Object.DWord = pActor->IsInfoRequestCompleted();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsInMyRaidTeam:
+		{
+			Object.DWord = pActor->IsInMyRaidTeam();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsInRaid:
+		{
+			Object.DWord = pActor->IsInRaid();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsInMyTeam:
+		{
+			Object.DWord = pActor->IsInMyTeam();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsInTeam:
+		{
+			Object.DWord = pActor->IsInTeam();
+			Object.Type = pBoolType;
+			break;
+		}
 		case IsInvis:
 		{
 			Object.DWord = pActor->IsInvis();
@@ -153,6 +362,18 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case IsMovingForward:
 		{
 			Object.DWord = pActor->IsMovingForward();
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsMyPet:
+		{
+			Object.DWord = pActor->IsPet() && isxao_inlines::IsClientId(pActor->GetMasterId());
+			Object.Type = pBoolType;
+			break;
+		}
+		case IsPlayer:
+		{
+			Object.DWord = pActor->IsPlayer();
 			Object.Type = pBoolType;
 			break;
 		}
@@ -216,6 +437,15 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			Object.Type = pUintType;
 			break;
 		}
+		case Loc:
+		{
+			VECTOR3 v = pActor->GetPosition();
+			POINT3F p = Point3fFromVector3(v);
+			PPOINT3F pP = PPOINT3F(pISInterface->GetTempBuffer(sizeof(p), &p));
+			Object.Ptr = pP;
+			Object.Type = pPoint3fType;
+			break;
+		}
 		case Master:
 		{
 			if((Object.Ptr = pActor->GetMaster()))
@@ -229,6 +459,18 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		{
 			Object.DWord = pActor->GetSkill(::ST_LIFE);
 			Object.Type = pUintType;
+			break;
+		}
+		case MaxNano:
+		{
+			Object.DWord = pActor->GetSkill(ST_MAXNANOENERGY);
+			Object.Type = pUintType;
+			break;
+		}
+		case Name:
+		{
+			Object.ConstCharPtr = pActor->GetName();
+			Object.Type = pStringType;
 			break;
 		}
 		case NCU:
@@ -263,16 +505,45 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			Object.Type = pIntType;
 			break;
 		}
-		case NPCNumPets:
+		case NearestActor:
 		{
-			Object.Int = pActor->GetSkill(::ST_NPCNUMPETS);
-			Object.Type = pIntType;
-			break;
+			if (IsClientId(pActor->GetIdentity().Id))
+			{
+				return (TLO_ACTORSEARCH(argc, argv, Object) != 0);
+			}
+			if (argc)
+			{
+				DWORD nth;
+				SEARCHACTOR sdDynel;
+				ClearSearchActor(&sdDynel);
+				sdDynel.f_radius = 999999.0f;
+				if (argc >= 2 || !IsNumber(argv[0]))
+				{
+					ParseSearchActor(1, argc, argv, sdDynel);
+					nth = atoi(argv[0]);
+				}
+				else
+					nth = atoi(argv[0]);
+				auto result = NthNearestActor(&sdDynel, nth, pEngineClientAnarchy->GetClientChar());
+				if (result)
+				{
+					Object.Ptr = result;
+					Object.Type = ::GetRealType(reinterpret_cast<Dynel*>(result));
+					return true;
+				}
+			}
+			return false;
 		}
 		case PctHealth:
 		{
 			Object.Int = pActor->GetSkill(::ST_PERCENTREMAININGHEALTH);
 			Object.Type = pIntType;
+			break;
+		}
+		case PctNano:
+		{
+			Object.DWord = pActor->GetSkill(ST_PERCENTREMAININGNANO);
+			Object.Type = pUintType;
 			break;
 		}
 		case Pet:
@@ -309,15 +580,32 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Profession:
 		{
-			//printf(isxao_utilities::GetProfessionStr(pActor->GetSkill(::ST_PROFESSION)));
 			Object.ConstCharPtr = isxao_utilities::GetProfessionStr(pActor->GetSkill(::ST_PROFESSION));
 			Object.Type = pStringType;
+			break;
+		}
+		case ProfessionLevel:
+		{
+			Object.DWord = pActor->GetSkill(::ST_PROFESSIONLEVEL);
+			Object.Type = pUintType;
+			break;
+		}
+		case Radius:
+		{
+			Object.Int = pActor->GetSkill(::ST_CHARRADIUS);
+			Object.Type = pIntType;
 			break;
 		}
 		case Runspeed:
 		{
 			Object.Int = pActor->GetSkill(::ST_RUNSPEED);
 			Object.Type = pIntType;
+			break;
+		}
+		case Scale:
+		{
+			Object.Float = pActor->GetScale();
+			Object.Type = pfloatType;
 			break;
 		}
 		case Side:
@@ -332,6 +620,18 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			Object.Type = pfloatType;
 			break;
 		}
+		case ToCharacter:
+		{
+			Object.Ptr = pActor;
+			Object.Type = pCharacterType;
+			break;
+		}
+		case ToPet:
+		{
+			Object.Ptr = pActor;
+			Object.Type = pPetType;
+			break;
+		}
 		case Velocity:
 		{
 			VECTOR3 velocity_vector3 = pActor->GetVehicle()->GetVelocity();
@@ -339,6 +639,24 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			PPOINT3F pvelocity_point3f = PPOINT3F(pISInterface->GetTempBuffer(sizeof(POINT3F), &velocity_point3f));
 			Object.Ptr = pvelocity_point3f;
 			Object.Type = pPoint3fType;
+			break;
+		}
+		case X:
+		{
+			Object.Float = pActor->GetPosition().X;
+			Object.Type = pfloatType;
+			break;
+		}
+		case Y:
+		{
+			Object.Float = pActor->GetPosition().Y;
+			Object.Type = pfloatType;
+			break;
+		}
+		case Z:
+		{
+			Object.Float = pActor->GetPosition().Z;
+			Object.Type = pfloatType;
 			break;
 		}
 		default:
@@ -372,6 +690,31 @@ bool ActorType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int a
 		case DoTarget:
 		{
 			pActor->DoTarget();
+			break;
+		}
+		case Interact:
+		{
+			pActor->Interact();
+			break;
+		}
+		case Invite:
+		{
+			pActor->SendTeamInvite();
+			break;
+		}
+		case Kick:
+		{
+			pActor->Kick();
+			break;
+		}
+		case MakeLeader:
+		{
+			pActor->MakeLeader();
+			break;
+		}
+		case RequestInfo:
+		{
+			isxao_utilities::RequestInfo(pActor->GetIdentity());
 			break;
 		}
 		default: break;

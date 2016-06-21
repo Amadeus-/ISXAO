@@ -119,7 +119,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="action_lock.cpp" />
-    <ClCompile Include="action_lock_type.cpp" />
     <ClCompile Include="actor.cpp" />
     <ClCompile Include="actor_type.cpp" />
     <ClCompile Include="ao_type.cpp" />
@@ -174,7 +173,6 @@
     <ClCompile Include="pet.cpp" />
     <ClCompile Include="pet_type.cpp" />
     <ClCompile Include="player.cpp" />
-    <ClCompile Include="player_type.cpp" />
     <ClCompile Include="playfield_anarchy.cpp" />
     <ClCompile Include="playfield_type.cpp" />
     <ClCompile Include="register_events.cpp" />
@@ -190,7 +188,6 @@
     <ClCompile Include="targeting_module.cpp" />
     <ClCompile Include="team_entry.cpp" />
     <ClCompile Include="team_entry_type.cpp" />
-    <ClCompile Include="team_member_type.cpp" />
     <ClCompile Include="team_member.cpp" />
     <ClCompile Include="team_raid.cpp" />
     <ClCompile Include="team_raid_type.cpp" />
@@ -201,7 +198,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="action_lock.h" />
-    <ClInclude Include="action_lock_type.h" />
     <ClInclude Include="actor.h" />
     <ClInclude Include="actor_type.h" />
     <ClInclude Include="ao_type.h" />
@@ -264,7 +260,6 @@
     <ClInclude Include="pet.h" />
     <ClInclude Include="pet_type.h" />
     <ClInclude Include="player.h" />
-    <ClInclude Include="player_type.h" />
     <ClInclude Include="playfield_type.h" />
     <ClInclude Include="playfield_anarchy.h" />
     <ClInclude Include="register_events.h" />
@@ -280,7 +275,6 @@
     <ClInclude Include="targeting_module.h" />
     <ClInclude Include="team_entry.h" />
     <ClInclude Include="team_entry_type.h" />
-    <ClInclude Include="team_member_type.h" />
     <ClInclude Include="team_member.h" />
     <ClInclude Include="team_raid.h" />
     <ClInclude Include="team_raid_type.h" />

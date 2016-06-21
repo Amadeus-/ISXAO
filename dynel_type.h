@@ -8,8 +8,7 @@ public:
 	enum DynelTypeMembers
 	{
 		Identity,
-		Name,	
-
+		Name,
 		Distance,
 		Distance2D,
 		X,
@@ -31,8 +30,6 @@ public:
 
 		ToActor,
 		ToPet,
-		ToPlayer,
-		ToTeamMember,
 
 		NearestDynel,
 		Type,
@@ -75,8 +72,6 @@ public:
 
 		TypeMember(ToActor);
 		TypeMember(ToPet);
-		TypeMember(ToPlayer);
-		TypeMember(ToTeamMember);
 
 		TypeMethod(Interact);
 		TypeMethod(RequestInfo);

@@ -1,45 +1,37 @@
 #pragma once
 
-class PetType : public LSTypeDefinition
+class PlayerType : public LSTypeDefinition
 {
 public:
 	int PersistentClass;
 
-	enum PetTypeMembers
+	enum PlayerTypeMembers
 	{
-		Type,
+		IsInMyTeam,
+		IsInTeam,
+		ProfessionLevel,
+		VisualProfession,
 	};
 
-	enum PetTypeMethods
+	enum PlayerTypeMethods
 	{
-		Attack,
-		Behind,
-		Follow,
-		Guard,
-		Heal,
-		Report,
-		Terminate,
-		Wait
+		Invite,
 	};
 
-	PetType() : LSType("Pet")
+	PlayerType() : LSType("Player")
 	{
-		TypeMember(Type);
+		TypeMember(IsInMyTeam);
+		TypeMember(IsInTeam);
+		TypeMember(ProfessionLevel);
+		TypeMember(VisualProfession);
 
-		TypeMethod(Attack);
-		TypeMethod(Behind);
-		TypeMethod(Follow);
-		TypeMethod(Guard);
-		TypeMethod(Heal);
-		TypeMethod(Report);
-		TypeMethod(Terminate);
-		TypeMethod(Wait);
+		TypeMethod(Invite);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("Pet");
+		PersistentClass = pISInterface->RegisterPersistentClass("Player");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 
-	~PetType()
+	~PlayerType()
 	{
 		pISInterface->InvalidatePersistentClass(PersistentClass);
 	}

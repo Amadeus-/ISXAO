@@ -1291,19 +1291,13 @@ namespace isxao_utilities
 		{
 			if (pObject->IsCharacter())
 				return pCharacterType;
-			if (pObject->IsTeamMember())
-				return pTeamMemberType;
 			if (pObject->IsPlayer())
-			{
-				//printf("IsPlayer");
-				return pPlayerType;
-			}				
+				return pActorType;	
 			if (pObject->IsPet() && isxao_inlines::IsClientId(pObject->ToActor()->GetMasterId()))
 				return pPetType;
 			if (pObject->IsActor())
 				return pActorType;
 		}
-		//printf("IsDynel");
 		return pDynelType;
 	}
 
