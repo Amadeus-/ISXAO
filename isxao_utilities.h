@@ -71,7 +71,7 @@ namespace isxao_utilities
 	bool GetInvSlotIdentity(AOData::ImplantSlot_e slot, IDENTITY& id);
 	bool GetInvSlotIdentity(AOData::WeaponSlot_e slot, IDENTITY& id);
 	bool GetInvSlotIdentity(DWORD slot, IDENTITY& id);
-	void GetInvSlotName(const IDENTITY& slot, PCHAR pName);
+	PCSTR GetInvSlotName(const IDENTITY& slot);
 	bool GetInvSlotIdentity(PCSTR slot_name, IDENTITY &id);
 
 #pragma endregion

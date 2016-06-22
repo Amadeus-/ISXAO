@@ -18,7 +18,7 @@ public:
 		Use,
 	};
 
-	SpecialActionTemplateType() : LSType("SpecialActionTemplate")
+	SpecialActionTemplateType() : LSType("specialactiontemplate")
 	{
 		TypeMember(Identity);
 		TypeMember(IsLocked);
@@ -27,7 +27,7 @@ public:
 
 		TypeMethod(Use);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("SpecialActionTemplate");
+		PersistentClass = pISInterface->RegisterPersistentClass("specialactiontemplate");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 

@@ -13,7 +13,7 @@ public:
 	AOLIB_OBJECT SpecialActionTemplate* GetSpecialAction(const IDENTITY&) const;
 	AOLIB_OBJECT DWORD GetSpecialActionCount() const;
 	AOLIB_OBJECT IDENTITY GetSpecialActionTarget() const;
-	AOLIB_OBJECT ActionLock* GetActionLock(SpecialActionTemplate*) const;
+	AOLIB_OBJECT ActionLock* GetActionLock(SpecialActionTemplate*) const;	
 private:
 	SPECIALACTIONHOLDER special_action_holder_;
 };

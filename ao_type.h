@@ -15,7 +15,7 @@ public:
 	{
 	};
 
-	AOType() : LSType("AO")
+	AOType() : LSType("ao")
 	{
 		TypeMember(CheckCollision);
 		TypeMember(GetActors);

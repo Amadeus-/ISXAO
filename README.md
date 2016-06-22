@@ -18,7 +18,7 @@ Activates an item that is equipped or in the general inventory.
 ###### Implant Slots:
 `IS_EYES` `IS_HEAD` `IS_EARS``IS_EARS` `IS_RARM` `IS_CHEST` `IS_LARM` `IS_RWRIST` `IS_WAIST` `IS_LWRIST` `IS_RHAND` `IS_LEGS` `IS_LHAND` `IS_FEET`
 ###### General Inventory:
-`GI_64` `GI_65` `GI_66` `GI_67` `GI_68` `GI_69` `GI_70` `GI_71` `GI_72` `GI_73` `GI_74` `GI_75` `GI_76` `GI_77` `GI_78` `GI_79` `GI_80` `GI_81` `GI_82` `GI_83` `GI_84` `GI_85` `GI_86` `GI_87` `GI_88` `GI_89` `GI_90` `GI_91` `GI_92` `GI_93` `GI_94`
+`GI_64` `GI_65` `GI_66` `GI_67` `GI_68` `GI_69` `GI_70` `GI_71` `GI_72` `GI_73` `GI_74` `GI_75` `GI_76` `GI_77` `GI_78` `GI_79` `GI_80` `GI_81` `GI_82` `GI_83` `GI_84` `GI_85` `GI_86` `GI_87` `GI_88` `GI_89` `GI_90` `GI_91` `GI_92` `GI_93`
 
 #### Examples:
 `activate GI_74`

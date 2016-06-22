@@ -83,7 +83,7 @@ bool SpecialActionTemplateType::ToText(LSOBJECTDATA ObjectData, char *buf, unsig
 	if (!ObjectData.Ptr)
 		return false;
 #define pSpecialActionTemplate ((SpecialActionTemplate*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64u", pSpecialActionTemplate->GetIdentity().GetCombinedIdentity());
+	sprintf_s(buf, buflen, "%d", pSpecialActionTemplate->GetIdentity().Id);
 #undef pSpecialActionTemplate
 
 	return true;

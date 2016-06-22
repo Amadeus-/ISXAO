@@ -13,6 +13,7 @@ public:
 		CanApplyOnSelf,
 		CanApplyOnFightingTarget,
 		CanUse,
+		Description,
 		IsBuff,
 		IsGeneralAction,
 		IsHostile,
@@ -22,9 +23,9 @@ public:
 		IsNotRemovable,
 		IsPerk,
 		IsSpecialAction,
+		Name,
 		Range,
 		SpecialActionId,
-		SpecialActionProgress,
 		WillBreakOnAttack,
 		WillBreakOnDebuff,
 		WillBreakOnSpellAttack,
@@ -35,7 +36,7 @@ public:
 		
 	};
 
-	SpecialActionType() : LSType("SpecialAction")
+	SpecialActionType() : LSType("specialaction")
 	{
 		TypeMember(AttackDelay);
 		TypeMember(CanApplyOnFriendly);
@@ -43,6 +44,7 @@ public:
 		TypeMember(CanApplyOnSelf);
 		TypeMember(CanApplyOnFightingTarget);
 		TypeMember(CanUse);
+		TypeMember(Description);
 		TypeMember(IsBuff);
 		TypeMember(IsGeneralAction);
 		TypeMember(IsHostile);
@@ -52,14 +54,14 @@ public:
 		TypeMember(IsNotRemovable);
 		TypeMember(IsPerk);
 		TypeMember(IsSpecialAction);
+		TypeMember(Name);
 		TypeMember(Range);
 		TypeMember(SpecialActionId);
-		TypeMember(SpecialActionProgress);
 		TypeMember(WillBreakOnAttack);
 		TypeMember(WillBreakOnDebuff);
 		TypeMember(WillBreakOnSpellAttack);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("SpecialAction");
+		PersistentClass = pISInterface->RegisterPersistentClass("specialaction");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 

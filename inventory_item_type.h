@@ -35,7 +35,7 @@ public:
 
 	};
 
-	InventoryItemType() : LSType("InventoryItem")
+	InventoryItemType() : LSType("inventoryitem")
 	{		
 		TypeMember(CanApplyOnFriendly);
 		TypeMember(CanApplyOnHostile);
@@ -59,7 +59,7 @@ public:
 		TypeMember(Name);
 		TypeMember(Rarity);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("InventoryItem");
+		PersistentClass = pISInterface->RegisterPersistentClass("inventoryitem");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 

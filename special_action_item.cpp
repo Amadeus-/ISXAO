@@ -33,11 +33,6 @@ namespace isxao_classes
 		return float(GetSkill(ST_ITEMDELAY) / 100.0f);
 	}
 
-	double SpecialActionItem::GetSpecialActionProgress(DWORD &a, DWORD &b)
-	{
-		return pEngineClientAnarchy->N3Msg_GetItemProgress(GetIdentity(), a, b);
-	}
-
 	DWORD SpecialActionItem::GetRange()
 	{
 		return GetSkill(ST_ATTACKRANGE);

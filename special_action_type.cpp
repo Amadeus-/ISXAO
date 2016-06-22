@@ -47,6 +47,12 @@ bool SpecialActionType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 			Object.Type = pBoolType;
 			break;
 		}
+		case Description:
+		{
+			Object.ConstCharPtr = pSpecialAction->GetDescription();
+			Object.Type = pStringType;
+			break;
+		}
 		case IsBuff:
 		{
 			Object.DWord = pSpecialAction->IsBuff();
@@ -101,6 +107,12 @@ bool SpecialActionType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 			Object.Type = pBoolType;
 			break;
 		}
+		case Name:
+		{
+			Object.ConstCharPtr = pSpecialAction->GetName();
+			Object.Type = pStringType;
+			break;
+		}
 		case Range:
 		{
 			Object.DWord = pSpecialAction->GetRange();
@@ -112,14 +124,7 @@ bool SpecialActionType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 			Object.DWord = pSpecialAction->GetIdentity().Id;
 			Object.Type = pUintType;
 			break;
-		}
-		case SpecialActionProgress:
-		{
-			DWORD a;
-			DWORD b;
-			Object.Float = pSpecialAction->GetSpecialActionProgress(a, b);
-			break;
-		}
+		}		
 		case WillBreakOnAttack:
 		{
 			Object.DWord = pSpecialAction->WillBreakOnAttack();

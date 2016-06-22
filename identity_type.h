@@ -12,13 +12,13 @@ public:
 		Combined
 	};
 
-	IdentityType() : LSType("Identity")
+	IdentityType() : LSType("identity")
 	{
 		TypeMember(Type);
 		TypeMember(Id);
 		TypeMember(Combined);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("Identity");
+		PersistentClass = pISInterface->RegisterPersistentClass("identity");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 	~IdentityType()

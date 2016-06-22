@@ -11,13 +11,11 @@ namespace isxao_classes
 		for (DWORD i = 0; i < count; i++)
 		{
 			IDENTITY slot;
-			::GetInvSlotIdentity(i, slot);
+			isxao_utilities::GetInvSlotIdentity(i, slot);
 			auto pItem = pEngineClientAnarchy->GetItemByTemplate(slot, d);
 			if (pItem)
 			{
-				PCHAR pName = nullptr;
-				GetInvSlotName(slot, pName);
-				pMap->SetItem(pName, reinterpret_cast<LSOBJECTDATA&>(pItem));
+				pMap->SetItem(isxao_utilities::GetInvSlotName(slot), reinterpret_cast<LSOBJECTDATA&>(pItem));
 			}
 		}
 		return pMap->GetContainerUsed();

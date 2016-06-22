@@ -40,7 +40,7 @@ public:
 		Cast,
 	};
 
-	NanoSpellType() : LSType("NanoSpell")
+	NanoSpellType() : LSType("nanospell")
 	{
 		TypeMember(CanApplyOnFightingTarget);
 		TypeMember(CanApplyOnFriendly);
@@ -71,7 +71,7 @@ public:
 
 		TypeMethod(Cast);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("NanoSpell");
+		PersistentClass = pISInterface->RegisterPersistentClass("nanospell");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 

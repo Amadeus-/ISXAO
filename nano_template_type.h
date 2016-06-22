@@ -19,7 +19,7 @@ public:
 		Remove,
 	};
 
-	NanoTemplateType() : LSType("NanoTemplate")
+	NanoTemplateType() : LSType("nanotemplate")
 	{
 		TypeMember(CasterId);
 		TypeMember(NanoId);
@@ -29,7 +29,7 @@ public:
 
 		TypeMethod(Remove);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("NanoTemplate");
+		PersistentClass = pISInterface->RegisterPersistentClass("nanotemplate");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 

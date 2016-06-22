@@ -18,7 +18,7 @@ public:
 		MakeLeader,
 	};
 
-	TeamEntryType() : LSType("TeamEntry")
+	TeamEntryType() : LSType("teamentry")
 	{
 		TypeMember(Name);
 		TypeMember(Identity);
@@ -27,7 +27,7 @@ public:
 		TypeMethod(Kick);
 		TypeMethod(MakeLeader);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("TeamEntry");
+		PersistentClass = pISInterface->RegisterPersistentClass("teamentry");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 

@@ -13,6 +13,7 @@ public:
 	AOLIB_OBJECT IDENTITY GetWeaponIdentity() const;
 	AOLIB_OBJECT bool IsLocked() const;
 	AOLIB_OBJECT SpecialActionItem* GetSpecialActionItem();
+	AOLIB_OBJECT double GetSpecialActionProgress(DWORD&, DWORD&) const;
 	AOLIB_OBJECT static bool SpecialActionCompare(SpecialActionTemplate &, SpecialActionTemplate &);
 	AOLIB_OBJECT static bool pSpecialActionCompare(SpecialActionTemplate*, SpecialActionTemplate*);
 private:

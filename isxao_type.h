@@ -13,7 +13,7 @@ public:
 	{
 	};
 
-	ISXAOType() : LSType("ISXAO")
+	ISXAOType() : LSType("isxao")
 	{
 		TypeMember(IsReady);
 		TypeMember(Version);

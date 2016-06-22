@@ -160,14 +160,14 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 				auto index = DWORD(GETNUMBER());
 				if ((Object.Ptr = pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialAction(index - 1)))
 				{
-					Object.Type = pSpecialActionType;
+					Object.Type = pSpecialActionTemplateType;
 					return true;
 				}
 				return false;
 			}
 			if ((Object.Ptr = pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialAction(argv[0])))
 			{
-				Object.Type = pSpecialActionType;
+				Object.Type = pSpecialActionTemplateType;
 				return true;
 			}
 			return false;

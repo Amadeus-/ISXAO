@@ -65,6 +65,11 @@ namespace isxao_classes
 		return GetSpecialActionData().IsLocked != 0;;
 	}
 
+	double SpecialActionTemplate::GetSpecialActionProgress(DWORD &a, DWORD &b) const
+	{
+		return pEngineClientAnarchy->N3Msg_GetItemProgress(GetIdentity(), a, b);
+	}
+
 	bool SpecialActionTemplate::SpecialActionCompare(SpecialActionTemplate &a, SpecialActionTemplate &b)
 	{
 		return a.GetIdentity().Id < b.GetIdentity().Id;

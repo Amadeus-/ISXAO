@@ -93,7 +93,7 @@ public:
 		RequestInfo
 	};
 
-	ActorType() : LSType("Actor")
+	ActorType() : LSType("actor")
 	{
 		TypeMember(Breed);
 		TypeMember(Casting);
@@ -177,7 +177,7 @@ public:
 		TypeMethod(MakeLeader);
 		TypeMethod(RequestInfo);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("Actor");
+		PersistentClass = pISInterface->RegisterPersistentClass("actor");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 

@@ -21,7 +21,7 @@ public:
 		CreateRaid,
 	};
 
-	TeamRaidType() : LSType("TeamRaid")
+	TeamRaidType() : LSType("teamraid")
 	{
 		TypeMember(Leader);
 		TypeMember(RaidCount);
@@ -33,7 +33,7 @@ public:
 
 		TypeMethod(CreateRaid);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("TeamRaid");
+		PersistentClass = pISInterface->RegisterPersistentClass("teamraid");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 

@@ -6,7 +6,7 @@ typedef struct _INVENTORYSLOT
 	InventoryItem* pItem;
 
 
-	void GetSlotName(PCHAR pName) const
+	PCSTR GetSlotName() const
 	{
 		switch(SlotID.Type)
 		{
@@ -15,53 +15,37 @@ typedef struct _INVENTORYSLOT
 			switch(SlotID.Id)
 			{
 			case 1:
-				pName = "WS_HUD1";
-				return;
+				return "WS_HUD1";
 			case 2:
-				pName =  "WS_HUD3";
-				return;
+				return "WS_HUD3";
 			case 3:
-				pName =  "WS_UTIL1";
-				return;
+				return "WS_UTIL1";
 			case 4:
-				pName =  "WS_UTIL2";
-				return;
+				return "WS_UTIL2";
 			case 5:
-				pName =  "WS_UTIL3";
-				return;
+				return "WS_UTIL3";
 			case 6:
-				pName =  "WS_RHAND";
-				return;
+				return "WS_RHAND";
 			case 7:
-				pName =  "WS_BELT";
-				return;
+				return "WS_BELT";
 			case 8:
-				pName =  "WS_LHAND";
-				return;
+				return "WS_LHAND";
 			case 9:
-				pName =  "WS_NCU1";
-				return;
+				return "WS_NCU1";
 			case 10:
-				pName =  "WS_NCU2";
-				return;
+				return "WS_NCU2";
 			case 11:
-				pName =  "WS_NCU3";
-				return;
+				return "WS_NCU3";
 			case 12:
-				pName =  "WS_NCU4";
-				return;
+				return "WS_NCU4";
 			case 13:
-				pName =  "WS_NCU5";
-				return;
+				return "WS_NCU5";
 			case 14:
-				pName =  "WS_NCU6";
-				return;
+				return "WS_NCU6";
 			case 15:
-				pName =  "WS_HUD2";
-				return;
+				return "WS_HUD2";
 			default:
-				pName =  "Unknown";
-				return;
+				return "Unknown";
 			}
 		}			
 		case 102:
@@ -69,53 +53,37 @@ typedef struct _INVENTORYSLOT
 			switch (SlotID.Id - 16)
 			{
 			case 1:
-				pName =  "AS_NECK";
-				return;
+				return "AS_NECK";
 			case 2:
-				pName =  "AS_HEAD";
-				return;
+				return "AS_HEAD";
 			case 3:
-				pName =  "AS_BACK";
-				return;
+				return "AS_BACK";
 			case 4:
-				pName =  "AS_RSHOULDER";
-				return;
+				return "AS_RSHOULDER";
 			case 5:
-				pName =  "AS_CHEST";
-				return;
+				return "AS_CHEST";
 			case 6:
-				pName =  "AS_LSHOULDER";
-				return;
+				return "AS_LSHOULDER";
 			case 7:
-				pName =  "AS_RARM";
-				return;
+				return "AS_RARM";
 			case 8:
-				pName =  "AS_HANDS";
-				return;
+				return "AS_HANDS";
 			case 9:
-				pName =  "AS_LARM";
-				return;
+				return "AS_LARM";
 			case 10:
-				pName =  "AS_RWRIST";
-				return;
+				return "AS_RWRIST";
 			case 11:
-				pName =  "AS_LEGS";
-				return;
+				return "AS_LEGS";
 			case 12:
-				pName =  "AS_LWRIST";
-				return;
+				return "AS_LWRIST";
 			case 13:
-				pName =  "AS_RFINGER";
-				return;
+				return "AS_RFINGER";
 			case 14:
-				pName =  "AS_FEET";
-				return;
+				return "AS_FEET";
 			case 15:
-				pName =  "AS_LFINGER";
-				return;
+				return "AS_LFINGER";
 			default:
-				pName =  "Unknown";
-				return;
+				return "Unknown";
 			}
 		}
 		case 103:
@@ -123,58 +91,105 @@ typedef struct _INVENTORYSLOT
 			switch (SlotID.Id - 32)
 			{
 			case 1:
-				pName =  "IS_EYES";
-				return;
+				return "IS_EYES";
 			case 2:
-				pName =  "IS_HEAD";
-				return;
+				return "IS_HEAD";
 			case 3:
-				pName =  "IS_EARS";
-				return;
+				return "IS_EARS";
 			case 4:
-				pName =  "IS_RARM";
-				return;
+				return "IS_RARM";
 			case 5:
-				pName =  "IS_CHEST";
-				return;
+				return "IS_CHEST";
 			case 6:
-				pName =  "IS_LARM";
-				return;
+				return "IS_LARM";
 			case 7:
-				pName =  "IS_RWRIST";
-				return;
+				return "IS_RWRIST";
 			case 8:
-				pName =  "IS_WAIST";
-				return;
+				return "IS_WAIST";
 			case 9:
-				pName =  "IS_LWRIST";
-				return;
+				return "IS_LWRIST";
 			case 10:
-				pName =  "IS_RHAND";
-				return;
+				return "IS_RHAND";
 			case 11:
-				pName =  "IS_LEGS";
-				return;
+				return "IS_LEGS";
 			case 12:
-				pName =  "IS_LHAND";
-				return;
+				return "IS_LHAND";
 			case 13:
-				pName =  "IS_FEET";
-				return;
+				return "IS_FEET";
 			default:
-				pName =  "Unknown";
-				return;
+				return "Unknown";
 			}
 		}
 		case 104:
 		{
-			sprintf_s(pName, MAX_STRING, "GI_%d", SlotID.Id);
-			return;
+			switch(SlotID.Id - 63)
+			{
+			case 1:
+				return "GI_64";
+			case 2:
+				return "GI_65";
+			case 3:
+				return "GI_66";
+			case 4:
+				return "GI_67";
+			case 5:
+				return "GI_68";
+			case 6:
+				return "GI_69";
+			case 7:
+				return "GI_70";
+			case 8:
+				return "GI_71";
+			case 9:
+				return "GI_72";
+			case 10:
+				return "GI_73";
+			case 11:
+				return "GI_74";
+			case 12:
+				return "GI_75";
+			case 13:
+				return "GI_76";
+			case 14:
+				return "GI_77";
+			case 15:
+				return "GI_78";
+			case 16:
+				return "GI_79";
+			case 17:
+				return "GI_80";
+			case 18:
+				return "GI_81";
+			case 19:
+				return "GI_82";
+			case 20:
+				return "GI_83";
+			case 21:
+				return "GI_84";
+			case 22:
+				return "GI_85";
+			case 23:
+				return "GI_86";
+			case 24:
+				return "GI_87";
+			case 25:
+				return "GI_88";
+			case 26:
+				return "GI_89";
+			case 27:
+				return "GI_90";
+			case 28:
+				return "GI_91";
+			case 29:
+				return "GI_92";
+			case 30:
+				return "GI_93";
+			}
 		}
 		default:
 			break;
 		}
-		pName = "Unknown";
+		return "Unknown";
 	}
 
 } INVENTORYSLOT, *PINVENTORYSLOT;

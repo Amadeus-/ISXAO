@@ -24,7 +24,7 @@ public:
 		CastNanoSpell,
 	};
 
-	CharacterType() : LSType("Character")
+	CharacterType() : LSType("character")
 	{
 		TypeMember(Inventory);
 		TypeMember(InventoryCount);
@@ -37,7 +37,7 @@ public:
 		TypeMember(GetSpecialActions);
 		TypeMember(ToActor);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("Character");
+		PersistentClass = pISInterface->RegisterPersistentClass("character");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 

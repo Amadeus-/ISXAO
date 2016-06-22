@@ -13,9 +13,7 @@ bool InventorySlotType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 		{
 		case Name:
 		{
-			PCHAR pName = { nullptr };
-			pInventorySlot->GetSlotName(pName);
-			Object.ConstCharPtr = pName;
+			Object.ConstCharPtr = pInventorySlot->GetSlotName();
 			Object.Type = pStringType;
 			break;
 		}
@@ -84,10 +82,8 @@ bool InventorySlotType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int 
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define pInventorySlot ((INVENTORYSLOT*)ObjectData.Ptr)
-	PCHAR pName = { nullptr };
-	pInventorySlot->GetSlotName(pName);
-	sprintf_s(buf, buflen, "%s", pName);
+#define pInventorySlot ((INVENTORYSLOT*)ObjectData.Ptr)	
+	sprintf_s(buf, buflen, "%s", pInventorySlot->GetSlotName());
 #undef pInventorySlot
 
 	return true;

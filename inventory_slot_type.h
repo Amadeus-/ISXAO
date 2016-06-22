@@ -17,7 +17,7 @@ public:
 		Use
 	};
 
-	InventorySlotType() : LSType("InventorySlot")
+	InventorySlotType() : LSType("inventoryslot")
 	{
 
 		TypeMember(Name);
@@ -26,7 +26,7 @@ public:
 
 		TypeMethod(Use);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("InventorySlot");
+		PersistentClass = pISInterface->RegisterPersistentClass("inventoryslot");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 

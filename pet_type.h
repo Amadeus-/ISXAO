@@ -22,7 +22,7 @@ public:
 		Wait
 	};
 
-	PetType() : LSType("Pet")
+	PetType() : LSType("pet")
 	{
 		TypeMember(Type);
 
@@ -35,7 +35,7 @@ public:
 		TypeMethod(Terminate);
 		TypeMethod(Wait);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("Pet");
+		PersistentClass = pISInterface->RegisterPersistentClass("pet");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 

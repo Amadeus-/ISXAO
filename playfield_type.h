@@ -11,12 +11,12 @@ public:
 		ID
 	};
 
-	PlayfieldType() : LSType("Playfield")
+	PlayfieldType() : LSType("playfield")
 	{
 		TypeMember(Name);
 		TypeMember(ID);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("Playfield");
+		PersistentClass = pISInterface->RegisterPersistentClass("playfield");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 

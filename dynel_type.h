@@ -42,7 +42,7 @@ public:
 		RequestInfo
 	};
 
-	DynelType() : LSType("Dynel")
+	DynelType() : LSType("dynel")
 	{
 		TypeMember(Identity);
 		TypeMember(Name);
@@ -76,7 +76,7 @@ public:
 		TypeMethod(Interact);
 		TypeMethod(RequestInfo);
 
-		PersistentClass = pISInterface->RegisterPersistentClass("Dynel");
+		PersistentClass = pISInterface->RegisterPersistentClass("dynel");
 		pISInterface->SetPersistentClass(this, PersistentClass);
 	}
 
