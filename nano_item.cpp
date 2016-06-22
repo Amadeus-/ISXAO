@@ -25,7 +25,8 @@ namespace isxao_classes
 
 	void NanoItem::Cast()
 	{
-		pEngineClientAnarchy->GetClientChar()->CastNanoSpell(GetNanoIdentity(), pSelectionIndicator->Identity);
+		if(pSelectionIndicator)
+			pEngineClientAnarchy->GetClientChar()->CastNanoSpell(GetNanoIdentity(), pSelectionIndicator->Identity);
 	}
 
 	float NanoItem::GetAttackDelay()

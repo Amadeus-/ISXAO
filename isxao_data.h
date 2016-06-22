@@ -1135,7 +1135,8 @@ namespace AOData
 		WORD Count;							// 0x02
 		struct _IDENTITY DynelIdentity;		// 0x04	
 		struct _RDBIDENTITY RDBIdentity;	// 0x0C
-		BYTE Unknown0x18[0x14];
+		DWORD QualityLevel;					// 0x14
+		BYTE Unknown0x18[0x14];				// 0x18
 	} INVENTORYDATA, *PINVENTORYDATA;
 
 	// Size = 0x2C
@@ -1143,7 +1144,7 @@ namespace AOData
 	typedef struct _NEWINVENTORY
 	{
 		PVOID pvTable;										// 0x00
-		std::vector <struct _INVENTORYDATA*> pInventory;	// 0x04
+		std::vector <struct _INVENTORYDATA*> pInventoryData;	// 0x04
 		BYTE Unknown0x10[0x4];								// 0x10
 		DWORD Count;										// 0x14
 		struct _IDENTITY InventoryIdentity;					// 0x18
@@ -1156,7 +1157,7 @@ namespace AOData
 	{
 		struct _SIMPLECHAR* pClientControlDynel;	// 0x0000
 		struct _IDENTITY* pClientIdentity;			// 0x0004
-		struct _NEWINVENTORY* pInventory;			// 0x0008
+		struct _NEWINVENTORY* pRegularInventory;	// 0x0008
 		struct _NEWINVENTORY* pUnknownInventory;	// 0x000C
 		struct _NEWINVENTORY* pOverflowInventory;	// 0x0010
 		BYTE Unknown0x14[0x168];					// 0x0014

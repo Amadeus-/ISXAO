@@ -83,12 +83,6 @@ bool InventoryItemType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 			Object.Type = pBoolType;
 			break;
 		}
-		case IsReady:
-		{
-			Object.DWord = !pInventoryItem->IsItemDisabled();
-			Object.Type = pBoolType;
-			break;
-		}
 		case IsSpirit:
 		{
 			Object.DWord = pInventoryItem->IsSpirit();

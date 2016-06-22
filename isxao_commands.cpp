@@ -477,6 +477,168 @@ namespace isxao_commands
 		return 0;
 	}
 
+	DWORD Cast(int argc, char *argv[])
+	{
+		if(ISINDEX())
+		{
+			if(argc == 1 && ISNUMBER())
+			{
+				auto nano_id = GETNUMBER();
+				NanoItem* pNanoSpell;
+				if((pNanoSpell = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(nano_id))))
+				{
+					pNanoSpell->Cast();
+					return 1;
+				}
+				return 0;					
+			}
+			if (argc == 1 && !ISNUMBER())
+			{
+				char name[MAX_STRING];
+				char search_name[MAX_STRING];
+				strcpy_s(search_name, sizeof(search_name), argv[0]);
+				_strlwr_s(search_name);
+				std::vector<DWORD> v;
+				pEngineClientAnarchy->GetClientChar()->GetSpellTemplateData()->GetNanoSpellList(v);
+				for (auto it = v.begin(); it != v.end(); ++it)
+				{
+					NanoItem* pNanoSpell = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(*it));
+					strcpy_s(name, sizeof(name), pNanoSpell->GetName());
+					_strlwr_s(name);
+					if (strstr(name, search_name))
+					{
+						pNanoSpell->Cast();
+						return 1;
+					}						
+				}
+				return 0;
+			}
+			if(argc == 2 && ISNUMBER() && IsNumber(argv[1])) // nanoid, targetid
+			{
+				DWORD nano_id = GETNUMBER();
+				IDENTITY nano_identity;
+				nano_identity.Type = 53019;
+				nano_identity.Id = nano_id;
+				DWORD64 target_id = atoui64(argv[1]);
+				IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(target_id);
+				NanoItem* pNanoItem = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(nano_id));
+				Dynel* pTarget = isxao_utilities::GetDynel(target_identity);
+				if(pNanoItem && pTarget)
+				{
+					pEngineClientAnarchy->N3Msg_CastNanoSpell(nano_identity, target_identity);
+					return 1;
+				}
+				return 0;
+			}
+			if(argc == 2 && ISNUMBER() && !IsNumber(argv[1])) // nanoid, targetname
+			{				
+				DWORD nano_id = GETNUMBER();
+				IDENTITY nano_identity;
+				nano_identity.Type = 53019;
+				nano_identity.Id = nano_id;
+				NanoItem* pNanoItem = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(nano_id));		
+				bool valid_target = false;
+				char first_arg[MAX_STRING];
+				strcpy_s(first_arg, sizeof(first_arg), argv[1]);
+				_strlwr_s(first_arg);
+				IDENTITY target_identity;
+				if (!strcmp(first_arg, "me"))
+				{
+					pEngineClientAnarchy->GetClientDynelId(target_identity);
+					valid_target = true;
+				}
+				else
+				{
+					std::string name(argv[1]);
+					valid_target = pEngineClientAnarchy->N3Msg_NameToID(name, target_identity);
+				}
+				if (pNanoItem && valid_target)
+				{
+					pEngineClientAnarchy->N3Msg_CastNanoSpell(nano_identity, target_identity);
+					return 1;
+				}
+				return 0;
+			}
+			if (argc == 2 && !ISNUMBER() && IsNumber(argv[1])) // nanoname, targetid
+			{
+				IDENTITY nano_identity;
+				ZeroMemory(&nano_identity, sizeof(IDENTITY));
+				char name[MAX_STRING];
+				char search_name[MAX_STRING];
+				strcpy_s(search_name, sizeof(search_name), argv[0]);
+				_strlwr_s(search_name);
+				std::vector<DWORD> v;
+				pEngineClientAnarchy->GetClientChar()->GetSpellTemplateData()->GetNanoSpellList(v);
+				for (auto it = v.begin(); it != v.end(); ++it)
+				{
+					NanoItem* pNanoSpell = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(*it));
+					strcpy_s(name, sizeof(name), pNanoSpell->GetName());
+					_strlwr_s(name);
+					if (strstr(name, search_name))
+					{
+						nano_identity = pNanoSpell->GetNanoIdentity();
+						break;
+					}
+				}
+				if (nano_identity.Id == 0)
+					return 0;
+				DWORD64 target_id = atoui64(argv[1]);
+				IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(target_id);
+				Dynel* pTarget = isxao_utilities::GetDynel(target_identity);
+				if (!pTarget)
+					return 0;
+				pEngineClientAnarchy->N3Msg_CastNanoSpell(nano_identity, target_identity);
+				return 1;
+			}
+			if (argc == 2 && !ISNUMBER() && !IsNumber(argv[1])) // nanoname, targetname
+			{
+				IDENTITY nano_identity;
+				ZeroMemory(&nano_identity, sizeof(IDENTITY));
+				char name[MAX_STRING];
+				char search_name[MAX_STRING];
+				strcpy_s(search_name, sizeof(search_name), argv[0]);
+				_strlwr_s(search_name);
+				std::vector<DWORD> v;
+				pEngineClientAnarchy->GetClientChar()->GetSpellTemplateData()->GetNanoSpellList(v);
+				for (auto it = v.begin(); it != v.end(); ++it)
+				{
+					NanoItem* pNanoSpell = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(*it));
+					strcpy_s(name, sizeof(name), pNanoSpell->GetName());
+					_strlwr_s(name);
+					if (strstr(name, search_name))
+					{
+						nano_identity = pNanoSpell->GetNanoIdentity();
+						break;
+					}
+				}
+				if (nano_identity.Id == 0)
+					return 0;
+				bool valid_target = false;
+				char first_arg[MAX_STRING];
+				strcpy_s(first_arg, sizeof(first_arg), argv[1]);
+				_strlwr_s(first_arg);
+				IDENTITY target_identity;
+				if (!strcmp(first_arg, "me"))
+				{
+					pEngineClientAnarchy->GetClientDynelId(target_identity);
+					valid_target = true;
+				}
+				else
+				{
+					std::string target_name(argv[1]);
+					valid_target = pEngineClientAnarchy->N3Msg_NameToID(target_name, target_identity);
+				}
+				if (valid_target)
+				{
+					pEngineClientAnarchy->N3Msg_CastNanoSpell(nano_identity, target_identity);
+					return 1;
+				}
+				return 0;
+			}
+		}
+		return 0;
+	}
+
 	DWORD Face(int argc, char *argv[])
 	{
 		if (argc > 1)

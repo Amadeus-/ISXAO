@@ -2,7 +2,7 @@
 ### An [Inner Space](http://www.lavishsoft.com/) extension for [Anarchy Online](http://www.anarchy-online.com/).
 ## Commands
 
-### Activate
+### ++Activate++
 
 #### Syntax:
 `activate <Slot Name>`
@@ -21,11 +21,10 @@ Activates an item that is equipped or in the general inventory.
 `GI_64` `GI_65` `GI_66` `GI_67` `GI_68` `GI_69` `GI_70` `GI_71` `GI_72` `GI_73` `GI_74` `GI_75` `GI_76` `GI_77` `GI_78` `GI_79` `GI_80` `GI_81` `GI_82` `GI_83` `GI_84` `GI_85` `GI_86` `GI_87` `GI_88` `GI_89` `GI_90` `GI_91` `GI_92` `GI_93`
 
 #### Examples:
-`activate GI_74`
-
+`activate GI_74`  
 `activate WS_BELT`
 
-### AOEcho
+### ++AOEcho++
 
 #### Syntax:
 `AOEcho [options] [output]`
@@ -44,10 +43,10 @@ By supplying a chattype, you are indicating to your client the color of the mess
 The default "chat type" is `System`.
 
 #### Examples:
-`AOEcho ${Me.Name}`
+`AOEcho ${Me.Name}`  
 `AOEcho -chattype red ${Target.Name}`
 
-### AOExecute
+### ++AOExecute++
 
 #### Syntax:
 `AOExecute <Chat Command>`
@@ -58,10 +57,43 @@ This command executes in-game AO commands. It is primarily used for executing AO
 #### Example:
 `AOExecute /follow`
 
-### Face
+### ++Cast++
+
+#### Syntax:
+`cast [options]`
+
+#### Description
+This command attempts to execute nanoprograms on the target identified.
+
+#### Parameters:
+* `cast <nanoid>`
+  * Attempts to cast the nanoprogram with the provided nanoid on the currently selected target.
+* `cast <nanoid> me`
+  * Attempts to cast the nanoprogram with the provided nanoid on the client character.
+* `cast <nanoid> <targetname>`
+  * Attempts the cast the nanoprogram with the provided nanoid on the first actor that *exactly* matches the name provided. The order of the actors subject to the search is undefined, so it is recommended that `<targetname>` only by used with with actors with unique names. (e.g. PCs)
+* `cast <nanoid> <targetid>`
+  * Attempts to cast the nanoprogram with the provided nanoid on the actor with the provided uint64 identity.
+* `cast <nanoname>`
+  * Attempts to cast the first nanoprogram that matches the name or partial name provided on the currently selected target.
+* `cast <nanoname> me`
+  * Attempts to cast the first nanoprogram that matches the name or partial name provided on the client character.
+* `cast <nanoname> <targetname>`
+  * Attempts to cast the first nanoprogram that matches the name or partial name provided on the first actor that *exactly* matches the name provided. The order of the actors subject to the search is undefined, so it is recommended that `<targetname>` only by used with with actors with unique names. (e.g. PCs)
+* `cast <nanoname> <targetid>`
+  * Attempts to cast the first nanoprogram that matches the name or partial name provided on the actor with the provided uint64 identity.
+
+#### Examples:
+`cast 220343, me`  
+`cast Mocham, Boobies`  
+
+### ++Face++
 
 #### Syntax:
 `face [options]`
+
+#### Description:
+This command adjusts the rotation of the client character as desired.
 
 #### Parameters:
 * `face`
@@ -76,14 +108,17 @@ This command executes in-game AO commands. It is primarily used for executing AO
   * If the command is used with any character string, it will assume that you are searching for a specific entity that is either a partial or exacy match for the 'name' given.
 
 #### Examples:
-`face Boobies`
-`face 300.15 -234.32`
+`face Boobies`  
+`face 300.15 -234.32`  
 `face 46.5`
 
-### Target
+### ++Target++
 
 #### Syntax:
 `target [parameter]`
+
+#### Description:
+This command changes the client character's selection target. If currently attacking a target, the weapon target will not change.
 
 #### Parameters:
 * `target <type>`
@@ -98,13 +133,13 @@ This command executes in-game AO commands. It is primarily used for executing AO
   * If used with any string which is not one of the "types" listed above, it will assum that you are searching for a specific after and will target the nearest actor that is either a partial or exact match for the actor name given.
 
 #### Examples:
-`target Boobies`
-`target me`
+`target Boobies`  
+`target me`  
 `target pc`
 
 ## Datatypes
 
-### AO
+### ++ao++
 This datatype include miscellaneous data that is available to ISXAO that pertain to the Anarchy Online gameworld.
 
 #### Members:
@@ -118,7 +153,7 @@ This datatype include miscellaneous data that is available to ISXAO that pertain
 * `int Zoning`
   * Return values are: -1 = unsure, 0 = not zoning, 1 = zoning
 
-### Actor
+### ++actor++
 Actor represents objects (NPCs and PCs) on the playfield.
 
 #### Members:
@@ -195,6 +230,8 @@ Actor represents objects (NPCs and PCs) on the playfield.
   * The compass heading the actor is facing.
 * `float HeadingTo`
   * The compass heading for the client character to face this actor.
+* `float HeadingTo[AsString]`
+  * The compass heading for the client character to face this dynel as an abbreviation. (N, NE, W, SW, etc.)
 * `float HeadingToLoc[x,z]`
   * The compass heading to a location specified by a two argument offset (x, z) from the actor's position. `HeadingToLoc[0,-1]` determines the heading to a location 1 unit south of the actor.
 * `float Radius`
@@ -206,7 +243,7 @@ Actor represents objects (NPCs and PCs) on the playfield.
 * `float Z` 
   * The z-coordinate of the actor's position. (Up-Down)
 
-##### Boolean:
+##### Booleans:
 * `bool GM`
   * `TRUE` if the actor has a GM level greater than zero. Do not rely on this for any reason.
 * `bool HasPets`
@@ -309,7 +346,7 @@ Actor represents objects (NPCs and PCs) on the playfield.
     * `Profession`
     * This list only reflects what I have found on my own. There are likely more.
 
-### Character
+### ++character++
 This datatype represents information available to ISXAO about the client character.
 
 #### Members:
@@ -332,6 +369,11 @@ This datatype represents information available to ISXAO about the client charact
 
 ##### Special Actions:
 * `uint GetSpecialActions[index:specialactiontemplate]`
+  * Populates the supplied `index:specialactiontemplate` with the special actions the client character has available to them. The member returns the size of the populated index.
+* `specialactiontemplate SpecialAction[n] or SpecialAction[name]`
+  * Retrieves the *nth* (from `1 to SpecialActionCount`) special action template or the first special action template that matches the name or partial name provided.
+* `uint SpecialActionCount`
+  * The number of special action templates accessible with `SpecialAction[n]` above.
 
 
 ##### Type Casting:
@@ -343,7 +385,7 @@ This datatype represents information available to ISXAO about the client charact
 #### Methods:
 
 
-### Dynel
+### ++dynel++
 Dynel represents a game object on the playfield. This includes players, monsters, doors, mission kiosks, corpses, and even some player carried weapons and containers. The main purpose of this datatype is to allow you to collect enough information to determine the correct type and then cast it to the type. There is very limited information available.  
 
 #### Members:
@@ -363,8 +405,8 @@ Dynel represents a game object on the playfield. This includes players, monsters
   * The globally unique type and identifier for the dynel.
 * `string Name`
   * The name of the dynel.
-* `variable NearestDynel[(optional)n]`
-  * Returns the *nth* closest dynel to this dynel. The return type will correspond to the dynel's actual type (`actor`, `player`, `character`, etc.).
+* `actor NearestDynel[(optional)n]`
+  * Returns the *nth* closest dynel to this dynel.
 * `string Type`
   * The dynel type. `Actor` `Pet` `Character` `Player` `Door` `Container` `Weapon` `VendingMachine` `TemporaryBag` `Corpse` `QuestBooth` `Unknown`
 
@@ -385,22 +427,24 @@ Dynel represents a game object on the playfield. This includes players, monsters
   * The compass heading the dynel is facing.
 * `float HeadingTo`
   * The compass heading for the player to face this dynel.
+* `float HeadingTo[AsString]`
+  * The compass heading for the client character to face this dynel as an abbreviation. (N, NE, W, SW, etc.)
 * `float HeadingToLoc[x,z]`
   * The compass heading to a location specified by a two argument offset (x, z) from the dynel's position. HeadingToLoc[0,-1] determines the heading to a location 1m south of the dynel.
 
 ##### Booleans:
 * `bool IsActor`
-  * TRUE if the dynel is an actor.
+  * `TRUE` if the dynel is an actor.
 * `bool IsAPet`
-  * TRUE if the dynel is a pet.
+  * `TRUE` if the dynel is a pet.
 * `bool IsCharacter`
-  * TRUE if the dynel is the client character.
+  * `TRUE` if the dynel is the client character.
 * `bool IsMyPet`
-  * TRUE if the dynel is the character's pet.
+  * `TRUE` if the dynel is the character's pet.
 * `bool IsPlayer`
-  * TRUE if the dynel is a player.
+  * `TRUE` if the dynel is a player.
 * `bool IsTeamMember`
-  * TRUE if the dynel is in the character's team.
+  * `TRUE` if the dynel is in the character's team.
 
 ##### Type Casting:
 * `actor ToActor`
@@ -414,106 +458,132 @@ Dynel represents a game object on the playfield. This includes players, monsters
 * `Interact`
   * Has the effect of right clicking on the dynel. (e.g. start trade with a player, open a mission kiosk, etc.)
 
-### Identity
+### ++identity++
 The identity serves as a globally unique identifier for all in-game objects. The HIDWORD is the object type and the LODWORD is the unique identifier.
 
 #### Members:
+##### General:
 * `uint Type`
-  * The object type (nano, weapon, container, corpse, door, player, mission, etc.).
+  * The object type.
 * `uint Id`
   * The unique identifier assigned to the object.
+
+##### Type Casting:
 * `string ToString`
-  * The identity.
-	
-### InventoryItem
-This datatype includes data available to ISXAO related to items.  
+  * The identity in a uint64 format.
+
+### ++inventoryitem++
+This datatype includes data available to ISXAO related to items.
 
 #### Members:
 
 ##### General:
-* `string Description` 
+* `string Description`
   * The description of the item.
-* `string Name` 
+* `string Name`
   * The name of the item.
-* `string ToString` 
-  * The item's name.	
+* `string Rarity`
+  * The item's Rarity. `Trash` `Normal` `Exotic` `Quest` `Social` `Unknown`
 
 ##### Booleans:
 * `bool CanApplyOnFriendly` 
-  * TRUE if the item can be used on friendly players.
+  * `TRUE` if the item can be used on friendly players.
 * `bool CanApplyOnHostile` 
-  * TRUE if the item can be used on hostile players or NPCs.
+  * `TRUE` if the item can be used on hostile players or NPCs.
 * `bool CanApplyOnFightingTarget` 
-  * TRUE if the item can be used on the player's fighting target only.
+  * `TRUE` if the item can be used on the client character's fighting target only.
 * `bool CanApplyOnSelf` 
-  * TRUE if the item can be used on the player only.
+  * `TRUE` if the item can be used on the player only.
 * `bool CanBeSplit` 
-  * TRUE if the item can be split.
+  * `TRUE` if the item can be split.
 * `bool CanUse` 
-  * TRUE if the item can be used.
+  * `TRUE` if the item can be used.
 * `bool IsArmor` 
-  * TRUE if the item is an armor item.
+  * `TRUE` if the item is an armor item.
 * `bool IsConsumable` 
-  * TRUE if the item is a consumable.
+  * `TRUE` if the item is a consumable.
 * `bool IsImplant` 
-  * TRUE if the item is an implant.
+  * `TRUE` if the item is an implant.
 * `bool IsMisc` 
-  * TRUE if the item is a miscellaneous item.
+  * `TRUE` if the item is a miscellaneous item.
 * `bool IsNPC` 
-  * TRUE if the item is an NPC.
+  * `TRUE` if the item is an NPC.
 * `bool IsSpirit` 
-  * TRUE if the item is a spirit.
+  * `TRUE` if the item is a spirit.
 * `bool IsStackable` 
-  * TRUE of the item is stackable.
+  * `TRUE` of the item is stackable.
 * `bool IsTower` 
-  * TRUE if the item is a tower.
+  * `TRUE` if the item is a tower.
 * `bool IsWeapon` 
-  * TRUE if the item is a weapon.
+  * `TRUE` if the item is a weapon.
 * `bool IsUtility` 
-  * TRUE if the item is a utility item.
+  * `TRUE` if the item is a utility item.
 * `bool MustSit` 
-  * TRUE if the target of the item must be sitting in order to apply the item.
+  * `TRUE` if the target of the item must be sitting in order to apply the item.
 	
-### InventorySlot
+##### Type Casting:
+* `string ToString`
+  * The item's name.
+    
+### ++inventoryslot++
 This datatype includes data available to ISXAO related to the inventory slots in which inventory items reside.  
 
 #### Members:
-* `string Name` 
-  * The name of the item in the inventory slot.
+##### General:
 * `inventoryitem Item` 
   * The item in the inventory slot.
+* `uint ItemCount`
+  * The quantity of the inventory item in the slot.
+* `uint LockOutRemaining`
+  * The number of seconds remaining until the item is ready for re-use.
+* `string Name` 
+  * The name of the inventory slot. Same as the names used with the `activate` command.
+* `uint QualityLevel`
+  * The quality level of the item in the slot.
 * `identity Slot` 
   * The identity of the inventory item slot.
+
+##### Booleans:
+* `bool IsReady`
+  * `TRUE` if the item in this slot is ready to use.
+
+##### Type Casting:
 * `string ToString` 
   * The name of the slot.
-  * 
+
 #### Methods:
 * `Use` 
-  * This will attempt to use the item in the inventory slot.
+  * This will attempt to use the item in the inventory slot on the currently selected target.
 	
-### ISXAO
+### ++isxao++
 This datatype interacts with the extension itself.  
 
 #### Members:
+##### Booleans:
 * `bool IsReady`
   *  TRUE once the extension has been intialized and is ready to go. Your scripts should always check to make sure this is TRUE before continuing.
+
+##### Type Casting:
 * `string Version`
   *  Returns the ISXAO version.
 	
-### NanoSpell
+### ++nanospell++
 This datatype includes all of the data available to ISXAO related to a nanoprogram.  
 
 #### Members:
+##### General:
 * `float CastingTime` 
   * The time required to cast the nanoprogram, in seconds.
-* `float FormulaProgress` 
+* `uint FormulaProgress` 
   * The time spent casting this nanoprogram, in seconds.
 * `uint FormulaRadius` 
   * The radius of the nanoprogram, in units. If greater than 0, this is an area-effect nanoprogram.
 * `string Name` 
   * The name of the nanoprogram.
+* `uint NanoId`
+  * The nano id of the nanoprogram.
 * `string NanoSchool` 
-  * The school of the nanoprogram: Combat, Medical, Protection, Psi, and Space.
+  * The school of the nanoprogram. `Combat` `Medical` `Protection` `Psi` `Space`
 * `uint NanoStrain` 
   * The strain of the nanoprogram.
 * `uint NCUCost` 
@@ -522,8 +592,37 @@ This datatype includes all of the data available to ISXAO related to a nanoprogr
   * The range of the nanoprogram.
 * `float RechargeDelay` 
   * The recharge delay of the nanoprogram, in seconds.
+* `uint StackingOrder`
+  * The stacking order of the nanoprogram.
+
+##### Booleans:
+* `bool CanApplyOnFightingTarget`
+  * `TRUE` if the nanoprogram can only be applied on the client character's fighting target.
+* `bool CanApplyOnFriendly`
+  * `TRUE` if the nanoprogram can be applied on any friendly actor.
+* `bool CanApplyOnHostile`
+  * `TRUE` if the nanoprogram can be applied on any hostile actor.
+* `bool CanApplyOnSelf`
+  * `TRUE` if the nanoprogram can only be applied on the client character.
+* `bool IsBuff`
+  * `TRUE` if the nanoprogram is a buff.
+* `bool IsHostile`
+  * `TRUE` if the nanoprogram is a hostile nanoprogram.
+* `bool IsNoResistCannotFumble`
+  * `TRUE` if the nanoprogram cannot be resisted by the target and the client character cannot fumble casting.
+* `bool IsReady`
+  * `TRUE` if the nanoprogram is ready to be cast.
+* `bool WillBreakOnAttack`
+  * `TRUE` if the nanoprogram will break if the target is attacked.
+* `bool WillBreakOnDebuff`
+  * `TRUE` if the nanoprogram will break if the target is debuffed.
+* `bool WillBreakOnSpellAttack`
+  * `TRUE` if the nanoprogram will break if the target is attacked by a nanoprogram.
+
+
+##### Type Casting:
 * `string ToString` 
-  * The nano id of the nanoprogram.
+  * The nano id of the nanoprogram on the currently selected target.
 
 #### Methods:
 * `Cast` 

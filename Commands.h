@@ -16,6 +16,7 @@ COMMAND("DUMPSAS", CMD_DUMPSPECIALACTIONS, false, false);
 COMMAND("Activate", CMD_ACTIVATE, true, false);
 COMMAND("AOEcho", CMD_AOECHO, true, false);
 COMMAND("AOExecute", CMD_AOEXECUTE, true, false);
+COMMAND("Cast", CMD_CAST, true, false);
 COMMAND("Face", CMD_FACE, true, false);
 COMMAND("Target", CMD_TARGET, true, false);
 

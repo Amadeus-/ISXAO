@@ -57,7 +57,7 @@ namespace isxao_classes
 
 	NewInventory* InventoryHolder::GetNewInventory() const
 	{
-		return reinterpret_cast<NewInventory*>(GetInventoryHolderData().pInventory);
+		return reinterpret_cast<NewInventory*>(GetInventoryHolderData().pRegularInventory);
 	}
 
 	INVENTORYHOLDER InventoryHolder::GetInventoryHolderData() const

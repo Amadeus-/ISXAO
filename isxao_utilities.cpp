@@ -797,7 +797,7 @@ namespace isxao_utilities
 		case AS_R_FINGER:
 		case AS_FEET:
 		case AS_L_FINGER:
-			id.Id = DWORD(slot) + 17;
+			id.Id = DWORD(slot) + 16;
 			break;
 		default:
 			return false;;
@@ -1294,6 +1294,38 @@ namespace isxao_utilities
 		if (id.Type != 0)
 			return true;
 		return false;
+	}
+
+	PINVENTORYDATA GetInvSlotData(INVENTORYSLOT *slot)
+	{
+		PINVENTORYDATA pData;
+		DWORD offset = 0;
+		switch(slot->SlotID.Type)
+		{
+		case 101:
+		{
+			offset = 0;
+			break;
+		}
+		case 102:
+		{
+			offset = 16;
+			break;
+		}
+		case 103:
+		{
+			offset = 32;
+			break;
+		}
+		case 104:
+		{
+			offset = 63;
+			break;
+		}
+		default:
+			return nullptr;
+		}
+		return pData = pEngineClientAnarchy->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[slot->SlotID.Id + offset];
 	}
 
 #pragma endregion

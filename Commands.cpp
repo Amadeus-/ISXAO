@@ -339,6 +339,13 @@ int CMD_AOEXECUTE(int argc, char *argv[])
 	return 0;
 }
 
+int CMD_CAST(int argc, char *argv[])
+{
+	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+		return Cast(argc, argv);
+	return 0;
+}
+
 int CMD_FACE(int argc, char *argv[])
 { 
 	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)

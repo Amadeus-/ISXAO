@@ -5,7 +5,7 @@ namespace isxao_classes
 
 	DWORD NewInventory::GetInventory(std::vector<InventoryData*> &v) const
 	{
-		auto inventory_vector = GetNewInventoryData().pInventory;
+		auto inventory_vector = GetNewInventoryData().pInventoryData;
 		for (auto it = inventory_vector.begin(); it != inventory_vector.end(); ++it)
 			v.push_back(reinterpret_cast<InventoryData*>(*it));
 		return v.size();

@@ -308,6 +308,9 @@
     <ClCompile Include="special_action_type.cpp">
       <Filter>Source Files\LavishScript Extensions\DataTypes</Filter>
     </ClCompile>
+    <ClCompile Include="inventory_slot.cpp">
+      <Filter>Source Files\Base\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ISXAO.h">

@@ -45,8 +45,9 @@ bool NanoSpellType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		{
 			DWORD a;
 			DWORD b;
-			Object.Float = float(pNanoSpell->GetFormulaProgress(a, b));
-			Object.Type = pfloatType;
+			double result = pNanoSpell->GetFormulaProgress(a, b);
+			Object.Float = b;
+			Object.Type = pUintType;
 			break;
 		}
 		case FormulaRadius:

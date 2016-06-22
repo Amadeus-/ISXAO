@@ -11,10 +11,11 @@ bool InventorySlotType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 #define pInventorySlot ((INVENTORYSLOT*)ObjectData.Ptr)
 		switch (InventorySlotTypeMembers(Member->ID))
 		{
-		case Name:
+		case IsReady:
 		{
-			Object.ConstCharPtr = pInventorySlot->GetSlotName();
-			Object.Type = pStringType;
+			bool IsReady = !pInventorySlot->IsItemLocked();
+			Object.DWord = IsReady;
+			Object.Type = pBoolType;
 			break;
 		}
 		case Item:
@@ -25,6 +26,33 @@ bool InventorySlotType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 				return true;
 			}
 			return false;
+		}
+		case ItemCount:
+		{
+			Object.DWord = pInventorySlot->GetInvSlotData()->Count;
+			Object.Type = pUintType;
+			break;
+		}
+		case LockOutRemaining:
+		{
+			DWORD a;
+			DWORD b;
+			double progress = pInventorySlot->GetItemProgress(a, b);
+			Object.DWord = a;
+			Object.Type = pUintType;
+			break;
+		}
+		case Name:
+		{
+			Object.ConstCharPtr = pInventorySlot->GetSlotName();
+			Object.Type = pStringType;
+			break;
+		}
+		case QualityLevel:
+		{
+			Object.DWord = pInventorySlot->GetInvSlotData()->QualityLevel;
+			Object.Type = pUintType;
+			break;
 		}
 		case Slot:
 		{

@@ -73,6 +73,7 @@ namespace isxao_utilities
 	bool GetInvSlotIdentity(DWORD slot, IDENTITY& id);
 	PCSTR GetInvSlotName(const IDENTITY& slot);
 	bool GetInvSlotIdentity(PCSTR slot_name, IDENTITY &id);
+	PINVENTORYDATA GetInvSlotData(INVENTORYSLOT *slot);
 
 #pragma endregion
 

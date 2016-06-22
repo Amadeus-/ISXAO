@@ -211,6 +211,33 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 #undef pCharacter
 }
 
+bool CharacterType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int argc, char* argv[])
+{
+	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+		return false;
+	if (!ObjectData.Ptr)
+		return false;
+	__try
+	{
+#define pActor ((Character*)ObjectData.Ptr)
+		switch (CharacterTypeMethods(pMethod->ID))
+		{
+		case Cast:
+		{
+			
+		}
+		default: break;
+		}
+#undef pActor
+	}
+	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, pMethod->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
+	{
+
+	}
+	return true;
+}
+
+
 bool CharacterType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 {
 	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
@@ -218,7 +245,7 @@ bool CharacterType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int bufl
 	if (!ObjectData.Ptr)
 		return false;
 #define pCharacter ((Character*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%s", pCharacter->GetName());
+	sprintf_s(buf, buflen, "%I64u", pCharacter->GetIdentity().GetCombinedIdentity());
 #undef pCharacter
 
 	return true;

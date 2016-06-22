@@ -7,8 +7,12 @@ public:
 
 	enum InventorySlotTypeMembers
 	{
-		Name,
+		IsReady,
 		Item,
+		ItemCount,
+		LockOutRemaining,
+		Name,
+		QualityLevel,
 		Slot
 	};
 
@@ -20,8 +24,12 @@ public:
 	InventorySlotType() : LSType("inventoryslot")
 	{
 
-		TypeMember(Name);
+		TypeMember(IsReady);
 		TypeMember(Item);
+		TypeMember(ItemCount);
+		TypeMember(LockOutRemaining);
+		TypeMember(Name);
+		TypeMember(QualityLevel);
 		TypeMember(Slot);
 
 		TypeMethod(Use);

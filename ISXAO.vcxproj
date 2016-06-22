@@ -131,6 +131,7 @@
     <ClCompile Include="graph_path_finder.cpp" />
     <ClCompile Include="html_parser.cpp" />
     <ClCompile Include="input_config.cpp" />
+    <ClCompile Include="inventory_slot.cpp" />
     <ClCompile Include="isxao_commands.cpp" />
     <ClCompile Include="isxao_detours.cpp" />
     <ClCompile Include="isxao_globals.cpp" />
