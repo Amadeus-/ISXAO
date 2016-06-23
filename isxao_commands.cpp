@@ -23,14 +23,70 @@ namespace isxao_commands
 
 	DWORD Activate(int argc, char *argv[])
 	{
-		if (!ISINDEX())
+		if (argc < 2)
 			return 0;
-		if (argc >= 2)
+		if (argc == 2)
 		{
+			if (IsNumber(argv[1]))
+				return 0;
 			IDENTITY inv_slot_identity;
 			if (GetInvSlotIdentity(argv[1], inv_slot_identity))
 			{
-				pEngineClientAnarchy->GetClientChar()->UseItem(inv_slot_identity);
+				pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+				return 1;
+			}
+			return 0;
+		}
+		if (argc == 3)
+		{
+			if (IsNumber(argv[1]))
+				return 0;
+			IDENTITY inv_slot_identity;
+			auto valid_slot = isxao_utilities::GetInvSlotIdentity(argv[1], inv_slot_identity);
+			
+			if(IsNumber(argv[2]))
+			{
+				IDENTITY previous_target;
+				DWORD64 target_id = atoui64(argv[2]);
+				IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(target_id);
+				Dynel* pDynel = isxao_utilities::GetDynel(target_identity);
+				if(pDynel)
+				{
+					bool has_current_selection_target = pSelectionIndicator != nullptr;
+					if (has_current_selection_target)
+						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
+					pTargetingModule->SetTarget(target_identity, false);
+					pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+					if (has_current_selection_target && pLastTarget)
+						pTargetingModule->SetTarget(*pLastTarget, false);
+					return 1;
+				}
+			}
+			char second_arg[MAX_STRING];
+			strcpy_s(second_arg, sizeof(second_arg), argv[2]);
+			_strlwr_s(second_arg);
+			if(!strcmp(second_arg, "me") && valid_slot)
+			{
+				IDENTITY previous_target;
+				bool has_current_selection_target = pSelectionIndicator != nullptr;
+				pTargetingModule->SelectSelf();
+				pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+				if(has_current_selection_target && pLastTarget)
+					pTargetingModule->SetTarget(*pLastTarget, false);
+				return 1;
+			}
+			IDENTITY target_identity;
+			string name(argv[2]);
+			bool valid_target = pEngineClientAnarchy->N3Msg_NameToID(name, target_identity);
+			if(valid_slot && valid_target)
+			{
+				bool has_current_selection_target = pSelectionIndicator != nullptr;
+				if (has_current_selection_target)
+					pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
+				pTargetingModule->SetTarget(target_identity, false);
+				pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+				if (has_current_selection_target && pLastTarget)
+					pTargetingModule->SetTarget(*pLastTarget, false);
 				return 1;
 			}
 		}
@@ -479,11 +535,11 @@ namespace isxao_commands
 
 	DWORD Cast(int argc, char *argv[])
 	{
-		if(ISINDEX())
+		if(argc >= 2)
 		{
-			if(argc == 1 && ISNUMBER())
+			if(argc == 2 && IsNumber(argv[1]))
 			{
-				auto nano_id = GETNUMBER();
+				auto nano_id = atoi(argv[1]);
 				NanoItem* pNanoSpell;
 				if((pNanoSpell = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(nano_id))))
 				{
@@ -492,11 +548,11 @@ namespace isxao_commands
 				}
 				return 0;					
 			}
-			if (argc == 1 && !ISNUMBER())
+			if (argc == 2 && !IsNumber(argv[1]))
 			{
 				char name[MAX_STRING];
 				char search_name[MAX_STRING];
-				strcpy_s(search_name, sizeof(search_name), argv[0]);
+				strcpy_s(search_name, sizeof(search_name), argv[1]);
 				_strlwr_s(search_name);
 				std::vector<DWORD> v;
 				pEngineClientAnarchy->GetClientChar()->GetSpellTemplateData()->GetNanoSpellList(v);
@@ -513,13 +569,13 @@ namespace isxao_commands
 				}
 				return 0;
 			}
-			if(argc == 2 && ISNUMBER() && IsNumber(argv[1])) // nanoid, targetid
+			if(argc == 3 && IsNumber(argv[1]) && IsNumber(argv[2])) // nanoid, targetid
 			{
-				DWORD nano_id = GETNUMBER();
+				DWORD nano_id = atoi(argv[1]);
 				IDENTITY nano_identity;
 				nano_identity.Type = 53019;
 				nano_identity.Id = nano_id;
-				DWORD64 target_id = atoui64(argv[1]);
+				DWORD64 target_id = atoui64(argv[2]);
 				IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(target_id);
 				NanoItem* pNanoItem = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(nano_id));
 				Dynel* pTarget = isxao_utilities::GetDynel(target_identity);
@@ -530,26 +586,26 @@ namespace isxao_commands
 				}
 				return 0;
 			}
-			if(argc == 2 && ISNUMBER() && !IsNumber(argv[1])) // nanoid, targetname
+			if(argc == 3 && IsNumber(argv[1]) && !IsNumber(argv[2])) // nanoid, targetname
 			{				
-				DWORD nano_id = GETNUMBER();
+				DWORD nano_id = atoi(argv[1]);
 				IDENTITY nano_identity;
 				nano_identity.Type = 53019;
 				nano_identity.Id = nano_id;
 				NanoItem* pNanoItem = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(nano_id));		
 				bool valid_target = false;
-				char first_arg[MAX_STRING];
-				strcpy_s(first_arg, sizeof(first_arg), argv[1]);
-				_strlwr_s(first_arg);
+				char second_arg[MAX_STRING];
+				strcpy_s(second_arg, sizeof(second_arg), argv[2]);
+				_strlwr_s(second_arg);
 				IDENTITY target_identity;
-				if (!strcmp(first_arg, "me"))
+				if (!strcmp(second_arg, "me"))
 				{
 					pEngineClientAnarchy->GetClientDynelId(target_identity);
 					valid_target = true;
 				}
 				else
 				{
-					std::string name(argv[1]);
+					std::string name(argv[2]);
 					valid_target = pEngineClientAnarchy->N3Msg_NameToID(name, target_identity);
 				}
 				if (pNanoItem && valid_target)
@@ -559,13 +615,13 @@ namespace isxao_commands
 				}
 				return 0;
 			}
-			if (argc == 2 && !ISNUMBER() && IsNumber(argv[1])) // nanoname, targetid
+			if (argc == 3 && !IsNumber(argv[1]) && IsNumber(argv[2])) // nanoname, targetid
 			{
 				IDENTITY nano_identity;
 				ZeroMemory(&nano_identity, sizeof(IDENTITY));
 				char name[MAX_STRING];
 				char search_name[MAX_STRING];
-				strcpy_s(search_name, sizeof(search_name), argv[0]);
+				strcpy_s(search_name, sizeof(search_name), argv[1]);
 				_strlwr_s(search_name);
 				std::vector<DWORD> v;
 				pEngineClientAnarchy->GetClientChar()->GetSpellTemplateData()->GetNanoSpellList(v);
@@ -582,7 +638,7 @@ namespace isxao_commands
 				}
 				if (nano_identity.Id == 0)
 					return 0;
-				DWORD64 target_id = atoui64(argv[1]);
+				DWORD64 target_id = atoui64(argv[2]);
 				IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(target_id);
 				Dynel* pTarget = isxao_utilities::GetDynel(target_identity);
 				if (!pTarget)
@@ -590,13 +646,13 @@ namespace isxao_commands
 				pEngineClientAnarchy->N3Msg_CastNanoSpell(nano_identity, target_identity);
 				return 1;
 			}
-			if (argc == 2 && !ISNUMBER() && !IsNumber(argv[1])) // nanoname, targetname
+			if (argc == 3 && !IsNumber(argv[1]) && !IsNumber(argv[2])) // nanoname, targetname
 			{
 				IDENTITY nano_identity;
 				ZeroMemory(&nano_identity, sizeof(IDENTITY));
 				char name[MAX_STRING];
 				char search_name[MAX_STRING];
-				strcpy_s(search_name, sizeof(search_name), argv[0]);
+				strcpy_s(search_name, sizeof(search_name), argv[1]);
 				_strlwr_s(search_name);
 				std::vector<DWORD> v;
 				pEngineClientAnarchy->GetClientChar()->GetSpellTemplateData()->GetNanoSpellList(v);
@@ -614,18 +670,18 @@ namespace isxao_commands
 				if (nano_identity.Id == 0)
 					return 0;
 				bool valid_target = false;
-				char first_arg[MAX_STRING];
-				strcpy_s(first_arg, sizeof(first_arg), argv[1]);
-				_strlwr_s(first_arg);
+				char second_arg[MAX_STRING];
+				strcpy_s(second_arg, sizeof(second_arg), argv[2]);
+				_strlwr_s(second_arg);
 				IDENTITY target_identity;
-				if (!strcmp(first_arg, "me"))
+				if (!strcmp(second_arg, "me"))
 				{
 					pEngineClientAnarchy->GetClientDynelId(target_identity);
 					valid_target = true;
 				}
 				else
 				{
-					std::string target_name(argv[1]);
+					std::string target_name(argv[2]);
 					valid_target = pEngineClientAnarchy->N3Msg_NameToID(target_name, target_identity);
 				}
 				if (valid_target)

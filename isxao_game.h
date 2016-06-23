@@ -309,6 +309,7 @@
 #pragma region TargetingModule
 
 #define TargetingModule_t__m_pcInstance_x							0x274CE8
+#define TargetingModule_t__m_cLastTarget_x							0x274CF8
 #define TargetingModule_t__m_pcSelectionIndicator_x					0x274CEC
 #define TargetingModule_t__m_pcAttackingIndicator_x					0x274CF0
 #define TargetingModule_t__m_cLastTarget_x							0x274CF8

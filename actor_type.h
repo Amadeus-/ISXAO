@@ -10,6 +10,8 @@ public:
 		Breed,
 		Casting,
 		CheckCollision,
+		Con,
+		ConColor,
 		CurrentHealth,
 		CurrentNano,
 		CurrentNCU,
@@ -99,6 +101,8 @@ public:
 		TypeMember(Breed);
 		TypeMember(Casting);
 		TypeMember(CheckCollision);
+		TypeMember(Con);
+		TypeMember(ConColor);
 		TypeMember(CurrentHealth);
 		TypeMember(CurrentNano);
 		TypeMember(CurrentNCU);

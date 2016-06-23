@@ -2,7 +2,7 @@
 ### An [Inner Space](http://www.lavishsoft.com/) extension for [Anarchy Online](http://www.anarchy-online.com/).
 ## Commands
 
-### ++Activate++
+### Activate
 
 #### Syntax:
 `activate <Slot Name>`
@@ -24,7 +24,7 @@ Activates an item that is equipped or in the general inventory.
 `activate GI_74`  
 `activate WS_BELT`
 
-### ++AOEcho++
+### AOEcho
 
 #### Syntax:
 `AOEcho [options] [output]`
@@ -46,7 +46,7 @@ The default "chat type" is `System`.
 `AOEcho ${Me.Name}`  
 `AOEcho -chattype red ${Target.Name}`
 
-### ++AOExecute++
+### AOExecute
 
 #### Syntax:
 `AOExecute <Chat Command>`
@@ -57,7 +57,7 @@ This command executes in-game AO commands. It is primarily used for executing AO
 #### Example:
 `AOExecute /follow`
 
-### ++Cast++
+### Cast
 
 #### Syntax:
 `cast [options]`
@@ -87,7 +87,7 @@ This command attempts to execute nanoprograms on the target identified.
 `cast 220343, me`  
 `cast Mocham, Boobies`  
 
-### ++Face++
+### Face
 
 #### Syntax:
 `face [options]`
@@ -112,7 +112,7 @@ This command adjusts the rotation of the client character as desired.
 `face 300.15 -234.32`  
 `face 46.5`
 
-### ++Target++
+### Target
 
 #### Syntax:
 `target [parameter]`
@@ -139,7 +139,7 @@ This command changes the client character's selection target. If currently attac
 
 ## Datatypes
 
-### ++ao++
+### ao
 This datatype include miscellaneous data that is available to ISXAO that pertain to the Anarchy Online gameworld.
 
 #### Members:
@@ -153,7 +153,7 @@ This datatype include miscellaneous data that is available to ISXAO that pertain
 * `int Zoning`
   * Return values are: -1 = unsure, 0 = not zoning, 1 = zoning
 
-### ++actor++
+### actor
 Actor represents objects (NPCs and PCs) on the playfield.
 
 #### Members:
@@ -171,6 +171,11 @@ Actor represents objects (NPCs and PCs) on the playfield.
 * `bool CheckCollision[to_x, to_y, to_z]`
   * `TRUE` if the actor has line of sight to the provided position.
   * Note: When determining whether or not the client character has line of sight to an object for purposes of casting or attacking, it adds 1.6 units to the y-axis of the player and object to account for height. This member does not account for this offset. If you wanted to see if this actor had line of sight to another for the purposes of casting, you would need to add 1.6 units the the y-axis value provided.
+* `string Con`
+  * The relative difficulty of the attacking the actor. `VeryEasy` `Easy` `Probable` `MaybePossible` `Hard` `AlmostImpossible` `Impossible`
+* `string ConColor`
+  * The color of the actor's health bar. `White` `Grey` `Green` `Yellow` `Orange` `Red` `Unknown`
+  * The method used by the client to determine the color of the actor's health bar does not supply a few discrete colors, with the exception of `White` and `Grey`. Instead it supplies a hue between 0 and 120 degrees (`Red` to `Green`) based on the actor difficulty. ISXAO breaks this spectrum up into four discrete ranges. The color provided may not exactly match what the client displays, however the ranges were selected to conservatively "over con" the actor.
 * `int CurrentHealth`
   * The current health of the actor.
 * `uint CurrentNano`

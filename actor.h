@@ -7,6 +7,8 @@ public:
 	AOLIB_OBJECT DWORD BuildLSPets(LSIndex*);
 	AOLIB_OBJECT DWORD Casting();
 	AOLIB_OBJECT PCSTR Consider();
+	AOLIB_OBJECT PCSTR ConColor();
+	AOLIB_OBJECT RGBCOLOR ConColorARGB();
 	AOLIB_OBJECT void DoFace();
 	AOLIB_OBJECT void DoTarget();
 	AOLIB_OBJECT float EstimatedDistanceTo(VECTOR3 &);

@@ -51,6 +51,51 @@ namespace isxao_classes
 		return "VeryEasy";
 	}
 
+	PCSTR Actor::ConColor()
+	{
+		RGBCOLOR argb = ConColorARGB();
+		if (argb.ARGB == 0xFFFFFF)
+			return "White";
+		if (argb.ARGB == 0xAAAAAA)
+			return "Grey";
+		float hue = isxao_utilities::RGBtoHue(argb);
+		if (hue < 0.0f)
+			return "Unknown";
+		if (hue <= 15.0f)
+			return "Red";
+		if (hue <= 45.0f)
+			return "Orange";
+		if (hue <= 75.0f)
+			return "Yellow";
+		return "Green";
+	}
+
+	RGBCOLOR Actor::ConColorARGB()
+	{
+		RGBCOLOR argb;
+		argb.ARGB = 0xFFFFFF;
+		float consider;
+		DWORD con_type = pEngineClientAnarchy->N3Msg_Consider(GetIdentity(), consider);
+		if (consider > 1.0f)
+			consider = 1.0f;
+		if(con_type == 3)
+		{
+			if(consider  > 0.0f)
+			{
+				if(consider >= 0.5f)
+				{
+					argb.ARGB = (int(2 * (1 - consider) * 240) | 0xFF00) << 8;
+					return argb;
+				}
+				argb.ARGB = (int(2 * (consider * 255)) << 16) | 0xFF00;
+				return argb;
+			}
+			argb.ARGB = 0xAAAAAA;
+			return argb;				
+		}
+		return argb;
+	}
+
 	void Actor::DoFace()
 	{
 		VECTOR3 client_position;

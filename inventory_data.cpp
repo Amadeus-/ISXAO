@@ -23,4 +23,10 @@ namespace isxao_classes
 		return GetInventoryDataData().RDBIdentity;
 	}
 
+	DWORD InventoryData::GetQualityLevel() const
+	{
+		return GetInventoryDataData().QualityLevel;
+	}
+
+
 }

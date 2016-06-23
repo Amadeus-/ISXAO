@@ -1167,11 +1167,11 @@ namespace AOData
 
 	typedef struct _INVENTORYENTRY
 	{
-		struct _IDENTITY TemplateIdentity;			// 0x04
-		DWORD Unknown1;
-		DWORD Unknown2;
-		WORD Unknown3;
-		WORD Unknown4;
+		struct _IDENTITY TemplateIdentity;			// 0x00
+		DWORD Unknown1;								// 0x04
+		DWORD Unknown2;								// 0x08
+		WORD Unknown3;								// 0x0C
+		WORD Unknown4;								// 0x0E
 	} INVENTORYENTRY, *PINVENTORYENTRY;
 
 #pragma endregion

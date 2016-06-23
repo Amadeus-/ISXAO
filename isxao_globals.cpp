@@ -792,6 +792,7 @@ namespace isxao_globals
 		TargetingModule_t__m_pcInstance = TargetingModule_t__m_pcInstance_x + hGUI;
 		ppTargetingModule = reinterpret_cast<TargetingModule**>(TargetingModule_t__m_pcInstance);
 #endif
+
 #ifdef TargetingModule_t__m_pcSelectionIndicator_x
 		TargetingModule_t__m_pcSelectionIndicator = TargetingModule_t__m_pcSelectionIndicator_x + hGUI;
 		ppSelectionIndicator = reinterpret_cast<INDICATOR**>(TargetingModule_t__m_pcSelectionIndicator);

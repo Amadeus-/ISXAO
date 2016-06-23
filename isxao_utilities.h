@@ -87,7 +87,7 @@ namespace isxao_utilities
 
 	DWORD GetGameState();
 	void PrintToChat(string message, PCSTR chat_type);
-
+	float RGBtoHue(RGBCOLOR&);
 #pragma endregion
 
 #pragma region Message Handling

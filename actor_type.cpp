@@ -63,6 +63,18 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			}
 			return false;
 		}
+		case Con:
+		{
+			Object.ConstCharPtr = pActor->Consider();
+			Object.Type = pStringType;
+			break;
+		}
+		case ConColor:
+		{
+			Object.ConstCharPtr = pActor->ConColor();
+			Object.Type = pStringType;
+			break;
+		}
 		case CurrentHealth:
 		{
 			Object.Int = pActor->GetSkill(::ST_HEALTH);

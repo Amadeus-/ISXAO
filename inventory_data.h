@@ -7,6 +7,7 @@ public:
 	AOLIB_OBJECT INVENTORYDATA GetInventoryDataData() const;
 	AOLIB_OBJECT DWORD GetItemCount() const;
 	AOLIB_OBJECT RDBIDENTITY GetRDBIdentity() const;
+	AOLIB_OBJECT DWORD GetQualityLevel() const;
 private:
 	INVENTORYDATA inventory_data_;
 };
