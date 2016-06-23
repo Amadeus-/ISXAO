@@ -46,7 +46,7 @@ bool NanoSpellType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			DWORD a;
 			DWORD b;
 			double result = pNanoSpell->GetFormulaProgress(a, b);
-			Object.Float = b;
+			Object.DWord = b;
 			Object.Type = pUintType;
 			break;
 		}

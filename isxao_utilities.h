@@ -43,25 +43,25 @@ namespace isxao_utilities
 
 #pragma region Collections
 
-	void RecursiveAddDynelToDynelMap(std::map<IDENTITY, PN3DYNEL>& m, PDYNELNODE pNode, PDYNELROOT pRoot, DWORD& count);
-	void GetDynelMap(std::map<IDENTITY, PN3DYNEL>& m);
-	void RecursiveAddPerkToPerkMap(std::map<IDENTITY, DWORD>& m, PPERKNODE pNode, PPERKROOT pRoot, DWORD& count);
-	void GetPerkMap(std::map<IDENTITY, DWORD>& m, PPERKDIR pDir);
-	void RecursiveAddPetToPetMap(std::map<IDENTITY, DWORD>& m, PPETNODE pNode, PPETROOT pRoot, DWORD& count);
-	void GetPetMap(std::map<IDENTITY, DWORD>& m, PPETDIR pPetDir);
-	void RecursiveAddNanoToNanoMap(std::map<DWORD, PNANOITEM>& m, PNANOITEMNODE pNode, PNANOITEMROOT pRoot, DWORD& count);
-	void GetNanoMap(std::map<DWORD, PNANOITEM>& m);
-	void RecursiveAddStatNameToStatNameMap(std::map<DWORD, PCSTR>& m, PSTATNAMENODE pNode, PSTATNAMEROOT pRoot, DWORD& count);
-	void GetStatNameMap(std::map<DWORD, PCSTR>& m);
-	void GetStaticItemMap(std::map<IDENTITY, PDUMMYITEMBASE>& m);
-	void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, PSTATNODE pNode, PSTATROOT pRoot, DWORD& count);
-	void GetStatMap(std::map<DWORD, LONG>& m, PSTATDIR pDir);
-	void RecursiveAddWeaponItemToWeaponItemMap(std::map<DWORD, PWEAPONITEM>& m, PWEAPONITEMNODE pNode, PWEAPONITEMROOT pRoot, DWORD& count);
-	void GetWeaponItemMap(std::map<DWORD, PWEAPONITEM>& m, WEAPONITEMDIR& dir);
-	void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, PCHATWINDOWNODENODE pNode, PCHATWINDOWNODEROOT pRoot, DWORD& count);
-	void GetChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, CHATWINDOWNODEDIR &dir);
-	void RecursiveAddLockIdToLockIdMap(std::map<DWORD, DWORD>& m, PLOCKIDNODE pNode, PLOCKIDROOT pRoot, DWORD& count);
-	void GetLockIdMap(std::map<DWORD, DWORD>& m, PLOCKIDDIR pDir);
+	AOLIB_API void RecursiveAddDynelToDynelMap(std::map<IDENTITY, PN3DYNEL>& m, PDYNELNODE pNode, PDYNELROOT pRoot, DWORD& count);
+	AOLIB_API void GetDynelMap(std::map<IDENTITY, PN3DYNEL>& m);
+	AOLIB_API void RecursiveAddPerkToPerkMap(std::map<IDENTITY, DWORD>& m, PPERKNODE pNode, PPERKROOT pRoot, DWORD& count);
+	AOLIB_API void GetPerkMap(std::map<IDENTITY, DWORD>& m, PPERKDIR pDir);
+	AOLIB_API void RecursiveAddPetToPetMap(std::map<IDENTITY, DWORD>& m, PPETNODE pNode, PPETROOT pRoot, DWORD& count);
+	AOLIB_API void GetPetMap(std::map<IDENTITY, DWORD>& m, PPETDIR pPetDir);
+	AOLIB_API void RecursiveAddNanoToNanoMap(std::map<DWORD, PNANOITEM>& m, PNANOITEMNODE pNode, PNANOITEMROOT pRoot, DWORD& count);
+	AOLIB_API void GetNanoMap(std::map<DWORD, PNANOITEM>& m);
+	AOLIB_API void RecursiveAddStatNameToStatNameMap(std::map<DWORD, PCSTR>& m, PSTATNAMENODE pNode, PSTATNAMEROOT pRoot, DWORD& count);
+	AOLIB_API void GetStatNameMap(std::map<DWORD, PCSTR>& m);
+	AOLIB_API void GetStaticItemMap(std::map<IDENTITY, PDUMMYITEMBASE>& m);
+	AOLIB_API void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, PSTATNODE pNode, PSTATROOT pRoot, DWORD& count);
+	AOLIB_API void GetStatMap(std::map<DWORD, LONG>& m, PSTATDIR pDir);
+	AOLIB_API void RecursiveAddWeaponItemToWeaponItemMap(std::map<DWORD, PWEAPONITEM>& m, PWEAPONITEMNODE pNode, PWEAPONITEMROOT pRoot, DWORD& count);
+	AOLIB_API void GetWeaponItemMap(std::map<DWORD, PWEAPONITEM>& m, WEAPONITEMDIR& dir);
+	AOLIB_API void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, PCHATWINDOWNODENODE pNode, PCHATWINDOWNODEROOT pRoot, DWORD& count);
+	AOLIB_API void GetChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, CHATWINDOWNODEDIR &dir);
+	AOLIB_API void RecursiveAddLockIdToLockIdMap(std::map<DWORD, DWORD>& m, PLOCKIDNODE pNode, PLOCKIDROOT pRoot, DWORD& count);
+	AOLIB_API void GetLockIdMap(std::map<DWORD, DWORD>& m, PLOCKIDDIR pDir);
 
 #pragma endregion
 
@@ -85,9 +85,9 @@ namespace isxao_utilities
 
 #pragma region Utility
 
-	DWORD GetGameState();
-	void PrintToChat(string message, PCSTR chat_type);
-	float RGBtoHue(RGBCOLOR&);
+	AOLIB_API DWORD GetGameState();
+	AOLIB_API void PrintToChat(string message, PCSTR chat_type);
+
 #pragma endregion
 
 #pragma region Message Handling

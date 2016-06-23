@@ -58,14 +58,52 @@ namespace isxao_classes
 			return "White";
 		if (argb.ARGB == 0xAAAAAA)
 			return "Grey";
-		float hue = isxao_utilities::RGBtoHue(argb);
-		if (hue < 0.0f)
+		float fR = float(argb.R / 255);
+		float fG = float(argb.G / 255);
+		float fB = float(argb.B / 255);
+		float fH = 0.0f;
+		float fS = 0.0f;
+		float fV = 0.0f;
+		float fCMax = max(max(fR, fG), fB);
+		float fCMin = min(min(fR, fG), fB);
+		float fDelta = fCMax - fCMin;
+
+		if (fDelta > 0) {
+			if (fCMax == fR) {
+				fH = 60 * (fmod(((fG - fB) / fDelta), 6));
+			}
+			else if (fCMax == fG) {
+				fH = 60 * (((fB - fR) / fDelta) + 2);
+			}
+			else if (fCMax == fB) {
+				fH = 60 * (((fR - fG) / fDelta) + 4);
+			}
+
+			if (fCMax > 0) {
+				fS = fDelta / fCMax;
+			}
+			else {
+				fS = 0;
+			}
+
+			fV = fCMax;
+		}
+		else {
+			fH = 0;
+			fS = 0;
+			fV = fCMax;
+		}
+
+		if (fH < 0) {
+			fH = 360 + fH;
+		}
+		if (fH < 0.0f)
 			return "Unknown";
-		if (hue <= 15.0f)
+		if (fH <= 15.0f)
 			return "Red";
-		if (hue <= 45.0f)
+		if (fH <= 45.0f)
 			return "Orange";
-		if (hue <= 75.0f)
+		if (fH <= 75.0f)
 			return "Yellow";
 		return "Green";
 	}

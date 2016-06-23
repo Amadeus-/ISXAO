@@ -7,13 +7,7 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	float consider = 0.0f;
-	DWORD unknown = 0;
-	IDENTITY dummy;
-	auto stat = 1234567890;
-	if (pSelectionIndicator)
-		unknown = pEngineClientAnarchy->N3Msg_Consider(pSelectionIndicator->Identity, consider);
-	printf("%d : %f", unknown, consider);
+	printf("%d", pLastTarget->Id);
 	return 1;
 }
 
