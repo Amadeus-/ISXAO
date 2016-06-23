@@ -13,8 +13,8 @@ bool InventorySlotType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 		{
 		case IsReady:
 		{
-			bool IsReady = !pInventorySlot->IsItemLocked();
-			Object.DWord = IsReady;
+			bool IsReady = pInventorySlot->IsItemLocked();
+			Object.DWord = !IsReady;
 			Object.Type = pBoolType;
 			break;
 		}
