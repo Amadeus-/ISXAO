@@ -32,6 +32,25 @@ namespace isxao_classes
 		return GetSpellTemplateData()->GetNanoBeingCast();
 	}
 
+	PCSTR Actor::Consider()
+	{
+		float consider;
+		pEngineClientAnarchy->N3Msg_Consider(GetIdentity(), consider);
+		if (consider >= 0.0f && consider < 0.2000000029802322)
+			return "Easy";
+		if (consider >= 0.2000000029802322 && consider < 0.4900000095367432)
+			return "Probable";
+		if (consider >= 0.4900000095367432 && consider < 0.50999999)
+			return "MaybePossible";
+		if (consider >= 0.50999999 && consider < 0.69999999)
+			return "Hard";
+		if (consider >= 0.69999999 && consider < 0.8999999761581421)
+			return "AlmostImpossible";
+		if (consider >= 0.8999999761581421)
+			return "Impossible";
+		return "VeryEasy";
+	}
+
 	void Actor::DoFace()
 	{
 		VECTOR3 client_position;
@@ -177,6 +196,11 @@ namespace isxao_classes
 	bool Actor::IsInvis()
 	{
 		return !(GetSimpleCharData()->IsVisible);
+	}
+
+	bool Actor::IsKOS()
+	{
+		return GetSkill(ST_BREEDHOSTILITY) > 30;
 	}
 
 	bool Actor::IsMovingForward()

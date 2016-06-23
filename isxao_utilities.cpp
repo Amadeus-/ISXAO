@@ -1298,34 +1298,7 @@ namespace isxao_utilities
 
 	PINVENTORYDATA GetInvSlotData(INVENTORYSLOT *slot)
 	{
-		PINVENTORYDATA pData;
-		DWORD offset = 0;
-		switch(slot->SlotID.Type)
-		{
-		case 101:
-		{
-			offset = 0;
-			break;
-		}
-		case 102:
-		{
-			offset = 16;
-			break;
-		}
-		case 103:
-		{
-			offset = 32;
-			break;
-		}
-		case 104:
-		{
-			offset = 63;
-			break;
-		}
-		default:
-			return nullptr;
-		}
-		return pData = pEngineClientAnarchy->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[slot->SlotID.Id + offset];
+		return pEngineClientAnarchy->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[slot->SlotID.Id];
 	}
 
 #pragma endregion

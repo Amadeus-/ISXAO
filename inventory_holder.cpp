@@ -43,9 +43,42 @@ namespace isxao_classes
 		return pIndex->GetContainerUsed();
 	}
 
+	DWORD InventoryHolder::GetArmorInventory(std::vector<INVENTORYDATA*> &v)
+	{
+		for (int i = 17; i < 32; i++)
+		{
+			PINVENTORYDATA p_inventory_data = pEngineClientAnarchy->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
+			if (p_inventory_data)
+				v.push_back(p_inventory_data);
+		}
+		return v.size();
+	}
+	
 	BankEntry* InventoryHolder::GetBankInventory() const
 	{
 		return reinterpret_cast<BankEntry*>(GetInventoryHolderData().pBankEntry);
+	}
+
+	DWORD InventoryHolder::GetCharacterInventory(std::vector<INVENTORYDATA*> &v)
+	{
+		for (int i = 64; i < 94; i++)
+		{
+			PINVENTORYDATA p_inventory_data = pEngineClientAnarchy->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
+			if (p_inventory_data)
+				v.push_back(p_inventory_data);
+		}
+		return v.size();
+	}
+
+	DWORD InventoryHolder::GetImplantInventory(std::vector<INVENTORYDATA*> &v)
+	{
+		for (int i = 33; i < 46; i++)
+		{
+			PINVENTORYDATA p_inventory_data = pEngineClientAnarchy->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
+			if (p_inventory_data)
+				v.push_back(p_inventory_data);
+		}
+		return v.size();
 	}
 
 	DWORD InventoryHolder::GetInventoryCount() const
@@ -53,8 +86,7 @@ namespace isxao_classes
 		std::map<IDENTITY, InventoryItem*> m;
 		return GetInventory(m);
 	}
-
-
+	
 	NewInventory* InventoryHolder::GetNewInventory() const
 	{
 		return reinterpret_cast<NewInventory*>(GetInventoryHolderData().pRegularInventory);
@@ -366,6 +398,17 @@ namespace isxao_classes
 				m.insert_or_assign(id, reinterpret_cast<InventoryItem*>(pEngineClientAnarchy->GetItemByTemplate(id, d)));
 		}
 		return m.size();
+	}
+
+	DWORD InventoryHolder::GetWeaponInventory(std::vector<INVENTORYDATA*>& v)
+	{
+		for (int i = 1; i < 16; i++)
+		{
+			PINVENTORYDATA p_inventory_data = pEngineClientAnarchy->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
+			if (p_inventory_data)
+				v.push_back(p_inventory_data);
+		}
+		return v.size();
 	}
 
 }

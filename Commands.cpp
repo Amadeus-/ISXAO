@@ -7,34 +7,13 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	//IDENTITY dummy;
-	//std::vector<SpecialActionTemplate*> v;
-	//pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
-
-	//FILE * pFILE;
-	//fopen_s(&pFILE, "stats.txt", "a");
-	//for (auto it = v.begin(); it != v.end(); ++it)
-	//{
-	//	IDENTITY id = (*it)->GetIdentity();
-	//	char buffer[MAX_STRING];
-	//	sprintf_s(buffer, sizeof(buffer), "%s\n", pEngineClientAnarchy->N3Msg_GetName(id, dummy));
-	//	fputs(buffer, pFILE);
-
-	//	for (DWORD i = 0; i < 1003; i++)
-	//	{
-	//		LONG stat = pEngineClientAnarchy->N3Msg_GetSkill(id, i, 2, dummy);
-	//		if(stat != 1234567890)
-	//		{
-	//			sprintf_s(buffer, "\tST_%s (%d) = %d,\n", isxao_utilities::StatToString(i), i, stat);
-	//			for (auto i = 0; i < (int)strlen(buffer); i++)
-	//				buffer[i] = toupper(buffer[i]);
-	//			fputs(buffer, pFILE);
-	//		}			
-	//	}		
-	//}
-	//fclose(pFILE);
-
-	printf("%d", pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActionCount());
+	float consider = 0.0f;
+	DWORD unknown = 0;
+	IDENTITY dummy;
+	auto stat = 1234567890;
+	if (pSelectionIndicator)
+		unknown = pEngineClientAnarchy->N3Msg_Consider(pSelectionIndicator->Identity, consider);
+	printf("%d : %f", unknown, consider);
 	return 1;
 }
 

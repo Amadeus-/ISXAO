@@ -40,6 +40,7 @@ public:
 		IsInRaid,
 		IsInTeam,
 		IsInvis,
+		IsKOS,
 		IsMovingForward,
 		IsMyPet,
 		IsPlayer,
@@ -128,6 +129,7 @@ public:
 		TypeMember(IsInRaid);
 		TypeMember(IsInTeam);
 		TypeMember(IsInvis);
+		TypeMember(IsKOS);
 		TypeMember(IsMovingForward);
 		TypeMember(IsMyPet);
 		TypeMember(IsPlayer);

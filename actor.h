@@ -6,6 +6,7 @@ public:
 	AOLIB_OBJECT DWORD BuildLSNCU(LSIndex*);
 	AOLIB_OBJECT DWORD BuildLSPets(LSIndex*);
 	AOLIB_OBJECT DWORD Casting();
+	AOLIB_OBJECT PCSTR Consider();
 	AOLIB_OBJECT void DoFace();
 	AOLIB_OBJECT void DoTarget();
 	AOLIB_OBJECT float EstimatedDistanceTo(VECTOR3 &);
@@ -35,6 +36,7 @@ public:
 	AOLIB_OBJECT bool IsInTeam();
 	AOLIB_OBJECT bool IsInRaid();
 	AOLIB_OBJECT bool IsInvis();
+	AOLIB_OBJECT bool IsKOS();
 	AOLIB_OBJECT bool IsMovingForward();
 	AOLIB_OBJECT bool IsNPC();
 	AOLIB_OBJECT bool IsStrafingLeft();

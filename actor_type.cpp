@@ -359,6 +359,12 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			Object.Type = pBoolType;
 			break;
 		}
+		case IsKOS:
+		{
+			Object.DWord = pActor->IsKOS();
+			Object.Type = pBoolType;
+			break;
+		}
 		case IsMovingForward:
 		{
 			Object.DWord = pActor->IsMovingForward();

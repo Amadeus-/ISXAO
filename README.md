@@ -272,6 +272,8 @@ Actor represents objects (NPCs and PCs) on the playfield.
   * `TRUE` if the actor is in any team. **This information is only valid for PCs.**
 * `bool IsInvis`
   * `TRUE` if the actor is not visible. This does not necessarily mean that actor's do not see through the invisibility.
+* `bool IsKOS`
+  * `TRUE` if the actor will attack the client character on sight.
 * `bool IsMovingForward`
   * `TRUE` if the actor is moving forward.
 * `bool IsMyPet`
