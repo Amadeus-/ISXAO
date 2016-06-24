@@ -8,6 +8,7 @@ namespace isxao_commands
 	AOLIB_API DWORD AOEcho(int argc, char *argv[]);
 	AOLIB_API DWORD AOExecute(int argc, char *argv[]);
 	AOLIB_API DWORD Cast(int argc, char *argv[]);
+	AOLIB_API DWORD DoAction(int argc, char *argv[]);
 	AOLIB_API DWORD Face(int argc, char *argv[]);
 	AOLIB_API DWORD Target(int argc, char *argv[]);
 

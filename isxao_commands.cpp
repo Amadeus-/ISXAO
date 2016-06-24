@@ -23,9 +23,9 @@ namespace isxao_commands
 
 	DWORD Activate(int argc, char *argv[])
 	{
-		if (argc < 2)
+		if (argc < 2) // No arguments provided
 			return 0;
-		if (argc == 2)
+		if (argc == 2) // Slot name provided
 		{
 			if (IsNumber(argv[1]))
 				return 0;
@@ -37,14 +37,13 @@ namespace isxao_commands
 			}
 			return 0;
 		}
-		if (argc == 3)
+		if (argc > 2) // Slot name and target provided
 		{
-			if (IsNumber(argv[1]))
+			if (IsNumber(argv[1])) // Make sure the first argument is a string, not a number
 				return 0;
 			IDENTITY inv_slot_identity;
-			auto valid_slot = isxao_utilities::GetInvSlotIdentity(argv[1], inv_slot_identity);
-			
-			if(IsNumber(argv[2]))
+			auto valid_slot = isxao_utilities::GetInvSlotIdentity(argv[1], inv_slot_identity);			
+			if(IsNumber(argv[2])) // Second argument is an identity
 			{
 				IDENTITY previous_target;
 				DWORD64 target_id = atoui64(argv[2]);
@@ -62,10 +61,10 @@ namespace isxao_commands
 					return 1;
 				}
 			}
-			char second_arg[MAX_STRING];
+			char second_arg[MAX_STRING]; // Second argument is a string
 			strcpy_s(second_arg, sizeof(second_arg), argv[2]);
 			_strlwr_s(second_arg);
-			if(!strcmp(second_arg, "me") && valid_slot)
+			if(!strcmp(second_arg, "me") && valid_slot) // Check to see it the target is "me"
 			{
 				IDENTITY previous_target;
 				bool has_current_selection_target = pSelectionIndicator != nullptr;
@@ -75,7 +74,7 @@ namespace isxao_commands
 					pTargetingModule->SetTarget(*pLastTarget, false);
 				return 1;
 			}
-			IDENTITY target_identity;
+			IDENTITY target_identity; // Find the actor identity that matches the name provided
 			string name(argv[2]);
 			bool valid_target = pEngineClientAnarchy->N3Msg_NameToID(name, target_identity);
 			if(valid_slot && valid_target)
@@ -691,6 +690,196 @@ namespace isxao_commands
 				}
 				return 0;
 			}
+		}
+		return 0;
+	}
+
+	DWORD DoAction(int argc, char* argv[])
+	{
+		if(argc >= 2)
+		{
+			if (argc == 2) // Only one argument provided
+			{
+				if(IsNumber(argv[1])) // ActionId 
+				{
+					IDENTITY action_identity;
+					action_identity.Type = 57008;
+					action_identity.Id = atoi(argv[1]);
+					pEngineClientAnarchy->N3Msg_PerformSpecialAction(action_identity);
+					return 1;
+				}
+				char name[MAX_STRING]; // ActionName
+				char search_name[MAX_STRING];
+				strcpy_s(search_name, sizeof(search_name), argv[1]);
+				_strlwr_s(search_name);
+				std::vector<SpecialActionTemplate*> v;
+				pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
+				IDENTITY dummy_identity;
+				for (auto it = v.begin(); it != v.end(); ++it)
+				{
+					PCSTR action_name = pEngineClientAnarchy->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
+					strcpy_s(name, sizeof(name), action_name);
+					_strlwr_s(name);
+					if(strstr(name, search_name))
+					{
+						pEngineClientAnarchy->N3Msg_PerformSpecialAction((*it)->GetIdentity());
+						return 1;
+					}
+				}
+				return 0;
+			}
+			if (argc > 2) // At least two arguments provided
+			{
+				if(IsNumber(argv[1]) && IsNumber(argv[2])) // ActionId, TargetId
+				{
+					IDENTITY action_identity;
+					action_identity.Type = 57008;
+					action_identity.Id = atoi(argv[1]);
+					DWORD64 comb_target_identity = atoui64(argv[2]);
+					IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(comb_target_identity);
+					Dynel* pDynel = isxao_utilities::GetDynel(target_identity);
+					if(pDynel)
+					{
+						bool has_current_target = pSelectionIndicator != nullptr;
+						bool current_target_is_desired_target = (pSelectionIndicator != nullptr) && (pSelectionIndicator->Identity == target_identity);
+						if(!current_target_is_desired_target)
+						{
+							if(has_current_target)
+								pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Stores the old target's identity in pLastTarget
+							pTargetingModule->SetTarget(target_identity, false);
+						}
+						pEngineClientAnarchy->N3Msg_PerformSpecialAction(action_identity);
+						if(!current_target_is_desired_target)
+						{
+							if (has_current_target)
+								pTargetingModule->SetTarget(*pLastTarget, false);
+						}
+						return 1;
+					}
+					return 0;
+				}
+				if(IsNumber(argv[1]) && !IsNumber(argv[2])) // ActionId, TargetName
+				{
+					IDENTITY action_identity;
+					action_identity.Type = 57008;
+					action_identity.Id = atoi(argv[1]);
+					IDENTITY target_identity;
+					string target_name(argv[2]);
+					bool valid_target = pEngineClientAnarchy->N3Msg_NameToID(target_name, target_identity);
+					if(valid_target)
+					{
+						bool has_current_target = pSelectionIndicator != nullptr;
+						bool current_target_is_desired_target = (pSelectionIndicator != nullptr) && (pSelectionIndicator->Identity == target_identity);
+						if (!current_target_is_desired_target)
+						{
+							if (has_current_target)
+								pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Stores the old target's identity in pLastTarget
+							pTargetingModule->SetTarget(target_identity, false);
+						}
+						pEngineClientAnarchy->N3Msg_PerformSpecialAction(action_identity);
+						if (!current_target_is_desired_target)
+						{
+							if (has_current_target)
+								pTargetingModule->SetTarget(*pLastTarget, false);
+						}
+						return 1;
+					}
+					return 0;
+				}
+				if(!IsNumber(argv[1]) && IsNumber(argv[2])) // ActionName, TargetId
+				{
+					char name[MAX_STRING]; // ActionName
+					char search_name[MAX_STRING];
+					strcpy_s(search_name, sizeof(search_name), argv[1]);
+					_strlwr_s(search_name);
+					std::vector<SpecialActionTemplate*> v;
+					pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
+					IDENTITY dummy_identity;
+					IDENTITY action_identity;
+					bool valid_action = false;
+					for (auto it = v.begin(); it != v.end(); ++it)
+					{
+						PCSTR action_name = pEngineClientAnarchy->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
+						strcpy_s(name, sizeof(name), action_name);
+						_strlwr_s(name);
+						if (strstr(name, search_name))
+						{
+							action_identity = (*it)->GetIdentity();
+							valid_action = true;
+							break;
+						}
+					}
+					DWORD64 comb_target_identity = atoui64(argv[2]);
+					IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(comb_target_identity);
+					Dynel* pDynel = isxao_utilities::GetDynel(target_identity);
+					if(valid_action && pDynel)
+					{
+						bool has_current_target = pSelectionIndicator != nullptr;
+						bool current_target_is_desired_target = (pSelectionIndicator != nullptr) && (pSelectionIndicator->Identity == target_identity);
+						if (!current_target_is_desired_target)
+						{
+							if (has_current_target)
+								pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Stores the old target's identity in pLastTarget
+							pTargetingModule->SetTarget(target_identity, false);
+						}
+						pEngineClientAnarchy->N3Msg_PerformSpecialAction(action_identity);
+						if (!current_target_is_desired_target)
+						{
+							if (has_current_target)
+								pTargetingModule->SetTarget(*pLastTarget, false);
+						}
+						return 1;
+					}
+					return 0;
+				}
+				if (!IsNumber(argv[1]) && !IsNumber(argv[2])) // ActionName, TargetName
+				{
+					char name[MAX_STRING]; // ActionName
+					char search_name[MAX_STRING];
+					strcpy_s(search_name, sizeof(search_name), argv[1]);
+					_strlwr_s(search_name);
+					std::vector<SpecialActionTemplate*> v;
+					pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
+					IDENTITY dummy_identity;
+					IDENTITY action_identity;
+					bool valid_action = false;
+					for (auto it = v.begin(); it != v.end(); ++it)
+					{
+						PCSTR action_name = pEngineClientAnarchy->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
+						strcpy_s(name, sizeof(name), action_name);
+						_strlwr_s(name);
+						if (strstr(name, search_name))
+						{
+							action_identity = (*it)->GetIdentity();
+							valid_action = true;
+							break;
+						}
+					}
+					IDENTITY target_identity;
+					string target_name(argv[2]);
+					bool valid_target = pEngineClientAnarchy->N3Msg_NameToID(target_name, target_identity);
+					if(valid_action && valid_target)
+					{
+						bool has_current_target = pSelectionIndicator != nullptr;
+						bool current_target_is_desired_target = (pSelectionIndicator != nullptr) && (pSelectionIndicator->Identity == target_identity);
+						if (!current_target_is_desired_target)
+						{
+							if (has_current_target)
+								pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Stores the old target's identity in pLastTarget
+							pTargetingModule->SetTarget(target_identity, false);
+						}
+						pEngineClientAnarchy->N3Msg_PerformSpecialAction(action_identity);
+						if (!current_target_is_desired_target)
+						{
+							if (has_current_target)
+								pTargetingModule->SetTarget(*pLastTarget, false);
+						}
+						return 1;
+					}
+					return 0;
+				}
+			}
+			return 0;
 		}
 		return 0;
 	}

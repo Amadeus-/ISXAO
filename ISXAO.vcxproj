@@ -134,6 +134,7 @@
     <ClCompile Include="inventory_slot.cpp" />
     <ClCompile Include="isxao_commands.cpp" />
     <ClCompile Include="isxao_detours.cpp" />
+    <ClCompile Include="isxao_find_pattern.cpp" />
     <ClCompile Include="isxao_globals.cpp" />
     <ClCompile Include="isxao_log.cpp" />
     <ClCompile Include="isxao_message.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="isxao_commands.h" />
     <ClInclude Include="isxao_data.h" />
     <ClInclude Include="isxao_enums.h" />
+    <ClInclude Include="isxao_find_pattern.h" />
     <ClInclude Include="isxao_game.h" />
     <ClInclude Include="isxao_globals.h" />
     <ClInclude Include="isxao_detours.h" />

@@ -311,6 +311,9 @@
     <ClCompile Include="inventory_slot.cpp">
       <Filter>Source Files\Base\Items</Filter>
     </ClCompile>
+    <ClCompile Include="isxao_find_pattern.cpp">
+      <Filter>Source Files\Base\Internal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ISXAO.h">
@@ -567,6 +570,9 @@
     </ClInclude>
     <ClInclude Include="special_action_type.h">
       <Filter>Header Files\LavishScript Extensions\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_find_pattern.h">
+      <Filter>Header Files\Base\Internal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,5 +1,8 @@
 #pragma once
 #include <windows.h>
+#include <algorithm>
+#include <cctype>
+#include <string>
 #include <vector>
 #include <list>
 #include <map>
@@ -32,6 +35,7 @@ using namespace std;
 #define MAX_STRING 2048
 #define MAX_LEVEL 300
 
+#include "isxao_find_pattern.h"
 #include "register_events.h"
 #include "ISXAO.h"
 #include "isxao_data.h"
