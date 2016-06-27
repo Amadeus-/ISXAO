@@ -315,7 +315,7 @@ int CMD_AOEXECUTE(int argc, char *argv[])
 int CMD_CAST(int argc, char *argv[])
 {
 	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
-		return Cast(argc, argv);
+		return Cast(1, argc, argv);
 	return 0;
 }
 

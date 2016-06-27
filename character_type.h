@@ -21,6 +21,7 @@ public:
 
 	enum CharacterTypeMethods
 	{
+		Attack,
 		Cast,
 	};
 
@@ -37,6 +38,7 @@ public:
 		TypeMember(GetSpecialActions);
 		TypeMember(ToActor);
 
+		TypeMember(Attack);
 		TypeMethod(Cast);
 
 		PersistentClass = pISInterface->RegisterPersistentClass("character");

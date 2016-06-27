@@ -5,18 +5,20 @@
 ### Activate
 
 #### Syntax:
-`activate <Slot Name>`  
-`activate <Slot Name> <Target Identity>`  
-`activate <Slot Name> <Target Name>`
-`activate <Slot Name> me`
+`activate [options]`
 
 #### Description:
-Activates an item that is equipped or in the general inventory. If no target is provided, it will attempt to use the item on the currently selected target, if any. Item use in AO for many items requires a target and does not default to the client character if there is no selected target.
+Activates an item that is equipped or in the general inventory. If no target is provided, it will attempt to use the item on the currently selected target, if any. Item use in AO for many items requires a target and does not default to the client character if there is no selected target. This may not be the case if the item is `CanApplyOnSelf`. Providing a target other than the currently selected target will result in a targeting change to the desired actor and then back to the previous target. The selection target will change, not the fighting target.
 
-##### Target information:
-`<Target Identity>` is the uint64 identifier for the target actor.
-`<Target Name>` is the *exact* name of the target actor.
-`me` will attempt to use the targe on the client character.
+#### Parameters:
+* `activate <Slot Name>`  
+  * Attempts to activate the item in the provided slot on the currently selected actor.
+* `activate <Slot Name> <Target Identity>`  
+  * Attempts to activate the item in the provided slot on the actor with the provided uint64 identity.
+* `activate <Slot Name> <Target Name>`
+  * Attempts to activate the item in the provided slot on the first actor that *exactly* matches the name provided.
+* `activate <Slot Name> me`
+  * Attempts to activate the item in the provided slot on the client character.
 
 ##### Equipment slot names:
 ###### Weapon Slots:
@@ -70,7 +72,7 @@ This command executes in-game AO commands. It is primarily used for executing AO
 #### Syntax:
 `cast [options]`
 
-#### Description
+#### Description:
 This command attempts to execute nanoprograms on the target identified.
 
 #### Parameters:
@@ -96,6 +98,36 @@ This command attempts to execute nanoprograms on the target identified.
 `cast Mocham, Boobies`  
 
 ### DoAction
+
+#### Syntax:
+`doaction [options]`
+
+#### Description:
+This command attempts to perform the action provided on the target identified.
+
+#### Parameters:
+* `doaction <actionid>`
+  * Attempts to perform the action with the provided actionid on the currently selected target.
+* `doaction <actionid> me`
+  * Attempts to perform the action with the provided actionid on the currently selected target.
+* `doaction <actionid> <targetname>`
+  * Attempts to perform the action with the provided actionid on the first actor that *exactly* matches the name provided.
+* `doaction <actionid> <targetid>`
+  * Attempts to perform the action with the provided actionid on the actor that matches the provided uint64 identity.
+* `doaction <actionname>`
+  * Attempts to perform the first action that matches or partially matches the action name provided on the currently selected target.
+* `doaction <actionname> me`
+  * Attempts to perform the first action that matches or partially matches the action name provided on the client character.
+* `doaction <actionname> <targetname>`
+  * Attempts to perform the first action that matches or partially matches the action name provided on the first actor that *exactly* matches the name provided.
+* `doaction <actionname> <targetid>`
+  * Attempts to perform the first action that matches or partially matches the action name provided on actor that matches the provided uint64 identity.
+
+#### Examples:
+`doaction 214068`  
+`doaction Regain Nano`  
+`doaction 214369, Boobies`  
+`doaction Seal Wounds, Boobies`  
 
 ### Face
 
@@ -363,7 +395,7 @@ Actor represents objects (NPCs and PCs) on the playfield.
     * `Profession`
     * This list only reflects what I have found on my own. There are likely more.
 
-### ++character++
+### character
 This datatype represents information available to ISXAO about the client character.
 
 #### Members:
@@ -402,7 +434,7 @@ This datatype represents information available to ISXAO about the client charact
 #### Methods:
 
 
-### ++dynel++
+### dynel
 Dynel represents a game object on the playfield. This includes players, monsters, doors, mission kiosks, corpses, and even some player carried weapons and containers. The main purpose of this datatype is to allow you to collect enough information to determine the correct type and then cast it to the type. There is very limited information available.  
 
 #### Members:
@@ -475,7 +507,7 @@ Dynel represents a game object on the playfield. This includes players, monsters
 * `Interact`
   * Has the effect of right clicking on the dynel. (e.g. start trade with a player, open a mission kiosk, etc.)
 
-### ++identity++
+### identity
 The identity serves as a globally unique identifier for all in-game objects. The HIDWORD is the object type and the LODWORD is the unique identifier.
 
 #### Members:
@@ -489,7 +521,7 @@ The identity serves as a globally unique identifier for all in-game objects. The
 * `string ToString`
   * The identity in a uint64 format.
 
-### ++inventoryitem++
+### inventoryitem
 This datatype includes data available to ISXAO related to items.
 
 #### Members:
@@ -542,7 +574,7 @@ This datatype includes data available to ISXAO related to items.
 * `string ToString`
   * The item's name.
     
-### ++inventoryslot++
+### inventoryslot
 This datatype includes data available to ISXAO related to the inventory slots in which inventory items reside.  
 
 #### Members:
@@ -572,7 +604,7 @@ This datatype includes data available to ISXAO related to the inventory slots in
 * `Use` 
   * This will attempt to use the item in the inventory slot on the currently selected target.
 	
-### ++isxao++
+### isxao
 This datatype interacts with the extension itself.  
 
 #### Members:
@@ -584,7 +616,7 @@ This datatype interacts with the extension itself.
 * `string Version`
   *  Returns the ISXAO version.
 	
-### ++nanospell++
+### nanospell
 This datatype includes all of the data available to ISXAO related to a nanoprogram.  
 
 #### Members:
@@ -635,7 +667,6 @@ This datatype includes all of the data available to ISXAO related to a nanoprogr
   * `TRUE` if the nanoprogram will break if the target is debuffed.
 * `bool WillBreakOnSpellAttack`
   * `TRUE` if the nanoprogram will break if the target is attacked by a nanoprogram.
-
 
 ##### Type Casting:
 * `string ToString` 

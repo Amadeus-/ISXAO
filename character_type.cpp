@@ -224,7 +224,8 @@ bool CharacterType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 		{
 		case Cast:
 		{
-			
+			if (GetGameState() == GAMESTATE_IN_GAME)
+				isxao_commands::Cast(0, argc, argv);
 		}
 		default: break;
 		}
