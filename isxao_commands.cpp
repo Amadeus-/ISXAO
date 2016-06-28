@@ -23,89 +23,108 @@ namespace isxao_commands
 		return false;
 	}
 
-	DWORD Activate(int argc, char *argv[])
+	DWORD Activate(int begin_inclusive, int argc, char *argv[])
 	{
-		if (argc < 2) // No arguments provided
+		if (argc < (1 + begin_inclusive)) // No arguments provided
 			return 0;
-		if (argc == 2) // Slot name provided
+		if (argc == (1 + begin_inclusive)) // Slot name provided
 		{
-			if (IsNumber(argv[1]))
+			if (IsNumber(argv[(0 + begin_inclusive)]))
 				return 0;
 			IDENTITY inv_slot_identity;
-			if (GetInvSlotIdentity(argv[1], inv_slot_identity))
+			if (GetInvSlotIdentity(argv[(0 + begin_inclusive)], inv_slot_identity))
 			{
 				pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
 				return 1;
 			}
 			return 0;
 		}
-		if (argc > 2) // Slot name and target provided
+		if (argc > (1 + begin_inclusive)) // Slot name and target provided
 		{
-			if (IsNumber(argv[1])) // Make sure the first argument is a string, not a number
+			if (IsNumber(argv[(0 + begin_inclusive)])) // Make sure the first argument is a string, not a number
 				return 0;
 			IDENTITY inv_slot_identity;
-			auto valid_slot = isxao_utilities::GetInvSlotIdentity(argv[1], inv_slot_identity);			
-			if(IsNumber(argv[2])) // Second argument is an identity
+			auto valid_slot = isxao_utilities::GetInvSlotIdentity(argv[(0 + begin_inclusive)], inv_slot_identity);
+			if (!valid_slot)
+				return 0;
+			if(IsNumber(argv[(1 + begin_inclusive)])) // Second argument is an identity
 			{
 				IDENTITY previous_target;
-				DWORD64 target_id = atoui64(argv[2]);
+				DWORD64 target_id = atoui64(argv[(1 + begin_inclusive)]);
 				IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(target_id);
 				Dynel* pDynel = isxao_utilities::GetDynel(target_identity);
 				if(pDynel)
 				{
-					bool has_current_selection_target = pSelectionIndicator != nullptr;
-					bool current_target_is_desired_target = (pSelectionIndicator != nullptr) && (pSelectionIndicator->Identity == target_identity);
-					if(!current_target_is_desired_target)
+					if(!pSelectionIndicator) // No Current Target
 					{
-						if (has_current_selection_target)
-							pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
 						pTargetingModule->SetTarget(target_identity, false);
-					}					
-					pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
-					if(!current_target_is_desired_target)
+						pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
+						return 1;
+					}
+					if(pSelectionIndicator->Identity == target_identity)// Current Target Is Desired Target
 					{
-						if (has_current_selection_target && pLastTarget)
-							pTargetingModule->SetTarget(*pLastTarget, false);						
-					}					
+						pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+						return 1;
+					}
+					// Current Target Is NOT Desired Target
+					pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Saves the current target to pLastTarget
+					pTargetingModule->SetTarget(target_identity, false);
+					pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+					pTargetingModule->SetTarget(*pLastTarget, false); // Switches the target back to the previous target
 					return 1;
 				}
+				return 0;
 			}
 			char second_arg[MAX_STRING]; // Second argument is a string
-			strcpy_s(second_arg, sizeof(second_arg), argv[2]);
+			strcpy_s(second_arg, sizeof(second_arg), argv[(1 + begin_inclusive)]);
 			_strlwr_s(second_arg);
-			if(!strcmp(second_arg, "me") && valid_slot) // Check to see it the target is "me"
+			if(!strcmp(second_arg, "me")) // Check to see it the target is "me"
 			{
-				IDENTITY previous_target;
-				bool has_current_selection_target = pSelectionIndicator != nullptr;
-				bool current_target_is_me = (pSelectionIndicator != nullptr) && (IsClientId(pSelectionIndicator->Identity.Id));
-				if(!current_target_is_me)
-					pTargetingModule->SelectSelf();
+				if(!pSelectionIndicator) // No current target
+				{
+					pTargetingModule->SetTarget(pEngineClientAnarchy->GetClientChar()->GetIdentity(), false);
+					pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+					pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
+					return 1;
+				}
+				if(pSelectionIndicator->Identity == pEngineClientAnarchy->GetClientChar()->GetIdentity()) // Current target is deisred target
+				{
+					pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+					return 1;
+				}
+				// Current target is NOT the desired target
+				pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
+				pTargetingModule->SetTarget(pEngineClientAnarchy->GetClientChar()->GetIdentity(), false);
 				pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
-				if(!current_target_is_me && has_current_selection_target && pLastTarget)
-					pTargetingModule->SetTarget(*pLastTarget, false);
+				pTargetingModule->SetTarget(*pLastTarget, false);
 				return 1;
 			}
 			IDENTITY target_identity; // Find the actor identity that matches the name provided
-			string name(argv[2]);
+			string name(argv[(1 + begin_inclusive)]);
 			bool valid_target = pEngineClientAnarchy->N3Msg_NameToID(name, target_identity);
-			if(valid_slot && valid_target)
+			if (valid_target)
 			{
-				bool has_current_selection_target = pSelectionIndicator != nullptr;
-				bool current_target_is_desired_target = (pSelectionIndicator != nullptr) && (pSelectionIndicator->Identity == target_identity);
-				if (!current_target_is_desired_target)
+				if (!pSelectionIndicator) // No Current Target
 				{
-					if (has_current_selection_target)
-						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
 					pTargetingModule->SetTarget(target_identity, false);
+					pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+					pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
+					return 1;
 				}
-				pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
-				if (!current_target_is_desired_target)
+				if (pSelectionIndicator->Identity == target_identity)// Current Target Is Desired Target
 				{
-					if (has_current_selection_target && pLastTarget)
-						pTargetingModule->SetTarget(*pLastTarget, false);
+					pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+					return 1;
 				}
+				// Current Target Is NOT Desired Target
+				pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Saves the current target to pLastTarget
+				pTargetingModule->SetTarget(target_identity, false);
+				pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+				pTargetingModule->SetTarget(*pLastTarget, false); // Switches the target back to the previous target
 				return 1;
 			}
+			return 0;
 		}
 		return 0;		
 	}
@@ -552,8 +571,34 @@ namespace isxao_commands
 
 	DWORD Attack(int begin_inclusive, int argc, char *argv[])
 	{
-		
-
+		if(argc >= (1 + begin_inclusive))
+		{
+			if(argc == (1 + begin_inclusive)) // exactly 1 argument provided
+			{
+				if (IsNumber(argv[0 + begin_inclusive]))
+					return 0;
+				char first_arg[MAX_STRING];
+				strcpy_s(first_arg, sizeof(first_arg), argv[0 + begin_inclusive]);
+				_strlwr_s(first_arg);
+				if(!strcmp(first_arg, "off"))
+				{
+					if(pEngineClientAnarchy->GetClientChar()->GetWeaponHolder()->IsAttacking())
+						pEngineClientAnarchy->N3Msg_StopAttack();
+					return 1;
+				}
+				if(!strcmp(first_arg, "on"))
+				{
+					if (!pEngineClientAnarchy->GetClientChar()->GetWeaponHolder()->IsAttacking() && pSelectionIndicator) // not already attacking something and has a selection target
+						pEngineClientAnarchy->N3Msg_DefaultAttack(pSelectionIndicator->Identity, true);
+					return 1;
+				}
+				return 0;
+			}
+			if(argc > (1 + begin_inclusive))
+			{
+				
+			}
+		}
 		return 0;
 	}
 

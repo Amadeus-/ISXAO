@@ -222,6 +222,11 @@ bool CharacterType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 #define pActor ((Character*)ObjectData.Ptr)
 		switch (CharacterTypeMethods(pMethod->ID))
 		{
+		case Activate:
+		{
+			if (GetGameState() == GAMESTATE_IN_GAME)
+				isxao_commands::Activate(0, argc, argv);
+		}
 		case Cast:
 		{
 			if (GetGameState() == GAMESTATE_IN_GAME)

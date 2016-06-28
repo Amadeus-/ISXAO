@@ -297,7 +297,7 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 int CMD_ACTIVATE(int argc, char *argv[])
 {
 	if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
-		return Activate(argc, argv);
+		return Activate(1, argc, argv);
 	return 0;
 }
 

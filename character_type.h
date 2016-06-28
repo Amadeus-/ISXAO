@@ -21,6 +21,7 @@ public:
 
 	enum CharacterTypeMethods
 	{
+		Activate,
 		Attack,
 		Cast,
 	};
@@ -38,6 +39,7 @@ public:
 		TypeMember(GetSpecialActions);
 		TypeMember(ToActor);
 
+		TypeMember(Activate);
 		TypeMember(Attack);
 		TypeMethod(Cast);
 
