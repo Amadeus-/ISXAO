@@ -7,7 +7,10 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	printf("%d", pLastTarget->Id);
+	IDENTITY identity;
+	identity.Type = 50000;
+	identity.Id = 8656041;
+	pTargetingModule->SetTarget(identity, false);
 	return 1;
 }
 

@@ -14,6 +14,8 @@ namespace isxao_commands
 			return true;
 		if (!strcmp(command, "/aoexecute"))
 			return true;
+		if (!strcmp(command, "/cast"))
+			return true;
 		if (!strcmp(command, "/face"))
 			return true;
 		if (!strcmp(command, "/target"))
@@ -52,12 +54,19 @@ namespace isxao_commands
 				if(pDynel)
 				{
 					bool has_current_selection_target = pSelectionIndicator != nullptr;
-					if (has_current_selection_target)
-						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
-					pTargetingModule->SetTarget(target_identity, false);
+					bool current_target_is_desired_target = (pSelectionIndicator != nullptr) && (pSelectionIndicator->Identity == target_identity);
+					if(!current_target_is_desired_target)
+					{
+						if (has_current_selection_target)
+							pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
+						pTargetingModule->SetTarget(target_identity, false);
+					}					
 					pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
-					if (has_current_selection_target && pLastTarget)
-						pTargetingModule->SetTarget(*pLastTarget, false);
+					if(!current_target_is_desired_target)
+					{
+						if (has_current_selection_target && pLastTarget)
+							pTargetingModule->SetTarget(*pLastTarget, false);						
+					}					
 					return 1;
 				}
 			}
@@ -68,9 +77,11 @@ namespace isxao_commands
 			{
 				IDENTITY previous_target;
 				bool has_current_selection_target = pSelectionIndicator != nullptr;
-				pTargetingModule->SelectSelf();
+				bool current_target_is_me = (pSelectionIndicator != nullptr) && (IsClientId(pSelectionIndicator->Identity.Id));
+				if(!current_target_is_me)
+					pTargetingModule->SelectSelf();
 				pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
-				if(has_current_selection_target && pLastTarget)
+				if(!current_target_is_me && has_current_selection_target && pLastTarget)
 					pTargetingModule->SetTarget(*pLastTarget, false);
 				return 1;
 			}
@@ -80,12 +91,19 @@ namespace isxao_commands
 			if(valid_slot && valid_target)
 			{
 				bool has_current_selection_target = pSelectionIndicator != nullptr;
-				if (has_current_selection_target)
-					pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
-				pTargetingModule->SetTarget(target_identity, false);
+				bool current_target_is_desired_target = (pSelectionIndicator != nullptr) && (pSelectionIndicator->Identity == target_identity);
+				if (!current_target_is_desired_target)
+				{
+					if (has_current_selection_target)
+						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
+					pTargetingModule->SetTarget(target_identity, false);
+				}
 				pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
-				if (has_current_selection_target && pLastTarget)
-					pTargetingModule->SetTarget(*pLastTarget, false);
+				if (!current_target_is_desired_target)
+				{
+					if (has_current_selection_target && pLastTarget)
+						pTargetingModule->SetTarget(*pLastTarget, false);
+				}
 				return 1;
 			}
 		}
