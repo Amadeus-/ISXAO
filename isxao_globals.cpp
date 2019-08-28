@@ -1,5 +1,9 @@
 #include "isxao_main.h"
 
+#define CALCULATE_FUNCTION_OFFSET(pattern, function_offset) isxao_find_pattern::calculate_function_offset(data, (pattern), (function_offset), #function_offset);
+#define CALCULATE_STATIC_OFFSET(function_base, static_offset, bytes_before, bytes_next_line) isxao_find_pattern::calculate_static_offset((function_base), (static_offset), #static_offset, (bytes_before), (bytes_next_line));
+
+
 namespace isxao_globals
 {
 

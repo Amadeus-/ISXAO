@@ -8,6 +8,9 @@
 #include <map>
 #include "psapi.h"
 #define _USE_MATH_DEFINES
+#define _USE_MATH_CONSTANTS
+#include <cmath>
+#include <cinttypes>
 #include <math.h>
 #include <cassert>
 #include <functional>

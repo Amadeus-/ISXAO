@@ -18,6 +18,7 @@
 
 // Client Instance
 #define n3EngineClientAnarchy_t__m_pcInstance_x								0x60698
+#define N3_ENGINE_T__N3__ENGINE_T_PATTERN									"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 10 53 56 8B F1"
 
 // Client Functions
 #define n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_x					0x234AC

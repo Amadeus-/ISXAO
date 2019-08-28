@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{6A826D85-A00F-4408-92EE-3CD4DF0437BB}</ProjectGuid>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -42,15 +43,15 @@
     <OutDir>Release\</OutDir>
     <IntDir>Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ISXDK_INC);$(IncludePath)</IncludePath>
-    <LibraryPath>$(ISXDK_LIB);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ISXDK_INCLUDES);$(IncludePath)</IncludePath>
+    <LibraryPath>$(ISXDK_LIBS);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>Release\</OutDir>
     <IntDir>Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ISXDK_INC);$(IncludePath)</IncludePath>
-    <LibraryPath>$(ISXDK_LIB);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ISXDK_INCLUDES);$(IncludePath)</IncludePath>
+    <LibraryPath>$(ISXDK_LIBS);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -83,7 +84,7 @@
       <MapExports>true</MapExports>
     </Link>
     <PostBuildEvent>
-      <Command>copy "D:\repos\ISXAO\Release\ISXAO.dll" "C:\Program Files (x86)\InnerSpace\Extensions\ISXDK35"</Command>
+      <Command>copy "$(OutDir)ISXAO.dll" "$(ISXDK_EXT_BUILD_PATH)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -114,7 +115,7 @@
       <AdditionalLibraryDirectories>$(ISXDK_LIB);</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy "D:\repos\isxao\ISXAO\Release\ISXAO.dll" "C:\Program Files (x86)\InnerSpace\Extensions\ISXDK35"</Command>
+      <Command>copy "$(OutDir)ISXAO.dll" "$(ISXDK_EXT_BUILD_PATH)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

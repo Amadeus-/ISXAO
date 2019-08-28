@@ -1,17 +1,34 @@
 #include "isxao_main.h"
 
-#define _USE_MATH_CONSTANTS
-#include <math.h>
-
 #pragma region Testing and Debugging
 
 int CMD_AO(int argc, char *argv[])
 {
-	IDENTITY identity;
+	/*IDENTITY identity;
 	identity.Type = 50000;
 	identity.Id = 8656041;
 	pTargetingModule->SetTarget(identity, false);
-	return 1;
+	return 1;*/
+	const auto h_process = GetCurrentProcess();
+	const auto h_module = GetModuleHandle("N3.dll");
+	if (!h_module)
+	{
+		printf("Could not find module N3.dll");
+		return false;
+	}
+	MODULEINFO module_info;
+	GetModuleInformation(h_process, h_module, &module_info, sizeof(module_info));
+	const auto p_data_start = reinterpret_cast<unsigned char*>(h_module);
+	printf("%" PRIX32, p_data_start);
+	const auto p_data_end = p_data_start + module_info.SizeOfImage;
+	printf("%" PRIX32, p_data_end);
+	const vector<unsigned char> data(p_data_start, p_data_end);
+	auto base_address = uint32_t(h_module);
+	printf("%" PRIX32, base_address);
+	int r = 0;
+	r = find_pattern(data, N3_ENGINE_T__N3__ENGINE_T_PATTERN, base_address);
+	printf("%" PRIX32, r);
+	return 0;
 }
 
 int CMD_TESTINTERFACE(int argc, char *argv[])

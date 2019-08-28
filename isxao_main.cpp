@@ -23,22 +23,22 @@ namespace isxao
 		gp_isxao_log->AddLine("Logging initialized\n");
 
 		// Initialize offsets
-		gp_isxao_log->AddLine("Initializing offsets...\n");
-		g_offsets_initialized = InitializeOffsets();
-		if (g_offsets_initialized)
+		// gp_isxao_log->AddLine("Initializing offsets...\n");
+		// g_offsets_initialized = InitializeOffsets();
+		/*if (g_offsets_initialized)
 			gp_isxao_log->AddLine("Offsets initialized.\n");
 		else
 		{
 			g_isxao_initialized = g_offsets_initialized;
 			gp_isxao_log->AddLine("Offsets failed to initialize.\n");
-		}	
+		}	*/
 
 		// Initialize globals
 		
 
 		// Determine GAMESTATE
-		g_game_state = GetGameState();
-		gp_isxao_log->AddLine("GAMESTATE = %d\n", g_game_state);
+		// g_game_state = GetGameState();
+		// gp_isxao_log->AddLine("GAMESTATE = %d\n", g_game_state);
 
 
 
@@ -49,18 +49,18 @@ namespace isxao
 		//InitializePlayfieldChildrenHook();
 		//InitializeAOMessageHook();
 		//InitializeSimpleCharHook();
-		AODetours::Initialize();
+		// AODetours::Initialize();
 
 		// Register events
-		gp_isxao_log->AddLine("Registering events.\n");
-		g_events_registered = RegisterEvents();
-		if (g_events_registered)
+		// gp_isxao_log->AddLine("Registering events.\n");
+		// g_events_registered = RegisterEvents();
+		/*if (g_events_registered)
 			gp_isxao_log->AddLine("Events registered.\n");
 		else
 		{
 			g_isxao_initialized = g_events_registered;
 			gp_isxao_log->AddLine("Events failed to register.\n");
-		}
+		}*/
 			
 	}
 
