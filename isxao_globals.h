@@ -3,10 +3,16 @@ namespace isxao_globals
 {
 	bool InitializeOffsets();
 
+#pragma region Process
+
+	AOLIB_VAR HANDLE process_handle;
+
+#pragma endregion
+
 #pragma region Modules
 
-	AOLIB_VAR DWORD hGamecode;
-	AOLIB_VAR DWORD hN3;
+	AOLIB_VAR HMODULE gamecode_module_handle;
+	AOLIB_VAR HMODULE n3_module_handle;
 	AOLIB_VAR DWORD hGUI;
 	AOLIB_VAR DWORD hVehicle;
 	AOLIB_VAR DWORD hMessageProtocol;
@@ -14,10 +20,49 @@ namespace isxao_globals
 
 #pragma endregion
 
+#pragma region N3
+
+	// Functions
+	AOLIB_VAR DWORD n3_camera_t__set_secondary_target;
+	AOLIB_VAR DWORD n3_camera_t__set_selected_target;	
+
+	// Functions
+	AOLIB_VAR DWORD n3_dynel_t__n3_dynel_t;
+	AOLIB_VAR DWORD n3_dynel_t__d_n3_dynel_t;
+	AOLIB_VAR DWORD n3_dynel_t__get_dynel;
+	AOLIB_VAR DWORD n3_dynel_t__send_iir_to_observers;
+	AOLIB_VAR DWORD n3_dynel_t__set_playfield;
+	AOLIB_VAR DWORD n3_dynel_t__update_locality_listeners;
+	AOLIB_VAR DWORD n3_dynel_t__update_where;
+
+	// Instances
+	AOLIB_VAR DWORD n3_dynel_t__m_pc_dynel_dir_instance;
+	AOLIB_VAR DYNELDIR **pp_dynel_dir;
+#define P_DYNEL_DIR (*pp_dynel_dir)  // NOLINT(cppcoreguidelines-macro-usage)
+
+	// Functions
+	AOLIB_VAR DWORD n3_engine_t__n3_engine_t;
+
+	// Instances
+	AOLIB_VAR DWORD n3_engine_t__m_pc_instance;
+
+
+	// Functions
+	AOLIB_VAR DWORD n3_playfield_t__add_child_dynel;
+	AOLIB_VAR DWORD n3_playfield_t__get_playfield;
+	AOLIB_VAR DWORD n3_playfield_t__line_of_sight;
+	AOLIB_VAR DWORD n3_playfield_t__remove_child;
+
+	// Instances
+	AOLIB_VAR DWORD n3_playfield_t__m_pc_playfield_dir_instance;
+	AOLIB_VAR PlayfieldDir** pp_playfield_dir;
+#define P_PLAYFIELD_DIR (*pp_playfield_dir)  // NOLINT(cppcoreguidelines-macro-usage)
+
+#pragma endregion
+
 #pragma region Globals
 
 	AOLIB_VAR DWORD __GetBreedStr;	
-	AOLIB_VAR DWORD __GetDynel;
 	AOLIB_VAR DWORD __GetNanoItem;
 	AOLIB_VAR DWORD __GetSexStr;	
 	AOLIB_VAR DWORD __N3Msg_GetFullPerkMap;
@@ -257,44 +302,18 @@ namespace isxao_globals
 	
 #pragma endregion
 
-#pragma region Dynel
-	// Instances
-	AOLIB_VAR DWORD n3Dynel_t__m_pcDynelDir;
-	AOLIB_VAR DYNELDIR **ppDynelDir;
-#define pDynelDir (*ppDynelDir)
-	// Functions
-	AOLIB_VAR DWORD n3Dynel_t__SendIIRToObservers;
-	AOLIB_VAR DWORD n3Dynel_t__SetPlayfield;
-	AOLIB_VAR DWORD n3Dynel_t__UpdateLocalityListeners;
-	AOLIB_VAR DWORD n3Dynel_t__n3Dynel_t;
-	AOLIB_VAR DWORD n3Dynel_t__dn3Dynel_t;
-#pragma endregion
 
 #pragma region Playfield
-	// Instance
-	AOLIB_VAR DWORD n3Playfield_t__m_pcPlayfieldDir;
-	AOLIB_VAR PlayfieldDir** ppPlayfieldDir;
-#define pPlayfieldDir (*ppPlayfieldDir)
-	// Functions
-	AOLIB_VAR DWORD n3Playfield_t__AddChildDynel;
-	AOLIB_VAR DWORD n3Playfield_t__LineOfSight;
+
+	
 	AOLIB_VAR DWORD n3Playfield_t__OnChildDynelBeingRemoved;
-	AOLIB_VAR DWORD n3Playfield_t__RemoveChild;
+	
 
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetDynelsInVicinity;
 
 
-
-
 	AOLIB_VAR DWORD PlayfieldAnarchy_t__PlayfieldAnarchy_t;
 	AOLIB_VAR DWORD PlayfieldAnarchy_t__dPlayfieldAnarchy_t;
-
-#pragma endregion
-
-#pragma region Camera
-
-	AOLIB_VAR DWORD n3Camera_t__SetSelectedTarget;
-	AOLIB_VAR DWORD n3Camera_t__SetSecondaryTarget;
 
 #pragma endregion
 
@@ -541,6 +560,11 @@ namespace isxao_globals
 	AOLIB_VAR DWORD GraphPathFinder_t__SetSurface;
 
 #pragma endregion
+
+	bool get_function_address(const std::vector<unsigned char>& data, const char* function_pattern, DWORD& module_base_address, DWORD& function_address, const char* function_offset_name);
+	bool get_static_address_from_function(const DWORD& function_base_address, DWORD& static_address, const char* static_address_name, const size_t offset);
+	bool get_relative_address_from_function(const DWORD& function_base_address, DWORD& relative_address, const char* relative_address_name, const size_t offset, const size_t bytes_to_next_line = 0x4);
+
 
 }
 using namespace isxao_globals;

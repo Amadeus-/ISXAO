@@ -34,6 +34,7 @@ using namespace std;
 #define ISNUMBER() (IsNumber(argv[0]))
 #define GETNUMBER() (atoi(argv[0]))
 #define GETFIRST()    argv[0]
+#define GET_VARIABLE_NAME(Variable) (#Variable)
 
 #define MAX_STRING 2048
 #define MAX_LEVEL 300

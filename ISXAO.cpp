@@ -178,6 +178,8 @@ void ISXAO::Shutdown()
 	UnRegisterDataTypes();
 	UnRegisterAliases();
 	UnRegisterCommands();
+
+	printf("ISXAO Unloaded");
 }
 
 /*
@@ -363,7 +365,7 @@ void __cdecl PulseService(bool Broadcast, unsigned int MSG, void *lpData)
 		 */
 
 		g_pulse_count++;
-		while (!g_n3message_queue.empty())
+		/*while (!g_n3message_queue.empty())
 		{
 			PN3MESSAGEINFO message_info;
 			if (g_n3message_queue.try_pop(message_info))
@@ -392,7 +394,7 @@ void __cdecl PulseService(bool Broadcast, unsigned int MSG, void *lpData)
 			PSYSTEMCHATINFO system_chat_info;
 			if (g_system_chat_queue.try_pop(system_chat_info))
 				HandleSystemChat(system_chat_info);
-		}
+		}*/
 	}
 }
 

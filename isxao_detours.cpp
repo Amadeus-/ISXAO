@@ -740,8 +740,8 @@ namespace isxao_detours
 		//EzDetour(n3EngineClientAnarchy_t__n3EngineClientAnarchy_t, &AODetours::n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Detour, &AODetours::n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Trampoline);
 		//EzDetour(n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t, &AODetours::n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Detour, &AODetours::n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Trampoline);
 
-		//EzDetour(n3Playfield_t__AddChildDynel, &AODetours::Playfield_t__AddChildDynel_Detour, &AODetours::Playfield_t__AddChildDynel_Trampoline);
-		//EzDetour(n3Dynel_t__SetPlayfield, &AODetours::n3Dynel_t__SetPlayfield_Detour, &AODetours::n3Dynel_t__SetPlayfield_Trampoline);
+		//EzDetour(n3_playfield_t__add_child_dynel, &AODetours::Playfield_t__AddChildDynel_Detour, &AODetours::Playfield_t__AddChildDynel_Trampoline);
+		//EzDetour(n3_dynel_t__set_playfield, &AODetours::n3Dynel_t__SetPlayfield_Detour, &AODetours::n3Dynel_t__SetPlayfield_Trampoline);
 
 		EzDetour(Client_t__ProcessMessage, &AODetours::Client_t__ProcessMessage_Detour, &AODetours::Client_t__ProcessMessage_Trampoline);
 
@@ -773,8 +773,8 @@ namespace isxao_detours
 		//EzUnDetour(n3EngineClientAnarchy_t__n3EngineClientAnarchy_t);
 		//EzUnDetour(n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t);
 
-		//EzUnDetour(n3Playfield_t__AddChildDynel);
-		//EzUnDetour(n3Dynel_t__SetPlayfield);
+		//EzUnDetour(n3_playfield_t__add_child_dynel);
+		//EzUnDetour(n3_dynel_t__set_playfield);
 
 		EzUnDetour(Client_t__ProcessMessage);
 

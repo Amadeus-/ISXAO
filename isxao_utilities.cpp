@@ -152,10 +152,8 @@ namespace isxao_utilities
 
 #pragma region Objects
 
-#ifdef __GetDynel_x
-	FUNCTION_AT_ADDRESS(Dynel* __cdecl GetDynel(const IDENTITY &), __GetDynel);
-	FUNCTION_AT_ADDRESS(Actor* __cdecl GetActor(const IDENTITY &), __GetDynel);
-#endif
+	FUNCTION_AT_ADDRESS(Dynel* __cdecl GetDynel(const IDENTITY &), n3_dynel_t__get_dynel);
+	FUNCTION_AT_ADDRESS(Actor* __cdecl GetActor(const IDENTITY &), n3_dynel_t__get_dynel);
 
 #ifdef __GetNanoItem_x
 	FUNCTION_AT_ADDRESS(PNANOITEM __cdecl GetNanoItem(DWORD), __GetNanoItem);
@@ -170,7 +168,7 @@ namespace isxao_utilities
 		if (pDynel && pDynel->pvTable)
 		{
 			auto d = DWORD(pDynel->pvTable);
-			if (d < hGamecode || d >(hGamecode + GetModuleInfo("Gamecode.dll").SizeOfImage))
+			if (d < DWORD(gamecode_module_handle) || d > DWORD(gamecode_module_handle + GetModuleInfo("Gamecode.dll").SizeOfImage))
 				return false;
 			if (d == AccessCard_t__vTable || d == CentralController_t__vTable || d == Chest_t__vTable || d == CityTerminal_t__vTable ||
 				d == Corpse_t__vTable || d == Door_t__vTable || d == LockableItem_t__vTable || d == Mine_t__vTable ||
@@ -388,7 +386,7 @@ namespace isxao_utilities
 		if (pEngineClientAnarchy)
 		{
 			std::vector<Actor*> v;
-			pPlayfieldDir->GetPlayfield()->GetPlayfieldActors(v);
+			P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{
 				if ((*it)->GetIdentity().Type == 50000 && !pEngineClientAnarchy->N3Msg_IsNpc((*it)->GetIdentity()))
@@ -411,7 +409,7 @@ namespace isxao_utilities
 			return 0;
 		DWORD total_matching = 0;
 		std::vector<Actor*> v;
-		pPlayfieldDir->GetPlayfield()->GetPlayfieldActors(v);
+		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 		{
 			if (include_char)
@@ -439,7 +437,7 @@ namespace isxao_utilities
 		CIndex<PAORANK> actor_set;
 		VECTOR3 pos = p_origin->GetPosition();
 		std::vector<Actor*> v;
-		pPlayfieldDir->GetPlayfield()->GetPlayfieldActors(v);
+		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		DWORD TotalMatching = 0;
 		if (include_char)
 		{
@@ -562,7 +560,7 @@ namespace isxao_utilities
 	//		return nullptr;
 	//	auto point_of_origin = p_origin->GetPosition();
 	//	std::vector<Actor*> v;
-	//	pPlayfieldDir->GetPlayfield()->GetPlayfieldActors(v);
+	//	P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 	//	std::sort(v.begin(), v.end(), Dynel::pDynelCompare);
 	//	if(include_character)
 	//	{
@@ -601,8 +599,8 @@ namespace isxao_utilities
 
 	void GetDynelMap(std::map<IDENTITY, PN3DYNEL>& m)
 	{
-		auto count = pDynelDir->Count;
-		auto pRoot = pDynelDir->pRoot;
+		auto count = P_DYNEL_DIR->Count;
+		auto pRoot = P_DYNEL_DIR->pRoot;
 		auto pNode = pRoot->pNode;
 		if (count > 0)
 			RecursiveAddDynelToDynelMap(m, pNode, pRoot, count);
@@ -1329,7 +1327,7 @@ namespace isxao_utilities
 	{
 		if (!pEngineClientAnarchy)
 			return GAMESTATE_NOT_IN_GAME;
-		if (!pPlayfieldDir->GetPlayfield())
+		if (!P_PLAYFIELD_DIR->GetPlayfield())
 			return GAMESTATE_WAITING_FOR_PLAYFIELD;
 		if (!pEngineClientAnarchy->GetClientChar())
 			return GAMESTATE_WAITING_FOR_CLIENT_CHAR;

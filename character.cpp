@@ -44,7 +44,7 @@ namespace isxao_classes
 #else
 	bool Character::CheckLOS(Dynel* pDynel)
 	{
-		if (pEngineClientAnarchy && pEngineClientAnarchy->GetClientChar() && pPlayfieldDir && pPlayfieldDir->GetPlayfield())
+		if (pEngineClientAnarchy && pEngineClientAnarchy->GetClientChar() && P_PLAYFIELD_DIR && P_PLAYFIELD_DIR->GetPlayfield())
 		{
 			VECTOR3 offset;
 			offset.X = 0.0f;
@@ -55,7 +55,7 @@ namespace isxao_classes
 			VECTOR3 offsetClient = VECTOR3::Add(client, offset);
 			VECTOR3 dynel = pDynel->GetPosition();
 			VECTOR3 offsetMe = VECTOR3::Add(dynel, offset);
-			return pPlayfieldDir->GetPlayfield()->LineOfSight(offsetClient, offsetMe, GetDynelData()->pVehicle->ZoneInstanceID, false);
+			return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offsetClient, offsetMe, GetDynelData()->pVehicle->ZoneInstanceID, false);
 		}
 		return false;
 	}

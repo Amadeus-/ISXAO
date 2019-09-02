@@ -23,15 +23,15 @@ namespace isxao
 		gp_isxao_log->AddLine("Logging initialized\n");
 
 		// Initialize offsets
-		// gp_isxao_log->AddLine("Initializing offsets...\n");
-		// g_offsets_initialized = InitializeOffsets();
-		/*if (g_offsets_initialized)
+		gp_isxao_log->AddLine("Initializing offsets...\n");
+		g_offsets_initialized = InitializeOffsets();
+		if (g_offsets_initialized)
 			gp_isxao_log->AddLine("Offsets initialized.\n");
 		else
 		{
 			g_isxao_initialized = g_offsets_initialized;
 			gp_isxao_log->AddLine("Offsets failed to initialize.\n");
-		}	*/
+		}	
 
 		// Initialize globals
 		
@@ -73,9 +73,9 @@ namespace isxao
 		//ShutdownSetTeleportStatusHook();
 		//ShutdownSetMainDynelHook();
 		//ShutdownPlayfieldHook();
-		AODetours::Shutdown();
+		//AODetours::Shutdown();
 
-
+		printf("ISXAO unloaded.");
 		gp_isxao_log->AddLine("Shutting down logging\n");
 		ShutdownLogging();
 	}
@@ -83,7 +83,7 @@ namespace isxao
 	DWORD GetActorIndexFromActorVector(LSIndex *index)
 	{
 		std::vector<Actor*> v;
-		pPlayfieldDir->GetPlayfield()->GetPlayfieldActors(v);
+		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 			index->AddItem(reinterpret_cast<LSOBJECTDATA&>(*it));
 		return index->GetContainerUsed();

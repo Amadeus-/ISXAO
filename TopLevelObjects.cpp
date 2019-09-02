@@ -105,7 +105,7 @@ bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 			search_actor.f_radius = 999999.0f;
 			IDENTITY identity;
 			std::vector<Actor*> v;
-			auto actor_count = pPlayfieldDir->GetPlayfield()->GetPlayfieldActors(v);
+			auto actor_count = P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 			if (!ISNUMBER())
 			{
 				char first_arg[MAX_STRING];
@@ -158,7 +158,7 @@ bool __cdecl TLO_ACTORSEARCHCOUNT(int argc, char *argv[], LSTYPEVAR&Dest)
 			return true;
 		}
 		std::vector<Actor*> v;
-		pPlayfieldDir->GetPlayfield()->GetPlayfieldActors(v);
+		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		Dest.DWord = v.size();
 		Dest.Type = pUintType;
 		return true;
@@ -219,7 +219,7 @@ bool __cdecl TLO_PLAYFIELD(int argc, char *argv[], LSTYPEVAR&Dest)
 {
 	if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
 	{
-		Dest.Ptr = pPlayfieldDir->GetPlayfield();
+		Dest.Ptr = P_PLAYFIELD_DIR->GetPlayfield();
 		Dest.Type = pPlayfieldType;
 		return true;
 	}

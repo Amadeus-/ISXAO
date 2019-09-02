@@ -93,13 +93,13 @@ namespace isxao_classes
 		VECTOR3 offset_client_position = VECTOR3::Add(client_position, height_offset);
 		VECTOR3 dynel_position = GetPosition();
 		VECTOR3 offset_dynel_position = VECTOR3::Add(dynel_position, height_offset);
-		return pPlayfieldDir->GetPlayfield()->LineOfSight(offset_client_position, offset_dynel_position, GetDynelData()->pVehicle->ZoneInstanceID, false);
+		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offset_client_position, offset_dynel_position, GetDynelData()->pVehicle->ZoneInstanceID, false);
 	}
 
 	bool Dynel::IsInLineOfSight(VECTOR3 &position)
 	{
 		VECTOR3 me = GetPosition();
-		return pPlayfieldDir->GetPlayfield()->LineOfSight(position, me, GetDynelData()->pVehicle->ZoneInstanceID, false);
+		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(position, me, GetDynelData()->pVehicle->ZoneInstanceID, false);
 	}
 	
 	PCSTR Dynel::GetName()
@@ -232,9 +232,7 @@ namespace isxao_classes
 		return PN3DYNEL(GetData());
 	}
 
-#ifdef n3Dynel_t__SendIIRToObservers_x
-	FUNCTION_AT_ADDRESS(void Dynel::SendIIRToObservers(InfoItemRemote*), n3Dynel_t__SendIIRToObservers);
-#endif
+	FUNCTION_AT_ADDRESS(void Dynel::SendIIRToObservers(InfoItemRemote*), n3_dynel_t__send_iir_to_observers)
 
 
 	Actor* Dynel::ToActor()
@@ -262,9 +260,7 @@ namespace isxao_classes
 		return static_cast<TeamMember*>(GetData());
 	}
 	
-#ifdef n3Dynel_t__UpdateLocalityListeners_x
-	FUNCTION_AT_ADDRESS(void Dynel::UpdateLocalityListeners(), n3Dynel_t__UpdateLocalityListeners);
-#endif
+	FUNCTION_AT_ADDRESS(void Dynel::UpdateLocalityListeners(), n3_dynel_t__update_locality_listeners);
 
 
 	bool Dynel::pDynelCompare(Dynel *pA, Dynel *pB)

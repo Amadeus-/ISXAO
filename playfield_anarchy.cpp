@@ -54,9 +54,7 @@ namespace isxao_classes
 		return playfield_anarchy_.pn3Tilemap->pRDBTileMap->IsDungeon == 1;
 	}
 
-#ifdef n3Playfield_t__LineOfSight_x
-	FUNCTION_AT_ADDRESS(bool PlayfieldAnarchy::LineOfSight(const VECTOR3 &, const VECTOR3 &, int, bool), n3Playfield_t__LineOfSight);
-#endif
+	FUNCTION_AT_ADDRESS(bool PlayfieldAnarchy::LineOfSight(const VECTOR3 &, const VECTOR3 &, int, bool), n3_playfield_t__line_of_sight);
 
 	PGRIDSPACE PlayfieldAnarchy::GetGridSpace() const
 	{

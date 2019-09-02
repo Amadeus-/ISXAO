@@ -3,7 +3,6 @@
 #pragma region Globals
 
 #define __GetBreedStr_x												0x16939		// Gamecode
-#define __GetDynel_x												0x5FD0		// N3
 #define __GetNanoItem_x												0xA3609		// Gamecode
 #define __GetSexStr_x												0x16930		// Gamecode
 #define	__GetFullPerkMap_x											0x282A1		// Gamecode
@@ -14,11 +13,57 @@
 
 #pragma endregion
 
+#pragma region N3
+
+// Module
+constexpr char *const n3_module_name = static_cast<char *>("N3.dll");
+
+// Functions
+constexpr char* const n3_camera_t__set_secondary_target_pattern = static_cast<char *>("55 8B EC 56 8B F1 8B 4E 50 6A 00");
+constexpr char* const n3_camera_t__set_selected_target_pattern = static_cast<char *>("55 8B EC 83 EC 10 56 57 8B F9");
+
+// Functions
+constexpr char* const n3_dynel_t__d_n3_dynel_t_pattern = static_cast<char *>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 56 8B F1 57 89 75 F0 C7 06 ?? ?? ?? ?? C7 46 04 ?? ?? ?? ?? C7 46 0C ?? ?? ?? ?? FF 76 60"
+);
+constexpr char* const n3_dynel_t__n3_dynel_t_pattern = static_cast<char *>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 53 56 8B F1 57 89 75 F0 FF 15 ?? ?? ?? ??");
+constexpr char* const n3_dynel_t__get_dynel_pattern = static_cast<char *>(
+	"55 8B EC 51 56 FF 75 08 8B 35 ?? ?? ?? ?? 8D 45 FC 50 8B CE E8 ?? ?? ?? ?? 8B 45 FC 3B 46 04 5E 75 ??");
+constexpr char* const n3_dynel_t__send_iir_to_observers_pattern = static_cast<char *>("55 8B EC 51 80 79 6B 00");
+constexpr char* const n3_dynel_t__set_playfield_pattern = static_cast<char *>("55 8B EC 53 8B 5D 08 56 57 8B F1");
+constexpr DWORD n3_dynel_t__update_locality_listeners_offset = 0x32;
+constexpr DWORD n3_dynel_t__update_locality_listeners_bytes_to_next = 0x0;
+constexpr char* const n3_dynel_t__update_where_pattern = static_cast<char *>("55 8B EC 56 57 FF 75 08");
+
+// Instances
+constexpr DWORD n3_dynel_t__m_pc_dynel_dir_instance_offset = 0xA;
+
+// Functions
+constexpr char* const n3_engine_t__n3_engine_t_pattern = static_cast<char *>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 10 53 56 8B F1");
+
+// Instances
+constexpr DWORD n3_engine_t__m_pc_instance_offset = 0x5B;
+
+// Functions
+constexpr char* const n3_playfield_t__add_child_dynel_pattern = static_cast<char *>("55 8B EC 51 56 57 8B 7D 08 8B F1 8B CF E8 ?? ?? ?? ?? 8B CF");
+constexpr char* const n3_playfield_t__get_playfield_pattern = static_cast<char *>("55 8B EC 51 56 8B 35 ?? ?? ?? ??");
+constexpr char* const n3_playfield_t__line_of_sight_pattern = static_cast<char *>("55 8B EC F6 05 ?? ?? ?? ?? 01 57");
+constexpr char* const n3_playfield_t__remove_child_pattern = static_cast<char *>("55 8B EC 56 57 8B 7D 08 8B F1 85 FF");
+
+// Instances
+constexpr DWORD n3_playfield_t__m_pc_playfield_dir_instance_offset = 0x7;
+constexpr DWORD n3_playfield_t__m_pc_playfield_dir_instance_bytes_to_next = 0x0;
+
+#pragma endregion
+
 #pragma region EngineClientAnarchy
 
 // Client Instance
 #define n3EngineClientAnarchy_t__m_pcInstance_x								0x60698
-#define N3_ENGINE_T__N3__ENGINE_T_PATTERN									"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 10 53 56 8B F1"
+
+									
 
 // Client Functions
 #define n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_x					0x234AC
@@ -232,30 +277,7 @@
 
 #pragma endregion
 
-#pragma region Dynel
-// Instances
-#define n3Dynel_t__m_pcDynelDir_x								0x5F3C4
-
-// Functions
-
-#define n3Dynel_t__SendIIRToObservers_x							0x597F
-#define n3Dynel_t__SetPlayfield_x								0x5BA3
-#define n3Dynel_t__UpdateLocalityListeners_x					0x4BAA
-
-#define n3Dynel_t__n3Dynel_t_x									0x62BA
-#define n3Dynel_t__dn3Dynel_t_x									0x641E
-
-#pragma endregion
-
 #pragma region Playfield
-
-#define n3Playfield_t__m_pcPlayfieldDir_x						0x5F870
-
-#define n3Playfield_t__AddChildDynel_x							0xEC00
-#define n3Playfield_t__OnChildDynelBeingRemoved_x				0x1318D6
-#define n3Playfield_t__LineOfSight_x							0xEB37
-#define n3Playfield_t__RemoveChild_x							0xE4AD
-
 
 #define PlayfieldAnarchy_t__PlayfieldAnarchy_t_x				0x121ACE
 #define PlayfieldAnarchy_t__dPlayfieldAnarchy_t_x				0x121998
@@ -263,13 +285,6 @@
 // Functions
 //#define n3EngineClientAnarchy_t__N3Msg_GetDynelsInVicinity_x	0x1E726
 
-
-#pragma endregion
-
-#pragma region Camera
-
-#define n3Camera_t__SetSelectedTarget_x							0x2233E
-#define n3Camera_t__SetSecondaryTarget_x						0x22420
 
 #pragma endregion
 
