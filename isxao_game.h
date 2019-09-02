@@ -13,44 +13,65 @@
 
 #pragma endregion
 
+#pragma region Gamecode
+
+
+
+constexpr char* const n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 24 53 56 8B F1 89 75 F0");
+constexpr char* const n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 53 56 8B F1 57 89 75 F0 C7 06 ?? ?? ?? ?? 8B 9E 00 01 00 00");
+constexpr char* const n3_engine_client_anarchy_t__get_client_dynel_id_pattern = static_cast<char*>(
+	"55 8B EC 8B 45 08 8B 89 80 00 00 00");
+constexpr char* const n3_engine_client_anarchy_t__get_current_movement_mode_pattern = static_cast<char*>(
+	"83 B9 84 00 00 00 00 74 ?? FF 15 ?? ?? ?? ?? 85 C0 74 ?? 8B C8 E8 ?? ?? ?? ?? 8B C8 E8 ?? ?? ?? ?? 8B C8");
+constexpr char* const n3_engine_client_anarchy_t__get_faction_str_pattern = static_cast<char*>(
+	"55 8B EC FF 75 0C FF 75 08 E8 ?? ?? ?? ?? 59 59 5D");
+
+
+#pragma endregion
+
 #pragma region N3
 
 // Module
-constexpr char *const n3_module_name = static_cast<char *>("N3.dll");
+constexpr char* const n3_module_name = static_cast<char*>("N3.dll");
 
 // Functions
-constexpr char* const n3_camera_t__set_secondary_target_pattern = static_cast<char *>("55 8B EC 56 8B F1 8B 4E 50 6A 00");
-constexpr char* const n3_camera_t__set_selected_target_pattern = static_cast<char *>("55 8B EC 83 EC 10 56 57 8B F9");
+constexpr char* const n3_camera_t__set_secondary_target_pattern = static_cast<char*>("55 8B EC 56 8B F1 8B 4E 50 6A 00");
+constexpr char* const n3_camera_t__set_selected_target_pattern = static_cast<char*>("55 8B EC 83 EC 10 56 57 8B F9");
 
 // Functions
-constexpr char* const n3_dynel_t__d_n3_dynel_t_pattern = static_cast<char *>(
+constexpr char* const n3_dynel_t__d_n3_dynel_t_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 56 8B F1 57 89 75 F0 C7 06 ?? ?? ?? ?? C7 46 04 ?? ?? ?? ?? C7 46 0C ?? ?? ?? ?? FF 76 60"
 );
-constexpr char* const n3_dynel_t__n3_dynel_t_pattern = static_cast<char *>(
+constexpr char* const n3_dynel_t__n3_dynel_t_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 53 56 8B F1 57 89 75 F0 FF 15 ?? ?? ?? ??");
-constexpr char* const n3_dynel_t__get_dynel_pattern = static_cast<char *>(
+constexpr char* const n3_dynel_t__get_dynel_pattern = static_cast<char*>(
 	"55 8B EC 51 56 FF 75 08 8B 35 ?? ?? ?? ?? 8D 45 FC 50 8B CE E8 ?? ?? ?? ?? 8B 45 FC 3B 46 04 5E 75 ??");
-constexpr char* const n3_dynel_t__send_iir_to_observers_pattern = static_cast<char *>("55 8B EC 51 80 79 6B 00");
-constexpr char* const n3_dynel_t__set_playfield_pattern = static_cast<char *>("55 8B EC 53 8B 5D 08 56 57 8B F1");
+constexpr char* const n3_dynel_t__send_iir_to_observers_pattern = static_cast<char*>("55 8B EC 51 80 79 6B 00");
+constexpr char* const n3_dynel_t__set_playfield_pattern = static_cast<char*>("55 8B EC 53 8B 5D 08 56 57 8B F1");
 constexpr DWORD n3_dynel_t__update_locality_listeners_offset = 0x32;
 constexpr DWORD n3_dynel_t__update_locality_listeners_bytes_to_next = 0x0;
-constexpr char* const n3_dynel_t__update_where_pattern = static_cast<char *>("55 8B EC 56 57 FF 75 08");
+constexpr char* const n3_dynel_t__update_where_pattern = static_cast<char*>("55 8B EC 56 57 FF 75 08");
 
 // Instances
 constexpr DWORD n3_dynel_t__m_pc_dynel_dir_instance_offset = 0xA;
 
 // Functions
-constexpr char* const n3_engine_t__n3_engine_t_pattern = static_cast<char *>(
+constexpr char* const n3_engine_t__n3_engine_t_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 10 53 56 8B F1");
 
 // Instances
 constexpr DWORD n3_engine_t__m_pc_instance_offset = 0x5B;
 
+constexpr DWORD n3_engine_client_t__get_client_control_dynel_offset = 0x8D;
+constexpr DWORD n3_engine_client_t__get_client_control_dynel_bytes_to_next = 0x0;
+
 // Functions
-constexpr char* const n3_playfield_t__add_child_dynel_pattern = static_cast<char *>("55 8B EC 51 56 57 8B 7D 08 8B F1 8B CF E8 ?? ?? ?? ?? 8B CF");
-constexpr char* const n3_playfield_t__get_playfield_pattern = static_cast<char *>("55 8B EC 51 56 8B 35 ?? ?? ?? ??");
-constexpr char* const n3_playfield_t__line_of_sight_pattern = static_cast<char *>("55 8B EC F6 05 ?? ?? ?? ?? 01 57");
-constexpr char* const n3_playfield_t__remove_child_pattern = static_cast<char *>("55 8B EC 56 57 8B 7D 08 8B F1 85 FF");
+constexpr char* const n3_playfield_t__add_child_dynel_pattern = static_cast<char*>("55 8B EC 51 56 57 8B 7D 08 8B F1 8B CF E8 ?? ?? ?? ?? 8B CF");
+constexpr char* const n3_playfield_t__get_playfield_pattern = static_cast<char*>("55 8B EC 51 56 8B 35 ?? ?? ?? ??");
+constexpr char* const n3_playfield_t__line_of_sight_pattern = static_cast<char*>("55 8B EC F6 05 ?? ?? ?? ?? 01 57");
+constexpr char* const n3_playfield_t__remove_child_pattern = static_cast<char*>("55 8B EC 56 57 8B 7D 08 8B F1 85 FF");
 
 // Instances
 constexpr DWORD n3_playfield_t__m_pc_playfield_dir_instance_offset = 0x7;
@@ -60,18 +81,7 @@ constexpr DWORD n3_playfield_t__m_pc_playfield_dir_instance_bytes_to_next = 0x0;
 
 #pragma region EngineClientAnarchy
 
-// Client Instance
-#define n3EngineClientAnarchy_t__m_pcInstance_x								0x60698
-
-									
-
-// Client Functions
-#define n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_x					0x234AC
-#define n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_x					0x2369C
-//#define n3EngineClientAnarchy_t__GetClientChar_x							0x17673
-//#define n3EngineClientAnarchy_t__GetClientDynelId_x							0x16402
-//#define n3EngineClientAnarchy_t__GetCurrentMovementMode_x					0x18521
-#define n3EngineClientAnarchy_t__GetFactionStr_x							0x16942
+// #define n3EngineClientAnarchy_t__GetFactionStr_x							0x16942
 #define n3EngineClientAnarchy_t__GetFactionTitle_x							0x17B24
 #define n3EngineClientAnarchy_t__GetGenderString_x							0x168CD
 #define n3EngineClientAnarchy_t__GetItemByTemplate_x						0x18310

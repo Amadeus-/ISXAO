@@ -34,7 +34,7 @@ namespace isxao_commands
 		//	IDENTITY inv_slot_identity;
 		//	if (GetInvSlotIdentity(argv[(0 + begin_inclusive)], inv_slot_identity))
 		//	{
-		//		pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+		//		P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(inv_slot_identity, false);
 		//		return 1;
 		//	}
 		//	return 0;
@@ -58,19 +58,19 @@ namespace isxao_commands
 		//			if(!pSelectionIndicator) // No Current Target
 		//			{
 		//				pTargetingModule->SetTarget(target_identity, false);
-		//				pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(inv_slot_identity, false);
 		//				pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
 		//				return 1;
 		//			}
 		//			if(pSelectionIndicator->Identity == target_identity)// Current Target Is Desired Target
 		//			{
-		//				pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(inv_slot_identity, false);
 		//				return 1;
 		//			}
 		//			// Current Target Is NOT Desired Target
 		//			pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Saves the current target to pLastTarget
 		//			pTargetingModule->SetTarget(target_identity, false);
-		//			pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(inv_slot_identity, false);
 		//			pTargetingModule->SetTarget(*pLastTarget, false); // Switches the target back to the previous target
 		//			return 1;
 		//		}
@@ -83,44 +83,44 @@ namespace isxao_commands
 		//	{
 		//		if(!pSelectionIndicator) // No current target
 		//		{
-		//			pTargetingModule->SetTarget(pEngineClientAnarchy->GetClientChar()->GetIdentity(), false);
-		//			pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+		//			pTargetingModule->SetTarget(P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetIdentity(), false);
+		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(inv_slot_identity, false);
 		//			pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
 		//			return 1;
 		//		}
-		//		if(pSelectionIndicator->Identity == pEngineClientAnarchy->GetClientChar()->GetIdentity()) // Current target is deisred target
+		//		if(pSelectionIndicator->Identity == P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetIdentity()) // Current target is deisred target
 		//		{
-		//			pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(inv_slot_identity, false);
 		//			return 1;
 		//		}
 		//		// Current target is NOT the desired target
 		//		pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
-		//		pTargetingModule->SetTarget(pEngineClientAnarchy->GetClientChar()->GetIdentity(), false);
-		//		pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+		//		pTargetingModule->SetTarget(P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetIdentity(), false);
+		//		P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(inv_slot_identity, false);
 		//		pTargetingModule->SetTarget(*pLastTarget, false);
 		//		return 1;
 		//	}
 		//	IDENTITY target_identity; // Find the actor identity that matches the name provided
 		//	string name(argv[(1 + begin_inclusive)]);
-		//	bool valid_target = pEngineClientAnarchy->N3Msg_NameToID(name, target_identity);
+		//	bool valid_target = P_ENGINE_CLIENT_ANARCHY->N3Msg_NameToID(name, target_identity);
 		//	if (valid_target)
 		//	{
 		//		if (!pSelectionIndicator) // No Current Target
 		//		{
 		//			pTargetingModule->SetTarget(target_identity, false);
-		//			pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(inv_slot_identity, false);
 		//			pTargetingModule->RemoveTarget(pSelectionIndicator->Identity);
 		//			return 1;
 		//		}
 		//		if (pSelectionIndicator->Identity == target_identity)// Current Target Is Desired Target
 		//		{
-		//			pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(inv_slot_identity, false);
 		//			return 1;
 		//		}
 		//		// Current Target Is NOT Desired Target
 		//		pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Saves the current target to pLastTarget
 		//		pTargetingModule->SetTarget(target_identity, false);
-		//		pEngineClientAnarchy->N3Msg_UseItem(inv_slot_identity, false);
+		//		P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(inv_slot_identity, false);
 		//		pTargetingModule->SetTarget(*pLastTarget, false); // Switches the target back to the previous target
 		//		return 1;
 		//	}
@@ -582,14 +582,14 @@ namespace isxao_commands
 		//		_strlwr_s(first_arg);
 		//		if(!strcmp(first_arg, "off"))
 		//		{
-		//			if(pEngineClientAnarchy->GetClientChar()->GetWeaponHolder()->IsAttacking())
-		//				pEngineClientAnarchy->N3Msg_StopAttack();
+		//			if(P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetWeaponHolder()->IsAttacking())
+		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_StopAttack();
 		//			return 1;
 		//		}
 		//		if(!strcmp(first_arg, "on"))
 		//		{
-		//			if (!pEngineClientAnarchy->GetClientChar()->GetWeaponHolder()->IsAttacking() && pSelectionIndicator) // not already attacking something and has a selection target
-		//				pEngineClientAnarchy->N3Msg_DefaultAttack(pSelectionIndicator->Identity, true);
+		//			if (!P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetWeaponHolder()->IsAttacking() && pSelectionIndicator) // not already attacking something and has a selection target
+		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_DefaultAttack(pSelectionIndicator->Identity, true);
 		//			return 1;
 		//		}
 		//		return 0;
@@ -624,7 +624,7 @@ namespace isxao_commands
 		//		strcpy_s(search_name, sizeof(search_name), argv[(0 + begin_inclusive)]);
 		//		_strlwr_s(search_name);
 		//		std::vector<DWORD> v;
-		//		pEngineClientAnarchy->GetClientChar()->GetSpellTemplateData()->GetNanoSpellList(v);
+		//		P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpellTemplateData()->GetNanoSpellList(v);
 		//		for (auto it = v.begin(); it != v.end(); ++it)
 		//		{
 		//			NanoItem* pNanoSpell = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(*it));
@@ -650,7 +650,7 @@ namespace isxao_commands
 		//		Dynel* pTarget = isxao_utilities::GetDynel(target_identity);
 		//		if(pNanoItem && pTarget)
 		//		{
-		//			pEngineClientAnarchy->N3Msg_CastNanoSpell(nano_identity, target_identity);
+		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_CastNanoSpell(nano_identity, target_identity);
 		//			return 1;
 		//		}
 		//		return 0;
@@ -669,17 +669,17 @@ namespace isxao_commands
 		//		IDENTITY target_identity;
 		//		if (!strcmp(second_arg, "me"))
 		//		{
-		//			pEngineClientAnarchy->GetClientDynelId(target_identity);
+		//			P_ENGINE_CLIENT_ANARCHY->GetClientDynelId(target_identity);
 		//			valid_target = true;
 		//		}
 		//		else
 		//		{
 		//			std::string name(argv[(1 + begin_inclusive)]);
-		//			valid_target = pEngineClientAnarchy->N3Msg_NameToID(name, target_identity);
+		//			valid_target = P_ENGINE_CLIENT_ANARCHY->N3Msg_NameToID(name, target_identity);
 		//		}
 		//		if (pNanoItem && valid_target)
 		//		{
-		//			pEngineClientAnarchy->N3Msg_CastNanoSpell(nano_identity, target_identity);
+		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_CastNanoSpell(nano_identity, target_identity);
 		//			return 1;
 		//		}
 		//		return 0;
@@ -693,7 +693,7 @@ namespace isxao_commands
 		//		strcpy_s(search_name, sizeof(search_name), argv[(0 + begin_inclusive)]);
 		//		_strlwr_s(search_name);
 		//		std::vector<DWORD> v;
-		//		pEngineClientAnarchy->GetClientChar()->GetSpellTemplateData()->GetNanoSpellList(v);
+		//		P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpellTemplateData()->GetNanoSpellList(v);
 		//		for (auto it = v.begin(); it != v.end(); ++it)
 		//		{
 		//			NanoItem* pNanoSpell = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(*it));
@@ -712,7 +712,7 @@ namespace isxao_commands
 		//		Dynel* pTarget = isxao_utilities::GetDynel(target_identity);
 		//		if (!pTarget)
 		//			return 0;
-		//		pEngineClientAnarchy->N3Msg_CastNanoSpell(nano_identity, target_identity);
+		//		P_ENGINE_CLIENT_ANARCHY->N3Msg_CastNanoSpell(nano_identity, target_identity);
 		//		return 1;
 		//	}
 		//	if (argc >= (2 + begin_inclusive) && !IsNumber(argv[(0 + begin_inclusive)]) && !IsNumber(argv[(1 + begin_inclusive)])) // nanoname, targetname
@@ -724,7 +724,7 @@ namespace isxao_commands
 		//		strcpy_s(search_name, sizeof(search_name), argv[(0 + begin_inclusive)]);
 		//		_strlwr_s(search_name);
 		//		std::vector<DWORD> v;
-		//		pEngineClientAnarchy->GetClientChar()->GetSpellTemplateData()->GetNanoSpellList(v);
+		//		P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpellTemplateData()->GetNanoSpellList(v);
 		//		for (auto it = v.begin(); it != v.end(); ++it)
 		//		{
 		//			NanoItem* pNanoSpell = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(*it));
@@ -745,17 +745,17 @@ namespace isxao_commands
 		//		IDENTITY target_identity;
 		//		if (!strcmp(second_arg, "me"))
 		//		{
-		//			pEngineClientAnarchy->GetClientDynelId(target_identity);
+		//			P_ENGINE_CLIENT_ANARCHY->GetClientDynelId(target_identity);
 		//			valid_target = true;
 		//		}
 		//		else
 		//		{
 		//			std::string target_name(argv[(0 + begin_inclusive)]);
-		//			valid_target = pEngineClientAnarchy->N3Msg_NameToID(target_name, target_identity);
+		//			valid_target = P_ENGINE_CLIENT_ANARCHY->N3Msg_NameToID(target_name, target_identity);
 		//		}
 		//		if (valid_target)
 		//		{
-		//			pEngineClientAnarchy->N3Msg_CastNanoSpell(nano_identity, target_identity);
+		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_CastNanoSpell(nano_identity, target_identity);
 		//			return 1;
 		//		}
 		//		return 0;
@@ -775,7 +775,7 @@ namespace isxao_commands
 		//			IDENTITY action_identity;
 		//			action_identity.Type = 57008;
 		//			action_identity.Id = atoi(argv[1]);
-		//			pEngineClientAnarchy->N3Msg_PerformSpecialAction(action_identity);
+		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(action_identity);
 		//			return 1;
 		//		}
 		//		char name[MAX_STRING]; // ActionName
@@ -783,16 +783,16 @@ namespace isxao_commands
 		//		strcpy_s(search_name, sizeof(search_name), argv[1]);
 		//		_strlwr_s(search_name);
 		//		std::vector<SpecialActionTemplate*> v;
-		//		pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
+		//		P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
 		//		IDENTITY dummy_identity;
 		//		for (auto it = v.begin(); it != v.end(); ++it)
 		//		{
-		//			PCSTR action_name = pEngineClientAnarchy->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
+		//			PCSTR action_name = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
 		//			strcpy_s(name, sizeof(name), action_name);
 		//			_strlwr_s(name);
 		//			if(strstr(name, search_name))
 		//			{
-		//				pEngineClientAnarchy->N3Msg_PerformSpecialAction((*it)->GetIdentity());
+		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction((*it)->GetIdentity());
 		//				return 1;
 		//			}
 		//		}
@@ -818,7 +818,7 @@ namespace isxao_commands
 		//						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Stores the old target's identity in pLastTarget
 		//					pTargetingModule->SetTarget(target_identity, false);
 		//				}
-		//				pEngineClientAnarchy->N3Msg_PerformSpecialAction(action_identity);
+		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(action_identity);
 		//				if(!current_target_is_desired_target)
 		//				{
 		//					if (has_current_target)
@@ -835,7 +835,7 @@ namespace isxao_commands
 		//			action_identity.Id = atoi(argv[1]);
 		//			IDENTITY target_identity;
 		//			string target_name(argv[2]);
-		//			bool valid_target = pEngineClientAnarchy->N3Msg_NameToID(target_name, target_identity);
+		//			bool valid_target = P_ENGINE_CLIENT_ANARCHY->N3Msg_NameToID(target_name, target_identity);
 		//			if(valid_target)
 		//			{
 		//				bool has_current_target = pSelectionIndicator != nullptr;
@@ -846,7 +846,7 @@ namespace isxao_commands
 		//						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Stores the old target's identity in pLastTarget
 		//					pTargetingModule->SetTarget(target_identity, false);
 		//				}
-		//				pEngineClientAnarchy->N3Msg_PerformSpecialAction(action_identity);
+		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(action_identity);
 		//				if (!current_target_is_desired_target)
 		//				{
 		//					if (has_current_target)
@@ -863,13 +863,13 @@ namespace isxao_commands
 		//			strcpy_s(search_name, sizeof(search_name), argv[1]);
 		//			_strlwr_s(search_name);
 		//			std::vector<SpecialActionTemplate*> v;
-		//			pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
+		//			P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
 		//			IDENTITY dummy_identity;
 		//			IDENTITY action_identity;
 		//			bool valid_action = false;
 		//			for (auto it = v.begin(); it != v.end(); ++it)
 		//			{
-		//				PCSTR action_name = pEngineClientAnarchy->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
+		//				PCSTR action_name = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
 		//				strcpy_s(name, sizeof(name), action_name);
 		//				_strlwr_s(name);
 		//				if (strstr(name, search_name))
@@ -892,7 +892,7 @@ namespace isxao_commands
 		//						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Stores the old target's identity in pLastTarget
 		//					pTargetingModule->SetTarget(target_identity, false);
 		//				}
-		//				pEngineClientAnarchy->N3Msg_PerformSpecialAction(action_identity);
+		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(action_identity);
 		//				if (!current_target_is_desired_target)
 		//				{
 		//					if (has_current_target)
@@ -909,13 +909,13 @@ namespace isxao_commands
 		//			strcpy_s(search_name, sizeof(search_name), argv[1]);
 		//			_strlwr_s(search_name);
 		//			std::vector<SpecialActionTemplate*> v;
-		//			pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
+		//			P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
 		//			IDENTITY dummy_identity;
 		//			IDENTITY action_identity;
 		//			bool valid_action = false;
 		//			for (auto it = v.begin(); it != v.end(); ++it)
 		//			{
-		//				PCSTR action_name = pEngineClientAnarchy->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
+		//				PCSTR action_name = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
 		//				strcpy_s(name, sizeof(name), action_name);
 		//				_strlwr_s(name);
 		//				if (strstr(name, search_name))
@@ -927,7 +927,7 @@ namespace isxao_commands
 		//			}
 		//			IDENTITY target_identity;
 		//			string target_name(argv[2]);
-		//			bool valid_target = pEngineClientAnarchy->N3Msg_NameToID(target_name, target_identity);
+		//			bool valid_target = P_ENGINE_CLIENT_ANARCHY->N3Msg_NameToID(target_name, target_identity);
 		//			if(valid_action && valid_target)
 		//			{
 		//				bool has_current_target = pSelectionIndicator != nullptr;
@@ -938,7 +938,7 @@ namespace isxao_commands
 		//						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Stores the old target's identity in pLastTarget
 		//					pTargetingModule->SetTarget(target_identity, false);
 		//				}
-		//				pEngineClientAnarchy->N3Msg_PerformSpecialAction(action_identity);
+		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(action_identity);
 		//				if (!current_target_is_desired_target)
 		//				{
 		//					if (has_current_target)
@@ -986,7 +986,7 @@ namespace isxao_commands
 		//		if (heading > 180.0f)
 		//			heading -= 360.0f;
 		//		heading = float(heading * 2 * M_PI / 360.0f);
-		//		pEngineClientAnarchy->GetClientChar()->Face(heading);
+		//		P_ENGINE_CLIENT_ANARCHY->GetClientChar()->Face(heading);
 		//		return 1;
 		//	}
 		//	if (argc == 3 && IsNumber(argv[1]) && IsNumber(argv[2])) // Check to see if X and Z coords provided
@@ -995,7 +995,7 @@ namespace isxao_commands
 		//		v.X = float(atof(argv[1]));
 		//		v.Y = 0.0f;
 		//		v.Z = float(atof(argv[2]));
-		//		pEngineClientAnarchy->GetClientChar()->Face(v);
+		//		P_ENGINE_CLIENT_ANARCHY->GetClientChar()->Face(v);
 		//		return 1;
 		//	}
 		//	if (argc == 4 && IsNumber(argv[1]) && IsNumber(argv[2]) && IsNumber(argv[3]))
@@ -1004,7 +1004,7 @@ namespace isxao_commands
 		//		v.X = float(atof(argv[1]));
 		//		v.Y = 0.0f;
 		//		v.Z = float(atof(argv[3]));
-		//		pEngineClientAnarchy->GetClientChar()->Face(v);
+		//		P_ENGINE_CLIENT_ANARCHY->GetClientChar()->Face(v);
 		//		return 1;
 		//	}
 		//	return 0;

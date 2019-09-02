@@ -27,9 +27,9 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		{
 			if (!ISINDEX())
 			{
-				if (pEngineClientAnarchy && pEngineClientAnarchy->GetClientChar())
+				if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->GetClientChar())
 				{
-					Object.DWord = pEngineClientAnarchy->GetClientChar()->CheckLOS(pActor);
+					Object.DWord = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->CheckLOS(pActor);
 					Object.Type = pBoolType;
 					return true;
 				}
@@ -96,7 +96,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case Distance:
 		{
 			VECTOR3 v;
-			pEngineClientAnarchy->N3Msg_GetGlobalCharacterPosition(v);
+			P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(v);
 			Object.Float = pActor->GetDistance3DTo(v);
 			Object.Type = pfloatType;
 			break;
@@ -104,21 +104,21 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case Distance2D:
 		{
 			VECTOR3 v;
-			pEngineClientAnarchy->N3Msg_GetGlobalCharacterPosition(v);
+			P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(v);
 			Object.Float = pActor->GetDistanceTo(v);
 			Object.Type = pfloatType;
 			break;
 		}
 		case DistancePredict:
 		{
-			VECTOR3 client = pEngineClientAnarchy->GetClientChar()->GetPosition();
+			VECTOR3 client = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetPosition();
 			Object.Float = pActor->EstimatedDistanceTo(client);
 			Object.Type = pfloatType;
 			break;
 		}
 		case Gender:
 		{
-			Object.ConstCharPtr = pEngineClientAnarchy->GetGenderString(pActor->GetIdentity());
+			Object.ConstCharPtr = P_ENGINE_CLIENT_ANARCHY->GetGenderString(pActor->GetIdentity());
 			Object.Type = pStringType;
 			break;
 		}
@@ -185,10 +185,10 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case HeadingTo:
 		{
 			float heading;
-			if (pEngineClientAnarchy && pEngineClientAnarchy->GetClientChar())
+			if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->GetClientChar())
 			{
 				VECTOR3 v;
-				pEngineClientAnarchy->N3Msg_GetGlobalCharacterPosition(v);
+				P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(v);
 				auto rawHeading = pActor->GetHeadingTo(v);
 				if (rawHeading > 0.0f)
 					heading = float(rawHeading * 180.0f / M_PI);
@@ -259,7 +259,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				offset.Y = 0.0f;
 				offset.Z = z;
 				VECTOR3 v;
-				pEngineClientAnarchy->N3Msg_GetGlobalCharacterPosition(v);
+				P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(v);
 				rawheading = pActor->GetHeadingToLoc(v, offset);
 				if (rawheading > 0.0f)
 					heading = float(rawheading * 180.0 / M_PI);
@@ -542,7 +542,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				}
 				else
 					nth = atoi(argv[0]);
-				auto result = NthNearestActor(&sdDynel, nth, pEngineClientAnarchy->GetClientChar());
+				auto result = NthNearestActor(&sdDynel, nth, P_ENGINE_CLIENT_ANARCHY->GetClientChar());
 				if (result)
 				{
 					Object.Ptr = result;

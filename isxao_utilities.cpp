@@ -184,7 +184,7 @@ namespace isxao_utilities
 	{
 		typedef PVOID(__thiscall * tRequestInfo)(SpecialActionHolder*, const IDENTITY&);
 		auto pLookAt = tRequestInfo(__RequestInfo);
-		return pLookAt(pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder(), id);
+		return pLookAt(P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder(), id);
 	}
 
 #pragma endregion
@@ -383,13 +383,13 @@ namespace isxao_utilities
 	bool IsPCNear(Actor* p_actor, float radius)
 	{
 		Actor* p_close_actor = nullptr;
-		if (pEngineClientAnarchy)
+		if (P_ENGINE_CLIENT_ANARCHY)
 		{
 			std::vector<Actor*> v;
 			P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{
-				if ((*it)->GetIdentity().Type == 50000 && !pEngineClientAnarchy->N3Msg_IsNpc((*it)->GetIdentity()))
+				if ((*it)->GetIdentity().Type == 50000 && !P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc((*it)->GetIdentity()))
 				{
 					if ((*it) != p_actor)
 					{
@@ -566,7 +566,7 @@ namespace isxao_utilities
 	//	{
 	//		for (auto it = v.begin(); it != v.end(); ++it)
 	//		{
-	//			if (ActorMatchesSearch(p_search_actor, pEngineClientAnarchy->GetClientChar(), (*it)))
+	//			if (ActorMatchesSearch(p_search_actor, P_ENGINE_CLIENT_ANARCHY->GetClientChar(), (*it)))
 	//				return (*it);
 	//		}
 	//	}
@@ -574,7 +574,7 @@ namespace isxao_utilities
 	//	{
 	//		for (auto it = v.begin(); it != v.end(); ++it)
 	//		{
-	//			if (ActorMatchesSearch(p_search_actor, pEngineClientAnarchy->GetClientChar(), (*it)) && !IsClientId((*it)->GetIdentity().Id))
+	//			if (ActorMatchesSearch(p_search_actor, P_ENGINE_CLIENT_ANARCHY->GetClientChar(), (*it)) && !IsClientId((*it)->GetIdentity().Id))
 	//				return (*it);
 	//		}
 	//	}
@@ -1296,7 +1296,7 @@ namespace isxao_utilities
 
 	PINVENTORYDATA GetInvSlotData(INVENTORYSLOT *slot)
 	{
-		return pEngineClientAnarchy->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[slot->SlotID.Id];
+		return P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[slot->SlotID.Id];
 	}
 
 #pragma endregion
@@ -1325,11 +1325,11 @@ namespace isxao_utilities
 
 	DWORD GetGameState()
 	{
-		if (!pEngineClientAnarchy)
+		if (!P_ENGINE_CLIENT_ANARCHY)
 			return GAMESTATE_NOT_IN_GAME;
 		if (!P_PLAYFIELD_DIR->GetPlayfield())
 			return GAMESTATE_WAITING_FOR_PLAYFIELD;
-		if (!pEngineClientAnarchy->GetClientChar())
+		if (!P_ENGINE_CLIENT_ANARCHY->GetClientChar())
 			return GAMESTATE_WAITING_FOR_CLIENT_CHAR;
 		return GAMESTATE_IN_GAME;
 	}

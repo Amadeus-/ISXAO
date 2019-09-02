@@ -44,7 +44,7 @@ namespace isxao_classes
 
 	bool NanoTemplate::Remove() const
 	{
-		return pEngineClientAnarchy->N3Msg_RemoveBuff(GetNanoIdentity());
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_RemoveBuff(GetNanoIdentity());
 	}
 
 }

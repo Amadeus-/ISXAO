@@ -196,13 +196,13 @@ namespace isxao_classes
 
 	double INVENTORYSLOT::GetItemProgress(DWORD& a, DWORD& b) const
 	{
-		return pEngineClientAnarchy->N3Msg_GetItemProgress(SlotID, a, b);
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetItemProgress(SlotID, a, b);
 	}
 
 	bool INVENTORYSLOT::IsItemLocked() const
 	{
 		IDENTITY dummy_identity;
-		return pEngineClientAnarchy->N3Msg_IsItemDisabled(SlotID, dummy_identity);
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_IsItemDisabled(SlotID, dummy_identity);
 	}
 
 }

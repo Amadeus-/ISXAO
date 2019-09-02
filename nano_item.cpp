@@ -26,7 +26,7 @@ namespace isxao_classes
 	void NanoItem::Cast()
 	{
 		if(pSelectionIndicator)
-			pEngineClientAnarchy->GetClientChar()->CastNanoSpell(GetNanoIdentity(), pSelectionIndicator->Identity);
+			P_ENGINE_CLIENT_ANARCHY->GetClientChar()->CastNanoSpell(GetNanoIdentity(), pSelectionIndicator->Identity);
 	}
 
 	float NanoItem::GetAttackDelay()
@@ -43,13 +43,13 @@ namespace isxao_classes
 	{
 		DWORD a;
 		DWORD b;
-		auto c = pEngineClientAnarchy->N3Msg_GetFormulaProgress(GetNanoIdentity(), a, b);
+		auto c = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetFormulaProgress(GetNanoIdentity(), a, b);
 		return float((1.0 - c)*b);
 	}
 
 	double NanoItem::GetFormulaProgress(DWORD &a, DWORD &b)
 	{
-		return pEngineClientAnarchy->N3Msg_GetFormulaProgress(GetNanoIdentity(), a, b);
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetFormulaProgress(GetNanoIdentity(), a, b);
 	}
 
 	DWORD NanoItem::GetFormulaRadius()
@@ -106,7 +106,7 @@ namespace isxao_classes
 	{
 		IDENTITY dummy_identity;
 		ZeroMemory(&dummy_identity, sizeof(IDENTITY));
-		return pEngineClientAnarchy->N3Msg_GetSkill(GetNanoIdentity(), stat, 2, dummy_identity);
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(GetNanoIdentity(), stat, 2, dummy_identity);
 	}
 
 	DWORD NanoItem::GetStackingOrder()
@@ -116,7 +116,7 @@ namespace isxao_classes
 
 	bool NanoItem::IsReady()
 	{
-		return pEngineClientAnarchy->N3Msg_IsFormulaReady(GetNanoIdentity());
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_IsFormulaReady(GetNanoIdentity());
 	}
 
 	bool NanoItem::IsBuff()
@@ -146,7 +146,7 @@ namespace isxao_classes
 
 	bool NanoItem::IsTeamNano()
 	{
-		return pEngineClientAnarchy->N3Msg_IsTeamNano(GetNanoIdentity());
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_IsTeamNano(GetNanoIdentity());
 	}
 
 	bool NanoItem::WillBreakOnAttack()

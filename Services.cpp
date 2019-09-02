@@ -17,7 +17,7 @@ void __cdecl AOService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 	{
 	case ISXSERVICE_CLIENTADDED:
 		// This message indicates that a new client has been added to the service
-		// pEngineClientAnarchy is 0, because this message is a system message from Inner Space
+		// P_ENGINE_CLIENT_ANARCHY is 0, because this message is a system message from Inner Space
 		// lpData is an ISXInterface* that is the pointer to the new client
 	{
 		// use lpData as the actual type, not as void *.  We can make a new
@@ -32,7 +32,7 @@ void __cdecl AOService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 	break;
 	case ISXSERVICE_CLIENTREMOVED:
 		// This message indicates that a client has been removed from the service
-		// pEngineClientAnarchy is 0, because this message is a system message from Inner Space
+		// P_ENGINE_CLIENT_ANARCHY is 0, because this message is a system message from Inner Space
 		// lpData is an ISXInterface* that is the pointer to the removed client
 	{
 		// use lpData as the actual type, not as void *.  We can make a new
@@ -44,7 +44,7 @@ void __cdecl AOService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 	break;
 	case AO_FOO:
 		// This is a custom service request defined in ISXAOServices.h
-		// pEngineClientAnarchy is a valid pointer to the client that sent this request
+		// P_ENGINE_CLIENT_ANARCHY is a valid pointer to the client that sent this request
 		// lpData is a AORequest_Foo* as sent by the client
 	{
 		AORequest_Foo *pFoo = (AORequest_Foo*)lpData;
@@ -59,7 +59,7 @@ void __cdecl AOService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 		/*
 		* That's it!  In many cases, the functionality provided by the service will
 		* be something that should be per-client to automatically handle cleanup.
-		* In such cases, it would be prudent to pass the pEngineClientAnarchy to the function call
+		* In such cases, it would be prudent to pass the P_ENGINE_CLIENT_ANARCHY to the function call
 		* for proper handling.
 		*/
 	}

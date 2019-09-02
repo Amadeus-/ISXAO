@@ -62,7 +62,7 @@ bool SpecialActionTemplateType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHO
 		{
 		case Use:
 		{
-			pEngineClientAnarchy->N3Msg_PerformSpecialAction(pSpecialActionTemplate->GetIdentity());
+			P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(pSpecialActionTemplate->GetIdentity());
 			return true;
 		}
 		default: break;

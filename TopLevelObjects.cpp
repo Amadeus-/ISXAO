@@ -42,7 +42,7 @@ bool __cdecl TLO_ME(int argc, char *argv[], LSTYPEVAR &Dest)
 {
 	if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
 	{
-		Dest.Ptr = pEngineClientAnarchy->GetClientChar();
+		Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->GetClientChar();
 		Dest.Type = pCharacterType;
 		return true;
 	}
@@ -113,7 +113,7 @@ bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 				_strlwr_s(first_arg);
 				if (!strcmp(first_arg, "me"))
 				{
-					Dest.Ptr = pEngineClientAnarchy->GetClientChar();
+					Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->GetClientChar();
 					Dest.Type = pCharacterType;
 					return true;
 				}
@@ -129,7 +129,7 @@ bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 			{
 				if (v[N]->GetDistanceToClient() > search_actor.f_radius && !search_actor.is_known_location)
 					return false;
-				if (ActorMatchesSearch(&search_actor, pEngineClientAnarchy->GetClientChar(), v[N]))
+				if (ActorMatchesSearch(&search_actor, P_ENGINE_CLIENT_ANARCHY->GetClientChar(), v[N]))
 				{
 					if (--nth == 0)
 					{
@@ -153,7 +153,7 @@ bool __cdecl TLO_ACTORSEARCHCOUNT(int argc, char *argv[], LSTYPEVAR&Dest)
 			SEARCHACTOR search_actor;
 			ClearSearchActor(&search_actor);
 			ParseSearchActor(0, argc, argv, search_actor);
-			Dest.DWord = CountMatchingActors(&search_actor, pEngineClientAnarchy->GetClientChar(), true);
+			Dest.DWord = CountMatchingActors(&search_actor, P_ENGINE_CLIENT_ANARCHY->GetClientChar(), true);
 			Dest.Type = pUintType;
 			return true;
 		}
@@ -234,7 +234,7 @@ bool __cdecl TLO_TEAMRAID(int argc, char *argv[], LSTYPEVAR &Dest)
 {
 	if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
 	{
-		Dest.Ptr = pEngineClientAnarchy->GetClientChar()->GetTeamRaid();
+		Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetTeamRaid();
 		Dest.Type = pTeamRaidType;
 		return true;
 	}
@@ -257,7 +257,7 @@ bool __cdecl TLO_SPECIALACTION(int argc, char *argv[], LSTYPEVAR&Dest)
 				IDENTITY identity;
 				identity.Type = 57008;
 				identity.Id = atoi(argv[0]);
-				if ((Dest.Ptr = pEngineClientAnarchy->GetItemByTemplate(identity, dummy_identity)))
+				if ((Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(identity, dummy_identity)))
 				{
 					Dest.Type = pSpecialActionType;
 					return true;
@@ -269,7 +269,7 @@ bool __cdecl TLO_SPECIALACTION(int argc, char *argv[], LSTYPEVAR&Dest)
 			strcpy_s(search_name, sizeof(search_name), argv[0]);
 			_strlwr_s(search_name);
 			std::vector<SpecialActionTemplate*> v;
-			pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
+			P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{
 				strcpy_s(name, sizeof(name), (*it)->GetName());

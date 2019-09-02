@@ -6,7 +6,7 @@ namespace isxao_classes
 	float Dynel::GetDistanceToClient()
 	{
 		VECTOR3 client_position;
-		pEngineClientAnarchy->N3Msg_GetGlobalCharacterPosition(client_position);
+		P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(client_position);
 		return GetDistance3DTo(client_position);
 	}
 
@@ -79,7 +79,7 @@ namespace isxao_classes
 
 	void Dynel::Interact()
 	{
-		pEngineClientAnarchy->N3Msg_DefaultActionOnDynel(GetIdentity());
+		P_ENGINE_CLIENT_ANARCHY->N3Msg_DefaultActionOnDynel(GetIdentity());
 	}
 
 	bool Dynel::IsInLineOfSight()
@@ -89,7 +89,7 @@ namespace isxao_classes
 		height_offset.Y = 1.6f;
 		height_offset.Z = 0.0f;
 		VECTOR3 client_position;
-		pEngineClientAnarchy->N3Msg_GetGlobalCharacterPosition(client_position);
+		P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(client_position);
 		VECTOR3 offset_client_position = VECTOR3::Add(client_position, height_offset);
 		VECTOR3 dynel_position = GetPosition();
 		VECTOR3 offset_dynel_position = VECTOR3::Add(dynel_position, height_offset);
@@ -106,7 +106,7 @@ namespace isxao_classes
 	{
 		IDENTITY dummy_identity;
 		ZeroMemory(&dummy_identity, sizeof(IDENTITY));
-		return pEngineClientAnarchy->N3Msg_GetName(GetIdentity(), dummy_identity);
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName(GetIdentity(), dummy_identity);
 	}
 
 	VECTOR3 Dynel::GetPosition()
@@ -131,9 +131,9 @@ namespace isxao_classes
 		{
 			//if (!IsInfoRequestCompleted())
 			//	isxao_utilities::RequestInfo(GetIdentity());
-			return pEngineClientAnarchy->N3Msg_GetSkill(GetIdentity(), stat, 2, dummy_identity);
+			return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(GetIdentity(), stat, 2, dummy_identity);
 		}			
-		return pEngineClientAnarchy->N3Msg_GetSkill(stat, 2);
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(stat, 2);
 	}
 
 	bool Dynel::IsContainer()
@@ -155,7 +155,7 @@ namespace isxao_classes
 	{
 		if (GetIdentity().Type == 50000)
 		{
-			auto is_npc = pEngineClientAnarchy->N3Msg_IsNpc(GetIdentity());
+			auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(GetIdentity());
 			return is_npc;
 		}
 		return false;
@@ -167,7 +167,7 @@ namespace isxao_classes
 		{
 			IDENTITY dummy_identity;
 			ZeroMemory(&dummy_identity, sizeof(IDENTITY));
-			auto profession = pEngineClientAnarchy->N3Msg_GetSkill(GetIdentity(), ST_PROFESSION, 2, dummy_identity);
+			auto profession = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(GetIdentity(), ST_PROFESSION, 2, dummy_identity);
 			//printf("%d", profession);
 			return profession != -1;
 		}
@@ -178,7 +178,7 @@ namespace isxao_classes
 	{
 		if (GetIdentity().Type == 50000)
 		{
-			auto is_npc = pEngineClientAnarchy->N3Msg_IsNpc(GetIdentity());
+			auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(GetIdentity());
 			if (is_npc)
 			{
 				if (GetSkill(ST_PETMASTER) != 1234567890)
@@ -192,7 +192,7 @@ namespace isxao_classes
 	{
 		if (GetIdentity().Type == 50000)
 		{
-			auto is_npc = pEngineClientAnarchy->N3Msg_IsNpc(GetIdentity());
+			auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(GetIdentity());
 			return is_npc == 0;
 		}
 		return false;

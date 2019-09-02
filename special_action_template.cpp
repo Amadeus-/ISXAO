@@ -23,7 +23,7 @@ namespace isxao_classes
 		DWORD a, b;
 		DWORD *pA = &a;
 		DWORD *pB = &b;
-		pEngineClientAnarchy->N3Msg_GetActionProgress(GetIdentity(), pA, pB);
+		P_ENGINE_CLIENT_ANARCHY->N3Msg_GetActionProgress(GetIdentity(), pA, pB);
 		return a;
 	}
 
@@ -32,14 +32,14 @@ namespace isxao_classes
 	//	DWORD a, b;
 	//	DWORD *pA = &a;
 	//	DWORD *pB = &b;
-	//	auto c = pEngineClientAnarchy->N3Msg_GetActionProgress(GetIdentity(), pA, pB);
+	//	auto c = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetActionProgress(GetIdentity(), pA, pB);
 	//	return float((1.0 - c)*b);
 	//}
 
 	PCSTR SpecialActionTemplate::GetName() const
 	{
 		IDENTITY dummy_identity;
-		return pEngineClientAnarchy->N3Msg_GetName(GetIdentity(), dummy_identity);
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName(GetIdentity(), dummy_identity);
 	}
 
 	SPECIALACTION SpecialActionTemplate::GetSpecialActionData() const
@@ -51,7 +51,7 @@ namespace isxao_classes
 	{
 		IDENTITY dummy_identity;
 		ZeroMemory(&dummy_identity, sizeof(IDENTITY));
-		return reinterpret_cast<SpecialActionItem*>(pEngineClientAnarchy->GetItemByTemplate(GetIdentity(), dummy_identity));
+		return reinterpret_cast<SpecialActionItem*>(P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(GetIdentity(), dummy_identity));
 	}
 
 
@@ -67,7 +67,7 @@ namespace isxao_classes
 
 	double SpecialActionTemplate::GetSpecialActionProgress(DWORD &a, DWORD &b) const
 	{
-		return pEngineClientAnarchy->N3Msg_GetItemProgress(GetIdentity(), a, b);
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetItemProgress(GetIdentity(), a, b);
 	}
 
 	bool SpecialActionTemplate::SpecialActionCompare(SpecialActionTemplate &a, SpecialActionTemplate &b)

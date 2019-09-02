@@ -108,7 +108,7 @@ namespace isxao_classes
 		if (lock_id)
 			return nullptr;
 		std::vector<ActionLock*> v;
-		pEngineClientAnarchy->GetClientChar()->GetStatHolder()->GetSkillLocks(v);
+		P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetStatHolder()->GetSkillLocks(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 		{
 			//if((*it)->GetActionIdentity().Type)

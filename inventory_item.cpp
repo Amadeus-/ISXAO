@@ -69,8 +69,8 @@ namespace isxao_classes
 		IDENTITY dummy_identity;
 		ZeroMemory(&dummy_identity, sizeof(IDENTITY));
 		auto result = 1234567890;
-		if (pEngineClientAnarchy)
-			result = pEngineClientAnarchy->N3Msg_GetSkill(GetIdentity(), stat, 2, dummy_identity);
+		if (P_ENGINE_CLIENT_ANARCHY)
+			result = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(GetIdentity(), stat, 2, dummy_identity);
 		return result;
 	}
 
