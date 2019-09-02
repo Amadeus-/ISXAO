@@ -158,14 +158,14 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			if (ISNUMBER())
 			{
 				auto index = DWORD(GETNUMBER());
-				if ((Object.Ptr = pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialAction(index - 1)))
+				if ((Object.Ptr = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialAction(index - 1)))
 				{
 					Object.Type = pSpecialActionTemplateType;
 					return true;
 				}
 				return false;
 			}
-			if ((Object.Ptr = pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialAction(argv[0])))
+			if ((Object.Ptr = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialAction(argv[0])))
 			{
 				Object.Type = pSpecialActionTemplateType;
 				return true;
@@ -176,7 +176,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	}
 	case SpecialActionCount:
 	{
-		Object.DWord = pEngineClientAnarchy->GetClientChar()->GetSpecialActionHolder()->GetSpecialActionCount();
+		Object.DWord = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialActionCount();
 		Object.Type = pUintType;
 		break;
 	}

@@ -44,14 +44,14 @@ namespace isxao_classes
 #else
 	bool Character::CheckLOS(Dynel* pDynel)
 	{
-		if (pEngineClientAnarchy && pEngineClientAnarchy->GetClientChar() && P_PLAYFIELD_DIR && P_PLAYFIELD_DIR->GetPlayfield())
+		if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->GetClientChar() && P_PLAYFIELD_DIR && P_PLAYFIELD_DIR->GetPlayfield())
 		{
 			VECTOR3 offset;
 			offset.X = 0.0f;
 			offset.Y = 1.6f;
 			offset.Z = 0.0f;
 			VECTOR3 client;
-			pEngineClientAnarchy->N3Msg_GetGlobalCharacterPosition(client);
+			P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(client);
 			VECTOR3 offsetClient = VECTOR3::Add(client, offset);
 			VECTOR3 dynel = pDynel->GetPosition();
 			VECTOR3 offsetMe = VECTOR3::Add(dynel, offset);
@@ -97,12 +97,12 @@ namespace isxao_classes
 
 	void Character::CastNanoSpell(IDENTITY const& nano, IDENTITY const& target) const
 	{
-		pEngineClientAnarchy->N3Msg_CastNanoSpell(nano, target);
+		P_ENGINE_CLIENT_ANARCHY->N3Msg_CastNanoSpell(nano, target);
 	}
 
 	void Character::DefaultAttack(IDENTITY const& id) const
 	{
-		pEngineClientAnarchy->N3Msg_DefaultAttack(id, true);
+		P_ENGINE_CLIENT_ANARCHY->N3Msg_DefaultAttack(id, true);
 	}
 
 	void Character::Face(float heading)
@@ -122,14 +122,14 @@ namespace isxao_classes
 
 	void Character::MakeTeamLeader(const IDENTITY& id)
 	{
-		if (pEngineClientAnarchy && IsInTeam() && IsTeamLeader())
-			pEngineClientAnarchy->N3Msg_TransferTeamLeadership(id);
+		if (P_ENGINE_CLIENT_ANARCHY && IsInTeam() && IsTeamLeader())
+			P_ENGINE_CLIENT_ANARCHY->N3Msg_TransferTeamLeadership(id);
 	}
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_2_x
 	bool Character::PerformSpecialAction(const IDENTITY &id) const
 	{
-		return pEngineClientAnarchy->N3Msg_PerformSpecialAction(id);
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(id);
 	}
 
 #else
@@ -137,7 +137,7 @@ namespace isxao_classes
 	{
 		typedef bool(__thiscall * tPerformSpecialAction)(PVOID, IDENTITY const &);
 		auto pPerformSpecialAction = tPerformSpecialAction(n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_2);
-		return pPerformSpecialAction(pEngineClientAnarchy, id);
+		return pPerformSpecialAction(P_ENGINE_CLIENT_ANARCHY, id);
 	}
 #endif
 
@@ -150,13 +150,13 @@ namespace isxao_classes
 	{
 		typedef void(__thiscall * tStopAttack)(PVOID);
 		auto pStopAttack = tStopAttack(n3EngineClientAnarchy_t__N3Msg_StopAttack);
-		pStopAttack(pEngineClientAnarchy);
+		pStopAttack(P_ENGINE_CLIENT_ANARCHY);
 	}
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_UseItem_x
 	void Character::UseItem(const IDENTITY& id)
 	{
-		pEngineClientAnarchy->N3Msg_UseItem(id, false);
+		P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(id, false);
 	}
 #else
 	void Character::UseItem(IDENTITY const& id)
@@ -164,7 +164,7 @@ namespace isxao_classes
 		IDENTITY dummy;
 		dummy.Type = 0;
 		dummy.Id = 0;
-		if (pEngineClientAnarchy->GetItemByTemplate(id, dummy))
+		if (P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, dummy))
 		{
 			typedef void(__thiscall * tUseItem)(PVOID, IDENTITY const &, bool);
 			auto pUseItem = tUseItem(n3EngineClientAnarchy_t__N3Msg_UseItem);

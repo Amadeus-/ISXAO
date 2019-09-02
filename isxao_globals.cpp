@@ -10,7 +10,9 @@ namespace isxao_globals
 #pragma region Modules
 
 	HMODULE gamecode_module_handle = GetModuleHandle("Gamecode.dll");
+	MODULEINFO gamecode_module_info;
 	HMODULE n3_module_handle = GetModuleHandle("N3.dll");
+	MODULEINFO n3_module_info;
 
 	DWORD hDatabaseController = DWORD(GetModuleHandle("DatabaseController.dll"));
 	
@@ -45,20 +47,9 @@ namespace isxao_globals
 
 #pragma endregion
 
-#pragma region Gamecode
-
-		MODULEINFO gamecode_module_info;
-		GetModuleInformation(process_handle, gamecode_module_handle, &gamecode_module_info, sizeof(gamecode_module_info));
-		auto gamecode_module_base = DWORD(gamecode_module_handle);
-		const auto gamecode_data_begin = reinterpret_cast<unsigned char*>(gamecode_module_base);
-		const auto gamecode_data_end = gamecode_data_begin + gamecode_module_info.SizeOfImage;
-		const vector<unsigned char> gamecode_data(gamecode_data_begin, gamecode_data_end);
-
-#pragma endregion
-
 #pragma region N3
 
-		MODULEINFO n3_module_info;
+		// Module
 		GetModuleInformation(process_handle, n3_module_handle, &n3_module_info, sizeof(n3_module_info));
 		auto n3_module_base = DWORD(n3_module_handle);
 		const auto n3_data_begin = reinterpret_cast<unsigned char*>(n3_module_base);
@@ -84,11 +75,13 @@ namespace isxao_globals
 		pp_dynel_dir = reinterpret_cast<DYNELDIR**>(n3_dynel_t__m_pc_dynel_dir_instance);
 
 		// Functions
-		GET_FUNCTION_ADDRESS(n3, n3_engine_t__n3_engine_t);
-
+		GET_FUNCTION_ADDRESS(n3, n3_engine_t__n3_engine_t);		
 
 		// Instances
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_t__n3_engine_t, n3_engine_t__m_pc_instance);
+
+		// Functions
+		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_camera_t__set_selected_target, n3_engine_client_t__get_client_control_dynel);
 
 		// Functions
 		GET_FUNCTION_ADDRESS(n3, n3_playfield_t__add_child_dynel);
@@ -101,6 +94,31 @@ namespace isxao_globals
 		pp_playfield_dir = reinterpret_cast<PlayfieldDir**>(n3_playfield_t__m_pc_playfield_dir_instance);
 
 #pragma endregion
+
+#pragma region Gamecode
+
+		// Module
+		GetModuleInformation(process_handle, gamecode_module_handle, &gamecode_module_info, sizeof(gamecode_module_info));
+		auto gamecode_module_base = DWORD(gamecode_module_handle);
+		const auto gamecode_data_begin = reinterpret_cast<unsigned char*>(gamecode_module_base);
+		const auto gamecode_data_end = gamecode_data_begin + gamecode_module_info.SizeOfImage;
+		const vector<unsigned char> gamecode_data(gamecode_data_begin, gamecode_data_end);
+
+		// Functions
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_engine_client_anarchy_t);
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t);
+		n3_engine_client_anarchy_t__get_client_char = n3_engine_client_t__get_client_control_dynel;
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_client_dynel_id);
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_current_movement_mode);
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_faction_str);
+
+		// Instances
+		n3_engine_client_anarchy_t__m_pc_instance = n3_engine_t__m_pc_instance;
+		pp_engine_client_anarchy = reinterpret_cast<EngineClientAnarchy**>(n3_engine_client_anarchy_t__m_pc_instance);
+
+#pragma endregion
+
+
 
 //#pragma region Globals
 //
@@ -137,29 +155,29 @@ namespace isxao_globals
 //#pragma region EngineClientAnarchy
 //
 //		// Instance
-//		n3EngineClientAnarchy_t__m_pcInstance = n3EngineClientAnarchy_t__m_pcInstance_x + n3_module_handle;
-//		ppEngineClientAnarchy = reinterpret_cast<EngineClientAnarchy**>(n3EngineClientAnarchy_t__m_pcInstance);
+//		n3_engine_client_anarchy_t__m_pc_instance = n3EngineClientAnarchy_t__m_pcInstance_x + n3_module_handle;
+//		pp_engine_client_anarchy = reinterpret_cast<EngineClientAnarchy**>(n3_engine_client_anarchy_t__m_pc_instance);
 //
 //		// Functions
 //#ifdef n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_x
-//		n3EngineClientAnarchy_t__n3EngineClientAnarchy_t = n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_x + gamecode_module_handle;
+//		n3_engine_client_anarchy_t__n3_engine_client_anarchy_t = n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_x + gamecode_module_handle;
 //#endif
 //
 //#ifdef n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_x
-//		n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t = n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_x + gamecode_module_handle;
+//		n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t = n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_x + gamecode_module_handle;
 //#endif
 //
 //#ifdef n3EngineClientAnarchy_t__GetClientChar_x
-//		n3EngineClientAnarchy_t__GetClientChar = n3EngineClientAnarchy_t__GetClientChar_x + gamecode_module_handle;
+//		n3_engine_client_anarchy_t__get_client_char = n3EngineClientAnarchy_t__GetClientChar_x + gamecode_module_handle;
 //#endif
 //#ifdef n3EngineClientAnarchy_t__GetClientDynelId_x
-//		n3EngineClientAnarchy_t__GetClientDynelId = n3EngineClientAnarchy_t__GetClientDynelId_x + gamecode_module_handle;
+//		n3_engine_client_anarchy_t__get_client_dynel_id = n3EngineClientAnarchy_t__GetClientDynelId_x + gamecode_module_handle;
 //#endif
 //#ifdef n3EngineClientAnarchy_t__GetCurrentMovementMode_x
-//		n3EngineClientAnarchy_t__GetCurrentMovementMode = n3EngineClientAnarchy_t__GetCurrentMovementMode_x + gamecode_module_handle;
+//		n3_engine_client_anarchy_t__get_current_movement_mode = n3EngineClientAnarchy_t__GetCurrentMovementMode_x + gamecode_module_handle;
 //#endif
 //#ifdef n3EngineClientAnarchy_t__GetFactionStr_x
-//		n3EngineClientAnarchy_t__GetFactionStr = n3EngineClientAnarchy_t__GetFactionStr_x + gamecode_module_handle;
+//		n3_engine_client_anarchy_t__get_faction_str = n3EngineClientAnarchy_t__GetFactionStr_x + gamecode_module_handle;
 //#endif
 //#ifdef n3EngineClientAnarchy_t__GetFactionTitle_x
 //		n3EngineClientAnarchy_t__GetFactionTitle = n3EngineClientAnarchy_t__GetFactionTitle_x + gamecode_module_handle;
@@ -1239,6 +1257,22 @@ namespace isxao_globals
 
 #pragma endregion
 
+#pragma region Gamecode
+
+	// Functions
+	DWORD n3_engine_client_anarchy_t__n3_engine_client_anarchy_t = 0;
+	DWORD n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t = 0;
+	DWORD n3_engine_client_anarchy_t__get_client_char = 0;
+	DWORD n3_engine_client_anarchy_t__get_client_dynel_id = 0;
+	DWORD n3_engine_client_anarchy_t__get_current_movement_mode = 0;
+	DWORD n3_engine_client_anarchy_t__get_faction_str = 0;
+
+	// Instances
+	DWORD n3_engine_client_anarchy_t__m_pc_instance = 0;
+	EngineClientAnarchy **pp_engine_client_anarchy = nullptr;
+
+#pragma endregion
+
 #pragma region N3
 
 	// Functions
@@ -1261,6 +1295,9 @@ namespace isxao_globals
 	// Functions
 	DWORD n3_engine_t__n3_engine_t = 0;
 
+	// Functions
+	DWORD n3_engine_client_t__get_client_control_dynel = 0;
+
 	// Instances
 	DWORD n3_engine_t__m_pc_instance = 0;
 
@@ -1279,16 +1316,14 @@ namespace isxao_globals
 #pragma region EngineClientAnarchy
 
 	// Client Instance
-	DWORD n3EngineClientAnarchy_t__m_pcInstance = 0;
-	EngineClientAnarchy **ppEngineClientAnarchy = nullptr;
+	
 
 	// Client Functions
-	DWORD n3EngineClientAnarchy_t__n3EngineClientAnarchy_t = 0;
-	DWORD n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t = 0;
-	DWORD n3EngineClientAnarchy_t__GetClientChar = 0;
-	DWORD n3EngineClientAnarchy_t__GetClientDynelId = 0;
-	DWORD n3EngineClientAnarchy_t__GetCurrentMovementMode = 0;	
-	DWORD n3EngineClientAnarchy_t__GetFactionStr = 0;
+	
+	
+	
+	
+	
 	DWORD n3EngineClientAnarchy_t__GetFactionTitle = 0;	
 	DWORD n3EngineClientAnarchy_t__GetGenderString = 0;
 	DWORD n3EngineClientAnarchy_t__GetItemByTemplate = 0;	

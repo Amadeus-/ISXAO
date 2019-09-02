@@ -3,7 +3,7 @@
 namespace isxao_classes
 {
 #ifdef n3EngineClientAnarchy_t__GetClientChar_x
-	FUNCTION_AT_ADDRESS(PSIMPLECHAR EngineClientAnarchy::GetClientChar(void), n3EngineClientAnarchy_t__GetClientChar);
+	FUNCTION_AT_ADDRESS(PSIMPLECHAR EngineClientAnarchy::GetClientChar(void), n3_engine_client_anarchy_t__get_client_char);
 #endif
 
 	Character* EngineClientAnarchy::GetClientChar(void) const
@@ -12,7 +12,7 @@ namespace isxao_classes
 	}
 
 #ifdef n3EngineClientAnarchy_t__GetClientDynelId_x
-	FUNCTION_AT_ADDRESS(PIDENTITY EngineClientAnarchy::GetClientDynelId(IDENTITY &), n3EngineClientAnarchy_t__GetClientDynelId);
+	FUNCTION_AT_ADDRESS(PIDENTITY EngineClientAnarchy::GetClientDynelId(IDENTITY &), n3_engine_client_anarchy_t__get_client_dynel_id);
 #endif
 
 	PIDENTITY EngineClientAnarchy::GetClientDynelId(IDENTITY& id) const
@@ -23,7 +23,7 @@ namespace isxao_classes
 	}
 
 #ifdef n3EngineClientAnarchy_t__GetCurrentMovementMode_x
-	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::GetCurrentMovementMode(void), n3EngineClientAnarchy_t__GetCurrentMovementMode);
+	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::GetCurrentMovementMode(void), n3_engine_client_anarchy_t__get_current_movement_mode);
 #endif
 
 	DWORD EngineClientAnarchy::GetCurrentMovementMode() const
@@ -36,9 +36,8 @@ namespace isxao_classes
 		return n3_engine_client_anarchy_;
 	}
 
-#ifdef n3EngineClientAnarchy_t__GetFactionStr_x
-	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::GetFactionStr(DWORD, bool), n3EngineClientAnarchy_t__GetFactionStr);
-#endif
+	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::GetFactionStr(DWORD, bool), n3_engine_client_anarchy_t__get_faction_str);
+
 
 #ifdef n3EngineClientAnarchy_t__GetFactionTitle_x
 	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::GetFactionTitle(DWORD), n3EngineClientAnarchy_t__GetFactionTitle);

@@ -42,7 +42,7 @@ namespace isxao_classes
 	{
 		IDENTITY dummy_identity;
 		ZeroMemory(&dummy_identity, sizeof(IDENTITY));
-		return pEngineClientAnarchy->N3Msg_GetSkill(GetIdentity(), stat, 2, dummy_identity);
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(GetIdentity(), stat, 2, dummy_identity);
 	}
 
 	bool SpecialActionItem::IsBuff()

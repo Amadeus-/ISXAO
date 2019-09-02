@@ -12,7 +12,7 @@ namespace isxao_classes
 		{
 			IDENTITY slot;
 			isxao_utilities::GetInvSlotIdentity(i, slot);
-			auto pItem = pEngineClientAnarchy->GetItemByTemplate(slot, d);
+			auto pItem = P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(slot, d);
 			if (pItem)
 			{
 				pMap->SetItem(isxao_utilities::GetInvSlotName(slot), reinterpret_cast<LSOBJECTDATA&>(pItem));
@@ -30,7 +30,7 @@ namespace isxao_classes
 		{
 			IDENTITY slot;
 			::GetInvSlotIdentity(i, slot);
-			auto pItem = pEngineClientAnarchy->GetItemByTemplate(slot, d);
+			auto pItem = P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(slot, d);
 			if (pItem)
 			{
 				INVENTORYSLOT s;
@@ -47,7 +47,7 @@ namespace isxao_classes
 	{
 		for (int i = 17; i < 32; i++)
 		{
-			PINVENTORYDATA p_inventory_data = pEngineClientAnarchy->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
+			PINVENTORYDATA p_inventory_data = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
@@ -63,7 +63,7 @@ namespace isxao_classes
 	{
 		for (int i = 64; i < 94; i++)
 		{
-			PINVENTORYDATA p_inventory_data = pEngineClientAnarchy->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
+			PINVENTORYDATA p_inventory_data = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
@@ -74,7 +74,7 @@ namespace isxao_classes
 	{
 		for (int i = 33; i < 46; i++)
 		{
-			PINVENTORYDATA p_inventory_data = pEngineClientAnarchy->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
+			PINVENTORYDATA p_inventory_data = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
@@ -219,7 +219,7 @@ namespace isxao_classes
 		else if (!strcmp(szSearchName, "is_feet"))
 			GetInvSlotIdentity(::IS_FEET, id);
 		if (id.Type != 0)
-			return reinterpret_cast<InventoryItem*>(pEngineClientAnarchy->GetItemByTemplate(id, d));
+			return reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, d));
 		std::map<IDENTITY, InventoryItem*> m;
 		GetInventory(m);
 		for (auto it = m.begin(); it != m.end(); ++it)
@@ -239,7 +239,7 @@ namespace isxao_classes
 	{
 		INVENTORYSLOT s;
 		ZeroMemory(&s, sizeof(INVENTORYSLOT));
-		if (pEngineClientAnarchy)
+		if (P_ENGINE_CLIENT_ANARCHY)
 		{
 			std::map<IDENTITY, InventoryItem*> m;
 			GetInventory(m);
@@ -263,7 +263,7 @@ namespace isxao_classes
 	{
 		INVENTORYSLOT s;
 		ZeroMemory(&s, sizeof(INVENTORYSLOT));
-		if (pEngineClientAnarchy && pEngineClientAnarchy->GetClientChar())
+		if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->GetClientChar())
 		{
 			IDENTITY id;
 			ZeroMemory(&id, sizeof(IDENTITY));
@@ -362,7 +362,7 @@ namespace isxao_classes
 			if (id.Type != 0)
 			{
 				s.SlotID = id;
-				s.pItem = reinterpret_cast<InventoryItem*>(pEngineClientAnarchy->GetItemByTemplate(id, d));
+				s.pItem = reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, d));
 			}
 			std::map<IDENTITY, InventoryItem*> m;
 			GetInventory(m);
@@ -393,9 +393,9 @@ namespace isxao_classes
 		{
 			IDENTITY id;
 			isxao_utilities::GetInvSlotIdentity(i, id);
-			auto pItem = pEngineClientAnarchy->GetItemByTemplate(id, d);
+			auto pItem = P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, d);
 			if (pItem)
-				m.insert_or_assign(id, reinterpret_cast<InventoryItem*>(pEngineClientAnarchy->GetItemByTemplate(id, d)));
+				m.insert_or_assign(id, reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, d)));
 		}
 		return m.size();
 	}
@@ -404,7 +404,7 @@ namespace isxao_classes
 	{
 		for (int i = 1; i < 16; i++)
 		{
-			PINVENTORYDATA p_inventory_data = pEngineClientAnarchy->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
+			PINVENTORYDATA p_inventory_data = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}

@@ -23,7 +23,7 @@ namespace isxao_classes
 
 	void TeamRaid::CreateRaid()
 	{
-		pEngineClientAnarchy->N3Msg_CreateRaid();
+		P_ENGINE_CLIENT_ANARCHY->N3Msg_CreateRaid();
 	}
 
 	TeamEntry* TeamRaid::GetTeamLeader() const
@@ -32,7 +32,7 @@ namespace isxao_classes
 		GetRaid(raid_vector);
 		for (auto it = raid_vector.begin(); it != raid_vector.end(); ++it)
 		{
-			if (pEngineClientAnarchy->N3Msg_IsTeamLeader((*it)->GetIdentity()))
+			if (P_ENGINE_CLIENT_ANARCHY->N3Msg_IsTeamLeader((*it)->GetIdentity()))
 				return (*it);
 		}
 		return nullptr;

@@ -10,7 +10,7 @@ namespace isxao_classes
 
 	//bool Player::IsInMyTeam()
 	//{
-	//	return IsInTeam() && GetTeamRaid()->GetTeamIdentity() == pEngineClientAnarchy->GetClientChar()->GetTeamRaid()->GetTeamIdentity();
+	//	return IsInTeam() && GetTeamRaid()->GetTeamIdentity() == P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetTeamRaid()->GetTeamIdentity();
 	//}
 
 	//bool Player::IsInTeam()
@@ -26,14 +26,14 @@ namespace isxao_classes
 	//bool Player::IsTeamLeader()
 	//{
 	//	auto result = false;
-	//	if (pEngineClientAnarchy && IsInTeam() && IsInMyTeam())
-	//		result = pEngineClientAnarchy->N3Msg_IsTeamLeader(GetIdentity());
+	//	if (P_ENGINE_CLIENT_ANARCHY && IsInTeam() && IsInMyTeam())
+	//		result = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsTeamLeader(GetIdentity());
 	//	return result;
 	//}
 
 	//bool Player::SendTeamInvite()
 	//{
-	//	return pEngineClientAnarchy->N3Msg_TeamJoinRequest(GetIdentity(), true);
+	//	return P_ENGINE_CLIENT_ANARCHY->N3Msg_TeamJoinRequest(GetIdentity(), true);
 	//}
 
 }

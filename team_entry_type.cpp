@@ -59,12 +59,12 @@ bool TeamEntryType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 		{
 		case Kick:
 		{
-			pEngineClientAnarchy->N3Msg_KickTeamMember(pTeamEntry->GetIdentity());
+			P_ENGINE_CLIENT_ANARCHY->N3Msg_KickTeamMember(pTeamEntry->GetIdentity());
 			break;
 		}
 		case MakeLeader:
 		{
-			pEngineClientAnarchy->N3Msg_TransferTeamLeadership(pTeamEntry->GetIdentity());
+			P_ENGINE_CLIENT_ANARCHY->N3Msg_TransferTeamLeadership(pTeamEntry->GetIdentity());
 			break;
 		}
 		default: break;

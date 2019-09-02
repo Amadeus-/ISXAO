@@ -4,8 +4,7 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	printf("%" PRIX32, n3_camera_t__set_secondary_target);
-	printf("%" PRIX32, n3_camera_t__set_selected_target);
+	printf("%" PRIX32, n3_engine_client_anarchy_t__get_current_movement_mode);
 	return 0;
 }
 
@@ -25,7 +24,7 @@ int CMD_DUMPSTATS(int argc, char *argv[])
 {
 	IDENTITY id;
 	IDENTITY dummy;
-	if (pEngineClientAnarchy->GetClientChar()->GetTarget(id))
+	if (P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetTarget(id))
 	{
 		FILE * pFILE;
 		fopen_s(&pFILE, "stats.txt", "a");
@@ -34,7 +33,7 @@ int CMD_DUMPSTATS(int argc, char *argv[])
 		for (auto it = m.begin(); it != m.end(); ++it)
 		{
 			char buffer[MAX_STRING];
-			LONG stat = pEngineClientAnarchy->N3Msg_GetSkill(id, static_cast<AOData::Stat_e>((*it).first), 2, dummy);
+			LONG stat = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(id, static_cast<AOData::Stat_e>((*it).first), 2, dummy);
 			sprintf_s(buffer, "ST_%s = %d,\n", (*it).second, /*(*it).first*/stat);
 			for (auto i = 0; i < (int)strlen(buffer); i++)
 				buffer[i] = toupper(buffer[i]);
@@ -43,16 +42,16 @@ int CMD_DUMPSTATS(int argc, char *argv[])
 		}
 		fclose(pFILE);
 	}
-	//if (pEngineClientAnarchy->GetWeaponTarget(id))
+	//if (P_ENGINE_CLIENT_ANARCHY->GetWeaponTarget(id))
 	//{
 	//	FILE * pFILE;
 	//	pFILE = fopen("stats.txt", "a");
 	//	std::map<DWORD, const char *> m;
-	//	pEngineClientAnarchy->GetStatNameMap(m);
+	//	P_ENGINE_CLIENT_ANARCHY->GetStatNameMap(m);
 	//	for (auto it = m.begin(); it != m.end(); ++it)
 	//	{
 	//		char buffer[MAX_STRING];
-	//		LONG stat = pEngineClientAnarchy->GetSkill(id, static_cast<AOData::Stat_e>((*it).first));
+	//		LONG stat = P_ENGINE_CLIENT_ANARCHY->GetSkill(id, static_cast<AOData::Stat_e>((*it).first));
 	//		if (stat != 1234567890)
 	//		{
 	//			sprintf_s(buffer, "PS_%s = %d,\n", (*it).second, (*it).first);
@@ -71,9 +70,9 @@ int CMD_ATTACK(int argc, char *argv[])
 {
 	IDENTITY p1;
 	IDENTITY p2;
-	pEngineClientAnarchy->N3Msg_GetClientPetID(p1, 0);
+	P_ENGINE_CLIENT_ANARCHY->N3Msg_GetClientPetID(p1, 0);
 	printf("%d", p1.Id);
-	pEngineClientAnarchy->N3Msg_GetClientPetID(p2, 1);
+	P_ENGINE_CLIENT_ANARCHY->N3Msg_GetClientPetID(p2, 1);
 	printf("%d", p2.Id);
 	return 0;
 }

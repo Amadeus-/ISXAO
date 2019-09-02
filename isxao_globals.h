@@ -12,11 +12,30 @@ namespace isxao_globals
 #pragma region Modules
 
 	AOLIB_VAR HMODULE gamecode_module_handle;
+	AOLIB_VAR MODULEINFO gamecode_module_info;
 	AOLIB_VAR HMODULE n3_module_handle;
+	AOLIB_VAR MODULEINFO n3_module_info;
 	AOLIB_VAR DWORD hGUI;
 	AOLIB_VAR DWORD hVehicle;
 	AOLIB_VAR DWORD hMessageProtocol;
 	AOLIB_VAR DWORD hInterfaces;
+
+#pragma endregion
+
+#pragma region Gamecode
+
+	// Functions
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_engine_client_anarchy_t;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_client_char;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_client_dynel_id;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_current_movement_mode;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_faction_str;
+
+	// Instances
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__m_pc_instance;
+	AOLIB_VAR EngineClientAnarchy **pp_engine_client_anarchy;
+#define P_ENGINE_CLIENT_ANARCHY (*pp_engine_client_anarchy)  // NOLINT(cppcoreguidelines-macro-usage)
 
 #pragma endregion
 
@@ -46,6 +65,8 @@ namespace isxao_globals
 	// Instances
 	AOLIB_VAR DWORD n3_engine_t__m_pc_instance;
 
+	// Functions
+	AOLIB_VAR DWORD n3_engine_client_t__get_client_control_dynel;
 
 	// Functions
 	AOLIB_VAR DWORD n3_playfield_t__add_child_dynel;
@@ -78,17 +99,14 @@ namespace isxao_globals
 #pragma region EngineClientAnarchy
 
 	// Client Instance
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__m_pcInstance;
-	AOLIB_VAR EngineClientAnarchy **ppEngineClientAnarchy;
-#define pEngineClientAnarchy (*ppEngineClientAnarchy)
+	
 
 	// Client Functions
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__n3EngineClientAnarchy_t;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetClientChar;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetClientDynelId;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetCurrentMovementMode;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetFactionStr;
+	
+	
+	
+	
+	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetFactionTitle;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetGenderString;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetItemByTemplate;	

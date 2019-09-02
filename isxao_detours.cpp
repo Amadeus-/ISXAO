@@ -737,8 +737,8 @@ namespace isxao_detours
 		//EzDetour(PlayfieldAnarchy_t__PlayfieldAnarchy_t, &AODetours::PlayfieldAnarchy_t__PlayfieldAnarchy_t_Detour, &AODetours::PlayfieldAnarchy_t__PlayfieldAnarchy_t_Trampoline);
 		//EzDetour(PlayfieldAnarchy_t__dPlayfieldAnarchy_t, &AODetours::PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Detour, &AODetours::PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Trampoline);
 
-		//EzDetour(n3EngineClientAnarchy_t__n3EngineClientAnarchy_t, &AODetours::n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Detour, &AODetours::n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Trampoline);
-		//EzDetour(n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t, &AODetours::n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Detour, &AODetours::n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Trampoline);
+		//EzDetour(n3_engine_client_anarchy_t__n3_engine_client_anarchy_t, &AODetours::n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Detour, &AODetours::n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Trampoline);
+		//EzDetour(n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t, &AODetours::n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Detour, &AODetours::n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Trampoline);
 
 		//EzDetour(n3_playfield_t__add_child_dynel, &AODetours::Playfield_t__AddChildDynel_Detour, &AODetours::Playfield_t__AddChildDynel_Trampoline);
 		//EzDetour(n3_dynel_t__set_playfield, &AODetours::n3Dynel_t__SetPlayfield_Detour, &AODetours::n3Dynel_t__SetPlayfield_Trampoline);
@@ -770,8 +770,8 @@ namespace isxao_detours
 		//EzUnDetour(PlayfieldAnarchy_t__PlayfieldAnarchy_t);
 		//EzUnDetour(PlayfieldAnarchy_t__dPlayfieldAnarchy_t);
 
-		//EzUnDetour(n3EngineClientAnarchy_t__n3EngineClientAnarchy_t);
-		//EzUnDetour(n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t);
+		//EzUnDetour(n3_engine_client_anarchy_t__n3_engine_client_anarchy_t);
+		//EzUnDetour(n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t);
 
 		//EzUnDetour(n3_playfield_t__add_child_dynel);
 		//EzUnDetour(n3_dynel_t__set_playfield);
