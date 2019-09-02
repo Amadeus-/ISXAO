@@ -732,7 +732,7 @@ namespace isxao_detours
 
 	void AODetours::Initialize()
 	{
-		//EzDetour(n3EngineClientAnarchy_t__SetMainDynel, &AODetours::n3EngineClientAnarchy_t__SetMainDynel_Detour, &AODetours::n3EngineClientAnarchy_t__SetMainDynel_Trampoline);
+		//gEzDetour(n3EngineClientAnarchy_t__SetMainDynel, &AODetours::n3EngineClientAnarchy_t__SetMainDynel_Detour, &AODetours::n3EngineClientAnarchy_t__SetMainDynel_Trampoline);
 
 		//EzDetour(PlayfieldAnarchy_t__PlayfieldAnarchy_t, &AODetours::PlayfieldAnarchy_t__PlayfieldAnarchy_t_Detour, &AODetours::PlayfieldAnarchy_t__PlayfieldAnarchy_t_Trampoline);
 		//EzDetour(PlayfieldAnarchy_t__dPlayfieldAnarchy_t, &AODetours::PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Detour, &AODetours::PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Trampoline);

@@ -60,6 +60,11 @@ namespace isxao_globals
 
 #pragma endregion
 
+#pragma region Gamecode
+
+
+#pragma endregion
+
 #pragma region Globals
 
 	AOLIB_VAR DWORD __GetBreedStr;	
