@@ -163,7 +163,7 @@ namespace isxao_utilities
 	FUNCTION_AT_ADDRESS(DWORD __cdecl GetFullPerkMap(void), __N3Msg_GetFullPerkMap);
 #endif
 
-	bool IsValidDynel(PN3DYNEL pDynel)
+	bool IsValidDynel(p_n3_dynel_t pDynel)
 	{
 		if (pDynel && pDynel->pvTable)
 		{
@@ -587,7 +587,7 @@ namespace isxao_utilities
 
 #pragma region Collections
 	
-	void RecursiveAddDynelToDynelMap(std::map<identity_t, PN3DYNEL>& m, PDYNELNODE pNode, PDYNELROOT pRoot, DWORD& count)
+	void RecursiveAddDynelToDynelMap(std::map<identity_t, p_n3_dynel_t>& m, PDYNELNODE pNode, PDYNELROOT pRoot, DWORD& count)
 	{
 		m.insert_or_assign(pNode->Identity, pNode->pDynel);
 		count--;
@@ -597,7 +597,7 @@ namespace isxao_utilities
 			RecursiveAddDynelToDynelMap(m, pNode->pHigher, pRoot, count);
 	}
 
-	void GetDynelMap(std::map<identity_t, PN3DYNEL>& m)
+	void GetDynelMap(std::map<identity_t, p_n3_dynel_t>& m)
 	{
 		auto count = P_DYNEL_DIR->Count;
 		auto pRoot = P_DYNEL_DIR->pRoot;
@@ -1296,7 +1296,7 @@ namespace isxao_utilities
 
 	p_inventory_data_t GetInvSlotData(INVENTORYSLOT *slot)
 	{
-		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[slot->SlotID.id];
+		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->p_inventory_data[slot->SlotID.id];
 	}
 
 #pragma endregion

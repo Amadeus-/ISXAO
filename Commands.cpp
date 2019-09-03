@@ -101,21 +101,21 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x3AC;
 	printf("char_vehicle_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(CHEST);
+	r = sizeof(chest_t);
 	a = 0x1E8;
-	printf("CHEST: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("chest_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(COLLINFO);
+	r = sizeof(coll_info_t);
 	a = 0x14;
-	printf("COLLINFO: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("coll_info_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(COLLPRIM);
+	r = sizeof(coll_prim_t);
 	a = 0x18;
-	printf("COLLPRIM: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("coll_prim_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(COLLSPHERE);
+	r = sizeof(coll_sphere_t);
 	a = 0x1C;
-	printf("COLLSPHERE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("coll_sphere_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(DBOBJECT);
 	a = 0x18;
@@ -129,9 +129,9 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x160;
 	printf("dummy_vehicle_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");	
 
-	r = sizeof(EVENTCASTER);
+	r = sizeof(event_caster_t);
 	a = 0x18;
-	printf("EVENTCASTER: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("event_caster_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(FLOWCONTROL);
 	a = 0x58;
@@ -165,9 +165,9 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x8;
 	printf("i_point_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(MESHCOLLSPHERE);
+	r = sizeof(mesh_coll_sphere_t);
 	a = 0x1C;
-	printf("MESHCOLLSPHERE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("mesh_coll_sphere_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(N3CAMERA);
 	a = 0x258;
@@ -177,17 +177,17 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x38;
 	printf("N3CELLMONITOR: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3DYNEL);
+	r = sizeof(n3_dynel_t);
 	a = 0xA0;
-	printf("N3DYNEL: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_dynel_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(N3DYNELEVENTSOURCE);
 	a = 0x8;
 	printf("N3DYNELEVENTSOURCE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3DYNAMESHCOLLSPHERE);
+	r = sizeof(n3_dyna_mesh_coll_sphere_t);
 	a = 0x30;
-	printf("N3DYNAMESHCOLLSPHERE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_dyna_mesh_coll_sphere_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(n3_engine_client_anarchy_t);
 	a = 0x130;
@@ -197,9 +197,9 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x18;
 	printf("N3FOBJ: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3FSM);
+	r = sizeof(n3_fsm_t);
 	a = 0x1C;
-	printf("N3FSM: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_fsm_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(N3OBJECTFACTORY);
 	a = 0x8;
@@ -209,13 +209,13 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x3C;
 	printf("N3ROOT: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3SFBASE);
+	r = sizeof(n3_sf_base_t);
 	a = 0x8;
-	printf("N3SFBASE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_sf_base_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3TILEMAP);
+	r = sizeof(n3_tile_map_t);
 	a = 0x424;
-	printf("N3TILEMAP: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_tile_map_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(N3VISUALDYNEL);
 	a = 0xE0;
@@ -229,9 +229,9 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x1C;
 	printf("NANOTEMPLATE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(NEWINVENTORY);
+	r = sizeof(new_inventory_t);
 	a = 0x2C;
-	printf("NEWINVENTORY: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("new_inventory_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(PLAYFIELDANARCHY);
 	a = 0x110;

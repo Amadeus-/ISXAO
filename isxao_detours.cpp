@@ -74,7 +74,7 @@ namespace isxao_detours
 	{
 		if (instance == 0)
 		{
-			PN3DYNEL p_dynel;
+			p_n3_dynel_t p_dynel;
 			__asm {mov[p_dynel], ecx};
 			ActorService(pExtension, RemoveActor, p_dynel);
 		}

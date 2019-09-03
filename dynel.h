@@ -12,7 +12,7 @@ public:
 	AOLIB_OBJECT float GetDistanceXTo(vector3_t&);
 	AOLIB_OBJECT float GetDistanceYTo(vector3_t&);
 	AOLIB_OBJECT float GetDistanceZTo(vector3_t&);
-	AOLIB_OBJECT PN3DYNEL GetDynelData();
+	AOLIB_OBJECT p_n3_dynel_t GetDynelData();
 	AOLIB_OBJECT float GetHeading();
 	AOLIB_OBJECT float GetHeadingTo(vector3_t &);
 	AOLIB_OBJECT float GetHeadingToLoc(vector3_t &, vector3_t &);
@@ -44,5 +44,5 @@ public:
 	AOLIB_OBJECT void UpdateLocalityListeners();
 	AOLIB_OBJECT static bool pDynelCompare(Dynel *pA, Dynel *pB);
 private: 
-	N3DYNEL n3_dynel_;
+	n3_dynel_t n3_dynel_;
 };

@@ -23,7 +23,7 @@ namespace isxao_utilities
 	AOLIB_API Actor* __cdecl GetActor(const identity_t &);
 	AOLIB_API PNANOITEM __cdecl GetNanoItem(DWORD);
 
-	AOLIB_API bool IsValidDynel(PN3DYNEL);
+	AOLIB_API bool IsValidDynel(p_n3_dynel_t);
 
 	AOLIB_API PVOID RequestInfo(const identity_t &);
 
@@ -43,8 +43,8 @@ namespace isxao_utilities
 
 #pragma region Collections
 
-	AOLIB_API void RecursiveAddDynelToDynelMap(std::map<identity_t, PN3DYNEL>& m, PDYNELNODE pNode, PDYNELROOT pRoot, DWORD& count);
-	AOLIB_API void GetDynelMap(std::map<identity_t, PN3DYNEL>& m);
+	AOLIB_API void RecursiveAddDynelToDynelMap(std::map<identity_t, p_n3_dynel_t>& m, PDYNELNODE pNode, PDYNELROOT pRoot, DWORD& count);
+	AOLIB_API void GetDynelMap(std::map<identity_t, p_n3_dynel_t>& m);
 	AOLIB_API void RecursiveAddPerkToPerkMap(std::map<identity_t, DWORD>& m, PPERKNODE pNode, PPERKROOT pRoot, DWORD& count);
 	AOLIB_API void GetPerkMap(std::map<identity_t, DWORD>& m, PPERKDIR pDir);
 	AOLIB_API void RecursiveAddPetToPetMap(std::map<identity_t, DWORD>& m, PPETNODE pNode, PPETROOT pRoot, DWORD& count);

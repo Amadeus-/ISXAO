@@ -9,14 +9,14 @@ namespace AOData
 	struct char_vehicle;
 	struct dummy_item_base;
 	struct dummy_vehicle;
-	struct _EVENTCASTER;
+	struct event_caster;
 	struct inventory_data;
 	struct _N3CELLMONITOR;
-	struct _N3DYNEL;
+	struct n3_dynel;
 	struct _N3OBJECTFACTORY;
 	struct _N3ROOT;
-	struct _N3SFBASE;
-	struct _N3TILEMAP;
+	struct n3_sf_base;
+	struct n3_tile_map;
 	struct n3_tile_map_surface;
 	struct _PERKDIR;
 	struct _PLAYFIELDANARCHY;
@@ -636,13 +636,15 @@ namespace AOData
 	
 	// Size = 0x80
 	// From GUI.dll
-	typedef struct _CHATWINDOWCONTROLLER
+	typedef struct chat_window_controller
 	{
-		PVOID pvTable;											// 0x00
-		BYTE Unknown0x04[0x10];									// 0x04
-		struct chat_window_node_dir ChatWindowNodeDir;			// 0x18
-		BYTE Unknown0x20[0x1C];									// 0x20
-	} CHATWINDOWCONTROLLER, *PCHATWINDOWCONTROLLER;
+		PVOID p_v_table;										// 0x00
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x04[0x10];								// 0x04
+		chat_window_node_dir_t chat_window_node_dir;			// 0x18
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x20[0x1C];								// 0x20
+	} chat_window_controller_t, *p_chat_window_controller;
 
 #pragma endregion
 
@@ -650,22 +652,23 @@ namespace AOData
 
 	// Size = 0x80
 	// From GUI.dll
-	typedef struct _COMMANDINTERPRETER
+	typedef struct command_interpreter
 	{
-		PVOID pvTable;				// 0x00
-		BYTE Unknown0x04[0x7C];		// 0x04
-	} COMMANDINTERPRETER, *PCOMMANDINTERPRETER;
+		PVOID p_v_table;				// 0x00
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x04[0x7C];		// 0x04
+	} command_interpreter_t, *p_command_interpreter_t;
 #pragma endregion
 
 #pragma region CollInfo
 
 	// Size = 0x14
 	// From 
-	typedef struct _COLLINFO
+	typedef struct coll_info
 	{
-		identity_t Identity;	// 0x00
-		struct vector3 Location;	// 0x08
-	} COLLINFO, *PCOLLINFO;
+		identity_t identity;	// 0x00
+		vector3_t location;		// 0x08
+	} coll_info_t, *p_coll_info_t;
 
 #pragma endregion
 
@@ -673,61 +676,78 @@ namespace AOData
 
 	// Size = 0x1E8
 	// From Gamecode.dll
-	typedef struct _CHEST
+	typedef struct chest  // NOLINT(cppcoreguidelines-pro-type-member-init)
 	{
-		PVOID pvTable;										// 0x0000
-		PVOID pvTable_n3DynelEventSource;					// 0x0004
-		BYTE Unknown_0x08[0x4];								// 0x0008
-		PVOID pvTable_DbObject;								// 0x000C
-		struct _EVENTCASTER* pEventCaster;					// 0x0010
-		identity_t Identity;							// 0x0014
-		BYTE Unknown_0x1C[0x8];								// 0x001C
-		std::vector<COLLINFO>* pCollInfoVector;				// 0x0024
-		PVOID pvTable_n3Fsm;								// 0x0028
-		BYTE Unknown0x2C[0x10];								// 0x002C
-		BYTE IsDead;										// 0x003C
-		BYTE Unknown0x3D[0x3];								// 0x003D
-		struct _N3SFBASE *pFirstStateFunction;				// 0x0040
-		BYTE Unknown0x44[0x4];								// 0x044
-		BYTE IsNotSnoozing;									// 0x0048
-		BYTE Unknown0x49[0x7];								// 0x0049
-		struct dummy_vehicle *pVehicle;						// 0x0050
-		BYTE IsGroundCollisionEnabled;						// 0x0054
-		BYTE IsCollEnabled;									// 0x0055
-		BYTE Unknown0x56[0x2];								// 0x0056
-		BYTE IsStationary;									// 0x0058
-		BYTE IsRepulsive;									// 0x0059
-		BYTE Unknown0x5A[0x2];								// 0x005A
-		struct _N3DYNAMESHCOLLSPHERE* pCollPrim;			// 0x005C
-		DWORD PlayfieldInstanceId;							// 0x0060
-		struct _N3TILEMAP* pn3Tilemap;						// 0x0064
-		BYTE IsOnBorder;									// 0x0068
-		BYTE Unknown0x69[0x2];								// 0x0069
+		PVOID p_v_table;									// 0x0000
+		PVOID p_v_table_n3_dynel_event_source;				// 0x0004
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x08[0x4];								// 0x0008
+		PVOID p_v_table_db_object;							// 0x000C
+		struct event_caster* p_event_caster;				// 0x0010
+		identity_t identity;								// 0x0014
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x1C[0x8];								// 0x001C
+		std::vector<coll_info_t>* p_coll_info_vector;		// 0x0024
+		PVOID p_v_table_n3_fsm;								// 0x0028
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x2C[0x10];							// 0x002C
+		BYTE is_dead;										// 0x003C
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x3D[0x3];								// 0x003D
+		struct n3_sf_base *p_first_state_function;			// 0x0040
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x44[0x4];								// 0x0044
+		BYTE is_not_snoozing;								// 0x0048
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x49[0x7];								// 0x0049
+		struct dummy_vehicle* p_vehicle;					// 0x0050
+		BYTE is_ground_collision_enabled;					// 0x0054
+		BYTE is_coll_enabled;								// 0x0055
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x56[0x2];								// 0x0056
+		BYTE is_stationary;									// 0x0058
+		BYTE is_repulsive;									// 0x0059
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x5A[0x2];								// 0x005A
+		struct n3_dyna_mesh_coll_sphere* p_coll_prim;		// 0x005C
+		DWORD playfield_instance_id;						// 0x0060
+		struct n3_tile_map* p_n3_tile_map;					// 0x0064
+		BYTE is_on_border;									// 0x0068
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x69[0x2];								// 0x0069
+		// ReSharper disable once CppInconsistentNaming
 		BYTE IsInTree;										// 0x006B	
-		PVOID pn3InfoItemRemote;							// 0x006C
-		std::vector<struct _N3DYNEL*>* pChildDynelVector;		// 0x0070
-		identity_t ParentIdentity;					// 0x0074
-		BYTE Unknown0x7C[0x4];								// 0x007C
-		BYTE IsDying;										// 0x0080
-		BYTE field_81[0xB];									// 0x0081
-		DWORD RDBDynelStatus;								// 0x008C
-		DWORD LastAllowedZoneInst;							// 0x0090
-		struct vector3 LastAllowedGlobalPositionInZone;	// 0x0094
-		struct vector3 ReconcilePosition;					// 0x00A0
-		float BodyScale;									// 0x00AC
-		PVOID pTextureDataList;								// 0x00B0
-		BYTE Unknown0xB4[0xC];								// 0x00B4
-		PVOID pVisualMesh_t;								// 0x00C0
-		PVOID pVisualCATMesh_t;								// 0x00C4
-		BYTE Unknown0xC8[0x4];								// 0x00C8
-		BYTE IsClientChar;									// 0x00CC
-		BYTE IsVisible;										// 0x00CD
-		BYTE UseCharDistCap;								// 0x00CE
-		BYTE Unknown0xCF;									// 0x00CF
-		struct vector3 BoundingSpherePos;					// 0x00D0
-		BYTE Unknown0xDC[0x4C];								// 0x00DC
-		struct _NEWINVENTORY* pInventory;					// 0x0128
-		BYTE Unknown0x12C[0x1C];							// 0x012C
+		PVOID p_n3_info_item_remote;						// 0x006C
+		std::vector<struct n3_dynel*>* p_child_dynel_vector;// 0x0070
+		identity_t parent_identity;							// 0x0074
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x7C[0x4];								// 0x007C
+		BYTE is_dying;										// 0x0080
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x81[0xB];								// 0x0081
+		DWORD rdb_dynel_status;								// 0x008C
+		DWORD last_allowed_zone_inst;						// 0x0090
+		vector3_t last_allowed_global_position_in_zone;		// 0x0094
+		vector3_t reconcile_position;						// 0x00A0
+		float body_scale;									// 0x00AC
+		PVOID p_texture_data_list;							// 0x00B0
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xB4[0xC];								// 0x00B4
+		PVOID p_visual_mesh_t;								// 0x00C0
+		PVOID p_visual_cat_mesh_t;							// 0x00C4
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xC8[0x4];								// 0x00C8
+		BYTE is_client_char;								// 0x00CC
+		BYTE is_visible;									// 0x00CD
+		BYTE use_char_dist_cap;								// 0x00CE
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xCF;									// 0x00CF
+		vector3_t bounding_sphere_pos;						// 0x00D0
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xDC[0x4C];							// 0x00DC
+		struct new_inventory* p_inventory;					// 0x0128
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x12C[0x1C];							// 0x012C
 		PVOID pvTable_SignalHolder;							// 0x0148
 		BYTE Unknown0x14C[0x30];							// 0x014C
 		PVOID pvTable_StatHolder;							// 0x017C
@@ -736,7 +756,7 @@ namespace AOData
 		BYTE Unknown0x18C[0x2C];							// 0x018C
 		identity_t TemplateIdentity;					// 0x01B8
 		BYTE Unknown0x1C0[0x28];							// 0x01C0
-	} CHEST, *PCHEST;
+	} chest_t, *p_chest_t;
 
 #pragma endregion
 
@@ -760,7 +780,7 @@ namespace AOData
 	typedef struct _DBOBJECT
 	{
 		PVOID pvTable;							// 0x00
-		struct _EVENTCASTER* pEventCaster;		// 0x04
+		struct event_caster* pEventCaster;		// 0x04
 		identity_t Identity;				// 0x08
 		BYTE Unknown_0x10[0x8];					// 0x10
 	} DBOBJECT, *PDBOBJECT;
@@ -909,7 +929,7 @@ namespace AOData
 		struct _DYNELNODE* pBack;		// 0x04
 		struct _DYNELNODE* pHigher;		// 0x08
 		identity_t Identity;			// 0x0C
-		struct _N3DYNEL* pDynel;			// 0x14
+		struct n3_dynel* pDynel;			// 0x14
 	} DYNELNODE, *PDYNELNODE;
 
 	// Size = 0x0C
@@ -935,12 +955,13 @@ namespace AOData
 
 	// Size = 0x18
 	// From N3.dll
-	typedef struct _EVENTCASTER
+	typedef struct event_caster
 	{
-		PVOID pvTable;											// 0x00
-		BYTE Unknown0x4[0x10];									// 0x04
-		VOID(__thiscall *pn3Dynel_t__ReleaseAddress)(PVOID);	// 0x14
-	} EVENTCASTER, *PEVENTCASTER;
+		PVOID p_v_table;										// 0x00
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x4[0x10];									// 0x04
+		VOID(__thiscall *p_n3_dynel_t__release_address)(PVOID);	// 0x14
+	} event_caster_t, *p_event_caster_t;
 
 #pragma endregion
 
@@ -1174,15 +1195,16 @@ namespace AOData
 
 	// Size = 0x2C
 	// From Gamecode.dll
-	typedef struct _NEWINVENTORY
+	typedef struct new_inventory
 	{
-		PVOID pvTable;										// 0x00
-		std::vector <struct inventory_data*> pInventoryData;	// 0x04
-		BYTE Unknown0x10[0x4];								// 0x10
-		DWORD Count;										// 0x14
-		identity_t InventoryIdentity;					// 0x18
-		BYTE Unknown0x20[0xC];								// 0x20
-	} NEWINVENTORY, *PNEWINVENTORY;
+		PVOID p_v_table;									// 0x00
+		std::vector <p_inventory_data_t> p_inventory_data;	// 0x04
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x10[0x4];								// 0x10
+		DWORD count;										// 0x14
+		identity_t inventory_identity;						// 0x18
+		BYTE unknown_0x20[0xC];								// 0x20
+	} new_inventory_t, *p_new_inventory_t;
 
 	// Size = 0x1B8
 	// From Gamecode.dll
@@ -1190,9 +1212,9 @@ namespace AOData
 	{
 		struct _SIMPLECHAR* pClientControlDynel;	// 0x0000
 		identity_t* pClientIdentity;			// 0x0004
-		struct _NEWINVENTORY* pRegularInventory;	// 0x0008
-		struct _NEWINVENTORY* pUnknownInventory;	// 0x000C
-		struct _NEWINVENTORY* pOverflowInventory;	// 0x0010
+		struct new_inventory* pRegularInventory;	// 0x0008
+		struct new_inventory* pUnknownInventory;	// 0x000C
+		struct new_inventory* pOverflowInventory;	// 0x0010
 		BYTE Unknown0x14[0x168];					// 0x0014
 		p_bank_entry_t p_bank_entry;				// 0x017C
 		BYTE Unknown0x180[0x38];					// 0x0180
@@ -1308,7 +1330,7 @@ namespace AOData
 		PVOID pvTable_n3DynelEventSource;					// 0x0004
 		BYTE Unknown_0x08[0x4];								// 0x0008
 		PVOID pvTable_DbObject;								// 0x000C
-		struct _EVENTCASTER* pEventCaster;					// 0x0010
+		struct event_caster* pEventCaster;					// 0x0010
 		identity_t Identity;							// 0x0014
 		BYTE Unknown_0x1C[0x8];								// 0x001C
 		BYTE Unknown0x24[0x4];								// 0x0024
@@ -1316,7 +1338,7 @@ namespace AOData
 		BYTE Unknown0x04[0x10];								// 0x002C
 		BYTE IsDead;										// 0x003C
 		BYTE Unknown0x15[0x3];								// 0x003D
-		struct _N3SFBASE *pFirstStateFunction;				// 0x0040
+		struct n3_sf_base *pFirstStateFunction;				// 0x0040
 		BYTE Unknown0x44[0xC];								// 0x0044
 		p_camera_vehicle_t pCameraVehicle;				// 0x0050
 		BYTE Unknown0x54[0x190];							// 0x0054
@@ -1361,38 +1383,38 @@ namespace AOData
 
 	// Size = 0x18
 	// From Collision.dll
-	typedef struct _COLLPRIM
+	typedef struct coll_prim  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
-		PVOID pvTable;					// 0x00
-		struct vector3 GlobalPos;		// 0x04
-		BYTE Unknown0x10[0x4];			// 0x10
-		DWORD CollPrimType;				// 0x14 Sphere = 2
-	} COLLPRIM, *PCOLLPRIM;
+		PVOID p_v_table;				// 0x00
+		vector3_t global_pos;			// 0x04
+		BYTE unknown_0x10[0x4];			// 0x10
+		DWORD coll_prim_type;			// 0x14 Sphere = 2
+	} coll_prim_t, *p_coll_prim;
 
 	// Size = 0x1C
 	// From Collision.dll
-	typedef struct _COLLSPHERE
+	typedef struct coll_sphere  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
-		struct _COLLPRIM CollPrim;		// 0x00
-		float PossibleRadius;			// 0x18
-	} COLLSPHERE, *PCOLLSPHERE;
+		struct coll_prim coll_prim;		// 0x00
+		float possible_radius;			// 0x18
+	} coll_sphere_t, *p_coll_sphere_t;
 
 	// Size = 0x1C
 	// From Collision.dll
-	typedef struct _MESHCOLLSPHERE
+	typedef struct mesh_coll_sphere
 	{
-		struct _COLLSPHERE CollSphere;				// 0x00
-	} MESHCOLLSPHERE, _MESHCOLLSPHERE;
+		struct coll_sphere coll_sphere;				// 0x00
+	} mesh_coll_sphere_t, p_mesh_coll_sphere_t;
 
 	// Size = 0x30
 	// From N3.dll
-	typedef struct _N3DYNAMESHCOLLSPHERE
+	typedef struct n3_dyna_mesh_coll_sphere  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
-		struct _MESHCOLLSPHERE MeshCollSphere;		// 0x00
-		PVOID pLocalityListener_i;					// 0x1C
-		struct _N3DYNEL* pOwner;					// 0x20
-		struct vector3 OriginalRelativePosition;	// 0x24
-	} N3DYNAMESHCOLLSPHERE, *PN3DYNAMESHCOLLSPHERE;
+		struct mesh_coll_sphere mesh_coll_sphere;	// 0x00
+		PVOID p_locality_listener_i;				// 0x1C
+		struct n3_dynel* p_owner;					// 0x20
+		vector3_t original_relative_position;		// 0x24
+	} n3_dyna_mesh_coll_sphere_t, *p_n3_dyna_mesh_coll_sphere_t;
 
 #pragma endregion
 
@@ -1400,21 +1422,21 @@ namespace AOData
 
 	// Size = 0xA0
 	// From N3.dll
-	typedef struct _N3DYNEL
+	typedef struct n3_dynel
 	{
 		PVOID pvTable;										// 0x00
 		PVOID pvTable_n3DynelEventSource;					// 0x04
 		BYTE Unknown_0x08[0x4];								// 0x08
 		PVOID pvTable_DbObject;								// 0x0C
-		struct _EVENTCASTER* pEventCaster;					// 0x10
+		struct event_caster* pEventCaster;					// 0x10
 		identity_t Identity;							// 0x14
 		BYTE Unknown_0x1C[0x8];								// 0x1C
-		std::vector<COLLINFO>* pCollInfoVector;				// 0x24
+		std::vector<coll_info_t>* pCollInfoVector;				// 0x24
 		PVOID pvTable_n3Fsm;								// 0x28
 		BYTE Unknown0x2C[0x10];								// 0x2C
 		BYTE IsDead;										// 0x3C
 		BYTE Unknown0x3D[0x3];								// 0x3D
-		struct _N3SFBASE *pFirstStateFunction;				// 0x40
+		struct n3_sf_base *pFirstStateFunction;				// 0x40
 		BYTE Unknown0x44[0x4];								// 0x44
 		BYTE IsNotSnoozing;									// 0x48
 		BYTE Unknown0x49[0x7];								// 0x49
@@ -1425,14 +1447,14 @@ namespace AOData
 		BYTE IsStationary;									// 0x58
 		BYTE IsRepulsive;									// 0x59
 		BYTE Unknown0x5A[0x2];								// 0x5A
-		struct _N3DYNAMESHCOLLSPHERE* pCollPrim;			// 0x5C
+		struct n3_dyna_mesh_coll_sphere* pCollPrim;			// 0x5C
 		DWORD PlayfieldInstanceId;							// 0x60
-		struct _N3TILEMAP* pn3Tilemap;						// 0x64
+		struct n3_tile_map* pn3Tilemap;						// 0x64
 		BYTE IsOnBorder;									// 0x68
 		BYTE Unknown0x69[0x2];								// 0x69
 		BYTE IsInTree;										// 0x6B	
 		PVOID pn3InfoItemRemote;							// 0x6C
-		std::vector<struct _N3DYNEL*>* pChildDynelVector;		// 0x70
+		std::vector<struct n3_dynel*>* pChildDynelVector;		// 0x70
 		identity_t ParentIdentity;					// 0x74
 		BYTE Unknown0x7C[0x4];								// 0x7C
 		BYTE IsDying;										// 0x80
@@ -1440,7 +1462,7 @@ namespace AOData
 		DWORD RDBDynelStatus;								// 0x8C
 		DWORD LastAllowedZoneInst;							// 0x90
 		struct vector3 LastAllowedGlobalPositionInZone;	// 0x94
-	} N3DYNEL, *PN3DYNEL;
+	} n3_dynel_t, *p_n3_dynel_t;
 
 #pragma endregion
 
@@ -1513,14 +1535,16 @@ namespace AOData
 
 	// Size = 1C
 	// From N3.dll
-	typedef struct _N3FSM
+	typedef struct n3_fsm
 	{
-		PVOID pvTable;												// 0x00
-		BYTE Unknown0x04[0x10];										// 0x04
-		BYTE IsDead;												// 0x14
-		BYTE Unknown0x15[0x3];										// 0x15
-		struct _N3SFBASE *pFirstStateFunction;						// 0x18
-	} N3FSM, *PN3FSM;	
+		PVOID p_v_table;										// 0x00
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x04[0x10];								// 0x04
+		BYTE is_dead;											// 0x14
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x15[0x3];									// 0x15
+		struct n3_sf_base *p_first_state_function;				// 0x18
+	} n3_fsm_t, *p_n3_fsm_t;	
 
 #pragma endregion
 
@@ -1577,11 +1601,11 @@ namespace AOData
 
 	// Size = 0x08
 	// From N3.dll
-	typedef struct _N3SFBASE
+	typedef struct n3_sf_base
 	{
-		PVOID pvTable;			// 0x00
-		struct _N3FSM* pN3Fsm;	// 0x04
-	} N3SFBASE, *PN3SFBASE;
+		PVOID p_v_table;			// 0x00
+		struct n3_fsm* p_n3_fsm;	// 0x04
+	} n3_sf_base_t, *p_n3_sf_base_t;
 
 #pragma endregion
 
@@ -1589,7 +1613,7 @@ namespace AOData
 
 	// Size = 0x424
 	// From N3.dll
-	typedef struct _N3TILEMAP
+	typedef struct n3_tile_map
 	{
 		PVOID pvTable;						// 0x0000
 		BYTE Unknown0x04[0x4];				// 0x0004
@@ -1597,7 +1621,7 @@ namespace AOData
 		struct _RDBTILEMAP* pRDBTileMap;	// 0x000C
 		BYTE Unknown0x10[0x410];			// 0x0010
 		PVOID pRDBHeightmap;				// 0x0420
-	} N3TILEMAP, *PN3TILEMAP;
+	} n3_tile_map_t, *p_n3_tile_map_t;
 
 #pragma endregion
 
@@ -1623,15 +1647,15 @@ namespace AOData
 		PVOID pvTable_n3DynelEventSource;					// 0x04
 		BYTE Unknown_0x08[0x4];								// 0x08
 		PVOID pvTable_DbObject;								// 0x0C
-		struct _EVENTCASTER* pEventCaster;					// 0x10
+		struct event_caster* pEventCaster;					// 0x10
 		identity_t Identity;							// 0x14
 		BYTE Unknown_0x1C[0x8];								// 0x1C
-		std::vector<COLLINFO>* pCollInfoVector;				// 0x24
+		std::vector<coll_info_t>* pCollInfoVector;				// 0x24
 		PVOID pvTable_n3Fsm;								// 0x28
 		BYTE Unknown0x2C[0x10];								// 0x2C
 		BYTE IsDead;										// 0x3C
 		BYTE Unknown0x3D[0x3];								// 0x3D
-		struct _N3SFBASE *pFirstStateFunction;				// 0x40
+		struct n3_sf_base *pFirstStateFunction;				// 0x40
 		BYTE Unknown0x44[0x4];								// 0x44
 		BYTE IsNotSnoozing;									// 0x48
 		BYTE Unknown0x49[0x7];								// 0x49
@@ -1642,14 +1666,14 @@ namespace AOData
 		BYTE IsStationary;									// 0x58
 		BYTE IsRepulsive;									// 0x59
 		BYTE Unknown0x5A[0x2];								// 0x5A
-		struct _N3DYNAMESHCOLLSPHERE* pCollPrim;			// 0x5C
+		struct n3_dyna_mesh_coll_sphere* pCollPrim;			// 0x5C
 		DWORD PlayfieldInstanceId;							// 0x60
-		struct _N3TILEMAP* pn3Tilemap;						// 0x64
+		struct n3_tile_map* pn3Tilemap;						// 0x64
 		BYTE IsOnBorder;									// 0x68
 		BYTE Unknown0x69[0x2];								// 0x69
 		BYTE IsInTree;										// 0x6B	
 		PVOID pn3InfoItemRemote;							// 0x6C
-		std::vector<struct _N3DYNEL*>* pChildDynelVector;		// 0x70
+		std::vector<struct n3_dynel*>* pChildDynelVector;		// 0x70
 		identity_t ParentIdentity;					// 0x74
 		BYTE Unknown0x7C[0x4];								// 0x7C
 		BYTE IsDying;										// 0x80
@@ -1857,11 +1881,11 @@ namespace AOData
 		identity_t InstanceID;			// 0x18
 		BYTE Unknown0x20[0xC];					// 0x20
 		PVOID pRoomLinks;						// 0x2C
-		std::vector<struct _N3DYNEL*, std::allocator<struct _N3DYNEL*>> DynelChildren;	// 0x30
+		std::vector<struct n3_dynel*, std::allocator<struct n3_dynel*>> DynelChildren;	// 0x30
 		BYTE Unknown0x3C[0x10];					// 0x3C
 		DWORD LastEntranceDoorNumber;			// 0x4C
 		DWORD ZoneSize;							// 0x50						
-		struct _N3TILEMAP* pn3Tilemap;			// 0x54
+		struct n3_tile_map* pn3Tilemap;			// 0x54
 		struct _GRIDSPACE* pSpace_i;			// 0x58
 		PVOID pPathfinder_i;					// 0x5C
 		struct n3_tile_map_surface* pSurface_i;	// 0x60
@@ -2052,7 +2076,7 @@ namespace AOData
 	typedef struct _RDBTILEMAP
 	{
 		PVOID pvTable;							    // 0x00
-		struct _EVENTCASTER* pEventCaster;		    // 0x04
+		struct event_caster* pEventCaster;		    // 0x04
 		identity_t Identity;					// 0x08
 		BYTE Unknown_0x10[0x8];						// 0x10
 		DWORD IsDungeon;							// 0x0018
@@ -2085,7 +2109,7 @@ namespace AOData
 	typedef struct _REFERENCECOUNTED
 	{
 		PVOID pvTable;							// 0x00
-		struct _EVENTCASTER* pEventCaster;		// 0x04
+		struct event_caster* pEventCaster;		// 0x04
 	} REFERENCECOUNTED, *PREFERENCECOUNTED;
 
 #pragma endregion
@@ -2112,8 +2136,8 @@ namespace AOData
 		PVOID pvTable;										// 0x00
 		struct _N3DYNELEVENTSOURCE N3DynelEventSource;		// 0x04
 		struct _DBOBJECT DbObject;							// 0x0C
-		std::vector<COLLINFO>* pCollInfoVector;				// 0x24
-		struct _N3FSM n3Fsm;								// 0x28
+		std::vector<coll_info_t>* pCollInfoVector;				// 0x24
+		struct n3_fsm n3Fsm;								// 0x28
 		BYTE Unknown0x44[0x4];								// 0x44
 		BYTE IsNotSnoozing;									// 0x48
 		BYTE Unknown0x49[0x7];								// 0x49
@@ -2124,14 +2148,14 @@ namespace AOData
 		BYTE IsStationary;									// 0x58
 		BYTE IsRepulsive;									// 0x59
 		BYTE Unknown0x5A[0x2];								// 0x5A
-		struct _N3DYNAMESHCOLLSPHERE* pCollPrim;			// 0x5C
+		struct n3_dyna_mesh_coll_sphere* pCollPrim;			// 0x5C
 		DWORD PlayfieldInstanceId;							// 0x60
-		struct _N3TILEMAP* pn3Tilemap;						// 0x64
+		struct n3_tile_map* pn3Tilemap;						// 0x64
 		BYTE IsOnBorder;									// 0x68
 		BYTE Unknown0x69[0x2];								// 0x69
 		BYTE IsInTree;										// 0x6B	
 		PVOID pn3InfoItemRemote_t;							// 0x6C
-		std::vector<struct _N3DYNEL*>* pChildDynelVector;   // 0x70
+		std::vector<struct n3_dynel*>* pChildDynelVector;   // 0x70
 		identity_t ParentIdentity;					// 0x74
 		BYTE Unknown0x7C[0x4];								// 0x7C
 		BYTE IsDying;										// 0x80
@@ -2441,15 +2465,15 @@ namespace AOData
 		PVOID pvTable_n3DynelEventSource;					// 0x0004
 		BYTE Unknown_0x08[0x4];								// 0x0008
 		PVOID pvTable_DbObject;								// 0x000C
-		struct _EVENTCASTER* pEventCaster;					// 0x0010
+		struct event_caster* pEventCaster;					// 0x0010
 		identity_t InstanceIdentity;					// 0x0014
 		BYTE Unknown_0x1C[0x8];								// 0x001C
-		std::vector<COLLINFO>* pCollInfoVector;				// 0x0024
+		std::vector<coll_info_t>* pCollInfoVector;				// 0x0024
 		PVOID pvTable_n3Fsm;								// 0x0028
 		BYTE Unknown0x2C[0x10];								// 0x002C
 		BYTE IsDead;										// 0x003C
 		BYTE Unknown0x3D[0x3];								// 0x003D
-		struct _N3SFBASE *pFirstStateFunction;				// 0x0040
+		struct n3_sf_base *pFirstStateFunction;				// 0x0040
 		BYTE Unknown0x44[0x4];								// 0x0044
 		BYTE IsNotSnoozing;									// 0x0048
 		BYTE Unknown0x49[0x7];								// 0x0049
@@ -2460,14 +2484,14 @@ namespace AOData
 		BYTE IsStationary;									// 0x0058
 		BYTE IsRepulsive;									// 0x0059
 		BYTE Unknown0x5A[0x2];								// 0x005A
-		struct _N3DYNAMESHCOLLSPHERE* pCollPrim;			// 0x005C
+		struct n3_dyna_mesh_coll_sphere* pCollPrim;			// 0x005C
 		DWORD PlayfieldInstanceId;							// 0x0060
-		struct _N3TILEMAP* pn3Tilemap;						// 0x0064
+		struct n3_tile_map* pn3Tilemap;						// 0x0064
 		BYTE IsOnBorder;									// 0x0068
 		BYTE Unknown0x69[0x2];								// 0x0069
 		BYTE IsInTree;										// 0x006B	
 		PVOID pn3InfoItemRemote;							// 0x006C
-		std::vector<struct _N3DYNEL*>* pChildDynelVector;		// 0x0070
+		std::vector<struct n3_dynel*>* pChildDynelVector;		// 0x0070
 		identity_t ParentIdentity;					// 0x0074
 		BYTE Unknown0x7C[0x4];								// 0x007C
 		BYTE IsDying;										// 0x0080

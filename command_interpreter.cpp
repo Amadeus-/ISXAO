@@ -3,7 +3,7 @@
 namespace isxao_classes
 {
 
-	COMMANDINTERPRETER CommandInterpreter::GetCommandInterpreterData() const
+	command_interpreter_t CommandInterpreter::GetCommandInterpreterData() const
 	{
 		return command_interpreter_;
 	}

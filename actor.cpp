@@ -382,7 +382,7 @@ namespace isxao_classes
 		std::map<identity_t, DWORD> pet_map;
 		if (!IsClientId(GetIdentity().id))
 		{
-			std::map<identity_t, PN3DYNEL> dynel_map;
+			std::map<identity_t, p_n3_dynel_t> dynel_map;
 			GetDynelMap(dynel_map);
 			DWORD pet_count = 0;
 			for (auto it = dynel_map.begin(); it != dynel_map.end(); ++it)
@@ -417,7 +417,7 @@ namespace isxao_classes
 				return false;
 			return true;
 		}
-		std::map<identity_t, PN3DYNEL> dynel_map;
+		std::map<identity_t, p_n3_dynel_t> dynel_map;
 		isxao_utilities::GetDynelMap(dynel_map);
 		for (auto it = dynel_map.begin(); it != dynel_map.end(); ++it)
 		{

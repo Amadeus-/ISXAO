@@ -227,9 +227,9 @@ namespace isxao_classes
 		return &n3_dynel_;
 	}
 
-	PN3DYNEL Dynel::GetDynelData()
+	p_n3_dynel_t Dynel::GetDynelData()
 	{
-		return PN3DYNEL(GetData());
+		return p_n3_dynel_t(GetData());
 	}
 
 	FUNCTION_AT_ADDRESS(void Dynel::SendIIRToObservers(InfoItemRemote*), n3_dynel_t__send_iir_to_observers)
