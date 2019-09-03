@@ -15,8 +15,6 @@
 
 #pragma region Gamecode
 
-
-
 constexpr char* const n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 24 53 56 8B F1 89 75 F0");
 constexpr char* const n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t_pattern = static_cast<char*>(
@@ -27,7 +25,8 @@ constexpr char* const n3_engine_client_anarchy_t__get_current_movement_mode_patt
 	"83 B9 84 00 00 00 00 74 ?? FF 15 ?? ?? ?? ?? 85 C0 74 ?? 8B C8 E8 ?? ?? ?? ?? 8B C8 E8 ?? ?? ?? ?? 8B C8");
 constexpr char* const n3_engine_client_anarchy_t__get_faction_str_pattern = static_cast<char*>(
 	"55 8B EC FF 75 0C FF 75 08 E8 ?? ?? ?? ?? 59 59 5D");
-
+constexpr char* const n3_engine_client_anarchy_t__get_faction_title_pattern = static_cast<char*>(
+	"55 8B EC FF 15 ?? ?? ?? ?? 85 C0 74 ?? 8B 80 C0 01 00 00");
 
 #pragma endregion
 
@@ -504,3 +503,4 @@ constexpr DWORD n3_playfield_t__m_pc_playfield_dir_instance_bytes_to_next = 0x0;
 #define GraphPathFinder_t__SetSurface_x					0x1EA4
 
 #pragma endregion
+

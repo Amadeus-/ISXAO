@@ -2,14 +2,14 @@
 
 namespace isxao_classes
 {
-#ifdef n3EngineClientAnarchy_t__GetClientChar_x
-	FUNCTION_AT_ADDRESS(PSIMPLECHAR EngineClientAnarchy::GetClientChar(void), n3_engine_client_anarchy_t__get_client_char);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_CLIENT_CHAR
+	FUNCTION_AT_ADDRESS(Character* EngineClientAnarchy::GetClientChar(void), n3_engine_client_anarchy_t__get_client_char);
 #endif
 
-	Character* EngineClientAnarchy::GetClientChar(void) const
-	{
-		return reinterpret_cast<Character*>(n3_engine_client_anarchy_.pClientControlChar);
-	}
+	//Character* EngineClientAnarchy::GetClientChar(void) const
+	//{
+	//	return reinterpret_cast<Character*>(n3_engine_client_anarchy_.pClientControlChar);
+	//}
 
 #ifdef n3EngineClientAnarchy_t__GetClientDynelId_x
 	FUNCTION_AT_ADDRESS(PIDENTITY EngineClientAnarchy::GetClientDynelId(IDENTITY &), n3_engine_client_anarchy_t__get_client_dynel_id);
@@ -38,10 +38,8 @@ namespace isxao_classes
 
 	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::GetFactionStr(DWORD, bool), n3_engine_client_anarchy_t__get_faction_str);
 
-
-#ifdef n3EngineClientAnarchy_t__GetFactionTitle_x
 	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::GetFactionTitle(DWORD), n3EngineClientAnarchy_t__GetFactionTitle);
-#endif
+
 
 #ifdef n3EngineClientAnarchy_t__GetGenderString_x
 	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::GetGenderString(const IDENTITY &), n3EngineClientAnarchy_t__GetGenderString);

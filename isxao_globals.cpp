@@ -180,7 +180,7 @@ namespace isxao_globals
 //		n3_engine_client_anarchy_t__get_faction_str = n3EngineClientAnarchy_t__GetFactionStr_x + gamecode_module_handle;
 //#endif
 //#ifdef n3EngineClientAnarchy_t__GetFactionTitle_x
-//		n3EngineClientAnarchy_t__GetFactionTitle = n3EngineClientAnarchy_t__GetFactionTitle_x + gamecode_module_handle;
+//		n3_engine_client_anarchy_t__get_faction_title = n3EngineClientAnarchy_t__GetFactionTitle_x + gamecode_module_handle;
 //#endif
 //#ifdef n3EngineClientAnarchy_t__GetGenderString_x
 //		n3EngineClientAnarchy_t__GetGenderString = n3EngineClientAnarchy_t__GetGenderString_x + gamecode_module_handle;
@@ -1266,6 +1266,7 @@ namespace isxao_globals
 	DWORD n3_engine_client_anarchy_t__get_client_dynel_id = 0;
 	DWORD n3_engine_client_anarchy_t__get_current_movement_mode = 0;
 	DWORD n3_engine_client_anarchy_t__get_faction_str = 0;
+	DWORD n3_engine_client_anarchy_t__get_faction_title = 0;
 
 	// Instances
 	DWORD n3_engine_client_anarchy_t__m_pc_instance = 0;
@@ -1324,7 +1325,7 @@ namespace isxao_globals
 	
 	
 	
-	DWORD n3EngineClientAnarchy_t__GetFactionTitle = 0;	
+		
 	DWORD n3EngineClientAnarchy_t__GetGenderString = 0;
 	DWORD n3EngineClientAnarchy_t__GetItemByTemplate = 0;	
 	DWORD n3EngineClientAnarchy_t__GetTitleStr = 0;

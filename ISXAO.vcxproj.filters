@@ -574,5 +574,8 @@
     <ClInclude Include="isxao_find_pattern.h">
       <Filter>Header Files\Base\Internal</Filter>
     </ClInclude>
+    <ClInclude Include="isxao_native_defines.h">
+      <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -31,6 +31,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_client_dynel_id;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_current_movement_mode;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_faction_str;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_faction_title;
 
 	// Instances
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__m_pc_instance;
@@ -103,16 +104,7 @@ namespace isxao_globals
 
 #pragma region EngineClientAnarchy
 
-	// Client Instance
 	
-
-	// Client Functions
-	
-	
-	
-	
-	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetFactionTitle;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetGenderString;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetItemByTemplate;	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetTitleStr;

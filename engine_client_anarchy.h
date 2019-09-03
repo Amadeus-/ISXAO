@@ -3,7 +3,7 @@
 class EngineClientAnarchy
 {
 public:
-	AOLIB_OBJECT Character* GetClientChar() const;
+	AOLIB_OBJECT Character* GetClientChar();
 	AOLIB_OBJECT PIDENTITY GetClientDynelId(IDENTITY &id) const;
 	AOLIB_OBJECT DWORD GetCurrentMovementMode() const;
 	AOLIB_OBJECT N3ENGINECLIENTANARCHY GetEngineClientAnarchyData() const;

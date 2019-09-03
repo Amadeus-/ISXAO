@@ -1,0 +1,3 @@
+#pragma once
+
+#define N3_ENGINE_CLIENT_ANARCHY_T__GET_CLIENT_CHAR

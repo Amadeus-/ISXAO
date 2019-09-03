@@ -245,6 +245,7 @@
     <ClInclude Include="inventory_slot_type.h" />
     <ClInclude Include="ISXAO.h" />
     <ClInclude Include="ISXAOServices.h" />
+    <ClInclude Include="isxao_native_defines.h" />
     <ClInclude Include="isxao_type.h" />
     <ClInclude Include="isxao_utilities.h" />
     <ClInclude Include="LGUIAOFrame.h" />
