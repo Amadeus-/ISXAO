@@ -40,8 +40,8 @@ namespace isxao_classes
 
 	LONG SpecialActionItem::GetSkill(DWORD stat)
 	{
-		IDENTITY dummy_identity;
-		ZeroMemory(&dummy_identity, sizeof(IDENTITY));
+		identity_t dummy_identity;
+		ZeroMemory(&dummy_identity, sizeof(identity_t));
 		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(GetIdentity(), stat, 2, dummy_identity);
 	}
 

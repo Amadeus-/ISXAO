@@ -3,13 +3,13 @@
 namespace isxao_classes
 {
 
-	PCHARMOVEMENTSTATUS Vehicle::GetCharMovementStatus()
+	p_char_movement_status_t Vehicle::GetCharMovementStatus()
 	{
-		return GetCharVehicleData()->pCharMovementStatus;
+		return GetCharVehicleData()->p_char_movement_status;
 	}
 
 #ifdef Vehicle_t__SetRelRot_x
-	FUNCTION_AT_ADDRESS(void Vehicle::SetRotation(const QUATERNION &), Vehicle_t__SetRelRot);
+	FUNCTION_AT_ADDRESS(void Vehicle::SetRotation(const quaternion_t &), Vehicle_t__SetRelRot);
 #endif
 
 	PVOID Vehicle::GetData()
@@ -17,28 +17,28 @@ namespace isxao_classes
 		return &char_vehicle_;
 	}
 
-	VECTOR3 Vehicle::GetVelocity()
+	vector3_t Vehicle::GetVelocity()
 	{
-		return GetCharVehicleData()->Velocity;
+		return GetCharVehicleData()->velocity;
 	}
 
 	DWORD Vehicle::GetZoneInstanceID()
 	{
-		return GetCharVehicleData()->ZoneInstanceID;
+		return GetCharVehicleData()->zone_instance_id;
 	}
 
-	PCHARVEHICLE Vehicle::GetCharVehicleData()
+	p_char_vehicle_t Vehicle::GetCharVehicleData()
 	{
-		return PCHARVEHICLE(GetData());
+		return p_char_vehicle_t(GetData());
 	}
 
 #ifdef PlayerVehicle_t__UseWaypointPath_x
-	FUNCTION_AT_ADDRESS(DWORD Vehicle::UseWaypointPath(std::vector<VECTOR3>&, float), PlayerVehicle_t__UseWaypointPath);
+	FUNCTION_AT_ADDRESS(DWORD Vehicle::UseWaypointPath(std::vector<vector3_t>&, float), PlayerVehicle_t__UseWaypointPath);
 #endif
 
 	float Vehicle::GetMaxSpeed()
 	{
-		return GetCharVehicleData()->MaxSpeed;
+		return GetCharVehicleData()->max_speed;
 	}
 
 

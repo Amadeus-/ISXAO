@@ -60,9 +60,9 @@ namespace isxao_detours
 
 #pragma region Adding and Removing Playfield Dynels
 
-	DETOUR_TRAMPOLINE_EMPTY(void AODetours::Playfield_t__AddChildDynel_Trampoline(Dynel*, const VECTOR3&, const QUATERNION&));
+	DETOUR_TRAMPOLINE_EMPTY(void AODetours::Playfield_t__AddChildDynel_Trampoline(Dynel*, const vector3_t&, const quaternion_t&));
 
-	void AODetours::Playfield_t__AddChildDynel_Detour(Dynel* p_dynel, const VECTOR3 &position, const QUATERNION &rotation)
+	void AODetours::Playfield_t__AddChildDynel_Detour(Dynel* p_dynel, const vector3_t &position, const quaternion_t &rotation)
 	{
 		ActorService(pExtension, AddActor, p_dynel);
 		Playfield_t__AddChildDynel_Trampoline(p_dynel, position, rotation);
@@ -160,8 +160,8 @@ namespace isxao_detours
 				//{
 				//	//auto cam = isxao_classes::CharacterActionMessage(p);
 				//	//HandleCharacterActionMessage(cam);
-				//	/*sprintf_s(buffer, "Type: 0x%.8X, Unknown0x4: %d, TargetType: %d, TargetId: %d, Param1: %d, Param2: %d, Unknown0x24: %d\n",
-				//	cam.CharacterActionType(), cam.Unknown0x4(), cam.Identity().Type(), cam.Identity().Id(), cam.Param1(), cam.Param2(), cam.Param3());
+				//	/*sprintf_s(buffer, "Type: 0x%.8X, unknown_0x4: %d, TargetType: %d, TargetId: %d, Param1: %d, Param2: %d, unknown_0x24: %d\n",
+				//	cam.CharacterActionType(), cam.unknown_0x4(), cam.Identity().Type(), cam.Identity().Id(), cam.Param1(), cam.Param2(), cam.Param3());
 				//	fopen_s(&pFILE, "messages.txt", "a");
 				//	fputs(buffer, pFILE);
 				//	fclose(pFILE);*/
@@ -381,7 +381,7 @@ namespace isxao_detours
 		{
 /*			FILE * pFILE;
 			char buffer[MAX_STRING];
-			sprintf_s(buffer, "Group Action:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n", m->Unknown0x4, m->Unknown0x8, m->String1.c_str(), m->Unknown0x28, m->Unknown0x2C, m->Unknown0x30, m->Unknown0x34, m->Unknown0x38, m->Unknown0x3C, m->Unknown0x40, m->Unknown0x44);
+			sprintf_s(buffer, "Group Action:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n", m->unknown_0x4, m->Unknown0x8, m->String1.c_str(), m->unknown_0x28, m->unknown_0x2C, m->unknown_0x30, m->Unknown0x34, m->Unknown0x38, m->Unknown0x3C, m->Unknown0x40, m->unknown_0x44);
 			fopen_s(&pFILE, "messages.txt", "a");
 			fputs(buffer, pFILE);
 			fclose(pFILE);	*/		
@@ -409,7 +409,7 @@ namespace isxao_detours
 		{
 			//FILE * pFILE;
 			//char buffer[MAX_STRING];
-			//sprintf_s(buffer, "PrivateGroupAction Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%s\n", m->Unknown0x04, m->Unknown0x08, m->String1.c_str(), m->Unknown0x28, m->Unknown0x2C, m->String2.c_str());
+			//sprintf_s(buffer, "PrivateGroupAction Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%s\n", m->unknown_0x04, m->Unknown0x08, m->String1.c_str(), m->unknown_0x28, m->unknown_0x2C, m->String2.c_str());
 			//fopen_s(&pFILE, "messages.txt", "a");
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);
@@ -425,7 +425,7 @@ namespace isxao_detours
 		{
 			//FILE * pFILE;
 			//char buffer[MAX_STRING];
-			//sprintf_s(buffer, "Private Message:\n\t%d\n\t%d\n\t%s\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n", m->Unknown0x4, m->SenderId, m->Sender.c_str(), m->Message.c_str(), m->Unknown0x44, m->Unknown0x48, m->Unknown0x4C, m->Unknown0x50);
+			//sprintf_s(buffer, "Private Message:\n\t%d\n\t%d\n\t%s\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n", m->unknown_0x4, m->SenderId, m->Sender.c_str(), m->Message.c_str(), m->unknown_0x44, m->unknown_0x48, m->Unknown0x4C, m->Unknown0x50);
 			//fopen_s(&pFILE,"messages.txt", "a");
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);
@@ -444,7 +444,7 @@ namespace isxao_detours
 		{
 			//FILE * pFILE;
 			//char buffer[MAX_STRING];
-			//sprintf_s(buffer, "System Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%s\n", m->Unknown0x4, m->Unknown0x8, m->String1.c_str(), m->Unknown0x28, m->String2.c_str());
+			//sprintf_s(buffer, "System Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%s\n", m->unknown_0x4, m->Unknown0x8, m->String1.c_str(), m->unknown_0x28, m->String2.c_str());
 			//fopen_s(&pFILE, "messages.txt", "a");
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);
@@ -460,7 +460,7 @@ namespace isxao_detours
 		{
 			//FILE * pFILE;
 			//char buffer[MAX_STRING];
-			//sprintf_s(buffer, "Vicinity Message:\n\t%d\n\t%d\n\t%s\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n", m->Unknown0x4, m->SenderId, m->Sender.c_str(), m->Message.c_str(), m->Unknown0x44, m->Unknown0x48, m->Unknown0x4C, m->Unknown0x50);
+			//sprintf_s(buffer, "Vicinity Message:\n\t%d\n\t%d\n\t%s\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n", m->unknown_0x4, m->SenderId, m->Sender.c_str(), m->Message.c_str(), m->unknown_0x44, m->unknown_0x48, m->Unknown0x4C, m->Unknown0x50);
 			//fopen_s(&pFILE, "messages.txt", "a");
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);
@@ -469,10 +469,10 @@ namespace isxao_detours
 			//char id[MAX_STRING];
 			//strcpy_s(sender, MAX_STRING, m->Sender.c_str());
 			//strcpy_s(message, MAX_STRING, m->Message.c_str());
-			//IDENTITY identity;
+			//identity_t identity;
 			//identity.Type = 50000;
 			//identity.Id = m->SenderId;
-			//sprintf_s(id, MAX_STRING, "%I64u", identity.GetCombinedIdentity());
+			//sprintf_s(id, MAX_STRING, "%I64u", identity.get_combined_identity());
 			//char *argv[] = { sender, message, id };
 			//pISInterface->ExecuteEvent(GetEventId("AO_onVicinityMessageReceived"), 0, 3, argv);
 			//delete argv;

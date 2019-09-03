@@ -152,8 +152,8 @@ namespace isxao_utilities
 
 #pragma region Objects
 
-	FUNCTION_AT_ADDRESS(Dynel* __cdecl GetDynel(const IDENTITY &), n3_dynel_t__get_dynel);
-	FUNCTION_AT_ADDRESS(Actor* __cdecl GetActor(const IDENTITY &), n3_dynel_t__get_dynel);
+	FUNCTION_AT_ADDRESS(Dynel* __cdecl GetDynel(const identity_t &), n3_dynel_t__get_dynel);
+	FUNCTION_AT_ADDRESS(Actor* __cdecl GetActor(const identity_t &), n3_dynel_t__get_dynel);
 
 #ifdef __GetNanoItem_x
 	FUNCTION_AT_ADDRESS(PNANOITEM __cdecl GetNanoItem(DWORD), __GetNanoItem);
@@ -180,11 +180,11 @@ namespace isxao_utilities
 		return false;
 	}
 
-	PVOID RequestInfo(const IDENTITY &id)
+	PVOID RequestInfo(const identity_t &id)
 	{
-		typedef PVOID(__thiscall * tRequestInfo)(SpecialActionHolder*, const IDENTITY&);
+		typedef PVOID(__thiscall * tRequestInfo)(SpecialActionHolder*, const identity_t&);
 		auto pLookAt = tRequestInfo(__RequestInfo);
-		return pLookAt(P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder(), id);
+		return pLookAt(P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetSpecialActionHolder(), id);
 	}
 
 #pragma endregion
@@ -322,7 +322,7 @@ namespace isxao_utilities
 		char szName[MAX_STRING] = { 0 };
 		char szSearchName[MAX_STRING] = { 0 };
 		DWORD actor_type;
-		if (p_actor->GetIdentity().Type != 50000)
+		if (p_actor->GetIdentity().type != 50000)
 			actor_type = MOB_OTHER;
 		else if (p_actor->IsActor())
 		{
@@ -347,18 +347,18 @@ namespace isxao_utilities
 			return false;
 		if (p_search_actor->max_level && DWORD(p_actor->GetSkill(ST_LEVEL)) > p_search_actor->max_level)
 			return false;
-		if (p_search_actor->not_id == p_actor->GetIdentity().GetCombinedIdentity())
+		if (p_search_actor->not_id == p_actor->GetIdentity().get_combined_identity())
 			return false;
-		if (p_search_actor->is_dynel_id && p_search_actor->actor_id != p_actor->GetIdentity().GetCombinedIdentity())
+		if (p_search_actor->is_dynel_id && p_search_actor->actor_id != p_actor->GetIdentity().get_combined_identity())
 			return false;
 		if (p_search_actor->is_known_location)
 		{
-			if (p_search_actor->x_loc != p_actor->GetPosition().X || p_search_actor->z_loc != p_actor->GetPosition().Z)
+			if (p_search_actor->x_loc != p_actor->GetPosition().x || p_search_actor->z_loc != p_actor->GetPosition().z)
 			{
-				VECTOR3 knownLoc;
-				knownLoc.X = p_search_actor->x_loc;
-				knownLoc.Y = 0.0f;
-				knownLoc.Z = p_search_actor->z_loc;
+				vector3_t knownLoc;
+				knownLoc.x = p_search_actor->x_loc;
+				knownLoc.y = 0.0f;
+				knownLoc.z = p_search_actor->z_loc;
 				if (p_search_actor->f_radius < 10000.0f && p_actor->GetDistanceTo(knownLoc) > p_search_actor->f_radius)
 					return false;
 			}
@@ -367,14 +367,14 @@ namespace isxao_utilities
 			return false;
 		if (g_y_filter < 10000.0f)
 		{
-			VECTOR3 client = p_character->GetPosition();
-			if (p_actor->GetPosition().Y > client.Y + g_y_filter || p_actor->GetPosition().Y < client.Y - g_y_filter)
+			vector3_t client = p_character->GetPosition();
+			if (p_actor->GetPosition().y > client.y + g_y_filter || p_actor->GetPosition().y < client.y - g_y_filter)
 				return false;
 		}
 		if (p_search_actor->y_radius < 10000.0f)
 		{
-			VECTOR3 client = p_character->GetPosition();
-			if (p_actor->GetPosition().Y > client.Y + p_search_actor->y_radius || p_actor->GetPosition().Y < client.Y - p_search_actor->y_radius)
+			vector3_t client = p_character->GetPosition();
+			if (p_actor->GetPosition().y > client.y + p_search_actor->y_radius || p_actor->GetPosition().y < client.y - p_search_actor->y_radius)
 				return false;
 		}
 		return true;
@@ -389,11 +389,11 @@ namespace isxao_utilities
 			P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{
-				if ((*it)->GetIdentity().Type == 50000 && !P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc((*it)->GetIdentity()))
+				if ((*it)->GetIdentity().type == 50000 && !P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc((*it)->GetIdentity()))
 				{
 					if ((*it) != p_actor)
 					{
-						VECTOR3 c = (*it)->GetPosition();
+						vector3_t c = (*it)->GetPosition();
 						if (p_actor->GetDistanceTo(c) < radius)
 							return true;
 					}
@@ -435,7 +435,7 @@ namespace isxao_utilities
 		if (!p_search_actor || !nth || !p_origin)
 			return nullptr;
 		CIndex<PAORANK> actor_set;
-		VECTOR3 pos = p_origin->GetPosition();
+		vector3_t pos = p_origin->GetPosition();
 		std::vector<Actor*> v;
 		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		DWORD TotalMatching = 0;
@@ -587,7 +587,7 @@ namespace isxao_utilities
 
 #pragma region Collections
 	
-	void RecursiveAddDynelToDynelMap(std::map<IDENTITY, PN3DYNEL>& m, PDYNELNODE pNode, PDYNELROOT pRoot, DWORD& count)
+	void RecursiveAddDynelToDynelMap(std::map<identity_t, PN3DYNEL>& m, PDYNELNODE pNode, PDYNELROOT pRoot, DWORD& count)
 	{
 		m.insert_or_assign(pNode->Identity, pNode->pDynel);
 		count--;
@@ -597,7 +597,7 @@ namespace isxao_utilities
 			RecursiveAddDynelToDynelMap(m, pNode->pHigher, pRoot, count);
 	}
 
-	void GetDynelMap(std::map<IDENTITY, PN3DYNEL>& m)
+	void GetDynelMap(std::map<identity_t, PN3DYNEL>& m)
 	{
 		auto count = P_DYNEL_DIR->Count;
 		auto pRoot = P_DYNEL_DIR->pRoot;
@@ -606,7 +606,7 @@ namespace isxao_utilities
 			RecursiveAddDynelToDynelMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddPerkToPerkMap(std::map<IDENTITY, DWORD>& m, PPERKNODE pNode, PPERKROOT pRoot, DWORD& count)
+	void RecursiveAddPerkToPerkMap(std::map<identity_t, DWORD>& m, PPERKNODE pNode, PPERKROOT pRoot, DWORD& count)
 	{
 		m.insert_or_assign(pNode->PerkIdentity, pNode->PerkID);
 		count--;
@@ -616,7 +616,7 @@ namespace isxao_utilities
 			RecursiveAddPerkToPerkMap(m, pNode->pHigher, pRoot, count);
 	}
 
-	void GetPerkMap(std::map<IDENTITY, DWORD>& m, PPERKDIR pDir)
+	void GetPerkMap(std::map<identity_t, DWORD>& m, PPERKDIR pDir)
 	{
 		auto count = pDir->Count;
 		auto pRoot = pDir->pRoot;
@@ -625,7 +625,7 @@ namespace isxao_utilities
 			RecursiveAddPerkToPerkMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddPetToPetMap(std::map<IDENTITY, DWORD>& m, PPETNODE pNode, PPETROOT pRoot, DWORD& count)
+	void RecursiveAddPetToPetMap(std::map<identity_t, DWORD>& m, PPETNODE pNode, PPETROOT pRoot, DWORD& count)
 	{
 		m.insert_or_assign(pNode->Identity, pNode->Index);
 		count--;
@@ -635,7 +635,7 @@ namespace isxao_utilities
 			RecursiveAddPetToPetMap(m, pNode->pHigher, pRoot, count);
 	}
 
-	void GetPetMap(std::map<IDENTITY, DWORD>& m, PPETDIR pPetDir)
+	void GetPetMap(std::map<identity_t, DWORD>& m, PPETDIR pPetDir)
 	{
 		auto count = pPetDir->Count;
 		auto pRoot = pPetDir->pRoot;
@@ -685,13 +685,13 @@ namespace isxao_utilities
 		}
 	}
 
-	void GetStaticItemMap(std::map<IDENTITY, PDUMMYITEMBASE>& m)
+	void GetStaticItemMap(std::map<identity_t, p_dummy_item_base_t>& m)
 	{
 		auto count = pStaticItemVector->size();
 		for (DWORD i = 0; i < count; i++)
 		{
 			if (pStaticItemVector->at(i).pDummyItem)
-				m.insert_or_assign(pStaticItemVector->at(i).pDummyItem->Identity, pStaticItemVector->at(i).pDummyItem);
+				m.insert_or_assign(pStaticItemVector->at(i).pDummyItem->identity, pStaticItemVector->at(i).pDummyItem);
 		}
 	}
 
@@ -733,21 +733,21 @@ namespace isxao_utilities
 			RecursiveAddWeaponItemToWeaponItemMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, PCHATWINDOWNODENODE pNode, PCHATWINDOWNODEROOT pRoot, DWORD& count)
+	void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, p_chat_window_node_node_t pNode, p_chat_window_node_root_t pRoot, DWORD& count)
 	{
-		m.insert_or_assign(pNode->WindowName, reinterpret_cast<ChatWindowNode*>(pNode->pChatWindow));
+		m.insert_or_assign(pNode->window_name, reinterpret_cast<ChatWindowNode*>(pNode->p_chat_window));
 		count--;
-		if (reinterpret_cast<PVOID>(pNode->pLower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode->pLower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->pHigher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode->pHigher, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode->p_lower, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, CHATWINDOWNODEDIR &dir)
+	void GetChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, chat_window_node_dir_t &dir)
 	{
-		auto count = dir.Count;
-		auto pRoot = dir.pRoot;
-		auto pNode = pRoot->pNode;
+		auto count = dir.count;
+		auto pRoot = dir.p_root;
+		auto pNode = pRoot->p_node;
 		if (count > 0)
 			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode, pRoot, count);
 	}
@@ -775,9 +775,9 @@ namespace isxao_utilities
 
 #pragma region Inventory
 
-	bool GetInvSlotIdentity(AOData::ArmorSlot_e slot, IDENTITY& id)
+	bool GetInvSlotIdentity(AOData::ArmorSlot_e slot, identity_t& id)
 	{
-		id.Type = 102;
+		id.type = 102;
 		switch (slot)
 		{
 		case AS_NECK:
@@ -795,7 +795,7 @@ namespace isxao_utilities
 		case AS_R_FINGER:
 		case AS_FEET:
 		case AS_L_FINGER:
-			id.Id = DWORD(slot) + 16;
+			id.id = DWORD(slot) + 16;
 			break;
 		default:
 			return false;;
@@ -803,9 +803,9 @@ namespace isxao_utilities
 		return true;
 	}
 
-	bool GetInvSlotIdentity(AOData::ImplantSlot_e slot, IDENTITY& id)
+	bool GetInvSlotIdentity(AOData::ImplantSlot_e slot, identity_t& id)
 	{
-		id.Type = 103;
+		id.type = 103;
 		switch (slot)
 		{
 		case IS_EYES:
@@ -821,7 +821,7 @@ namespace isxao_utilities
 		case IS_LEGS:
 		case IS_L_HAND:
 		case IS_FEET:
-			id.Id = DWORD(slot) + 32;
+			id.id = DWORD(slot) + 32;
 			break;
 		default:
 			return false;
@@ -829,9 +829,9 @@ namespace isxao_utilities
 		return true;
 	}
 
-	bool GetInvSlotIdentity(AOData::WeaponSlot_e slot, IDENTITY& id)
+	bool GetInvSlotIdentity(AOData::WeaponSlot_e slot, identity_t& id)
 	{
-		id.Type = 101;
+		id.type = 101;
 		switch (slot)
 		{
 		case WS_HUD_1:
@@ -849,7 +849,7 @@ namespace isxao_utilities
 		case WS_NCU_5:
 		case WS_NCU_6:
 		case WS_HUD_2:
-			id.Id = DWORD(slot);
+			id.id = DWORD(slot);
 			break;
 		default:
 			return false;
@@ -857,9 +857,9 @@ namespace isxao_utilities
 		return true;
 	}
 
-	bool GetInvSlotIdentity(DWORD slot, IDENTITY& id)
+	bool GetInvSlotIdentity(DWORD slot, identity_t& id)
 	{
-		id.Id = slot;
+		id.id = slot;
 		switch (slot)
 		{
 		case 1:
@@ -877,7 +877,7 @@ namespace isxao_utilities
 		case 13:
 		case 14:
 		case 15:
-			id.Type = 101;
+			id.type = 101;
 			break;
 		case 17:
 		case 18:
@@ -894,7 +894,7 @@ namespace isxao_utilities
 		case 29:
 		case 30:
 		case 31:
-			id.Type = 102;
+			id.type = 102;
 			break;
 		case 33:
 		case 34:
@@ -909,7 +909,7 @@ namespace isxao_utilities
 		case 43:
 		case 44:
 		case 45:
-			id.Type = 103;
+			id.type = 103;
 			break;
 		case 64:
 		case 65:
@@ -942,7 +942,7 @@ namespace isxao_utilities
 		case 92:
 		case 93:
 		case 94:
-			id.Type = 104;
+			id.type = 104;
 			break;
 		default:
 			return false;
@@ -950,13 +950,13 @@ namespace isxao_utilities
 		return true;
 	}
 
-	PCSTR GetInvSlotName(const IDENTITY& slot)
+	PCSTR GetInvSlotName(const identity_t& slot)
 	{
-		switch (slot.Type)
+		switch (slot.type)
 		{
 		case 101:
 		{
-			switch (slot.Id)
+			switch (slot.id)
 			{
 			case 1:
 				return "WS_HUD1";
@@ -994,7 +994,7 @@ namespace isxao_utilities
 		}
 		case 102:
 		{
-			switch (slot.Id - 16)
+			switch (slot.id - 16)
 			{
 			case 1:
 				return "AS_NECK";
@@ -1032,7 +1032,7 @@ namespace isxao_utilities
 		}
 		case 103:
 		{
-			switch (slot.Id - 32)
+			switch (slot.id - 32)
 			{
 			case 1:
 				return "IS_EYES";
@@ -1066,7 +1066,7 @@ namespace isxao_utilities
 		}
 		case 104:
 		{
-			switch (slot.Id - 63)
+			switch (slot.id - 63)
 			{
 			case 1:
 				return "GI_64";
@@ -1136,7 +1136,7 @@ namespace isxao_utilities
 		return "Unknown";
 	}
 
-	bool GetInvSlotIdentity(PCSTR slot_name, IDENTITY &id)
+	bool GetInvSlotIdentity(PCSTR slot_name, identity_t &id)
 	{
 		char search_name[MAX_STRING];
 		strcpy_s(search_name, MAX_STRING, slot_name);
@@ -1289,14 +1289,14 @@ namespace isxao_utilities
 			GetInvSlotIdentity(93, id);
 		else if (!strcmp(search_name, "gi_94"))
 			GetInvSlotIdentity(94, id);
-		if (id.Type != 0)
+		if (id.type != 0)
 			return true;
 		return false;
 	}
 
-	PINVENTORYDATA GetInvSlotData(INVENTORYSLOT *slot)
+	p_inventory_data_t GetInvSlotData(INVENTORYSLOT *slot)
 	{
-		return P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[slot->SlotID.Id];
+		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[slot->SlotID.id];
 	}
 
 #pragma endregion
@@ -1305,7 +1305,7 @@ namespace isxao_utilities
 
 	LSTypeDefinition* GetRealType(Dynel* pObject)
 	{
-		if (pObject && pObject->GetIdentity().Type == 50000)
+		if (pObject && pObject->GetIdentity().type == 50000)
 		{
 			if (pObject->IsCharacter())
 				return pCharacterType;
@@ -1329,7 +1329,7 @@ namespace isxao_utilities
 			return GAMESTATE_NOT_IN_GAME;
 		if (!P_PLAYFIELD_DIR->GetPlayfield())
 			return GAMESTATE_WAITING_FOR_PLAYFIELD;
-		if (!P_ENGINE_CLIENT_ANARCHY->GetClientChar())
+		if (!P_ENGINE_CLIENT_ANARCHY->get_client_char())
 			return GAMESTATE_WAITING_FOR_CLIENT_CHAR;
 		return GAMESTATE_IN_GAME;
 	}
@@ -1629,13 +1629,13 @@ namespace isxao_utilities
 		}
 		case ::CAT_SET_NANO_DURATION:
 		{
-			IDENTITY caster_identity;
-			caster_identity.Type = 50000;
-			caster_identity.Id = character_action_message.Param1();
+			identity_t caster_identity;
+			caster_identity.type = 50000;
+			caster_identity.id = character_action_message.Param1();
 			char nano_id[MAX_STRING];
 			sprintf_s(nano_id, sizeof(nano_id), "%d", character_action_message.Identity().Id());
 			char caster_id[MAX_STRING];
-			sprintf_s(caster_id, sizeof(caster_id), "%I64u", caster_identity.GetCombinedIdentity());
+			sprintf_s(caster_id, sizeof(caster_id), "%I64u", caster_identity.get_combined_identity());
 			char duration[MAX_STRING];
 			sprintf_s(duration, sizeof(duration), "%d", character_action_message.Param2());
 			char * argv[] = { nano_id, caster_id, duration };
@@ -1714,7 +1714,7 @@ namespace isxao_utilities
 		char* channel = _strdup(group_message_info->ChatChannel.c_str());
 		char* message = _strdup(group_message_info->Message.c_str());
 		char id[MAX_STRING];
-		sprintf_s(id, sizeof(id), "%I64u", group_message_info->SenderIdentity.GetCombinedIdentity());
+		sprintf_s(id, sizeof(id), "%I64u", group_message_info->SenderIdentity.get_combined_identity());
 		char *argv[] = { sender, channel, message, id };
 		pISInterface->ExecuteEvent(GetEventId("AO_onGroupMessageReceived"), 0, 4, argv);
 		delete group_message_info;
@@ -1725,7 +1725,7 @@ namespace isxao_utilities
 		char* sender = _strdup(private_message_info->SenderName.c_str());
 		char* message = _strdup(private_message_info->Message.c_str());
 		char id[MAX_STRING];
-		sprintf_s(id, sizeof(id), "%I64u", private_message_info->SenderIdentity.GetCombinedIdentity());
+		sprintf_s(id, sizeof(id), "%I64u", private_message_info->SenderIdentity.get_combined_identity());
 		char *argv[] = { sender, message, id };
 		pISInterface->ExecuteEvent(GetEventId("AO_onTellReceived"), 0, 3, argv);
 		delete private_message_info;
@@ -1736,7 +1736,7 @@ namespace isxao_utilities
 		char* sender = _strdup(vicinity_message_info->SenderName.c_str());
 		char* message = _strdup(vicinity_message_info->Message.c_str());
 		char id[MAX_STRING];
-		sprintf_s(id, sizeof(id), "%I64u", vicinity_message_info->SenderIdentity.GetCombinedIdentity());
+		sprintf_s(id, sizeof(id), "%I64u", vicinity_message_info->SenderIdentity.get_combined_identity());
 		char *argv[] = { sender, message, id };
 		pISInterface->ExecuteEvent(GetEventId("AO_onVicinityMessageReceived"), 0, 3, argv);
 		delete vicinity_message_info;

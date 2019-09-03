@@ -13,8 +13,8 @@ bool SpecialActionTemplateType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER
 		{		
 		case Identity:
 		{
-			IDENTITY id = pSpecialActionTemplate->GetIdentity();
-			PIDENTITY pId = PIDENTITY(pISInterface->GetTempBuffer(sizeof(IDENTITY), &id));
+			identity_t id = pSpecialActionTemplate->GetIdentity();
+			p_identity_t pId = p_identity_t(pISInterface->GetTempBuffer(sizeof(identity_t), &id));
 			Object.Ptr = pId;
 			Object.Type = pIdentityType;
 			break;
@@ -83,7 +83,7 @@ bool SpecialActionTemplateType::ToText(LSOBJECTDATA ObjectData, char *buf, unsig
 	if (!ObjectData.Ptr)
 		return false;
 #define pSpecialActionTemplate ((SpecialActionTemplate*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%d", pSpecialActionTemplate->GetIdentity().Id);
+	sprintf_s(buf, buflen, "%d", pSpecialActionTemplate->GetIdentity().id);
 #undef pSpecialActionTemplate
 
 	return true;

@@ -26,7 +26,7 @@ namespace isxao_classes
 	void NanoItem::Cast()
 	{
 		if(pSelectionIndicator)
-			P_ENGINE_CLIENT_ANARCHY->GetClientChar()->CastNanoSpell(GetNanoIdentity(), pSelectionIndicator->Identity);
+			P_ENGINE_CLIENT_ANARCHY->get_client_char()->CastNanoSpell(GetNanoIdentity(), pSelectionIndicator->Identity);
 	}
 
 	float NanoItem::GetAttackDelay()
@@ -62,7 +62,7 @@ namespace isxao_classes
 		return GetSkill(ST_CAN);
 	}
 
-	IDENTITY NanoItem::GetNanoIdentity()
+	identity_t NanoItem::GetNanoIdentity()
 	{
 		return GetNanoItemData()->NanoIdentity;
 	}
@@ -104,8 +104,8 @@ namespace isxao_classes
 
 	LONG NanoItem::GetSkill(DWORD stat)
 	{
-		IDENTITY dummy_identity;
-		ZeroMemory(&dummy_identity, sizeof(IDENTITY));
+		identity_t dummy_identity;
+		ZeroMemory(&dummy_identity, sizeof(identity_t));
 		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(GetNanoIdentity(), stat, 2, dummy_identity);
 	}
 

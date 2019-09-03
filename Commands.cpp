@@ -22,9 +22,9 @@ int CMD_DUMPSPECIALACTIONS(int argc, char *argv[])
 
 int CMD_DUMPSTATS(int argc, char *argv[])
 {
-	IDENTITY id;
-	IDENTITY dummy;
-	if (P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetTarget(id))
+	identity_t id;
+	identity_t dummy;
+	if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetTarget(id))
 	{
 		FILE * pFILE;
 		fopen_s(&pFILE, "stats.txt", "a");
@@ -68,12 +68,12 @@ int CMD_DUMPSTATS(int argc, char *argv[])
 
 int CMD_ATTACK(int argc, char *argv[])
 {
-	IDENTITY p1;
-	IDENTITY p2;
+	identity_t p1;
+	identity_t p2;
 	P_ENGINE_CLIENT_ANARCHY->N3Msg_GetClientPetID(p1, 0);
-	printf("%d", p1.Id);
+	printf("%d", p1.id);
 	P_ENGINE_CLIENT_ANARCHY->N3Msg_GetClientPetID(p2, 1);
-	printf("%d", p2.Id);
+	printf("%d", p2.id);
 	return 0;
 }
 
@@ -81,25 +81,25 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 {	
 	printf("Testing struct sizes...");
 
-	DWORD r = sizeof(BANKENTRY);
+	DWORD r = sizeof(bank_entry_t);
 	DWORD a = 0x38;
-	printf("BANKENTRY: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("bank_entry_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(BINARYSTREAM);
+	r = sizeof(binary_stream_t);
 	a = 0x44;
-	printf("BINARYSTREAM: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("binary_stream_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(CAMERAVEHICLE);
+	r = sizeof(camera_vehicle_t);
 	a = 0x1EC;
-	printf("CAMERAVEHICLE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("camera_vehicle_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(CHARMOVEMENTSTATUS);
+	r = sizeof(char_movement_status_t);
 	a = 0x34;
-	printf("CHARMOVEMENTSTATUS: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("char_movement_status_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(CHARVEHICLE);
+	r = sizeof(char_vehicle_t);
 	a = 0x3AC;
-	printf("CHARVEHICLE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("char_vehicle_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(CHEST);
 	a = 0x1E8;
@@ -121,13 +121,13 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x18;
 	printf("DBOBJECT: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(DUMMYITEMBASE);
+	r = sizeof(dummy_item_base_t);
 	a = 0xA4;
-	printf("DUMMYITEMBASE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("dummy_item_base_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(DUMMYVEHICLE);
+	r = sizeof(dummy_vehicle_t);
 	a = 0x160;
-	printf("DUMMYVEHICLE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");	
+	printf("dummy_vehicle_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");	
 
 	r = sizeof(EVENTCASTER);
 	a = 0x18;
@@ -145,25 +145,25 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x54;
 	printf("HOTSPOT: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(IDENTITY);
+	r = sizeof(identity_t);
 	a = 0x8;
-	printf("IDENTITY: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("identity_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(INPUTCONFIG);
 	a = 0x8;
 	printf("INPUTCONFIG: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(INVENTORYDATA);
+	r = sizeof(inventory_data_t);
 	a = 0x2C;
-	printf("INVENTORYDATA: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("inventory_data_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(INVENTORYHOLDER);
 	a = 0x1B8;
 	printf("INVENTORYHOLDER: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(IPOINT);
+	r = sizeof(i_point_t);
 	a = 0x8;
-	printf("IPOINT: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("i_point_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(MESHCOLLSPHERE);
 	a = 0x1C;
@@ -189,9 +189,9 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x30;
 	printf("N3DYNAMESHCOLLSPHERE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3ENGINECLIENTANARCHY);
+	r = sizeof(n3_engine_client_anarchy_t);
 	a = 0x130;
-	printf("N3ENGINECLIENTANARCHY: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_engine_client_anarchy_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(N3FOBJ);
 	a = 0x18;
@@ -237,13 +237,13 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x110;
 	printf("PLAYFIELDANARCHY: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(QUATERNION);
+	r = sizeof(quaternion_t);
 	a = 0x10;
-	printf("QUATERNION: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("quaternion_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(RDBIDENTITY);
+	r = sizeof(rdb_identity_t);
 	a = 0xC;
-	printf("RDBIDENTITY: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("rdb_identity_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(RDBPLAYFIELD);
 	a = 0x6C;
@@ -265,9 +265,9 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x50;
 	printf("SPELLANDTEMPLATEDATA: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(VECTOR3);
+	r = sizeof(vector3_t);
 	a = 0xC;
-	printf("VECTOR3: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("vector3_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(WEAPONHOLDER);
 	a = 0xA4;

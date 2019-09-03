@@ -11,7 +11,7 @@ namespace isxao_classes
 		return v.size();
 	}
 
-	IDENTITY NewInventory::GetInventoryIdentity() const
+	identity_t NewInventory::GetInventoryIdentity() const
 	{
 		return GetNewInventoryData().InventoryIdentity;
 	}

@@ -29,7 +29,7 @@ bool InventorySlotType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 		}
 		case ItemCount:
 		{
-			Object.DWord = pInventorySlot->GetInvSlotData()->Count;
+			Object.DWord = pInventorySlot->GetInvSlotData()->count;
 			Object.Type = pUintType;
 			break;
 		}
@@ -50,14 +50,14 @@ bool InventorySlotType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 		}
 		case QualityLevel:
 		{
-			Object.DWord = pInventorySlot->GetInvSlotData()->QualityLevel;
+			Object.DWord = pInventorySlot->GetInvSlotData()->quality_level;
 			Object.Type = pUintType;
 			break;
 		}
 		case Slot:
 		{
-			IDENTITY id = pInventorySlot->SlotID;
-			PIDENTITY pId = static_cast<PIDENTITY>(pISInterface->GetTempBuffer(sizeof(IDENTITY), &id));
+			identity_t id = pInventorySlot->SlotID;
+			p_identity_t pId = static_cast<p_identity_t>(pISInterface->GetTempBuffer(sizeof(identity_t), &id));
 			Object.Ptr = pId;
 			Object.Type = pIdentityType;
 			break;
@@ -84,9 +84,9 @@ bool InventorySlotType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMetho
 		{
 		case Use:
 		{
-			IDENTITY d;
-			ZeroMemory(&d, sizeof(IDENTITY));
-			if(P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->GetClientChar() && P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(pInventorySlot->SlotID, d))
+			identity_t d;
+			ZeroMemory(&d, sizeof(identity_t));
+			if(P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->get_client_char() && P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(pInventorySlot->SlotID, d))
 			{
 				P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(pInventorySlot->SlotID, false);
 				return true;

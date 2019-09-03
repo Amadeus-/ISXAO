@@ -8,29 +8,29 @@ namespace isxao_classes
 		return &dummy_item_base_;
 	}
 
-	PDUMMYITEMBASE DummyItemBase::GetDummyItemBaseData()
+	p_dummy_item_base_t DummyItemBase::GetDummyItemBaseData()
 	{
-		return PDUMMYITEMBASE(GetData());
+		return p_dummy_item_base_t(GetData());
 	}
 
 	PCSTR DummyItemBase::GetDescription()
 	{
-		return GetDummyItemBaseData()->Description;
+		return GetDummyItemBaseData()->description;
 	}
 
-	IDENTITY DummyItemBase::GetIdentity()
+	identity_t DummyItemBase::GetIdentity()
 	{
-		return GetDummyItemBaseData()->Identity;
+		return GetDummyItemBaseData()->identity;
 	}
 
-	IDENTITY DummyItemBase::GetParentIdentity()
+	identity_t DummyItemBase::GetParentIdentity()
 	{
-		return GetDummyItemBaseData()->ParentIdentity;
+		return GetDummyItemBaseData()->parent_identity;
 	}
 
 	PCSTR DummyItemBase::GetName()
 	{
-		return GetDummyItemBaseData()->Name;
+		return GetDummyItemBaseData()->name;
 	}
 
 }

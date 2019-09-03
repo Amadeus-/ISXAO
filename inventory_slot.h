@@ -2,12 +2,12 @@
 
 typedef struct _INVENTORYSLOT
 {
-	IDENTITY SlotID;
+	identity_t SlotID;
 	InventoryItem* pItem;
 
 	PCSTR GetSlotName() const;	
 
-	PINVENTORYDATA GetInvSlotData();
+	p_inventory_data_t GetInvSlotData();
 
 	double GetItemProgress(DWORD&, DWORD&) const;
 

@@ -745,7 +745,7 @@ namespace isxao_globals
 //#pragma region ItemManagement
 //#ifdef ItemManager_t__m_ppcInstance_x
 //		ItemManager_t__m_ppcInstance = ItemManager_t__m_ppcInstance_x + gamecode_module_handle;
-//		pppItemVector = reinterpret_cast<std::vector<ACGGAMEITEM>***>(ItemManager_t__m_ppcInstance);
+//		pppItemVector = reinterpret_cast<std::vector<acg_game_item_t>***>(ItemManager_t__m_ppcInstance);
 //#endif
 //#ifdef 	NanoItemManager_t__m_pcInstance_x
 //		NanoItemManager_t__m_pcInstance = NanoItemManager_t__m_pcInstance_x + gamecode_module_handle;
@@ -899,7 +899,7 @@ namespace isxao_globals
 //#endif
 //#ifdef TargetingModule_t__m_cLastTarget_x
 //		TargetingModule_t__m_cLastTarget = TargetingModule_t__m_cLastTarget_x + hGUI;
-//		pLastTarget = reinterpret_cast<IDENTITY*>(TargetingModule_t__m_cLastTarget);
+//		pLastTarget = reinterpret_cast<identity_t*>(TargetingModule_t__m_cLastTarget);
 //#endif
 //#ifdef TargetingModule_t__RemoveTarget_x
 //		TargetingModule_t__RemoveTarget = TargetingModule_t__RemoveTarget_x + hGUI;
@@ -1522,7 +1522,7 @@ namespace isxao_globals
 #pragma region ItemManagement
 
 	DWORD ItemManager_t__m_ppcInstance = 0;
-	std::vector<ACGGAMEITEM> ***pppItemVector = nullptr;
+	std::vector<acg_game_item_t> ***pppItemVector = nullptr;
 	DWORD NanoItemManager_t__m_pcInstance = 0;
 	NANOITEMDIR **ppNanoItemDir = nullptr;
 	DWORD NanoItem_t__GetNanoItem = 0;
@@ -1586,7 +1586,7 @@ namespace isxao_globals
 	DWORD TargetingModule_t__m_pcAttackingIndicator = 0;
 	INDICATOR** ppAttackingIndicator = nullptr;
 	DWORD TargetingModule_t__m_cLastTarget = 0;
-	IDENTITY* pLastTarget = nullptr;
+	identity_t* pLastTarget = nullptr;
 	DWORD TargetingModule_t__RemoveTarget = 0;
 	DWORD TargetingModule_t__SelectSelf = 0;
 	DWORD TargetingModule_t__SetTarget = 0;

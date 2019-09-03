@@ -3,7 +3,7 @@
 namespace isxao_classes
 {
 
-	IDENTITY SpecialActionTemplate::GetIdentity() const
+	identity_t SpecialActionTemplate::GetIdentity() const
 	{
 		return GetSpecialActionData().Identity;
 	}
@@ -38,7 +38,7 @@ namespace isxao_classes
 
 	PCSTR SpecialActionTemplate::GetName() const
 	{
-		IDENTITY dummy_identity;
+		identity_t dummy_identity;
 		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName(GetIdentity(), dummy_identity);
 	}
 
@@ -49,13 +49,13 @@ namespace isxao_classes
 
 	SpecialActionItem* SpecialActionTemplate::GetSpecialActionItem()
 	{
-		IDENTITY dummy_identity;
-		ZeroMemory(&dummy_identity, sizeof(IDENTITY));
+		identity_t dummy_identity;
+		ZeroMemory(&dummy_identity, sizeof(identity_t));
 		return reinterpret_cast<SpecialActionItem*>(P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(GetIdentity(), dummy_identity));
 	}
 
 
-	IDENTITY SpecialActionTemplate::GetWeaponIdentity() const
+	identity_t SpecialActionTemplate::GetWeaponIdentity() const
 	{
 		return GetSpecialActionData().WeaponIdentity;
 	}
@@ -72,12 +72,12 @@ namespace isxao_classes
 
 	bool SpecialActionTemplate::SpecialActionCompare(SpecialActionTemplate &a, SpecialActionTemplate &b)
 	{
-		return a.GetIdentity().Id < b.GetIdentity().Id;
+		return a.GetIdentity().id < b.GetIdentity().id;
 	}
 
 	bool SpecialActionTemplate::pSpecialActionCompare(SpecialActionTemplate *a, SpecialActionTemplate *b)
 	{
-		return a->GetIdentity().Id < b->GetIdentity().Id;
+		return a->GetIdentity().id < b->GetIdentity().id;
 	}
 	
 }

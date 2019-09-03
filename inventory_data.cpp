@@ -3,29 +3,29 @@
 namespace isxao_classes
 {
 
-	IDENTITY InventoryData::GetDynelId() const
+	identity_t InventoryData::GetDynelId() const
 	{
-		return GetInventoryDataData().DynelIdentity;
+		return GetInventoryDataData().dynel_identity;
 	}
 
-	INVENTORYDATA InventoryData::GetInventoryDataData() const
+	inventory_data_t InventoryData::GetInventoryDataData() const
 	{
 		return inventory_data_;
 	}
 
 	DWORD InventoryData::GetItemCount() const
 	{
-		return GetInventoryDataData().Count;
+		return GetInventoryDataData().count;
 	}
 
-	RDBIDENTITY InventoryData::GetRDBIdentity() const
+	rdb_identity_t InventoryData::GetRDBIdentity() const
 	{
-		return GetInventoryDataData().RDBIdentity;
+		return GetInventoryDataData().rdb_identity;
 	}
 
 	DWORD InventoryData::GetQualityLevel() const
 	{
-		return GetInventoryDataData().QualityLevel;
+		return GetInventoryDataData().quality_level;
 	}
 
 

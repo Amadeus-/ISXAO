@@ -51,7 +51,7 @@ namespace isxao_classes
 			GetTeam(team_entry_vector, i);
 			for (auto it = team_entry_vector.begin(); it != team_entry_vector.end(); ++it)
 			{
-				if(!IsClientId((*it)->GetIdentity().Id))
+				if(!IsClientId((*it)->GetIdentity().id))
 					v.push_back(*it);
 			}				
 		}
@@ -111,7 +111,7 @@ namespace isxao_classes
 		for (auto it = team_entry_vector->begin(); it != team_entry_vector->end(); ++it)
 		{
 			auto entry = reinterpret_cast<TeamEntry*>(*it);
-			if (!IsClientId(entry->GetIdentity().Id))
+			if (!IsClientId(entry->GetIdentity().id))
 				v.push_back(entry);
 		}
 		return v.size();
@@ -151,12 +151,12 @@ namespace isxao_classes
 		return nullptr;
 	}
 
-	IDENTITY TeamRaid::GetTeamIdentity() const
+	identity_t TeamRaid::GetTeamIdentity() const
 	{
 		return GetTeamRaidData().TeamIdentity;
 	}
 
-	IDENTITY TeamRaid::GetTeamLeaderID() const
+	identity_t TeamRaid::GetTeamLeaderID() const
 	{
 		return GetTeamRaidData().TeamLeaderIdentity;
 	}

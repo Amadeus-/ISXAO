@@ -3,11 +3,11 @@
 class InventoryData
 {
 public:
-	AOLIB_OBJECT IDENTITY GetDynelId() const;
-	AOLIB_OBJECT INVENTORYDATA GetInventoryDataData() const;
+	AOLIB_OBJECT identity_t GetDynelId() const;
+	AOLIB_OBJECT inventory_data_t GetInventoryDataData() const;
 	AOLIB_OBJECT DWORD GetItemCount() const;
-	AOLIB_OBJECT RDBIDENTITY GetRDBIdentity() const;
+	AOLIB_OBJECT rdb_identity_t GetRDBIdentity() const;
 	AOLIB_OBJECT DWORD GetQualityLevel() const;
 private:
-	INVENTORYDATA inventory_data_;
+	inventory_data_t inventory_data_;
 };

@@ -65,9 +65,9 @@ namespace isxao_internal
 	//	char Breed[MAX_STRING];
 	//	float MinRadius;
 	//	float MaxRadius;
-	//	VECTOR3 Range;
+	//	vector3_t Range;
 	//	bool KnownLocation;
-	//	VECTOR3 Location;
+	//	vector3_t Location;
 	//	bool NoPCNear;
 	//	float NoPCNearRange;
 	//} SEARCHACTOR, *PSEARCHACTOR;
@@ -167,15 +167,15 @@ namespace isxao_internal
 
 	typedef struct _GROUPMESSAGEINFO
 	{
-		struct _IDENTITY SenderIdentity;
+		identity_t SenderIdentity;
 		std::string SenderName;
 		std::string ChatChannel;
 		std::string Message;
 
 		_GROUPMESSAGEINFO(DWORD sender_id, string& sender_name, string& chat_channel, string& message)
 		{
-			SenderIdentity.Type = 50000;
-			SenderIdentity.Id = sender_id;
+			SenderIdentity.type = 50000;
+			SenderIdentity.id = sender_id;
 			SenderName = sender_name;
 			ChatChannel = chat_channel;
 			Message = message;
@@ -185,14 +185,14 @@ namespace isxao_internal
 
 	typedef struct _PRIVATEMESSAGEINFO
 	{
-		struct _IDENTITY SenderIdentity;
+		identity_t SenderIdentity;
 		std::string SenderName;
 		std::string Message;
 
 		_PRIVATEMESSAGEINFO(DWORD sender_id, std::string& sender_name, std::string& message)
 		{
-			SenderIdentity.Type = 50000;
-			SenderIdentity.Id = sender_id;
+			SenderIdentity.type = 50000;
+			SenderIdentity.id = sender_id;
 			SenderName = sender_name;
 			Message = message;
 		}

@@ -98,7 +98,7 @@ bool PetType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 	if (!ObjectData.Ptr)
 		return false;
 #define pPet ((Pet*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64u", pPet->GetIdentity().GetCombinedIdentity());
+	sprintf_s(buf, buflen, "%I64u", pPet->GetIdentity().get_combined_identity());
 #undef pPet
 
 	return true;

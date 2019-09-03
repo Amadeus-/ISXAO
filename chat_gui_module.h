@@ -5,5 +5,5 @@ class ChatGUIModule
 public:
 	static void HandleSystemMessage(PPPJCLIENTSYSTEMMESSAGE);
 private:
-	CHATGUIMODULE chat_gui_module_;
+	chat_gui_module_t chat_gui_module_;
 };

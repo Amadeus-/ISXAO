@@ -24,15 +24,15 @@ bool AOType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER pMember, int argc,
 			return false;
 		if (argc == 6 && IsNumber(argv[0]) && IsNumber(argv[1]) && IsNumber(argv[2]) && IsNumber(argv[3]) && IsNumber(argv[4]) && IsNumber(argv[5]))
 		{
-			VECTOR3 to_position;
-			to_position.X = float(atof(argv[0]));
-			to_position.Y = float(atof(argv[1]));
-			to_position.Z = float(atof(argv[2]));
-			VECTOR3 from_position;
-			from_position.X = float(atof(argv[3]));
-			from_position.Y = float(atof(argv[4]));
-			from_position.Z = float(atof(argv[5]));
-			Object.DWord = P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(to_position, from_position, P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetVehicle()->GetZoneInstanceID(), false);
+			vector3_t to_position;
+			to_position.x = float(atof(argv[0]));
+			to_position.y = float(atof(argv[1]));
+			to_position.z = float(atof(argv[2]));
+			vector3_t from_position;
+			from_position.x = float(atof(argv[3]));
+			from_position.y = float(atof(argv[4]));
+			from_position.z = float(atof(argv[5]));
+			Object.DWord = P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(to_position, from_position, P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetVehicle()->GetZoneInstanceID(), false);
 			Object.Type = pBoolType;
 			return true;
 		}
@@ -66,15 +66,15 @@ bool AOType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER pMember, int argc,
 			return false;
 		if (argc == 6 && IsNumber(argv[0]) && IsNumber(argv[1]) && IsNumber(argv[2]) && IsNumber(argv[3]) && IsNumber(argv[4]) && IsNumber(argv[5]))
 		{
-			VECTOR3 to_position;
-			to_position.X = float(atof(argv[0]));
-			to_position.Y = float(atof(argv[1]));
-			to_position.Z = float(atof(argv[2]));
-			VECTOR3 from_position;
-			from_position.X = float(atof(argv[3]));
-			from_position.Y = float(atof(argv[4]));
-			from_position.Z = float(atof(argv[5]));
-			auto raw_heading = VECTOR3::Subtract(to_position, from_position).GetYaw();
+			vector3_t to_position;
+			to_position.x = float(atof(argv[0]));
+			to_position.y = float(atof(argv[1]));
+			to_position.z = float(atof(argv[2]));
+			vector3_t from_position;
+			from_position.x = float(atof(argv[3]));
+			from_position.y = float(atof(argv[4]));
+			from_position.z = float(atof(argv[5]));
+			auto raw_heading = vector3_t::subtract(to_position, from_position).get_yaw();
 			auto heading = float(raw_heading * 360.0f / (2 * M_PI));
 			if (heading < 0.0f)
 				heading += 360.0f;

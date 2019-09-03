@@ -22,30 +22,30 @@ namespace isxao_inlines
 		return g_character_id == id;
 	}
 
-	POINT3F inline Point3fFromVector3(VECTOR3 &v)
+	POINT3F inline Point3fFromVector3(vector3_t &v)
 	{
 		POINT3F p;
-		p.X = v.X;
-		p.Y = v.Y;
-		p.Z = v.Z;
+		p.X = v.x;
+		p.Y = v.y;
+		p.Z = v.z;
 		return p;
 	}
 
-	VECTOR3 inline Vector3FromPoint3f(POINT3F &p)
+	vector3_t inline Vector3FromPoint3f(POINT3F &p)
 	{
-		VECTOR3 v;
-		v.X = p.X;
-		v.Y = p.Y;
-		v.Z = p.Z;
+		vector3_t v;
+		v.x = p.X;
+		v.y = p.Y;
+		v.z = p.Z;
 		return v;
 	}
 
-	VECTOR3 inline Vector3FrompPoint3f(PPOINT3F p)
+	vector3_t inline Vector3FrompPoint3f(PPOINT3F p)
 	{
-		VECTOR3 v;
-		v.X = p->X;
-		v.Y = p->Y;
-		v.Z = p->Z;
+		vector3_t v;
+		v.x = p->X;
+		v.y = p->Y;
+		v.z = p->Z;
 		return v;
 	}
 

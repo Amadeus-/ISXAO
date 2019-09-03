@@ -20,7 +20,7 @@ bool TeamEntryType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		case Identity:
 		{
 			auto identity = pTeamEntry->GetIdentity();
-			auto p_identity = pISInterface->GetTempBuffer(sizeof(IDENTITY), &identity);
+			auto p_identity = pISInterface->GetTempBuffer(sizeof(identity_t), &identity);
 			Object.Ptr = p_identity;
 			Object.Type = pIdentityType;
 			break;
@@ -85,7 +85,7 @@ bool TeamEntryType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int bufl
 	if (!ObjectData.Ptr)
 		return false;
 #define pTeamEntry ((TeamMember*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64u", pTeamEntry->GetIdentity().GetCombinedIdentity());
+	sprintf_s(buf, buflen, "%I64u", pTeamEntry->GetIdentity().get_combined_identity());
 #undef pTeamEntry
 
 	return true;

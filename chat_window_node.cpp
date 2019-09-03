@@ -3,7 +3,7 @@
 namespace isxao_classes
 {
 	
-CHATWINDOWNODE ChatWindowNode::GetData() const
+chat_window_node_t ChatWindowNode::GetData() const
 {
 	return chat_window_node_;
 }

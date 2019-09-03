@@ -3,7 +3,7 @@
 namespace isxao_classes
 {
 
-	IDENTITY NanoTemplate::GetCasterIdentity() const
+	identity_t NanoTemplate::GetCasterIdentity() const
 	{
 		return GetNanoTemplateData().CasterIdentity;
 	}
@@ -13,7 +13,7 @@ namespace isxao_classes
 		return GetNanoTemplateData().Duration;
 	}
 
-	IDENTITY NanoTemplate::GetNanoIdentity() const
+	identity_t NanoTemplate::GetNanoIdentity() const
 	{
 		return GetNanoTemplateData().NanoIdentity;
 	}
@@ -39,7 +39,7 @@ namespace isxao_classes
 
 	bool NanoTemplate::NanoTemplateCompare(NanoTemplate &a, NanoTemplate &b)
 	{
-		return a.GetNanoIdentity().Id < b.GetNanoIdentity().Id;
+		return a.GetNanoIdentity().id < b.GetNanoIdentity().id;
 	}
 
 	bool NanoTemplate::Remove() const

@@ -152,7 +152,7 @@ bool TeamRaidType::ToText(LSOBJECTDATA ObjectData, char* buf, unsigned buflen)
 	if (!ObjectData.Ptr)
 		return false;
 #define pTeamRaid ((TeamRaid*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64d", pTeamRaid->GetTeamIdentity().GetCombinedIdentity());
+	sprintf_s(buf, buflen, "%I64d", pTeamRaid->GetTeamIdentity().get_combined_identity());
 #undef pTeamRaid
 	return true;
 }

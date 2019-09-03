@@ -5,12 +5,12 @@ namespace isxao_classes
 
 	DWORD InventoryHolder::BuildLSInventory(LSObjectCollection *pMap) const
 	{
-		IDENTITY d;
-		ZeroMemory(&d, sizeof(IDENTITY));
+		identity_t d;
+		ZeroMemory(&d, sizeof(identity_t));
 		auto count = GetNewInventory()->GetInventorySize();
 		for (DWORD i = 0; i < count; i++)
 		{
-			IDENTITY slot;
+			identity_t slot;
 			isxao_utilities::GetInvSlotIdentity(i, slot);
 			auto pItem = P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(slot, d);
 			if (pItem)
@@ -23,12 +23,12 @@ namespace isxao_classes
 
 	DWORD InventoryHolder::BuildLSInventory(LSIndex* pIndex) const
 	{
-		IDENTITY d;
-		ZeroMemory(&d, sizeof(IDENTITY));
+		identity_t d;
+		ZeroMemory(&d, sizeof(identity_t));
 		auto count = GetNewInventory()->GetInventorySize();
 		for (DWORD i = 0; i < count; i++)
 		{
-			IDENTITY slot;
+			identity_t slot;
 			::GetInvSlotIdentity(i, slot);
 			auto pItem = P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(slot, d);
 			if (pItem)
@@ -43,11 +43,11 @@ namespace isxao_classes
 		return pIndex->GetContainerUsed();
 	}
 
-	DWORD InventoryHolder::GetArmorInventory(std::vector<INVENTORYDATA*> &v)
+	DWORD InventoryHolder::GetArmorInventory(std::vector<inventory_data_t*> &v)
 	{
 		for (int i = 17; i < 32; i++)
 		{
-			PINVENTORYDATA p_inventory_data = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
+			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
@@ -56,25 +56,25 @@ namespace isxao_classes
 	
 	BankEntry* InventoryHolder::GetBankInventory() const
 	{
-		return reinterpret_cast<BankEntry*>(GetInventoryHolderData().pBankEntry);
+		return reinterpret_cast<BankEntry*>(GetInventoryHolderData().p_bank_entry);
 	}
 
-	DWORD InventoryHolder::GetCharacterInventory(std::vector<INVENTORYDATA*> &v)
+	DWORD InventoryHolder::GetCharacterInventory(std::vector<inventory_data_t*> &v)
 	{
 		for (int i = 64; i < 94; i++)
 		{
-			PINVENTORYDATA p_inventory_data = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
+			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
 		return v.size();
 	}
 
-	DWORD InventoryHolder::GetImplantInventory(std::vector<INVENTORYDATA*> &v)
+	DWORD InventoryHolder::GetImplantInventory(std::vector<inventory_data_t*> &v)
 	{
 		for (int i = 33; i < 46; i++)
 		{
-			PINVENTORYDATA p_inventory_data = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
+			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
@@ -83,7 +83,7 @@ namespace isxao_classes
 
 	DWORD InventoryHolder::GetInventoryCount() const
 	{
-		std::map<IDENTITY, InventoryItem*> m;
+		std::map<identity_t, InventoryItem*> m;
 		return GetInventory(m);
 	}
 	
@@ -97,7 +97,7 @@ namespace isxao_classes
 		return inventory_holder_;
 	}
 
-	PIDENTITY InventoryHolder::GetInventoryHolderIdentity() const
+	p_identity_t InventoryHolder::GetInventoryHolderIdentity() const
 	{
 		return GetInventoryHolderData().pClientIdentity;
 	}
@@ -109,7 +109,7 @@ namespace isxao_classes
 
 	InventoryItem* InventoryHolder::GetInventoryItem(DWORD index) const
 	{
-		std::map<IDENTITY, InventoryItem*> m;
+		std::map<identity_t, InventoryItem*> m;
 		GetInventory(m);
 		if (index < 1 || index > m.size())
 			return nullptr;
@@ -124,10 +124,10 @@ namespace isxao_classes
 
 	InventoryItem* InventoryHolder::GetInventoryItem(PCSTR szArg) const
 	{
-		IDENTITY id;
-		ZeroMemory(&id, sizeof(IDENTITY));
-		IDENTITY d;
-		ZeroMemory(&d, sizeof(IDENTITY));
+		identity_t id;
+		ZeroMemory(&id, sizeof(identity_t));
+		identity_t d;
+		ZeroMemory(&d, sizeof(identity_t));
 		char szName[MAX_STRING] = { 0 };
 		char szSearchName[MAX_STRING];
 		strcpy_s(szSearchName, MAX_STRING, szArg);
@@ -218,9 +218,9 @@ namespace isxao_classes
 			GetInvSlotIdentity(::IS_L_HAND, id);
 		else if (!strcmp(szSearchName, "is_feet"))
 			GetInvSlotIdentity(::IS_FEET, id);
-		if (id.Type != 0)
+		if (id.type != 0)
 			return reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, d));
-		std::map<IDENTITY, InventoryItem*> m;
+		std::map<identity_t, InventoryItem*> m;
 		GetInventory(m);
 		for (auto it = m.begin(); it != m.end(); ++it)
 		{
@@ -241,7 +241,7 @@ namespace isxao_classes
 		ZeroMemory(&s, sizeof(INVENTORYSLOT));
 		if (P_ENGINE_CLIENT_ANARCHY)
 		{
-			std::map<IDENTITY, InventoryItem*> m;
+			std::map<identity_t, InventoryItem*> m;
 			GetInventory(m);
 			if (index < 1 || index > m.size())
 				return s;
@@ -263,12 +263,12 @@ namespace isxao_classes
 	{
 		INVENTORYSLOT s;
 		ZeroMemory(&s, sizeof(INVENTORYSLOT));
-		if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->GetClientChar())
+		if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->get_client_char())
 		{
-			IDENTITY id;
-			ZeroMemory(&id, sizeof(IDENTITY));
-			IDENTITY d;
-			ZeroMemory(&d, sizeof(IDENTITY));
+			identity_t id;
+			ZeroMemory(&id, sizeof(identity_t));
+			identity_t d;
+			ZeroMemory(&d, sizeof(identity_t));
 			char szName[MAX_STRING] = { 0 };
 			char szSearchName[MAX_STRING];
 			strcpy_s(szSearchName, MAX_STRING, szArg);
@@ -359,12 +359,12 @@ namespace isxao_classes
 				GetInvSlotIdentity(::IS_L_HAND, id);
 			else if (!strcmp(szSearchName, "is_feet"))
 				GetInvSlotIdentity(::IS_FEET, id);
-			if (id.Type != 0)
+			if (id.type != 0)
 			{
 				s.SlotID = id;
 				s.pItem = reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, d));
 			}
-			std::map<IDENTITY, InventoryItem*> m;
+			std::map<identity_t, InventoryItem*> m;
 			GetInventory(m);
 			for (auto it = m.begin(); it != m.end(); ++it)
 			{
@@ -383,15 +383,15 @@ namespace isxao_classes
 		return s;
 	}
 
-	DWORD InventoryHolder::GetInventory(std::map<IDENTITY, InventoryItem*>& m) const
+	DWORD InventoryHolder::GetInventory(std::map<identity_t, InventoryItem*>& m) const
 	{
-		IDENTITY d;
-		d.Type = 0;
-		d.Id = 0;
+		identity_t d;
+		d.type = 0;
+		d.id = 0;
 		auto count = GetNewInventory()->GetInventorySize();
 		for (DWORD i = 0; i < count; i++)
 		{
-			IDENTITY id;
+			identity_t id;
 			isxao_utilities::GetInvSlotIdentity(i, id);
 			auto pItem = P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, d);
 			if (pItem)
@@ -400,11 +400,11 @@ namespace isxao_classes
 		return m.size();
 	}
 
-	DWORD InventoryHolder::GetWeaponInventory(std::vector<INVENTORYDATA*>& v)
+	DWORD InventoryHolder::GetWeaponInventory(std::vector<inventory_data_t*>& v)
 	{
 		for (int i = 1; i < 16; i++)
 		{
-			PINVENTORYDATA p_inventory_data = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
+			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->pInventoryData[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}

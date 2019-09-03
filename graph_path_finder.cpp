@@ -28,9 +28,9 @@ namespace isxao_classes
 
 	FUNCTION_AT_ADDRESS(void GraphPathFinder::CreateFromData(PVOID), GraphPathFinder_t__CreateFromData);
 
-	FUNCTION_AT_ADDRESS(int GraphPathFinder::FindPath(const VECTOR3&, const VECTOR3&, vector<VECTOR3>&, PVOID, bool, bool), GraphPathFinder_t__FindPath);
+	FUNCTION_AT_ADDRESS(int GraphPathFinder::FindPath(const vector3_t&, const vector3_t&, vector<vector3_t>&, PVOID, bool, bool), GraphPathFinder_t__FindPath);
 
-	FUNCTION_AT_ADDRESS(PVOID GraphPathFinder::GenerateGraph(vector<VECTOR3>&, float, float, float, float, PVOID, bool), GraphPathFinder_t__GenerateGraph);
+	FUNCTION_AT_ADDRESS(PVOID GraphPathFinder::GenerateGraph(vector<vector3_t>&, float, float, float, float, PVOID, bool), GraphPathFinder_t__GenerateGraph);
 
 	FUNCTION_AT_ADDRESS(void GraphPathFinder::Init(), GraphPathFinder_t__Init);
 

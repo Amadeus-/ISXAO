@@ -8,9 +8,9 @@ namespace isxao_classes
 		return npc_holder_;
 	}
 
-	DWORD NpcHolder::GetPetMap(std::map<DWORD, IDENTITY> &m) const
+	DWORD NpcHolder::GetPetMap(std::map<DWORD, identity_t> &m) const
 	{
-		std::map<IDENTITY, DWORD> pet_map;
+		std::map<identity_t, DWORD> pet_map;
 		isxao_utilities::GetPetMap(pet_map, GetNPCHolderData().pPetDir);
 		for (auto it = pet_map.begin(); it != pet_map.end(); ++it)
 			m.insert_or_assign(it->second, it->first);

@@ -19,13 +19,13 @@ namespace isxao_utilities
 #pragma region Objects
 
 	AOLIB_API DWORD __cdecl GetFullPerkMap(void);
-	AOLIB_API Dynel* __cdecl GetDynel(const IDENTITY &);
-	AOLIB_API Actor* __cdecl GetActor(const IDENTITY &);
+	AOLIB_API Dynel* __cdecl GetDynel(const identity_t &);
+	AOLIB_API Actor* __cdecl GetActor(const identity_t &);
 	AOLIB_API PNANOITEM __cdecl GetNanoItem(DWORD);
 
 	AOLIB_API bool IsValidDynel(PN3DYNEL);
 
-	AOLIB_API PVOID RequestInfo(const IDENTITY &);
+	AOLIB_API PVOID RequestInfo(const identity_t &);
 
 #pragma endregion
 
@@ -43,23 +43,23 @@ namespace isxao_utilities
 
 #pragma region Collections
 
-	AOLIB_API void RecursiveAddDynelToDynelMap(std::map<IDENTITY, PN3DYNEL>& m, PDYNELNODE pNode, PDYNELROOT pRoot, DWORD& count);
-	AOLIB_API void GetDynelMap(std::map<IDENTITY, PN3DYNEL>& m);
-	AOLIB_API void RecursiveAddPerkToPerkMap(std::map<IDENTITY, DWORD>& m, PPERKNODE pNode, PPERKROOT pRoot, DWORD& count);
-	AOLIB_API void GetPerkMap(std::map<IDENTITY, DWORD>& m, PPERKDIR pDir);
-	AOLIB_API void RecursiveAddPetToPetMap(std::map<IDENTITY, DWORD>& m, PPETNODE pNode, PPETROOT pRoot, DWORD& count);
-	AOLIB_API void GetPetMap(std::map<IDENTITY, DWORD>& m, PPETDIR pPetDir);
+	AOLIB_API void RecursiveAddDynelToDynelMap(std::map<identity_t, PN3DYNEL>& m, PDYNELNODE pNode, PDYNELROOT pRoot, DWORD& count);
+	AOLIB_API void GetDynelMap(std::map<identity_t, PN3DYNEL>& m);
+	AOLIB_API void RecursiveAddPerkToPerkMap(std::map<identity_t, DWORD>& m, PPERKNODE pNode, PPERKROOT pRoot, DWORD& count);
+	AOLIB_API void GetPerkMap(std::map<identity_t, DWORD>& m, PPERKDIR pDir);
+	AOLIB_API void RecursiveAddPetToPetMap(std::map<identity_t, DWORD>& m, PPETNODE pNode, PPETROOT pRoot, DWORD& count);
+	AOLIB_API void GetPetMap(std::map<identity_t, DWORD>& m, PPETDIR pPetDir);
 	AOLIB_API void RecursiveAddNanoToNanoMap(std::map<DWORD, PNANOITEM>& m, PNANOITEMNODE pNode, PNANOITEMROOT pRoot, DWORD& count);
 	AOLIB_API void GetNanoMap(std::map<DWORD, PNANOITEM>& m);
 	AOLIB_API void RecursiveAddStatNameToStatNameMap(std::map<DWORD, PCSTR>& m, PSTATNAMENODE pNode, PSTATNAMEROOT pRoot, DWORD& count);
 	AOLIB_API void GetStatNameMap(std::map<DWORD, PCSTR>& m);
-	AOLIB_API void GetStaticItemMap(std::map<IDENTITY, PDUMMYITEMBASE>& m);
+	AOLIB_API void GetStaticItemMap(std::map<identity_t, p_dummy_item_base_t>& m);
 	AOLIB_API void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, PSTATNODE pNode, PSTATROOT pRoot, DWORD& count);
 	AOLIB_API void GetStatMap(std::map<DWORD, LONG>& m, PSTATDIR pDir);
 	AOLIB_API void RecursiveAddWeaponItemToWeaponItemMap(std::map<DWORD, PWEAPONITEM>& m, PWEAPONITEMNODE pNode, PWEAPONITEMROOT pRoot, DWORD& count);
 	AOLIB_API void GetWeaponItemMap(std::map<DWORD, PWEAPONITEM>& m, WEAPONITEMDIR& dir);
-	AOLIB_API void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, PCHATWINDOWNODENODE pNode, PCHATWINDOWNODEROOT pRoot, DWORD& count);
-	AOLIB_API void GetChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, CHATWINDOWNODEDIR &dir);
+	AOLIB_API void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, p_chat_window_node_node_t pNode, p_chat_window_node_root_t pRoot, DWORD& count);
+	AOLIB_API void GetChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, chat_window_node_dir_t &dir);
 	AOLIB_API void RecursiveAddLockIdToLockIdMap(std::map<DWORD, DWORD>& m, PLOCKIDNODE pNode, PLOCKIDROOT pRoot, DWORD& count);
 	AOLIB_API void GetLockIdMap(std::map<DWORD, DWORD>& m, PLOCKIDDIR pDir);
 
@@ -67,13 +67,13 @@ namespace isxao_utilities
 
 #pragma region Inventory
 
-	bool GetInvSlotIdentity(AOData::ArmorSlot_e slot, IDENTITY& id);
-	bool GetInvSlotIdentity(AOData::ImplantSlot_e slot, IDENTITY& id);
-	bool GetInvSlotIdentity(AOData::WeaponSlot_e slot, IDENTITY& id);
-	bool GetInvSlotIdentity(DWORD slot, IDENTITY& id);
-	PCSTR GetInvSlotName(const IDENTITY& slot);
-	bool GetInvSlotIdentity(PCSTR slot_name, IDENTITY &id);
-	PINVENTORYDATA GetInvSlotData(INVENTORYSLOT *slot);
+	bool GetInvSlotIdentity(AOData::ArmorSlot_e slot, identity_t& id);
+	bool GetInvSlotIdentity(AOData::ImplantSlot_e slot, identity_t& id);
+	bool GetInvSlotIdentity(AOData::WeaponSlot_e slot, identity_t& id);
+	bool GetInvSlotIdentity(DWORD slot, identity_t& id);
+	PCSTR GetInvSlotName(const identity_t& slot);
+	bool GetInvSlotIdentity(PCSTR slot_name, identity_t &id);
+	p_inventory_data_t GetInvSlotData(INVENTORYSLOT *slot);
 
 #pragma endregion
 

@@ -3,24 +3,24 @@
 namespace isxao_classes
 {
 
-	IDENTITY ActionLock::GetActionIdentity() const
+	identity_t ActionLock::GetActionIdentity() const
 	{
-		return GetActionLockData().ActionIdentity;
+		return GetActionLockData().action_identity;
 	}
 
-	ACTIONLOCK ActionLock::GetActionLockData() const
+	action_lock_t ActionLock::GetActionLockData() const
 	{
 		return action_lock_;
 	}
 
 	DWORD ActionLock::GetLockOutTimeRemaining() const
 	{
-		return GetActionLockData().LockoutTimeRemaining;
+		return GetActionLockData().lockout_time_remaining;
 	}
 
 	DWORD ActionLock::GetTotalLockOutTime() const
 	{
-		return GetActionLockData().TotalLockoutTime;
+		return GetActionLockData().total_lockout_time;
 	}
 
 	bool ActionLock::pActionLockCompare(ActionLock* a, ActionLock* b)

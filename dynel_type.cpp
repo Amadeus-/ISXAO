@@ -13,8 +13,8 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		{
 		case Identity:
 		{
-			IDENTITY id = pDynel->GetIdentity();
-			PIDENTITY pId = static_cast<PIDENTITY>(pISInterface->GetTempBuffer(sizeof(IDENTITY), &id));
+			identity_t id = pDynel->GetIdentity();
+			p_identity_t pId = static_cast<p_identity_t>(pISInterface->GetTempBuffer(sizeof(identity_t), &id));
 			Object.Ptr = pId;
 			Object.Type = pIdentityType;
 			break;
@@ -27,7 +27,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Loc:
 		{						
-			VECTOR3 v = pDynel->GetPosition();
+			vector3_t v = pDynel->GetPosition();
 			POINT3F p = Point3fFromVector3(v);
 			PPOINT3F pP = PPOINT3F(pISInterface->GetTempBuffer(sizeof(p), &p));
 			Object.Ptr = pP;
@@ -36,25 +36,25 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case X:
 		{
-			Object.Float = pDynel->GetPosition().X;
+			Object.Float = pDynel->GetPosition().x;
 			Object.Type = pfloatType;
 			break;
 		}
 		case Y:
 		{
-			Object.Float = pDynel->GetPosition().Y;
+			Object.Float = pDynel->GetPosition().y;
 			Object.Type = pfloatType;
 			break;
 		}
 		case Z:
 		{
-			Object.Float = pDynel->GetPosition().Z;
+			Object.Float = pDynel->GetPosition().z;
 			Object.Type = pfloatType;
 			break;
 		}
 		case Distance:
 		{
-			VECTOR3 v;
+			vector3_t v;
 			P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(v);
 			Object.Float = pDynel->GetDistance3DTo(v);
 			Object.Type = pfloatType;
@@ -62,7 +62,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Distance2D:
 		{
-			VECTOR3 v;
+			vector3_t v;
 			P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(v);
 			Object.Float = pDynel->GetDistanceTo(v);
 			Object.Type = pfloatType;
@@ -83,9 +83,9 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case HeadingTo:
 		{
 			float heading;
-			if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->GetClientChar())
+			if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->get_client_char())
 			{
-				VECTOR3 v;
+				vector3_t v;
 				P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(v);
 				auto rawHeading = pDynel->GetHeadingTo(v);
 				if (rawHeading > 0.0f)
@@ -152,11 +152,11 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				float rawheading;
 				float x = float(atof(argv[0]));
 				float z = float(atof(argv[1]));
-				VECTOR3 offset;
-				offset.X = x;
-				offset.Y = 0.0f;
-				offset.Z = z;
-				VECTOR3 v;
+				vector3_t offset;
+				offset.x = x;
+				offset.y = 0.0f;
+				offset.z = z;
+				vector3_t v;
 				P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(v);
 				rawheading = pDynel->GetHeadingToLoc(v, offset);
 				if (rawheading > 0.0f)
@@ -175,9 +175,9 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		{
 			if (!ISINDEX())
 			{
-				if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->GetClientChar())
+				if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->get_client_char())
 				{
-					Object.DWord = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->CheckLOS(pDynel);
+					Object.DWord = P_ENGINE_CLIENT_ANARCHY->get_client_char()->CheckLOS(pDynel);
 					Object.Type = pBoolType;
 					return true;
 				}
@@ -194,17 +194,17 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 					return false;
 				}
 				PPOINT3F p = PPOINT3F(object.Ptr);
-				VECTOR3 v = Vector3FrompPoint3f(p);
+				vector3_t v = Vector3FrompPoint3f(p);
 				Object.DWord = pDynel->IsInLineOfSight(v);
 				Object.Type = pBoolType;
 				return true;
 			}
 			else if (argc == 3 && IsNumber(argv[0]) && IsNumber(argv[1]) && IsNumber(argv[2]))
 			{
-				VECTOR3 v;
-				v.X = float(atof(argv[0]));
-				v.Y = float(atof(argv[1]));
-				v.Z = float(atof(argv[2]));
+				vector3_t v;
+				v.x = float(atof(argv[0]));
+				v.y = float(atof(argv[1]));
+				v.z = float(atof(argv[2]));
 				Object.DWord = pDynel->IsInLineOfSight(v);
 				Object.Type = pBoolType;
 				return true;
@@ -213,7 +213,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case NearestDynel:
 		{
-			if (IsClientId(pDynel->GetIdentity().Id))
+			if (IsClientId(pDynel->GetIdentity().id))
 			{
 				return (TLO_ACTORSEARCH(argc, argv, Object) != 0);
 			}
@@ -230,7 +230,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				}
 				else
 					nth = atoi(argv[0]);
-				auto result = NthNearestActor(&sdDynel, nth, P_ENGINE_CLIENT_ANARCHY->GetClientChar());
+				auto result = NthNearestActor(&sdDynel, nth, P_ENGINE_CLIENT_ANARCHY->get_client_char());
 				if (result)
 				{
 					Object.Ptr = result;
@@ -242,7 +242,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Type:
 		{
-			switch (pDynel->GetIdentity().Type)
+			switch (pDynel->GetIdentity().type)
 			{
 			case 50000:
 			{
@@ -300,7 +300,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case IsCharacter:
 		{
-			Object.DWord = isxao_inlines::IsClientId(pDynel->GetIdentity().Id);
+			Object.DWord = isxao_inlines::IsClientId(pDynel->GetIdentity().id);
 			Object.Type = pBoolType;
 			break;
 		}
@@ -392,7 +392,7 @@ bool DynelType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 	if (!ObjectData.Ptr)
 		return false;
 #define pDynel ((Dynel*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64d", pDynel->GetIdentity().GetCombinedIdentity());
+	sprintf_s(buf, buflen, "%I64d", pDynel->GetIdentity().get_combined_identity());
 #undef pDynel
 
 	return true;

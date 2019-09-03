@@ -5,11 +5,11 @@ namespace isxao_classes
 
 	PCSTR INVENTORYSLOT::GetSlotName() const
 	{
-		switch (SlotID.Type)
+		switch (SlotID.type)
 		{
 		case 101:
 		{
-			switch (SlotID.Id)
+			switch (SlotID.id)
 			{
 			case 1:
 				return "WS_HUD1";
@@ -47,7 +47,7 @@ namespace isxao_classes
 		}
 		case 102:
 		{
-			switch (SlotID.Id - 16)
+			switch (SlotID.id - 16)
 			{
 			case 1:
 				return "AS_NECK";
@@ -85,7 +85,7 @@ namespace isxao_classes
 		}
 		case 103:
 		{
-			switch (SlotID.Id - 32)
+			switch (SlotID.id - 32)
 			{
 			case 1:
 				return "IS_EYES";
@@ -119,7 +119,7 @@ namespace isxao_classes
 		}
 		case 104:
 		{
-			switch (SlotID.Id - 63)
+			switch (SlotID.id - 63)
 			{
 			case 1:
 				return "GI_64";
@@ -189,7 +189,7 @@ namespace isxao_classes
 		return "Unknown";
 	}
 
-	PINVENTORYDATA INVENTORYSLOT::GetInvSlotData()
+	p_inventory_data_t INVENTORYSLOT::GetInvSlotData()
 	{
 		return isxao_utilities::GetInvSlotData(this);
 	}
@@ -201,7 +201,7 @@ namespace isxao_classes
 
 	bool INVENTORYSLOT::IsItemLocked() const
 	{
-		IDENTITY dummy_identity;
+		identity_t dummy_identity;
 		return P_ENGINE_CLIENT_ANARCHY->N3Msg_IsItemDisabled(SlotID, dummy_identity);
 	}
 

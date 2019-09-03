@@ -17,8 +17,8 @@ public:
 	AOLIB_OBJECT DWORD GetTeamCount() const;
 	AOLIB_OBJECT TeamEntry* GetTeamMember(DWORD) const;
 	AOLIB_OBJECT TeamEntry* GetTeamMember(PCSTR) const;
-	AOLIB_OBJECT IDENTITY GetTeamIdentity() const;
-	AOLIB_OBJECT IDENTITY GetTeamLeaderID() const;
+	AOLIB_OBJECT identity_t GetTeamIdentity() const;
+	AOLIB_OBJECT identity_t GetTeamLeaderID() const;
 	AOLIB_OBJECT TEAMRAIDHOLDER GetTeamRaidData() const;
 	AOLIB_OBJECT DWORD GetTeamRaidIndex() const;
 	AOLIB_OBJECT bool IsRaid() const;

@@ -11,7 +11,7 @@ public:
 	AOLIB_OBJECT RGBCOLOR ConColorARGB();
 	AOLIB_OBJECT void DoFace();
 	AOLIB_OBJECT void DoTarget();
-	AOLIB_OBJECT float EstimatedDistanceTo(VECTOR3 &);
+	AOLIB_OBJECT float EstimatedDistanceTo(vector3_t &);
 	AOLIB_OBJECT Actor* GetMaster();
 	AOLIB_OBJECT DWORD GetMasterId();
 	AOLIB_OBJECT NanoTemplate* GetNCU(DWORD);
@@ -20,7 +20,7 @@ public:
 	AOLIB_OBJECT Actor* GetPet(DWORD);
 	AOLIB_OBJECT Actor* GetPet(PCSTR);
 	AOLIB_OBJECT DWORD GetPetCount();
-	AOLIB_OBJECT DWORD GetPetIDs(std::map<IDENTITY, DWORD>&);
+	AOLIB_OBJECT DWORD GetPetIDs(std::map<identity_t, DWORD>&);
 	AOLIB_OBJECT float GetScale();
 	AOLIB_OBJECT PSIMPLECHAR GetSimpleCharData();
 	AOLIB_OBJECT SpellTemplateData* GetSpellTemplateData();

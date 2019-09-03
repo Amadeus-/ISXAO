@@ -13,7 +13,7 @@ public:
 	AOLIB_OBJECT float GetCooldownRemaining();
 	AOLIB_OBJECT double GetFormulaProgress(DWORD&, DWORD&);
 	AOLIB_OBJECT DWORD GetFormulaRadius();
-	AOLIB_OBJECT IDENTITY GetNanoIdentity();
+	AOLIB_OBJECT identity_t GetNanoIdentity();
 	AOLIB_OBJECT PNANOITEM GetNanoItemData();
 	AOLIB_OBJECT DWORD GetNCUCost();
 	AOLIB_OBJECT DWORD GetNanoPoints();

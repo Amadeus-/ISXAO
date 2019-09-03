@@ -3,7 +3,7 @@
 namespace isxao_classes
 {
 
-	IDENTITY TeamEntry::GetIdentity() const
+	identity_t TeamEntry::GetIdentity() const
 	{
 		return GetTeamEntryData().Identity;
 	}

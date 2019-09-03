@@ -25,7 +25,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 				}
 			}
 			INVENTORYSLOT s = pCharacter->GetInventoryHolder()->GetInventorySlot(argv[0]);
-			if(s.SlotID.Type != 0)
+			if(s.SlotID.type != 0)
 			{
 				PINVENTORYSLOT pS = static_cast<PINVENTORYSLOT>(pISInterface->GetTempBuffer(sizeof(INVENTORYSLOT), &s));
 				if ((Object.Ptr = pS))
@@ -158,14 +158,14 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			if (ISNUMBER())
 			{
 				auto index = DWORD(GETNUMBER());
-				if ((Object.Ptr = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialAction(index - 1)))
+				if ((Object.Ptr = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetSpecialActionHolder()->GetSpecialAction(index - 1)))
 				{
 					Object.Type = pSpecialActionTemplateType;
 					return true;
 				}
 				return false;
 			}
-			if ((Object.Ptr = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialAction(argv[0])))
+			if ((Object.Ptr = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetSpecialActionHolder()->GetSpecialAction(argv[0])))
 			{
 				Object.Type = pSpecialActionTemplateType;
 				return true;
@@ -176,7 +176,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	}
 	case SpecialActionCount:
 	{
-		Object.DWord = P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialActionCount();
+		Object.DWord = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetSpecialActionHolder()->GetSpecialActionCount();
 		Object.Type = pUintType;
 		break;
 	}
@@ -251,7 +251,7 @@ bool CharacterType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int bufl
 	if (!ObjectData.Ptr)
 		return false;
 #define pCharacter ((Character*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64u", pCharacter->GetIdentity().GetCombinedIdentity());
+	sprintf_s(buf, buflen, "%I64u", pCharacter->GetIdentity().get_combined_identity());
 #undef pCharacter
 
 	return true;

@@ -17,7 +17,7 @@ namespace isxao_classes
 	{
 		for (auto it = playfield_anarchy_.DynelChildren.begin(); it != playfield_anarchy_.DynelChildren.end(); ++it)
 		{
-			if ((*it)->Identity.Type == 50000)
+			if ((*it)->Identity.type == 50000)
 				v.push_back(reinterpret_cast<Actor*>(*it));
 		}
 		std::sort(v.begin(), v.end(), Dynel::pDynelCompare);
@@ -31,7 +31,7 @@ namespace isxao_classes
 
 	DWORD PlayfieldAnarchy::GetPlayfieldInstance() const
 	{
-		return playfield_anarchy_.InstanceID.Id;
+		return playfield_anarchy_.InstanceID.id;
 	}
 
 	PCSTR PlayfieldAnarchy::GetPlayfieldName() const
@@ -54,14 +54,14 @@ namespace isxao_classes
 		return playfield_anarchy_.pn3Tilemap->pRDBTileMap->IsDungeon == 1;
 	}
 
-	FUNCTION_AT_ADDRESS(bool PlayfieldAnarchy::LineOfSight(const VECTOR3 &, const VECTOR3 &, int, bool), n3_playfield_t__line_of_sight);
+	FUNCTION_AT_ADDRESS(bool PlayfieldAnarchy::LineOfSight(const vector3_t &, const vector3_t &, int, bool), n3_playfield_t__line_of_sight);
 
 	PGRIDSPACE PlayfieldAnarchy::GetGridSpace() const
 	{
 		return playfield_anarchy_.pSpace_i;
 	}
 
-	PN3TILEMAPSURFACE PlayfieldAnarchy::GetTilemapSurface() const
+	p_n3_tile_map_surface_t PlayfieldAnarchy::GetTilemapSurface() const
 	{
 		return playfield_anarchy_.pSurface_i;
 	}

@@ -15,7 +15,7 @@ namespace isxao_classes
 		return m.size();
 	}
 
-	IDENTITY WeaponHolder::GetWeaponTarget() const
+	identity_t WeaponHolder::GetWeaponTarget() const
 	{
 		return GetWeaponHolderData().WeaponTargetIdentity;
 	}

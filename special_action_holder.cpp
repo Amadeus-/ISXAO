@@ -68,7 +68,7 @@ namespace isxao_classes
 		return nullptr;
 	}
 
-	SpecialActionTemplate* SpecialActionHolder::GetSpecialAction(const IDENTITY& id) const
+	SpecialActionTemplate* SpecialActionHolder::GetSpecialAction(const identity_t& id) const
 	{
 		vector<SpecialActionTemplate> v;
 		GetSpecialActions(v);
@@ -86,7 +86,7 @@ namespace isxao_classes
 		return GetSpecialActions(v);
 	}
 
-	IDENTITY SpecialActionHolder::GetSpecialActionTarget() const
+	identity_t SpecialActionHolder::GetSpecialActionTarget() const
 	{
 		return GetSpecialActionHolderData().SpecialActionTarget;
 	}
@@ -96,7 +96,7 @@ namespace isxao_classes
 		std::map<DWORD, DWORD> m;
 		GetLockIdMap(m);
 		DWORD lock_id = 0;
-		auto action_id = p_special_action->GetIdentity().Id;
+		auto action_id = p_special_action->GetIdentity().id;
 		for (auto it = m.begin(); it != m.end(); ++it)
 		{
 			if(it->second == action_id)
@@ -108,7 +108,7 @@ namespace isxao_classes
 		if (lock_id)
 			return nullptr;
 		std::vector<ActionLock*> v;
-		P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetStatHolder()->GetSkillLocks(v);
+		P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetStatHolder()->GetSkillLocks(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 		{
 			//if((*it)->GetActionIdentity().Type)

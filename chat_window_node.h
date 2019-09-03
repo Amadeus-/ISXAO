@@ -3,8 +3,8 @@
 class ChatWindowNode
 {
 public:
-	AOLIB_OBJECT CHATWINDOWNODE GetData() const;
+	AOLIB_OBJECT chat_window_node_t GetData() const;
 	AOLIB_OBJECT bool ParseTextCommand(string&);
 private:
-	CHATWINDOWNODE chat_window_node_;
+	chat_window_node_t chat_window_node_;
 };

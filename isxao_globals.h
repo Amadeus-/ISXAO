@@ -303,7 +303,7 @@ namespace isxao_globals
 
 	// Item Vector Instance
 	AOLIB_VAR DWORD ItemManager_t__m_ppcInstance;
-	AOLIB_VAR std::vector<ACGGAMEITEM> ***pppItemVector;
+	AOLIB_VAR std::vector<acg_game_item_t> ***pppItemVector;
 #define pItemVector (**pppItemVector)
 	// NanoMap Instance
 	AOLIB_VAR DWORD NanoItemManager_t__m_pcInstance;
@@ -374,7 +374,7 @@ namespace isxao_globals
 	AOLIB_VAR INDICATOR** ppAttackingIndicator;
 #define pAttackingIndicator (*ppAttackingIndicator)
 	AOLIB_VAR DWORD TargetingModule_t__m_cLastTarget;
-	AOLIB_VAR IDENTITY* pLastTarget;
+	AOLIB_VAR identity_t* pLastTarget;
 #define LastTarget (*pLastTarget)
 	AOLIB_VAR DWORD TargetingModule_t__RemoveTarget;
 	AOLIB_VAR DWORD TargetingModule_t__SelectSelf;

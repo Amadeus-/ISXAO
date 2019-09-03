@@ -13,15 +13,15 @@ bool NanoTemplateType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, 
 		{
 		case CasterId:
 		{
-			IDENTITY id = pNanoTemplate->GetCasterIdentity();
-			PIDENTITY pId = static_cast<PIDENTITY>(pISInterface->GetTempBuffer(sizeof(IDENTITY), &id));
+			identity_t id = pNanoTemplate->GetCasterIdentity();
+			p_identity_t pId = static_cast<p_identity_t>(pISInterface->GetTempBuffer(sizeof(identity_t), &id));
 			Object.Ptr = pId;
 			Object.Type = pIdentityType;
 			break;
 		}
 		case NanoId:
 		{
-			Object.DWord = pNanoTemplate->GetNanoIdentity().Id;
+			Object.DWord = pNanoTemplate->GetNanoIdentity().id;
 			Object.Type = pUintType;
 			break;
 		}
@@ -88,7 +88,7 @@ bool NanoTemplateType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int b
 	if (!ObjectData.Ptr)
 		return false;
 #define pNanoTemplate ((NanoTemplate*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%d", pNanoTemplate->GetNanoIdentity().Id);
+	sprintf_s(buf, buflen, "%d", pNanoTemplate->GetNanoIdentity().id);
 #undef pNanoTemplate
 
 	return true;

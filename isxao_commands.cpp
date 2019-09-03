@@ -31,7 +31,7 @@ namespace isxao_commands
 		//{
 		//	if (IsNumber(argv[(0 + begin_inclusive)]))
 		//		return 0;
-		//	IDENTITY inv_slot_identity;
+		//	identity_t inv_slot_identity;
 		//	if (GetInvSlotIdentity(argv[(0 + begin_inclusive)], inv_slot_identity))
 		//	{
 		//		P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(inv_slot_identity, false);
@@ -43,15 +43,15 @@ namespace isxao_commands
 		//{
 		//	if (IsNumber(argv[(0 + begin_inclusive)])) // Make sure the first argument is a string, not a number
 		//		return 0;
-		//	IDENTITY inv_slot_identity;
+		//	identity_t inv_slot_identity;
 		//	auto valid_slot = isxao_utilities::GetInvSlotIdentity(argv[(0 + begin_inclusive)], inv_slot_identity);
 		//	if (!valid_slot)
 		//		return 0;
 		//	if(IsNumber(argv[(1 + begin_inclusive)])) // Second argument is an identity
 		//	{
-		//		IDENTITY previous_target;
+		//		identity_t previous_target;
 		//		DWORD64 target_id = atoui64(argv[(1 + begin_inclusive)]);
-		//		IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(target_id);
+		//		identity_t target_identity = identity_t::get_identity_from_combined(target_id);
 		//		Dynel* pDynel = isxao_utilities::GetDynel(target_identity);
 		//		if(pDynel)
 		//		{
@@ -100,7 +100,7 @@ namespace isxao_commands
 		//		pTargetingModule->SetTarget(*pLastTarget, false);
 		//		return 1;
 		//	}
-		//	IDENTITY target_identity; // Find the actor identity that matches the name provided
+		//	identity_t target_identity; // Find the actor identity that matches the name provided
 		//	string name(argv[(1 + begin_inclusive)]);
 		//	bool valid_target = P_ENGINE_CLIENT_ANARCHY->N3Msg_NameToID(name, target_identity);
 		//	if (valid_target)
@@ -641,11 +641,11 @@ namespace isxao_commands
 		//	if(argc >= (2 + begin_inclusive) && IsNumber(argv[(0 + begin_inclusive)]) && IsNumber(argv[(1 + begin_inclusive)])) // nanoid, targetid
 		//	{
 		//		DWORD nano_id = atoi(argv[(0 + begin_inclusive)]);
-		//		IDENTITY nano_identity;
+		//		identity_t nano_identity;
 		//		nano_identity.Type = 53019;
 		//		nano_identity.Id = nano_id;
 		//		DWORD64 target_id = atoui64(argv[(1 + begin_inclusive)]);
-		//		IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(target_id);
+		//		identity_t target_identity = identity_t::get_identity_from_combined(target_id);
 		//		NanoItem* pNanoItem = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(nano_id));
 		//		Dynel* pTarget = isxao_utilities::GetDynel(target_identity);
 		//		if(pNanoItem && pTarget)
@@ -658,7 +658,7 @@ namespace isxao_commands
 		//	if(argc >= (2 + begin_inclusive) && IsNumber(argv[(0 + begin_inclusive)]) && !IsNumber(argv[(1 + begin_inclusive)])) // nanoid, targetname
 		//	{				
 		//		DWORD nano_id = atoi(argv[(0 + begin_inclusive)]);
-		//		IDENTITY nano_identity;
+		//		identity_t nano_identity;
 		//		nano_identity.Type = 53019;
 		//		nano_identity.Id = nano_id;
 		//		NanoItem* pNanoItem = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(nano_id));		
@@ -666,7 +666,7 @@ namespace isxao_commands
 		//		char second_arg[MAX_STRING];
 		//		strcpy_s(second_arg, sizeof(second_arg), argv[(1 + begin_inclusive)]);
 		//		_strlwr_s(second_arg);
-		//		IDENTITY target_identity;
+		//		identity_t target_identity;
 		//		if (!strcmp(second_arg, "me"))
 		//		{
 		//			P_ENGINE_CLIENT_ANARCHY->GetClientDynelId(target_identity);
@@ -686,8 +686,8 @@ namespace isxao_commands
 		//	}
 		//	if (argc >= (2 + begin_inclusive) && !IsNumber(argv[(0 + begin_inclusive)]) && IsNumber(argv[(1 + begin_inclusive)])) // nanoname, targetid
 		//	{
-		//		IDENTITY nano_identity;
-		//		ZeroMemory(&nano_identity, sizeof(IDENTITY));
+		//		identity_t nano_identity;
+		//		ZeroMemory(&nano_identity, sizeof(identity_t));
 		//		char name[MAX_STRING];
 		//		char search_name[MAX_STRING];
 		//		strcpy_s(search_name, sizeof(search_name), argv[(0 + begin_inclusive)]);
@@ -708,7 +708,7 @@ namespace isxao_commands
 		//		if (nano_identity.Id == 0)
 		//			return 0;
 		//		DWORD64 target_id = atoui64(argv[(1 + begin_inclusive)]);
-		//		IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(target_id);
+		//		identity_t target_identity = identity_t::get_identity_from_combined(target_id);
 		//		Dynel* pTarget = isxao_utilities::GetDynel(target_identity);
 		//		if (!pTarget)
 		//			return 0;
@@ -717,8 +717,8 @@ namespace isxao_commands
 		//	}
 		//	if (argc >= (2 + begin_inclusive) && !IsNumber(argv[(0 + begin_inclusive)]) && !IsNumber(argv[(1 + begin_inclusive)])) // nanoname, targetname
 		//	{
-		//		IDENTITY nano_identity;
-		//		ZeroMemory(&nano_identity, sizeof(IDENTITY));
+		//		identity_t nano_identity;
+		//		ZeroMemory(&nano_identity, sizeof(identity_t));
 		//		char name[MAX_STRING];
 		//		char search_name[MAX_STRING];
 		//		strcpy_s(search_name, sizeof(search_name), argv[(0 + begin_inclusive)]);
@@ -742,7 +742,7 @@ namespace isxao_commands
 		//		char second_arg[MAX_STRING];
 		//		strcpy_s(second_arg, sizeof(second_arg), argv[(1 + begin_inclusive)]);
 		//		_strlwr_s(second_arg);
-		//		IDENTITY target_identity;
+		//		identity_t target_identity;
 		//		if (!strcmp(second_arg, "me"))
 		//		{
 		//			P_ENGINE_CLIENT_ANARCHY->GetClientDynelId(target_identity);
@@ -772,7 +772,7 @@ namespace isxao_commands
 		//	{
 		//		if(IsNumber(argv[1])) // ActionId 
 		//		{
-		//			IDENTITY action_identity;
+		//			identity_t action_identity;
 		//			action_identity.Type = 57008;
 		//			action_identity.Id = atoi(argv[1]);
 		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(action_identity);
@@ -784,7 +784,7 @@ namespace isxao_commands
 		//		_strlwr_s(search_name);
 		//		std::vector<SpecialActionTemplate*> v;
 		//		P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
-		//		IDENTITY dummy_identity;
+		//		identity_t dummy_identity;
 		//		for (auto it = v.begin(); it != v.end(); ++it)
 		//		{
 		//			PCSTR action_name = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
@@ -802,11 +802,11 @@ namespace isxao_commands
 		//	{
 		//		if(IsNumber(argv[1]) && IsNumber(argv[2])) // ActionId, TargetId
 		//		{
-		//			IDENTITY action_identity;
+		//			identity_t action_identity;
 		//			action_identity.Type = 57008;
 		//			action_identity.Id = atoi(argv[1]);
 		//			DWORD64 comb_target_identity = atoui64(argv[2]);
-		//			IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(comb_target_identity);
+		//			identity_t target_identity = identity_t::get_identity_from_combined(comb_target_identity);
 		//			Dynel* pDynel = isxao_utilities::GetDynel(target_identity);
 		//			if(pDynel)
 		//			{
@@ -830,10 +830,10 @@ namespace isxao_commands
 		//		}
 		//		if(IsNumber(argv[1]) && !IsNumber(argv[2])) // ActionId, TargetName
 		//		{
-		//			IDENTITY action_identity;
+		//			identity_t action_identity;
 		//			action_identity.Type = 57008;
 		//			action_identity.Id = atoi(argv[1]);
-		//			IDENTITY target_identity;
+		//			identity_t target_identity;
 		//			string target_name(argv[2]);
 		//			bool valid_target = P_ENGINE_CLIENT_ANARCHY->N3Msg_NameToID(target_name, target_identity);
 		//			if(valid_target)
@@ -864,8 +864,8 @@ namespace isxao_commands
 		//			_strlwr_s(search_name);
 		//			std::vector<SpecialActionTemplate*> v;
 		//			P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
-		//			IDENTITY dummy_identity;
-		//			IDENTITY action_identity;
+		//			identity_t dummy_identity;
+		//			identity_t action_identity;
 		//			bool valid_action = false;
 		//			for (auto it = v.begin(); it != v.end(); ++it)
 		//			{
@@ -880,7 +880,7 @@ namespace isxao_commands
 		//				}
 		//			}
 		//			DWORD64 comb_target_identity = atoui64(argv[2]);
-		//			IDENTITY target_identity = IDENTITY::GetIdentityFromCombined(comb_target_identity);
+		//			identity_t target_identity = identity_t::get_identity_from_combined(comb_target_identity);
 		//			Dynel* pDynel = isxao_utilities::GetDynel(target_identity);
 		//			if(valid_action && pDynel)
 		//			{
@@ -910,8 +910,8 @@ namespace isxao_commands
 		//			_strlwr_s(search_name);
 		//			std::vector<SpecialActionTemplate*> v;
 		//			P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
-		//			IDENTITY dummy_identity;
-		//			IDENTITY action_identity;
+		//			identity_t dummy_identity;
+		//			identity_t action_identity;
 		//			bool valid_action = false;
 		//			for (auto it = v.begin(); it != v.end(); ++it)
 		//			{
@@ -925,7 +925,7 @@ namespace isxao_commands
 		//					break;
 		//				}
 		//			}
-		//			IDENTITY target_identity;
+		//			identity_t target_identity;
 		//			string target_name(argv[2]);
 		//			bool valid_target = P_ENGINE_CLIENT_ANARCHY->N3Msg_NameToID(target_name, target_identity);
 		//			if(valid_action && valid_target)
@@ -991,7 +991,7 @@ namespace isxao_commands
 		//	}
 		//	if (argc == 3 && IsNumber(argv[1]) && IsNumber(argv[2])) // Check to see if X and Z coords provided
 		//	{
-		//		VECTOR3 v;
+		//		vector3_t v;
 		//		v.X = float(atof(argv[1]));
 		//		v.Y = 0.0f;
 		//		v.Z = float(atof(argv[2]));
@@ -1000,7 +1000,7 @@ namespace isxao_commands
 		//	}
 		//	if (argc == 4 && IsNumber(argv[1]) && IsNumber(argv[2]) && IsNumber(argv[3]))
 		//	{
-		//		VECTOR3 v;
+		//		vector3_t v;
 		//		v.X = float(atof(argv[1]));
 		//		v.Y = 0.0f;
 		//		v.Z = float(atof(argv[3]));
@@ -1025,7 +1025,7 @@ namespace isxao_commands
 		//if (IsNumber(argv[1]))	// Check to see if an Id was provided
 		//{
 		//	auto combined_identity = atoui64(argv[1]);
-		//	IDENTITY id = IDENTITY::GetIdentityFromCombined(combined_identity);
+		//	identity_t id = identity_t::get_identity_from_combined(combined_identity);
 		//	auto pDynel = isxao_utilities::GetDynel(id);
 		//	if (pDynel)
 		//	{

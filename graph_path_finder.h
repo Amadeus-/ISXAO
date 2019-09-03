@@ -8,8 +8,8 @@ public:
 	~GraphPathFinder();
 	void Configure(int, int, float, float);
 	void CreateFromData(PVOID);
-	int FindPath(const VECTOR3&, const VECTOR3&, vector<VECTOR3>&, PVOID, bool, bool);
-	PVOID GenerateGraph(vector<VECTOR3>&, float, float, float, float, PVOID, bool);
+	int FindPath(const vector3_t&, const vector3_t&, vector<vector3_t>&, PVOID, bool, bool);
+	PVOID GenerateGraph(vector<vector3_t>&, float, float, float, float, PVOID, bool);
 	void Init();
 	//void GenerateGraphForRoom()
 	void SetSpaceForGraph(PVOID);

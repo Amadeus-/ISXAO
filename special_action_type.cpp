@@ -121,7 +121,7 @@ bool SpecialActionType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 		}
 		case SpecialActionId:
 		{
-			Object.DWord = pSpecialAction->GetIdentity().Id;
+			Object.DWord = pSpecialAction->GetIdentity().id;
 			Object.Type = pUintType;
 			break;
 		}		
@@ -184,7 +184,7 @@ bool SpecialActionType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int 
 	if (!ObjectData.Ptr)
 		return false;
 #define pSpecialAction ((SpecialActionItem*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%d", pSpecialAction->GetIdentity().Id);
+	sprintf_s(buf, buflen, "%d", pSpecialAction->GetIdentity().id);
 #undef pSpecialAction
 
 	return true;

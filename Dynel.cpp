@@ -5,74 +5,74 @@ namespace isxao_classes
 
 	float Dynel::GetDistanceToClient()
 	{
-		VECTOR3 client_position;
+		vector3_t client_position;
 		P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(client_position);
 		return GetDistance3DTo(client_position);
 	}
 
-	float Dynel::GetDistanceTo(VECTOR3& position)
+	float Dynel::GetDistanceTo(vector3_t& position)
 	{
 		auto dynel_position = GetPosition();
-		return VECTOR3::DistanceXZ(dynel_position, position);
+		return vector3_t::distance_xz(dynel_position, position);
 	}
 
-	float Dynel::GetDistance3DTo(VECTOR3& position)
+	float Dynel::GetDistance3DTo(vector3_t& position)
 	{
 		auto dynel_position = GetPosition();
-		return VECTOR3::Distance(dynel_position, position);
+		return vector3_t::distance(dynel_position, position);
 	}
 
-	float Dynel::GetDistance3DToSquared(VECTOR3& position)
+	float Dynel::GetDistance3DToSquared(vector3_t& position)
 	{
 		auto dynel_position = GetPosition();
-		return VECTOR3::DistanceSquared(dynel_position, position);
+		return vector3_t::distance_squared(dynel_position, position);
 	}
 
-	float Dynel::GetDistanceToSquared(VECTOR3& position)
+	float Dynel::GetDistanceToSquared(vector3_t& position)
 	{
 		auto dynel_position = GetPosition();
-		return VECTOR3::DistanceXZSquared(dynel_position, position);
+		return vector3_t::distance_xz_squared(dynel_position, position);
 	}
 
-	float Dynel::GetDistanceXTo(VECTOR3& position)
+	float Dynel::GetDistanceXTo(vector3_t& position)
 	{
 		auto dynel_position = GetPosition();
-		return VECTOR3::DistanceX(dynel_position, position);
+		return vector3_t::distance_x(dynel_position, position);
 	}
 
-	float Dynel::GetDistanceYTo(VECTOR3& position)
+	float Dynel::GetDistanceYTo(vector3_t& position)
 	{
 		auto dynel_position = GetPosition();
-		return VECTOR3::DistanceY(dynel_position, position);
+		return vector3_t::distance_y(dynel_position, position);
 	}
 
-	float Dynel::GetDistanceZTo(VECTOR3& position)
+	float Dynel::GetDistanceZTo(vector3_t& position)
 	{
 		auto dynel_position = GetPosition();
-		return VECTOR3::DistanceZ(dynel_position, position);
+		return vector3_t::distance_z(dynel_position, position);
 	}
 
 	float Dynel::GetHeading()
 	{
-		return GetRotation().GetHeading();
+		return GetRotation().get_heading();
 	}
 
-	float Dynel::GetHeadingTo(VECTOR3 & position)
+	float Dynel::GetHeadingTo(vector3_t & position)
 	{
-		auto direction_vector = VECTOR3::Subtract(GetPosition(), position);
-		direction_vector.Normalize();
-		return direction_vector.GetYaw();
+		auto direction_vector = vector3_t::subtract(GetPosition(), position);
+		direction_vector.normalize();
+		return direction_vector.get_yaw();
 	}
 
-	float Dynel::GetHeadingToLoc(VECTOR3 &position, VECTOR3 &position_offset)
+	float Dynel::GetHeadingToLoc(vector3_t &position, vector3_t &position_offset)
 	{
-		VECTOR3 new_position = VECTOR3::Add(GetPosition(), position_offset);
-		auto direction_vector = VECTOR3::Subtract(position, new_position);
-		direction_vector.Normalize();
-		return direction_vector.GetYaw();
+		vector3_t new_position = vector3_t::add(GetPosition(), position_offset);
+		auto direction_vector = vector3_t::subtract(position, new_position);
+		direction_vector.normalize();
+		return direction_vector.get_yaw();
 	}
 
-	IDENTITY Dynel::GetIdentity()
+	identity_t Dynel::GetIdentity()
 	{
 		return GetDynelData()->Identity;
 	}	
@@ -84,39 +84,39 @@ namespace isxao_classes
 
 	bool Dynel::IsInLineOfSight()
 	{
-		VECTOR3 height_offset;
-		height_offset.X = 0.0f;
-		height_offset.Y = 1.6f;
-		height_offset.Z = 0.0f;
-		VECTOR3 client_position;
+		vector3_t height_offset;
+		height_offset.x = 0.0f;
+		height_offset.y = 1.6f;
+		height_offset.z = 0.0f;
+		vector3_t client_position;
 		P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(client_position);
-		VECTOR3 offset_client_position = VECTOR3::Add(client_position, height_offset);
-		VECTOR3 dynel_position = GetPosition();
-		VECTOR3 offset_dynel_position = VECTOR3::Add(dynel_position, height_offset);
+		vector3_t offset_client_position = vector3_t::add(client_position, height_offset);
+		vector3_t dynel_position = GetPosition();
+		vector3_t offset_dynel_position = vector3_t::add(dynel_position, height_offset);
 		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offset_client_position, offset_dynel_position, GetDynelData()->pVehicle->ZoneInstanceID, false);
 	}
 
-	bool Dynel::IsInLineOfSight(VECTOR3 &position)
+	bool Dynel::IsInLineOfSight(vector3_t &position)
 	{
-		VECTOR3 me = GetPosition();
+		vector3_t me = GetPosition();
 		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(position, me, GetDynelData()->pVehicle->ZoneInstanceID, false);
 	}
 	
 	PCSTR Dynel::GetName()
 	{
-		IDENTITY dummy_identity;
-		ZeroMemory(&dummy_identity, sizeof(IDENTITY));
+		identity_t dummy_identity;
+		ZeroMemory(&dummy_identity, sizeof(identity_t));
 		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName(GetIdentity(), dummy_identity);
 	}
 
-	VECTOR3 Dynel::GetPosition()
+	vector3_t Dynel::GetPosition()
 	{
 		if (GetDynelData()->pVehicle->pParentVehicle == nullptr)
 			return GetDynelData()->pVehicle->GlobalPos;
 		return GetDynelData()->pVehicle->ParentGlobalPos;
 	}
 
-	QUATERNION Dynel::GetRotation()
+	quaternion_t Dynel::GetRotation()
 	{
 		if (GetDynelData()->pVehicle->pParentVehicle == nullptr)
 			return GetDynelData()->pVehicle->BodyRot;
@@ -125,9 +125,9 @@ namespace isxao_classes
 
 	LONG Dynel::GetSkill(DWORD stat)
 	{
-		IDENTITY dummy_identity; 
-		ZeroMemory(&dummy_identity, sizeof(IDENTITY));
-		if (!IsClientId(GetIdentity().Id))
+		identity_t dummy_identity; 
+		ZeroMemory(&dummy_identity, sizeof(identity_t));
+		if (!IsClientId(GetIdentity().id))
 		{
 			//if (!IsInfoRequestCompleted())
 			//	isxao_utilities::RequestInfo(GetIdentity());
@@ -138,22 +138,22 @@ namespace isxao_classes
 
 	bool Dynel::IsContainer()
 	{
-		return GetIdentity().Type == 51017;
+		return GetIdentity().type == 51017;
 	}
 
 	bool Dynel::IsCorpse()
 	{
-		return GetIdentity().Type == 51050;
+		return GetIdentity().type == 51050;
 	}
 
 	bool Dynel::IsDoor()
 	{
-		return GetIdentity().Type == 51016;
+		return GetIdentity().type == 51016;
 	}
 
 	bool Dynel::IsActor()
 	{
-		if (GetIdentity().Type == 50000)
+		if (GetIdentity().type == 50000)
 		{
 			auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(GetIdentity());
 			return is_npc;
@@ -163,10 +163,10 @@ namespace isxao_classes
 
 	bool Dynel::IsInfoRequestCompleted()
 	{
-		if(!IsClientId(GetIdentity().Id))
+		if(!IsClientId(GetIdentity().id))
 		{
-			IDENTITY dummy_identity;
-			ZeroMemory(&dummy_identity, sizeof(IDENTITY));
+			identity_t dummy_identity;
+			ZeroMemory(&dummy_identity, sizeof(identity_t));
 			auto profession = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(GetIdentity(), ST_PROFESSION, 2, dummy_identity);
 			//printf("%d", profession);
 			return profession != -1;
@@ -176,7 +176,7 @@ namespace isxao_classes
 
 	bool Dynel::IsPet()
 	{
-		if (GetIdentity().Type == 50000)
+		if (GetIdentity().type == 50000)
 		{
 			auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(GetIdentity());
 			if (is_npc)
@@ -190,7 +190,7 @@ namespace isxao_classes
 
 	bool Dynel::IsPlayer()
 	{
-		if (GetIdentity().Type == 50000)
+		if (GetIdentity().type == 50000)
 		{
 			auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(GetIdentity());
 			return is_npc == 0;
@@ -200,9 +200,9 @@ namespace isxao_classes
 
 	bool Dynel::IsCharacter()
 	{
-		if (GetIdentity().Type == 50000)
+		if (GetIdentity().type == 50000)
 		{
-			return GetIdentity().Id == g_character_id;
+			return GetIdentity().id == g_character_id;
 		}
 		return false;
 	}
@@ -214,12 +214,12 @@ namespace isxao_classes
 
 	bool Dynel::IsVendingMachine()
 	{
-		return GetIdentity().Type == 51035;
+		return GetIdentity().type == 51035;
 	}
 
 	bool Dynel::IsWeaponInstance()
 	{
-		return GetIdentity().Type == 51018;
+		return GetIdentity().type == 51018;
 	}
 
 	PVOID Dynel::GetData()

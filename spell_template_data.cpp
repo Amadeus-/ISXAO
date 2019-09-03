@@ -16,12 +16,12 @@ namespace isxao_classes
 		return pIndex->GetContainerUsed();
 	}
 
-	DWORD SpellTemplateData::GetActiveNanoEffects(std::vector<IDENTITY> &v) const
+	DWORD SpellTemplateData::GetActiveNanoEffects(std::vector<identity_t> &v) const
 	{
-		std::vector<PIDENTITY> nano_identity_vector = GetSpellTemplateDataData().ActiveNanos;
+		std::vector<p_identity_t> nano_identity_vector = GetSpellTemplateDataData().ActiveNanos;
 		for (auto it = nano_identity_vector.begin(); it != nano_identity_vector.end(); ++it)
 			v.push_back(*(*it));
-		std::sort(v.begin(), v.end(), less<IDENTITY>());
+		std::sort(v.begin(), v.end(), less<identity_t>());
 		return v.size();
 	}
 

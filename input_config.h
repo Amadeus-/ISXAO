@@ -3,5 +3,5 @@
 class InputConfig
 {
 public:
-	AOLIB_OBJECT void SetCurrentTarget(const IDENTITY&);
+	AOLIB_OBJECT void SetCurrentTarget(const identity_t&);
 };

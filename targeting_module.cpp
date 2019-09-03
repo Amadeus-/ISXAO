@@ -4,7 +4,7 @@ namespace isxao_classes
 {
 
 #ifdef TargetingModule_t__RemoveTarget_x
-	FUNCTION_AT_ADDRESS(void __cdecl TargetingModule::RemoveTarget(const IDENTITY &), TargetingModule_t__RemoveTarget);
+	FUNCTION_AT_ADDRESS(void __cdecl TargetingModule::RemoveTarget(const identity_t &), TargetingModule_t__RemoveTarget);
 #endif
 
 #ifdef TargetingModule_t__SelectSelf_x
@@ -12,7 +12,7 @@ namespace isxao_classes
 #endif
 
 #ifdef TargetingModule_t__SetTarget_x
-	FUNCTION_AT_ADDRESS(void __cdecl TargetingModule::SetTarget(const IDENTITY&, bool), TargetingModule_t__SetTarget);
+	FUNCTION_AT_ADDRESS(void __cdecl TargetingModule::SetTarget(const identity_t&, bool), TargetingModule_t__SetTarget);
 #endif
 
 //#ifdef TargetingModule_t__SetTargetPet_x

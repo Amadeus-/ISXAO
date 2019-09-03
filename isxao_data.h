@@ -5,16 +5,19 @@ namespace AOData
 #include "isxao_enums.h"
 
 #pragma region Formard Declarations
-	
-	struct _DUMMYVEHICLE;
+
+	struct char_vehicle;
+	struct dummy_item_base;
+	struct dummy_vehicle;
 	struct _EVENTCASTER;
+	struct inventory_data;
 	struct _N3CELLMONITOR;
 	struct _N3DYNEL;
 	struct _N3OBJECTFACTORY;
 	struct _N3ROOT;
 	struct _N3SFBASE;
 	struct _N3TILEMAP;
-	struct _N3TILEMAPSURFACE;
+	struct n3_tile_map_surface;
 	struct _PERKDIR;
 	struct _PLAYFIELDANARCHY;
 	struct _RDBPLAYFIELD;
@@ -30,299 +33,286 @@ namespace AOData
 #pragma region Common Structs (by alpha)
 	
 	// Size = 0x08
-	typedef struct _IDENTITY
+	typedef struct identity
 	{
-		DWORD Type;
-		DWORD Id;
+		DWORD type;
+		DWORD id;
 
-		DWORD64 GetCombinedIdentity() const
+		DWORD64 get_combined_identity() const
 		{
-			return (static_cast<UINT64>(Type) << 32) | Id;
+			return (static_cast<UINT64>(type) << 32) | id;
 		}
 
-		static struct _IDENTITY GetIdentityFromCombined(DWORD64 combined)
+		static struct identity get_identity_from_combined(const DWORD64 combined)
 		{
-			struct _IDENTITY id;
-			id.Type = DWORD(combined >> 32);
-			id.Id = DWORD(combined);
+			struct identity id;
+			id.type = DWORD(combined >> 32);
+			id.id = DWORD(combined);
 			return id;
 		}
 
-		bool operator==(const _IDENTITY & wIdentity) const
+		bool operator==(const struct identity& other) const
 		{
-			return GetCombinedIdentity() == wIdentity.GetCombinedIdentity();
+			return get_combined_identity() == other.get_combined_identity();
 		}
 
-		bool operator!=(const _IDENTITY & wIdentity) const
+		bool operator!=(const struct identity& other) const
 		{
-			return GetCombinedIdentity() != wIdentity.GetCombinedIdentity();
+			return get_combined_identity() != other.get_combined_identity();
 		}
 
-		bool operator<(const _IDENTITY& wIdentity) const
+		bool operator<(const struct identity& other) const
 		{
-			return GetCombinedIdentity() < wIdentity.GetCombinedIdentity();
+			return get_combined_identity() < other.get_combined_identity();
 		}
 
-		_IDENTITY()
+		identity()
 		{
-			Type = 0;
-			Id = 0;
+			type = 0;
+			id = 0;
 		}
 
-	} IDENTITY, *PIDENTITY;
+	} identity_t, *p_identity_t;
 	
 	// Size = 0x0C
-	typedef struct _VECTOR3
+	typedef struct vector3
 	{
-		float X;					// 0x00
-		float Y;					// 0x04
-		float Z;					// 0x08
+		float x;					// 0x00
+		float y;					// 0x04
+		float z;					// 0x08
 
-		static struct _VECTOR3 Add(struct _VECTOR3 v1, struct _VECTOR3 v2)
+		static struct vector3 add(struct vector3& v1, struct vector3& v2)
 		{
-			struct _VECTOR3 a;
-			a.X = v1.X + v2.X;
-			a.Y = v1.Y + v2.Y;
-			a.Z = v1.Z + v2.Z;
+			struct vector3 a;
+			a.x = v1.x + v2.x;
+			a.y = v1.y + v2.y;
+			a.z = v1.z + v2.z;
 			return a;
 		}
 
-		static struct _VECTOR3 Subtract(struct _VECTOR3 v1, struct _VECTOR3 v2)
+		static struct vector3 subtract(struct vector3& v1, struct vector3& v2)
 		{
-			struct _VECTOR3 a;
-			a.X = v1.X - v2.X;
-			a.Y = v1.Y - v2.Y;
-			a.Z = v1.Z - v2.Z;
+			struct vector3 a;
+			a.x = v1.x - v2.x;
+			a.y = v1.y - v2.y;
+			a.z = v1.z - v2.z;
 			return a;
 		}
 
-		void Normalize()
+		void normalize()
 		{
-			auto m = sqrt(X*X + Y*Y + Z*Z);
-			X = X / m;
-			Y = Y / m;
-			Z = Z / m;
+			const auto m = sqrt(x*x + y*y + z*z);
+			x = x / m;
+			y = y / m;
+			z = z / m;
 		}
 
-		static struct _VECTOR3 Cross(struct _VECTOR3 v1, struct _VECTOR3 v2)
+		static struct vector3 cross(struct vector3& v1, struct vector3& v2)
 		{
-			struct _VECTOR3 c;
+			struct vector3 c;
 
-			c.X = v1.Y*v2.Z - v1.Z*v2.Y;
-			c.Y = v1.Z*v2.X - v1.X*v2.Z;
-			c.Z = v1.X*v2.Y - v1.Y*v2.X;
+			c.x = v1.y*v2.z - v1.z*v2.y;
+			c.y = v1.z*v2.x - v1.x*v2.z;
+			c.z = v1.x*v2.y - v1.y*v2.x;
 
 			return c;
 		}
 
-		static float Dot(struct _VECTOR3 v1, struct _VECTOR3 v2)
+		static float dot(struct vector3& v1, struct vector3& v2)
 		{
-			return v1.X*v2.X + v1.Y*v2.Y + v1.Z*v2.Z;
+			return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
 		}
 
-		float Length() const
+		float length() const
 		{
-			return sqrt(X*X + Y*Y + Z*Z);
+			return sqrt(x*x + y*y + z*z);
 		}
 
-		float LengthSquared() const
+		float length_squared() const
 		{
-			return X*X + Y*Y + Z*Z;
+			return x*x + y*y + z*z;
 		}
 
-		static float Distance(struct _VECTOR3& v1, struct _VECTOR3& v2)
+		static float distance(struct vector3& v1, struct vector3& v2)
 		{
-			auto r = Subtract(v1, v2);
-			return r.Length();
+			const auto r = subtract(v1, v2);
+			return r.length();
 		}
 
-		static float DistanceSquared(struct _VECTOR3& v1, struct _VECTOR3& v2)
+		static float distance_squared(struct vector3& v1, struct vector3& v2)
 		{
-			auto r = Subtract(v1, v2);
-			return r.LengthSquared();
+			const auto r = subtract(v1, v2);
+			return r.length_squared();
 		}
 
-		static float DistanceX(struct _VECTOR3& v1, struct _VECTOR3& v2)
+		static float distance_x(struct vector3& v1, struct vector3& v2)
 		{
-			return abs(v1.X - v2.X);
+			return abs(v1.x - v2.x);
 		}
 
-		static float DistanceY(struct _VECTOR3& v1, struct _VECTOR3& v2)
+		static float distance_y(struct vector3& v1, struct vector3& v2)
 		{
-			return abs(v1.Y - v2.Y);
+			return abs(v1.y - v2.y);
 		}
 
-		static float DistanceZ(struct _VECTOR3& v1, struct _VECTOR3& v2)
+		static float distance_z(struct vector3& v1, struct vector3& v2)
 		{
-			return abs(v1.Z - v2.Z);
+			return abs(v1.z - v2.z);
 		}
 
-		static float DistanceXZ(struct _VECTOR3& v1, struct _VECTOR3& v2)
+		static float distance_xz(struct vector3& v1, struct vector3& v2)
 		{
-			auto dX = v1.X - v2.X;
-			auto dZ = v1.Z - v2.Z;
-			return sqrt(dX*dX + dZ*dZ);
+			const auto d_x = v1.x - v2.x;
+			const auto d_z = v1.z - v2.z;
+			return sqrt(d_x*d_x + d_z*d_z);
 		}
 
-		static float DistanceXZSquared(struct _VECTOR3& v1, struct _VECTOR3& v2)
+		static float distance_xz_squared(struct vector3& v1, struct vector3& v2)
 		{
-			auto dX = v1.X - v2.X;
-			auto dZ = v1.Z - v2.Z;
-			return dX*dX + dZ*dZ;
+			const auto d_x = v1.x - v2.x;
+			const auto d_z = v1.z - v2.z;
+			return d_x*d_x + d_z*d_z;
 		}
 
-		float GetYaw() const
+		float get_yaw() const
 		{
-			return atan2f(X, Z);
+			return atan2f(x, z);
 		}
 
-	} VECTOR3, *PVECTOR3;
+		vector3()
+		{
+			x = 0.0f;
+			y = 0.0f;
+			z = 0.0f;
+		}
+
+	} vector3_t, *p_vector3_t;
 	
 	// Size = 0x10
-	typedef struct _QUATERNION
+	typedef struct quaternion
 	{
-		float X;					// 0x00
-		float Y; // sin(theta/2)	// 0x04
-		float Z;					// 0x08
-		float W; // cos(theta/2)	// 0x0C
+		float x;					// 0x00
+		float y; // sin(theta/2)	// 0x04
+		float z;					// 0x08
+		float w; // cos(theta/2)	// 0x0C
 
-		void Normalize()
+		void normalize()
 		{
-			auto m = sqrt(X*X + Y*Y + Z*Z + W*W);
-			X = X / m;
-			Y = Y / m;
-			Z = Z / m;
-			W = W / m;
+			const auto m = sqrt(x*x + y*y + z*z + w*w);
+			x = x / m;
+			y = y / m;
+			z = z / m;
+			w = w / m;
 		}
 
-		float GetHeading() const
+		float get_heading() const
 		{
-			return atan2f(2 * Y*W - 2 * X*Z, 1 - 2 * Y*Y - 2 * Z*Z);
-			//return atan2f(2.0*(Y*Z + W*X), W*W - X*X - Y*Y + Z*Z);
+			return atan2f(2 * y*w - 2 * x*z, 1 - 2 * y*y - 2 * z*z);
 		}
 
-		float GetRawPitch() const
+		float get_raw_pitch() const
 		{
-			return atan2f(2*(X*W - Y*Z), 1 - 2 * X*X - 2 * Z*Z);
+			return atan2f(2*(x*w - y*z), 1 - 2 * x*x - 2 * z*z);
 		}
 
-		static struct _QUATERNION GetQuaternion(float yaw, float pitch)
+		static struct quaternion get_quaternion(float& yaw, float& pitch)
 		{
-			struct _QUATERNION q;
+			struct quaternion q;
 
-			auto c1 = cosf(yaw);
-			auto c2 = cosf(0);
-			auto c3 = cosf(pitch);
+			const auto c1 = cosf(yaw);
+			const auto c2 = cosf(0);
+			const auto c3 = cosf(pitch);
 
-			auto s1 = sinf(yaw);
-			auto s2 = sinf(0);
-			auto s3 = sinf(pitch);
+			const auto s1 = sinf(yaw);
+			const auto s2 = sinf(0);
+			const auto s3 = sinf(pitch);
 
-			q.W = sqrt(1 + c1*c2 + c1*c3 - s1*s2*s3 + c2*c3) / 2;
-			q.X = (c2*s3 + c1*s3 + s1*s2*c3) / (4 * q.W);
-			q.Y = (s1*c2 + s1*c3 + c1*s2*s3) / (4 * q.W);
-			q.Z = (-s1*s3 + c1*s2*c3 + s2) / (4 * q.W);
+			q.w = sqrt(1 + c1*c2 + c1*c3 - s1*s2*s3 + c2*c3) / 2;
+			q.x = (c2*s3 + c1*s3 + s1*s2*c3) / (4 * q.w);
+			q.y = (s1*c2 + s1*c3 + c1*s2*s3) / (4 * q.w);
+			q.z = (-s1*s3 + c1*s2*c3 + s2) / (4 * q.w);
 
-			auto mag = sqrt(q.W*q.W + q.X*q.X + q.Y*q.Y + q.Z*q.Z);
+			const auto m = sqrt(q.w*q.w + q.x*q.x + q.y*q.y + q.z*q.z);
 
-			q.W = q.W / mag;
-			q.X = q.X / mag;
-			q.Y = q.Y / mag;
-			q.Z = q.Z / mag;
+			q.w = q.w / m;
+			q.x = q.x / m;
+			q.y = q.y / m;
+			q.z = q.z / m;
 
 			return q;
 		}
 
-		static struct _QUATERNION GetQuaternion(float yaw)
+		static struct quaternion get_quaternion(float& yaw)
 		{
-			struct _QUATERNION q;
+			struct quaternion q;
 
-			//auto c1 = cosf(yaw);
-			//auto c2 = cosf(0);
-			//auto c3 = cosf(0);
-
-			//auto s1 = sinf(yaw);
-			//auto s2 = sinf(0);
-			//auto s3 = sinf(0);
-
-			//q.W = sqrt(1 + c1*c2 + c1*c3 - s1*s2*s3 + c2*c3) / 2;
-			//q.X = (c2*s3 + c1*s3 + s1*s2*c3) / (4 * q.W);
-			//q.Y = (s1*c2 + s1*c3 + c1*s2*s3) / (4 * q.W);
-			//q.Z = (-s1*s3 + c1*s2*c3 + s2) / (4 * q.W);
-
-			//auto mag = sqrt(q.W*q.W + q.X*q.X + q.Y*q.Y + q.Z*q.Z);
-
-			//q.W = q.W / mag;
-			//q.X = q.X / mag;
-			//q.Y = q.Y / mag;
-			//q.Z = q.Z / mag;
-
-			q.W = cosf(yaw / 2);
-			q.X = 0;
-			q.Y = sinf(yaw / 2);
-			q.Z = 0;
+			q.w = cosf(yaw / 2);
+			q.x = 0;
+			q.y = sinf(yaw / 2);
+			q.z = 0;
 
 			return q;
 		}
 
-		static struct _QUATERNION GetQuaternionToFace(VECTOR3& to, VECTOR3& from)
+		static struct quaternion get_quaternion_to_face(vector3_t& to, vector3_t& from)
 		{
 			// Get the unit vector pointing from the element at v1 and v2 and normalize it
-			auto dir = VECTOR3::Subtract(to, from);
-			dir.Normalize();
-			auto q = GetQuaternion(dir.GetYaw());
-			q.Normalize();
+			auto dir = vector3_t::subtract(to, from);
+			dir.normalize();
+			auto yaw = dir.get_yaw();
+			auto q = get_quaternion(yaw);
+			q.normalize();
 			return q;
 		}
 
-		_QUATERNION()
+		quaternion()
 		{
-			X = 0;
-			Y = 0;
-			Z = 0;
-			W = 0;
+			x = 0;
+			y = 0;
+			z = 0;
+			w = 0;
 		}
 
-	} QUATERNION, *PQUATERNION;	
+	} quaternion_t, *p_quaternion_t;	
 
 	// Size = 0xC
-	typedef struct _RDBIDENTITY
+	typedef struct rdb_identity
 	{
-		DWORD LowQualityLevelId;
-		DWORD HighQualityLevelId;
-		DWORD QualityLevel;
-	} RDBIDENTITY, *PRDBIDENTITY;
+		DWORD low_quality_level_id;
+		DWORD high_quality_level_id;
+		DWORD quality_level;
+	} rdb_identity_t, *p_rdb_identity_t;
 	
 	// Size = 0x8
 	// From Utils.dll
-	typedef struct _IPOINT
+	typedef struct i_point
 	{
-		DWORD X;
-		DWORD Y;
-	} IPOINT, *PIPOINT;
+		DWORD x;
+		DWORD y;
+	} i_point_t, *p_i_point_t;
 
 #pragma endregion
 
 #pragma region ACGGameItem
 
-	typedef struct _ACGGAMEITEM
+	typedef struct acg_game_item
 	{
-		struct _RDBIDENTITY RDBIdentity;		// 0x00
-		struct _DUMMYITEMBASE* pDummyItemBase;	// 0x04
-		DWORD InterpolatedId;					// 0x10
-	} ACGGAMEITEM, *PACGGAMEITEM;
+		rdb_identity_t rdb_identity;				// 0x00
+		struct dummy_item_base* p_dummy_item_base;	// 0x04
+		DWORD interpolated_id;						// 0x10
+	} acg_game_item_t, *p_acg_game_item_t;
 
 #pragma endregion
 
 #pragma region ActionLock
 
 	// Size = 0x10
-	typedef struct _ACTIONLOCK
+	typedef struct action_lock  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
-		struct _IDENTITY ActionIdentity;		// 0x00
-		DWORD TotalLockoutTime;					// 0x08
-		DWORD LockoutTimeRemaining;				// 0x0C
-	} ACTIONLOCK, *PACTIONLOCK;
+		identity_t action_identity;		// 0x00
+		DWORD total_lockout_time;		// 0x08
+		DWORD lockout_time_remaining;	// 0x0C
+	} action_lock_t, *p_action_lock_t;
 
 #pragma endregion
 	
@@ -330,23 +320,26 @@ namespace AOData
 
 	// Size = 0x5C
 	// From GameData.dll
-	typedef struct _AREADATA
+	typedef struct area_data  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
-		PVOID pvTable;					// 0x00
-		BYTE Unknown0x4[0x4];			// 0x04
-		std::string* pName;				// 0x08
-		std::string* pDescription;		// 0x0C
-		std::string* pOwnerName;		// 0x10
-		std::string* pKnowledge;		// 0x14
-		DWORD MinLevel;					// 0x18
-		DWORD MaxLevel;					// 0x1C
-		PVOID pEnvironmentData;			// 0x20
-		DWORD OmniTekControl;			// 0x24
-		DWORD ClanControl;				// 0x28
-		BYTE Unknown0x2C[0x1C];			// 0x2C
-		struct _VECTOR3 Center;			// 0x48
-		BYTE Unknown0x54[0x8];			// 0x54
-	} AREADATA, *PAREADATA;
+		PVOID p_v_table;				// 0x00
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x4[0x4];			// 0x04
+		std::string* p_name;			// 0x08
+		std::string* p_description;		// 0x0C
+		std::string* p_owner_name;		// 0x10
+		std::string* p_knowledge;		// 0x14
+		DWORD min_level;				// 0x18
+		DWORD max_level;				// 0x1C
+		PVOID p_environment_data;		// 0x20
+		DWORD omni_tek_control;			// 0x24
+		DWORD clan_control;				// 0x28
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x2C[0x1C];		// 0x2C
+		struct vector3 center;			// 0x48
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x54[0x8];			// 0x54
+	} area_data_t, *p_area_data_t;
 
 #pragma endregion
 
@@ -354,17 +347,20 @@ namespace AOData
 
 	// Size = 0x38
 	// From Gamecode.dll
-	typedef struct _BANKENTRY
+	typedef struct bank_entry
 	{
-		PVOID pvTable;									// 0x00
-		BYTE Unknown0x04[0x4];							// 0x04
-		PVOID pvTable_NewInventory;						// 0x08
-		std::vector <struct _INVENTORYDATA*> Inventory;	// 0x0C
-		BYTE Unknown0x18[0x4];							// 0x18
-		DWORD Count;									// 0x1C
-		struct _IDENTITY InventoryIdentity;				// 0x20
-		BYTE Unknown0x28[0x10];							// 0x28
-	} BANKENTRY, *PBANKENTRY;
+		PVOID p_v_table;									// 0x00
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x04[0x4];								// 0x04
+		PVOID p_v_table_new_inventory;						// 0x08
+		std::vector <struct inventory_data*> inventory;		// 0x0C
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x18[0x4];								// 0x18
+		DWORD count;										// 0x1C
+		identity_t inventory_identity;						// 0x20
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x28[0x10];							// 0x28
+	} bank_entry_t, *p_bank_entry_t;
 
 #pragma endregion 
 	
@@ -372,16 +368,25 @@ namespace AOData
 
 	// Size = 0x44
 	// From BinaryStream.dll
-	typedef struct _BINARYSTREAM
+	typedef struct binary_stream
 	{
-		struct _BINARYSTREAM* (__thiscall *BinaryStream__readmemAddress)(_BINARYSTREAM*, PCSTR, size_t);	// 0x00
-		struct _BINARYSTREAM* (__thiscall *BinaryStream__writememAddress)(_BINARYSTREAM*, BYTE, size_t);	// 0x04
-		DWORD(__thiscall *BinaryStream__bgetcAddress)(_BINARYSTREAM*);										// 0x08
-		DWORD(__thiscall *BinaryStream__bputcAddress)(_BINARYSTREAM*, BYTE);								// 0x0C
-		BYTE Unknown0x10[0x2C];																				// 0x10
-		DWORD MachineEndian;																				// 0x3C
-		DWORD Endian;																						// 0x40
-	} BINARYSTREAM, *PBINARYSTREAM;
+		// ReSharper disable once CppInconsistentNaming
+		// ReSharper disable once IdentifierTypo
+		struct binary_stream* (__thiscall *BinaryStream__readmemAddress)(binary_stream*, PCSTR, size_t);	// 0x00
+		// ReSharper disable once CppInconsistentNaming
+		// ReSharper disable once IdentifierTypo
+		struct binary_stream* (__thiscall *BinaryStream__writememAddress)(binary_stream*, BYTE, size_t);	// 0x04
+		// ReSharper disable once CppInconsistentNaming
+		// ReSharper disable once IdentifierTypo
+		DWORD(__thiscall *BinaryStream__bgetcAddress)(binary_stream*);										// 0x08
+		// ReSharper disable once CppInconsistentNaming
+		// ReSharper disable once IdentifierTypo
+		DWORD(__thiscall *BinaryStream__bputcAddress)(binary_stream*, BYTE);								// 0x0C
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x10[0x2C];																			// 0x10
+		DWORD machine_endian;																				// 0x3C
+		DWORD endian;																						// 0x40
+	} binary_stream_t, *p_binary_stream;
 
 #pragma endregion
 
@@ -389,45 +394,55 @@ namespace AOData
 
 	// Size = 0x1EC
 	// From N3.dll
-	typedef struct _CAMERAVEHICLE
+	typedef struct camera_vehicle  // NOLINT(cppcoreguidelines-pro-type-member-init, hicpp-member-init)
 	{
-		PVOID pvTable;									// 0x0000
-		BYTE Unknown0x04[0x20];							// 0x0004
-		PVOID pLocalityListener_i;						// 0x0024
-		BYTE Unknown0x28[0x4];							// 0x0028
-		struct _DUMMYVEHICLE* pParentVehicle;			// 0x002C
-		PVOID pVehicleBody_i;							// 0x0030
-		float Mass;										// 0x0034
-		float MaxForce;									// 0x0038
-		float MaxVel1;									// 0x003C
-		float BrakeDistance;							// 0x0040
-		BYTE Unknown0x44[0x4];							// 0x0044
-		float MaxVel2;									// 0x0048
-		float Radius;									// 0x004C
-		BYTE FallingEnabled;							// 0x0050
-		BYTE SurfaceHugEnabled;							// 0x0051
-		BYTE Unknown0x52[0x6];							// 0x0052
-		struct _VECTOR3 GlobalPos;						// 0x0058
-		struct _VECTOR3 Velocity;						// 0x0064
-		struct _QUATERNION Direction;					// 0x0070
-		struct _QUATERNION BodyRot;						// 0x0080
-		float Dir;										// 0x0090
-		BYTE Unknown0x94[0x1C];							// 0x0094
-		DWORD OrientationMode;							// 0x00B0
-		BYTE Unknown0xB4[0x18];							// 0x00B4
-		float VelocityMagnitude;						// 0x00CC
-		struct _VECTOR3 LastPos;						// 0x00D0
-		struct _VECTOR3 ParentGlobalPos;				// 0x00DC
-		struct _QUATERNION ParentBodyRot;				// 0x00E8
-		BYTE Unknown0xF8[0x5C];							// 0x00F8	
-		struct _N3TILEMAPSURFACE* pn3TilemapSurface;	// 0x0154
-		DWORD PlayfieldInstanceId;						// 0x0158
-		BYTE SurfaceCollisionEnabled;					// 0x015C
-		BYTE Unknown0x15D[0x3];							// 0x015D
-		BYTE Unknown0x160[0x1C];						// 0x0160
-		struct _CHARVEHICLE* pSecondaryTargetVehicle;	// 0x017C
-		BYTE Unknown0x180[0x6C];						// 0x180
-	} CAMERAVEHICLE, *PCAMERAVEHICLE;
+		PVOID p_v_table;									// 0x0000
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x04[0x20];							// 0x0004
+		PVOID p_locality_listener_i;						// 0x0024
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x28[0x4];								// 0x0028
+		struct dummy_vehicle* p_parent_vehicle;				// 0x002C
+		PVOID p_vehicle_body_i;								// 0x0030
+		float mass;											// 0x0034
+		float max_force;									// 0x0038
+		float max_vel1;										// 0x003C
+		float brake_distance;								// 0x0040
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x44[0x4];								// 0x0044
+		float max_vel2;										// 0x0048
+		float radius;										// 0x004C
+		BYTE falling_enabled;								// 0x0050
+		BYTE surface_hug_enabled;							// 0x0051
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x52[0x6];								// 0x0052
+		vector3_t global_pos;								// 0x0058
+		vector3_t velocity;									// 0x0064
+		quaternion_t direction;								// 0x0070
+		quaternion_t body_rot;								// 0x0080
+		float dir;											// 0x0090
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x94[0x1C];							// 0x0094
+		DWORD orientation_mode;								// 0x00B0
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xB4[0x18];							// 0x00B4
+		float velocity_magnitude;							// 0x00CC
+		vector3_t last_pos;									// 0x00D0
+		vector3_t parent_global_pos;						// 0x00DC
+		quaternion_t parent_body_rot;						// 0x00E8
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xF8[0x5C];							// 0x00F8	
+		struct n3_tile_map_surface* p_n3_tile_map_surface;	// 0x0154
+		DWORD playfield_instance_id;						// 0x0158
+		BYTE surface_collision_enabled;						// 0x015C
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x15D[0x3];							// 0x015D
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x160[0x1C];							// 0x0160
+		struct char_vehicle* p_secondary_target_vehicle;	// 0x017C
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x180[0x6C];							// 0x180
+	} camera_vehicle_t, *p_camera_vehicle_t;
 
 #pragma endregion
 
@@ -435,21 +450,23 @@ namespace AOData
 
 	// Size = 0x30
 	// From Gamecode.dll
-	typedef struct _CASTNANOSPELLIIR
+	typedef struct cast_nanospell_iir  // NOLINT(cppcoreguidelines-pro-type-member-init, hicpp-member-init)
 	{
-		PVOID pvTable;
-		struct _IDENTITY Identity;
-		BYTE Unknown0xC;
-		BYTE Unknown0xD[0x3];
-		DWORD Unknown0x10;
-		DWORD Unknown0x14;
-		DWORD Unknown0x18;
-		DWORD Unknown0x1C;
-		DWORD Unknown0x20;
-		DWORD Unknown0x24;
-		DWORD Unknown0x28;
-		DWORD Unknown0x2C;
-	} CASTNANOSPELLIIR, *PCASTNANOSPELLIIR;
+		PVOID p_v_table;
+		identity_t identity;		
+		// ReSharper disable CppInconsistentNaming
+		BYTE unknown_0xC;
+		BYTE unknown_0xD[0x3];
+		DWORD unknown_0x10;
+		DWORD unknown_0x14;
+		DWORD unknown_0x18;
+		DWORD unknown_0x1C;
+		DWORD unknown_0x20;
+		DWORD unknown_0x24;
+		DWORD unknown_0x28;
+		DWORD unknown_0x2C;
+		// ReSharper restore CppInconsistentNaming
+	} cast_nanospell_iir_t, *p_cast_nanospell_iir_t;
 
 #pragma endregion
 
@@ -457,21 +474,23 @@ namespace AOData
 
 	// Size = 0x34
 	// From Gamecode.dll
-	typedef struct _CHARMOVEMENTSTATUS
+	typedef struct char_movement_status
 	{
-		PVOID pvTable;				// 0x00
-		DWORD MovementMode;			// 0x04
-		DWORD IsMovingFwdBck;		// 0x08 If != 1
-		DWORD FwdBckDirection;		// 0x0C
-		DWORD IsMovingStrafe;		// 0x10 If != 1
-		DWORD StrafeDirection;		// 0x14
-		BYTE Unknown0x18[0x8];		// 0x18
-		DWORD IsRotating;			// 0x20 If != 1
-		DWORD RotationDirection;	// 0x24
-		DWORD IsJumping;			// 0x28 If = 3
-		PVOID pVehicle;				// 0x2C
-		DWORD Unknown0x30;			// 0x30
-	} CHARMOVEMENTSTATUS, *PCHARMOVEMENTSTATUS;
+		PVOID p_v_table;				// 0x00
+		DWORD movement_mode;			// 0x04
+		DWORD is_moving_forward_back;	// 0x08 If != 1
+		DWORD forward_back_direction;	// 0x0C
+		DWORD is_moving_strafe;			// 0x10 If != 1
+		DWORD strafe_direction;			// 0x14
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x18[0x8];			// 0x18
+		DWORD is_rotating;				// 0x20 If != 1
+		DWORD rotation_direction;		// 0x24
+		DWORD is_jumping;				// 0x28 If = 3
+		PVOID p_vehicle;				// 0x2C
+		// ReSharper disable once CppInconsistentNaming
+		DWORD unknown_0x30;				// 0x30
+	} char_movement_status_t, *p_char_movement_status_t;
 
 #pragma endregion
 
@@ -479,53 +498,65 @@ namespace AOData
 
 	// Size = 0x3AC
 	// From Gamecode.dll
-	typedef struct _CHARVEHICLE
+	typedef struct char_vehicle  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
-		PVOID pvTable;										// 0x0000
-		BYTE Unknown0x04[0x10];								// 0x0004
-		DWORD ZoneInstanceID;								// 0x0014
-		BYTE Unknown0x18[0xC];								// 0x0018
-		PVOID pLocalityListener_i;							// 0x0024
-		BYTE Unknown0x28[0x4];								// 0x0028
-		struct _DUMMYVEHICLE* pParentVehicle;				// 0x002C
-		PVOID pVehicleBody_i;								// 0x0030
-		float Mass;											// 0x0034
-		float MaxForce;										// 0x0038
-		float MaxVel1;										// 0x003C
-		float BrakeDistance;								// 0x0040
-		BYTE Unknown0x44[0x4];								// 0x0044
-		float MaxVel2;										// 0x0048
-		float Radius;										// 0x004C
-		BYTE FallingEnabled;								// 0x0050
-		BYTE SurfaceHugEnabled;								// 0x0051
-		BYTE Unknown0x52[0x6];								// 0x0052
-		struct _VECTOR3 GlobalPos;							// 0x0058
-		struct _VECTOR3 Velocity;							// 0x0064
-		struct _QUATERNION Direction;						// 0x0070
-		struct _QUATERNION BodyRot;							// 0x0080
-		float Dir;											// 0x0090
-		BYTE Unknown0x94[0x1C];								// 0x0094
-		DWORD OrientationMode;								// 0x00B0
-		BYTE Unknown0xB4[0xC];								// 0x00B4
-		struct _VECTOR3 BodyForward;						// 0x00C0
-		float VelocityMagnitude;							// 0x00CC
-		struct _VECTOR3 LastPos;							// 0x00D0
-		struct _VECTOR3 ParentGlobalPos;					// 0x00DC
-		struct _QUATERNION ParentBodyRot;					// 0x00E8
-		BYTE Unknown0xF8[0x5C];								// 0x00F8	
-		struct _N3TILEMAPSURFACE* pn3TilemapSurface;		// 0x0154
-		DWORD PlayfieldInstanceId;							// 0x0158
-		BYTE SurfaceCollisionEnabled;						// 0x015C
-		BYTE Unknown0x15D[0x3];								// 0x015D
-		PVOID pn3DynelEventListener_i;						// 0x0160
-		BYTE Unknown0x164[0x4];								// 0x0164
-		struct _IDENTITY Identity;							// 0x0168
-		float MaxSpeed;										// 0x0170
-		BYTE Unknown0x174[0x4];								// 0x0174
-		struct _CHARMOVEMENTSTATUS* pCharMovementStatus;	// 0x0178
-		struct _CHARVEHICLE* pThisVehicle;					// 0x017C
-		BYTE Unknown0x180[0x22C];							// 0x0180
-	} CHARVEHICLE, *PCHARVEHICLE;
+		PVOID p_v_table;									// 0x0000
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x04[0x10];							// 0x0004
+		DWORD zone_instance_id;								// 0x0014
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x18[0xC];								// 0x0018
+		PVOID p_locality_listener_i;						// 0x0024
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x28[0x4];								// 0x0028
+		struct dummy_vehicle* p_parent_vehicle;				// 0x002C
+		PVOID p_vehicle_body_i;								// 0x0030
+		float mass;											// 0x0034
+		float max_force;									// 0x0038
+		float max_vel1;										// 0x003C
+		float brake_distance;								// 0x0040
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x44[0x4];								// 0x0044
+		float max_vel2;										// 0x0048
+		float radius;										// 0x004C
+		BYTE falling_enabled;								// 0x0050
+		BYTE surface_hug_enabled;							// 0x0051
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x52[0x6];								// 0x0052
+		vector3_t global_pos;								// 0x0058
+		vector3_t velocity;									// 0x0064
+		quaternion_t direction;								// 0x0070
+		quaternion_t body_rot;								// 0x0080
+		float dir;											// 0x0090
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x94[0x1C];							// 0x0094
+		DWORD orientation_mode;								// 0x00B0
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xB4[0xC];								// 0x00B4
+		vector3_t body_forward;								// 0x00C0
+		float velocity_magnitude;							// 0x00CC
+		vector3_t last_pos;									// 0x00D0
+		vector3_t parent_global_pos;						// 0x00DC
+		quaternion_t parent_body_rot;						// 0x00E8
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xF8[0x5C];							// 0x00F8	
+		struct n3_tile_map_surface* p_n3_tile_map_surface;	// 0x0154
+		DWORD playfield_instance_id;						// 0x0158
+		BYTE surface_collision_enabled;						// 0x015C
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x15D[0x3];							// 0x015D
+		PVOID pn_3dynel_event_listener_i;					// 0x0160
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x164[0x4];							// 0x0164
+		identity_t identity;								// 0x0168
+		float max_speed;									// 0x0170
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x174[0x4];							// 0x0174
+		p_char_movement_status_t p_char_movement_status;	// 0x0178
+		struct char_vehicle* p_this_vehicle;				// 0x017C
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x180[0x22C];							// 0x0180
+	} char_vehicle_t, *p_char_vehicle_t;
 
 #pragma endregion
 
@@ -533,29 +564,31 @@ namespace AOData
 
 	// Size = 0x2C0
 	// From GUI.dll
-	typedef struct _CHATGUIMODULE
+	typedef struct chat_gui_module
 	{
-		PVOID pvTable;					// 0x00
-		BYTE Unknown0x4[0x4C];			// 0x04
-		PVOID pvTable_SignalTarget_c;	// 0x50
-		BYTE Unknown0x54[0x4];			// 0x54
-		PVOID pvTable_BaseTarget_c;		// 0x58
-		BYTE Unknown0x5C[0x84];			// 0x5C
-		PVOID pChatSoundEffect;			// 0xE0
-		PVOID pFriendListView;			// 0xE4
-		BYTE Unknown0xE8[0x14];			// 0xE8
-		PVOID pWindow;					// 0xFC
-		BYTE Unknown0x100[0x18];		// 0x100
-		PVOID pFriendsWindow;			// 0x118
-		BYTE Unknown0x11C[0xB4];		// 0x11C
-		PVOID pChatGroupWindow;			// 0x1D0
-		BYTE Unknown0x1D4[0xC0];		// 0x1D4
-		string AFKMessage;				// 0x294
-		BYTE Unknown0x2AC[0x4];
-		DWORD64 AFKTimer;				// 0x2B0
-		PVOID pCCGeneric;				// 0x2B8
-		BYTE Unknown0x2BC[0x4];			// 0x2BC
-	} CHATGUIMODULE, *PCHATGUIMODULE;
+		PVOID p_v_table;					// 0x00
+		// ReSharper disable CppInconsistentNaming
+		BYTE unknown_0x4[0x4C];				// 0x04		
+		PVOID p_v_table_signal_target_c;	// 0x50
+		BYTE unknown_0x54[0x4];				// 0x54
+		PVOID p_v_table_base_target_c;		// 0x58
+		BYTE unknown_0x5C[0x84];			// 0x5C
+		PVOID p_chat_sound_effect;			// 0xE0
+		PVOID p_friend_list_view;			// 0xE4
+		BYTE unknown_0xE8[0x14];			// 0xE8
+		PVOID p_window;						// 0xFC
+		BYTE unknown_0x100[0x18];			// 0x100
+		PVOID p_friends_window;				// 0x118
+		BYTE unknown_0x11C[0xB4];			// 0x11C
+		PVOID p_chat_group_window;			// 0x1D0
+		BYTE unknown_0x1D4[0xC0];			// 0x1D4
+		string afk_message;					// 0x294
+		BYTE Unknown0x2AC[0x4];				// 0x2AC
+		DWORD64 AFKTimer;					// 0x2B0
+		PVOID p_cc_generic;					// 0x2B8
+		BYTE unknown_0x2BC[0x4];			// 0x2BC
+		// ReSharper restore CppInconsistentNaming
+	} chat_gui_module_t, *p_chat_gui_module_t;
 
 #pragma endregion
 
@@ -563,39 +596,39 @@ namespace AOData
 
 	// Size = 0x218
 	// From GUI.dll
-	typedef struct _CHATWINDOWNODE
+	typedef struct chat_window_node
 	{
-		PVOID pvTable;					// 0x00
-		BYTE Unknown0x04[0x4];			// 0x04
-		PVOID pvTable_BaseObject_c;		// 0x08
-		std::string WindowName;			// 0x0C
-		BYTE Unknown0x24[0x1F4];		// 0x24
-	} CHATWINDOWNODE, *PCHATWINDOWNODE;
+		PVOID p_v_table;				// 0x00
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x04[0x4];			// 0x04
+		PVOID p_v_table_base_object_c;	// 0x08
+		std::string window_name;		// 0x0C
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x24[0x1F4];		// 0x24
+	} chat_window_node_t, *p_chat_window_node_t;
 
-	typedef struct _CHATWINDOWNODENODE
+	typedef struct chat_window_node_node
 	{
-		struct _CHATWINDOWNODENODE* pLower;			// 0x00
-		struct _CHATWINDOWNODENODE* pBack;			// 0x04
-		struct _CHATWINDOWNODENODE* pHigher;		// 0x08
-		string WindowName;							// 0x0C
-		struct _CHATWINDOWNODE* pChatWindow;		// 0x24
-	} CHATWINDOWNODENODE, *PCHATWINDOWNODENODE;
+		struct chat_window_node_node* p_lower;		// 0x00
+		struct chat_window_node_node* p_back;		// 0x04
+		struct chat_window_node_node* p_higher;		// 0x08
+		string window_name;							// 0x0C
+		struct chat_window_node* p_chat_window;		// 0x24
+	} chat_window_node_node_t, *p_chat_window_node_node_t;
 
-	typedef struct _CHATWINDOWNODEROOT
+	typedef struct chat_window_node_root
 	{
-		struct _CHATWINDOWNODENODE* pBegin;
-		struct _CHATWINDOWNODENODE* pNode;
-		struct _NCHATWINDOWNODEODE* pEnd;
-	} CHATWINDOWNODEROOT, *PCHATWINDOWNODEROOT;
+		struct chat_window_node_node* p_begin;
+		struct chat_window_node_node* p_node;
+		struct chat_window_node_node* pEnd;
+	} chat_window_node_root_t, *p_chat_window_node_root_t;
 
-	typedef struct _CHATWINDOWNODEDIR
+	typedef struct chat_window_node_dir
 	{
-		BYTE Unknown0x00[0x4];
-		struct _CHATWINDOWNODEROOT* pRoot;
-		DWORD Count;
-	} CHATWINDOWNODEDIR, *PCHATWINDOWNODEDIR;
-
-	
+		BYTE unknown_0x00[0x4];
+		p_chat_window_node_root_t p_root;
+		DWORD count;
+	} chat_window_node_dir_t, *p_chat_window_node_dir_t;
 
 #pragma endregion
 
@@ -607,7 +640,7 @@ namespace AOData
 	{
 		PVOID pvTable;											// 0x00
 		BYTE Unknown0x04[0x10];									// 0x04
-		struct _CHATWINDOWNODEDIR ChatWindowNodeDir;			// 0x18
+		struct chat_window_node_dir ChatWindowNodeDir;			// 0x18
 		BYTE Unknown0x20[0x1C];									// 0x20
 	} CHATWINDOWCONTROLLER, *PCHATWINDOWCONTROLLER;
 
@@ -630,8 +663,8 @@ namespace AOData
 	// From 
 	typedef struct _COLLINFO
 	{
-		struct _IDENTITY Identity;	// 0x00
-		struct _VECTOR3 Location;	// 0x08
+		identity_t Identity;	// 0x00
+		struct vector3 Location;	// 0x08
 	} COLLINFO, *PCOLLINFO;
 
 #pragma endregion
@@ -647,7 +680,7 @@ namespace AOData
 		BYTE Unknown_0x08[0x4];								// 0x0008
 		PVOID pvTable_DbObject;								// 0x000C
 		struct _EVENTCASTER* pEventCaster;					// 0x0010
-		struct _IDENTITY Identity;							// 0x0014
+		identity_t Identity;							// 0x0014
 		BYTE Unknown_0x1C[0x8];								// 0x001C
 		std::vector<COLLINFO>* pCollInfoVector;				// 0x0024
 		PVOID pvTable_n3Fsm;								// 0x0028
@@ -658,7 +691,7 @@ namespace AOData
 		BYTE Unknown0x44[0x4];								// 0x044
 		BYTE IsNotSnoozing;									// 0x0048
 		BYTE Unknown0x49[0x7];								// 0x0049
-		struct _DUMMYVEHICLE *pVehicle;						// 0x0050
+		struct dummy_vehicle *pVehicle;						// 0x0050
 		BYTE IsGroundCollisionEnabled;						// 0x0054
 		BYTE IsCollEnabled;									// 0x0055
 		BYTE Unknown0x56[0x2];								// 0x0056
@@ -673,14 +706,14 @@ namespace AOData
 		BYTE IsInTree;										// 0x006B	
 		PVOID pn3InfoItemRemote;							// 0x006C
 		std::vector<struct _N3DYNEL*>* pChildDynelVector;		// 0x0070
-		struct _IDENTITY ParentIdentity;					// 0x0074
+		identity_t ParentIdentity;					// 0x0074
 		BYTE Unknown0x7C[0x4];								// 0x007C
 		BYTE IsDying;										// 0x0080
 		BYTE field_81[0xB];									// 0x0081
 		DWORD RDBDynelStatus;								// 0x008C
 		DWORD LastAllowedZoneInst;							// 0x0090
-		struct _VECTOR3 LastAllowedGlobalPositionInZone;	// 0x0094
-		struct _VECTOR3 ReconcilePosition;					// 0x00A0
+		struct vector3 LastAllowedGlobalPositionInZone;	// 0x0094
+		struct vector3 ReconcilePosition;					// 0x00A0
 		float BodyScale;									// 0x00AC
 		PVOID pTextureDataList;								// 0x00B0
 		BYTE Unknown0xB4[0xC];								// 0x00B4
@@ -691,7 +724,7 @@ namespace AOData
 		BYTE IsVisible;										// 0x00CD
 		BYTE UseCharDistCap;								// 0x00CE
 		BYTE Unknown0xCF;									// 0x00CF
-		struct _VECTOR3 BoundingSpherePos;					// 0x00D0
+		struct vector3 BoundingSpherePos;					// 0x00D0
 		BYTE Unknown0xDC[0x4C];								// 0x00DC
 		struct _NEWINVENTORY* pInventory;					// 0x0128
 		BYTE Unknown0x12C[0x1C];							// 0x012C
@@ -699,9 +732,9 @@ namespace AOData
 		BYTE Unknown0x14C[0x30];							// 0x014C
 		PVOID pvTable_StatHolder;							// 0x017C
 		std::vector<LONG>* pStatVector;						// 0x0180
-		struct _IDENTITY UnknownIdentity;					// 0x0184
+		identity_t UnknownIdentity;					// 0x0184
 		BYTE Unknown0x18C[0x2C];							// 0x018C
-		struct _IDENTITY TemplateIdentity;					// 0x01B8
+		identity_t TemplateIdentity;					// 0x01B8
 		BYTE Unknown0x1C0[0x28];							// 0x01C0
 	} CHEST, *PCHEST;
 
@@ -728,7 +761,7 @@ namespace AOData
 	{
 		PVOID pvTable;							// 0x00
 		struct _EVENTCASTER* pEventCaster;		// 0x04
-		struct _IDENTITY Identity;				// 0x08
+		identity_t Identity;				// 0x08
 		BYTE Unknown_0x10[0x8];					// 0x10
 	} DBOBJECT, *PDBOBJECT;
 
@@ -742,7 +775,7 @@ namespace AOData
 	{
 		PVOID pvTable;				// 0x00
 		BYTE Unknown0x4[0x8];		// 0x04
-		struct _VECTOR3 Center;		// 0x0C
+		struct vector3 Center;		// 0x0C
 		BYTE Unknown0x18[0x24];		// 0x18
 		DWORD NPCMinLevel;			// 0x3C
 		BYTE Unknown0x40[0x4];		// 0x40
@@ -764,18 +797,18 @@ namespace AOData
 
 	// Size = 0xA4
 	// From Gamecode.dll
-	typedef struct _DUMMYITEMBASE
+	typedef struct dummy_item_base  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
-		PVOID pvTable;						// 0x00
-		BYTE Unknown0x04[0x34];				// 0x04
-		std::vector<LONG>* pStatsVector;	// 0x38
-		struct _IDENTITY ParentIdentity;	// 0x3C
-		BYTE Unknown0x44[0x2C];				// 0x44
-		struct _IDENTITY Identity;			// 0x70
-		BYTE Unknown0x78[0x24];				// 0x78
-		char const * Name;					// 0x9C
-		char const * Description;			// 0xA0
-	} DUMMYITEMBASE, *PDUMMYITEMBASE;
+		PVOID p_v_table;					// 0x00
+		BYTE unknown_0x04[0x34];			// 0x04
+		std::vector<LONG>* p_stats_vector;	// 0x38
+		identity_t parent_identity;			// 0x3C
+		BYTE unknown_0x44[0x2C];			// 0x44
+		identity_t identity;				// 0x70
+		BYTE unknown_0x78[0x24];			// 0x78
+		char const * name;					// 0x9C
+		char const * description;			// 0xA0
+	} dummy_item_base_t, *p_dummy_item_base_t;
 
 #pragma endregion
 
@@ -783,7 +816,7 @@ namespace AOData
 
 	// Size = 0x160
 	// From N3.dll
-	typedef struct _DUMMYVEHICLE
+	typedef struct dummy_vehicle
 	{
 		PVOID pvTable;									// 0x0000
 		BYTE Unknown0x04[0x10];							// 0x0004
@@ -791,7 +824,7 @@ namespace AOData
 		BYTE Unknown0x18[0xC];							// 0x0018
 		PVOID pLocalityListener_i;						// 0x0024
 		BYTE Unknown0x28[0x4];							// 0x0028
-		struct _DUMMYVEHICLE* pParentVehicle;			// 0x002C
+		struct dummy_vehicle* pParentVehicle;			// 0x002C
 		PVOID pVehicleBody_i;							// 0x0030
 		float Mass;										// 0x0034
 		float MaxForce;									// 0x0038
@@ -803,25 +836,25 @@ namespace AOData
 		BYTE FallingEnabled;							// 0x0050
 		BYTE SurfaceHugEnabled;							// 0x0051
 		BYTE Unknown0x52[0x6];							// 0x0052
-		struct _VECTOR3 GlobalPos;						// 0x0058
-		struct _VECTOR3 Velocity;						// 0x0064
-		struct _QUATERNION Direction;					// 0x0070
-		struct _QUATERNION BodyRot;						// 0x0080
+		struct vector3 GlobalPos;						// 0x0058
+		struct vector3 Velocity;						// 0x0064
+		quaternion_t Direction;					// 0x0070
+		quaternion_t BodyRot;						// 0x0080
 		float Dir;										// 0x0090
 		BYTE Unknown0x94[0x1C];							// 0x0094
 		DWORD OrientationMode;							// 0x00B0
 		BYTE Unknown0xB4[0xC];							// 0x00B4
-		struct _VECTOR3 BodyForward;					// 0x00C0
+		struct vector3 BodyForward;					// 0x00C0
 		float VelocityMagnitude;						// 0x00CC
-		struct _VECTOR3 LastPos;						// 0x00D0
-		struct _VECTOR3 ParentGlobalPos;				// 0x00DC
-		struct _QUATERNION ParentBodyRot;				// 0x00E8
+		struct vector3 LastPos;						// 0x00D0
+		struct vector3 ParentGlobalPos;				// 0x00DC
+		quaternion_t ParentBodyRot;				// 0x00E8
 		BYTE Unknown0xF8[0x5C];							// 0x00F8	
-		struct _N3TILEMAPSURFACE* pn3TilemapSurface;	// 0x0154
+		struct n3_tile_map_surface* pn3TilemapSurface;	// 0x0154
 		DWORD PlayfieldInstanceId;						// 0x0158
 		BYTE SurfaceCollisionEnabled;					// 0x015C
 		BYTE Unknown0x15D[0x3];							// 0x015D
-	} DUMMYVEHICLE, *PDUMMYVEHICLE;
+	} dummy_vehicle_t, *p_dummy_vehicle_t;
 
 #pragma endregion
 
@@ -834,13 +867,13 @@ namespace AOData
 		PVOID pvTable;						// 0x00
 		BYTE Unknown0x04[0x34];				// 0x04
 		std::vector<LONG>* pStatsVector;	// 0x38
-		struct _IDENTITY UnknownsIdentity;	// 0x3C
+		identity_t UnknownsIdentity;	// 0x3C
 		BYTE Unknown0x44[0x2C];				// 0x44
-		struct _IDENTITY Identity;			// 0x70
+		identity_t Identity;			// 0x70
 		BYTE Unknown0x78[0x24];				// 0x78
 		char const * Name;					// 0x9C
 		char const * Description;			// 0xA0
-		struct _IDENTITY WeaponIdentity;	// 0xA4
+		identity_t WeaponIdentity;	// 0xA4
 		BYTE Unknown0xAC[0x3C];				// 0xAC
 	} DUMMYWEAPON, *PDUMMYWEAPON;
 
@@ -875,7 +908,7 @@ namespace AOData
 		struct _DYNELNODE* pLower;		// 0x00
 		struct _DYNELNODE* pBack;		// 0x04
 		struct _DYNELNODE* pHigher;		// 0x08
-		struct _IDENTITY Identity;			// 0x0C
+		identity_t Identity;			// 0x0C
 		struct _N3DYNEL* pDynel;			// 0x14
 	} DYNELNODE, *PDYNELNODE;
 
@@ -1010,7 +1043,7 @@ namespace AOData
 	typedef struct _HASHSPAWNPOINT
 	{
 		PVOID pvTable;					// 0x00
-		struct _VECTOR3 CenterPos;		// 0x04
+		struct vector3 CenterPos;		// 0x04
 		float Radius;					// 0x10
 		float RotationMid;				// 0x14
 		float RotationWidth;			// 0x18
@@ -1056,8 +1089,8 @@ namespace AOData
 		DWORD HotRectCorner2;		// 0x30
 		DWORD HotRectCorner3;		// 0x34
 		DWORD HotRectCorner4;		// 0x38
-		struct _IPOINT OrgPos;		// 0x3C
-		struct _IPOINT Unknown0x44;	// 0x44
+		i_point_t OrgPos;		// 0x3C
+		i_point_t Unknown0x44;	// 0x44
 		BYTE Unknown0x4C[0x4];		// 0x4C
 		BYTE IsInserted;			// 0x50
 		BYTE Unknown0x51[0x3];		// 0x51
@@ -1090,7 +1123,7 @@ namespace AOData
 	{
 		PVOID pvTable;				// 0x00
 		BYTE Uknown0x04[0x4];		// 0x04
-		struct _IDENTITY Identity;	// 0x08
+		identity_t Identity;	// 0x08
 		BYTE Unknown0x10[0x2C];		// 0x10
 	} INDICATOR, *PINDICATOR;
 
@@ -1107,19 +1140,19 @@ namespace AOData
 		PVOID pHotkeyList;									// 0x001C
 		DWORD TooltipTime;									// 0x0020
 		BYTE Unknown0x24[0x80];								// 0x0024
-		struct _VECTOR3 MouseWorldPosition;					// 0x00A4
-		struct _IDENTITY CurrentID;							// 0x00B0
-		struct _IDENTITY CurrentReference;					// 0x00B8
-		struct _IDENTITY CurrentTarget;						// 0x00C0
+		struct vector3 MouseWorldPosition;					// 0x00A4
+		identity_t CurrentID;							// 0x00B0
+		identity_t CurrentReference;					// 0x00B8
+		identity_t CurrentTarget;						// 0x00C0
 		DWORD CurrentVoidReference;							// 0x00C8
 		struct _HOTSPOT* pCurrentHotspot;					// 0x00CC
 		struct _HOTSPOT* pLastMouseButtonPressedHotspot;	// 0x00D0
 		DWORD CharacterID;									// 0x00D4
-		struct _IDENTITY CharacterIdentity;					// 0x00D8
+		identity_t CharacterIdentity;					// 0x00D8
 		BYTE Unknown0xE0[0x10];								// 0x00E0
 		DWORD LastHotkeyPressed;							// 0x00F0
 		BYTE Unknown0xF4[0x24];								// 0x00F4
-		struct _IPOINT CurrentMousePosition;				// 0x0118
+		i_point_t CurrentMousePosition;				// 0x0118
 		BYTE Unknown0x0120[0xB0];							// 0x0120
 	} INPUTCONFIG, *PINPUTCONFIG;
 
@@ -1129,25 +1162,25 @@ namespace AOData
 
 	// Size = 0x2C
 	// From Gamecode.dll
-	typedef struct _INVENTORYDATA
+	typedef struct inventory_data  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
-		BYTE Unknown0x00[0x2];				// 0x00
-		WORD Count;							// 0x02
-		struct _IDENTITY DynelIdentity;		// 0x04	
-		struct _RDBIDENTITY RDBIdentity;	// 0x0C
-		DWORD QualityLevel;					// 0x14
-		BYTE Unknown0x18[0x14];				// 0x18
-	} INVENTORYDATA, *PINVENTORYDATA;
+		BYTE unknown_0x00[0x2];			// 0x00
+		WORD count;						// 0x02
+		identity_t dynel_identity;		// 0x04	
+		rdb_identity_t rdb_identity;	// 0x0C
+		DWORD quality_level;			// 0x14
+		BYTE unknown_0x18[0x14];		// 0x18
+	} inventory_data_t, *p_inventory_data_t;
 
 	// Size = 0x2C
 	// From Gamecode.dll
 	typedef struct _NEWINVENTORY
 	{
 		PVOID pvTable;										// 0x00
-		std::vector <struct _INVENTORYDATA*> pInventoryData;	// 0x04
+		std::vector <struct inventory_data*> pInventoryData;	// 0x04
 		BYTE Unknown0x10[0x4];								// 0x10
 		DWORD Count;										// 0x14
-		struct _IDENTITY InventoryIdentity;					// 0x18
+		identity_t InventoryIdentity;					// 0x18
 		BYTE Unknown0x20[0xC];								// 0x20
 	} NEWINVENTORY, *PNEWINVENTORY;
 
@@ -1156,18 +1189,18 @@ namespace AOData
 	typedef struct _INVENTORYHOLDER
 	{
 		struct _SIMPLECHAR* pClientControlDynel;	// 0x0000
-		struct _IDENTITY* pClientIdentity;			// 0x0004
+		identity_t* pClientIdentity;			// 0x0004
 		struct _NEWINVENTORY* pRegularInventory;	// 0x0008
 		struct _NEWINVENTORY* pUnknownInventory;	// 0x000C
 		struct _NEWINVENTORY* pOverflowInventory;	// 0x0010
 		BYTE Unknown0x14[0x168];					// 0x0014
-		struct _BANKENTRY* pBankEntry;				// 0x017C
+		p_bank_entry_t p_bank_entry;				// 0x017C
 		BYTE Unknown0x180[0x38];					// 0x0180
 	} INVENTORYHOLDER, *PINVENTORYHOLDER;
 
 	typedef struct _INVENTORYENTRY
 	{
-		struct _IDENTITY TemplateIdentity;			// 0x00
+		identity_t TemplateIdentity;			// 0x00
 		DWORD Unknown1;								// 0x04
 		DWORD Unknown2;								// 0x08
 		WORD Unknown3;								// 0x0C
@@ -1211,12 +1244,12 @@ namespace AOData
 	typedef struct _LOOKATIIR
 	{
 		PVOID pvTable;				// 0x00
-		struct _IDENTITY ClientId;	// 0x04
+		identity_t ClientId;	// 0x04
 		BYTE Unknown0xC;			// 0x0C
 		BYTE Unknown0xD[0x3];		// 0x0D
 		DWORD MapToKey;				// 0x10
 		DWORD Unknown0x14;			// 0x14
-		struct _IDENTITY TargetId;	// 0x18
+		identity_t TargetId;	// 0x18
 		DWORD Unknown0x20;			// 0x20
 	} LOOKATIIR, *PLOOKATIIR;
 
@@ -1243,7 +1276,7 @@ namespace AOData
 
 	typedef struct _STATHOLDER
 	{
-		std::vector<ACTIONLOCK>* pSkillLocks;	// 0x00
+		std::vector<action_lock_t>* pSkillLocks;	// 0x00
 		struct _STATDIR* pStatMapDir;			// 0x04
 	} STATHOLDER, *PSTATHOLDER;
 
@@ -1276,7 +1309,7 @@ namespace AOData
 		BYTE Unknown_0x08[0x4];								// 0x0008
 		PVOID pvTable_DbObject;								// 0x000C
 		struct _EVENTCASTER* pEventCaster;					// 0x0010
-		struct _IDENTITY Identity;							// 0x0014
+		identity_t Identity;							// 0x0014
 		BYTE Unknown_0x1C[0x8];								// 0x001C
 		BYTE Unknown0x24[0x4];								// 0x0024
 		PVOID pvTable_n3Fsm;								// 0x0028
@@ -1285,9 +1318,9 @@ namespace AOData
 		BYTE Unknown0x15[0x3];								// 0x003D
 		struct _N3SFBASE *pFirstStateFunction;				// 0x0040
 		BYTE Unknown0x44[0xC];								// 0x0044
-		struct _CAMERAVEHICLE* pCameraVehicle;				// 0x0050
+		p_camera_vehicle_t pCameraVehicle;				// 0x0050
 		BYTE Unknown0x54[0x190];							// 0x0054
-		struct _IDENTITY SelectedTarget;					// 0x01E4
+		identity_t SelectedTarget;					// 0x01E4
 		DWORD CameraType;									// 0x01EC 0 - 1st Person, 1 = 3rd Person Trail, 2 = 3rd Person Rubber, 3 = 3rd Person Lock
 		BYTE Unknown0x1F0[0x10];							// 0x01F0
 		PVOID pVisualCamera;								// 0x0200
@@ -1305,7 +1338,7 @@ namespace AOData
 		PVOID pvTable;					// 0x00
 		BYTE Unknown0x04[0x20];			// 0x04
 		PVOID pLocalityListener_i;		// 0x24
-		struct _VECTOR3 Pos;			// 0x28
+		struct vector3 Pos;			// 0x28
 		BYTE Unknown0x34[0x4];			// 0x34
 	} N3CELLMONITOR, *PN3CELLMONITOR;
 
@@ -1331,7 +1364,7 @@ namespace AOData
 	typedef struct _COLLPRIM
 	{
 		PVOID pvTable;					// 0x00
-		struct _VECTOR3 GlobalPos;		// 0x04
+		struct vector3 GlobalPos;		// 0x04
 		BYTE Unknown0x10[0x4];			// 0x10
 		DWORD CollPrimType;				// 0x14 Sphere = 2
 	} COLLPRIM, *PCOLLPRIM;
@@ -1358,7 +1391,7 @@ namespace AOData
 		struct _MESHCOLLSPHERE MeshCollSphere;		// 0x00
 		PVOID pLocalityListener_i;					// 0x1C
 		struct _N3DYNEL* pOwner;					// 0x20
-		struct _VECTOR3 OriginalRelativePosition;	// 0x24
+		struct vector3 OriginalRelativePosition;	// 0x24
 	} N3DYNAMESHCOLLSPHERE, *PN3DYNAMESHCOLLSPHERE;
 
 #pragma endregion
@@ -1374,7 +1407,7 @@ namespace AOData
 		BYTE Unknown_0x08[0x4];								// 0x08
 		PVOID pvTable_DbObject;								// 0x0C
 		struct _EVENTCASTER* pEventCaster;					// 0x10
-		struct _IDENTITY Identity;							// 0x14
+		identity_t Identity;							// 0x14
 		BYTE Unknown_0x1C[0x8];								// 0x1C
 		std::vector<COLLINFO>* pCollInfoVector;				// 0x24
 		PVOID pvTable_n3Fsm;								// 0x28
@@ -1385,7 +1418,7 @@ namespace AOData
 		BYTE Unknown0x44[0x4];								// 0x44
 		BYTE IsNotSnoozing;									// 0x48
 		BYTE Unknown0x49[0x7];								// 0x49
-		struct _DUMMYVEHICLE *pVehicle;						// 0x50
+		struct dummy_vehicle *pVehicle;						// 0x50
 		BYTE IsGroundCollisionEnabled;						// 0x54
 		BYTE IsCollEnabled;									// 0x55
 		BYTE Unknown0x56[0x2];								// 0x56
@@ -1400,13 +1433,13 @@ namespace AOData
 		BYTE IsInTree;										// 0x6B	
 		PVOID pn3InfoItemRemote;							// 0x6C
 		std::vector<struct _N3DYNEL*>* pChildDynelVector;		// 0x70
-		struct _IDENTITY ParentIdentity;					// 0x74
+		identity_t ParentIdentity;					// 0x74
 		BYTE Unknown0x7C[0x4];								// 0x7C
 		BYTE IsDying;										// 0x80
 		BYTE field_81[0xB];									// 0x81
 		DWORD RDBDynelStatus;								// 0x8C
 		DWORD LastAllowedZoneInst;							// 0x90
-		struct _VECTOR3 LastAllowedGlobalPositionInZone;	// 0x94
+		struct vector3 LastAllowedGlobalPositionInZone;	// 0x94
 	} N3DYNEL, *PN3DYNEL;
 
 #pragma endregion
@@ -1427,37 +1460,38 @@ namespace AOData
 
 	// Size = 0x130
 	// From Gamecode.dll
-	typedef struct _N3ENGINECLIENTANARCHY
+	typedef struct n3_engine_client_anarchy  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init, cppcoreguidelines-pro-type-member-init, cppcoreguidelines-pro-type-member-init)
 	{
-		PVOID pvTable;										// 0x0000
-		struct _BINARYSTREAM BinaryStream;					// 0x0004
-		BYTE Unknown0x48[0x10];								// 0x0048
-		BYTE TeleportStatus;								// 0x0058
-		BYTE Unknown0x59[0x7];								// 0x0059					
-		struct _RESOURCEDATABASE* pResourceDatabase;		// 0x0060
-		struct _N3ROOT* pn3Root;							// 0x0064
-		DOUBLE DeltaTime;									// 0x0068
-		float TotalTime;									// 0x0070
-		struct _N3OBJECTFACTORY* pn3ObjectFactory;			// 0x0074
-		BYTE Unknown0x78[0x4];								// 0x0078
-		struct _N3CAMERA* pn3Camera;						// 0x007C
-		DWORD ClientInstId;									// 0x0080
-		struct _SIMPLECHAR* pClientControlChar;				// 0x0084
-		BYTE Unknown0x88[0x8];								// 0x0088
-		struct _N3ENGINECLIENTANARCHY** ppClientInterface;	// 0x0090
-		BYTE Unknown0x94[0xC];								// 0x0094
-		PVOID pGridDestinationList;							// 0x00A0
-		BYTE Unknown0xA4[0x24];								// 0x00A4
-		struct _IDENTITY MouseoverTarget;					// 0x00C8
-		BYTE Unknown0xD0[0x8];								// 0x00D0
-		DOUBLE TimeOfLastMotion;							// 0x00D8
-		struct _QUATERNION LastRot;							// 0x00E0
-		struct _VECTOR3 LastMove;							// 0x00F0
-		BYTE Unknown0xFC[0x4];								// 0x00FC
-		PVOID pAnimCalibrationControl;						// 0x0100
-		BYTE IsFirstLogin;									// 0x0104
-		BYTE Unknown0x105[0x2B];							// 0x0105
-	} N3ENGINECLIENTANARCHY, *PN3ENGINECLIENTANARCHY;
+		PVOID p_v_table;										// 0x0000
+		binary_stream_t binary_stream;						// 0x0004
+		BYTE unknown_0x48[0x10];								// 0x0048
+		BYTE teleport_status;									// 0x0058
+		BYTE unknown_0x59[0x7];									// 0x0059					
+		struct _RESOURCEDATABASE* p_resource_database;			// 0x0060
+		struct _N3ROOT* p_n3_root;								// 0x0064
+		float delta_time;										// 0x0068
+		BYTE unknown_0x6C[0x4];									// 0x006C
+		float total_time;										// 0x0070
+		struct _N3OBJECTFACTORY* p_n3_object_factory;			// 0x0074
+		BYTE unknown_0x78[0x4];									// 0x0078
+		struct _N3CAMERA* p_n3_camera;							// 0x007C
+		DWORD client_inst_id;									// 0x0080
+		struct _SIMPLECHAR* p_client_control_char;				// 0x0084
+		BYTE unknown_0x88[0x8];									// 0x0088
+		struct n3_engine_client_anarchy** pp_client_interface;	// 0x0090
+		BYTE unknown_0x94[0xC];									// 0x0094
+		PVOID p_grid_destination_list;							// 0x00A0
+		BYTE unknown_0xA4[0x24];								// 0x00A4
+		identity_t mouseover_target;						// 0x00C8
+		BYTE unknown_0xD0[0x8];									// 0x00D0
+		DOUBLE time_of_last_motion;								// 0x00D8
+		quaternion_t last_rot;							// 0x00E0
+		struct vector3 last_move;								// 0x00F0
+		BYTE unknown_0xFC[0x4];									// 0x00FC
+		PVOID p_anim_calibration_control;						// 0x0100
+		BYTE is_first_login;									// 0x0104
+		BYTE unknown_0x105[0x2B];								// 0x0105
+	} n3_engine_client_anarchy_t, *p_n3_engine_client_anarchy_t;
 
 #pragma endregion
 
@@ -1571,11 +1605,11 @@ namespace AOData
 
 	// Size = 0x18
 	// From N3.dll
-	typedef struct _N3TILEMAPSURFACE
+	typedef struct n3_tile_map_surface
 	{
 		PVOID pvTable;				// 0x00
 		BYTE Unknown0x04[0x14];		// 0x04
-	} N3TILEMAPSURFACE, *PN3TILEMAPSURFACE;
+	} n3_tile_map_surface_t, *p_n3_tile_map_surface_t;
 
 #pragma endregion
 
@@ -1590,7 +1624,7 @@ namespace AOData
 		BYTE Unknown_0x08[0x4];								// 0x08
 		PVOID pvTable_DbObject;								// 0x0C
 		struct _EVENTCASTER* pEventCaster;					// 0x10
-		struct _IDENTITY Identity;							// 0x14
+		identity_t Identity;							// 0x14
 		BYTE Unknown_0x1C[0x8];								// 0x1C
 		std::vector<COLLINFO>* pCollInfoVector;				// 0x24
 		PVOID pvTable_n3Fsm;								// 0x28
@@ -1601,7 +1635,7 @@ namespace AOData
 		BYTE Unknown0x44[0x4];								// 0x44
 		BYTE IsNotSnoozing;									// 0x48
 		BYTE Unknown0x49[0x7];								// 0x49
-		struct _DUMMYVEHICLE *pVehicle;						// 0x50
+		struct dummy_vehicle *pVehicle;						// 0x50
 		BYTE IsGroundCollisionEnabled;						// 0x54
 		BYTE IsCollEnabled;									// 0x55
 		BYTE Unknown0x56[0x2];								// 0x56
@@ -1616,14 +1650,14 @@ namespace AOData
 		BYTE IsInTree;										// 0x6B	
 		PVOID pn3InfoItemRemote;							// 0x6C
 		std::vector<struct _N3DYNEL*>* pChildDynelVector;		// 0x70
-		struct _IDENTITY ParentIdentity;					// 0x74
+		identity_t ParentIdentity;					// 0x74
 		BYTE Unknown0x7C[0x4];								// 0x7C
 		BYTE IsDying;										// 0x80
 		BYTE field_81[0xB];									// 0x81
 		DWORD RDBDynelStatus;								// 0x8C
 		DWORD LastAllowedZoneInst;							// 0x90
-		struct _VECTOR3 LastAllowedGlobalPositionInZone;	// 0x94
-		struct _VECTOR3 ReconcilePosition;					// 0xA0
+		struct vector3 LastAllowedGlobalPositionInZone;	// 0x94
+		struct vector3 ReconcilePosition;					// 0xA0
 		float BodyScale;									// 0xAC
 		PVOID pTextureDataList;								// 0xB0
 		BYTE Unknown0xB4[0xC];								// 0xB4
@@ -1634,7 +1668,7 @@ namespace AOData
 		BYTE IsVisible;										// 0xCD
 		BYTE UseCharDistCap;								// 0xCE
 		BYTE Unknown0xCF;									// 0xCF
-		struct _VECTOR3 BoundingSpherePos;					// 0xD0
+		struct vector3 BoundingSpherePos;					// 0xD0
 		float Unknown0xDC;									// 0xDC
 	} N3VISUALDYNEL, *PN3VISUALDYNEL;
 
@@ -1649,13 +1683,13 @@ namespace AOData
 		PVOID pvTable;						// 0x04
 		BYTE Unknown0x04[0x34];				// 0x04
 		std::vector <LONG>* pStatsVector;	// 0x38
-		struct _IDENTITY ParentIdentity;	// 0x3C
+		identity_t ParentIdentity;	// 0x3C
 		BYTE Unknown0x44[0x2C];				// 0x44
-		struct _IDENTITY UnknownIdentity;	// 0x70
+		identity_t UnknownIdentity;	// 0x70
 		BYTE Unknown0x78[0x24];				// 0x78
 		char const * Name;					// 0x9C
 		char const * Description;			// 0xA0
-		struct _IDENTITY NanoIdentity;		// 0xA4
+		identity_t NanoIdentity;		// 0xA4
 		BYTE Unknown0xAC[0xC];				// 0xAC
 		DWORD Radius;						// 0xB8
 		BYTE IsNanoSelfOnly;				// 0xBC
@@ -1701,11 +1735,11 @@ namespace AOData
 	// From Gamecode.dll
 	typedef struct _NANOTEMPLATE
 	{
-		struct _IDENTITY NanoIdentity;		// 0x00
+		identity_t NanoIdentity;		// 0x00
 		DWORD StartTime;					// 0x08
 		DWORD Duration;						// 0x0C
 		BYTE Unknown0x10[0x4];				// 0x10
-		struct _IDENTITY CasterIdentity;	// 0x14
+		identity_t CasterIdentity;	// 0x14
 	} NANOTEMPLATE, *PNANOTEMPLATE;
 
 #pragma endregion
@@ -1717,7 +1751,7 @@ namespace AOData
 		struct _PETNODE* pLower;
 		struct _PETNODE* pNode;
 		struct _PETNODE* pHigher;
-		struct _IDENTITY Identity;
+		identity_t Identity;
 		DWORD Index;
 	} PETNODE, *PPETNODE;
 
@@ -1754,7 +1788,7 @@ namespace AOData
 	{
 		BYTE Unknown0x00[0x4];					// 0x00
 		struct _PERKDIR* pPerkDir;				// 0x04
-		std::vector<ACTIONLOCK>* pPerkLocks;	// 0x08
+		std::vector<action_lock_t>* pPerkLocks;	// 0x08
 	} PERKHOLDER, *PPERKHOLDER;
 
 #pragma endregion
@@ -1766,7 +1800,7 @@ namespace AOData
 		struct _PERKNODE* pLower;
 		struct _PERKNODE* pBack;
 		struct _PERKNODE* pHigher;
-		struct _IDENTITY PerkIdentity;
+		identity_t PerkIdentity;
 		DWORD PerkID;
 	} PERKNODE, *PPERKNODE;
 
@@ -1818,9 +1852,9 @@ namespace AOData
 	{
 		PVOID vTable;							// 0x00
 		BYTE Unknown0x04[0x4];					// 0x04
-		struct _IDENTITY ModelID;				// 0x08
+		identity_t ModelID;				// 0x08
 		BYTE Unknown0x10[0x8];					// 0x10
-		struct _IDENTITY InstanceID;			// 0x18
+		identity_t InstanceID;			// 0x18
 		BYTE Unknown0x20[0xC];					// 0x20
 		PVOID pRoomLinks;						// 0x2C
 		std::vector<struct _N3DYNEL*, std::allocator<struct _N3DYNEL*>> DynelChildren;	// 0x30
@@ -1830,7 +1864,7 @@ namespace AOData
 		struct _N3TILEMAP* pn3Tilemap;			// 0x54
 		struct _GRIDSPACE* pSpace_i;			// 0x58
 		PVOID pPathfinder_i;					// 0x5C
-		struct _N3TILEMAPSURFACE* pSurface_i;	// 0x60
+		struct n3_tile_map_surface* pSurface_i;	// 0x60
 		BYTE Unknown0x64[0x8];					// 0x64
 		PVOID pShadowList;						// 0x6C
 		BYTE Unknown0x70[0x14];					// 0x70
@@ -1995,7 +2029,7 @@ namespace AOData
 	{
 		PVOID vTable;					// 0x00
 		BYTE Unknown0x04[0x4];			// 0x04
-		struct _IDENTITY ResourceId;	// 0x08
+		identity_t ResourceId;	// 0x08
 		BYTE Unknown0x10[0x10];			// 0x10
 		char Name[0x20];				// 0x20
 		BYTE Unknown0x40[0x18];			// 0x40
@@ -2019,7 +2053,7 @@ namespace AOData
 	{
 		PVOID pvTable;							    // 0x00
 		struct _EVENTCASTER* pEventCaster;		    // 0x04
-		struct _IDENTITY Identity;					// 0x08
+		identity_t Identity;					// 0x08
 		BYTE Unknown_0x10[0x8];						// 0x10
 		DWORD IsDungeon;							// 0x0018
 		float Unknown0x1C;							// 0x001C
@@ -2083,7 +2117,7 @@ namespace AOData
 		BYTE Unknown0x44[0x4];								// 0x44
 		BYTE IsNotSnoozing;									// 0x48
 		BYTE Unknown0x49[0x7];								// 0x49
-		struct _CHARVEHICLE* pVehicle;						// 0x50
+		struct char_vehicle* pVehicle;						// 0x50
 		BYTE IsGroundCollisionEnabled;						// 0x54
 		BYTE IsCollEnabled;									// 0x55
 		BYTE Unknown0x56[0x2];								// 0x56
@@ -2098,14 +2132,14 @@ namespace AOData
 		BYTE IsInTree;										// 0x6B	
 		PVOID pn3InfoItemRemote_t;							// 0x6C
 		std::vector<struct _N3DYNEL*>* pChildDynelVector;   // 0x70
-		struct _IDENTITY ParentIdentity;					// 0x74
+		identity_t ParentIdentity;					// 0x74
 		BYTE Unknown0x7C[0x4];								// 0x7C
 		BYTE IsDying;										// 0x80
 		BYTE field_81[0xB];									// 0x81
 		DWORD RDBDynelStatus;								// 0x8C
 		DWORD LastAllowedZoneInst;							// 0x90
-		struct _VECTOR3 LastAllowedGlobalPositionInZone;	// 0x94
-		struct _VECTOR3 ReconcilePosition;					// 0xA0
+		struct vector3 LastAllowedGlobalPositionInZone;	// 0x94
+		struct vector3 ReconcilePosition;					// 0xA0
 		float BodyScale;									// 0xAC
 		PVOID pTextureDataList;								// 0xB0
 		BYTE Unknown0xB4[0xC];								// 0xB4
@@ -2116,7 +2150,7 @@ namespace AOData
 		BYTE IsVisible;										// 0xCD
 		BYTE UseCharDistCap;								// 0xCE
 		BYTE Unknown0xCF;									// 0xCF
-		struct _VECTOR3 BoundingSpherePos;					// 0xD0
+		struct vector3 BoundingSpherePos;					// 0xD0
 		BYTE Unknown0xDC[0x4];								// 0xDC
 		PVOID pvTable_TriggerHolder;						// 0xE0
 		BYTE Unknown0xE4[0x8];								// 0xE4
@@ -2124,7 +2158,7 @@ namespace AOData
 		BYTE Unknown0xF0[0x30];								// 0xF0
 		PVOID pvTable_StatHolder_t;							// 0x120
 		std::vector<LONG>* pStatVector;						// 0x124
-		struct _IDENTITY Identity;							// 0x128
+		identity_t Identity;							// 0x128
 		BYTE Unknown0x130[0x28];							// 0x130
 		std::string Name;									// 0x148
 		BYTE Unknown0x170[0x4C];							// 0x170
@@ -2158,7 +2192,7 @@ namespace AOData
 	typedef struct _SPAWNPOINT
 	{
 		PVOID pvTable;		        // 0x00
-		struct _VECTOR3 CenterPos;	// 0x04
+		struct vector3 CenterPos;	// 0x04
 		float Radius;				// 0x10
 	} SPAWNPOINT, *PSPAWNPOINT;
 
@@ -2170,8 +2204,8 @@ namespace AOData
 	// Size = 0x20
 	typedef struct _SPECIALACTION
 	{
-		struct _IDENTITY Identity;			// 0x00
-		struct _IDENTITY WeaponIdentity;	// 0x08
+		identity_t Identity;			// 0x00
+		identity_t WeaponIdentity;	// 0x08
 		DWORD LockedSkillId1;				// 0x10
 		DWORD LockedSkillId2;				// 0x14
 		BYTE Unknown0x18[0x4];				// 0x18
@@ -2189,7 +2223,7 @@ namespace AOData
 	{
 		struct _SIMPLECHAR* pClientControlChar;			// 0x00
 		BYTE Unknown0x04[0x58];							// 0x04
-		struct _IDENTITY SpecialActionTarget;			// 0x5C
+		identity_t SpecialActionTarget;			// 0x5C
 		BYTE Unknown0x64[0x10];							// 0x64
 		PVOID pDistrictData;							// 0x74
 		PVOID pAreaData;								// 0x78
@@ -2220,9 +2254,9 @@ namespace AOData
 		LONG Unknown0x08;			// 0x08
 		DWORD CastStatus;			// 0x0C
 		BYTE Unknown0x10[0x14];		// 0x10
-		struct _IDENTITY  Target;	// 0x24
+		identity_t  Target;	// 0x24
 		BYTE Unknown0x2C[0x4];		// 0x2C
-		struct _IDENTITY Caster;	// 0x30
+		identity_t Caster;	// 0x30
 	} CASTINGDATA, *PCASTINGDATA;
 
 	// Size = 0x50
@@ -2239,7 +2273,7 @@ namespace AOData
 		std::list<NANOTEMPLATE> NanoTemplateList;		// 0x20
 		BYTE Unknown0x28[0x4];							// 0x28
 		std::list<CASTINGDATA*>* pSpellcastingInfo;		// 0x2C
-		std::vector<PIDENTITY> ActiveNanos;				// 0x30
+		std::vector<p_identity_t> ActiveNanos;				// 0x30
 		BYTE Unknown0x3C[0x14];							// 0x3C
 	} SPELLTEMPLATEDATA, *PSPELLTEMPLATEDATA;
 
@@ -2249,8 +2283,8 @@ namespace AOData
 
 	typedef struct _STATICITEM
 	{
-		struct _IDENTITY StaticIdentity;
-		struct _DUMMYITEMBASE* pDummyItem;
+		identity_t StaticIdentity;
+		struct dummy_item_base* pDummyItem;
 		DWORD Unknown;
 	} STATICITEM, *PSTATICITEM;
 
@@ -2322,7 +2356,7 @@ namespace AOData
 	{
 		string Name;
 		BYTE Unknown0x18[0x4];
-		struct _IDENTITY Identity;
+		identity_t Identity;
 	} TEAMENTRY, *PTEAMENTRY;
 
 #pragma endregion
@@ -2333,15 +2367,15 @@ namespace AOData
 	{
 		const char Name[0x14];		// 0x00
 		BYTE Unknown0x14[0x8];		// 0x14
-		struct _IDENTITY Identity;	// 0x1C
+		identity_t Identity;	// 0x1C
 	} TEAMRAIDINFO, *PTEAMRAIDINFO;
 
 	typedef struct _TEAMRAIDHOLDER
 	{
-		struct _IDENTITY TeamIdentity;				// 0x00
+		identity_t TeamIdentity;				// 0x00
 		struct _SIMPLECHAR* pClientControlDynel;	// 0x08
 		BYTE Unknown0xC[0x8];						// 0x0C
-		struct _IDENTITY TeamLeaderIdentity;		// 0x14
+		identity_t TeamLeaderIdentity;		// 0x14
 		BYTE Unknown0x1C[0x4];						// 0x1C
 		std::vector<PTEAMRAIDINFO*>* pTeamList[6];	// 0x20
 		//std::vector<PTEAMRAIDINFO>* pTeamList_2;	// 0x24
@@ -2391,7 +2425,7 @@ namespace AOData
 		BYTE Unknown0x18[0x2C];					// 0x18
 		DWORD IsAttacking;						// 0x44
 		BYTE Unknown0x48[0x4];					// 0x48
-		struct _IDENTITY WeaponTargetIdentity;	// 0x4C
+		identity_t WeaponTargetIdentity;	// 0x4C
 		BYTE Unknown0x54[0x50];					// 0x54
 	} WEAPONHOLDER, *PWEAPONHOLDER;
 
@@ -2408,7 +2442,7 @@ namespace AOData
 		BYTE Unknown_0x08[0x4];								// 0x0008
 		PVOID pvTable_DbObject;								// 0x000C
 		struct _EVENTCASTER* pEventCaster;					// 0x0010
-		struct _IDENTITY InstanceIdentity;					// 0x0014
+		identity_t InstanceIdentity;					// 0x0014
 		BYTE Unknown_0x1C[0x8];								// 0x001C
 		std::vector<COLLINFO>* pCollInfoVector;				// 0x0024
 		PVOID pvTable_n3Fsm;								// 0x0028
@@ -2419,7 +2453,7 @@ namespace AOData
 		BYTE Unknown0x44[0x4];								// 0x0044
 		BYTE IsNotSnoozing;									// 0x0048
 		BYTE Unknown0x49[0x7];								// 0x0049
-		struct _DUMMYVEHICLE *pVehicle;						// 0x0050
+		struct dummy_vehicle *pVehicle;						// 0x0050
 		BYTE IsGroundCollisionEnabled;						// 0x0054
 		BYTE IsCollEnabled;									// 0x0055
 		BYTE Unknown0x56[0x2];								// 0x0056
@@ -2434,14 +2468,14 @@ namespace AOData
 		BYTE IsInTree;										// 0x006B	
 		PVOID pn3InfoItemRemote;							// 0x006C
 		std::vector<struct _N3DYNEL*>* pChildDynelVector;		// 0x0070
-		struct _IDENTITY ParentIdentity;					// 0x0074
+		identity_t ParentIdentity;					// 0x0074
 		BYTE Unknown0x7C[0x4];								// 0x007C
 		BYTE IsDying;										// 0x0080
 		BYTE field_81[0xB];									// 0x0081
 		DWORD RDBDynelStatus;								// 0x008C
 		DWORD LastAllowedZoneInst;							// 0x0090
-		struct _VECTOR3 LastAllowedGlobalPositionInZone;	// 0x0094
-		struct _VECTOR3 ReconcilePosition;					// 0x00A0
+		struct vector3 LastAllowedGlobalPositionInZone;	// 0x0094
+		struct vector3 ReconcilePosition;					// 0x00A0
 		float BodyScale;									// 0x00AC
 		PVOID pTextureDataList;								// 0x00B0
 		BYTE Unknown0xB4[0xC];								// 0x00B4
@@ -2452,16 +2486,16 @@ namespace AOData
 		BYTE IsVisible;										// 0x00CD
 		BYTE UseCharDistCap;								// 0x00CE
 		BYTE Unknown0xCF;									// 0x00CF
-		struct _VECTOR3 BoundingSpherePos;					// 0x00D0
+		struct vector3 BoundingSpherePos;					// 0x00D0
 		BYTE Unknown0xDC[0x4];								// 0x00DC
-		struct _IDENTITY StaticIdentity;					// 0x00E0
+		identity_t StaticIdentity;					// 0x00E0
 		BYTE Unknown0xE8[0x70];								// 0x00E8
 		PVOID pvTable_WeaponItem;							// 0x0158
 		BYTE Unknown0x15C[0x30];							// 0x015C
 		PVOID pvTable_StatHolder;							// 0x018C
 		std::vector<LONG>* pStatVector;						// 0x0190
 		BYTE Unknown0x194[0x34];							// 0x0194
-		struct _IDENTITY UnknownIdentity2;					// 0x01C8
+		identity_t UnknownIdentity2;					// 0x01C8
 		BYTE Unknown0x1D0[0x24];							// 0x01D0
 		char const * Name;									// 0x01F4
 		char const * Description;							// 0x01F8

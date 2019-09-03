@@ -106,7 +106,7 @@ bool NanoSpellType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		}
 		case NanoId:
 		{
-			Object.DWord = pNanoSpell->GetNanoIdentity().Id;
+			Object.DWord = pNanoSpell->GetNanoIdentity().id;
 			Object.Type = pUintType;
 			break;
 		}
@@ -209,7 +209,7 @@ bool NanoSpellType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int bufl
 	if (!ObjectData.Ptr)
 		return false;
 #define pNanoSpell ((NanoItem*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%d", pNanoSpell->GetNanoIdentity().Id);
+	sprintf_s(buf, buflen, "%d", pNanoSpell->GetNanoIdentity().id);
 #undef pNanoSpell
 
 	return true;

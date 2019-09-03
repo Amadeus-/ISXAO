@@ -8,24 +8,24 @@ bool IdentityType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 		return false;
 	__try
 	{
-#define pIdentity ((IDENTITY*)ObjectData.Ptr)
+#define pIdentity ((identity_t*)ObjectData.Ptr)
 		switch (IdentityTypeMembers(Member->ID))
 		{
 		case Type:
 		{
-			Object.DWord = pIdentity->Type;
+			Object.DWord = pIdentity->type;
 			Object.Type = pUintType;
 			break;
 		}
 		case Id:
 		{
-			Object.DWord = pIdentity->Id;
+			Object.DWord = pIdentity->id;
 			Object.Type = pUintType;
 			break;
 		}
 		case Combined:
 		{
-			Object.Int64 = pIdentity->GetCombinedIdentity();
+			Object.Int64 = pIdentity->get_combined_identity();
 			Object.Type = pInt64Type;
 			break;
 		}
@@ -47,8 +47,8 @@ bool IdentityType::ToText(LSOBJECTDATA ObjectData, char* buf, unsigned buflen)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define pIdentity ((IDENTITY*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64d", pIdentity->GetCombinedIdentity());
+#define pIdentity ((identity_t*)ObjectData.Ptr)
+	sprintf_s(buf, buflen, "%I64d", pIdentity->get_combined_identity());
 #undef pIdentity
 	return true;
 }

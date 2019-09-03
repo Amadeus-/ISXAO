@@ -4,8 +4,8 @@ class NanoTemplate
 {
 public:
 	AOLIB_OBJECT DWORD GetDuration() const;
-	AOLIB_OBJECT IDENTITY GetCasterIdentity() const;
-	AOLIB_OBJECT IDENTITY GetNanoIdentity() const;
+	AOLIB_OBJECT identity_t GetCasterIdentity() const;
+	AOLIB_OBJECT identity_t GetNanoIdentity() const;
 	AOLIB_OBJECT NANOTEMPLATE GetNanoTemplateData() const;
 	AOLIB_OBJECT DWORD GetStartTime() const;
 	AOLIB_OBJECT float GetTimeRemaining() const;

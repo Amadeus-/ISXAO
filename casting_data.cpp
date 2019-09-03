@@ -2,7 +2,7 @@
 namespace isxao_classes
 {
 
-	IDENTITY CastingData::GetCaster() const
+	identity_t CastingData::GetCaster() const
 	{
 		return GetCastingData().Caster;
 	}
@@ -22,7 +22,7 @@ namespace isxao_classes
 		return reinterpret_cast<NanoItem*>(GetCastingData().pNanoItem);
 	}
 
-	IDENTITY CastingData::GetTarget() const
+	identity_t CastingData::GetTarget() const
 	{
 		return GetCastingData().Target;
 	}

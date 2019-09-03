@@ -3,50 +3,54 @@
 namespace isxao_classes
 {
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_CLIENT_CHAR
-	FUNCTION_AT_ADDRESS(Character* EngineClientAnarchy::GetClientChar(void), n3_engine_client_anarchy_t__get_client_char);
-#endif
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(Character* EngineClientAnarchy::get_client_char(void), n3_engine_client_anarchy_t__get_client_char);
+#else
+	Character* EngineClientAnarchy::GetClientChar(void)
+	{
+		return reinterpret_cast<Character*>(n3_engine_client_anarchy_.p_client_control_char);
+	}
+#endif	
 
-	//Character* EngineClientAnarchy::GetClientChar(void) const
-	//{
-	//	return reinterpret_cast<Character*>(n3_engine_client_anarchy_.pClientControlChar);
-	//}
-
-#ifdef n3EngineClientAnarchy_t__GetClientDynelId_x
-	FUNCTION_AT_ADDRESS(PIDENTITY EngineClientAnarchy::GetClientDynelId(IDENTITY &), n3_engine_client_anarchy_t__get_client_dynel_id);
-#endif
-
-	PIDENTITY EngineClientAnarchy::GetClientDynelId(IDENTITY& id) const
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_CLIENT_DYNEL_ID
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(p_identity_t EngineClientAnarchy::get_client_dynel_id(identity_t &), n3_engine_client_anarchy_t__get_client_dynel_id);
+#else
+	p_identity_t EngineClientAnarchy::GetClientDynelId(identity_t& id)
 	{
 		id.Type = 50000;
-		id.Id = n3_engine_client_anarchy_.ClientInstId;
+		id.Id = n3_engine_client_anarchy_.client_inst_id;
 		return &id;
 	}
+#endif	
 
-#ifdef n3EngineClientAnarchy_t__GetCurrentMovementMode_x
-	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::GetCurrentMovementMode(void), n3_engine_client_anarchy_t__get_current_movement_mode);
-#endif
-
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_CURRENT_MOVEMENT_MODE
+	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::get_current_movement_mode(void), n3_engine_client_anarchy_t__get_current_movement_mode);
+#else
 	DWORD EngineClientAnarchy::GetCurrentMovementMode() const
 	{
-		return n3_engine_client_anarchy_.pClientControlChar->pVehicle->pCharMovementStatus->MovementMode;
+		return n3_engine_client_anarchy_.p_client_control_char->pVehicle->pCharMovementStatus->MovementMode;
 	}
+#endif
 
-	N3ENGINECLIENTANARCHY EngineClientAnarchy::GetEngineClientAnarchyData() const
+	
+
+	n3_engine_client_anarchy_t EngineClientAnarchy::get_engine_client_anarchy_data() const
 	{
 		return n3_engine_client_anarchy_;
 	}
 
 	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::GetFactionStr(DWORD, bool), n3_engine_client_anarchy_t__get_faction_str);
 
-	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::GetFactionTitle(DWORD), n3EngineClientAnarchy_t__GetFactionTitle);
+	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::GetFactionTitle(DWORD), n3_engine_client_anarchy_t__get_faction_title);
 
 
 #ifdef n3EngineClientAnarchy_t__GetGenderString_x
-	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::GetGenderString(const IDENTITY &), n3EngineClientAnarchy_t__GetGenderString);
+	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::GetGenderString(const identity_t &), n3EngineClientAnarchy_t__GetGenderString);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__GetItemByTemplate_x
-	FUNCTION_AT_ADDRESS(PDUMMYITEMBASE EngineClientAnarchy::GetItemByTemplate(IDENTITY, const IDENTITY &), n3EngineClientAnarchy_t__GetItemByTemplate);
+	FUNCTION_AT_ADDRESS(p_dummy_item_base_t EngineClientAnarchy::GetItemByTemplate(identity_t, const identity_t &), n3EngineClientAnarchy_t__GetItemByTemplate);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__GetTitleStr_x
@@ -59,11 +63,11 @@ namespace isxao_classes
 
 	bool EngineClientAnarchy::IsFirstLogin(void) const
 	{
-		return n3_engine_client_anarchy_.IsFirstLogin == 1;
+		return n3_engine_client_anarchy_.is_first_login == 1;
 	}
 
 #ifdef n3EngineClientAnarchy_t__IsFixture_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::IsFixture(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__IsFixture);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::IsFixture(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__IsFixture);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_ActivateMech_x
@@ -71,23 +75,23 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_Airstrike_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_Airstrike(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_Airstrike);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_Airstrike(const identity_t &), n3EngineClientAnarchy_t__N3Msg_Airstrike);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_ArtilleryAttack_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_ArtilleryAttack(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_ArtilleryAttack);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_ArtilleryAttack(const identity_t &), n3EngineClientAnarchy_t__N3Msg_ArtilleryAttack);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_AssistFight_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_AssistFight(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_AssistFight);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_AssistFight(const identity_t &), n3EngineClientAnarchy_t__N3Msg_AssistFight);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_CanAttack_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_CanAttack(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_CanAttack);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_CanAttack(const identity_t &), n3EngineClientAnarchy_t__N3Msg_CanAttack);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_CanClickTargetTarget_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_CanClickTargetTarget(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_CanClickTargetTarget);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_CanClickTargetTarget(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_CanClickTargetTarget);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_CanUseMech_x
@@ -95,15 +99,15 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_CastNanoSpell_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_CastNanoSpell(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_CastNanoSpell);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_CastNanoSpell(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_CastNanoSpell);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_Consider_x
-	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_Consider(const IDENTITY &, float &), n3EngineClientAnarchy_t__N3Msg_Consider);
+	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_Consider(const identity_t &, float &), n3EngineClientAnarchy_t__N3Msg_Consider);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_ContainerAddItem_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_ContainerAddItem(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_ContainerAddItem);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_ContainerAddItem(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_ContainerAddItem);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_CrawlToggle_x
@@ -115,15 +119,15 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_DefaultActionOnDynel_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_DefaultActionOnDynel(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_DefaultActionOnDynel);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_DefaultActionOnDynel(const identity_t &), n3EngineClientAnarchy_t__N3Msg_DefaultActionOnDynel);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_DefaultAttack_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_DefaultAttack(const IDENTITY &, bool), n3EngineClientAnarchy_t__N3Msg_DefaultAttack);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_DefaultAttack(const identity_t &, bool), n3EngineClientAnarchy_t__N3Msg_DefaultAttack);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_DeleteNano_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_DeleteNano(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_DeleteNano);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_DeleteNano(const identity_t &), n3EngineClientAnarchy_t__N3Msg_DeleteNano);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_DoSocialAction_x
@@ -131,7 +135,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_DropItem_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_DropItem(const IDENTITY &, const VECTOR3 &), n3EngineClientAnarchy_t__N3Msg_DropItem);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_DropItem(const identity_t &, const vector3_t &), n3EngineClientAnarchy_t__N3Msg_DropItem);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_Duel_Accept_x
@@ -139,7 +143,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_Duel_Challenge_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_Duel_Challenge(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_Duel_Challenge);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_Duel_Challenge(const identity_t &), n3EngineClientAnarchy_t__N3Msg_Duel_Challenge);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_Duel_Draw_x
@@ -163,7 +167,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetActionProgress_x
-	FUNCTION_AT_ADDRESS(double EngineClientAnarchy::N3Msg_GetActionProgress(const IDENTITY &, DWORD*, DWORD*), n3EngineClientAnarchy_t__N3Msg_GetActionProgress);
+	FUNCTION_AT_ADDRESS(double EngineClientAnarchy::N3Msg_GetActionProgress(const identity_t &, DWORD*, DWORD*), n3EngineClientAnarchy_t__N3Msg_GetActionProgress);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetAggDef_x
@@ -171,7 +175,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetAlienLevelString_x
-	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetAlienLevelString(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetAlienLevelString)
+	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetAlienLevelString(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetAlienLevelString)
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetAreaName_x
@@ -179,65 +183,65 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetAttackingID_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetAttackingID(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetAttackingID);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetAttackingID(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetAttackingID);
 #endif
 
-	bool EngineClientAnarchy::N3Msg_GetAttackingID(IDENTITY& id) const
+	bool EngineClientAnarchy::N3Msg_GetAttackingID(identity_t& id) const
 	{
-		if (n3_engine_client_anarchy_.pClientControlChar->pWeaponHolder->IsAttacking == 1)
+		if (n3_engine_client_anarchy_.p_client_control_char->pWeaponHolder->IsAttacking == 1)
 		{
-			id = n3_engine_client_anarchy_.pClientControlChar->pWeaponHolder->WeaponTargetIdentity;
+			id = n3_engine_client_anarchy_.p_client_control_char->pWeaponHolder->WeaponTargetIdentity;
 			return true;
 		}
 		return false;
 	}
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetBreedStr_x
-	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetBreedStr(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetBreedStr);
+	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetBreedStr(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetBreedStr);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetBuffCurrentTime_x
-	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_GetBuffCurrentTime(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetBuffCurrentTime);
+	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_GetBuffCurrentTime(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetBuffCurrentTime);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetBuffTotalTime_x
-	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_GetBuffTotalTime(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetBuffTotalTime);
+	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_GetBuffTotalTime(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetBuffTotalTime);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetCharacterBodyShape_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetCharacterBodyShape(BYTE &, IDENTITY), n3EngineClientAnarchy_t__N3Msg_GetCharacterBodyShape);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetCharacterBodyShape(BYTE &, identity_t), n3EngineClientAnarchy_t__N3Msg_GetCharacterBodyShape);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetCharOrientationData_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetCharOrientationData(const IDENTITY &, VECTOR3 &, QUATERNION &, float &), n3EngineClientAnarchy_t__N3Msg_GetCharOrientationData);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetCharOrientationData(const identity_t &, vector3_t &, quaternion_t &, float &), n3EngineClientAnarchy_t__N3Msg_GetCharOrientationData);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetCityNameForClanMember_x
-	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetCityNameForClanMember(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetCityNameForClanMember);
+	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetCityNameForClanMember(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetCityNameForClanMember);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetClanLevelString_x
-	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetClanLevelString(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetClanLevelString);
+	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetClanLevelString(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetClanLevelString);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetClanString_x
-	FUNCTION_AT_ADDRESS(std::string* EngineClientAnarchy::N3Msg_GetClanString(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetClanString);
+	FUNCTION_AT_ADDRESS(std::string* EngineClientAnarchy::N3Msg_GetClanString(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetClanString);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetClientPetID_x
-	FUNCTION_AT_ADDRESS(PIDENTITY EngineClientAnarchy::N3Msg_GetClientPetID(IDENTITY &, DWORD), n3EngineClientAnarchy_t__N3Msg_GetClientPetID);
+	FUNCTION_AT_ADDRESS(p_identity_t EngineClientAnarchy::N3Msg_GetClientPetID(identity_t &, DWORD), n3EngineClientAnarchy_t__N3Msg_GetClientPetID);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetCloseTarget_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetCloseTarget(IDENTITY &, bool, bool), n3EngineClientAnarchy_t__N3Msg_GetCloseTarget);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetCloseTarget(identity_t &, bool, bool), n3EngineClientAnarchy_t__N3Msg_GetCloseTarget);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetContainerInventoryList_x
-	FUNCTION_AT_ADDRESS(PVOID EngineClientAnarchy::N3Msg_GetContainerInventoryList(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetContainerInventoryList);
+	FUNCTION_AT_ADDRESS(PVOID EngineClientAnarchy::N3Msg_GetContainerInventoryList(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetContainerInventoryList);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetCorrectActionID_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_GetCorrectActionID(IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetCorrectActionID);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_GetCorrectActionID(identity_t &), n3EngineClientAnarchy_t__N3Msg_GetCorrectActionID);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetCurrentRoom_x
@@ -253,7 +257,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetFactionInfoString_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetFactionInfoString(const IDENTITY &, std::string &), n3EngineClientAnarchy_t__N3Msg_GetFactionInfoString);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetFactionInfoString(const identity_t &, std::string &), n3EngineClientAnarchy_t__N3Msg_GetFactionInfoString);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetFactionRange_x
@@ -261,23 +265,23 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetFirstName_x
-	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetFirstName(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetFirstName);
+	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetFirstName(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetFirstName);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetFormulaProgress_x
-	FUNCTION_AT_ADDRESS(double EngineClientAnarchy::N3Msg_GetFormulaProgress(const IDENTITY &, DWORD &, DWORD &), n3EngineClientAnarchy_t__N3Msg_GetFormulaProgress);
+	FUNCTION_AT_ADDRESS(double EngineClientAnarchy::N3Msg_GetFormulaProgress(const identity_t &, DWORD &, DWORD &), n3EngineClientAnarchy_t__N3Msg_GetFormulaProgress);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetFormulaRadius_x
-	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_GetFormulaRadius(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetFormulaRadius);
+	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_GetFormulaRadius(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetFormulaRadius);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterPosition_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_GetGlobalCharacterPosition(VECTOR3 &), n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterPosition);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_GetGlobalCharacterPosition(vector3_t &), n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterPosition);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterRotation_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_GetGlobalCharacterRotation(QUATERNION &), n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterRotation);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_GetGlobalCharacterRotation(quaternion_t &), n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterRotation);
 #endif
 
 #ifdef  n3EngineClientAnarchy_t__N3Msg_GetGridDestinationList_2_x
@@ -286,19 +290,19 @@ namespace isxao_classes
 
 	PVOID EngineClientAnarchy::N3Msg_GetGridDestinationList(void) const
 	{
-		return n3_engine_client_anarchy_.pGridDestinationList;
+		return n3_engine_client_anarchy_.p_grid_destination_list;
 	}
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetInventoryVec_x
-	FUNCTION_AT_ADDRESS(std::vector<PINVENTORYDATA>* EngineClientAnarchy::N3Msg_GetInventoryVec(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetInventoryVec);
+	FUNCTION_AT_ADDRESS(std::vector<p_inventory_data_t>* EngineClientAnarchy::N3Msg_GetInventoryVec(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetInventoryVec);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetItem_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_GetItem(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetItem);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_GetItem(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetItem);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetItemProgress_x
-	FUNCTION_AT_ADDRESS(double EngineClientAnarchy::N3Msg_GetItemProgress(const IDENTITY &, DWORD &, DWORD &), n3EngineClientAnarchy_t__N3Msg_GetItemProgress);
+	FUNCTION_AT_ADDRESS(double EngineClientAnarchy::N3Msg_GetItemProgress(const identity_t &, DWORD &, DWORD &), n3EngineClientAnarchy_t__N3Msg_GetItemProgress);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetMovementMode_x
@@ -306,7 +310,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetName_x
-	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetName(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetName);
+	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetName(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetName);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetNanoCostModifier_x
@@ -319,11 +323,11 @@ namespace isxao_classes
 
 	std::list<DWORD>* EngineClientAnarchy::N3Msg_GetNanoSpellList() const
 	{
-		return &n3_engine_client_anarchy_.pClientControlChar->pSpellTemplateData->SpellList;
+		return &n3_engine_client_anarchy_.p_client_control_char->pSpellTemplateData->SpellList;
 	}
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetNanoTemplateInfoList_1_x
-	FUNCTION_AT_ADDRESS(std::list<NANOTEMPLATE>* EngineClientAnarchy::N3Msg_GetNanoTemplateInfoList(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetNanoTemplateInfoList_1);
+	FUNCTION_AT_ADDRESS(std::list<NANOTEMPLATE>* EngineClientAnarchy::N3Msg_GetNanoTemplateInfoList(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetNanoTemplateInfoList_1);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetNanoTemplateInfoList_2_x
@@ -332,11 +336,11 @@ namespace isxao_classes
 
 	std::list<NANOTEMPLATE>* EngineClientAnarchy::N3Msg_GetNanoTemplateInfoList(void) const
 	{
-		return &n3_engine_client_anarchy_.pClientControlChar->pSpellTemplateData->NanoTemplateList;
+		return &n3_engine_client_anarchy_.p_client_control_char->pSpellTemplateData->NanoTemplateList;
 	}
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetNextTarget_x
-	FUNCTION_AT_ADDRESS(PIDENTITY EngineClientAnarchy::N3Msg_GetNextTarget(IDENTITY &, DWORD), n3EngineClientAnarchy_t__N3Msg_GetNextTarget);
+	FUNCTION_AT_ADDRESS(p_identity_t EngineClientAnarchy::N3Msg_GetNextTarget(identity_t &, DWORD), n3EngineClientAnarchy_t__N3Msg_GetNextTarget);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetNumberOfAvailableAlienPerks_x
@@ -360,7 +364,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetOverEquipLevel_x
-	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_GetOverEquipLevel(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetOverEquipLevel);
+	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_GetOverEquipLevel(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetOverEquipLevel);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetPFName_1_x
@@ -372,11 +376,11 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetParent_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetParent(const IDENTITY &, IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetParent);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetParent(const identity_t &, identity_t &), n3EngineClientAnarchy_t__N3Msg_GetParent);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetPos_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetPos(const IDENTITY &, VECTOR3 &), n3EngineClientAnarchy_t__N3Msg_GetPos);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_GetPos(const identity_t &, vector3_t &), n3EngineClientAnarchy_t__N3Msg_GetPos);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetSkill_1_x
@@ -384,7 +388,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetSkill_2_x
-	FUNCTION_AT_ADDRESS(LONG EngineClientAnarchy::N3Msg_GetSkill(const IDENTITY &, DWORD, DWORD, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetSkill_2);
+	FUNCTION_AT_ADDRESS(LONG EngineClientAnarchy::N3Msg_GetSkill(const identity_t &, DWORD, DWORD, const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetSkill_2);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetSkillMax_x
@@ -397,19 +401,19 @@ namespace isxao_classes
 
 	std::list<SPECIALACTION>* EngineClientAnarchy::N3Msg_GetSpecialActionList() const
 	{
-		return n3_engine_client_anarchy_.pClientControlChar->pSpecialActionHolder->pSpecialActionsList;
+		return n3_engine_client_anarchy_.p_client_control_char->pSpecialActionHolder->pSpecialActionsList;
 	}
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetSpecialActionState_x
-	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_GetSpecialActionState(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetSpecialActionState);
+	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_GetSpecialActionState(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetSpecialActionState);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetSpecialAttackWeaponName_x
-	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetSpecialAttackWeaponName(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetSpecialAttackWeaponName);
+	FUNCTION_AT_ADDRESS(PCSTR EngineClientAnarchy::N3Msg_GetSpecialAttackWeaponName(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetSpecialAttackWeaponName);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetTargetTarget_x
-	FUNCTION_AT_ADDRESS(PIDENTITY EngineClientAnarchy::N3Msg_GetTargetTarget(IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_GetTargetTarget);
+	FUNCTION_AT_ADDRESS(p_identity_t EngineClientAnarchy::N3Msg_GetTargetTarget(identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetTargetTarget);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetTeamMemberList_x
@@ -426,7 +430,7 @@ namespace isxao_classes
 
 	bool EngineClientAnarchy::N3Msg_IsAttacking(void) const
 	{
-		return n3_engine_client_anarchy_.pClientControlChar->pWeaponHolder->IsAttacking == 1;
+		return n3_engine_client_anarchy_.p_client_control_char->pWeaponHolder->IsAttacking == 1;
 	}
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsBattleStation_x
@@ -434,11 +438,11 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsCharacterInMech_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsCharacterInMech(IDENTITY), n3EngineClientAnarchy_t__N3Msg_IsCharacterInMech);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsCharacterInMech(identity_t), n3EngineClientAnarchy_t__N3Msg_IsCharacterInMech);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsCharacterMorphed_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsCharacterMorphed(IDENTITY), n3EngineClientAnarchy_t__N3Msg_IsCharacterMorphed);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsCharacterMorphed(identity_t), n3EngineClientAnarchy_t__N3Msg_IsCharacterMorphed);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsDungeon_x
@@ -446,7 +450,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsFormulaReady_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsFormulaReady(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsFormulaReady);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsFormulaReady(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsFormulaReady);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsGeneralPerk_x
@@ -462,27 +466,27 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsInTeam_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsInTeam(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsInTeam);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsInTeam(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsInTeam);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsItemDisabled_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsItemDisabled(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsItemDisabled);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsItemDisabled(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsItemDisabled);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsItemMine_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsItemMine(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsItemMine);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsItemMine(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsItemMine);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsItemNFCrystal_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsItemNFCrystal(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsItemNFCrystal);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsItemNFCrystal(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsItemNFCrystal);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToUnWear_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsItemPossibleToUnWear(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToUnWear);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsItemPossibleToUnWear(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToUnWear);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToWear_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsItemPossibleToWear(const IDENTITY &, DWORD, DWORD, bool, DWORD), n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToWear);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsItemPossibleToWear(const identity_t &, DWORD, DWORD, bool, DWORD), n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToWear);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsMoving_x
@@ -490,15 +494,15 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsMyPetID_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsMyPetID(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsMyPetID);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsMyPetID(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsMyPetID);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsNanoSelfOnly(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsNanoSelfOnly(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsNpc_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsNpc(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsNpc);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsNpc(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsNpc);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsPerk_x
@@ -506,7 +510,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsPetTower_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsPetTower(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsPetTower);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsPetTower(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsPetTower);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsProfessionPerk_x
@@ -522,7 +526,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsShieldDisablerItem_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsShieldDisablerItem(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsShieldDisablerItem);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsShieldDisablerItem(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsShieldDisablerItem);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsSpecialPerk_x
@@ -530,35 +534,35 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsTeamLeader_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsTeamLeader(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsTeamLeader);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsTeamLeader(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsTeamLeader);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsTeamMission_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsTeamMission(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsTeamMission);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsTeamMission(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsTeamMission);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsTeamMissionCopy_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsTeamMissionCopy(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsTeamMissionCopy);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsTeamMissionCopy(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsTeamMissionCopy);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsTeamNano_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsTeamNano(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsTeamNano);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsTeamNano(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsTeamNano);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsTower_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsTower(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsTower);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsTower(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsTower);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsVisible_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsVisible(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_IsVisible);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsVisible(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsVisible);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_JoinItems_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_JoinItems(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_JoinItems);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_JoinItems(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_JoinItems);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_KickTeamMember_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_KickTeamMember(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_KickTeamMember);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_KickTeamMember(const identity_t &), n3EngineClientAnarchy_t__N3Msg_KickTeamMember);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_LeaveBattle_x
@@ -574,43 +578,43 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_MoveItemToInventory_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_MoveItemToInventory(const IDENTITY &, DWORD, DWORD), n3EngineClientAnarchy_t__N3Msg_MoveItemToInventory);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_MoveItemToInventory(const identity_t &, DWORD, DWORD), n3EngineClientAnarchy_t__N3Msg_MoveItemToInventory);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_MoveRaidMember_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_MoveRaidMember(const IDENTITY &, DWORD), n3EngineClientAnarchy_t__N3Msg_MoveRaidMember);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_MoveRaidMember(const identity_t &, DWORD), n3EngineClientAnarchy_t__N3Msg_MoveRaidMember);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_NameToID_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_NameToID(const std::string &, IDENTITY &), n3EngineClientAnarchy_t__N3Msg_NameToID);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_NameToID(const std::string &, identity_t &), n3EngineClientAnarchy_t__N3Msg_NameToID);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_NPCChatAddTradeItem_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_NPCChatAddTradeItem(const IDENTITY &, const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_NPCChatAddTradeItem);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_NPCChatAddTradeItem(const identity_t &, const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_NPCChatAddTradeItem);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_NPCChatCloseWindow_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_NPCChatCloseWindow(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_NPCChatCloseWindow);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_NPCChatCloseWindow(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_NPCChatCloseWindow);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_NPCChatEndTrade_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_NPCChatEndTrade(const IDENTITY &, const IDENTITY &, DWORD, bool), n3EngineClientAnarchy_t__N3Msg_NPCChatEndTrade);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_NPCChatEndTrade(const identity_t &, const identity_t &, DWORD, bool), n3EngineClientAnarchy_t__N3Msg_NPCChatEndTrade);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_NPCChatRemoveTradeItem_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_NPCChatRemoveTradeItem(const IDENTITY &, const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_NPCChatRemoveTradeItem);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_NPCChatRemoveTradeItem(const identity_t &, const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_NPCChatRemoveTradeItem);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_NPCChatRequestDescription_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_NPCChatRequestDescription(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_NPCChatRequestDescription);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_NPCChatRequestDescription(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_NPCChatRequestDescription);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_NPCChatStartTrade_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_NPCChatStartTrade(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_NPCChatStartTrade);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_NPCChatStartTrade(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_NPCChatStartTrade);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_OrbitalAttack_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_OrbitalAttack(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_OrbitalAttack);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_OrbitalAttack(const identity_t &), n3EngineClientAnarchy_t__N3Msg_OrbitalAttack);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_1_x
@@ -618,7 +622,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_2_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_PerformSpecialAction(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_2);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_PerformSpecialAction(const identity_t &), n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_2);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_PetDuel_Accept_x
@@ -626,7 +630,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_PetDuel_Challenge_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_PetDuel_Challenge(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_PetDuel_Challenge);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_PetDuel_Challenge(const identity_t &), n3EngineClientAnarchy_t__N3Msg_PetDuel_Challenge);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_PetDuel_Refuse_x
@@ -638,11 +642,11 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_RemoveBuff_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_RemoveBuff(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_RemoveBuff);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_RemoveBuff(const identity_t &), n3EngineClientAnarchy_t__N3Msg_RemoveBuff);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_RemoveQuest_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_RemoveQuest(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_RemoveQuest);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_RemoveQuest(const identity_t &), n3EngineClientAnarchy_t__N3Msg_RemoveQuest);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_RequestCharacterInventory_x
@@ -650,31 +654,31 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_RequestClothInventory_x
-	FUNCTION_AT_ADDRESS(std::list<INVENTORYENTRY>* EngineClientAnarchy::N3Msg_RequestClothInventory(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_RequestClothInventory);
+	FUNCTION_AT_ADDRESS(std::list<INVENTORYENTRY>* EngineClientAnarchy::N3Msg_RequestClothInventory(const identity_t &), n3EngineClientAnarchy_t__N3Msg_RequestClothInventory);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_RequestImplantInventory_x
-	FUNCTION_AT_ADDRESS(std::list<INVENTORYENTRY>* EngineClientAnarchy::N3Msg_RequestImplantInventory(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_RequestImplantInventory);
+	FUNCTION_AT_ADDRESS(std::list<INVENTORYENTRY>* EngineClientAnarchy::N3Msg_RequestImplantInventory(const identity_t &), n3EngineClientAnarchy_t__N3Msg_RequestImplantInventory);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_RequestSocialInventory_x
-	FUNCTION_AT_ADDRESS(std::list<INVENTORYENTRY>* EngineClientAnarchy::N3Msg_RequestSocialInventory(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_RequestSocialInventory);
+	FUNCTION_AT_ADDRESS(std::list<INVENTORYENTRY>* EngineClientAnarchy::N3Msg_RequestSocialInventory(const identity_t &), n3EngineClientAnarchy_t__N3Msg_RequestSocialInventory);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_RequestWeaponInventory_x
-	FUNCTION_AT_ADDRESS(std::list<INVENTORYENTRY>* EngineClientAnarchy::N3Msg_RequestWeaponInventory(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_RequestWeaponInventory);
+	FUNCTION_AT_ADDRESS(std::list<INVENTORYENTRY>* EngineClientAnarchy::N3Msg_RequestWeaponInventory(const identity_t &), n3EngineClientAnarchy_t__N3Msg_RequestWeaponInventory);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_SecondarySpecialAttack_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_SecondarySpecialAttack(const IDENTITY &, DWORD), n3EngineClientAnarchy_t__N3Msg_SecondarySpecialAttack);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_SecondarySpecialAttack(const identity_t &, DWORD), n3EngineClientAnarchy_t__N3Msg_SecondarySpecialAttack);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_SelectedTarget_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_SelectedTarget(const IDENTITY&), n3EngineClientAnarchy_t__N3Msg_SelectedTarget);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_SelectedTarget(const identity_t&), n3EngineClientAnarchy_t__N3Msg_SelectedTarget);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_SendPetCommand_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_SendPetCommand(DWORD, const IDENTITY &, DWORD, DWORD, PCSTR), n3EngineClientAnarchy_t__N3Msg_SendPetCommand);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_SendPetCommand(DWORD, const identity_t &, DWORD, DWORD, PCSTR), n3EngineClientAnarchy_t__N3Msg_SendPetCommand);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_SitToggle_x
@@ -682,7 +686,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_SplitItem_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_SplitItem(const IDENTITY &, DWORD), n3EngineClientAnarchy_t__N3Msg_SplitItem);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_SplitItem(const identity_t &, DWORD), n3EngineClientAnarchy_t__N3Msg_SplitItem);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_StartAltState_x
@@ -694,11 +698,11 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_StartPvP_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_StartPvP(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_StartPvP);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_StartPvP(const identity_t &), n3EngineClientAnarchy_t__N3Msg_StartPvP);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_StartTreatment_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_StartTreatment(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_StartTreatment);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_StartTreatment(const identity_t &), n3EngineClientAnarchy_t__N3Msg_StartTreatment);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_StopAltState_x
@@ -718,19 +722,19 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_SwitchTarget_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_SwitchTarget(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_SwitchTarget);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_SwitchTarget(const identity_t &), n3EngineClientAnarchy_t__N3Msg_SwitchTarget);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TeamJoinRequest_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_TeamJoinRequest(const IDENTITY &, bool), n3EngineClientAnarchy_t__N3Msg_TeamJoinRequest);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_TeamJoinRequest(const identity_t &, bool), n3EngineClientAnarchy_t__N3Msg_TeamJoinRequest);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TemplateIDToDynelID_x
-	FUNCTION_AT_ADDRESS(PIDENTITY EngineClientAnarchy::N3Msg_TemplateIDToDynelID(IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_TemplateIDToDynelID);
+	FUNCTION_AT_ADDRESS(p_identity_t EngineClientAnarchy::N3Msg_TemplateIDToDynelID(identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_TemplateIDToDynelID);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TextCommand_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_TextCommand(DWORD, PCSTR, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_TextCommand);
+	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_TextCommand(DWORD, PCSTR, const identity_t &), n3EngineClientAnarchy_t__N3Msg_TextCommand);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_ToggleReclaim_x
@@ -746,7 +750,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TradeAddItem_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_TradeAddItem(const IDENTITY &, const IDENTITY &, DWORD), n3EngineClientAnarchy_t__N3Msg_TradeAddItem);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_TradeAddItem(const identity_t &, const identity_t &, DWORD), n3EngineClientAnarchy_t__N3Msg_TradeAddItem);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TradeConfirm_x
@@ -754,15 +758,15 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TradeGetInventory_x
-	FUNCTION_AT_ADDRESS(PVOID EngineClientAnarchy::N3Msg_TradeGetInventory(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_TradeGetInventory);
+	FUNCTION_AT_ADDRESS(PVOID EngineClientAnarchy::N3Msg_TradeGetInventory(const identity_t &), n3EngineClientAnarchy_t__N3Msg_TradeGetInventory);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TradeGetInventoryCost_x
-	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_TradeGetInventoryCost(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_TradeGetInventoryCost);
+	FUNCTION_AT_ADDRESS(DWORD EngineClientAnarchy::N3Msg_TradeGetInventoryCost(const identity_t &), n3EngineClientAnarchy_t__N3Msg_TradeGetInventoryCost);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TradeRemoveItem_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_TradeRemoveItem(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_TradeRemoveItem);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_TradeRemoveItem(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_TradeRemoveItem);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TradeSetCash_x
@@ -770,11 +774,11 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TradeStart_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_TradeStart(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_TradeStart);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_TradeStart(const identity_t &), n3EngineClientAnarchy_t__N3Msg_TradeStart);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TradeskillCombine_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_TradeskillCombine(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_TradeskillCombine);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_TradeskillCombine(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_TradeskillCombine);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TrainPerk_x
@@ -782,7 +786,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TransferTeamLeadership_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_TransferTeamLeadership(const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_TransferTeamLeadership);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_TransferTeamLeadership(const identity_t &), n3EngineClientAnarchy_t__N3Msg_TransferTeamLeadership);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_TryAbortNanoFormula_x
@@ -798,11 +802,11 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_UseItem_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_UseItem(const IDENTITY&, bool), n3EngineClientAnarchy_t__N3Msg_UseItem);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_UseItem(const identity_t&, bool), n3EngineClientAnarchy_t__N3Msg_UseItem);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_UseItemOnItem_x
-	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_UseItemOnItem(const IDENTITY &, const IDENTITY &), n3EngineClientAnarchy_t__N3Msg_UseItemOnItem);
+	FUNCTION_AT_ADDRESS(void EngineClientAnarchy::N3Msg_UseItemOnItem(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_UseItemOnItem);
 #endif
 
 
