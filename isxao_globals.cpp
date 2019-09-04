@@ -107,6 +107,7 @@ namespace isxao_globals
 		// Functions
 		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_engine_client_anarchy_t);
 		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t);
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__convert_criteria);
 		n3_engine_client_anarchy_t__get_client_char = n3_engine_client_t__get_client_control_dynel;
 		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_client_dynel_id);
 		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_current_movement_mode);
@@ -1262,6 +1263,8 @@ namespace isxao_globals
 	// Functions
 	DWORD n3_engine_client_anarchy_t__n3_engine_client_anarchy_t = 0;
 	DWORD n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t = 0;
+	DWORD n3_engine_client_anarchy_t__convert_criteria = 0;
+	DWORD n3_engine_client_anarchy_t__get_breed_str = 0;
 	DWORD n3_engine_client_anarchy_t__get_client_char = 0;
 	DWORD n3_engine_client_anarchy_t__get_client_dynel_id = 0;
 	DWORD n3_engine_client_anarchy_t__get_current_movement_mode = 0;

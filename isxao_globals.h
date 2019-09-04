@@ -27,6 +27,8 @@ namespace isxao_globals
 	// Functions
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_engine_client_anarchy_t;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__convert_criteria;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_breed_str;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_client_char;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_client_dynel_id;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_current_movement_mode;

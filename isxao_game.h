@@ -19,6 +19,8 @@ constexpr char* const n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_pat
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 24 53 56 8B F1 89 75 F0");
 constexpr char* const n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 53 56 8B F1 57 89 75 F0 C7 06 ?? ?? ?? ?? 8B 9E 00 01 00 00");
+constexpr char* const n3_engine_client_anarchy_t__convert_criteria_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC C8 04 00 00");
 constexpr char* const n3_engine_client_anarchy_t__get_client_dynel_id_pattern = static_cast<char*>(
 	"55 8B EC 8B 45 08 8B 89 80 00 00 00");
 constexpr char* const n3_engine_client_anarchy_t__get_current_movement_mode_pattern = static_cast<char*>(

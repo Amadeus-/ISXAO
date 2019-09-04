@@ -8,8 +8,8 @@ public:
 	AOLIB_OBJECT p_identity_t get_client_dynel_id(identity_t &id);
 	AOLIB_OBJECT DWORD get_current_movement_mode();
 	AOLIB_OBJECT n3_engine_client_anarchy_t get_engine_client_anarchy_data() const;
-	AOLIB_OBJECT PCSTR GetFactionStr(DWORD faction_id, bool unknown);
-	AOLIB_OBJECT PCSTR GetFactionTitle(DWORD faction_id);
+	AOLIB_OBJECT PCSTR get_faction_str(DWORD faction_id, bool unknown);
+	AOLIB_OBJECT PCSTR get_faction_title(DWORD faction_id);
 	AOLIB_OBJECT PCSTR GetGenderString(const identity_t &id);
 	AOLIB_OBJECT p_dummy_item_base_t GetItemByTemplate(identity_t template_id, const identity_t & container_id);
 	AOLIB_OBJECT PCSTR GetTitleStr(DWORD base, DWORD level);

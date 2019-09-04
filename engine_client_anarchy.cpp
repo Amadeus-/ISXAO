@@ -39,9 +39,19 @@ namespace isxao_classes
 		return n3_engine_client_anarchy_;
 	}
 
-	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::GetFactionStr(DWORD, bool), n3_engine_client_anarchy_t__get_faction_str);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_FACTION_STR
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::get_faction_str(DWORD, bool), n3_engine_client_anarchy_t__get_faction_str);
+#else
+	static_assert(false, "N3_ENGINE_CLIENT_ANARCHY_T__GET_FACTION_STR does not have a non-native method.");
+#endif
 
-	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::GetFactionTitle(DWORD), n3_engine_client_anarchy_t__get_faction_title);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_FACTION_TITLE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::get_faction_title(DWORD), n3_engine_client_anarchy_t__get_faction_title);
+#else
+	static_assert(false, "N3_ENGINE_CLIENT_ANARCHY_T__GET_FACTION_TITLE does not have a non-native method.");
+#endif
 
 
 #ifdef n3EngineClientAnarchy_t__GetGenderString_x
