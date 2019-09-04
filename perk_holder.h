@@ -3,10 +3,10 @@
 class PerkHolder
 {
 public:
-	AOLIB_OBJECT PERKHOLDER GetPerkHolderData() const;
+	AOLIB_OBJECT perk_holder GetPerkHolderData() const;
 	AOLIB_OBJECT DWORD GetPerkLocks(std::vector<ActionLock*>&) const;
 	AOLIB_OBJECT DWORD GetPerkMap(std::map<identity_t, DWORD> &m) const;
 	AOLIB_OBJECT ActionLock* GetActionLock(SpecialActionTemplate*);
 private:
-	PERKHOLDER perk_holder_;
+	perk_holder perk_holder_;
 };

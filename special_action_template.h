@@ -9,7 +9,7 @@ public:
 	AOLIB_OBJECT DWORD GetLockoutTimeRemaining() const;
 	//AOLIB_OBJECT float GetLockoutTimeRemaining() const;
 	AOLIB_OBJECT PCSTR GetName() const;
-	AOLIB_OBJECT SPECIALACTION GetSpecialActionData() const;
+	AOLIB_OBJECT special_action_t GetSpecialActionData() const;
 	AOLIB_OBJECT identity_t GetWeaponIdentity() const;
 	AOLIB_OBJECT bool IsLocked() const;
 	AOLIB_OBJECT SpecialActionItem* GetSpecialActionItem();
@@ -17,5 +17,5 @@ public:
 	AOLIB_OBJECT static bool SpecialActionCompare(SpecialActionTemplate &, SpecialActionTemplate &);
 	AOLIB_OBJECT static bool pSpecialActionCompare(SpecialActionTemplate*, SpecialActionTemplate*);
 private:
-	SPECIALACTION special_action_;
+	special_action_t special_action_;
 };

@@ -7,9 +7,9 @@ namespace isxao_classes
 	FUNCTION_AT_ADDRESS(char* N3Message::DuplicateBody(void), N3Message_t__DuplicateBody);
 #endif
 
-	PN3MESSAGE N3Message::GetN3MessageData()
+	p_n3_message_t N3Message::GetN3MessageData()
 	{
-		return PN3MESSAGE(GetData());
+		return p_n3_message_t(GetData());
 	}
 
 #ifdef N3Message_t__MessageBodyGet_x

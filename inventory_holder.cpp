@@ -47,7 +47,7 @@ namespace isxao_classes
 	{
 		for (int i = 17; i < 32; i++)
 		{
-			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->p_inventory_data[i];
+			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().p_regular_inventory->p_inventory_data[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
@@ -63,7 +63,7 @@ namespace isxao_classes
 	{
 		for (int i = 64; i < 94; i++)
 		{
-			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->p_inventory_data[i];
+			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().p_regular_inventory->p_inventory_data[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
@@ -74,7 +74,7 @@ namespace isxao_classes
 	{
 		for (int i = 33; i < 46; i++)
 		{
-			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->p_inventory_data[i];
+			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().p_regular_inventory->p_inventory_data[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
@@ -89,22 +89,22 @@ namespace isxao_classes
 	
 	NewInventory* InventoryHolder::GetNewInventory() const
 	{
-		return reinterpret_cast<NewInventory*>(GetInventoryHolderData().pRegularInventory);
+		return reinterpret_cast<NewInventory*>(GetInventoryHolderData().p_regular_inventory);
 	}
 
-	INVENTORYHOLDER InventoryHolder::GetInventoryHolderData() const
+	inventory_holder_t InventoryHolder::GetInventoryHolderData() const
 	{
 		return inventory_holder_;
 	}
 
 	p_identity_t InventoryHolder::GetInventoryHolderIdentity() const
 	{
-		return GetInventoryHolderData().pClientIdentity;
+		return GetInventoryHolderData().p_client_identity;
 	}
 
 	NewInventory* InventoryHolder::GetOverflowInventory() const
 	{
-		return reinterpret_cast<NewInventory*>(GetInventoryHolderData().pOverflowInventory);
+		return reinterpret_cast<NewInventory*>(GetInventoryHolderData().p_overflow_inventory);
 	}
 
 	InventoryItem* InventoryHolder::GetInventoryItem(DWORD index) const
@@ -404,7 +404,7 @@ namespace isxao_classes
 	{
 		for (int i = 1; i < 16; i++)
 		{
-			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->p_inventory_data[i];
+			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().p_regular_inventory->p_inventory_data[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}

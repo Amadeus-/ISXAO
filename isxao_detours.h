@@ -33,18 +33,18 @@ namespace isxao_detours
 		void n3Engine_t__SetTeleportStatus_Trampoline(bool);
 		void n3Engine_t__SetTeleportStatus_Detour(bool);
 
-		void ChatGUIModule_c__HandleGroupAction_Trampoline(PPPJCLIENTGROUPACTION);
-		void ChatGUIModule_c__HandleGroupAction_Detour(PPPJCLIENTGROUPACTION);
-		void ChatGUIModule_c__HandleGroupMessage_Trampoline(PPPJCLIENTGROUPMESSAGE);
-		void ChatGUIModule_c__HandleGroupMessage_Detour(PPPJCLIENTGROUPMESSAGE);
-		void ChatGUIModule_c__HandlePrivateGroupAction_Trampoline(PPPJCLIENTPRIVATEGROUPACTION);
-		void ChatGUIModule_c__HandlePrivateGroupAction_Detour(PPPJCLIENTPRIVATEGROUPACTION);
-		void ChatGUIModule_c__HandlePrivateMessage_Trampoline(PPPJCLIENTPRIVATEMESSAGE);
-		void ChatGUIModule_c__HandlePrivateMessage_Detour(PPPJCLIENTPRIVATEMESSAGE);
-		static void ChatGUIModule_c__HandleSystemMessage_Trampoline(PPPJCLIENTSYSTEMMESSAGE);
-		static void ChatGUIModule_c__HandleSystemMessage_Detour(PPPJCLIENTSYSTEMMESSAGE);
-		void ChatGUIModule_c__HandleVicinityMessage_Trampoline(PPPJCLIENTVICINITYMESSAGE);
-		void ChatGUIModule_c__HandleVicinityMessage_Detour(PPPJCLIENTVICINITYMESSAGE);
+		void ChatGUIModule_c__HandleGroupAction_Trampoline(p_ppj_client_group_action_t);
+		void ChatGUIModule_c__HandleGroupAction_Detour(p_ppj_client_group_action_t);
+		void ChatGUIModule_c__HandleGroupMessage_Trampoline(p_ppj_group_message_t);
+		void ChatGUIModule_c__HandleGroupMessage_Detour(p_ppj_group_message_t);
+		void ChatGUIModule_c__HandlePrivateGroupAction_Trampoline(p_ppj_client_private_group_action_t);
+		void ChatGUIModule_c__HandlePrivateGroupAction_Detour(p_ppj_client_private_group_action_t);
+		void ChatGUIModule_c__HandlePrivateMessage_Trampoline(p_ppj_client_private_message_t);
+		void ChatGUIModule_c__HandlePrivateMessage_Detour(p_ppj_client_private_message_t);
+		static void ChatGUIModule_c__HandleSystemMessage_Trampoline(p_ppj_client_system_message_t);
+		static void ChatGUIModule_c__HandleSystemMessage_Detour(p_ppj_client_system_message_t);
+		void ChatGUIModule_c__HandleVicinityMessage_Trampoline(p_ppj_client_vicinity_message_t);
+		void ChatGUIModule_c__HandleVicinityMessage_Detour(p_ppj_client_vicinity_message_t);
 
 		void ChatGroupController_c__sub_10083D9C_Trampoline(int, string*, int);
 		void ChatGroupController_c__sub_10083D9C_Detour(int, string*, int);

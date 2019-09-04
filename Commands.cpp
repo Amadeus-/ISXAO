@@ -33,7 +33,7 @@ int CMD_DUMPSTATS(int argc, char *argv[])
 		for (auto it = m.begin(); it != m.end(); ++it)
 		{
 			char buffer[MAX_STRING];
-			LONG stat = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(id, static_cast<AOData::Stat_e>((*it).first), 2, dummy);
+			LONG stat = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(id, static_cast<ao_data::Stat_e>((*it).first), 2, dummy);
 			sprintf_s(buffer, "ST_%s = %d,\n", (*it).second, /*(*it).first*/stat);
 			for (auto i = 0; i < (int)strlen(buffer); i++)
 				buffer[i] = toupper(buffer[i]);
@@ -117,9 +117,9 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x1C;
 	printf("coll_sphere_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(DBOBJECT);
+	r = sizeof(db_object_t);
 	a = 0x18;
-	printf("DBOBJECT: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("db_object_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(dummy_item_base_t);
 	a = 0xA4;
@@ -133,33 +133,33 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x18;
 	printf("event_caster_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(FLOWCONTROL);
+	r = sizeof(flow_control_t);
 	a = 0x58;
-	printf("FLOWCONTROL: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("flow_control_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(GAMETIME);
+	r = sizeof(game_time_t);
 	a = 0xC8;
-	printf("GAMETIME: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("game_time_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(HOTSPOT);
+	r = sizeof(hot_spot_t);
 	a = 0x54;
-	printf("HOTSPOT: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("hot_spot_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(identity_t);
 	a = 0x8;
 	printf("identity_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(INPUTCONFIG);
+	r = sizeof(input_config_t);
 	a = 0x8;
-	printf("INPUTCONFIG: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("input_config_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(inventory_data_t);
 	a = 0x2C;
 	printf("inventory_data_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(INVENTORYHOLDER);
+	r = sizeof(inventory_holder_t);
 	a = 0x1B8;
-	printf("INVENTORYHOLDER: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("inventory_holder_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(i_point_t);
 	a = 0x8;
@@ -169,21 +169,21 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x1C;
 	printf("mesh_coll_sphere_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3CAMERA);
+	r = sizeof(n3_camera_t);
 	a = 0x258;
-	printf("N3CAMERA: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_camera_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3CELLMONITOR);
+	r = sizeof(n3_cell_monitor_t);
 	a = 0x38;
-	printf("N3CELLMONITOR: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_cell_monitor_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(n3_dynel_t);
 	a = 0xA0;
 	printf("n3_dynel_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3DYNELEVENTSOURCE);
+	r = sizeof(n3_dynel_event_source_t);
 	a = 0x8;
-	printf("N3DYNELEVENTSOURCE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_dynel_event_source_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(n3_dyna_mesh_coll_sphere_t);
 	a = 0x30;
@@ -193,21 +193,21 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x130;
 	printf("n3_engine_client_anarchy_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3FOBJ);
+	r = sizeof(n3_f_obj_t);
 	a = 0x18;
-	printf("N3FOBJ: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_f_obj_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(n3_fsm_t);
 	a = 0x1C;
 	printf("n3_fsm_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3OBJECTFACTORY);
+	r = sizeof(n3_object_factory_t);
 	a = 0x8;
-	printf("N3OBJECTFACTORY: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_object_factory_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3ROOT);
+	r = sizeof(n3_root_t);
 	a = 0x3C;
-	printf("N3ROOT: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_root_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(n3_sf_base_t);
 	a = 0x8;
@@ -217,25 +217,25 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x424;
 	printf("n3_tile_map_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(N3VISUALDYNEL);
+	r = sizeof(n3_visual_dynel_t);
 	a = 0xE0;
-	printf("N3VISUALDYNEL: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("n3_visual_dynel_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(NANOITEM);
+	r = sizeof(nano_item_t);
 	a = 0xC0;
-	printf("NANOITEM: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("nano_item_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(NANOTEMPLATE);
+	r = sizeof(nano_template_t);
 	a = 0x1C;
-	printf("NANOTEMPLATE: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("nano_template_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(new_inventory_t);
 	a = 0x2C;
 	printf("new_inventory_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(PLAYFIELDANARCHY);
+	r = sizeof(playfield_anarchy_t);
 	a = 0x110;
-	printf("PLAYFIELDANARCHY: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("playfield_anarchy_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(quaternion_t);
 	a = 0x10;
@@ -245,23 +245,23 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0xC;
 	printf("rdb_identity_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(RDBPLAYFIELD);
+	r = sizeof(rdb_playfield_t);
 	a = 0x6C;
-	printf("RDBPLAYFIELD: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("rdb_playfield_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(RDBTILEMAP);
+	r = sizeof(rdb_tile_map_t);
 	a = 0x8270;
-	printf("RDBTILEMAP: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("rdb_tile_map_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(REFERENCECOUNTED);
+	r = sizeof(reference_counted_t);
 	a = 0x8;
-	printf("REFERENCECOUNTED: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("reference_counted_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(SIMPLECHAR);
+	r = sizeof(simple_char_t);
 	a = 0x2D8;
-	printf("SIMPLECHAR: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("simple_char_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(SPELLTEMPLATEDATA);
+	r = sizeof(spell_template_data_t);
 	a = 0x50;
 	printf("SPELLANDTEMPLATEDATA: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
@@ -269,13 +269,13 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0xC;
 	printf("vector3_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(WEAPONHOLDER);
+	r = sizeof(weapon_holder_t);
 	a = 0xA4;
-	printf("WEAPONHOLDER: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("weapon_holder_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
-	r = sizeof(WEAPONITEM);
+	r = sizeof(weapon_item_t);
 	a = 0x204;
-	printf("WEAPONITEM: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("weapon_item_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 	
 	r = sizeof(Character);
 	a = sizeof(Player);

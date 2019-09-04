@@ -5,65 +5,65 @@ namespace isxao_classes
 
 	LONG PlayfieldAnarchy::GetPFWorldXPos() const
 	{
-		return playfield_anarchy_.PFWorldXPos;
+		return playfield_anarchy_.pf_world_x_pos;
 	}
 
 	LONG PlayfieldAnarchy::GetPFWorldZPos() const
 	{
-		return playfield_anarchy_.PFWorldZPos;
+		return playfield_anarchy_.pf_world_z_pos;
 	}
 
 	DWORD PlayfieldAnarchy::GetPlayfieldActors(std::vector<Actor*> &v)
 	{
-		for (auto it = playfield_anarchy_.DynelChildren.begin(); it != playfield_anarchy_.DynelChildren.end(); ++it)
+		for (auto it = playfield_anarchy_.p_dynel_children.begin(); it != playfield_anarchy_.p_dynel_children.end(); ++it)
 		{
-			if ((*it)->Identity.type == 50000)
+			if ((*it)->identity.type == 50000)
 				v.push_back(reinterpret_cast<Actor*>(*it));
 		}
 		std::sort(v.begin(), v.end(), Dynel::pDynelCompare);
 		return v.size();
 	}
 
-	PLAYFIELDANARCHY PlayfieldAnarchy::GetPlayfieldData() const
+	playfield_anarchy_t PlayfieldAnarchy::GetPlayfieldData() const
 	{
 		return playfield_anarchy_;
 	}
 
 	DWORD PlayfieldAnarchy::GetPlayfieldInstance() const
 	{
-		return playfield_anarchy_.InstanceID.id;
+		return playfield_anarchy_.instance_id.id;
 	}
 
 	PCSTR PlayfieldAnarchy::GetPlayfieldName() const
 	{
-		return playfield_anarchy_.pRDBPlayfield->Name;
+		return playfield_anarchy_.p_rdb_playfield->name;
 	}
 
 	float PlayfieldAnarchy::GetSizeX() const
 	{
-		return playfield_anarchy_.pn3Tilemap->pRDBTileMap->MapSizeMultiplier * playfield_anarchy_.pn3Tilemap->pRDBTileMap->Width;
+		return playfield_anarchy_.p_n3_tile_map->p_rdb_tile_map->map_size_multiplier * playfield_anarchy_.p_n3_tile_map->p_rdb_tile_map->width;
 	}
 
 	float PlayfieldAnarchy::GetSizeZ() const
 	{
-		return playfield_anarchy_.pn3Tilemap->pRDBTileMap->MapSizeMultiplier * playfield_anarchy_.pn3Tilemap->pRDBTileMap->Height;
+		return playfield_anarchy_.p_n3_tile_map->p_rdb_tile_map->map_size_multiplier * playfield_anarchy_.p_n3_tile_map->p_rdb_tile_map->height;
 	}
 
 	bool PlayfieldAnarchy::IsDungeon() const
 	{
-		return playfield_anarchy_.pn3Tilemap->pRDBTileMap->IsDungeon == 1;
+		return playfield_anarchy_.p_n3_tile_map->p_rdb_tile_map->is_dungeon == 1;
 	}
 
 	FUNCTION_AT_ADDRESS(bool PlayfieldAnarchy::LineOfSight(const vector3_t &, const vector3_t &, int, bool), n3_playfield_t__line_of_sight);
 
-	PGRIDSPACE PlayfieldAnarchy::GetGridSpace() const
+	p_grid_space_t PlayfieldAnarchy::GetGridSpace() const
 	{
-		return playfield_anarchy_.pSpace_i;
+		return playfield_anarchy_.p_space_i;
 	}
 
 	p_n3_tile_map_surface_t PlayfieldAnarchy::GetTilemapSurface() const
 	{
-		return playfield_anarchy_.pSurface_i;
+		return playfield_anarchy_.p_surface_i;
 	}
 
 
@@ -73,7 +73,7 @@ namespace isxao_classes
 
 	PlayfieldAnarchy* PlayfieldDir::GetPlayfield() const
 	{
-		return reinterpret_cast<PlayfieldAnarchy*>(playfield_dir_.Root->Node->pPlayfield);
+		return reinterpret_cast<PlayfieldAnarchy*>(playfield_dir_.p_root->p_node->p_playfield);
 	}
 
 #pragma endregion

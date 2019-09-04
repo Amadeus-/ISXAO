@@ -3,8 +3,8 @@
 class NpcHolder
 {
 public:
-	AOLIB_OBJECT NPCHOLDER GetNPCHolderData() const;
+	AOLIB_OBJECT npc_holder_t GetNPCHolderData() const;
 	AOLIB_OBJECT DWORD GetPetMap(std::map<DWORD, identity_t> &m) const;
 private:
-	NPCHOLDER npc_holder_;
+	npc_holder_t npc_holder_;
 };

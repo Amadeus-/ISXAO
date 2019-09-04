@@ -18,7 +18,7 @@ namespace isxao_classes
 
 	DWORD SpellTemplateData::GetActiveNanoEffects(std::vector<identity_t> &v) const
 	{
-		std::vector<p_identity_t> nano_identity_vector = GetSpellTemplateDataData().ActiveNanos;
+		std::vector<p_identity_t> nano_identity_vector = GetSpellTemplateDataData().active_nanos;
 		for (auto it = nano_identity_vector.begin(); it != nano_identity_vector.end(); ++it)
 			v.push_back(*(*it));
 		std::sort(v.begin(), v.end(), less<identity_t>());
@@ -27,7 +27,7 @@ namespace isxao_classes
 
 	CastingData* SpellTemplateData::GetCastingData() const
 	{
-		std::list<CASTINGDATA*>* casting_data_list = GetSpellTemplateDataData().pSpellcastingInfo;
+		std::list<casting_data_t*>* casting_data_list = GetSpellTemplateDataData().p_spellcasting_info;
 		if (IsCasting())
 		{
 			for (auto it = casting_data_list->begin(); it != casting_data_list->end(); ++it)
@@ -46,7 +46,7 @@ namespace isxao_classes
 
 	DWORD SpellTemplateData::GetNanoSpellList(std::vector<DWORD> &v) const
 	{
-		std::list<DWORD> nano_spell_list = GetSpellTemplateDataData().SpellList;
+		std::list<DWORD> nano_spell_list = GetSpellTemplateDataData().spell_list;
 		for (auto it = nano_spell_list.begin(); it != nano_spell_list.end(); ++it)
 			v.push_back(*it);
 		std::sort(v.begin(), v.end(), less<DWORD>());
@@ -55,7 +55,7 @@ namespace isxao_classes
 
 	DWORD SpellTemplateData::GetNanoTemplateList(std::vector<NanoTemplate> &v) const
 	{
-		std::list<NANOTEMPLATE> l = GetSpellTemplateDataData().NanoTemplateList;
+		std::list<nano_template_t> l = GetSpellTemplateDataData().nano_template_list;
 		for (auto it = l.begin(); it != l.end(); ++it)
 		{
 			auto t = *it;
@@ -65,14 +65,14 @@ namespace isxao_classes
 		return v.size();
 	}
 
-	SPELLTEMPLATEDATA SpellTemplateData::GetSpellTemplateDataData() const
+	spell_template_data_t SpellTemplateData::GetSpellTemplateDataData() const
 	{
 		return spell_template_data_;
 	}
 
 	bool SpellTemplateData::IsCasting() const
 	{
-		return GetSpellTemplateDataData().pSpellcastingInfo->size() > 0;
+		return GetSpellTemplateDataData().p_spellcasting_info->size() > 0;
 	}
 
 }

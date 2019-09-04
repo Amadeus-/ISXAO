@@ -3,8 +3,8 @@
 class ResourceDatabase
 {
 public:
-	PDBOBJECT GetDbObject(const identity_t&);
+	p_db_object_t GetDbObject(const identity_t&);
 	void GetIdentityVec(vector<identity_t>&, int);
 private:
-	RESOURCEDATABASE resource_database_;
+	resource_database_t resource_database_;
 };

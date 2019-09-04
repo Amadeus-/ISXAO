@@ -7,27 +7,27 @@ namespace isxao_classes
 
 	InventoryHolder* Character::GetInventoryHolder()
 	{
-		return reinterpret_cast<InventoryHolder*>(GetSimpleCharData()->pContainerInventory);
+		return reinterpret_cast<InventoryHolder*>(GetSimpleCharData()->p_container_inventory);
 	}
 
 	NpcHolder* Character::GetNPCHolder()
 	{
-		return reinterpret_cast<NpcHolder*>(GetSimpleCharData()->pNpcHolder);
+		return reinterpret_cast<NpcHolder*>(GetSimpleCharData()->p_npc_holder);
 	}
 
 	PerkHolder* Character::GetPerkHolder()
 	{
-		return reinterpret_cast<PerkHolder*>(GetSimpleCharData()->pPerkHolder);
+		return reinterpret_cast<PerkHolder*>(GetSimpleCharData()->p_perk_holder);
 	}
 
 	SpecialActionHolder* Character::GetSpecialActionHolder()
 	{
-		return reinterpret_cast<SpecialActionHolder*>(GetSimpleCharData()->pSpecialActionHolder);
+		return reinterpret_cast<SpecialActionHolder*>(GetSimpleCharData()->p_special_action_holder);
 	}
 
 	StatHolder* Character::GetStatHolder()
 	{
-		return reinterpret_cast<StatHolder*>(GetSimpleCharData()->pMapHolder);
+		return reinterpret_cast<StatHolder*>(GetSimpleCharData()->p_map_holder);
 	}
 
 	void Character::GetStatMap(std::map<DWORD, LONG> &m)
@@ -65,7 +65,7 @@ namespace isxao_classes
 	{
 		if (HasWeaponTarget())
 		{
-			id = pAttackingIndicator->Identity;
+			id = pAttackingIndicator->identity;
 			return true;
 		}
 		return false;
@@ -75,7 +75,7 @@ namespace isxao_classes
 	{
 		if (HasTarget())
 		{
-			id = pSelectionIndicator->Identity;
+			id = pSelectionIndicator->identity;
 			return true;
 		}
 		return false;

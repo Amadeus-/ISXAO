@@ -1,7 +1,7 @@
 #pragma once
 
 // ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
-class EngineClientAnarchy
+class engine_client_anarchy
 {
 public:
 	AOLIB_OBJECT Character* get_client_char();
@@ -74,8 +74,8 @@ public:
 	AOLIB_OBJECT PCSTR N3Msg_GetName(const identity_t &, const identity_t &);
 	AOLIB_OBJECT DWORD N3Msg_GetNanoCostModifier();
 	AOLIB_OBJECT std::list<DWORD>* N3Msg_GetNanoSpellList() const;
-	AOLIB_OBJECT std::list<NANOTEMPLATE>* N3Msg_GetNanoTemplateInfoList(const identity_t &);
-	AOLIB_OBJECT std::list<NANOTEMPLATE>* N3Msg_GetNanoTemplateInfoList() const;
+	AOLIB_OBJECT std::list<nano_template_t>* N3Msg_GetNanoTemplateInfoList(const identity_t &);
+	AOLIB_OBJECT std::list<nano_template_t>* N3Msg_GetNanoTemplateInfoList() const;
 	AOLIB_OBJECT p_identity_t N3Msg_GetNextTarget(identity_t &, DWORD);
 	AOLIB_OBJECT DWORD N3Msg_GetNumberOfAvailableAlienPerks();
 	AOLIB_OBJECT DWORD N3Msg_GetNumberOfAvailablePerks();
@@ -90,7 +90,7 @@ public:
 	AOLIB_OBJECT LONG N3Msg_GetSkill(DWORD, DWORD);
 	AOLIB_OBJECT LONG N3Msg_GetSkill(const identity_t &, DWORD, DWORD, const identity_t &);
 	AOLIB_OBJECT LONG N3Msg_GetSkillMax(DWORD);
-	AOLIB_OBJECT std::list<SPECIALACTION>* N3Msg_GetSpecialActionList() const;
+	AOLIB_OBJECT std::list<special_action_t>* N3Msg_GetSpecialActionList() const;
 	AOLIB_OBJECT DWORD N3Msg_GetSpecialActionState(const identity_t &);
 	AOLIB_OBJECT PCSTR N3Msg_GetSpecialAttackWeaponName(const identity_t &);
 	AOLIB_OBJECT p_identity_t N3Msg_GetTargetTarget(identity_t &, const identity_t &);
@@ -151,11 +151,11 @@ public:
 	AOLIB_OBJECT void N3Msg_PetDuel_Stop();
 	AOLIB_OBJECT bool N3Msg_RemoveBuff(const identity_t &);
 	AOLIB_OBJECT void N3Msg_RemoveQuest(const identity_t &);
-	AOLIB_OBJECT std::list<INVENTORYENTRY>* N3Msg_RequestCharacterInventory();
-	AOLIB_OBJECT std::list<INVENTORYENTRY>* N3Msg_RequestClothInventory(const identity_t &);
-	AOLIB_OBJECT std::list<INVENTORYENTRY>* N3Msg_RequestImplantInventory(const identity_t &);
-	AOLIB_OBJECT std::list<INVENTORYENTRY>* N3Msg_RequestSocialInventory(const identity_t &);
-	AOLIB_OBJECT std::list<INVENTORYENTRY>* N3Msg_RequestWeaponInventory(const identity_t &);
+	AOLIB_OBJECT std::list<inventory_entry_t>* N3Msg_RequestCharacterInventory();
+	AOLIB_OBJECT std::list<inventory_entry_t>* N3Msg_RequestClothInventory(const identity_t &);
+	AOLIB_OBJECT std::list<inventory_entry_t>* N3Msg_RequestImplantInventory(const identity_t &);
+	AOLIB_OBJECT std::list<inventory_entry_t>* N3Msg_RequestSocialInventory(const identity_t &);
+	AOLIB_OBJECT std::list<inventory_entry_t>* N3Msg_RequestWeaponInventory(const identity_t &);
 	AOLIB_OBJECT bool N3Msg_SecondarySpecialAttack(const identity_t &, DWORD);
 	AOLIB_OBJECT void N3Msg_SelectedTarget(const identity_t&);
 	AOLIB_OBJECT void N3Msg_SendPetCommand(DWORD, const identity_t &, DWORD, DWORD, PCSTR); // 0, PetIdentity&, PetCommand_e, 0, nullptr
@@ -194,6 +194,7 @@ public:
 
 
 	private:
+	// ReSharper disable once CppUninitializedNonStaticDataMember
 	n3_engine_client_anarchy_t n3_engine_client_anarchy_;
 
 

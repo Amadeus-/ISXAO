@@ -5,7 +5,7 @@ class SpecialActionHolder
 public:
 	AOLIB_OBJECT DWORD BuildLSSpecialActions(LSIndex*) const;
 	AOLIB_OBJECT DWORD GetLockIdMap(std::map<DWORD, DWORD> &m) const;
-	AOLIB_OBJECT SPECIALACTIONHOLDER GetSpecialActionHolderData() const;
+	AOLIB_OBJECT special_action_holder_t GetSpecialActionHolderData() const;
 	AOLIB_OBJECT DWORD GetSpecialActions(std::vector<SpecialActionTemplate>&) const;
 	AOLIB_OBJECT DWORD GetSpecialActions(std::vector<SpecialActionTemplate*>&) const;
 	AOLIB_OBJECT SpecialActionTemplate* GetSpecialAction(PCHAR) const;
@@ -15,5 +15,5 @@ public:
 	AOLIB_OBJECT identity_t GetSpecialActionTarget() const;
 	AOLIB_OBJECT ActionLock* GetActionLock(SpecialActionTemplate*) const;	
 private:
-	SPECIALACTIONHOLDER special_action_holder_;
+	special_action_holder_t special_action_holder_;
 };

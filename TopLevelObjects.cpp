@@ -60,7 +60,7 @@ bool __cdecl TLO_SELECTIONTARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 		identity_t identity;
 		if (pSelectionIndicator)
 		{
-			auto d = GetDynel(pSelectionIndicator->Identity);
+			auto d = GetDynel(pSelectionIndicator->identity);
 			Dest.Ptr = d;
 			Dest.Type = isxao_utilities::GetRealType(d);
 			return true;
@@ -80,7 +80,7 @@ bool __cdecl TLO_ATTACKTARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 		identity_t identity;
 		if (pAttackingIndicator)
 		{
-			auto d = reinterpret_cast<Dynel*>(GetDynel(pAttackingIndicator->Identity));
+			auto d = reinterpret_cast<Dynel*>(GetDynel(pAttackingIndicator->identity));
 			Dest.Ptr = d;
 			Dest.Type = isxao_utilities::GetRealType(d);
 			return true;
@@ -189,7 +189,7 @@ bool __cdecl TLO_NANOSPELL(int argc, char *argv[], LSTYPEVAR&Dest)
 			char szSearchName[MAX_STRING];
 			strcpy_s(szSearchName, MAX_STRING, argv[0]);
 			_strlwr_s(szSearchName);
-			std::map<DWORD, PNANOITEM> m;
+			std::map<DWORD, p_nano_item_t> m;
 			::GetNanoMap(m);
 			for (auto it = m.begin(); it != m.end(); ++it)
 			{

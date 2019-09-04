@@ -5,7 +5,7 @@ namespace isxao_classes
 
 	DWORD StatHolder::GetSkillLocks(std::vector<ActionLock*> &v) const
 	{
-		std::vector<action_lock_t>* p_skill_lock_vector = GetStatHolderData().pSkillLocks;
+		std::vector<action_lock_t>* p_skill_lock_vector = GetStatHolderData().p_skill_locks;
 		for (auto it = p_skill_lock_vector->begin(); it != p_skill_lock_vector->end(); ++it)
 			v.push_back(reinterpret_cast<ActionLock*>(&(*it)));
 		std::sort(v.begin(), v.end(), ActionLock::pActionLockCompare);
@@ -27,14 +27,14 @@ namespace isxao_classes
 		return nullptr;
 	}
 
-	STATHOLDER StatHolder::GetStatHolderData() const
+	stat_holder_t StatHolder::GetStatHolderData() const
 	{
 		return stat_holder_;
 	}
 
 	DWORD StatHolder::GetStatMap(std::map<DWORD, LONG> &m) const
 	{
-		isxao_utilities::GetStatMap(m, GetStatHolderData().pStatMapDir);
+		isxao_utilities::GetStatMap(m, GetStatHolderData().p_stat_map_dir);
 		return m.size();
 	}
 

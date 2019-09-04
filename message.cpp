@@ -9,7 +9,7 @@ namespace isxao_classes
 
 	DWORD Message::DestIdGet() const
 	{
-		return message_.DestId;
+		return message_.dest_id;
 	}
 
 	PVOID Message::GetData()
@@ -17,7 +17,7 @@ namespace isxao_classes
 		return &message_;
 	}
 
-	MESSAGE Message::GetMessageData() const
+	message_t Message::GetMessageData() const
 	{
 		return message_;
 	}
@@ -43,17 +43,17 @@ namespace isxao_classes
 
 	DWORD Message::MessageTypeGet() const
 	{
-		return message_.MessageType;
+		return message_.message_type;
 	}
 
 	DWORD Message::PriorityGet() const
 	{
-		return message_.Priority;
+		return message_.priority;
 	}
 
 	DWORD Message::SourceIdGet() const
 	{
-		return message_.SourceId;
+		return message_.source_id;
 	}
 
 }

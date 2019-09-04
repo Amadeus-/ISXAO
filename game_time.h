@@ -16,8 +16,8 @@ public:
 	AOLIB_OBJECT double GetDeltaTime() const;
 	AOLIB_OBJECT double GetDuskEnd() const;
 	AOLIB_OBJECT double GetDuskStart() const;
-	AOLIB_OBJECT GAMETIME GetGameTimeData() const;
+	AOLIB_OBJECT game_time_t GetGameTimeData() const;
 	AOLIB_OBJECT double GetNormalTime() const;
 private:
-	GAMETIME game_time_;
+	game_time_t game_time_;
 };

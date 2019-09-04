@@ -22,7 +22,7 @@ public:
 	AOLIB_OBJECT DWORD GetPetCount();
 	AOLIB_OBJECT DWORD GetPetIDs(std::map<identity_t, DWORD>&);
 	AOLIB_OBJECT float GetScale();
-	AOLIB_OBJECT PSIMPLECHAR GetSimpleCharData();
+	AOLIB_OBJECT p_simple_char_t GetSimpleCharData();
 	AOLIB_OBJECT SpellTemplateData* GetSpellTemplateData();
 	AOLIB_OBJECT TeamRaid* GetTeamRaid();
 	AOLIB_OBJECT Vehicle* GetVehicle();

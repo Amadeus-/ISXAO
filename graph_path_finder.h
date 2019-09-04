@@ -15,5 +15,5 @@ public:
 	void SetSpaceForGraph(PVOID);
 	void SetSurface(PVOID);
 //private:
-	GRAPHPATHFINDER graph_path_finder_;
+	graph_path_finder_t graph_path_finder_;
 };

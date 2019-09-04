@@ -5,15 +5,15 @@ namespace isxao_classes
 
 	identity_t TeamEntry::GetIdentity() const
 	{
-		return GetTeamEntryData().Identity;
+		return GetTeamEntryData().identity;
 	}
 
 	PCSTR TeamEntry::GetName() const
 	{
-		return GetTeamEntryData().Name.c_str();
+		return GetTeamEntryData().name.c_str();
 	}
 
-	TEAMENTRY TeamEntry::GetTeamEntryData() const
+	team_entry_t TeamEntry::GetTeamEntryData() const
 	{
 		return team_entry_;
 	}

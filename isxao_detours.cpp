@@ -373,15 +373,15 @@ namespace isxao_detours
 
 #pragma region ChatGUIModule Message Handling
 
-	DETOUR_TRAMPOLINE_EMPTY(void AODetours::ChatGUIModule_c__HandleGroupAction_Trampoline(PPPJCLIENTGROUPACTION));
+	DETOUR_TRAMPOLINE_EMPTY(void AODetours::ChatGUIModule_c__HandleGroupAction_Trampoline(p_ppj_client_group_action_t));
 
-	void AODetours::ChatGUIModule_c__HandleGroupAction_Detour(PPPJCLIENTGROUPACTION m)
+	void AODetours::ChatGUIModule_c__HandleGroupAction_Detour(p_ppj_client_group_action_t m)
 	{
 		if(GetGameState() == GAMESTATE_IN_GAME)
 		{
 /*			FILE * pFILE;
 			char buffer[MAX_STRING];
-			sprintf_s(buffer, "Group Action:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n", m->unknown_0x4, m->Unknown0x8, m->String1.c_str(), m->unknown_0x28, m->unknown_0x2C, m->unknown_0x30, m->Unknown0x34, m->Unknown0x38, m->Unknown0x3C, m->Unknown0x40, m->unknown_0x44);
+			sprintf_s(buffer, "Group Action:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n", m->unknown_0x4, m->Unknown0x8, m->String1.c_str(), m->unknown_0x28, m->unknown_0x2C, m->unknown_0x30, m->Unknown0x34, m->Unknown0x38, m->Unknown0x3C, m->unknown_0x40, m->unknown_0x44);
 			fopen_s(&pFILE, "messages.txt", "a");
 			fputs(buffer, pFILE);
 			fclose(pFILE);	*/		
@@ -389,27 +389,27 @@ namespace isxao_detours
 		ChatGUIModule_c__HandleGroupAction_Trampoline(m);
 	}
 
-	DETOUR_TRAMPOLINE_EMPTY(void AODetours::ChatGUIModule_c__HandleGroupMessage_Trampoline(PPPJCLIENTGROUPMESSAGE));
+	DETOUR_TRAMPOLINE_EMPTY(void AODetours::ChatGUIModule_c__HandleGroupMessage_Trampoline(p_ppj_group_message_t));
 
-	void AODetours::ChatGUIModule_c__HandleGroupMessage_Detour(PPPJCLIENTGROUPMESSAGE m)
+	void AODetours::ChatGUIModule_c__HandleGroupMessage_Detour(p_ppj_group_message_t m)
 	{
 		if(GetGameState() == GAMESTATE_IN_GAME)
 		{
-			PGROUPMESSAGEINFO group_message_info = new GROUPMESSAGEINFO(m->SenderId, m->Sender, m->ChannelName, m->Message);
+			PGROUPMESSAGEINFO group_message_info = new GROUPMESSAGEINFO(m->sender_id, m->sender, m->channel_name, m->message);
 			g_group_message_queue.push(group_message_info);
 		}
 		ChatGUIModule_c__HandleGroupMessage_Trampoline(m);
 	}
 	
-	DETOUR_TRAMPOLINE_EMPTY(void AODetours::ChatGUIModule_c__HandlePrivateGroupAction_Trampoline(PPPJCLIENTPRIVATEGROUPACTION));
+	DETOUR_TRAMPOLINE_EMPTY(void AODetours::ChatGUIModule_c__HandlePrivateGroupAction_Trampoline(p_ppj_client_private_group_action_t));
 
-	void AODetours::ChatGUIModule_c__HandlePrivateGroupAction_Detour(PPPJCLIENTPRIVATEGROUPACTION m)
+	void AODetours::ChatGUIModule_c__HandlePrivateGroupAction_Detour(p_ppj_client_private_group_action_t m)
 	{
 		if(GetGameState() == GAMESTATE_IN_GAME)
 		{
 			//FILE * pFILE;
 			//char buffer[MAX_STRING];
-			//sprintf_s(buffer, "PrivateGroupAction Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%s\n", m->unknown_0x04, m->Unknown0x08, m->String1.c_str(), m->unknown_0x28, m->unknown_0x2C, m->String2.c_str());
+			//sprintf_s(buffer, "PrivateGroupAction Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%s\n", m->unknown_0x04, m->unknown_0x08, m->String1.c_str(), m->unknown_0x28, m->unknown_0x2C, m->String2.c_str());
 			//fopen_s(&pFILE, "messages.txt", "a");
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);
@@ -417,9 +417,9 @@ namespace isxao_detours
 		ChatGUIModule_c__HandlePrivateGroupAction_Trampoline(m);
 	}
 
-	DETOUR_TRAMPOLINE_EMPTY(void AODetours::ChatGUIModule_c__HandlePrivateMessage_Trampoline(PPPJCLIENTPRIVATEMESSAGE));
+	DETOUR_TRAMPOLINE_EMPTY(void AODetours::ChatGUIModule_c__HandlePrivateMessage_Trampoline(p_ppj_client_private_message_t));
 
-	void AODetours::ChatGUIModule_c__HandlePrivateMessage_Detour(PPPJCLIENTPRIVATEMESSAGE m)
+	void AODetours::ChatGUIModule_c__HandlePrivateMessage_Detour(p_ppj_client_private_message_t m)
 	{
 		if(GetGameState() == GAMESTATE_IN_GAME)
 		{
@@ -430,15 +430,15 @@ namespace isxao_detours
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);
 
-			PPRIVATEMESSAGEINFO private_message_info = new PRIVATEMESSAGEINFO(m->SenderId, m->Sender, m->Message);
+			PPRIVATEMESSAGEINFO private_message_info = new PRIVATEMESSAGEINFO(m->sender_id, m->sender, m->message);
 			g_private_message_queue.push(private_message_info);
 		}
 		ChatGUIModule_c__HandlePrivateMessage_Trampoline(m);
 	}
 
-	DETOUR_TRAMPOLINE_EMPTY(void AODetours::ChatGUIModule_c__HandleSystemMessage_Trampoline(PPPJCLIENTSYSTEMMESSAGE));
+	DETOUR_TRAMPOLINE_EMPTY(void AODetours::ChatGUIModule_c__HandleSystemMessage_Trampoline(p_ppj_client_system_message_t));
 
-	void AODetours::ChatGUIModule_c__HandleSystemMessage_Detour(PPPJCLIENTSYSTEMMESSAGE m)
+	void AODetours::ChatGUIModule_c__HandleSystemMessage_Detour(p_ppj_client_system_message_t m)
 	{
 		if(GetGameState() == GAMESTATE_IN_GAME)
 		{
@@ -452,9 +452,9 @@ namespace isxao_detours
 		ChatGUIModule_c__HandleSystemMessage_Trampoline(m);
 	}
 
-	DETOUR_TRAMPOLINE_EMPTY(void AODetours::ChatGUIModule_c__HandleVicinityMessage_Trampoline(PPPJCLIENTVICINITYMESSAGE));
+	DETOUR_TRAMPOLINE_EMPTY(void AODetours::ChatGUIModule_c__HandleVicinityMessage_Trampoline(p_ppj_client_vicinity_message_t));
 
-	void AODetours::ChatGUIModule_c__HandleVicinityMessage_Detour(PPPJCLIENTVICINITYMESSAGE m)
+	void AODetours::ChatGUIModule_c__HandleVicinityMessage_Detour(p_ppj_client_vicinity_message_t m)
 	{
 		if (GetGameState() == GAMESTATE_IN_GAME)
 		{
@@ -476,7 +476,7 @@ namespace isxao_detours
 			//char *argv[] = { sender, message, id };
 			//pISInterface->ExecuteEvent(GetEventId("AO_onVicinityMessageReceived"), 0, 3, argv);
 			//delete argv;
-			PPRIVATEMESSAGEINFO vicintity_message_info = new PRIVATEMESSAGEINFO(m->SenderId, m->Sender, m->Message);
+			PPRIVATEMESSAGEINFO vicintity_message_info = new PRIVATEMESSAGEINFO(m->sender_id, m->sender, m->message);
 			g_vicinity_message_queue.push(vicintity_message_info);
 		}
 		ChatGUIModule_c__HandleVicinityMessage_Trampoline(m);

@@ -107,7 +107,7 @@ namespace isxao_classes
 	{
 		if (index < 0 || index > 5)
 			return 0;
-		auto team_entry_vector = GetTeamRaidData().pTeamList[index];
+		auto team_entry_vector = GetTeamRaidData().p_team_list[index];
 		for (auto it = team_entry_vector->begin(); it != team_entry_vector->end(); ++it)
 		{
 			auto entry = reinterpret_cast<TeamEntry*>(*it);
@@ -153,27 +153,27 @@ namespace isxao_classes
 
 	identity_t TeamRaid::GetTeamIdentity() const
 	{
-		return GetTeamRaidData().TeamIdentity;
+		return GetTeamRaidData().team_identity;
 	}
 
 	identity_t TeamRaid::GetTeamLeaderID() const
 	{
-		return GetTeamRaidData().TeamLeaderIdentity;
+		return GetTeamRaidData().team_leader_identity;
 	}
 
-	TEAMRAIDHOLDER TeamRaid::GetTeamRaidData() const
+	team_raid_holder_t TeamRaid::GetTeamRaidData() const
 	{
 		return team_raid_holder_;
 	}
 
 	DWORD TeamRaid::GetTeamRaidIndex() const
 	{
-		return GetTeamRaidData().RaidTeamIndex;
+		return GetTeamRaidData().raid_team_index;
 	}
 
 	bool TeamRaid::IsRaid() const
 	{
-		return GetTeamRaidData().RaidTeamIndex != -1;
+		return GetTeamRaidData().raid_team_index != -1;
 	}
 
 }

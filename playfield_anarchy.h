@@ -7,17 +7,17 @@ public:
 	AOLIB_OBJECT LONG GetPFWorldXPos() const;
 	AOLIB_OBJECT LONG GetPFWorldZPos() const;
 	AOLIB_OBJECT DWORD GetPlayfieldActors(std::vector<Actor*> &v);
-	AOLIB_OBJECT PLAYFIELDANARCHY GetPlayfieldData() const;
+	AOLIB_OBJECT playfield_anarchy_t GetPlayfieldData() const;
 	AOLIB_OBJECT DWORD GetPlayfieldInstance() const;
 	AOLIB_OBJECT PCSTR GetPlayfieldName() const;
 	AOLIB_OBJECT float GetSizeX() const;
 	AOLIB_OBJECT float GetSizeZ() const;
 	AOLIB_OBJECT bool IsDungeon() const;
 	AOLIB_OBJECT bool LineOfSight(const vector3_t &, const vector3_t &, int, bool);
-	AOLIB_OBJECT PGRIDSPACE GetGridSpace() const;
+	AOLIB_OBJECT p_grid_space_t GetGridSpace() const;
 	AOLIB_OBJECT p_n3_tile_map_surface_t GetTilemapSurface() const;
 private:
-	PLAYFIELDANARCHY playfield_anarchy_;
+	playfield_anarchy_t playfield_anarchy_;
 };
 
 class PlayfieldDir
@@ -25,5 +25,5 @@ class PlayfieldDir
 public:
 	PlayfieldAnarchy* GetPlayfield() const;
 private:
-	PLAYFIELDDIR playfield_dir_;
+	playfield_dir_t playfield_dir_;
 };

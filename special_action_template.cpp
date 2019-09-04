@@ -5,17 +5,17 @@ namespace isxao_classes
 
 	identity_t SpecialActionTemplate::GetIdentity() const
 	{
-		return GetSpecialActionData().Identity;
+		return GetSpecialActionData().identity;
 	}
 
 	DWORD SpecialActionTemplate::GetLockedSkillId1() const
 	{
-		return special_action_.LockedSkillId1;
+		return special_action_.locked_skill_id1;
 	}
 
 	DWORD SpecialActionTemplate::GetLockedSkillId2() const
 	{
-		return special_action_.LockedSkillId2;
+		return special_action_.locked_skill_id2;
 	}
 
 	DWORD SpecialActionTemplate::GetLockoutTimeRemaining() const
@@ -42,7 +42,7 @@ namespace isxao_classes
 		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName(GetIdentity(), dummy_identity);
 	}
 
-	SPECIALACTION SpecialActionTemplate::GetSpecialActionData() const
+	special_action_t SpecialActionTemplate::GetSpecialActionData() const
 	{
 		return special_action_;
 	}
@@ -57,12 +57,12 @@ namespace isxao_classes
 
 	identity_t SpecialActionTemplate::GetWeaponIdentity() const
 	{
-		return GetSpecialActionData().WeaponIdentity;
+		return GetSpecialActionData().weapon_identity;
 	}
 
 	bool SpecialActionTemplate::IsLocked() const
 	{
-		return GetSpecialActionData().IsLocked != 0;;
+		return GetSpecialActionData().is_locked != 0;;
 	}
 
 	double SpecialActionTemplate::GetSpecialActionProgress(DWORD &a, DWORD &b) const

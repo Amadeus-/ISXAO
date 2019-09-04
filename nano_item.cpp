@@ -26,7 +26,7 @@ namespace isxao_classes
 	void NanoItem::Cast()
 	{
 		if(pSelectionIndicator)
-			P_ENGINE_CLIENT_ANARCHY->get_client_char()->CastNanoSpell(GetNanoIdentity(), pSelectionIndicator->Identity);
+			P_ENGINE_CLIENT_ANARCHY->get_client_char()->CastNanoSpell(GetNanoIdentity(), pSelectionIndicator->identity);
 	}
 
 	float NanoItem::GetAttackDelay()
@@ -54,7 +54,7 @@ namespace isxao_classes
 
 	DWORD NanoItem::GetFormulaRadius()
 	{
-		return GetNanoItemData()->Radius;
+		return GetNanoItemData()->radius;
 	}
 
 	DWORD NanoItem::GetNanoCanFlags()
@@ -64,12 +64,12 @@ namespace isxao_classes
 
 	identity_t NanoItem::GetNanoIdentity()
 	{
-		return GetNanoItemData()->NanoIdentity;
+		return GetNanoItemData()->nano_identity;
 	}
 
-	PNANOITEM NanoItem::GetNanoItemData()
+	p_nano_item_t NanoItem::GetNanoItemData()
 	{
-		return PNANOITEM(GetData());
+		return p_nano_item_t(GetData());
 	}
 
 	DWORD NanoItem::GetNCUCost()
@@ -131,7 +131,7 @@ namespace isxao_classes
 
 	bool NanoItem::IsNanoSelfOnly()
 	{
-		return GetNanoItemData()->IsNanoSelfOnly == 1;
+		return GetNanoItemData()->is_nano_self_only == 1;
 	}
 
 	bool NanoItem::IsNoResistCannotFumble()

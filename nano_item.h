@@ -14,7 +14,7 @@ public:
 	AOLIB_OBJECT double GetFormulaProgress(DWORD&, DWORD&);
 	AOLIB_OBJECT DWORD GetFormulaRadius();
 	AOLIB_OBJECT identity_t GetNanoIdentity();
-	AOLIB_OBJECT PNANOITEM GetNanoItemData();
+	AOLIB_OBJECT p_nano_item_t GetNanoItemData();
 	AOLIB_OBJECT DWORD GetNCUCost();
 	AOLIB_OBJECT DWORD GetNanoPoints();
 	AOLIB_OBJECT DWORD GetNanoSchool();

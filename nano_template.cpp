@@ -5,27 +5,27 @@ namespace isxao_classes
 
 	identity_t NanoTemplate::GetCasterIdentity() const
 	{
-		return GetNanoTemplateData().CasterIdentity;
+		return GetNanoTemplateData().caster_identity;
 	}
 
 	DWORD NanoTemplate::GetDuration() const
 	{
-		return GetNanoTemplateData().Duration;
+		return GetNanoTemplateData().duration;
 	}
 
 	identity_t NanoTemplate::GetNanoIdentity() const
 	{
-		return GetNanoTemplateData().NanoIdentity;
+		return GetNanoTemplateData().nano_identity;
 	}
 
-	NANOTEMPLATE NanoTemplate::GetNanoTemplateData() const
+	nano_template_t NanoTemplate::GetNanoTemplateData() const
 	{
 		return nano_template_;
 	}
 
 	DWORD NanoTemplate::GetStartTime() const
 	{
-		return GetNanoTemplateData().StartTime;
+		return GetNanoTemplateData().start_time;
 	}
 
 	float NanoTemplate::GetTimeRemaining() const

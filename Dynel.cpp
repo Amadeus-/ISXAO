@@ -74,7 +74,7 @@ namespace isxao_classes
 
 	identity_t Dynel::GetIdentity()
 	{
-		return GetDynelData()->Identity;
+		return GetDynelData()->identity;
 	}	
 
 	void Dynel::Interact()
@@ -93,13 +93,13 @@ namespace isxao_classes
 		vector3_t offset_client_position = vector3_t::add(client_position, height_offset);
 		vector3_t dynel_position = GetPosition();
 		vector3_t offset_dynel_position = vector3_t::add(dynel_position, height_offset);
-		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offset_client_position, offset_dynel_position, GetDynelData()->pVehicle->ZoneInstanceID, false);
+		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offset_client_position, offset_dynel_position, GetDynelData()->p_vehicle->zone_instance_id, false);
 	}
 
 	bool Dynel::IsInLineOfSight(vector3_t &position)
 	{
 		vector3_t me = GetPosition();
-		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(position, me, GetDynelData()->pVehicle->ZoneInstanceID, false);
+		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(position, me, GetDynelData()->p_vehicle->zone_instance_id, false);
 	}
 	
 	PCSTR Dynel::GetName()
@@ -111,16 +111,16 @@ namespace isxao_classes
 
 	vector3_t Dynel::GetPosition()
 	{
-		if (GetDynelData()->pVehicle->pParentVehicle == nullptr)
-			return GetDynelData()->pVehicle->GlobalPos;
-		return GetDynelData()->pVehicle->ParentGlobalPos;
+		if (GetDynelData()->p_vehicle->p_parent_vehicle == nullptr)
+			return GetDynelData()->p_vehicle->global_pos;
+		return GetDynelData()->p_vehicle->parent_global_pos;
 	}
 
 	quaternion_t Dynel::GetRotation()
 	{
-		if (GetDynelData()->pVehicle->pParentVehicle == nullptr)
-			return GetDynelData()->pVehicle->BodyRot;
-		return GetDynelData()->pVehicle->ParentBodyRot;
+		if (GetDynelData()->p_vehicle->p_parent_vehicle == nullptr)
+			return GetDynelData()->p_vehicle->body_rot;
+		return GetDynelData()->p_vehicle->parent_body_rot;
 	}
 
 	LONG Dynel::GetSkill(DWORD stat)

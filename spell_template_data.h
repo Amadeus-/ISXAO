@@ -9,8 +9,8 @@ public:
 	AOLIB_OBJECT DWORD GetNanoBeingCast() const;
 	AOLIB_OBJECT DWORD GetNanoSpellList(std::vector<DWORD>&) const;
 	AOLIB_OBJECT DWORD GetNanoTemplateList(std::vector<NanoTemplate>&) const;
-	AOLIB_OBJECT SPELLTEMPLATEDATA GetSpellTemplateDataData() const;
+	AOLIB_OBJECT spell_template_data_t GetSpellTemplateDataData() const;
 	AOLIB_OBJECT bool IsCasting() const;
 private:
-	SPELLTEMPLATEDATA spell_template_data_;
+	spell_template_data_t spell_template_data_;
 };

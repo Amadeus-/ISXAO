@@ -5,7 +5,7 @@ namespace isxao_classes
 
 	DWORD Actor::BuildLSNCU(LSIndex* pIndex)
 	{
-		auto l = GetSpellTemplateData()->GetSpellTemplateDataData().NanoTemplateList;
+		auto l = GetSpellTemplateData()->GetSpellTemplateDataData().nano_template_list;
 		for (auto it = l.begin(); it != l.end(); ++it)
 		{
 			auto pNanoTemplate = reinterpret_cast<NanoTemplate*>(&(*it));
@@ -200,22 +200,22 @@ namespace isxao_classes
 
 	SpellTemplateData* Actor::GetSpellTemplateData()
 	{
-		return reinterpret_cast<SpellTemplateData*>(GetSimpleCharData()->pSpellTemplateData);
+		return reinterpret_cast<SpellTemplateData*>(GetSimpleCharData()->p_spell_template_data);
 	}
 
 	float Actor::GetScale()
 	{
-		return GetSimpleCharData()->BodyScale;
+		return GetSimpleCharData()->body_scale;
 	}
 
-	PSIMPLECHAR Actor::GetSimpleCharData()
+	p_simple_char_t Actor::GetSimpleCharData()
 	{
-		return PSIMPLECHAR(GetData());
+		return p_simple_char_t(GetData());
 	}
 
 	Vehicle* Actor::GetVehicle()
 	{
-		return reinterpret_cast<Vehicle*>(GetSimpleCharData()->pVehicle);
+		return reinterpret_cast<Vehicle*>(GetSimpleCharData()->p_vehicle);
 	}
 
 	bool Actor::IsBackingUp()
@@ -230,13 +230,13 @@ namespace isxao_classes
 
 	bool Actor::IsFighting()
 	{
-		return GetSimpleCharData()->pWeaponHolder->IsAttacking != 1;
+		return GetSimpleCharData()->p_weapon_holder->is_attacking != 1;
 
 	}
 
 	bool Actor::IsFightingMe()
 	{
-		return IsClientId(GetSimpleCharData()->pWeaponHolder->WeaponTargetIdentity.id);
+		return IsClientId(GetSimpleCharData()->p_weapon_holder->weapon_target_identity.id);
 	}
 
 	bool Actor::IsIdle()
@@ -278,7 +278,7 @@ namespace isxao_classes
 
 	bool Actor::IsInvis()
 	{
-		return !(GetSimpleCharData()->IsVisible);
+		return !(GetSimpleCharData()->is_visible);
 	}
 
 	bool Actor::IsKOS()
@@ -293,7 +293,7 @@ namespace isxao_classes
 
 	bool Actor::IsNPC()
 	{
-		return GetSimpleCharData()->IsNPC == 1;
+		return GetSimpleCharData()->is_npc == 1;
 	}
 
 	bool Actor::IsStrafingLeft()
@@ -403,7 +403,7 @@ namespace isxao_classes
 			}
 			return pet_map.size();
 		}
-		isxao_utilities::GetPetMap(m, ToCharacter()->GetNPCHolder()->GetNPCHolderData().pPetDir);
+		isxao_utilities::GetPetMap(m, ToCharacter()->GetNPCHolder()->GetNPCHolderData().p_pet_dir);
 		return m.size();
 	}
 
@@ -412,7 +412,7 @@ namespace isxao_classes
 		if(IsCharacter())
 		{
 			std::map <identity_t, DWORD> pet_map;
-			isxao_utilities::GetPetMap(pet_map, ToCharacter()->GetNPCHolder()->GetNPCHolderData().pPetDir);
+			isxao_utilities::GetPetMap(pet_map, ToCharacter()->GetNPCHolder()->GetNPCHolderData().p_pet_dir);
 			if (pet_map.size() == 0)
 				return false;
 			return true;
@@ -438,13 +438,13 @@ namespace isxao_classes
 	TeamRaid* Actor::GetTeamRaid()
 	{
 		if(IsPlayer())
-			return reinterpret_cast<TeamRaid*>(GetSimpleCharData()->pTeamRaidInfo);
+			return reinterpret_cast<TeamRaid*>(GetSimpleCharData()->p_team_raid_info);
 		return nullptr;
 	}
 
 	WeaponHolder* Actor::GetWeaponHolder()
 	{
-		return reinterpret_cast<WeaponHolder*>(GetSimpleCharData()->pWeaponHolder);
+		return reinterpret_cast<WeaponHolder*>(GetSimpleCharData()->p_weapon_holder);
 	}
 
 	void Actor::Kick()

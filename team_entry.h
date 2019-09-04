@@ -5,7 +5,7 @@ class TeamEntry
 public:
 	AOLIB_OBJECT PCSTR GetName() const;
 	AOLIB_OBJECT identity_t GetIdentity() const;
-	AOLIB_OBJECT TEAMENTRY GetTeamEntryData() const;
+	AOLIB_OBJECT team_entry_t GetTeamEntryData() const;
 private:
-	TEAMENTRY team_entry_;
+	team_entry_t team_entry_;
 };

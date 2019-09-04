@@ -72,7 +72,7 @@ namespace isxao_globals
 
 		// Instances
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(n3_dynel_t__get_dynel, n3_dynel_t__m_pc_dynel_dir_instance);
-		pp_dynel_dir = reinterpret_cast<DYNELDIR**>(n3_dynel_t__m_pc_dynel_dir_instance);
+		pp_dynel_dir = reinterpret_cast<dynel_dir_t**>(n3_dynel_t__m_pc_dynel_dir_instance);
 
 		// Functions
 		GET_FUNCTION_ADDRESS(n3, n3_engine_t__n3_engine_t);		
@@ -114,7 +114,7 @@ namespace isxao_globals
 
 		// Instances
 		n3_engine_client_anarchy_t__m_pc_instance = n3_engine_t__m_pc_instance;
-		pp_engine_client_anarchy = reinterpret_cast<EngineClientAnarchy**>(n3_engine_client_anarchy_t__m_pc_instance);
+		pp_engine_client_anarchy = reinterpret_cast<engine_client_anarchy**>(n3_engine_client_anarchy_t__m_pc_instance);
 
 #pragma endregion
 
@@ -139,7 +139,7 @@ namespace isxao_globals
 //#endif
 //#ifdef m_cStatNameDir_x
 //		m_cStatNameDir = m_cStatNameDir_x + gamecode_module_handle;
-//		StatNameDir = (*reinterpret_cast<STATNAMEDIR*>(m_cStatNameDir));
+//		StatNameDir = (*reinterpret_cast<stat_name_dir_t*>(m_cStatNameDir));
 //		pStatNameDir = &StatNameDir;
 //#endif
 //#ifdef __RequestInfo_x
@@ -749,14 +749,14 @@ namespace isxao_globals
 //#endif
 //#ifdef 	NanoItemManager_t__m_pcInstance_x
 //		NanoItemManager_t__m_pcInstance = NanoItemManager_t__m_pcInstance_x + gamecode_module_handle;
-//		ppNanoItemDir = reinterpret_cast<NANOITEMDIR**>(NanoItemManager_t__m_pcInstance);
+//		ppNanoItemDir = reinterpret_cast<nano_item_dir_t**>(NanoItemManager_t__m_pcInstance);
 //#endif
 //#ifdef __GetNanoItem_x
 //		NanoItem_t__GetNanoItem = __GetNanoItem_x + gamecode_module_handle;
 //#endif
 //#ifdef StaticItemManager_t_mppcInstance_x
 //		StaticItemManager_t_mppcInstance = StaticItemManager_t_mppcInstance_x + gamecode_module_handle;
-//		pppStaticItemVector = reinterpret_cast<std::vector<STATICITEM>***>(StaticItemManager_t_mppcInstance);
+//		pppStaticItemVector = reinterpret_cast<std::vector<static_item_t>***>(StaticItemManager_t_mppcInstance);
 //#endif
 //
 //#pragma endregion
@@ -765,7 +765,7 @@ namespace isxao_globals
 //
 //#ifdef n3Dynel_t__m_pcDynelDir_x
 //		n3_dynel_t__m_pc_dynel_dir_instance = n3Dynel_t__m_pcDynelDir_x + n3_module_handle;
-//		pp_dynel_dir = reinterpret_cast<DYNELDIR**>(n3_dynel_t__m_pc_dynel_dir_instance);
+//		pp_dynel_dir = reinterpret_cast<dynel_dir_t**>(n3_dynel_t__m_pc_dynel_dir_instance);
 //#endif
 //
 //#ifdef n3Dynel_t__SendIIRToObservers_x
@@ -891,11 +891,11 @@ namespace isxao_globals
 //
 //#ifdef TargetingModule_t__m_pcSelectionIndicator_x
 //		TargetingModule_t__m_pcSelectionIndicator = TargetingModule_t__m_pcSelectionIndicator_x + hGUI;
-//		ppSelectionIndicator = reinterpret_cast<INDICATOR**>(TargetingModule_t__m_pcSelectionIndicator);
+//		ppSelectionIndicator = reinterpret_cast<indicator_t**>(TargetingModule_t__m_pcSelectionIndicator);
 //#endif
 //#ifdef TargetingModule_t__m_pcAttackingIndicator_x
 //		TargetingModule_t__m_pcAttackingIndicator = TargetingModule_t__m_pcAttackingIndicator_x + hGUI;
-//		ppAttackingIndicator = reinterpret_cast<INDICATOR**>(TargetingModule_t__m_pcAttackingIndicator);
+//		ppAttackingIndicator = reinterpret_cast<indicator_t**>(TargetingModule_t__m_pcAttackingIndicator);
 //#endif
 //#ifdef TargetingModule_t__m_cLastTarget_x
 //		TargetingModule_t__m_cLastTarget = TargetingModule_t__m_cLastTarget_x + hGUI;
@@ -1084,7 +1084,7 @@ namespace isxao_globals
 //
 //#ifdef LoginModule_c__m_pcInstance_x
 //		LoginModule_c__m_pcInstance = LoginModule_c__m_pcInstance_x + hGUI;
-//		ppLoginModule = reinterpret_cast<LOGINMODULE**>(LoginModule_c__m_pcInstance);
+//		ppLoginModule = reinterpret_cast<login_module_t**>(LoginModule_c__m_pcInstance);
 //#endif
 //
 //#pragma endregion
@@ -1250,8 +1250,8 @@ namespace isxao_globals
 	DWORD __N3Msg_GetFullPerkMap = 0;
 	DWORD __SetTarget = 0;
 	DWORD m_cStatNameDir = 0;
-	STATNAMEDIR StatNameDir;
-	STATNAMEDIR *pStatNameDir = nullptr;
+	stat_name_dir_t StatNameDir;
+	stat_name_dir_t *pStatNameDir = nullptr;
 	DWORD __RequestInfo = 0;
 	DWORD __StatToString = 0;
 
@@ -1270,7 +1270,7 @@ namespace isxao_globals
 
 	// Instances
 	DWORD n3_engine_client_anarchy_t__m_pc_instance = 0;
-	EngineClientAnarchy **pp_engine_client_anarchy = nullptr;
+	engine_client_anarchy **pp_engine_client_anarchy = nullptr;
 
 #pragma endregion
 
@@ -1291,7 +1291,7 @@ namespace isxao_globals
 
 	// Instances
 	DWORD n3_dynel_t__m_pc_dynel_dir_instance = 0;
-	DYNELDIR **pp_dynel_dir = nullptr;
+	dynel_dir_t **pp_dynel_dir = nullptr;
 
 	// Functions
 	DWORD n3_engine_t__n3_engine_t = 0;
@@ -1524,10 +1524,10 @@ namespace isxao_globals
 	DWORD ItemManager_t__m_ppcInstance = 0;
 	std::vector<acg_game_item_t> ***pppItemVector = nullptr;
 	DWORD NanoItemManager_t__m_pcInstance = 0;
-	NANOITEMDIR **ppNanoItemDir = nullptr;
+	nano_item_dir_t **ppNanoItemDir = nullptr;
 	DWORD NanoItem_t__GetNanoItem = 0;
 	DWORD StaticItemManager_t_mppcInstance;
-	std::vector<STATICITEM> ***pppStaticItemVector = nullptr;
+	std::vector<static_item_t> ***pppStaticItemVector = nullptr;
 	
 
 #pragma endregion
@@ -1582,9 +1582,9 @@ namespace isxao_globals
 	DWORD TargetingModule_t__m_pcInstance = 0;
 	TargetingModule** ppTargetingModule = nullptr;
 	DWORD TargetingModule_t__m_pcSelectionIndicator = 0;
-	INDICATOR** ppSelectionIndicator = nullptr;
+	indicator_t** ppSelectionIndicator = nullptr;
 	DWORD TargetingModule_t__m_pcAttackingIndicator = 0;
-	INDICATOR** ppAttackingIndicator = nullptr;
+	indicator_t** ppAttackingIndicator = nullptr;
 	DWORD TargetingModule_t__m_cLastTarget = 0;
 	identity_t* pLastTarget = nullptr;
 	DWORD TargetingModule_t__RemoveTarget = 0;
@@ -1700,7 +1700,7 @@ namespace isxao_globals
 #pragma region LoginModule
 
 	DWORD LoginModule_c__m_pcInstance = 0;
-	LOGINMODULE** ppLoginModule = nullptr;
+	login_module_t** ppLoginModule = nullptr;
 
 #pragma endregion
 

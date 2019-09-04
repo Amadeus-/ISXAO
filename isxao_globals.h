@@ -35,7 +35,7 @@ namespace isxao_globals
 
 	// Instances
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__m_pc_instance;
-	AOLIB_VAR EngineClientAnarchy **pp_engine_client_anarchy;
+	AOLIB_VAR engine_client_anarchy **pp_engine_client_anarchy;
 #define P_ENGINE_CLIENT_ANARCHY (*pp_engine_client_anarchy)  // NOLINT(cppcoreguidelines-macro-usage)
 
 #pragma endregion
@@ -57,7 +57,7 @@ namespace isxao_globals
 
 	// Instances
 	AOLIB_VAR DWORD n3_dynel_t__m_pc_dynel_dir_instance;
-	AOLIB_VAR DYNELDIR **pp_dynel_dir;
+	AOLIB_VAR dynel_dir_t **pp_dynel_dir;
 #define P_DYNEL_DIR (*pp_dynel_dir)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	// Functions
@@ -95,8 +95,8 @@ namespace isxao_globals
 	AOLIB_VAR DWORD __N3Msg_GetFullPerkMap;
 	AOLIB_VAR DWORD __SetTarget;
 	AOLIB_VAR DWORD m_cStatNameDir;
-	AOLIB_VAR STATNAMEDIR StatNameDir;
-	AOLIB_VAR STATNAMEDIR *pStatNameDir;
+	AOLIB_VAR stat_name_dir_t StatNameDir;
+	AOLIB_VAR stat_name_dir_t *pStatNameDir;
 	AOLIB_VAR DWORD __RequestInfo;
 	AOLIB_VAR DWORD __StatToString;
 
@@ -307,12 +307,12 @@ namespace isxao_globals
 #define pItemVector (**pppItemVector)
 	// NanoMap Instance
 	AOLIB_VAR DWORD NanoItemManager_t__m_pcInstance;
-	AOLIB_VAR NANOITEMDIR **ppNanoItemDir;
+	AOLIB_VAR nano_item_dir_t **ppNanoItemDir;
 #define pNanoItemDir (*ppNanoItemDir)
 	AOLIB_VAR DWORD NanoItem_t__GetNanoItem;
 	// Action Item Manager
 	AOLIB_VAR DWORD StaticItemManager_t_mppcInstance;
-	AOLIB_VAR std::vector<STATICITEM> ***pppStaticItemVector;
+	AOLIB_VAR std::vector<static_item_t> ***pppStaticItemVector;
 #define pStaticItemVector (**pppStaticItemVector)
 	
 #pragma endregion
@@ -368,10 +368,10 @@ namespace isxao_globals
 	AOLIB_VAR TargetingModule** ppTargetingModule;
 #define pTargetingModule (*ppTargetingModule)
 	AOLIB_VAR DWORD TargetingModule_t__m_pcSelectionIndicator;
-	AOLIB_VAR INDICATOR** ppSelectionIndicator;
+	AOLIB_VAR indicator_t** ppSelectionIndicator;
 #define pSelectionIndicator (*ppSelectionIndicator)
 	AOLIB_VAR DWORD TargetingModule_t__m_pcAttackingIndicator;
-	AOLIB_VAR INDICATOR** ppAttackingIndicator;
+	AOLIB_VAR indicator_t** ppAttackingIndicator;
 #define pAttackingIndicator (*ppAttackingIndicator)
 	AOLIB_VAR DWORD TargetingModule_t__m_cLastTarget;
 	AOLIB_VAR identity_t* pLastTarget;
@@ -492,7 +492,7 @@ namespace isxao_globals
 #pragma region LoginModule
 
 	AOLIB_VAR DWORD LoginModule_c__m_pcInstance;
-	AOLIB_VAR LOGINMODULE** ppLoginModule;
+	AOLIB_VAR login_module_t** ppLoginModule;
 #define pLoginModule (*ppLoginModule)
 
 #pragma endregion

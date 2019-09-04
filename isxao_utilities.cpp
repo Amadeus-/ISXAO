@@ -156,7 +156,7 @@ namespace isxao_utilities
 	FUNCTION_AT_ADDRESS(Actor* __cdecl GetActor(const identity_t &), n3_dynel_t__get_dynel);
 
 #ifdef __GetNanoItem_x
-	FUNCTION_AT_ADDRESS(PNANOITEM __cdecl GetNanoItem(DWORD), __GetNanoItem);
+	FUNCTION_AT_ADDRESS(p_nano_item_t __cdecl GetNanoItem(DWORD), __GetNanoItem);
 #endif
 
 #ifdef __GetFullPerkMap_x
@@ -165,9 +165,9 @@ namespace isxao_utilities
 
 	bool IsValidDynel(p_n3_dynel_t pDynel)
 	{
-		if (pDynel && pDynel->pvTable)
+		if (pDynel && pDynel->p_v_table)
 		{
-			auto d = DWORD(pDynel->pvTable);
+			auto d = DWORD(pDynel->p_v_table);
 			if (d < DWORD(gamecode_module_handle) || d > DWORD(gamecode_module_handle + GetModuleInfo("Gamecode.dll").SizeOfImage))
 				return false;
 			if (d == AccessCard_t__vTable || d == CentralController_t__vTable || d == Chest_t__vTable || d == CityTerminal_t__vTable ||
@@ -587,99 +587,99 @@ namespace isxao_utilities
 
 #pragma region Collections
 	
-	void RecursiveAddDynelToDynelMap(std::map<identity_t, p_n3_dynel_t>& m, PDYNELNODE pNode, PDYNELROOT pRoot, DWORD& count)
+	void RecursiveAddDynelToDynelMap(std::map<identity_t, p_n3_dynel_t>& m, p_dynel_node_t pNode, p_dynel_root_t pRoot, DWORD& count)
 	{
-		m.insert_or_assign(pNode->Identity, pNode->pDynel);
+		m.insert_or_assign(pNode->identity, pNode->p_dynel);
 		count--;
-		if (reinterpret_cast<PVOID>(pNode->pLower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddDynelToDynelMap(m, pNode->pLower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->pHigher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddDynelToDynelMap(m, pNode->pHigher, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddDynelToDynelMap(m, pNode->p_lower, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddDynelToDynelMap(m, pNode->p_higher, pRoot, count);
 	}
 
 	void GetDynelMap(std::map<identity_t, p_n3_dynel_t>& m)
 	{
-		auto count = P_DYNEL_DIR->Count;
-		auto pRoot = P_DYNEL_DIR->pRoot;
-		auto pNode = pRoot->pNode;
+		auto count = P_DYNEL_DIR->count;
+		auto pRoot = P_DYNEL_DIR->p_root;
+		auto pNode = pRoot->p_node;
 		if (count > 0)
 			RecursiveAddDynelToDynelMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddPerkToPerkMap(std::map<identity_t, DWORD>& m, PPERKNODE pNode, PPERKROOT pRoot, DWORD& count)
+	void RecursiveAddPerkToPerkMap(std::map<identity_t, DWORD>& m, p_perk_node_t pNode, p_perk_root_t pRoot, DWORD& count)
 	{
-		m.insert_or_assign(pNode->PerkIdentity, pNode->PerkID);
+		m.insert_or_assign(pNode->perk_identity, pNode->perk_id);
 		count--;
-		if (reinterpret_cast<PVOID>(pNode->pLower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddPerkToPerkMap(m, pNode->pLower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->pHigher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddPerkToPerkMap(m, pNode->pHigher, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddPerkToPerkMap(m, pNode->p_lower, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddPerkToPerkMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetPerkMap(std::map<identity_t, DWORD>& m, PPERKDIR pDir)
+	void GetPerkMap(std::map<identity_t, DWORD>& m, p_perk_dir_t pDir)
 	{
-		auto count = pDir->Count;
-		auto pRoot = pDir->pRoot;
-		auto pNode = pRoot->pNode;
+		auto count = pDir->count;
+		auto pRoot = pDir->p_root;
+		auto pNode = pRoot->p_node;
 		if (count > 0)
 			RecursiveAddPerkToPerkMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddPetToPetMap(std::map<identity_t, DWORD>& m, PPETNODE pNode, PPETROOT pRoot, DWORD& count)
+	void RecursiveAddPetToPetMap(std::map<identity_t, DWORD>& m, p_pet_node_t pNode, p_pet_root_t pRoot, DWORD& count)
 	{
-		m.insert_or_assign(pNode->Identity, pNode->Index);
+		m.insert_or_assign(pNode->identity, pNode->index);
 		count--;
-		if (reinterpret_cast<PVOID>(pNode->pLower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddPetToPetMap(m, pNode->pLower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->pHigher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddPetToPetMap(m, pNode->pHigher, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddPetToPetMap(m, pNode->p_lower, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddPetToPetMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetPetMap(std::map<identity_t, DWORD>& m, PPETDIR pPetDir)
+	void GetPetMap(std::map<identity_t, DWORD>& m, p_pet_dir_t pPetDir)
 	{
-		auto count = pPetDir->Count;
-		auto pRoot = pPetDir->pRoot;
-		auto pNode = pRoot->pNode;
+		auto count = pPetDir->count;
+		auto pRoot = pPetDir->p_root;
+		auto pNode = pRoot->p_node;
 		if (count > 0)
 			RecursiveAddPetToPetMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddNanoToNanoMap(std::map<DWORD, PNANOITEM>& m, PNANOITEMNODE pNode, PNANOITEMROOT pRoot, DWORD& count)
+	void RecursiveAddNanoToNanoMap(std::map<DWORD, p_nano_item_t>& m, p_nano_item_node_t pNode, p_nano_item_root_t pRoot, DWORD& count)
 	{
-		m.insert_or_assign(pNode->NanoItemId, pNode->pNanoItem);
+		m.insert_or_assign(pNode->nano_item_id, pNode->p_nano_item);
 		count--;
-		if (reinterpret_cast<PVOID>(pNode->pLower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddNanoToNanoMap(m, pNode->pLower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->pHigher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddNanoToNanoMap(m, pNode->pHigher, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddNanoToNanoMap(m, pNode->p_lower, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddNanoToNanoMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetNanoMap(std::map<DWORD, PNANOITEM>& m)
+	void GetNanoMap(std::map<DWORD, p_nano_item_t>& m)
 	{
-		auto count = pNanoItemDir->Count;
-		auto pRoot = pNanoItemDir->pRoot;
-		auto pNode = pRoot->pNode;
+		auto count = pNanoItemDir->count;
+		auto pRoot = pNanoItemDir->p_root;
+		auto pNode = pRoot->p_node;
 		if (count > 0)
 			RecursiveAddNanoToNanoMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddStatNameToStatNameMap(std::map<DWORD, PCSTR>& m, PSTATNAMENODE pNode, PSTATNAMEROOT pRoot, DWORD& count)
+	void RecursiveAddStatNameToStatNameMap(std::map<DWORD, PCSTR>& m, p_stat_name_node_t pNode, p_stat_name_root_t pRoot, DWORD& count)
 	{
-		m.insert_or_assign(pNode->Stat, pNode->pName);
+		m.insert_or_assign(pNode->stat, pNode->p_name);
 		count--;
-		if (reinterpret_cast<PVOID>(pNode->pLower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddStatNameToStatNameMap(m, pNode->pLower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->pHigher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddStatNameToStatNameMap(m, pNode->pHigher, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddStatNameToStatNameMap(m, pNode->p_lower, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddStatNameToStatNameMap(m, pNode->p_higher, pRoot, count);
 	}
 
 	void GetStatNameMap(std::map<DWORD, PCSTR>& m)
 	{
 		if (pStatNameDir)
 		{
-			auto count = pStatNameDir->Count;
-			auto pRoot = pStatNameDir->pRoot;
-			auto pNode = pRoot->pNode;
+			auto count = pStatNameDir->count;
+			auto pRoot = pStatNameDir->p_root;
+			auto pNode = pRoot->p_node;
 			if (count > 0)
 				RecursiveAddStatNameToStatNameMap(m, pNode, pRoot, count);
 		}
@@ -690,45 +690,45 @@ namespace isxao_utilities
 		auto count = pStaticItemVector->size();
 		for (DWORD i = 0; i < count; i++)
 		{
-			if (pStaticItemVector->at(i).pDummyItem)
-				m.insert_or_assign(pStaticItemVector->at(i).pDummyItem->identity, pStaticItemVector->at(i).pDummyItem);
+			if (pStaticItemVector->at(i).p_dummy_item)
+				m.insert_or_assign(pStaticItemVector->at(i).p_dummy_item->identity, pStaticItemVector->at(i).p_dummy_item);
 		}
 	}
 
-	void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, PSTATNODE pNode, PSTATROOT pRoot, DWORD& count)
+	void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, p_stat_node_t pNode, p_stat_root_t pRoot, DWORD& count)
 	{
-		m.insert_or_assign(pNode->Stat, pNode->Modifier);
+		m.insert_or_assign(pNode->stat, pNode->modifier);
 		count--;
-		if (reinterpret_cast<PVOID>(pNode->pLower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddStatToStatMap(m, pNode->pLower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->pHigher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddStatToStatMap(m, pNode->pHigher, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddStatToStatMap(m, pNode->p_lower, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddStatToStatMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetStatMap(std::map<DWORD, LONG>& m, PSTATDIR pDir)
+	void GetStatMap(std::map<DWORD, LONG>& m, p_stat_dir_t pDir)
 	{
-		auto count = pDir->Count;
-		auto pRoot = pDir->pRoot;
-		auto pNode = pRoot->pNode;
+		auto count = pDir->count;
+		auto pRoot = pDir->p_root;
+		auto pNode = pRoot->p_node;
 		if (count > 0)
 			RecursiveAddStatToStatMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddWeaponItemToWeaponItemMap(std::map<DWORD, PWEAPONITEM>& m, PWEAPONITEMNODE pNode, PWEAPONITEMROOT pRoot, DWORD& count)
+	void RecursiveAddWeaponItemToWeaponItemMap(std::map<DWORD, p_weapon_item_t>& m, p_weapon_item_node_t pNode, p_weapon_item_root_t pRoot, DWORD& count)
 	{
-		m.insert_or_assign(pNode->ActionID, pNode->pWeaponItem);
+		m.insert_or_assign(pNode->action_id, pNode->p_weapon_item);
 		count--;
-		if (reinterpret_cast<PVOID>(pNode->pLower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddWeaponItemToWeaponItemMap(m, pNode->pLower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->pHigher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddWeaponItemToWeaponItemMap(m, pNode->pHigher, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddWeaponItemToWeaponItemMap(m, pNode->p_lower, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddWeaponItemToWeaponItemMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetWeaponItemMap(std::map<DWORD, PWEAPONITEM>& m, WEAPONITEMDIR& dir)
+	void GetWeaponItemMap(std::map<DWORD, p_weapon_item_t>& m, weapon_item_dir_t& dir)
 	{
-		auto count = dir.Count;
-		auto pRoot = dir.pRoot;
-		auto pNode = pRoot->pNode;
+		auto count = dir.count;
+		auto pRoot = dir.p_root;
+		auto pNode = pRoot->p_node;
 		if (count > 0)
 			RecursiveAddWeaponItemToWeaponItemMap(m, pNode, pRoot, count);
 	}
@@ -752,21 +752,21 @@ namespace isxao_utilities
 			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddLockIdToLockIdMap(std::map<DWORD, DWORD>& m, PLOCKIDNODE pNode, PLOCKIDROOT pRoot, DWORD& count)
+	void RecursiveAddLockIdToLockIdMap(std::map<DWORD, DWORD>& m, p_lock_id_node_t pNode, p_lock_id_root_t pRoot, DWORD& count)
 	{
-		m.insert_or_assign(pNode->LockId, pNode->ActionId);
+		m.insert_or_assign(pNode->lock_id, pNode->action_id);
 		count--;
-		if (reinterpret_cast<PVOID>(pNode->pLower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddLockIdToLockIdMap(m, pNode->pLower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->pHigher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddLockIdToLockIdMap(m, pNode->pHigher, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddLockIdToLockIdMap(m, pNode->p_lower, pRoot, count);
+		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+			RecursiveAddLockIdToLockIdMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetLockIdMap(std::map<DWORD, DWORD>& m, PLOCKIDDIR pDir)
+	void GetLockIdMap(std::map<DWORD, DWORD>& m, p_lock_id_dir_t pDir)
 	{
-		auto count = pDir->Count;
-		auto pRoot = pDir->pRoot;
-		auto pNode = pRoot->pNode;
+		auto count = pDir->count;
+		auto pRoot = pDir->p_root;
+		auto pNode = pRoot->p_node;
 		if (count > 0)
 			RecursiveAddLockIdToLockIdMap(m, pNode, pRoot, count);
 	}
@@ -775,7 +775,7 @@ namespace isxao_utilities
 
 #pragma region Inventory
 
-	bool GetInvSlotIdentity(AOData::ArmorSlot_e slot, identity_t& id)
+	bool GetInvSlotIdentity(ao_data::ArmorSlot_e slot, identity_t& id)
 	{
 		id.type = 102;
 		switch (slot)
@@ -803,7 +803,7 @@ namespace isxao_utilities
 		return true;
 	}
 
-	bool GetInvSlotIdentity(AOData::ImplantSlot_e slot, identity_t& id)
+	bool GetInvSlotIdentity(ao_data::ImplantSlot_e slot, identity_t& id)
 	{
 		id.type = 103;
 		switch (slot)
@@ -829,7 +829,7 @@ namespace isxao_utilities
 		return true;
 	}
 
-	bool GetInvSlotIdentity(AOData::WeaponSlot_e slot, identity_t& id)
+	bool GetInvSlotIdentity(ao_data::WeaponSlot_e slot, identity_t& id)
 	{
 		id.type = 101;
 		switch (slot)
@@ -1296,7 +1296,7 @@ namespace isxao_utilities
 
 	p_inventory_data_t GetInvSlotData(INVENTORYSLOT *slot)
 	{
-		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().pRegularInventory->p_inventory_data[slot->SlotID.id];
+		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().p_regular_inventory->p_inventory_data[slot->SlotID.id];
 	}
 
 #pragma endregion

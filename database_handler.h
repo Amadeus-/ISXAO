@@ -5,5 +5,5 @@ class DatabaseHandler
 public:
 	ResourceDatabase* GetResourceDatabase() const;
 private:
-	N3DATABASEHANDLER n3_database_handler_;
+	n3_database_handler_t n3_database_handler_;
 };

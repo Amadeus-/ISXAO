@@ -14,18 +14,18 @@ namespace isxao_classes
 
 	DWORD SpecialActionHolder::GetLockIdMap(std::map<DWORD, DWORD>& m) const
 	{
-		isxao_utilities::GetLockIdMap(m, GetSpecialActionHolderData().pLockIdDir);
+		isxao_utilities::GetLockIdMap(m, GetSpecialActionHolderData().p_lock_id_dir);
 		return m.size();
 	}
 
-	SPECIALACTIONHOLDER SpecialActionHolder::GetSpecialActionHolderData() const
+	special_action_holder_t SpecialActionHolder::GetSpecialActionHolderData() const
 	{
 		return special_action_holder_;
 	}
 
 	DWORD SpecialActionHolder::GetSpecialActions(std::vector<SpecialActionTemplate> &v) const
 	{
-		std::list<SPECIALACTION>* p_special_actions_vector = GetSpecialActionHolderData().pSpecialActionsList;
+		std::list<special_action_t>* p_special_actions_vector = GetSpecialActionHolderData().p_special_actions_list;
 		for (auto it = p_special_actions_vector->begin(); it != p_special_actions_vector->end(); ++it)
 			v.push_back(*reinterpret_cast<SpecialActionTemplate*>(&(*it)));
 		std::sort(v.begin(), v.end(), SpecialActionTemplate::SpecialActionCompare);
@@ -34,7 +34,7 @@ namespace isxao_classes
 
 	DWORD SpecialActionHolder::GetSpecialActions(std::vector<SpecialActionTemplate*> &v) const
 	{
-		std::list<SPECIALACTION>* p_special_actions_vector = GetSpecialActionHolderData().pSpecialActionsList;
+		std::list<special_action_t>* p_special_actions_vector = GetSpecialActionHolderData().p_special_actions_list;
 		for (auto it = p_special_actions_vector->begin(); it != p_special_actions_vector->end(); ++it)
 			v.push_back(reinterpret_cast<SpecialActionTemplate*>(&(*it)));
 		std::sort(v.begin(), v.end(), SpecialActionTemplate::pSpecialActionCompare);
@@ -88,7 +88,7 @@ namespace isxao_classes
 
 	identity_t SpecialActionHolder::GetSpecialActionTarget() const
 	{
-		return GetSpecialActionHolderData().SpecialActionTarget;
+		return GetSpecialActionHolderData().special_action_target;
 	}
 
 	ActionLock* SpecialActionHolder::GetActionLock(SpecialActionTemplate* p_special_action) const

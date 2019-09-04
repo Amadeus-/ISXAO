@@ -19,9 +19,9 @@ public:
 	AOLIB_OBJECT TeamEntry* GetTeamMember(PCSTR) const;
 	AOLIB_OBJECT identity_t GetTeamIdentity() const;
 	AOLIB_OBJECT identity_t GetTeamLeaderID() const;
-	AOLIB_OBJECT TEAMRAIDHOLDER GetTeamRaidData() const;
+	AOLIB_OBJECT team_raid_holder_t GetTeamRaidData() const;
 	AOLIB_OBJECT DWORD GetTeamRaidIndex() const;
 	AOLIB_OBJECT bool IsRaid() const;
 private:
-	TEAMRAIDHOLDER team_raid_holder_;
+	team_raid_holder_t team_raid_holder_;
 };

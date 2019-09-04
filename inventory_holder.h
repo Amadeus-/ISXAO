@@ -11,7 +11,7 @@ public:
 	AOLIB_OBJECT DWORD GetImplantInventory(std::vector<inventory_data_t*> &v);
 	AOLIB_OBJECT DWORD GetInventoryCount() const;
 	AOLIB_OBJECT NewInventory* GetNewInventory() const;
-	AOLIB_OBJECT INVENTORYHOLDER GetInventoryHolderData() const;
+	AOLIB_OBJECT inventory_holder_t GetInventoryHolderData() const;
 	AOLIB_OBJECT p_identity_t GetInventoryHolderIdentity() const;
 	AOLIB_OBJECT NewInventory* GetOverflowInventory() const;
 	AOLIB_OBJECT DWORD GetInventory(std::map<identity_t, InventoryItem*>&) const;
@@ -21,5 +21,5 @@ public:
 	AOLIB_OBJECT INVENTORYSLOT GetInventorySlot(PCSTR) const;
 	AOLIB_OBJECT DWORD GetWeaponInventory(std::vector<inventory_data_t*> &v);
 private:
-	INVENTORYHOLDER inventory_holder_;
+	inventory_holder_t inventory_holder_;
 };
