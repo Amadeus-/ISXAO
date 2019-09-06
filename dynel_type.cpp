@@ -177,7 +177,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			{
 				if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->get_client_char())
 				{
-					Object.DWord = P_ENGINE_CLIENT_ANARCHY->get_client_char()->CheckLOS(pDynel);
+					Object.DWord = P_ENGINE_CLIENT_ANARCHY->get_client_char()->check_los(pDynel);
 					Object.Type = pBoolType;
 					return true;
 				}

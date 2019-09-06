@@ -218,7 +218,17 @@ namespace isxao_globals
 		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_assist_fight)
 #endif
 
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GLOBAL_CHARACTER_POSITION_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_position)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_position)
+#endif
 
+#ifdef SIMPLE_CHAR_T__CHECK_LOS_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, simple_char_t__check_los)
+#else
+		static_assert(false, "simple_char_t__check_los requires a pattern for the function address to be found.")
+#endif
 
 
 		// Instances
@@ -313,6 +323,8 @@ namespace isxao_globals
 	DWORD n3_engine_client_anarchy_t__n3_msg_artillery_attack = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_assist_fight = 0;
 
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_global_character_position = 0;
+
 	// Instances
 	DWORD n3_engine_client_anarchy_t__m_pc_instance = 0;
 	isxao_classes::engine_client_anarchy **pp_engine_client_anarchy = nullptr;
@@ -368,7 +380,7 @@ namespace isxao_globals
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetFirstName = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetFormulaProgress = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetFormulaRadius = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterPosition = 0;
+	
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterRotation = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetGridDestinationList_1 = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetGridDestinationList_2 = 0;
@@ -657,7 +669,7 @@ namespace isxao_globals
 
 	DWORD SimpleChar_t__SimpleChar_t = 0;
 	DWORD SimpleChar_t__dSimpleChar_t = 0;
-	DWORD SimpleChar_t__CheckLOS = 0;
+	DWORD simple_char_t__check_los = 0;
 
 #pragma endregion
 

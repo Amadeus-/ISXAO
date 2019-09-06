@@ -5,7 +5,7 @@ class engine_client_anarchy
 {
 public:
 	AOLIB_OBJECT static PCSTR get_breed_str(breed_e breed_id);
-	AOLIB_OBJECT Character* get_client_char();
+	AOLIB_OBJECT character* get_client_char();
 	AOLIB_OBJECT p_identity_t get_client_dynel_id(identity_t &id);
 	AOLIB_OBJECT DWORD get_current_movement_mode();
 	AOLIB_OBJECT n3_engine_client_anarchy_t get_engine_client_anarchy_data() const;

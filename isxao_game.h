@@ -108,6 +108,13 @@ constexpr char* const n3_engine_client_anarchy_t__n3_msg_assist_fight_mangled_na
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_assist_fight_pattern = static_cast<char*>(
 	"55 8B EC 53 56 E8 ?? ?? ?? ??");
 
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_global_character_position_mangled_name = static_cast<char*>
+	("?N3Msg_GetGlobalCharacterPosition@n3EngineClientAnarchy_t@@QAEXAAVVector3_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_global_character_position_pattern = static_cast<char*>(
+	"55 8B EC FF 15 ?? ?? ?? ?? 85 C0 74 ?? 56");
+
+constexpr char* const simple_char_t__check_los_pattern = static_cast<char*>("55 8B EC 83 EC 30 56 57 8B 7D 08");
+
 #pragma endregion
 
 #pragma region N3

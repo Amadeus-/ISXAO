@@ -240,9 +240,9 @@ namespace isxao_classes
 		return static_cast<Actor*>(GetData());
 	}
 
-	Character* Dynel::ToCharacter()
+	character* Dynel::ToCharacter()
 	{
-		return static_cast<Character*>(GetData());
+		return static_cast<character*>(GetData());
 	}
 
 	Pet* Dynel::ToPet()

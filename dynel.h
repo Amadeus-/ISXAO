@@ -37,7 +37,7 @@ public:
 	AOLIB_OBJECT bool IsWeaponInstance();
 	AOLIB_OBJECT void SendIIRToObservers(InfoItemRemote*);
 	AOLIB_OBJECT Actor* ToActor();
-	AOLIB_OBJECT Character* ToCharacter();
+	AOLIB_OBJECT character* ToCharacter();
 	AOLIB_OBJECT Pet* ToPet();
 	AOLIB_OBJECT Player* ToPlayer();
 	AOLIB_OBJECT TeamMember* ToTeamMember();

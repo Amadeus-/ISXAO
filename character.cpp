@@ -5,32 +5,32 @@ namespace isxao_classes
 
 #pragma region Holders
 
-	InventoryHolder* Character::GetInventoryHolder()
+	InventoryHolder* character::GetInventoryHolder()
 	{
 		return reinterpret_cast<InventoryHolder*>(GetSimpleCharData()->p_container_inventory);
 	}
 
-	NpcHolder* Character::GetNPCHolder()
+	NpcHolder* character::GetNPCHolder()
 	{
 		return reinterpret_cast<NpcHolder*>(GetSimpleCharData()->p_npc_holder);
 	}
 
-	PerkHolder* Character::GetPerkHolder()
+	PerkHolder* character::GetPerkHolder()
 	{
 		return reinterpret_cast<PerkHolder*>(GetSimpleCharData()->p_perk_holder);
 	}
 
-	SpecialActionHolder* Character::GetSpecialActionHolder()
+	SpecialActionHolder* character::GetSpecialActionHolder()
 	{
 		return reinterpret_cast<SpecialActionHolder*>(GetSimpleCharData()->p_special_action_holder);
 	}
 
-	StatHolder* Character::GetStatHolder()
+	StatHolder* character::GetStatHolder()
 	{
 		return reinterpret_cast<StatHolder*>(GetSimpleCharData()->p_map_holder);
 	}
 
-	void Character::GetStatMap(std::map<DWORD, LONG> &m)
+	void character::GetStatMap(std::map<DWORD, LONG> &m)
 	{
 		GetStatHolder()->GetStatMap(m);
 	}
@@ -39,29 +39,31 @@ namespace isxao_classes
 
 #pragma region Info
 
-#ifdef SimpleChar_t__CheckLOS_x
-	FUNCTION_AT_ADDRESS(bool Character::CheckLOS(Dynel* pDynel), SimpleChar_t__CheckLOS);
+#ifdef SIMPLE_CHAR_T__CHECK_LOS_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(bool character::check_los(Dynel* p_dynel), simple_char_t__check_los);
 #else
-	bool Character::CheckLOS(Dynel* pDynel)
+	bool character::check_los(Dynel* p_dynel)
 	{
-		if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->GetClientChar() && P_PLAYFIELD_DIR && P_PLAYFIELD_DIR->GetPlayfield())
+		if (GetGameState() == GAMESTATE_IN_GAME)
 		{
 			vector3_t offset;
-			offset.X = 0.0f;
-			offset.Y = 1.6f;
-			offset.Z = 0.0f;
+			offset.x = 0.0f;
+			offset.y = 1.6f;
+			offset.z = 0.0f;
 			vector3_t client;
 			P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(client);
-			vector3_t offsetClient = vector3_t::Add(client, offset);
-			vector3_t dynel = pDynel->GetPosition();
-			vector3_t offsetMe = vector3_t::Add(dynel, offset);
-			return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offsetClient, offsetMe, GetDynelData()->pVehicle->ZoneInstanceID, false);
+			const auto offset_client = vector3_t::add(client, offset);
+			auto dynel = p_dynel->GetPosition();
+			const vector3_t offset_me = vector3_t::add(dynel, offset);
+			return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offset_client, offset_me, GetDynelData()->p_vehicle->zone_instance_id, false);
 		}
 		return false;
 	}
 #endif
 
-	bool Character::GetWeaponTarget(identity_t& id)
+	bool character::GetWeaponTarget(identity_t& id)
 	{
 		if (HasWeaponTarget())
 		{
@@ -71,7 +73,7 @@ namespace isxao_classes
 		return false;
 	}
 
-	bool Character::GetTarget(identity_t& id)
+	bool character::GetTarget(identity_t& id)
 	{
 		if (HasTarget())
 		{
@@ -81,12 +83,12 @@ namespace isxao_classes
 		return false;
 	}
 
-	bool Character::HasTarget()
+	bool character::HasTarget()
 	{
 		return pSelectionIndicator != nullptr;
 	}
 
-	bool Character::HasWeaponTarget()
+	bool character::HasWeaponTarget()
 	{
 		return pAttackingIndicator != nullptr;
 	}
@@ -95,17 +97,17 @@ namespace isxao_classes
 
 #pragma region Actions
 
-	void Character::CastNanoSpell(identity_t const& nano, identity_t const& target) const
+	void character::CastNanoSpell(identity_t const& nano, identity_t const& target) const
 	{
 		P_ENGINE_CLIENT_ANARCHY->N3Msg_CastNanoSpell(nano, target);
 	}
 
-	void Character::DefaultAttack(identity_t const& id) const
+	void character::DefaultAttack(identity_t const& id) const
 	{
 		P_ENGINE_CLIENT_ANARCHY->N3Msg_DefaultAttack(id, true);
 	}
 
-	void Character::Face(float heading)
+	void character::Face(float heading)
 	{
 		if (heading > 180.0f)
 			heading -= 360.0f;
@@ -113,27 +115,27 @@ namespace isxao_classes
 		SetRotation(q);
 	}
 
-	void Character::Face(vector3_t &location)
+	void character::Face(vector3_t &location)
 	{
 		auto client_position = GetPosition();
 		auto q = quaternion_t::get_quaternion_to_face(location, client_position);
 		SetRotation(q);
 	}
 
-	void Character::MakeTeamLeader(const identity_t& id)
+	void character::MakeTeamLeader(const identity_t& id)
 	{
 		if (P_ENGINE_CLIENT_ANARCHY && IsInTeam() && IsTeamLeader())
 			P_ENGINE_CLIENT_ANARCHY->N3Msg_TransferTeamLeadership(id);
 	}
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_2_x
-	bool Character::PerformSpecialAction(const identity_t &id) const
+	bool character::PerformSpecialAction(const identity_t &id) const
 	{
 		return P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(id);
 	}
 
 #else
-	bool Character::PerformSpecialAction(const identity_t &id) const
+	bool character::PerformSpecialAction(const identity_t &id) const
 	{
 		typedef bool(__thiscall * tPerformSpecialAction)(PVOID, identity_t const &);
 		auto pPerformSpecialAction = tPerformSpecialAction(n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_2);
@@ -141,12 +143,12 @@ namespace isxao_classes
 	}
 #endif
 
-	void Character::SetRotation(const quaternion_t& q)
+	void character::SetRotation(const quaternion_t& q)
 	{
 		GetVehicle()->SetRotation(q);
 	}
 
-	void Character::StopAttack() const
+	void character::StopAttack() const
 	{
 		typedef void(__thiscall * tStopAttack)(PVOID);
 		auto pStopAttack = tStopAttack(n3EngineClientAnarchy_t__N3Msg_StopAttack);
@@ -154,12 +156,12 @@ namespace isxao_classes
 	}
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_UseItem_x
-	void Character::UseItem(const identity_t& id)
+	void character::UseItem(const identity_t& id)
 	{
 		P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(id, false);
 	}
 #else
-	void Character::UseItem(identity_t const& id)
+	void character::UseItem(identity_t const& id)
 	{
 		identity_t dummy;
 		dummy.Type = 0;

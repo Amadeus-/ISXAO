@@ -16,12 +16,12 @@ namespace isxao_classes
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_CLIENT_CHAR_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
-	FUNCTION_AT_ADDRESS(Character* engine_client_anarchy::get_client_char(void), n3_engine_client_anarchy_t__get_client_char)
+	FUNCTION_AT_ADDRESS(character* engine_client_anarchy::get_client_char(void), n3_engine_client_anarchy_t__get_client_char)
 #else
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	Character* engine_client_anarchy::get_client_char(void)
+	character* engine_client_anarchy::get_client_char(void)
 	{
-		return reinterpret_cast<Character*>(n3_engine_client_anarchy_.p_client_control_char);
+		return reinterpret_cast<character*>(n3_engine_client_anarchy_.p_client_control_char);
 	}
 #endif	
 

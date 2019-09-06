@@ -87,6 +87,10 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_artillery_attack;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_assist_fight;
 
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_global_character_position;
+
+	AOLIB_VAR DWORD simple_char_t__check_los;
+
 	// Instances
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__m_pc_instance;
 	AOLIB_VAR isxao_classes::engine_client_anarchy **pp_engine_client_anarchy;
@@ -155,7 +159,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetFirstName;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetFormulaProgress;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetFormulaRadius;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterPosition;
+	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterRotation;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetGridDestinationList_1;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetGridDestinationList_2;
@@ -456,7 +460,7 @@ namespace isxao_globals
 
 	AOLIB_VAR DWORD SimpleChar_t__SimpleChar_t;
 	AOLIB_VAR DWORD SimpleChar_t__dSimpleChar_t;
-	AOLIB_VAR DWORD SimpleChar_t__CheckLOS;
+	
 
 #pragma endregion
 

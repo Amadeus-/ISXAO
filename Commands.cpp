@@ -286,7 +286,7 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	a = 0x204;
 	printf("weapon_item_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 	
-	r = sizeof(Character);
+	r = sizeof(character);
 	a = sizeof(Player);
 	printf("LocalPlayer: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
