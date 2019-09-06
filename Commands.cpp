@@ -4,7 +4,16 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	printf("%" PRIX32, n3_engine_client_anarchy_t__get_current_movement_mode);
+	// printf("%" PRIX32, n3_engine_client_anarchy_t__get_item_by_template);
+	identity_t i;
+	i.type = 53019;
+	i.id = 223279;
+	identity_t d;
+	d.type = 0;
+	d.id = 0;
+	auto r = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d);
+	// printf("%" PRIX32, r);
+	printf(r->name);
 	return 0;
 }
 

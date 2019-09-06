@@ -24,7 +24,7 @@ namespace isxao
 
 		// Initialize offsets
 		gp_isxao_log->AddLine("Initializing offsets...\n");
-		g_offsets_initialized = InitializeOffsets();
+		g_offsets_initialized = initialize_offsets();
 		if (g_offsets_initialized)
 			gp_isxao_log->AddLine("Offsets initialized.\n");
 		else

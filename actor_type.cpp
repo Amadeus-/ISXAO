@@ -13,7 +13,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		{
 		case Breed:
 		{
-			Object.ConstCharPtr = GetBreedStr(pActor->GetSkill(::ST_BREED));
+			Object.ConstCharPtr = P_ENGINE_CLIENT_ANARCHY->get_breed_str(breed_e(pActor->GetSkill(ST_BREED)));
 			Object.Type = pStringType;
 			break;
 		}
@@ -118,7 +118,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Gender:
 		{
-			Object.ConstCharPtr = P_ENGINE_CLIENT_ANARCHY->GetGenderString(pActor->GetIdentity());
+			Object.ConstCharPtr = P_ENGINE_CLIENT_ANARCHY->get_gender_string(pActor->GetIdentity());
 			Object.Type = pStringType;
 			break;
 		}

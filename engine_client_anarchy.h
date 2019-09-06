@@ -4,21 +4,23 @@
 class engine_client_anarchy
 {
 public:
+	AOLIB_OBJECT static PCSTR get_breed_str(breed_e breed_id);
 	AOLIB_OBJECT Character* get_client_char();
 	AOLIB_OBJECT p_identity_t get_client_dynel_id(identity_t &id);
 	AOLIB_OBJECT DWORD get_current_movement_mode();
 	AOLIB_OBJECT n3_engine_client_anarchy_t get_engine_client_anarchy_data() const;
-	AOLIB_OBJECT PCSTR get_faction_str(DWORD faction_id, bool unknown);
+	AOLIB_OBJECT PCSTR get_faction_str(DWORD faction_id, bool full_name);
 	AOLIB_OBJECT PCSTR get_faction_title(DWORD faction_id);
-	AOLIB_OBJECT PCSTR GetGenderString(const identity_t &id);
-	AOLIB_OBJECT p_dummy_item_base_t GetItemByTemplate(identity_t template_id, const identity_t & container_id);
-	AOLIB_OBJECT PCSTR GetTitleStr(DWORD base, DWORD level);
-	AOLIB_OBJECT bool IsFirstLogin() const;
-	AOLIB_OBJECT bool IsFixture(const identity_t &template_id, const identity_t &container_id);
-	AOLIB_OBJECT void N3Msg_ActivateMech(DWORD mech_id);
-	AOLIB_OBJECT void N3Msg_Airstrike(const identity_t &target_id);
-	AOLIB_OBJECT void N3Msg_ArtilleryAttack(const identity_t &target_id);
-	AOLIB_OBJECT void N3Msg_AssistFight(const identity_t &assist_id);
+	AOLIB_OBJECT PCSTR get_gender_string(identity_t const &id);
+	AOLIB_OBJECT p_dummy_item_base_t get_item_by_template(identity_t template_id, const identity_t &container_id);	
+	AOLIB_OBJECT static PCSTR get_sex_str(gender_e gender_id);
+	AOLIB_OBJECT static PCSTR get_title_string(DWORD base, DWORD level);
+	AOLIB_OBJECT bool is_first_login();
+	AOLIB_OBJECT bool is_fixture(const identity_t &template_id, const identity_t &container_id);
+	AOLIB_OBJECT void n3_msg_activate_mech(DWORD mech_id);
+	AOLIB_OBJECT void n3_msg_airstrike(const identity_t &target_id);
+	AOLIB_OBJECT void n3_msg_artillery_attack(const identity_t &target_id);
+	AOLIB_OBJECT void n3_msg_assist_fight(const identity_t &assist_id);
 	AOLIB_OBJECT bool N3Msg_CanAttack(identity_t const &target_id);
 	AOLIB_OBJECT bool N3Msg_CanClickTargetTarget(const identity_t &, const identity_t &);
 	AOLIB_OBJECT bool N3Msg_CanUseMech();

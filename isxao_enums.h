@@ -717,7 +717,7 @@ enum Stat_e : DWORD
 
 #pragma region Breed
 
-enum Breed_e : DWORD
+enum breed_e : DWORD
 {
 	BT_NOTHING = 0,
 	BT_SOLITUS = 1,
@@ -731,24 +731,29 @@ enum Breed_e : DWORD
 
 #pragma endregion
 
+#pragma region Gender
+
+enum gender_e : DWORD
+{
+	GT_NONE = 0,
+	GT_UNI = 1,
+	GT_MALE = 2,
+	GT_FEMALE = 3
+};
+
+#pragma endregion
+
 #pragma region Sides
 
-enum Side_e : DWORD
+enum side_e : DWORD
 {
 	SD_NEUTRAL = 0,
-
 	SD_CLAN = 1,
-
 	SD_OMNI = 2,
-
 	SD_MONSTER = 3,
-
 	SD_ADVISOR = 4,
-
 	SD_GUARDIAN = 5,
-
 	SD_GM = 6,
-
 	SD_MIXED = 7
 };
 
@@ -1144,7 +1149,7 @@ enum PacketType_e : DWORD
 	PT_N3_MESSAGE = 0XA,
 	PT_PING_MESSAGE = 0XB,
 	PT_OPERATOR_MESSAGE = 0XE,
-	PT_INITATE_COMPRESSION_MESSAGE = 0x7F00
+	PT_INITIATE_COMPRESSION_MESSAGE = 0x7F00
 };
 
 enum N3MessageType_e : DWORD

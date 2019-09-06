@@ -48,6 +48,12 @@ namespace ao_data
 			id = 0;
 		}
 
+		identity(const DWORD t, const DWORD i)
+		{
+			type = t;
+			id = i;
+		}
+
 	} identity_t, *p_identity_t;
 	
 	// Size = 0x0C

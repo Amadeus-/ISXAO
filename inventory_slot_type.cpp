@@ -86,7 +86,7 @@ bool InventorySlotType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMetho
 		{
 			identity_t d;
 			ZeroMemory(&d, sizeof(identity_t));
-			if(P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->get_client_char() && P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(pInventorySlot->SlotID, d))
+			if(P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->get_client_char() && P_ENGINE_CLIENT_ANARCHY->get_item_by_template(pInventorySlot->SlotID, d))
 			{
 				P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(pInventorySlot->SlotID, false);
 				return true;

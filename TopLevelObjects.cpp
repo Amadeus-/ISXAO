@@ -178,7 +178,9 @@ bool __cdecl TLO_NANOSPELL(int argc, char *argv[], LSTYPEVAR&Dest)
 		{
 			if (ISNUMBER())
 			{
-				if ((Dest.Ptr = isxao_utilities::GetNanoItem(GETNUMBER())))
+				const identity_t i(53019, GETNUMBER());
+				const identity_t d(0, 0);
+				if ((Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d)))
 				{
 					Dest.Type = pNanoSpellType;
 					return true;
@@ -257,7 +259,7 @@ bool __cdecl TLO_SPECIALACTION(int argc, char *argv[], LSTYPEVAR&Dest)
 				identity_t identity;
 				identity.type = 57008;
 				identity.id = atoi(argv[0]);
-				if ((Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(identity, dummy_identity)))
+				if ((Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(identity, dummy_identity)))
 				{
 					Dest.Type = pSpecialActionType;
 					return true;

@@ -2,7 +2,6 @@
 
 #pragma region Globals
 
-#define __GetBreedStr_x												0x16939		// Gamecode
 #define __GetNanoItem_x												0xA3609		// Gamecode
 #define __GetSexStr_x												0x16930		// Gamecode
 #define	__GetFullPerkMap_x											0x282A1		// Gamecode
@@ -15,20 +14,99 @@
 
 #pragma region Gamecode
 
+constexpr char* const gamecode_module_name = static_cast<char*>("Gamecode.dll");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_mangled_name = static_cast<char*>(
+	"??0n3EngineClientAnarchy_t@@QAE@XZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 24 53 56 8B F1 89 75 F0");
+
+constexpr char* const n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t_mangled_name = static_cast<char*>(
+	"??1n3EngineClientAnarchy_t@@UAE@XZ");
 constexpr char* const n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 53 56 8B F1 57 89 75 F0 C7 06 ?? ?? ?? ?? 8B 9E 00 01 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__convert_criteria_mangled_name = static_cast<char*>(
+	"?ConvertCriteria@n3EngineClientAnarchy_t@@ABE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVCriterion_t@GameData@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__convert_criteria_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC C8 04 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__get_breed_str_mangled_name = static_cast<char*>(
+	"?GetBreedStr@n3EngineClientAnarchy_t@@SAPBDH@Z");
+constexpr DWORD n3_engine_client_anarchy_t__get_breed_str_offset = 0xB89;
+constexpr DWORD n3_engine_client_anarchy_t__get_breed_str_bytes_to_next = 0x0;
+
+constexpr char* const n3_engine_client_anarchy_t__get_client_char_mangled_name = static_cast<char*>(
+	"?GetClientChar@n3EngineClientAnarchy_t@@QBEPAVSimpleChar_t@@XZ");
+
+constexpr char* const n3_engine_client_anarchy_t__get_client_dynel_id_mangled_name = static_cast<char*>(
+	"?GetClientDynelId@n3EngineClientAnarchy_t@@UBE?AVIdentity_t@@XZ");
 constexpr char* const n3_engine_client_anarchy_t__get_client_dynel_id_pattern = static_cast<char*>(
 	"55 8B EC 8B 45 08 8B 89 80 00 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__get_current_movement_mode_mangled_name = static_cast<char*>(
+	"?GetCurrentMovementMode@n3EngineClientAnarchy_t@@QBE?AW4Mode_e@Movement_n@@XZ");
 constexpr char* const n3_engine_client_anarchy_t__get_current_movement_mode_pattern = static_cast<char*>(
 	"83 B9 84 00 00 00 00 74 ?? FF 15 ?? ?? ?? ?? 85 C0 74 ?? 8B C8 E8 ?? ?? ?? ?? 8B C8 E8 ?? ?? ?? ?? 8B C8");
+
+constexpr char* const n3_engine_client_anarchy_t__get_faction_str_mangled_name = static_cast<char*>(
+	"?GetFactionStr@n3EngineClientAnarchy_t@@QBEPBDH_N@Z");
 constexpr char* const n3_engine_client_anarchy_t__get_faction_str_pattern = static_cast<char*>(
 	"55 8B EC FF 75 0C FF 75 08 E8 ?? ?? ?? ?? 59 59 5D");
+
+constexpr char* const n3_engine_client_anarchy_t__get_faction_title_mangled_name = static_cast<char*>(
+	"?GetFactionTitle@n3EngineClientAnarchy_t@@QBEPBDH@Z");
 constexpr char* const n3_engine_client_anarchy_t__get_faction_title_pattern = static_cast<char*>(
 	"55 8B EC FF 15 ?? ?? ?? ?? 85 C0 74 ?? 8B 80 C0 01 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__get_gender_string_mangled_name = static_cast<char*>(
+	"?GetGenderString@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__get_gender_string_pattern = static_cast<char*>(
+	"55 8B EC 6A 00 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? 6A 00 FF 75 08 FF 15 ?? ?? ?? ?? 59 50 E8 ?? ?? ?? ?? 83 C4 14 85 C0 74 ?? 8D 88 EC 00 00 00 8B 01 6A 02 6A 3B");
+
+constexpr char* const n3_engine_client_anarchy_t__get_item_by_template_mangled_name = static_cast<char*>(
+	"?GetItemByTemplate@n3EngineClientAnarchy_t@@ABEPAVDummyItemBase_t@@VIdentity_t@@ABV3@@Z");
+constexpr char* const n3_engine_client_anarchy_t__get_item_by_template_pattern = static_cast<char*>(
+	"55 8B EC 83 EC 0C 8B 45 08");
+
+constexpr char* const n3_engine_client_anarchy_t__get_sex_str_mangled_name = static_cast<char*>(
+	"?GetSexStr@n3EngineClientAnarchy_t@@SAPBDH@Z");
+constexpr DWORD n3_engine_client_anarchy_t__get_sex_str_offset = 0xC1D;
+constexpr DWORD n3_engine_client_anarchy_t__get_sex_str_bytes_to_next = 0x0;
+
+constexpr char* const n3_engine_client_anarchy_t__get_title_str_mangled_name = static_cast<char*>(
+	"?GetTitleStr@n3EngineClientAnarchy_t@@QBEPBDHH@Z");
+constexpr char* const n3_engine_client_anarchy_t__get_title_str_pattern = static_cast<char*>(
+	"55 8B EC 8B 45 08 6B C0 64");
+
+constexpr char* const n3_engine_client_anarchy_t__is_first_login_mangled_name = static_cast<char*>(
+	"?IsFirstLogin@n3EngineClientAnarchy_t@@QBE_NXZ");
+constexpr char* const n3_engine_client_anarchy_t__is_first_login_pattern = static_cast<char*>("8A 81 04 01 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__is_fixture_mangled_name = static_cast<char*>(
+	"?IsFixture@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@0@Z");
+constexpr char* const n3_engine_client_anarchy_t__is_fixture_pattern = static_cast<char*>(
+	"55 8B EC 8B 45 0C 53 33 DB 39 18 75 ?? 39 58 04 75 ?? FF 15 ?? ?? ?? ??");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_activate_mech_mangled_name = static_cast<char*>(
+	"?N3Msg_AddToQueue@n3EngineClientAnarchy_t@@QAEXH@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_activate_mech_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 70 53 56 FF 15 ?? ?? ?? ?? 8B F0 33 DB 3B F3 74 ?? 53 68 ?? ?? ?? ?? 8D 4D D0 C7 45 E4 0F 00 00 00 89 5D E0 88 5D D0 E8 ?? ?? ?? ?? 8B 45 08");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_airstrike_mangled_name = static_cast<char*>(
+	"?N3Msg_Airstrike@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_airstrike_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 68 53 56 FF 15 ?? ?? ?? ?? 8B F0 33 DB 3B F3 74 ?? 53 68 ?? ?? ?? ?? 8D 4D D8 C7 45 EC 0F 00 00 00 89 5D E8 88 5D D8 E8 ?? ?? ?? ?? 8D 4D D8 51 FF 75 08 8D 46 14 68 03 01 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_artillery_attack_mangled_name = static_cast<char*>(
+	"?N3Msg_ArtilleryAttack@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_artillery_attack_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 68 53 56 FF 15 ?? ?? ?? ?? 8B F0 33 DB 3B F3 74 ?? 53 68 ?? ?? ?? ?? 8D 4D D8 C7 45 EC 0F 00 00 00 89 5D E8 88 5D D8 E8 ?? ?? ?? ?? 8D 4D D8 51 FF 75 08 8D 46 14 68 01 01 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_assist_fight_mangled_name = static_cast<char*>(
+	"?N3Msg_AssistFight@n3EngineClientAnarchy_t@@QBEXABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_assist_fight_pattern = static_cast<char*>(
+	"55 8B EC 53 56 E8 ?? ?? ?? ??");
 
 #pragma endregion
 

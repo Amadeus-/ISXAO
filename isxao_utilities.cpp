@@ -7,9 +7,53 @@ namespace isxao_utilities
 
 #pragma region Strings
 
-#ifdef __GetBreedStr_x
-	FUNCTION_AT_ADDRESS(PCSTR __cdecl GetBreedStr(DWORD), __GetBreedStr);
-#endif
+	// ReSharper disable once CppParameterMayBeConst
+	PCSTR get_breed_str_local(breed_e breed_id)
+	{
+		switch(breed_id)
+		{
+		case BT_NOTHING:
+			return "Nothing";
+		case BT_SOLITUS:
+			return "Solitus";
+		case BT_OPIFEX:
+			return "Opifex";
+		case BT_NANOMAGE:
+			return "Nanomage";
+		case BT_ATROX:
+			return "Atrox";
+		case BT_SPECIAL:
+			return "Special";
+		case BT_MONSTER:
+			return "Monster";
+		case BT_HUMAN_MONSTER: 
+			return "human monster";
+		default:
+			char buffer[MAX_VARSTRING];
+			sprintf_s(buffer, sizeof(buffer), "Missing breed: %d", DWORD(breed_id));
+			return buffer;
+		}
+	}
+
+	// ReSharper disable once CppParameterMayBeConst
+	PCSTR get_sex_str_local(gender_e gender_id)
+	{
+		switch(gender_id)
+		{
+		case GT_NONE:
+			return "NONE";
+		case GT_UNI: 
+			return "uni";
+		case GT_MALE: 
+			return "male";
+		case GT_FEMALE: 
+			return "female";
+		default:
+			char buffer[MAX_VARSTRING];
+			sprintf_s(buffer, sizeof(buffer), "Missing sex: %d", DWORD(gender_id));
+			return buffer;
+		}
+	}
 
 	PCSTR GetProfessionStr(DWORD prof)
 	{
@@ -51,10 +95,6 @@ namespace isxao_utilities
 			return "Unknown";
 		}
 	}
-
-#ifdef __GetSexStr_x
-	FUNCTION_AT_ADDRESS(PCSTR __cdecl GetSexStr(DWORD), __GetSexStr);
-#endif
 
 	PCSTR GetSideStr(DWORD side)
 	{
@@ -154,10 +194,6 @@ namespace isxao_utilities
 
 	FUNCTION_AT_ADDRESS(Dynel* __cdecl GetDynel(const identity_t &), n3_dynel_t__get_dynel);
 	FUNCTION_AT_ADDRESS(Actor* __cdecl GetActor(const identity_t &), n3_dynel_t__get_dynel);
-
-#ifdef __GetNanoItem_x
-	FUNCTION_AT_ADDRESS(p_nano_item_t __cdecl GetNanoItem(DWORD), __GetNanoItem);
-#endif
 
 #ifdef __GetFullPerkMap_x
 	FUNCTION_AT_ADDRESS(DWORD __cdecl GetFullPerkMap(void), __N3Msg_GetFullPerkMap);

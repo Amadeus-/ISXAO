@@ -1,7 +1,7 @@
 
 namespace isxao_globals
 {
-	bool InitializeOffsets();
+	bool initialize_offsets();
 
 #pragma region Process
 
@@ -19,26 +19,6 @@ namespace isxao_globals
 	AOLIB_VAR DWORD hVehicle;
 	AOLIB_VAR DWORD hMessageProtocol;
 	AOLIB_VAR DWORD hInterfaces;
-
-#pragma endregion
-
-#pragma region Gamecode
-
-	// Functions
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_engine_client_anarchy_t;
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t;
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t__convert_criteria;
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_breed_str;
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_client_char;
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_client_dynel_id;
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_current_movement_mode;
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_faction_str;
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_faction_title;
-
-	// Instances
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t__m_pc_instance;
-	AOLIB_VAR engine_client_anarchy **pp_engine_client_anarchy;
-#define P_ENGINE_CLIENT_ANARCHY (*pp_engine_client_anarchy)  // NOLINT(cppcoreguidelines-macro-usage)
 
 #pragma endregion
 
@@ -86,14 +66,36 @@ namespace isxao_globals
 
 #pragma region Gamecode
 
+	// Functions
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_engine_client_anarchy_t;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__convert_criteria;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_breed_str;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_client_char;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_client_dynel_id;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_current_movement_mode;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_faction_str;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_faction_title;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_gender_string;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_item_by_template;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_sex_str;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_title_str;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__is_first_login;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__is_fixture;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_activate_mech;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_airstrike;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_artillery_attack;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_assist_fight;
+
+	// Instances
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__m_pc_instance;
+	AOLIB_VAR isxao_classes::engine_client_anarchy **pp_engine_client_anarchy;
+#define P_ENGINE_CLIENT_ANARCHY (*pp_engine_client_anarchy)  // NOLINT(cppcoreguidelines-macro-usage)
 
 #pragma endregion
 
 #pragma region Globals
 
-	AOLIB_VAR DWORD __GetBreedStr;	
-	AOLIB_VAR DWORD __GetNanoItem;
-	AOLIB_VAR DWORD __GetSexStr;	
 	AOLIB_VAR DWORD __N3Msg_GetFullPerkMap;
 	AOLIB_VAR DWORD __SetTarget;
 	AOLIB_VAR DWORD m_cStatNameDir;
@@ -104,18 +106,8 @@ namespace isxao_globals
 
 #pragma endregion
 
-#pragma region EngineClientAnarchy
-
+#pragma region EngineClientAnarchy		
 	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetGenderString;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetItemByTemplate;	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__GetTitleStr;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__IsFirstLogin;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__IsFixture;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_ActivateMech;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_Airstrike;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_ArtilleryAttack;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_AssistFight;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_CanAttack;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_CanClickTargetTarget;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_CanUseMech;
@@ -579,9 +571,9 @@ namespace isxao_globals
 #pragma endregion
 
 	bool get_function_address(const std::vector<unsigned char>& data, const char* function_pattern, DWORD& module_base_address, DWORD& function_address, const char* function_offset_name);
-	bool get_static_address_from_function(const DWORD& function_base_address, DWORD& static_address, const char* static_address_name, const size_t offset);
-	bool get_relative_address_from_function(const DWORD& function_base_address, DWORD& relative_address, const char* relative_address_name, const size_t offset, const size_t bytes_to_next_line = 0x4);
-
+	bool get_static_address_from_function(const DWORD& function_base_address, DWORD& static_address, const char* static_address_name, const size_t& offset);
+	bool get_relative_address_from_function(const DWORD& function_base_address, DWORD& relative_address, const char* relative_address_name, const size_t& offset, const size_t& bytes_to_next_line);
+	bool get_proc_address(const HMODULE& module_handle, DWORD& function_address, const char* function_name, const char* mangled_function_name);
 
 }
 using namespace isxao_globals;

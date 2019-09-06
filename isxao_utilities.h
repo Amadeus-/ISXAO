@@ -4,10 +4,9 @@ namespace isxao_utilities
 {
 	
 #pragma region Strings
-
-	AOLIB_API PCSTR __cdecl GetBreedStr(DWORD);
+	AOLIB_API PCSTR get_breed_str_local(breed_e);
+	AOLIB_API PCSTR get_sex_str_local(gender_e);
 	AOLIB_API PCSTR GetProfessionStr(DWORD);
-	AOLIB_API PCSTR __cdecl GetSexStr(DWORD);
 	AOLIB_API PCSTR GetSideStr(DWORD);
 	AOLIB_API PCSTR GetStatName(DWORD);
 	AOLIB_API PCSTR GetNanoSchoolStr(DWORD);

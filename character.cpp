@@ -164,7 +164,7 @@ namespace isxao_classes
 		identity_t dummy;
 		dummy.Type = 0;
 		dummy.Id = 0;
-		if (P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, dummy))
+		if (P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, dummy))
 		{
 			typedef void(__thiscall * tUseItem)(PVOID, identity_t const &, bool);
 			auto pUseItem = tUseItem(n3EngineClientAnarchy_t__N3Msg_UseItem);

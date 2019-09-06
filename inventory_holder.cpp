@@ -12,7 +12,7 @@ namespace isxao_classes
 		{
 			identity_t slot;
 			isxao_utilities::GetInvSlotIdentity(i, slot);
-			auto pItem = P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(slot, d);
+			auto pItem = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(slot, d);
 			if (pItem)
 			{
 				pMap->SetItem(isxao_utilities::GetInvSlotName(slot), reinterpret_cast<LSOBJECTDATA&>(pItem));
@@ -30,7 +30,7 @@ namespace isxao_classes
 		{
 			identity_t slot;
 			::GetInvSlotIdentity(i, slot);
-			auto pItem = P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(slot, d);
+			auto pItem = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(slot, d);
 			if (pItem)
 			{
 				INVENTORYSLOT s;
@@ -219,7 +219,7 @@ namespace isxao_classes
 		else if (!strcmp(szSearchName, "is_feet"))
 			GetInvSlotIdentity(::IS_FEET, id);
 		if (id.type != 0)
-			return reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, d));
+			return reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d));
 		std::map<identity_t, InventoryItem*> m;
 		GetInventory(m);
 		for (auto it = m.begin(); it != m.end(); ++it)
@@ -362,7 +362,7 @@ namespace isxao_classes
 			if (id.type != 0)
 			{
 				s.SlotID = id;
-				s.pItem = reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, d));
+				s.pItem = reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d));
 			}
 			std::map<identity_t, InventoryItem*> m;
 			GetInventory(m);
@@ -393,9 +393,9 @@ namespace isxao_classes
 		{
 			identity_t id;
 			isxao_utilities::GetInvSlotIdentity(i, id);
-			auto pItem = P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, d);
+			auto pItem = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d);
 			if (pItem)
-				m.insert_or_assign(id, reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->GetItemByTemplate(id, d)));
+				m.insert_or_assign(id, reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d)));
 		}
 		return m.size();
 	}

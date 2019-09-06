@@ -340,7 +340,7 @@ namespace isxao_detours
 			}
 			case ::PT_PING_MESSAGE: break;
 			case ::PT_OPERATOR_MESSAGE: break;
-			case ::PT_INITATE_COMPRESSION_MESSAGE: break;
+			case ::PT_INITIATE_COMPRESSION_MESSAGE: break;
 			default: break;
 			}
 		//}
