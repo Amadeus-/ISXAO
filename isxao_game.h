@@ -2,7 +2,6 @@
 
 #pragma region Globals
 
-#define __GetNanoItem_x												0xA3609		// Gamecode
 #define __GetSexStr_x												0x16930		// Gamecode
 #define	__GetFullPerkMap_x											0x282A1		// Gamecode
 #define __SetTarget_x												0x2682E		// GUI
@@ -107,6 +106,12 @@ constexpr char* const n3_engine_client_anarchy_t__n3_msg_assist_fight_mangled_na
 	"?N3Msg_AssistFight@n3EngineClientAnarchy_t@@QBEXABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_assist_fight_pattern = static_cast<char*>(
 	"55 8B EC 53 56 E8 ?? ?? ?? ??");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_attack_mangled_name = static_cast<char*>(
+	"?N3Msg_CanAttack@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_attack_pattern = static_cast<char*>(
+	"55 8B EC E8 ?? ?? ?? ?? 85 C0 75 ?? 32 C0 EB ??");
+
 
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_global_character_position_mangled_name = static_cast<char*>
 	("?N3Msg_GetGlobalCharacterPosition@n3EngineClientAnarchy_t@@QAEXAAVVector3_t@@@Z");

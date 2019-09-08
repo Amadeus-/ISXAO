@@ -218,6 +218,12 @@ namespace isxao_globals
 		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_assist_fight)
 #endif
 
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CAN_ATTACK_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_attack)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_attack)
+#endif
+
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GLOBAL_CHARACTER_POSITION_USE_PATTERN
 		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_position)
 #else
@@ -322,6 +328,7 @@ namespace isxao_globals
 	DWORD n3_engine_client_anarchy_t__n3_msg_airstrike = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_artillery_attack = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_assist_fight = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_can_attack = 0;
 
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_global_character_position = 0;
 
@@ -334,7 +341,7 @@ namespace isxao_globals
 #pragma region EngineClientAnarchy		
 	
 	
-	DWORD n3EngineClientAnarchy_t__N3Msg_CanAttack = 0;
+	
 	DWORD n3EngineClientAnarchy_t__N3Msg_CanClickTargetTarget = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_CanUseMech = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_CastNanoSpell = 0;
@@ -522,9 +529,9 @@ namespace isxao_globals
 
 	DWORD ItemManager_t__m_ppcInstance = 0;
 	std::vector<acg_game_item_t> ***pppItemVector = nullptr;
-	DWORD NanoItemManager_t__m_pcInstance = 0;
-	nano_item_dir_t **ppNanoItemDir = nullptr;
-	DWORD NanoItem_t__GetNanoItem = 0;
+	//DWORD NanoItemManager_t__m_pcInstance = 0;
+	//nano_item_dir_t **ppNanoItemDir = nullptr;
+	//DWORD NanoItem_t__GetNanoItem = 0;
 	DWORD StaticItemManager_t_mppcInstance;
 	std::vector<static_item_t> ***pppStaticItemVector = nullptr;
 	

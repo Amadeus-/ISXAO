@@ -86,6 +86,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_airstrike;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_artillery_attack;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_assist_fight;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_can_attack;
 
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_global_character_position;
 
@@ -112,7 +113,7 @@ namespace isxao_globals
 
 #pragma region EngineClientAnarchy		
 	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_CanAttack;
+	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_CanClickTargetTarget;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_CanUseMech;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_CastNanoSpell;
@@ -304,10 +305,10 @@ namespace isxao_globals
 	AOLIB_VAR std::vector<acg_game_item_t> ***pppItemVector;
 #define pItemVector (**pppItemVector)
 	// NanoMap Instance
-	AOLIB_VAR DWORD NanoItemManager_t__m_pcInstance;
-	AOLIB_VAR nano_item_dir_t **ppNanoItemDir;
-#define pNanoItemDir (*ppNanoItemDir)
-	AOLIB_VAR DWORD NanoItem_t__GetNanoItem;
+//	AOLIB_VAR DWORD NanoItemManager_t__m_pcInstance;
+//	AOLIB_VAR nano_item_dir_t **ppNanoItemDir;
+//#define pNanoItemDir (*ppNanoItemDir)
+//	AOLIB_VAR DWORD NanoItem_t__GetNanoItem;
 	// Action Item Manager
 	AOLIB_VAR DWORD StaticItemManager_t_mppcInstance;
 	AOLIB_VAR std::vector<static_item_t> ***pppStaticItemVector;

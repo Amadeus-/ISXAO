@@ -21,7 +21,7 @@ public:
 	AOLIB_OBJECT void n3_msg_airstrike(const identity_t &target_id);
 	AOLIB_OBJECT void n3_msg_artillery_attack(const identity_t &target_id);
 	AOLIB_OBJECT void n3_msg_assist_fight(const identity_t &assist_id);
-	AOLIB_OBJECT bool N3Msg_CanAttack(identity_t const &target_id);
+	AOLIB_OBJECT bool n3_msg_can_attack(identity_t const &target_id);
 	AOLIB_OBJECT bool N3Msg_CanClickTargetTarget(const identity_t &, const identity_t &);
 	AOLIB_OBJECT bool N3Msg_CanUseMech();
 	AOLIB_OBJECT void N3Msg_CastNanoSpell(const identity_t &, const identity_t &);
@@ -66,7 +66,7 @@ public:
 	AOLIB_OBJECT PCSTR N3Msg_GetFirstName(const identity_t &);
 	AOLIB_OBJECT double N3Msg_GetFormulaProgress(const identity_t &, DWORD &, DWORD &);
 	AOLIB_OBJECT DWORD N3Msg_GetFormulaRadius(const identity_t &);
-	AOLIB_OBJECT void N3Msg_GetGlobalCharacterPosition(vector3_t &);
+	AOLIB_OBJECT void n3_msg_get_global_character_position(vector3_t &);
 	AOLIB_OBJECT void N3Msg_GetGlobalCharacterRotation(quaternion_t &);
 	AOLIB_OBJECT PVOID N3Msg_GetGridDestinationList() const;
 	AOLIB_OBJECT std::vector<p_inventory_data_t>* N3Msg_GetInventoryVec(const identity_t &);

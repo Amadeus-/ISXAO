@@ -7,7 +7,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	if (!ObjectData.Ptr)
 		return false;
 
-#define pCharacter ((Character*)ObjectData.Ptr)
+#define pCharacter ((character*)ObjectData.Ptr)
 	switch (CharacterTypeMembers(Member->ID))
 	{
 	case Inventory:
@@ -76,7 +76,9 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 				auto index = DWORD(GETNUMBER());				
 				if (index > v.size())
 					return false;
-				if((Object.Ptr = isxao_utilities::GetNanoItem(v[index - 1])))
+				identity_t i(53019, v[index - 1]);
+				identity_t d(0.0, 0.0);
+				if((Object.Ptr = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d)))
 				{
 					Object.Type = pNanoSpellType;
 					return true;
@@ -90,7 +92,9 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 				_strlwr_s(search_name);
 				for (auto it = v.begin(); it != v.end(); ++it)
 				{
-					auto pSpell = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(*it));
+					identity_t i(53019, *it);
+					identity_t d(0.0, 0.0);
+					auto pSpell = reinterpret_cast<NanoItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d));
 					strcpy_s(name, sizeof(name), pSpell->GetName());
 					_strlwr_s(name);
 					if(strstr(name, search_name))
@@ -250,7 +254,7 @@ bool CharacterType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int bufl
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define pCharacter ((Character*)ObjectData.Ptr)
+#define pCharacter ((character*)ObjectData.Ptr)
 	sprintf_s(buf, buflen, "%I64u", pCharacter->GetIdentity().get_combined_identity());
 #undef pCharacter
 

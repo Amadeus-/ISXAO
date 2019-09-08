@@ -6,7 +6,7 @@ namespace isxao_classes
 	float Dynel::GetDistanceToClient()
 	{
 		vector3_t client_position;
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(client_position);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(client_position);
 		return GetDistance3DTo(client_position);
 	}
 
@@ -89,7 +89,7 @@ namespace isxao_classes
 		height_offset.y = 1.6f;
 		height_offset.z = 0.0f;
 		vector3_t client_position;
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(client_position);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(client_position);
 		vector3_t offset_client_position = vector3_t::add(client_position, height_offset);
 		vector3_t dynel_position = GetPosition();
 		vector3_t offset_dynel_position = vector3_t::add(dynel_position, height_offset);

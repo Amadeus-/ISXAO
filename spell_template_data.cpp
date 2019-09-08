@@ -9,7 +9,9 @@ namespace isxao_classes
 		GetNanoSpellList(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 		{
-			auto item = isxao_utilities::GetNanoItem((*it));
+			identity_t i(53019, (*it));
+			identity_t d(0.0, 0.0);
+			auto item = reinterpret_cast<NanoItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d));
 			if (item)
 				pIndex->AddItem((LSOBJECTDATA&)item);
 		}

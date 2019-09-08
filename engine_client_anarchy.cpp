@@ -106,7 +106,7 @@ namespace isxao_classes
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	bool engine_client_anarchy::is_first_login(void)
 	{
-		return bool(n3_engine_client_anarchy_.is_first_login);
+		return n3_engine_client_anarchy_.is_first_login == 1;
 	}
 #endif
 
@@ -133,7 +133,7 @@ namespace isxao_classes
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_ARTILLERY_ATTACK_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
-	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_artillery_attack(const identity_t &), n3_engine_client_anarchy_t__n3_msg_artillery_attack);
+	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_artillery_attack(const identity_t &), n3_engine_client_anarchy_t__n3_msg_artillery_attack)
 #else
 	static_assert(false, "engine_client_anarchy::n3_msg_artillery_attack(const identity_t &) requires a native function.");
 #endif
@@ -145,8 +145,11 @@ namespace isxao_classes
 	static_assert(false, "engine_client_anarchy::n3_msg_artillery_attack(const identity_t &) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_CanAttack_x
-	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::N3Msg_CanAttack(const identity_t &), n3EngineClientAnarchy_t__N3Msg_CanAttack);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CAN_ATTACK_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_can_attack(const identity_t &), n3_engine_client_anarchy_t__n3_msg_can_attack)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_can_attack(const identity_t &) requires a native function.");
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_CanClickTargetTarget_x
@@ -336,7 +339,7 @@ namespace isxao_classes
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterPosition_x
-	FUNCTION_AT_ADDRESS(void engine_client_anarchy::N3Msg_GetGlobalCharacterPosition(vector3_t &), n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterPosition);
+	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_get_global_character_position(vector3_t &), n3_engine_client_anarchy_t__n3_msg_get_global_character_position);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterRotation_x

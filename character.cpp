@@ -53,7 +53,7 @@ namespace isxao_classes
 			offset.y = 1.6f;
 			offset.z = 0.0f;
 			vector3_t client;
-			P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(client);
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(client);
 			const auto offset_client = vector3_t::add(client, offset);
 			auto dynel = p_dynel->GetPosition();
 			const vector3_t offset_me = vector3_t::add(dynel, offset);

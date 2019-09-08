@@ -55,7 +55,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case Distance:
 		{
 			vector3_t v;
-			P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(v);
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
 			Object.Float = pDynel->GetDistance3DTo(v);
 			Object.Type = pfloatType;
 			break;			
@@ -63,7 +63,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case Distance2D:
 		{
 			vector3_t v;
-			P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(v);
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
 			Object.Float = pDynel->GetDistanceTo(v);
 			Object.Type = pfloatType;
 			break;
@@ -86,7 +86,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->get_client_char())
 			{
 				vector3_t v;
-				P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(v);
+				P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
 				auto rawHeading = pDynel->GetHeadingTo(v);
 				if (rawHeading > 0.0f)
 					heading = float(rawHeading * 180.0f / M_PI);
@@ -157,7 +157,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				offset.y = 0.0f;
 				offset.z = z;
 				vector3_t v;
-				P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(v);
+				P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
 				rawheading = pDynel->GetHeadingToLoc(v, offset);
 				if (rawheading > 0.0f)
 					heading = float(rawheading * 180.0 / M_PI);

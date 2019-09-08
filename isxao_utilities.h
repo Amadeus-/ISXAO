@@ -20,7 +20,7 @@ namespace isxao_utilities
 	AOLIB_API DWORD __cdecl GetFullPerkMap(void);
 	AOLIB_API Dynel* __cdecl GetDynel(const identity_t &);
 	AOLIB_API Actor* __cdecl GetActor(const identity_t &);
-	AOLIB_API p_nano_item_t __cdecl GetNanoItem(DWORD);
+	//AOLIB_API p_nano_item_t __cdecl GetNanoItem(DWORD);
 
 	AOLIB_API bool IsValidDynel(p_n3_dynel_t);
 

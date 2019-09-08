@@ -137,7 +137,7 @@ namespace isxao_classes
 	void Actor::DoFace()
 	{
 		vector3_t client_position;
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_GetGlobalCharacterPosition(client_position);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(client_position);
 		auto position = GetPosition();
 		auto new_rotation = quaternion_t::get_quaternion_to_face(position, client_position);
 		P_ENGINE_CLIENT_ANARCHY->get_client_char()->SetRotation(new_rotation);

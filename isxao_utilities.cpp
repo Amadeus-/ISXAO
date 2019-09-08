@@ -692,11 +692,11 @@ namespace isxao_utilities
 
 	void GetNanoMap(std::map<DWORD, p_nano_item_t>& m)
 	{
-		auto count = pNanoItemDir->count;
-		auto pRoot = pNanoItemDir->p_root;
-		auto pNode = pRoot->p_node;
-		if (count > 0)
-			RecursiveAddNanoToNanoMap(m, pNode, pRoot, count);
+		//auto count = pNanoItemDir->count;
+		//auto pRoot = pNanoItemDir->p_root;
+		//auto pNode = pRoot->p_node;
+		//if (count > 0)
+		//	RecursiveAddNanoToNanoMap(m, pNode, pRoot, count);
 	}
 
 	void RecursiveAddStatNameToStatNameMap(std::map<DWORD, PCSTR>& m, p_stat_name_node_t pNode, p_stat_name_root_t pRoot, DWORD& count)
