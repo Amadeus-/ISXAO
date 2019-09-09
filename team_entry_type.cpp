@@ -85,7 +85,7 @@ bool TeamEntryType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int bufl
 	if (!ObjectData.Ptr)
 		return false;
 #define pTeamEntry ((TeamMember*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64u", pTeamEntry->GetIdentity().get_combined_identity());
+	sprintf_s(buf, buflen, "%I64u", pTeamEntry->get_identity().get_combined_identity());
 #undef pTeamEntry
 
 	return true;

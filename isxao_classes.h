@@ -7,7 +7,7 @@ namespace isxao_classes
 
 	class Actor;
 	class character;
-	class InfoItemRemote;
+	class info_item_remote;
 	class InventoryItem;
 	class Pet;
 	class Player;

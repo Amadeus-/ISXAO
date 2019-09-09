@@ -21,8 +21,8 @@ namespace isxao_detours
 		PVOID n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Trampoline();
 		PVOID n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Detour();
 
-		void Playfield_t__AddChildDynel_Trampoline(Dynel*, const vector3_t&, const quaternion_t&);
-		void Playfield_t__AddChildDynel_Detour(Dynel*, const vector3_t&, const quaternion_t&);
+		void Playfield_t__AddChildDynel_Trampoline(dynel*, const vector3_t&, const quaternion_t&);
+		void Playfield_t__AddChildDynel_Detour(dynel*, const vector3_t&, const quaternion_t&);
 
 		void n3Dynel_t__SetPlayfield_Trampoline(DWORD);
 		void n3Dynel_t__SetPlayfield_Detour(DWORD);

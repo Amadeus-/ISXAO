@@ -39,7 +39,7 @@ namespace isxao_classes
 	PCSTR SpecialActionTemplate::GetName() const
 	{
 		identity_t dummy_identity;
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName(GetIdentity(), dummy_identity);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name(GetIdentity(), dummy_identity);
 	}
 
 	special_action_t SpecialActionTemplate::GetSpecialActionData() const
@@ -67,7 +67,7 @@ namespace isxao_classes
 
 	double SpecialActionTemplate::GetSpecialActionProgress(DWORD &a, DWORD &b) const
 	{
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetItemProgress(GetIdentity(), a, b);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_item_progress(GetIdentity(), a, b);
 	}
 
 	bool SpecialActionTemplate::SpecialActionCompare(SpecialActionTemplate &a, SpecialActionTemplate &b)

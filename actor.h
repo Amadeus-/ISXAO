@@ -1,6 +1,6 @@
 #pragma once
 
-class Actor : public Dynel
+class Actor : public dynel
 {
 public:
 	AOLIB_OBJECT DWORD BuildLSNCU(LSIndex*);

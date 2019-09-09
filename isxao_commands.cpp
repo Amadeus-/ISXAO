@@ -52,7 +52,7 @@ namespace isxao_commands
 		//		identity_t previous_target;
 		//		DWORD64 target_id = atoui64(argv[(1 + begin_inclusive)]);
 		//		identity_t target_identity = identity_t::get_identity_from_combined(target_id);
-		//		Dynel* pDynel = isxao_utilities::GetDynel(target_identity);
+		//		dynel* pDynel = isxao_utilities::GetDynel(target_identity);
 		//		if(pDynel)
 		//		{
 		//			if(!pSelectionIndicator) // No Current Target
@@ -647,7 +647,7 @@ namespace isxao_commands
 		//		DWORD64 target_id = atoui64(argv[(1 + begin_inclusive)]);
 		//		identity_t target_identity = identity_t::get_identity_from_combined(target_id);
 		//		NanoItem* pNanoItem = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(nano_id));
-		//		Dynel* pTarget = isxao_utilities::GetDynel(target_identity);
+		//		dynel* pTarget = isxao_utilities::GetDynel(target_identity);
 		//		if(pNanoItem && pTarget)
 		//		{
 		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_CastNanoSpell(nano_identity, target_identity);
@@ -709,7 +709,7 @@ namespace isxao_commands
 		//			return 0;
 		//		DWORD64 target_id = atoui64(argv[(1 + begin_inclusive)]);
 		//		identity_t target_identity = identity_t::get_identity_from_combined(target_id);
-		//		Dynel* pTarget = isxao_utilities::GetDynel(target_identity);
+		//		dynel* pTarget = isxao_utilities::GetDynel(target_identity);
 		//		if (!pTarget)
 		//			return 0;
 		//		P_ENGINE_CLIENT_ANARCHY->N3Msg_CastNanoSpell(nano_identity, target_identity);
@@ -807,7 +807,7 @@ namespace isxao_commands
 		//			action_identity.Id = atoi(argv[1]);
 		//			DWORD64 comb_target_identity = atoui64(argv[2]);
 		//			identity_t target_identity = identity_t::get_identity_from_combined(comb_target_identity);
-		//			Dynel* pDynel = isxao_utilities::GetDynel(target_identity);
+		//			dynel* pDynel = isxao_utilities::GetDynel(target_identity);
 		//			if(pDynel)
 		//			{
 		//				bool has_current_target = pSelectionIndicator != nullptr;
@@ -881,7 +881,7 @@ namespace isxao_commands
 		//			}
 		//			DWORD64 comb_target_identity = atoui64(argv[2]);
 		//			identity_t target_identity = identity_t::get_identity_from_combined(comb_target_identity);
-		//			Dynel* pDynel = isxao_utilities::GetDynel(target_identity);
+		//			dynel* pDynel = isxao_utilities::GetDynel(target_identity);
 		//			if(valid_action && pDynel)
 		//			{
 		//				bool has_current_target = pSelectionIndicator != nullptr;

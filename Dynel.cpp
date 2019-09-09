@@ -3,86 +3,90 @@
 namespace isxao_classes
 {
 
-	float Dynel::GetDistanceToClient()
+	float dynel::get_distance_to_client()
 	{
 		vector3_t client_position;
 		P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(client_position);
-		return GetDistance3DTo(client_position);
+		return this->get_distance_3d_to(client_position);
 	}
 
-	float Dynel::GetDistanceTo(vector3_t& position)
+	float dynel::get_distance_to(vector3_t& position)
 	{
-		auto dynel_position = GetPosition();
+		auto dynel_position = this->get_position();
 		return vector3_t::distance_xz(dynel_position, position);
 	}
 
-	float Dynel::GetDistance3DTo(vector3_t& position)
+	// ReSharper disable once CppInconsistentNaming
+	float dynel::get_distance_3d_to(vector3_t& position)
 	{
-		auto dynel_position = GetPosition();
+		auto dynel_position = this->get_position();
 		return vector3_t::distance(dynel_position, position);
 	}
 
-	float Dynel::GetDistance3DToSquared(vector3_t& position)
+	// ReSharper disable once CppInconsistentNaming
+	float dynel::get_distance_3d_to_squared(vector3_t& position)
 	{
-		auto dynel_position = GetPosition();
+		auto dynel_position = this->get_position();
 		return vector3_t::distance_squared(dynel_position, position);
 	}
 
-	float Dynel::GetDistanceToSquared(vector3_t& position)
+	float dynel::get_distance_to_squared(vector3_t& position)
 	{
-		auto dynel_position = GetPosition();
+		auto dynel_position = this->get_position();
 		return vector3_t::distance_xz_squared(dynel_position, position);
 	}
 
-	float Dynel::GetDistanceXTo(vector3_t& position)
+	float dynel::get_distance_x_to(vector3_t& position)
 	{
-		auto dynel_position = GetPosition();
+		auto dynel_position = this->get_position();
 		return vector3_t::distance_x(dynel_position, position);
 	}
 
-	float Dynel::GetDistanceYTo(vector3_t& position)
+	float dynel::get_distance_y_to(vector3_t& position)
 	{
-		auto dynel_position = GetPosition();
+		auto dynel_position = this->get_position();
 		return vector3_t::distance_y(dynel_position, position);
 	}
 
-	float Dynel::GetDistanceZTo(vector3_t& position)
+	float dynel::get_distance_z_to(vector3_t& position)
 	{
-		auto dynel_position = GetPosition();
+		auto dynel_position = this->get_position();
 		return vector3_t::distance_z(dynel_position, position);
 	}
 
-	float Dynel::GetHeading()
+	float dynel::get_heading()
 	{
-		return GetRotation().get_heading();
+		return get_rotation().get_heading();
 	}
 
-	float Dynel::GetHeadingTo(vector3_t & position)
+	float dynel::get_heading_to(vector3_t & position)
 	{
-		auto direction_vector = vector3_t::subtract(GetPosition(), position);
+		auto dynel_position = this->get_position();
+		auto direction_vector = vector3_t::subtract(dynel_position, position);
 		direction_vector.normalize();
 		return direction_vector.get_yaw();
 	}
 
-	float Dynel::GetHeadingToLoc(vector3_t &position, vector3_t &position_offset)
+	float dynel::get_heading_to_loc(vector3_t &position, vector3_t &position_offset)
 	{
-		vector3_t new_position = vector3_t::add(GetPosition(), position_offset);
+		auto dynel_position = this->get_position();
+		auto new_position = vector3_t::add(dynel_position, position_offset);
 		auto direction_vector = vector3_t::subtract(position, new_position);
 		direction_vector.normalize();
 		return direction_vector.get_yaw();
 	}
 
-	identity_t Dynel::GetIdentity()
+	identity_t dynel::get_identity()
 	{
-		return GetDynelData()->identity;
+		return this->get_dynel_data()->identity;
 	}	
 
-	void Dynel::Interact()
+	void dynel::interact()
 	{
-		P_ENGINE_CLIENT_ANARCHY->n3_msg_default_action_on_dynel(GetIdentity());
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_default_action_on_dynel(this->get_identity());
 	}
 
-	bool Dynel::IsInLineOfSight()
+	bool dynel::is_in_line_of_sight()
 	{
 		vector3_t height_offset;
 		height_offset.x = 0.0f;
@@ -90,182 +94,197 @@ namespace isxao_classes
 		height_offset.z = 0.0f;
 		vector3_t client_position;
 		P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(client_position);
-		vector3_t offset_client_position = vector3_t::add(client_position, height_offset);
-		vector3_t dynel_position = GetPosition();
-		vector3_t offset_dynel_position = vector3_t::add(dynel_position, height_offset);
-		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offset_client_position, offset_dynel_position, GetDynelData()->p_vehicle->zone_instance_id, false);
+		const auto offset_client_position = vector3_t::add(client_position, height_offset);
+		auto dynel_position = this->get_position();
+		const auto offset_dynel_position = vector3_t::add(dynel_position, height_offset);
+		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offset_client_position, offset_dynel_position, get_dynel_data()->p_vehicle->zone_instance_id, false);
 	}
 
-	bool Dynel::IsInLineOfSight(vector3_t &position)
+	bool dynel::is_in_line_of_sight(vector3_t &position)
 	{
-		vector3_t me = GetPosition();
-		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(position, me, GetDynelData()->p_vehicle->zone_instance_id, false);
+		vector3_t height_offset;
+		height_offset.x = 0.0f;
+		height_offset.y = 1.6f;
+		height_offset.z = 0.0f;
+		auto dynel_position = this->get_position();
+		const auto offset_dynel_position = vector3_t::add(dynel_position, height_offset);
+		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(position, offset_dynel_position, get_dynel_data()->p_vehicle->zone_instance_id, false);
 	}
 	
-	PCSTR Dynel::GetName()
+	PCSTR dynel::get_name()
 	{
-		identity_t dummy_identity;
-		ZeroMemory(&dummy_identity, sizeof(identity_t));
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName(GetIdentity(), dummy_identity);
+		const identity_t container_identity(0.0, 0.0);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name(this->get_identity(), container_identity);
 	}
 
-	vector3_t Dynel::GetPosition()
+	vector3_t dynel::get_position()
 	{
-		if (GetDynelData()->p_vehicle->p_parent_vehicle == nullptr)
-			return GetDynelData()->p_vehicle->global_pos;
-		return GetDynelData()->p_vehicle->parent_global_pos;
+		if (get_dynel_data()->p_vehicle->p_parent_vehicle == nullptr)
+			return get_dynel_data()->p_vehicle->global_pos;
+		return get_dynel_data()->p_vehicle->parent_global_pos;
 	}
 
-	quaternion_t Dynel::GetRotation()
+	quaternion_t dynel::get_rotation()
 	{
-		if (GetDynelData()->p_vehicle->p_parent_vehicle == nullptr)
-			return GetDynelData()->p_vehicle->body_rot;
-		return GetDynelData()->p_vehicle->parent_body_rot;
+		if (get_dynel_data()->p_vehicle->p_parent_vehicle == nullptr)
+			return get_dynel_data()->p_vehicle->body_rot;
+		return get_dynel_data()->p_vehicle->parent_body_rot;
 	}
 
-	LONG Dynel::GetSkill(DWORD stat)
+	LONG dynel::get_skill(DWORD stat)
 	{
-		identity_t dummy_identity; 
-		ZeroMemory(&dummy_identity, sizeof(identity_t));
-		if (!IsClientId(GetIdentity().id))
+		const auto dynel_identity = this->get_identity();
+		const identity_t container_identity(0.0, 0.0);
+		if (!IsClientId(dynel_identity.id))
 		{
-			//if (!IsInfoRequestCompleted())
-			//	isxao_utilities::RequestInfo(GetIdentity());
-			return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(GetIdentity(), stat, 2, dummy_identity);
+			return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(dynel_identity, stat, 2, container_identity);
 		}			
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(stat, 2);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(stat, 2);
 	}
 
-	bool Dynel::IsContainer()
+	bool dynel::is_container()
 	{
-		return GetIdentity().type == 51017;
+		return this->get_identity().type == 51017;
 	}
 
-	bool Dynel::IsCorpse()
+	bool dynel::is_corpse()
 	{
-		return GetIdentity().type == 51050;
+		return this->get_identity().type == 51050;
 	}
 
-	bool Dynel::IsDoor()
+	bool dynel::is_door()
 	{
-		return GetIdentity().type == 51016;
+		return this->get_identity().type == 51016;
 	}
 
-	bool Dynel::IsActor()
+	bool dynel::is_actor()
 	{
-		if (GetIdentity().type == 50000)
+		const auto dynel_identity = this->get_identity();
+		if (dynel_identity.type == 50000)
 		{
-			auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(GetIdentity());
+			const auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(dynel_identity);
 			return is_npc;
 		}
 		return false;
 	}
 
-	bool Dynel::IsInfoRequestCompleted()
+	bool dynel::is_info_request_completed()
 	{
-		if(!IsClientId(GetIdentity().id))
+		const auto dynel_identity = this->get_identity();
+		if(!IsClientId(dynel_identity.id))
 		{
-			identity_t dummy_identity;
-			ZeroMemory(&dummy_identity, sizeof(identity_t));
-			auto profession = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(GetIdentity(), ST_PROFESSION, 2, dummy_identity);
-			//printf("%d", profession);
+			const identity_t container_identity(0.0, 0.0);
+			const auto profession = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(dynel_identity, ST_PROFESSION, 2, container_identity);
 			return profession != -1;
 		}
 		return true;
 	}
 
-	bool Dynel::IsPet()
+	bool dynel::is_pet()
 	{
-		if (GetIdentity().type == 50000)
+		const auto dynel_identity = this->get_identity();
+		if (dynel_identity.type == 50000)
 		{
-			auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(GetIdentity());
+			const auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(dynel_identity);
 			if (is_npc)
 			{
-				if (GetSkill(ST_PETMASTER) != 1234567890)
+				if (this->get_skill(ST_PETMASTER) != 1234567890)
 					return true;
 			}
 		}
 		return false;
 	}
 
-	bool Dynel::IsPlayer()
+	bool dynel::is_player()
 	{
-		if (GetIdentity().type == 50000)
+		const auto dynel_identity = this->get_identity();
+		if (dynel_identity.type == 50000)
 		{
-			auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(GetIdentity());
+			const auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(dynel_identity);
 			return is_npc == 0;
 		}
 		return false;
 	}
 
-	bool Dynel::IsCharacter()
+	bool dynel::is_character()
 	{
-		if (GetIdentity().type == 50000)
+		const auto dynel_identity = this->get_identity();
+		if (dynel_identity.type == 50000)
 		{
-			return GetIdentity().id == g_character_id;
+			return dynel_identity.id == g_character_id;
 		}
 		return false;
 	}
 
-	bool Dynel::IsTeamMember()
+	bool dynel::is_team_member()
 	{
-		return IsPlayer() && ToPlayer()->IsInMyTeam();
+		return this->is_player() && this->to_player()->IsInMyTeam();
 	}
 
-	bool Dynel::IsVendingMachine()
+	bool dynel::is_vending_machine()
 	{
-		return GetIdentity().type == 51035;
+		return get_identity().type == 51035;
 	}
 
-	bool Dynel::IsWeaponInstance()
+	bool dynel::is_weapon_instance()
 	{
-		return GetIdentity().type == 51018;
+		return get_identity().type == 51018;
 	}
 
-	PVOID Dynel::GetData()
+	PVOID dynel::get_data()
 	{
 		return &n3_dynel_;
 	}
 
-	p_n3_dynel_t Dynel::GetDynelData()
+	p_n3_dynel_t dynel::get_dynel_data()
 	{
-		return p_n3_dynel_t(GetData());
+		return p_n3_dynel_t(get_data());
 	}
 
-	FUNCTION_AT_ADDRESS(void Dynel::SendIIRToObservers(InfoItemRemote*), n3_dynel_t__send_iir_to_observers)
+#ifdef N3_DYNEL_T__SEND_IIR_TO_OBSERVERS_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(void dynel::send_iir_to_observers(info_item_remote*), n3_dynel_t__send_iir_to_observers)
+#else
+	static_assert(false, "dynel::send_iir_to_observers(info_item_remote*) requires a native function.");
+#endif
 
-
-	Actor* Dynel::ToActor()
+	Actor* dynel::to_actor()
 	{
-		return static_cast<Actor*>(GetData());
+		return static_cast<Actor*>(get_data());
 	}
 
-	character* Dynel::ToCharacter()
+	character* dynel::to_character()
 	{
-		return static_cast<character*>(GetData());
+		return static_cast<character*>(get_data());
 	}
 
-	Pet* Dynel::ToPet()
+	Pet* dynel::to_pet()
 	{
-		return static_cast<Pet*>(GetData());
+		return static_cast<Pet*>(get_data());
 	}
 
-	Player* Dynel::ToPlayer()
+	Player* dynel::to_player()
 	{
-		return static_cast<Player*>(GetData());
+		return static_cast<Player*>(get_data());
 	}
 
-	TeamMember* Dynel::ToTeamMember()
+	TeamMember* dynel::to_team_member()
 	{
-		return static_cast<TeamMember*>(GetData());
+		return static_cast<TeamMember*>(get_data());
 	}
+
+#ifdef N3_DYNEL_T__UPDATE_LOCALITY_LISTENERS_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(void dynel::update_locality_listeners(), n3_dynel_t__update_locality_listeners)
+#else
+	static_assert(false, "dynel::update_locality_listeners() requires a native function.");
+#endif
 	
-	FUNCTION_AT_ADDRESS(void Dynel::UpdateLocalityListeners(), n3_dynel_t__update_locality_listeners);
-
-
-	bool Dynel::pDynelCompare(Dynel *pA, Dynel *pB)
+	bool dynel::p_dynel_compare(dynel *p_a, dynel *p_b)
 	{
-		return pA->GetDistanceToClient() < pB->GetDistanceToClient();
+		return p_a->get_distance_to_client() < p_b->get_distance_to_client();
 	}
 	
 }

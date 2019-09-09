@@ -234,7 +234,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				if (result)
 				{
 					Object.Ptr = result;
-					Object.Type = ::GetRealType(reinterpret_cast<Dynel*>(result));
+					Object.Type = ::GetRealType(reinterpret_cast<dynel*>(result));
 					return true;
 				}
 			}

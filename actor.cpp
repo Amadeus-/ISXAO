@@ -35,7 +35,7 @@ namespace isxao_classes
 	PCSTR Actor::Consider()
 	{
 		float consider;
-		P_ENGINE_CLIENT_ANARCHY->n3_msg_consider(GetIdentity(), consider);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_consider(get_identity(), consider);
 		if (consider >= 0.0f && consider < 0.2000000029802322)
 			return "Easy";
 		if (consider >= 0.2000000029802322 && consider < 0.4900000095367432)
@@ -113,7 +113,7 @@ namespace isxao_classes
 		RGBCOLOR argb;
 		argb.ARGB = 0xFFFFFF;
 		float consider;
-		DWORD con_type = P_ENGINE_CLIENT_ANARCHY->n3_msg_consider(GetIdentity(), consider);
+		DWORD con_type = P_ENGINE_CLIENT_ANARCHY->n3_msg_consider(get_identity(), consider);
 		if (consider > 1.0f)
 			consider = 1.0f;
 		if(con_type == 3)
@@ -138,20 +138,20 @@ namespace isxao_classes
 	{
 		vector3_t client_position;
 		P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(client_position);
-		auto position = GetPosition();
+		auto position = get_position();
 		auto new_rotation = quaternion_t::get_quaternion_to_face(position, client_position);
 		P_ENGINE_CLIENT_ANARCHY->get_client_char()->SetRotation(new_rotation);
 	}
 
 	void Actor::DoTarget()
 	{
-		pTargetingModule->SetTarget(GetIdentity(), false);
+		pTargetingModule->SetTarget(get_identity(), false);
 	}
 
 	float Actor::EstimatedDistanceTo(vector3_t &position)
 	{
-		vector3_t dynel_position = GetPosition();
-		float uncompensated_distance = GetDistanceTo(position);
+		vector3_t dynel_position = get_position();
+		float uncompensated_distance = get_distance_to(position);
 		float x = position.x - (dynel_position.x + GetVehicle()->GetVelocity().x*uncompensated_distance);
 		float z = position.z - (dynel_position.z + GetVehicle()->GetVelocity().z*uncompensated_distance);
 		vector3_t estimated_position;
@@ -183,7 +183,7 @@ namespace isxao_classes
 		for (auto it = nano_template_vector.begin(); it != nano_template_vector.end(); ++it)
 		{
 			auto entry = static_cast<NanoTemplate*>(&(*it));
-			strcpy_s(name, MAX_STRING, P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName(entry->GetNanoIdentity(), dummy_identity));
+			strcpy_s(name, MAX_STRING, P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name(entry->GetNanoIdentity(), dummy_identity));
 			_strlwr_s(name);
 			if (strstr(name, search_name))
 				return entry;
@@ -210,7 +210,7 @@ namespace isxao_classes
 
 	p_simple_char_t Actor::GetSimpleCharData()
 	{
-		return p_simple_char_t(GetData());
+		return p_simple_char_t(get_data());
 	}
 
 	Vehicle* Actor::GetVehicle()
@@ -246,30 +246,30 @@ namespace isxao_classes
 
 	bool Actor::IsInMyTeam()
 	{
-		return IsPlayer() && IsInTeam() && (GetTeamRaid()->GetTeamIdentity() == P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetTeamRaid()->GetTeamIdentity());
+		return is_player() && IsInTeam() && (GetTeamRaid()->GetTeamIdentity() == P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetTeamRaid()->GetTeamIdentity());
 	}
 
 	bool Actor::IsInTeam()
 	{
-		if(IsPlayer())
+		if(is_player())
 			return GetTeamRaid()->GetTeamIdentity().type != 0;
 		return false;
 	}
 
 	bool Actor::IsInRaid()
 	{
-		return IsPlayer() && IsInTeam() && GetTeamRaid()->GetTeamRaidIndex() != -1;
+		return is_player() && IsInTeam() && GetTeamRaid()->GetTeamRaidIndex() != -1;
 	}
 
 	bool Actor::IsInMyRaidTeam()
 	{
-		if(IsTeamMember() && IsInRaid())
+		if(is_team_member() && IsInRaid())
 		{
 			std::vector<TeamEntry*> v;
 			P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetTeamRaid()->GetTeam(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{
-				if ((*it)->GetIdentity() == GetIdentity())
+				if ((*it)->GetIdentity() == get_identity())
 					return true;
 			}
 		}		
@@ -283,7 +283,7 @@ namespace isxao_classes
 
 	bool Actor::IsKOS()
 	{
-		return GetSkill(ST_BREEDHOSTILITY) > 30;
+		return get_skill(ST_BREEDHOSTILITY) > 30;
 	}
 
 	bool Actor::IsMovingForward()
@@ -308,11 +308,11 @@ namespace isxao_classes
 	
 	bool Actor::IsTeamLeader()
 	{
-		if(IsPlayer())
+		if(is_player())
 		{
 			auto result = false;
 			if (P_ENGINE_CLIENT_ANARCHY && IsInTeam() && IsInMyTeam())
-				result = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsTeamLeader(GetIdentity());
+				result = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsTeamLeader(get_identity());
 			return result;
 		}
 		return false;
@@ -320,19 +320,19 @@ namespace isxao_classes
 	
 	DWORD Actor::GetMasterId()
 	{
-		return GetSkill(ST_PETMASTER);
+		return get_skill(ST_PETMASTER);
 	}
 
 	Actor* Actor::GetMaster()
 	{
-		if (!IsPet())
+		if (!is_pet())
 			return nullptr;
 		identity_t master;
 		DWORD id = 0;
 		master.type = 50000;
-		id = GetSkill(ST_PETMASTER);
+		id = get_skill(ST_PETMASTER);
 		master.id = id;
-		return isxao_utilities::GetDynel(master)->ToActor();
+		return isxao_utilities::GetDynel(master)->to_actor();
 	}
 
 	Actor* Actor::GetPet(DWORD index)
@@ -345,7 +345,7 @@ namespace isxao_classes
 		for (auto it = pet_map.begin(); it != pet_map.end(); ++it)
 		{
 			if (it->second == index)
-				return isxao_utilities::GetDynel(it->first)->ToActor();
+				return isxao_utilities::GetDynel(it->first)->to_actor();
 		}
 		return nullptr;
 	}
@@ -363,10 +363,10 @@ namespace isxao_classes
 		_strlwr_s(search_name);
 		for (auto it = pet_map.begin(); it != pet_map.end(); ++it)
 		{
-			strcpy_s(name, MAX_STRING, P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName((*it).first, dummy_identity));
+			strcpy_s(name, MAX_STRING, P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name((*it).first, dummy_identity));
 			_strlwr_s(name);
 			if (strstr(name, search_name))
-				return isxao_utilities::GetDynel((*it).first)->ToActor();
+				return isxao_utilities::GetDynel((*it).first)->to_actor();
 		}
 		return nullptr;
 	}
@@ -380,7 +380,7 @@ namespace isxao_classes
 	DWORD Actor::GetPetIDs(std::map<identity_t, DWORD>& m)
 	{
 		std::map<identity_t, DWORD> pet_map;
-		if (!IsClientId(GetIdentity().id))
+		if (!IsClientId(get_identity().id))
 		{
 			std::map<identity_t, p_n3_dynel_t> dynel_map;
 			GetDynelMap(dynel_map);
@@ -392,8 +392,8 @@ namespace isxao_classes
 					auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(it->first);
 					if (is_npc)
 					{
-						auto dynel = reinterpret_cast<Dynel*>(it->second);
-						if (dynel->GetSkill(ST_PETMASTER) == GetIdentity().id)
+						auto dynel = reinterpret_cast<dynel*>(it->second);
+						if (dynel->get_skill(ST_PETMASTER) == get_identity().id)
 						{
 							pet_map.insert_or_assign(it->first, pet_count);
 							pet_count++;
@@ -403,16 +403,16 @@ namespace isxao_classes
 			}
 			return pet_map.size();
 		}
-		isxao_utilities::GetPetMap(m, ToCharacter()->GetNPCHolder()->GetNPCHolderData().p_pet_dir);
+		isxao_utilities::GetPetMap(m, to_character()->GetNPCHolder()->GetNPCHolderData().p_pet_dir);
 		return m.size();
 	}
 
 	bool Actor::HasPet()
 	{
-		if(IsCharacter())
+		if(is_character())
 		{
 			std::map <identity_t, DWORD> pet_map;
-			isxao_utilities::GetPetMap(pet_map, ToCharacter()->GetNPCHolder()->GetNPCHolderData().p_pet_dir);
+			isxao_utilities::GetPetMap(pet_map, to_character()->GetNPCHolder()->GetNPCHolderData().p_pet_dir);
 			if (pet_map.size() == 0)
 				return false;
 			return true;
@@ -426,8 +426,8 @@ namespace isxao_classes
 				auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(it->first);
 				if (is_npc)
 				{
-					auto dynel = reinterpret_cast<Dynel*>(it->second);
-					if (dynel->GetSkill(ST_PETMASTER) == GetIdentity().id)
+					auto dynel = reinterpret_cast<dynel*>(it->second);
+					if (dynel->get_skill(ST_PETMASTER) == get_identity().id)
 						return true;
 				}
 			}
@@ -437,7 +437,7 @@ namespace isxao_classes
 
 	TeamRaid* Actor::GetTeamRaid()
 	{
-		if(IsPlayer())
+		if(is_player())
 			return reinterpret_cast<TeamRaid*>(GetSimpleCharData()->p_team_raid_info);
 		return nullptr;
 	}
@@ -449,20 +449,20 @@ namespace isxao_classes
 
 	void Actor::Kick()
 	{
-		if(IsTeamMember())
-			P_ENGINE_CLIENT_ANARCHY->N3Msg_KickTeamMember(GetIdentity());
+		if(is_team_member())
+			P_ENGINE_CLIENT_ANARCHY->N3Msg_KickTeamMember(get_identity());
 	}
 
 	void Actor::MakeLeader()
 	{
-		if(IsTeamMember())
-			P_ENGINE_CLIENT_ANARCHY->get_client_char()->MakeTeamLeader(GetIdentity());
+		if(is_team_member())
+			P_ENGINE_CLIENT_ANARCHY->get_client_char()->MakeTeamLeader(get_identity());
 	}
 
 	bool Actor::SendTeamInvite()
 	{
-		if(IsPlayer())
-			return P_ENGINE_CLIENT_ANARCHY->N3Msg_TeamJoinRequest(GetIdentity(), true);
+		if(is_player())
+			return P_ENGINE_CLIENT_ANARCHY->N3Msg_TeamJoinRequest(get_identity(), true);
 		return false;
 	}	
 

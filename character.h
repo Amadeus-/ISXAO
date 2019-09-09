@@ -11,7 +11,7 @@ public:
 	AOLIB_OBJECT StatHolder* GetStatHolder();
 
 	// Info
-	AOLIB_OBJECT bool check_los(Dynel*);
+	AOLIB_OBJECT bool check_los(dynel*);
 	AOLIB_OBJECT bool GetWeaponTarget(identity_t&);
 	AOLIB_OBJECT bool GetTarget(identity_t&);
 	AOLIB_OBJECT bool HasWeaponTarget();

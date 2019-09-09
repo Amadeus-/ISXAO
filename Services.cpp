@@ -84,12 +84,12 @@ void __cdecl ActorService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 		if (lpData)
 		{
 			Actor* p_actor = static_cast<Actor*>(lpData);
-			if (p_actor->GetIdentity().type == 50000)
+			if (p_actor->get_identity().type == 50000)
 			{
 				char name[MAX_STRING];
 				char identity[MAX_STRING];
-				strcpy_s(name, MAX_STRING, reinterpret_cast<Actor*>(p_actor)->GetName());
-				sprintf_s(identity, MAX_STRING, "%I64d", reinterpret_cast<Actor*>(p_actor)->GetIdentity().get_combined_identity());
+				strcpy_s(name, MAX_STRING, reinterpret_cast<Actor*>(p_actor)->get_name());
+				sprintf_s(identity, MAX_STRING, "%I64d", reinterpret_cast<Actor*>(p_actor)->get_identity().get_combined_identity());
 				char *argv[] = { name, identity };
 				pISInterface->ExecuteEvent(GetEventId("AO_onActorSpawned"), 0, 2, argv);
 				pISInterface->ServiceBroadcast(pExtension, hActorService, AddActor, p_actor);
@@ -102,12 +102,12 @@ void __cdecl ActorService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 		if(lpData)
 		{
 			Actor* p_actor = static_cast<Actor*>(lpData);
-			if (p_actor->GetIdentity().type == 50000)
+			if (p_actor->get_identity().type == 50000)
 			{
 				char name[MAX_STRING];
 				char identity[MAX_STRING];
-				strcpy_s(name, MAX_STRING, reinterpret_cast<Actor*>(p_actor)->GetName());
-				sprintf_s(identity, MAX_STRING, "%I64d", reinterpret_cast<Actor*>(p_actor)->GetIdentity().get_combined_identity());
+				strcpy_s(name, MAX_STRING, reinterpret_cast<Actor*>(p_actor)->get_name());
+				sprintf_s(identity, MAX_STRING, "%I64d", reinterpret_cast<Actor*>(p_actor)->get_identity().get_combined_identity());
 				char *argv[] = { name, identity };
 				pISInterface->ExecuteEvent(GetEventId("AO_onActorDespawned"), 0, 2, argv);
 				pISInterface->ServiceBroadcast(pExtension, hActorService, RemoveActor, p_actor);

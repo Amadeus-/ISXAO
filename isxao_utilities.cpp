@@ -192,7 +192,7 @@ namespace isxao_utilities
 
 #pragma region Objects
 
-	FUNCTION_AT_ADDRESS(Dynel* __cdecl GetDynel(const identity_t &), n3_dynel_t__get_dynel);
+	FUNCTION_AT_ADDRESS(dynel* __cdecl GetDynel(const identity_t &), n3_dynel_t__get_dynel);
 	FUNCTION_AT_ADDRESS(Actor* __cdecl GetActor(const identity_t &), n3_dynel_t__get_dynel);
 
 #ifdef __GetFullPerkMap_x
@@ -358,13 +358,13 @@ namespace isxao_utilities
 		char szName[MAX_STRING] = { 0 };
 		char szSearchName[MAX_STRING] = { 0 };
 		DWORD actor_type;
-		if (p_actor->GetIdentity().type != 50000)
+		if (p_actor->get_identity().type != 50000)
 			actor_type = MOB_OTHER;
-		else if (p_actor->IsActor())
+		else if (p_actor->is_actor())
 		{
-			if (p_actor->IsPet() && IsClientId(p_actor->GetMasterId()))
+			if (p_actor->is_pet() && IsClientId(p_actor->GetMasterId()))
 				actor_type = MOB_MYPET;
-			else if (p_actor->IsPet())
+			else if (p_actor->is_pet())
 				actor_type = MOB_PET;
 			else
 				actor_type = MOB_NPC;
@@ -373,29 +373,29 @@ namespace isxao_utilities
 			actor_type = MOB_PC;
 		if (p_search_actor->actor_type != actor_type && p_search_actor->actor_type != MOB_NONE)
 			return false;
-		strcpy_s(szName, MAX_STRING, p_actor->GetName());
+		strcpy_s(szName, MAX_STRING, p_actor->get_name());
 		_strlwr_s(szName);
 		strcpy_s(szSearchName, MAX_STRING, p_search_actor->name);
 		_strlwr_s(szSearchName);
 		if (!strstr(szName, szSearchName))
 			return false;
-		if (p_search_actor->min_level && DWORD(p_actor->GetSkill(ST_LEVEL)) < p_search_actor->min_level)
+		if (p_search_actor->min_level && DWORD(p_actor->get_skill(ST_LEVEL)) < p_search_actor->min_level)
 			return false;
-		if (p_search_actor->max_level && DWORD(p_actor->GetSkill(ST_LEVEL)) > p_search_actor->max_level)
+		if (p_search_actor->max_level && DWORD(p_actor->get_skill(ST_LEVEL)) > p_search_actor->max_level)
 			return false;
-		if (p_search_actor->not_id == p_actor->GetIdentity().get_combined_identity())
+		if (p_search_actor->not_id == p_actor->get_identity().get_combined_identity())
 			return false;
-		if (p_search_actor->is_dynel_id && p_search_actor->actor_id != p_actor->GetIdentity().get_combined_identity())
+		if (p_search_actor->is_dynel_id && p_search_actor->actor_id != p_actor->get_identity().get_combined_identity())
 			return false;
 		if (p_search_actor->is_known_location)
 		{
-			if (p_search_actor->x_loc != p_actor->GetPosition().x || p_search_actor->z_loc != p_actor->GetPosition().z)
+			if (p_search_actor->x_loc != p_actor->get_position().x || p_search_actor->z_loc != p_actor->get_position().z)
 			{
 				vector3_t knownLoc;
 				knownLoc.x = p_search_actor->x_loc;
 				knownLoc.y = 0.0f;
 				knownLoc.z = p_search_actor->z_loc;
-				if (p_search_actor->f_radius < 10000.0f && p_actor->GetDistanceTo(knownLoc) > p_search_actor->f_radius)
+				if (p_search_actor->f_radius < 10000.0f && p_actor->get_distance_to(knownLoc) > p_search_actor->f_radius)
 					return false;
 			}
 		}
@@ -403,14 +403,14 @@ namespace isxao_utilities
 			return false;
 		if (g_y_filter < 10000.0f)
 		{
-			vector3_t client = p_character->GetPosition();
-			if (p_actor->GetPosition().y > client.y + g_y_filter || p_actor->GetPosition().y < client.y - g_y_filter)
+			vector3_t client = p_character->get_position();
+			if (p_actor->get_position().y > client.y + g_y_filter || p_actor->get_position().y < client.y - g_y_filter)
 				return false;
 		}
 		if (p_search_actor->y_radius < 10000.0f)
 		{
-			vector3_t client = p_character->GetPosition();
-			if (p_actor->GetPosition().y > client.y + p_search_actor->y_radius || p_actor->GetPosition().y < client.y - p_search_actor->y_radius)
+			vector3_t client = p_character->get_position();
+			if (p_actor->get_position().y > client.y + p_search_actor->y_radius || p_actor->get_position().y < client.y - p_search_actor->y_radius)
 				return false;
 		}
 		return true;
@@ -425,12 +425,12 @@ namespace isxao_utilities
 			P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{
-				if ((*it)->GetIdentity().type == 50000 && !P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc((*it)->GetIdentity()))
+				if ((*it)->get_identity().type == 50000 && !P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc((*it)->get_identity()))
 				{
 					if ((*it) != p_actor)
 					{
-						vector3_t c = (*it)->GetPosition();
-						if (p_actor->GetDistanceTo(c) < radius)
+						vector3_t c = (*it)->get_position();
+						if (p_actor->get_distance_to(c) < radius)
 							return true;
 					}
 				}
@@ -471,7 +471,7 @@ namespace isxao_utilities
 		if (!p_search_actor || !nth || !p_origin)
 			return nullptr;
 		CIndex<PAORANK> actor_set;
-		vector3_t pos = p_origin->GetPosition();
+		vector3_t pos = p_origin->get_position();
 		std::vector<Actor*> v;
 		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		DWORD TotalMatching = 0;
@@ -484,7 +484,7 @@ namespace isxao_utilities
 					TotalMatching++;
 					PAORANK pNewRank = new AORANK;
 					pNewRank->VarPtr.Ptr = *it;
-					pNewRank->Value.Float = (*it)->GetDistanceTo(pos);
+					pNewRank->Value.Float = (*it)->get_distance_to(pos);
 					actor_set += pNewRank;
 				}
 			}
@@ -498,7 +498,7 @@ namespace isxao_utilities
 					TotalMatching++;
 					PAORANK pNewRank = new AORANK;
 					pNewRank->VarPtr.Ptr = *it;
-					pNewRank->Value.Float = (*it)->GetDistanceTo(pos);
+					pNewRank->Value.Float = (*it)->get_distance_to(pos);
 					actor_set += pNewRank;
 				}
 			}
@@ -597,7 +597,7 @@ namespace isxao_utilities
 	//	auto point_of_origin = p_origin->GetPosition();
 	//	std::vector<Actor*> v;
 	//	P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
-	//	std::sort(v.begin(), v.end(), Dynel::pDynelCompare);
+	//	std::sort(v.begin(), v.end(), dynel::pDynelCompare);
 	//	if(include_character)
 	//	{
 	//		for (auto it = v.begin(); it != v.end(); ++it)
@@ -1339,17 +1339,17 @@ namespace isxao_utilities
 
 #pragma region Lavishscript
 
-	LSTypeDefinition* GetRealType(Dynel* pObject)
+	LSTypeDefinition* GetRealType(dynel* pObject)
 	{
-		if (pObject && pObject->GetIdentity().type == 50000)
+		if (pObject && pObject->get_identity().type == 50000)
 		{
-			if (pObject->IsCharacter())
+			if (pObject->is_character())
 				return pCharacterType;
-			if (pObject->IsPlayer())
+			if (pObject->is_player())
 				return pActorType;	
-			if (pObject->IsPet() && isxao_inlines::IsClientId(pObject->ToActor()->GetMasterId()))
+			if (pObject->is_pet() && isxao_inlines::IsClientId(pObject->to_actor()->GetMasterId()))
 				return pPetType;
-			if (pObject->IsActor())
+			if (pObject->is_actor())
 				return pActorType;
 		}
 		return pDynelType;

@@ -20,7 +20,7 @@ namespace isxao_classes
 			if ((*it)->identity.type == 50000)
 				v.push_back(reinterpret_cast<Actor*>(*it));
 		}
-		std::sort(v.begin(), v.end(), Dynel::pDynelCompare);
+		std::sort(v.begin(), v.end(), dynel::p_dynel_compare);
 		return v.size();
 	}
 

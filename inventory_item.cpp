@@ -70,7 +70,7 @@ namespace isxao_classes
 		ZeroMemory(&dummy_identity, sizeof(identity_t));
 		auto result = 1234567890;
 		if (P_ENGINE_CLIENT_ANARCHY)
-			result = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(GetIdentity(), stat, 2, dummy_identity);
+			result = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(GetIdentity(), stat, 2, dummy_identity);
 		return result;
 	}
 

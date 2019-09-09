@@ -1,48 +1,50 @@
 #pragma once
 
-class Dynel
+// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
+class dynel
 {
 public:
-	AOLIB_OBJECT PVOID GetData();
-	AOLIB_OBJECT float GetDistanceToClient();
-	AOLIB_OBJECT float GetDistanceTo(vector3_t&);
-	AOLIB_OBJECT float GetDistance3DTo(vector3_t&);
-	AOLIB_OBJECT float GetDistance3DToSquared(vector3_t&);
-	AOLIB_OBJECT float GetDistanceToSquared(vector3_t&);
-	AOLIB_OBJECT float GetDistanceXTo(vector3_t&);
-	AOLIB_OBJECT float GetDistanceYTo(vector3_t&);
-	AOLIB_OBJECT float GetDistanceZTo(vector3_t&);
-	AOLIB_OBJECT p_n3_dynel_t GetDynelData();
-	AOLIB_OBJECT float GetHeading();
-	AOLIB_OBJECT float GetHeadingTo(vector3_t &);
-	AOLIB_OBJECT float GetHeadingToLoc(vector3_t &, vector3_t &);
-	AOLIB_OBJECT identity_t GetIdentity();
-	AOLIB_OBJECT PCSTR GetName();
-	AOLIB_OBJECT vector3_t GetPosition();
-	AOLIB_OBJECT quaternion_t GetRotation();
-	AOLIB_OBJECT LONG GetSkill(DWORD);
-	AOLIB_OBJECT bool IsInfoRequestCompleted();
-	AOLIB_OBJECT void Interact();
-	AOLIB_OBJECT bool IsContainer();
-	AOLIB_OBJECT bool IsCorpse();
-	AOLIB_OBJECT bool IsDoor();
-	AOLIB_OBJECT bool IsInLineOfSight();
-	AOLIB_OBJECT bool IsInLineOfSight(vector3_t &);
-	AOLIB_OBJECT bool IsCharacter();
-	AOLIB_OBJECT bool IsActor();
-	AOLIB_OBJECT bool IsPet();
-	AOLIB_OBJECT bool IsPlayer();
-	AOLIB_OBJECT bool IsTeamMember();
-	AOLIB_OBJECT bool IsVendingMachine();
-	AOLIB_OBJECT bool IsWeaponInstance();
-	AOLIB_OBJECT void SendIIRToObservers(InfoItemRemote*);
-	AOLIB_OBJECT Actor* ToActor();
-	AOLIB_OBJECT character* ToCharacter();
-	AOLIB_OBJECT Pet* ToPet();
-	AOLIB_OBJECT Player* ToPlayer();
-	AOLIB_OBJECT TeamMember* ToTeamMember();
-	AOLIB_OBJECT void UpdateLocalityListeners();
-	AOLIB_OBJECT static bool pDynelCompare(Dynel *pA, Dynel *pB);
+	AOLIB_OBJECT PVOID get_data();
+	AOLIB_OBJECT float get_distance_to_client();
+	AOLIB_OBJECT float get_distance_to(vector3_t&);
+	AOLIB_OBJECT float get_distance_3d_to(vector3_t&);
+	AOLIB_OBJECT float get_distance_3d_to_squared(vector3_t&);
+	AOLIB_OBJECT float get_distance_to_squared(vector3_t&);
+	AOLIB_OBJECT float get_distance_x_to(vector3_t&);
+	AOLIB_OBJECT float get_distance_y_to(vector3_t&);
+	AOLIB_OBJECT float get_distance_z_to(vector3_t&);
+	AOLIB_OBJECT p_n3_dynel_t get_dynel_data();
+	AOLIB_OBJECT float get_heading();
+	AOLIB_OBJECT float get_heading_to(vector3_t &);
+	AOLIB_OBJECT float get_heading_to_loc(vector3_t &, vector3_t &);
+	AOLIB_OBJECT identity_t get_identity();
+	AOLIB_OBJECT PCSTR get_name();
+	AOLIB_OBJECT vector3_t get_position();
+	AOLIB_OBJECT quaternion_t get_rotation();
+	AOLIB_OBJECT LONG get_skill(DWORD);
+	AOLIB_OBJECT bool is_info_request_completed();
+	AOLIB_OBJECT void interact();
+	AOLIB_OBJECT bool is_container();
+	AOLIB_OBJECT bool is_corpse();
+	AOLIB_OBJECT bool is_door();
+	AOLIB_OBJECT bool is_in_line_of_sight();
+	AOLIB_OBJECT bool is_in_line_of_sight(vector3_t &);
+	AOLIB_OBJECT bool is_character();
+	AOLIB_OBJECT bool is_actor();
+	AOLIB_OBJECT bool is_pet();
+	AOLIB_OBJECT bool is_player();
+	AOLIB_OBJECT bool is_team_member();
+	AOLIB_OBJECT bool is_vending_machine();
+	AOLIB_OBJECT bool is_weapon_instance();
+	AOLIB_OBJECT void send_iir_to_observers(info_item_remote*);
+	AOLIB_OBJECT Actor* to_actor();
+	AOLIB_OBJECT character* to_character();
+	AOLIB_OBJECT Pet* to_pet();
+	AOLIB_OBJECT Player* to_player();
+	AOLIB_OBJECT TeamMember* to_team_member();
+	AOLIB_OBJECT void update_locality_listeners();
+	AOLIB_OBJECT static bool p_dynel_compare(dynel *p_a, dynel *p_b);
 private: 
+	// ReSharper disable once CppUninitializedNonStaticDataMember
 	n3_dynel_t n3_dynel_;
 };

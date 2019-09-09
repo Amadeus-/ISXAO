@@ -42,9 +42,9 @@ namespace isxao_classes
 #ifdef SIMPLE_CHAR_T__CHECK_LOS_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(bool character::check_los(Dynel* p_dynel), simple_char_t__check_los);
+	FUNCTION_AT_ADDRESS(bool character::check_los(dynel* p_dynel), simple_char_t__check_los);
 #else
-	bool character::check_los(Dynel* p_dynel)
+	bool character::check_los(dynel* p_dynel)
 	{
 		if (GetGameState() == GAMESTATE_IN_GAME)
 		{
@@ -55,9 +55,9 @@ namespace isxao_classes
 			vector3_t client;
 			P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(client);
 			const auto offset_client = vector3_t::add(client, offset);
-			auto dynel = p_dynel->GetPosition();
+			auto dynel = p_dynel->get_position();
 			const vector3_t offset_me = vector3_t::add(dynel, offset);
-			return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offset_client, offset_me, GetDynelData()->p_vehicle->zone_instance_id, false);
+			return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offset_client, offset_me, get_dynel_data()->p_vehicle->zone_instance_id, false);
 		}
 		return false;
 	}
@@ -117,7 +117,7 @@ namespace isxao_classes
 
 	void character::Face(vector3_t &location)
 	{
-		auto client_position = GetPosition();
+		auto client_position = get_position();
 		auto q = quaternion_t::get_quaternion_to_face(location, client_position);
 		SetRotation(q);
 	}

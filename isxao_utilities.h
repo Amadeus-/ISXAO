@@ -18,7 +18,7 @@ namespace isxao_utilities
 #pragma region Objects
 
 	AOLIB_API DWORD __cdecl GetFullPerkMap(void);
-	AOLIB_API Dynel* __cdecl GetDynel(const identity_t &);
+	AOLIB_API dynel* __cdecl GetDynel(const identity_t &);
 	AOLIB_API Actor* __cdecl GetActor(const identity_t &);
 	//AOLIB_API p_nano_item_t __cdecl GetNanoItem(DWORD);
 
@@ -78,7 +78,7 @@ namespace isxao_utilities
 
 #pragma region Lavishscript
 
-	AOLIB_API LSTypeDefinition* GetRealType(Dynel* pObject);
+	AOLIB_API LSTypeDefinition* GetRealType(dynel* pObject);
 
 #pragma endregion
 

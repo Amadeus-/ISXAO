@@ -459,45 +459,89 @@ namespace isxao_classes
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CONTAINER_INVENTORY_LIST_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(PVOID engine_client_anarchy::n3_msg_get_container_inventory_list(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list)
+	FUNCTION_AT_ADDRESS(p_inventory_holder_t engine_client_anarchy::n3_msg_get_container_inventory_list(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list)
 #else
 	static_assert(false, "engine_client_anarchy::n3_msg_get_container_inventory_list(const identity_t &) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetCorrectActionID_x
-	FUNCTION_AT_ADDRESS(void engine_client_anarchy::N3Msg_GetCorrectActionID(identity_t &), n3EngineClientAnarchy_t__N3Msg_GetCorrectActionID);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CORRECT_ACTION_ID_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_get_correct_action_id(identity_t &), n3_engine_client_anarchy_t__n3_msg_get_correct_action_id)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_correct_action_id(identity_t &) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetCurrentRoom_x
-	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::N3Msg_GetCurrentRoom(void), n3EngineClientAnarchy_t__N3Msg_GetCurrentRoom);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CURRENT_ROOM_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::n3_msg_get_current_room(), n3_engine_client_anarchy_t__n3_msg_get_current_room)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_current_room() requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetCurrentRoomName_x
-	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::N3Msg_GetCurrentRoomName(void), n3EngineClientAnarchy_t__N3Msg_GetCurrentRoomName);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CURRENT_ROOM_NAME_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_current_room_name(), n3_engine_client_anarchy_t__n3_msg_get_current_room_name)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_current_room_name() requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetDistrictFightMode_x
-	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::N3Msg_GetDistrictFightMode(void), n3EngineClientAnarchy_t__N3Msg_GetDistrictFightMode);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_DISTRICT_FIGHT_MODE_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_district_fight_mode(), n3_engine_client_anarchy_t__n3_msg_get_district_fight_mode)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_district_fight_mode() requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetFactionInfoString_x
-	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::N3Msg_GetFactionInfoString(const identity_t &, std::string &), n3EngineClientAnarchy_t__N3Msg_GetFactionInfoString);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_DYNELS_IN_VICINITY_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_get_dynels_in_vicinity(vector<identity_t>&, bool, bool, type_id_e), n3_engine_client_anarchy_t__n3_msg_get_dynels_in_vicinity)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_dynels_in_vicinity(vector<identity_t>&, bool, bool, type_id_e) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetFactionRange_x
-	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::N3Msg_GetFactionRange(DWORD, DWORD &, DWORD &), n3EngineClientAnarchy_t__N3Msg_GetFactionRange);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FACTION_INFO_STRING_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_get_faction_info_string(const identity_t &, string &), n3_engine_client_anarchy_t__n3_msg_get_faction_info_string)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_faction_info_string(const identity_t &, string &) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetFirstName_x
-	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::N3Msg_GetFirstName(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetFirstName);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FACTION_RANGE_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_get_faction_range(DWORD, DWORD &, DWORD &), n3_engine_client_anarchy_t__n3_msg_get_faction_range)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_faction_range(DWORD, DWORD &, DWORD &) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetFormulaProgress_x
-	FUNCTION_AT_ADDRESS(double engine_client_anarchy::N3Msg_GetFormulaProgress(const identity_t &, DWORD &, DWORD &), n3EngineClientAnarchy_t__N3Msg_GetFormulaProgress);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FIRST_NAME_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_first_name(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_first_name)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_first_name(const identity_t &) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetFormulaRadius_x
-	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::N3Msg_GetFormulaRadius(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetFormulaRadius);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FORMULA_PROGRESS_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(double engine_client_anarchy::n3_msg_get_formula_progress(const identity_t &, DWORD &, DWORD &), n3_engine_client_anarchy_t__n3_msg_get_formula_progress)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_formula_progress(const identity_t &, DWORD &, DWORD &) requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FORMULA_RADIUS_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_formula_radius(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_formula_radius)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_formula_radius(const identity_t &) requires a native function.");
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GLOBAL_CHARACTER_POSITION_USE_NATIVE
@@ -511,135 +555,269 @@ namespace isxao_classes
 	{
 		if (GetGameState() == GAMESTATE_IN_GAME)
 		{
-			auto client_pos = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetPosition();
+			const auto client_pos = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetPosition();
 			pos.copy(client_pos);
 		}
 	}
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterRotation_x
-	FUNCTION_AT_ADDRESS(void engine_client_anarchy::N3Msg_GetGlobalCharacterRotation(quaternion_t &), n3EngineClientAnarchy_t__N3Msg_GetGlobalCharacterRotation);
-#endif
-
-#ifdef  n3EngineClientAnarchy_t__N3Msg_GetGridDestinationList_2_x
-	FUNCTION_AT_ADDRESS(PVOID EngineClientAnarchy::N3Msg_GetGridDestinationList(void), n3EngineClientAnarchy_t__N3Msg_GetGridDestinationList_2);
-#endif
-
-	PVOID engine_client_anarchy::N3Msg_GetGridDestinationList(void) const
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GLOBAL_CHARACTER_ROTATION_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_get_global_character_rotation(quaternion_t &), n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation)
+#else
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	void engine_client_anarchy::n3_msg_get_global_character_rotation(quaternion_t& rot)
 	{
-		return n3_engine_client_anarchy_.p_grid_destination_list;
+		if (GetGameState() == GAMESTATE_IN_GAME)
+		{
+			const auto client_rot = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetRotation();
+			rot.copy(client_rot);
+		}
 	}
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetInventoryVec_x
-	FUNCTION_AT_ADDRESS(std::vector<p_inventory_data_t>* engine_client_anarchy::N3Msg_GetInventoryVec(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetInventoryVec);
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetItem_x
-	FUNCTION_AT_ADDRESS(void engine_client_anarchy::N3Msg_GetItem(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetItem);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GRID_DESTINATION_1_LIST_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(PVOID engine_client_anarchy::n3_msg_get_grid_destination_list(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_grid_destination_list(const identity_t &) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetItemProgress_x
-	FUNCTION_AT_ADDRESS(double engine_client_anarchy::N3Msg_GetItemProgress(const identity_t &, DWORD &, DWORD &), n3EngineClientAnarchy_t__N3Msg_GetItemProgress);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetMovementMode_x
-	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::N3Msg_GetMovementMode(void), n3EngineClientAnarchy_t__N3Msg_GetMovementMode);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetName_x
-	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::N3Msg_GetName(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetName);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetNanoCostModifier_x
-	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::N3Msg_GetNanoCostModifier(void), n3EngineClientAnarchy_t__N3Msg_GetNanoCostModifier);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetNanoSpellList_x
-	FUNCTION_AT_ADDRESS(PVOID EngineClientAnarchy::N3Msg_GetNanoSpellList(void), n3EngineClientAnarchy_t__N3Msg_GetNanoSpellList);
-#endif
-
-	std::list<DWORD>* engine_client_anarchy::N3Msg_GetNanoSpellList() const
+#ifdef  N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GRID_DESTINATION_2_LIST_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(PVOID engine_client_anarchy::n3_msg_get_grid_destination_list(), n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_2);
+#else
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	PVOID engine_client_anarchy::n3_msg_get_grid_destination_list()
 	{
-		return &n3_engine_client_anarchy_.p_client_control_char->p_spell_template_data->spell_list;
+		if (GetGameState() == GAMESTATE_IN_GAME)
+		{
+			return n3_engine_client_anarchy_.p_grid_destination_list;
+		}
+		return nullptr;
 	}
+#endif	
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetNanoTemplateInfoList_1_x
-	FUNCTION_AT_ADDRESS(std::list<nano_template>* engine_client_anarchy::N3Msg_GetNanoTemplateInfoList(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetNanoTemplateInfoList_1);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_INVENTORY_VEC_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(std::vector<p_inventory_data_t>* engine_client_anarchy::n3_msg_get_inventory_vec(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_inventory_vec)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_inventory_vec(const identity_t &) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetNanoTemplateInfoList_2_x
-	FUNCTION_AT_ADDRESS(PVOID EngineClientAnarchy::N3Msg_GetNanoTemplateInfoList(void), n3EngineClientAnarchy_t__N3Msg_GetNanoTemplateInfoList_2);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ITEM_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_get_item(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_item)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_item(const identity_t &) requires a native function.");
 #endif
 
-	std::list<nano_template>* engine_client_anarchy::N3Msg_GetNanoTemplateInfoList(void) const
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ITEM_PROGRESS_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(double engine_client_anarchy::n3_msg_get_item_progress(const identity_t &, DWORD &, DWORD &), n3_engine_client_anarchy_t__n3_msg_get_item_progress)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_item_progress(const identity_t &, DWORD &, DWORD &) requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_MOVEMENT_MODE_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_movement_mode(), n3_engine_client_anarchy_t__n3_msg_get_movement_mode)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_movement_mode() requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NAME_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_name(const identity_t &, const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_name)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_name(const identity_t &, const identity_t &) requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_COST_MODIFIER_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_nano_cost_modifier(), n3_engine_client_anarchy_t__n3_msg_get_nano_cost_modifier)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_nano_cost_modifier() requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_SPELL_LIST_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(list<DWORD>* engine_client_anarchy::n3_msg_get_nano_spell_list(), n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list)
+#else
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	list<DWORD>* engine_client_anarchy::n3_msg_get_nano_spell_list()
 	{
-		return &n3_engine_client_anarchy_.p_client_control_char->p_spell_template_data->nano_template_list;
+		if (GetGameState() == GAMESTATE_IN_GAME)
+		{
+			return &n3_engine_client_anarchy_.p_client_control_char->p_spell_template_data->spell_list;
+		}
+		return nullptr;
 	}
+#endif	
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetNextTarget_x
-	FUNCTION_AT_ADDRESS(p_identity_t engine_client_anarchy::N3Msg_GetNextTarget(identity_t &, DWORD), n3EngineClientAnarchy_t__N3Msg_GetNextTarget);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_TEMPLATE_INFO_LIST_1_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(list<nano_template>* engine_client_anarchy::n3_msg_get_nano_template_info_list(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_nano_template_info_list(const identity_t &) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetNumberOfAvailableAlienPerks_x
-	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::N3Msg_GetNumberOfAvailableAlienPerks(void), n3EngineClientAnarchy_t__N3Msg_GetNumberOfAvailableAlienPerks);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetNumberOfAvailablePerks_x
-	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::N3Msg_GetNumberOfAvailablePerks(void), n3EngineClientAnarchy_t__N3Msg_GetNumberOfAvailablePerks);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetNumberOfFreeInventorySlots_x
-	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::N3Msg_GetNumberOfFreeInventorySlots(void), n3EngineClientAnarchy_t__N3Msg_GetNumberOfFreeInventorySlots);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetNumberOfUsedAlienPerks_x
-	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::N3Msg_GetNumberOfUsedAlienPerks(void), n3EngineClientAnarchy_t__N3Msg_GetNumberOfUsedAlienPerks);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetNumberOfUsedPerks_x
-	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::N3Msg_GetNumberOfUsedPerks(void), n3EngineClientAnarchy_t__N3Msg_GetNumberOfUsedPerks);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetOverEquipLevel_x
-	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::N3Msg_GetOverEquipLevel(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetOverEquipLevel);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetPFName_1_x
-	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::N3Msg_GetPFName(DWORD), n3EngineClientAnarchy_t__N3Msg_GetPFName_1);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetPFName_2_x
-	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::N3Msg_GetPFName(void), n3EngineClientAnarchy_t__N3Msg_GetPFName_2);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetParent_x
-	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::N3Msg_GetParent(const identity_t &, identity_t &), n3EngineClientAnarchy_t__N3Msg_GetParent);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetPos_x
-	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::N3Msg_GetPos(const identity_t &, vector3_t &), n3EngineClientAnarchy_t__N3Msg_GetPos);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetSkill_1_x
-	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::N3Msg_GetSkill(DWORD, DWORD), n3EngineClientAnarchy_t__N3Msg_GetSkill_1);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetSkill_2_x
-	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::N3Msg_GetSkill(const identity_t &, DWORD, DWORD, const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetSkill_2);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetSkillMax_x
-	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::N3Msg_GetSkillMax(DWORD), n3EngineClientAnarchy_t__N3Msg_GetSkillMax);
-#endif
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetSpecialActionList_x
-	FUNCTION_AT_ADDRESS(PVOID EngineClientAnarchy::N3Msg_GetSpecialActionList(void), n3EngineClientAnarchy_t__N3Msg_GetSpecialActionList);
-#endif
-
-	std::list<special_action_t>* engine_client_anarchy::N3Msg_GetSpecialActionList() const
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_TEMPLATE_INFO_LIST_2_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(list<nano_template>* engine_client_anarchy::n3_msg_get_nano_template_info_list(), n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2);
+#else
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	list<nano_template>* engine_client_anarchy::n3_msg_get_nano_template_info_list()
 	{
-		return n3_engine_client_anarchy_.p_client_control_char->p_special_action_holder->p_special_actions_list;
+		if (GetGameState() == GAMESTATE_IN_GAME)
+		{
+			return &n3_engine_client_anarchy_.p_client_control_char->p_spell_template_data->nano_template_list;
+		}
+		return nullptr;
 	}
+#endif	
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NEXT_TARGET_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(p_identity_t engine_client_anarchy::n3_msg_get_next_target(identity_t &, DWORD), n3_engine_client_anarchy_t__n3_msg_get_next_target)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_next_target(identity_t &, DWORD) requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_AVAILABLE_ALIEN_PERKS_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_number_of_available_alien_perks(), n3_engine_client_anarchy_t__n3_msg_get_number_of_available_alien_perks)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_available_alien_perks() requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_AVAILABLE_PERKS_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_number_of_available_perks(), n3_engine_client_anarchy_t__n3_msg_get_number_of_available_perks)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_available_perks() requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_FREE_INVENTORY_SLOTS_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_number_of_free_inventory_slots(), n3_engine_client_anarchy_t_n3_msg_get_number_of_free_inventory_slots)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_free_inventory_slots() requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_USED_ALIEN_PERKS_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_number_of_used_alien_perks(), n3_engine_client_anarchy_t__n3_msg_get_number_of_used_alien_perks)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_used_alien_perks() requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_USED_PERKS_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_number_of_used_perks(), n3_engine_client_anarchy_t__n3_msg_get_number_of_used_perks)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_used_perks() requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_OVER_EQUIP_LEVEL_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_over_equip_level(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_over_equip_level)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_used_perks() requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_PLAYFIELD_NAME_1_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_pf_name(DWORD), n3_engine_client_anarchy_t__n3_msg_get_pf_name_1)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_pf_name(DWORD) requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_PLAYFIELD_NAME_2_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_pf_name(), n3_engine_client_anarchy_t__n3_msg_get_pf_name_2)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_pf_name() requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_PARENT_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_get_parent(const identity_t &, identity_t &), n3_engine_client_anarchy_t__n3_msg_get_parent)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_parent(const identity_t &, identity_t &) requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_POS_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_get_pos(const identity_t &, vector3_t &), n3_engine_client_anarchy_t__n3_msg_get_pos)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_pos(const identity_t &, vector3_t &) requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SKILL_1_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::n3_msg_get_skill(DWORD, DWORD), n3_engine_client_anarchy_t__n3_msg_get_skill_1)
+#else
+	static_assert(false, " engine_client_anarchy::n3_msg_get_skill(DWORD, DWORD) requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SKILL_2_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::n3_msg_get_skill(const identity_t &, DWORD, DWORD, const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_skill_2)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_skill(const identity_t &, DWORD, DWORD, const identity_t &) requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SKILL_MAX_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::n3_msg_get_skill_max(DWORD), n3_engine_client_anarchy_t_n3_msg_get_skill_max)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_skill_max(DWORD) requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SPECIAL_ACTION_LIST_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(list<special_action_t>* engine_client_anarchy::n3_msg_get_special_action_list(), n3_engine_client_anarchy_t__n3_msg_get_special_action_list)
+#else
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	list<special_action_t>* engine_client_anarchy::n3_msg_get_special_action_list()
+	{
+		if (GetGameState() == GAMESTATE_IN_GAME)
+		{
+			return n3_engine_client_anarchy_.p_client_control_char->p_special_action_holder->p_special_actions_list;
+		}
+		return nullptr;
+	}
+#endif	
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetSpecialActionState_x
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::N3Msg_GetSpecialActionState(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetSpecialActionState);

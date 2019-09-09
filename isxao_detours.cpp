@@ -60,9 +60,9 @@ namespace isxao_detours
 
 #pragma region Adding and Removing Playfield Dynels
 
-	DETOUR_TRAMPOLINE_EMPTY(void AODetours::Playfield_t__AddChildDynel_Trampoline(Dynel*, const vector3_t&, const quaternion_t&));
+	DETOUR_TRAMPOLINE_EMPTY(void AODetours::Playfield_t__AddChildDynel_Trampoline(dynel*, const vector3_t&, const quaternion_t&));
 
-	void AODetours::Playfield_t__AddChildDynel_Detour(Dynel* p_dynel, const vector3_t &position, const quaternion_t &rotation)
+	void AODetours::Playfield_t__AddChildDynel_Detour(dynel* p_dynel, const vector3_t &position, const quaternion_t &rotation)
 	{
 		ActorService(pExtension, AddActor, p_dynel);
 		Playfield_t__AddChildDynel_Trampoline(p_dynel, position, rotation);

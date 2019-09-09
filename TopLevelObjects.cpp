@@ -80,7 +80,7 @@ bool __cdecl TLO_ATTACKTARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 		identity_t identity;
 		if (pAttackingIndicator)
 		{
-			auto d = reinterpret_cast<Dynel*>(GetDynel(pAttackingIndicator->identity));
+			auto d = reinterpret_cast<dynel*>(GetDynel(pAttackingIndicator->identity));
 			Dest.Ptr = d;
 			Dest.Type = isxao_utilities::GetRealType(d);
 			return true;
@@ -127,7 +127,7 @@ bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 			}
 			for (DWORD N = 0; N < actor_count; N++)
 			{
-				if (v[N]->GetDistanceToClient() > search_actor.f_radius && !search_actor.is_known_location)
+				if (v[N]->get_distance_to_client() > search_actor.f_radius && !search_actor.is_known_location)
 					return false;
 				if (ActorMatchesSearch(&search_actor, P_ENGINE_CLIENT_ANARCHY->get_client_char(), v[N]))
 				{

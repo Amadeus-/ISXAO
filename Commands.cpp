@@ -35,7 +35,7 @@ int CMD_DUMPSTATS(int argc, char *argv[])
 		for (auto it = m.begin(); it != m.end(); ++it)
 		{
 			char buffer[MAX_STRING];
-			LONG stat = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(id, static_cast<ao_data::Stat_e>((*it).first), 2, dummy);
+			LONG stat = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(id, static_cast<ao_data::Stat_e>((*it).first), 2, dummy);
 			sprintf_s(buffer, "ST_%s = %d,\n", (*it).second, /*(*it).first*/stat);
 			for (auto i = 0; i < (int)strlen(buffer); i++)
 				buffer[i] = toupper(buffer[i]);

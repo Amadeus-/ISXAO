@@ -85,7 +85,7 @@ enum TypeAction_e : DWORD
 
 };
 
-enum TypeId_e : DWORD
+enum type_id_e : DWORD
 {
 	TY_NONE = 0,
 	TY_WEAPON_PAGE = 101,

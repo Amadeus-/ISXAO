@@ -43,13 +43,13 @@ namespace isxao_classes
 	{
 		DWORD a;
 		DWORD b;
-		auto c = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetFormulaProgress(GetNanoIdentity(), a, b);
+		auto c = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_formula_progress(GetNanoIdentity(), a, b);
 		return float((1.0 - c)*b);
 	}
 
 	double NanoItem::GetFormulaProgress(DWORD &a, DWORD &b)
 	{
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetFormulaProgress(GetNanoIdentity(), a, b);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_formula_progress(GetNanoIdentity(), a, b);
 	}
 
 	DWORD NanoItem::GetFormulaRadius()
@@ -106,7 +106,7 @@ namespace isxao_classes
 	{
 		identity_t dummy_identity;
 		ZeroMemory(&dummy_identity, sizeof(identity_t));
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_GetSkill(GetNanoIdentity(), stat, 2, dummy_identity);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(GetNanoIdentity(), stat, 2, dummy_identity);
 	}
 
 	DWORD NanoItem::GetStackingOrder()

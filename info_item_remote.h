@@ -1,6 +1,6 @@
 #pragma once
 
-class InfoItemRemote
+class info_item_remote
 {
 	
 };

@@ -1,6 +1,6 @@
 #pragma once
 
-class LookAtIIR : public InfoItemRemote
+class LookAtIIR : public info_item_remote
 {
 public:
 	AOLIB_OBJECT LookAtIIR(const identity_t*, const identity_t*, int);

@@ -81,7 +81,7 @@ namespace ao_data
 			return a;
 		}
 
-		void copy(vector3& other)
+		void copy(const struct vector3& other)
 		{
 			x = other.x;
 			y = other.y;
@@ -183,6 +183,14 @@ namespace ao_data
 		float y; // sin(theta/2)	// 0x04
 		float z;					// 0x08
 		float w; // cos(theta/2)	// 0x0C
+
+		void copy(const struct quaternion& other)
+		{
+			x = other.x;
+			y = other.y;
+			z = other.z;
+			w = other.w;
+		}
 
 		void normalize()
 		{
@@ -1745,7 +1753,7 @@ namespace ao_data
 
 	// Size = 0xE0
 	// From N3.dll
-	typedef struct n3_visual_dynel
+	typedef struct n3_visual_dynel  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;									// 0x00
 		PVOID p_v_table_n3_dynel_event_source;				// 0x04

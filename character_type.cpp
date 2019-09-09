@@ -255,7 +255,7 @@ bool CharacterType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int bufl
 	if (!ObjectData.Ptr)
 		return false;
 #define pCharacter ((character*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64u", pCharacter->GetIdentity().get_combined_identity());
+	sprintf_s(buf, buflen, "%I64u", pCharacter->get_identity().get_combined_identity());
 #undef pCharacter
 
 	return true;
