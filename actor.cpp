@@ -35,7 +35,7 @@ namespace isxao_classes
 	PCSTR Actor::Consider()
 	{
 		float consider;
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_Consider(GetIdentity(), consider);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_consider(GetIdentity(), consider);
 		if (consider >= 0.0f && consider < 0.2000000029802322)
 			return "Easy";
 		if (consider >= 0.2000000029802322 && consider < 0.4900000095367432)
@@ -113,7 +113,7 @@ namespace isxao_classes
 		RGBCOLOR argb;
 		argb.ARGB = 0xFFFFFF;
 		float consider;
-		DWORD con_type = P_ENGINE_CLIENT_ANARCHY->N3Msg_Consider(GetIdentity(), consider);
+		DWORD con_type = P_ENGINE_CLIENT_ANARCHY->n3_msg_consider(GetIdentity(), consider);
 		if (consider > 1.0f)
 			consider = 1.0f;
 		if(con_type == 3)

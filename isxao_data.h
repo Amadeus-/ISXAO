@@ -61,7 +61,7 @@ namespace ao_data
 	{
 		float x;					// 0x00
 		float y;					// 0x04
-		float z;					// 0x08
+		float z;					// 0x08		
 
 		static struct vector3 add(struct vector3& v1, struct vector3& v2)
 		{
@@ -79,6 +79,13 @@ namespace ao_data
 			a.y = v1.y - v2.y;
 			a.z = v1.z - v2.z;
 			return a;
+		}
+
+		void copy(vector3& other)
+		{
+			x = other.x;
+			y = other.y;
+			z = other.z;
 		}
 
 		void normalize()
@@ -167,7 +174,6 @@ namespace ao_data
 			y = 0.0f;
 			z = 0.0f;
 		}
-
 	} vector3_t, *p_vector3_t;
 	
 	// Size = 0x10

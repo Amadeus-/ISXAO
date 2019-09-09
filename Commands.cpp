@@ -4,16 +4,9 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	// printf("%" PRIX32, n3_engine_client_anarchy_t__get_item_by_template);
-	identity_t i;
-	i.type = 53019;
-	i.id = 223279;
-	identity_t d;
-	d.type = 0;
-	d.id = 0;
-	auto r = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d);
+	auto r = get_breed_str_local(BT_ATROX);
 	// printf("%" PRIX32, r);
-	printf(r->name);
+	printf(r);
 	return 0;
 }
 
@@ -79,9 +72,9 @@ int CMD_ATTACK(int argc, char *argv[])
 {
 	identity_t p1;
 	identity_t p2;
-	P_ENGINE_CLIENT_ANARCHY->N3Msg_GetClientPetID(p1, 0);
+	P_ENGINE_CLIENT_ANARCHY->n3_msg_get_client_pet_id(p1, 0);
 	printf("%d", p1.id);
-	P_ENGINE_CLIENT_ANARCHY->N3Msg_GetClientPetID(p2, 1);
+	P_ENGINE_CLIENT_ANARCHY->n3_msg_get_client_pet_id(p2, 1);
 	printf("%d", p2.id);
 	return 0;
 }

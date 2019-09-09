@@ -112,6 +112,187 @@ constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_attack_mangled_name
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_attack_pattern = static_cast<char*>(
 	"55 8B EC E8 ?? ?? ?? ?? 85 C0 75 ?? 32 C0 EB ??");
 
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_click_target_target_mangled_name = static_cast<char*>(
+	"?N3Msg_CanClickTargetTarget@n3EngineClientAnarchy_t@@QAE_NABVIdentity_t@@0@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_click_target_target_pattern = static_cast<char*>(
+	"55 8B EC 53 56 57 FF 75 08 E8 ?? ?? ?? ?? FF 75 0C");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_use_mech_mangled_name = static_cast<char*>(
+	"?N3Msg_CanUseMech@n3EngineClientAnarchy_t@@QAE_NXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_use_mech_pattern = static_cast<char*>(
+	"56 E8 ?? ?? ?? ?? 8B F0 85 F6 75 ??");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_cast_nano_spell_mangled_name = static_cast<char*>(
+	"?N3Msg_CastNanoSpell@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@0@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_cast_nano_spell_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 74 53 56 89 4D F0");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_consider_mangled_name = static_cast<char*>(
+	"?N3Msg_Consider@n3EngineClientAnarchy_t@@QBE?AW4Consider_e@@ABVIdentity_t@@AAM@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_consider_pattern = static_cast<char*>(
+	"55 8B EC 51 51 56 57 33 F6");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_container_add_item_mangled_name = static_cast<char*>(
+	"?N3Msg_ContainerAddItem@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@0@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_container_add_item_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 30 56 57 8B 7D 0C");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_crawl_toggle_mangled_name = static_cast<char*>(
+	"?N3Msg_CrawlToggle@n3EngineClientAnarchy_t@@QAEXXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_crawl_toggle_pattern = static_cast<char*>(
+	"53 57 8B D9 E8 ?? ?? ?? ?? 8B F8");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_create_raid_mangled_name = static_cast<char*>(
+	"?N3Msg_CreateRaid@n3EngineClientAnarchy_t@@QAEXXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_create_raid_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 4C 56 57 FF 15 ?? ?? ?? ?? 8B F0 33 FF 3B F7 74 ?? 8B CE");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel_mangled_name = static_cast<char*>(
+	"?N3Msg_DefaultActionOnDynel@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 2C 56 8B 75 08");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_default_attack_mangled_name = static_cast<char*>(
+	"?N3Msg_DefaultAttack@n3EngineClientAnarchy_t@@QBEXABVIdentity_t@@_N@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_default_attack_pattern = static_cast<char*>(
+	"55 8B EC 51 53 56 57 8B D9 E8 ?? ?? ?? ??");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_delete_item_mangled_name = static_cast<char*>(
+	"?N3Msg_DeleteItem@n3EngineClientAnarchy_t@@QBEXABVIdentity_t@@0@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_delete_item_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 70 53 56 FF 15 ?? ?? ?? ?? 8B F0 33 DB 3B F3 0F 84 ?? ?? ?? ?? 8B 8E BC 01 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_delete_nano_mangled_name = static_cast<char*>(
+	"?N3Msg_DeleteNano@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_delete_nano_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 70 53 56 FF 15 ?? ?? ?? ?? 8B F0 33 DB 3B F3 0F 84 ?? ?? ?? ?? 57");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_do_social_action_mangled_name = static_cast<char*>(
+	"?N3Msg_DoSocialAction@n3EngineClientAnarchy_t@@QAEXW4AbstractAnimID_e@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_do_social_action_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 0C 53 56 8B D9");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_drop_item_mangled_name = static_cast<char*>(
+	"?N3Msg_DropItem@n3EngineClientAnarchy_t@@QBEXABVIdentity_t@@ABVVector3_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_drop_item_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 48 53 E8 ?? ?? ?? ??");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_accept_mangled_name = static_cast<char*>(
+	"?N3Msg_Duel_Accept@n3EngineClientAnarchy_t@@QAEXXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_accept_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC 88 00 00 00 53 56 33 DB");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_challenge_mangled_name = static_cast<char*>(
+	"?N3Msg_Duel_Challenge@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_challenge_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 70 53 56 33 DB 53 8B F1 68 ?? ?? ?? ?? 8D 4D D0 C7 45 E4 0F 00 00 00 89 5D E0 88 5D D0 E8 ?? ?? ?? ?? 8B 86 84 00 00 00 8D 4D D0 51 8D 4D EC 51 68 06 01 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_draw_mangled_name = static_cast<char*>(
+	"?N3Msg_Duel_Draw@n3EngineClientAnarchy_t@@QAEXXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_draw_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 78 53 56 33 DB 53 8B F1 68 ?? ?? ?? ?? 8D 4D C8 C7 45 DC 0F 00 00 00 89 5D D8 88 5D C8 E8 ?? ?? ?? ?? 8B 86 84 00 00 00 8D 4D C8 51 8D 4D EC 51 68 06 01 00 00 53 8D 4D E4 51 83 C0 14 50 8D 8D 7C FF FF FF 89 5D FC C7 45 EC 04 00 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_refuse_mangled_name = static_cast<char*>(
+	"?N3Msg_Duel_Refuse@n3EngineClientAnarchy_t@@QAEXXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_refuse_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC 84 00 00 00 53 56");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_stop_mangled_name = static_cast<char*>(
+	"?N3Msg_Duel_Stop@n3EngineClientAnarchy_t@@QAEXXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_stop_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 78 53 56 33 DB 53 8B F1 68 ?? ?? ?? ?? 8D 4D C8 C7 45 DC 0F 00 00 00 89 5D D8 88 5D C8 E8 ?? ?? ?? ?? 8B 86 84 00 00 00 8D 4D C8 51 8D 4D EC 51 68 06 01 00 00 53 8D 4D E4 51 83 C0 14 50 8D 8D 7C FF FF FF 89 5D FC C7 45 EC 03 00 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_forage_mangled_name = static_cast<char*>(
+	"?N3Msg_Forage@n3EngineClientAnarchy_t@@QAEXXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_forage_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 78 53 56 33 DB 53 8B F1 68 ?? ?? ?? ?? 8D 4D C8 C7 45 DC 0F 00 00 00 89 5D D8 88 5D C8 E8 ?? ?? ?? ?? 8B 86 84 00 00 00 8D 4D C8 51 8D 4D EC 51 68 CA 00 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_action_by_name_mangled_name = static_cast<char*>(
+	"?N3Msg_GetActionByName@n3EngineClientAnarchy_t@@QBE?AW4AbstractAnimID_e@@PBD@Z");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_action_progress_mangled_name = static_cast<char*>(
+	"?N3Msg_GetActionProgress@n3EngineClientAnarchy_t@@QBEMABVIdentity_t@@PAH1@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_action_progress_pattern = static_cast<char*>(
+	"55 8B EC 56 57 E8 ?? ?? ?? ?? 8B F0 85 F6 0F 84 ?? ?? ?? ??");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_agg_def_mangled_name = static_cast<char*>(
+	"?N3Msg_GetAggDef@n3EngineClientAnarchy_t@@QBEHXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_agg_def_pattern = static_cast<char*>(
+	"E8 ?? ?? ?? ?? 85 C0 75 ?? C3 8D 88 EC 00 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_alien_level_string_mangled_name = static_cast<char*>(
+	"?N3Msg_GetAlienLevelString@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_alien_level_string_pattern = static_cast<char*>(
+	"55 8B EC 6A 00 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? 6A 00 FF 75 08 FF 15 ?? ?? ?? ?? 59 50 E8 ?? ?? ?? ?? 83 C4 14 85 C0 74 ?? 8D 88 EC 00 00 00 8B 01 6A 02 68 A9 00 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_area_name_mangled_name = static_cast<char*>(
+	"?N3Msg_GetAreaName@n3EngineClientAnarchy_t@@QBEXPAPBD@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_area_name_pattern = static_cast<char*>(
+	"55 8B EC 8B 45 08 83 20 00 8B 89 84 00 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_attacking_id_mangled_name = static_cast<char*>(
+	"?N3Msg_GetAttackingID@n3EngineClientAnarchy_t@@QBE_NAAVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_attacking_id_pattern = static_cast<char*>(
+	"55 8B EC E8 ?? ?? ?? ?? 85 C0 74 ?? 8B 88 D8 01 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_breed_str_mangled_name = static_cast<char*>(
+	"?N3Msg_GetBreedStr@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_breed_str_pattern = static_cast<char*>(
+	"55 8B EC 56 6A 00 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? 6A 00 FF 75 08 FF 15 ?? ?? ?? ?? 59 50 E8 ?? ?? ?? ?? 83 C4 14");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_buff_current_time_mangled_name = static_cast<char*>(
+	"?N3Msg_GetBuffCurrentTime@n3EngineClientAnarchy_t@@QAEHABVIdentity_t@@0@Z");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_buff_total_time_mangled_name = static_cast<char*>(
+	"?N3Msg_GetBuffTotalTime@n3EngineClientAnarchy_t@@QAEHABVIdentity_t@@0@Z");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_character_body_shape_mangled_name = static_cast<char*>(
+	"?N3Msg_GetCharacterBodyShape@n3EngineClientAnarchy_t@@QAE_NAAEVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_character_body_shape_pattern = static_cast<char*>(
+	"55 8B EC 83 7D 10 00 75 ?? 83 7D 0C 00 75 ?? FF 15 ?? ?? ?? ?? EB ?? 8D 45 0C 50 E8 ?? ?? ?? ?? 59 85 C0 75 ?? 32 C0 EB ?? 8B C8");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data_mangled_name = static_cast<char*>(
+	"?N3Msg_GetCharOrientationData@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@AAVVector3_t@@AAVQuaternion_t@@AAM@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data_pattern = static_cast<char*>(
+	"55 8B EC 83 EC 10 53 FF 75 08");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member_mangled_name = static_cast<char*>(
+	"?N3Msg_GetCityNameForClanMember@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member_pattern = static_cast<char*>(
+	"55 8B EC 56 6A 00 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? 6A 00 FF 75 08 FF 15 ?? ?? ?? ?? 59 50 E8 ?? ?? ?? ?? 8B F0 83 C4 14 85 F6 74 ?? 8B CE E8 ?? ?? ?? ??");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_clan_level_string_mangled_name = static_cast<char*>(
+	"?N3Msg_GetClanLevelString@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_clan_level_string_pattern = static_cast<char*>(
+	"55 8B EC FF 75 08 E8 ?? ?? ?? ?? 59 85 C0 74 ?? 8B C8 E8 ?? ?? ?? ?? 8B 40 7C 85 C0");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_clan_string_mangled_name = static_cast<char*>(
+	"?N3Msg_GetClanString@n3EngineClientAnarchy_t@@QBEPBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_clan_string_pattern = static_cast<char*>(
+	"55 8B EC FF 75 08 E8 ?? ?? ?? ?? 59 85 C0 74 ?? 8B C8 E8 ?? ?? ?? ?? 8B 80 A0 00 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_client_pet_id_mangled_name = static_cast<char*>(
+	"?N3Msg_GetClientPetID@n3EngineClientAnarchy_t@@QBE?AVIdentity_t@@H@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_client_pet_id_pattern = static_cast<char*>(
+	"55 8B EC FF 15 ?? ?? ?? ?? 85 C0 75 ?? 8B 45 08");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_close_target_mangled_name = static_cast<char*>(
+	"?N3Msg_GetCloseTarget@n3EngineClientAnarchy_t@@QBE_NAAVIdentity_t@@_N1@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_close_target_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 70 53 8B 99 84 00 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list_mangled_name = static_cast<char*>(
+	"?N3Msg_GetContainerInventoryList@n3EngineClientAnarchy_t@@QBEPBV?$list@VInventoryEntry_t@@V?$allocator@VInventoryEntry_t@@@std@@@std@@ABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list_pattern = static_cast<char*>(
+	"55 8B EC 51 53 8B 5D 08 81 3B 50 C3 00 00");
+
+
+
+
+
+
+
+
 
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_global_character_position_mangled_name = static_cast<char*>
 	("?N3Msg_GetGlobalCharacterPosition@n3EngineClientAnarchy_t@@QAEXAAVVector3_t@@@Z");

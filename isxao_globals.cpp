@@ -224,6 +224,216 @@ namespace isxao_globals
 		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_attack)
 #endif
 
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CAST_NANO_SPELL_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_cast_nano_spell)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_cast_nano_spell)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CONSIDER_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_consider)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_consider)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CONTAINER_ADD_ITEM_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_container_add_item)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_container_add_item)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CRAWL_TOGGLE_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_crawl_toggle)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_crawl_toggle)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CREATE_RAID_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_create_raid)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_create_raid)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DEFAULT_ACTION_ON_DYNEL_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DEFAULT_ATTACK_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_default_attack)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_default_attack)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DELETE_ITEM_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_delete_item)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_delete_item)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DELETE_NANO_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode , n3_engine_client_anarchy_t__n3_msg_delete_nano)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_delete_nano)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DO_SOCIAL_ACTION_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_do_social_action)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_do_social_action)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DROP_ITEM_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_drop_item)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_drop_item)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_ACCEPT_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_accept)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_accept)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_CHALLENGE_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_challenge)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_challenge)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_DRAW_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_draw)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_draw)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_REFUSE_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_refuse)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_refuse)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_STOP_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_stop)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_stop)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_FORAGE_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_forage)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_forage)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ACTION_BY_NAME_USE_PATTERN
+		static_assert(false, "engine_client_anarchy::n3_msg_get_action_by_name(PCSTR) cannot be found with a pattern.");
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_action_by_name)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ACTION_PROGRESS_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_action_progress)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_action_progress)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_AGG_DEF_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_agg_def)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_agg_def)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ALIEN_LEVEL_STRING_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_alien_level_string)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_alien_level_string)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_AREA_NAME_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_area_name)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_area_name)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ATTACKING_ID_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_attacking_id)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_attacking_id)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_BREED_STR_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_breed_str)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_breed_str)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_BUFF_CURRENT_TIME_USE_PATTERN
+		static_assert(false, "engine_client_anarchy::n3_msg_get_buff_current_time(const identity_t&, const identity_t&) cannot be found with a pattern.");
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_buff_current_time)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_BUFF_TOTAL_TIME_USE_PATTERN
+		static_assert(false, "engine_client_anarchy::n3_msg_get_buff_total_time(const identity_t&, const identity_t&) cannot be found with a pattern.");
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_buff_total_time)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CHARACTER_BODY_SHAPE_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_character_body_shape)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_character_body_shape)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CHAR_ORIENTATION_DATA_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CITY_NAME_FOR_CLAN_MEMBER_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CLAN_LEVEL_STRING_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_clan_level_string)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_clan_level_string)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CLAN_STRING_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_clan_string)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_clan_string)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CLIENT_PET_ID_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_client_pet_id)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_client_pet_id)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CLOSE_TARGET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_close_target)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_close_target)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CONTAINER_INVENTORY_LIST_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list)
+#endif
+
+
+
+
+
+
+
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GLOBAL_CHARACTER_POSITION_USE_PATTERN
 		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_position)
 #else
@@ -236,6 +446,11 @@ namespace isxao_globals
 		static_assert(false, "simple_char_t__check_los requires a pattern for the function address to be found.")
 #endif
 
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CAN_CLICK_TARGET_TARGET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_click_target_target)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_click_target_target)
+#endif
 
 		// Instances
 		n3_engine_client_anarchy_t__m_pc_instance = n3_engine_t__m_pc_instance;
@@ -329,6 +544,43 @@ namespace isxao_globals
 	DWORD n3_engine_client_anarchy_t__n3_msg_artillery_attack = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_assist_fight = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_can_attack = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_can_click_target_target = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_can_use_mech = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_cast_nano_spell = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_consider = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_container_add_item = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_crawl_toggle = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_create_raid = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_default_attack = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_delete_item = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_delete_nano = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_do_social_action = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_drop_item = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_duel_accept = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_duel_challenge = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_duel_draw = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_duel_refuse = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_duel_stop = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_forage = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_action_by_name = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_action_progress = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_agg_def = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_alien_level_string = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_area_name = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_attacking_id = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_breed_str = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_buff_current_time = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_buff_total_time = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_character_body_shape = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_clan_level_string = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_clan_string = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_client_pet_id = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_close_target = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list = 0;
+
 
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_global_character_position = 0;
 
@@ -338,45 +590,9 @@ namespace isxao_globals
 
 #pragma endregion
 
-#pragma region EngineClientAnarchy		
+#pragma region EngineClientAnarchy
 	
 	
-	
-	DWORD n3EngineClientAnarchy_t__N3Msg_CanClickTargetTarget = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_CanUseMech = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_CastNanoSpell = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_Consider = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_ContainerAddItem = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_CrawlToggle = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_CreateRaid = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_DefaultActionOnDynel = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_DefaultAttack = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_DeleteNano = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_DoSocialAction = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_DropItem = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_Duel_Accept = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_Duel_Challenge = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_Duel_Draw = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_Duel_Refuse = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_Duel_Stop = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_Forage = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetActionByName = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetActionProgress = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetAggDef = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetAlienLevelString = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetAreaName = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetAttackingID = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetBreedStr = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetBuffCurrentTime = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetBuffTotalTime = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetCharacterBodyShape = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetCharOrientationData = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetCityNameForClanMember = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetClanLevelString = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetClanString = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetClientPetID = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetCloseTarget = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetContainerInventoryList = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetCorrectActionID = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetCurrentRoom = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetCurrentRoomName = 0;

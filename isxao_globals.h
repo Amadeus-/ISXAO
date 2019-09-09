@@ -1,4 +1,7 @@
 
+#ifndef ISXAO_GLOBALS_H
+#define ISXAO_GLOBALS_H
+
 namespace isxao_globals
 {
 	bool initialize_offsets();
@@ -87,6 +90,45 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_artillery_attack;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_assist_fight;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_can_attack;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_can_click_target_target;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_can_use_mech;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_cast_nano_spell;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_consider;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_container_add_item;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_crawl_toggle;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_create_raid;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_default_attack;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_delete_item;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_delete_nano;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_do_social_action;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_drop_item;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_duel_accept;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_duel_challenge;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_duel_draw;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_duel_refuse;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_duel_stop;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_forage;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_action_by_name;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_action_progress;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_agg_def;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_alien_level_string;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_area_name;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_attacking_id;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_breed_str;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_buff_current_time;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_buff_total_time;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_character_body_shape;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_clan_level_string;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_clan_string;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_client_pet_id;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_close_target;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list;
+
+
+
 
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_global_character_position;
 
@@ -111,45 +153,8 @@ namespace isxao_globals
 
 #pragma endregion
 
-#pragma region EngineClientAnarchy		
+#pragma region EngineClientAnarchy	
 	
-	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_CanClickTargetTarget;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_CanUseMech;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_CastNanoSpell;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_Consider;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_ContainerAddItem;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_CrawlToggle;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_CreateRaid;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_DefaultActionOnDynel;	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_DefaultAttack;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_DeleteNano;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_DoSocialAction;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_DropItem;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_Duel_Accept;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_Duel_Challenge;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_Duel_Draw;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_Duel_Refuse;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_Duel_Stop;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_FlashHead;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_Forage;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetActionByName;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetActionProgress;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetAggDef;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetAlienLevelString;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetAreaName;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetAttackingID;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetBreedStr;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetBuffCurrentTime;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetBuffTotalTime;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetCharacterBodyShape;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetCharOrientationData;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetCityNameForClanMember;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetClanLevelString;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetClanString;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetClientPetID;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetCloseTarget;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetContainerInventoryList;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetCorrectActionID;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetCurrentRoom;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetCurrentRoomName;
@@ -582,3 +587,4 @@ namespace isxao_globals
 
 }
 using namespace isxao_globals;
+#endif // ISXAO_GLOBALS_H

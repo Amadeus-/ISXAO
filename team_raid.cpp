@@ -23,7 +23,7 @@ namespace isxao_classes
 
 	void TeamRaid::CreateRaid()
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_CreateRaid();
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_create_raid();
 	}
 
 	TeamEntry* TeamRaid::GetTeamLeader() const

@@ -1051,7 +1051,7 @@ enum Profession_e
 
 #pragma region SocialActions
 
-enum SocialAction_e
+enum social_action_e
 {
 	SA_GREETING_BOW = 9,
 	SA_GREETING_CURT = 15,

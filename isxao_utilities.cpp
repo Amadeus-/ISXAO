@@ -28,10 +28,10 @@ namespace isxao_utilities
 			return "Monster";
 		case BT_HUMAN_MONSTER: 
 			return "human monster";
-		default:
+		default:			
 			char buffer[MAX_VARSTRING];
 			sprintf_s(buffer, sizeof(buffer), "Missing breed: %d", DWORD(breed_id));
-			return buffer;
+			return PCSTR(pISInterface->GetTempBuffer(sizeof(buffer), buffer));
 		}
 	}
 
@@ -51,7 +51,7 @@ namespace isxao_utilities
 		default:
 			char buffer[MAX_VARSTRING];
 			sprintf_s(buffer, sizeof(buffer), "Missing sex: %d", DWORD(gender_id));
-			return buffer;
+			return PCSTR(pISInterface->GetTempBuffer(sizeof(buffer), buffer));
 		}
 	}
 

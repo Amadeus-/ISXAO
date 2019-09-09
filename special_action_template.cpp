@@ -23,7 +23,7 @@ namespace isxao_classes
 		DWORD a, b;
 		DWORD *pA = &a;
 		DWORD *pB = &b;
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_GetActionProgress(GetIdentity(), pA, pB);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_get_action_progress(GetIdentity(), pA, pB);
 		return a;
 	}
 

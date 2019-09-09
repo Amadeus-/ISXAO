@@ -79,7 +79,7 @@ namespace isxao_classes
 
 	void Dynel::Interact()
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_DefaultActionOnDynel(GetIdentity());
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_default_action_on_dynel(GetIdentity());
 	}
 
 	bool Dynel::IsInLineOfSight()

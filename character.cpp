@@ -99,12 +99,12 @@ namespace isxao_classes
 
 	void character::CastNanoSpell(identity_t const& nano, identity_t const& target) const
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_CastNanoSpell(nano, target);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_cast_nano_spell(nano, target);
 	}
 
 	void character::DefaultAttack(identity_t const& id) const
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_DefaultAttack(id, true);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_default_attack(id, true);
 	}
 
 	void character::Face(float heading)
