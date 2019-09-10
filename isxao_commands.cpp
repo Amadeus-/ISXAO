@@ -963,7 +963,7 @@ namespace isxao_commands
 		//		char search_name[MAX_STRING];
 		//		strcpy_s(search_name, MAX_STRING, argv[1]);
 		//		_strlwr_s(search_name);
-		//		std::vector<Actor*> v;
+		//		std::vector<actor*> v;
 		//		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		//		for (auto it = v.begin(); it != v.end(); ++it)
 		//		{
@@ -1012,7 +1012,7 @@ namespace isxao_commands
 		//// If no arguments are provided, we should try to face our current target
 		//if (pSelectionIndicator)
 		//{
-		//	static_cast<Actor*>(isxao_utilities::GetDynel(pSelectionIndicator->Identity))->DoFace();
+		//	static_cast<actor*>(isxao_utilities::GetDynel(pSelectionIndicator->Identity))->DoFace();
 		//	return 1;
 		//}
 		return 0;
@@ -1042,7 +1042,7 @@ namespace isxao_commands
 		//	pTargetingModule->SelectSelf();
 		//	return 1;
 		//}
-		//std::vector<Actor*> v;
+		//std::vector<actor*> v;
 		//P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		//if (!strcmp(arg, "pc")) // Check for nearest pc
 		//{

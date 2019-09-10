@@ -798,7 +798,7 @@ namespace isxao_classes
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SKILL_MAX_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::n3_msg_get_skill_max(DWORD), n3_engine_client_anarchy_t_n3_msg_get_skill_max)
+	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::n3_msg_get_skill_max(DWORD), n3_engine_client_anarchy_t__n3_msg_get_skill_max)
 #else
 	static_assert(false, "engine_client_anarchy::n3_msg_get_skill_max(DWORD) requires a native function.");
 #endif

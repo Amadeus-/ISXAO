@@ -19,7 +19,7 @@ namespace isxao_utilities
 
 	AOLIB_API DWORD __cdecl GetFullPerkMap(void);
 	AOLIB_API dynel* __cdecl GetDynel(const identity_t &);
-	AOLIB_API Actor* __cdecl GetActor(const identity_t &);
+	AOLIB_API actor* __cdecl GetActor(const identity_t &);
 	//AOLIB_API p_nano_item_t __cdecl GetNanoItem(DWORD);
 
 	AOLIB_API bool IsValidDynel(p_n3_dynel_t);
@@ -31,12 +31,12 @@ namespace isxao_utilities
 #pragma region SearchDynel
 
 	AOLIB_API void ClearSearchActor(PSEARCHACTOR);
-	AOLIB_API Actor* NthNearestActor(PSEARCHACTOR p_search_actor, DWORD nth, Actor* p_origin, bool include_origin = false);
-	AOLIB_API DWORD CountMatchingActors(PSEARCHACTOR p_search_actor, Actor* p_character, bool include_char = false);
-	AOLIB_API bool ActorMatchesSearch(PSEARCHACTOR p_search_actor, Actor* p_character, Actor* p_actor);
+	AOLIB_API actor* NthNearestActor(PSEARCHACTOR p_search_actor, DWORD nth, actor* p_origin, bool include_origin = false);
+	AOLIB_API DWORD CountMatchingActors(PSEARCHACTOR p_search_actor, actor* p_character, bool include_char = false);
+	AOLIB_API bool ActorMatchesSearch(PSEARCHACTOR p_search_actor, actor* p_character, actor* p_actor);
 	AOLIB_API DWORD ParseSearchActorArg(int arg, int argc, char *argv[], SEARCHACTOR &search_actor);
 	AOLIB_API void ParseSearchActor(int begin_inclusive, int end_exclusive, char *argv[], SEARCHACTOR &search_actor);
-	AOLIB_API bool IsPCNear(Actor* p_actor, float radius);
+	AOLIB_API bool IsPCNear(actor* p_actor, float radius);
 
 #pragma endregion
 

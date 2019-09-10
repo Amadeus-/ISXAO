@@ -104,7 +104,7 @@ bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 			ClearSearchActor(&search_actor);
 			search_actor.f_radius = 999999.0f;
 			identity_t identity;
-			std::vector<Actor*> v;
+			std::vector<actor*> v;
 			auto actor_count = P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 			if (!ISNUMBER())
 			{
@@ -157,7 +157,7 @@ bool __cdecl TLO_ACTORSEARCHCOUNT(int argc, char *argv[], LSTYPEVAR&Dest)
 			Dest.Type = pUintType;
 			return true;
 		}
-		std::vector<Actor*> v;
+		std::vector<actor*> v;
 		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		Dest.DWord = v.size();
 		Dest.Type = pUintType;
@@ -236,7 +236,7 @@ bool __cdecl TLO_TEAMRAID(int argc, char *argv[], LSTYPEVAR &Dest)
 {
 	if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
 	{
-		Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetTeamRaid();
+		Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_team_raid();
 		Dest.Type = pTeamRaidType;
 		return true;
 	}

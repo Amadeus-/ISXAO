@@ -218,7 +218,7 @@ namespace isxao_classes
 
 	bool dynel::is_team_member()
 	{
-		return this->is_player() && this->to_player()->IsInMyTeam();
+		return this->is_player() && this->to_player()->is_in_my_team();
 	}
 
 	bool dynel::is_vending_machine()
@@ -249,9 +249,9 @@ namespace isxao_classes
 	static_assert(false, "dynel::send_iir_to_observers(info_item_remote*) requires a native function.");
 #endif
 
-	Actor* dynel::to_actor()
+	actor* dynel::to_actor()
 	{
-		return static_cast<Actor*>(get_data());
+		return static_cast<actor*>(get_data());
 	}
 
 	character* dynel::to_character()

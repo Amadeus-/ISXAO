@@ -193,7 +193,7 @@ namespace isxao_utilities
 #pragma region Objects
 
 	FUNCTION_AT_ADDRESS(dynel* __cdecl GetDynel(const identity_t &), n3_dynel_t__get_dynel);
-	FUNCTION_AT_ADDRESS(Actor* __cdecl GetActor(const identity_t &), n3_dynel_t__get_dynel);
+	FUNCTION_AT_ADDRESS(actor* __cdecl GetActor(const identity_t &), n3_dynel_t__get_dynel);
 
 #ifdef __GetFullPerkMap_x
 	FUNCTION_AT_ADDRESS(DWORD __cdecl GetFullPerkMap(void), __N3Msg_GetFullPerkMap);
@@ -353,7 +353,7 @@ namespace isxao_utilities
 			arg += ParseSearchActorArg(arg, end_exclusive, argv, search_actor);
 	}
 
-	bool ActorMatchesSearch(PSEARCHACTOR p_search_actor, Actor* p_character, Actor* p_actor)
+	bool ActorMatchesSearch(PSEARCHACTOR p_search_actor, actor* p_character, actor* p_actor)
 	{
 		char szName[MAX_STRING] = { 0 };
 		char szSearchName[MAX_STRING] = { 0 };
@@ -362,7 +362,7 @@ namespace isxao_utilities
 			actor_type = MOB_OTHER;
 		else if (p_actor->is_actor())
 		{
-			if (p_actor->is_pet() && IsClientId(p_actor->GetMasterId()))
+			if (p_actor->is_pet() && IsClientId(p_actor->get_master_id()))
 				actor_type = MOB_MYPET;
 			else if (p_actor->is_pet())
 				actor_type = MOB_PET;
@@ -416,12 +416,12 @@ namespace isxao_utilities
 		return true;
 	}
 
-	bool IsPCNear(Actor* p_actor, float radius)
+	bool IsPCNear(actor* p_actor, float radius)
 	{
-		Actor* p_close_actor = nullptr;
+		actor* p_close_actor = nullptr;
 		if (P_ENGINE_CLIENT_ANARCHY)
 		{
-			std::vector<Actor*> v;
+			std::vector<actor*> v;
 			P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{
@@ -439,12 +439,12 @@ namespace isxao_utilities
 		return false;
 	}
 
-	DWORD CountMatchingActors(PSEARCHACTOR p_search_actor, Actor* p_character, bool include_char)
+	DWORD CountMatchingActors(PSEARCHACTOR p_search_actor, actor* p_character, bool include_char)
 	{
 		if (!p_search_actor || !p_character)
 			return 0;
 		DWORD total_matching = 0;
-		std::vector<Actor*> v;
+		std::vector<actor*> v;
 		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 		{
@@ -466,13 +466,13 @@ namespace isxao_utilities
 		return total_matching;
 	}
 
-	Actor* NthNearestActor(PSEARCHACTOR p_search_actor, DWORD nth, Actor* p_origin, bool include_char)
+	actor* NthNearestActor(PSEARCHACTOR p_search_actor, DWORD nth, actor* p_origin, bool include_char)
 	{
 		if (!p_search_actor || !nth || !p_origin)
 			return nullptr;
 		CIndex<PAORANK> actor_set;
 		vector3_t pos = p_origin->get_position();
-		std::vector<Actor*> v;
+		std::vector<actor*> v;
 		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		DWORD TotalMatching = 0;
 		if (include_char)
@@ -509,7 +509,7 @@ namespace isxao_utilities
 			return nullptr;
 		}
 		std::sort(&actor_set.List[0], &actor_set[0] + TotalMatching, pAORankFloatCompare);
-		auto p_actor = static_cast<Actor*>(actor_set[nth - 1]->VarPtr.Ptr);
+		auto p_actor = static_cast<actor*>(actor_set[nth - 1]->VarPtr.Ptr);
 		actor_set.Cleanup();
 		return p_actor;
 	}
@@ -568,7 +568,7 @@ namespace isxao_utilities
 	//		arg += ParseSearchActorArg(arg, end_exclusive, argv, search_actor);
 	//}
 
-	//bool ActorMatchesSearch(PSEARCHACTOR p_search_actor, Actor* p_character, Actor* p_actor)
+	//bool ActorMatchesSearch(PSEARCHACTOR p_search_actor, actor* p_character, actor* p_actor)
 	//{
 	//	DWORD actor_type;
 	//	if (p_actor->IsPlayer())
@@ -590,12 +590,12 @@ namespace isxao_utilities
 	//	return true;
 	//}
 
-	//Actor* NearestActor(PSEARCHACTOR p_search_actor, Actor* p_origin, bool include_character)
+	//actor* NearestActor(PSEARCHACTOR p_search_actor, actor* p_origin, bool include_character)
 	//{
 	//	if (!p_search_actor || !p_origin)
 	//		return nullptr;
 	//	auto point_of_origin = p_origin->GetPosition();
-	//	std::vector<Actor*> v;
+	//	std::vector<actor*> v;
 	//	P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 	//	std::sort(v.begin(), v.end(), dynel::pDynelCompare);
 	//	if(include_character)
@@ -1347,7 +1347,7 @@ namespace isxao_utilities
 				return pCharacterType;
 			if (pObject->is_player())
 				return pActorType;	
-			if (pObject->is_pet() && isxao_inlines::IsClientId(pObject->to_actor()->GetMasterId()))
+			if (pObject->is_pet() && isxao_inlines::IsClientId(pObject->to_actor()->get_master_id()))
 				return pPetType;
 			if (pObject->is_actor())
 				return pActorType;

@@ -6,7 +6,7 @@ public:
 	//void GetDynelsInVicinity(std::vector<identity_t, std::allocator<identity_t>> &, DWORD);
 	AOLIB_OBJECT LONG GetPFWorldXPos() const;
 	AOLIB_OBJECT LONG GetPFWorldZPos() const;
-	AOLIB_OBJECT DWORD GetPlayfieldActors(std::vector<Actor*> &v);
+	AOLIB_OBJECT DWORD GetPlayfieldActors(std::vector<actor*> &v);
 	AOLIB_OBJECT playfield_anarchy_t GetPlayfieldData() const;
 	AOLIB_OBJECT DWORD GetPlayfieldInstance() const;
 	AOLIB_OBJECT PCSTR GetPlayfieldName() const;

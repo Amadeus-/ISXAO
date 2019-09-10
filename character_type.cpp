@@ -7,7 +7,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	if (!ObjectData.Ptr)
 		return false;
 
-#define pCharacter ((character*)ObjectData.Ptr)
+#define P_CHARACTER ((character*)ObjectData.Ptr)
 	switch (CharacterTypeMembers(Member->ID))
 	{
 	case Inventory:
@@ -16,15 +16,15 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		{
 			if(ISNUMBER())
 			{
-				INVENTORYSLOT s = pCharacter->GetInventoryHolder()->GetInventorySlot(GETNUMBER());
-				PINVENTORYSLOT pS = static_cast<PINVENTORYSLOT>(pISInterface->GetTempBuffer(sizeof(INVENTORYSLOT), &s));
-				if((Object.Ptr = pS))
+				auto s = P_CHARACTER->GetInventoryHolder()->GetInventorySlot(GETNUMBER());  // NOLINT(cert-err34-c)
+				const auto p_s = static_cast<PINVENTORYSLOT>(pISInterface->GetTempBuffer(sizeof(INVENTORYSLOT), &s));
+				if((Object.Ptr = p_s))
 				{
 					Object.Type = pInventorySlotType;
 					return true;
 				}
 			}
-			INVENTORYSLOT s = pCharacter->GetInventoryHolder()->GetInventorySlot(argv[0]);
+			INVENTORYSLOT s = P_CHARACTER->GetInventoryHolder()->GetInventorySlot(argv[0]);
 			if(s.SlotID.type != 0)
 			{
 				PINVENTORYSLOT pS = static_cast<PINVENTORYSLOT>(pISInterface->GetTempBuffer(sizeof(INVENTORYSLOT), &s));
@@ -39,7 +39,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	}
 	case InventoryCount:
 	{
-		Object.DWord = pCharacter->GetInventoryHolder()->GetInventoryCount();
+		Object.DWord = P_CHARACTER->GetInventoryHolder()->GetInventoryCount();
 		Object.Type = pUintType;
 		break;
 	}
@@ -58,7 +58,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			LSObjectCollection *pMap = (LSObjectCollection*)MapObject.Ptr;
 			if (pMap->GetType() != pInventoryItemType)
 				return false;
-			auto count = pCharacter->GetInventoryHolder()->BuildLSInventory(pMap);
+			auto count = P_CHARACTER->GetInventoryHolder()->BuildLSInventory(pMap);
 			Object.DWord = pMap->GetCount();
 			Object.Type = pUintType;
 			return true;
@@ -70,7 +70,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		if(ISINDEX())
 		{
 			std::vector<DWORD> v;
-			pCharacter->GetSpellTemplateData()->GetNanoSpellList(v);
+			P_CHARACTER->get_spell_template_data()->GetNanoSpellList(v);
 			if(ISNUMBER())
 			{
 				auto index = DWORD(GETNUMBER());				
@@ -111,7 +111,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	case NanoSpellCount:
 	{
 		std::vector<DWORD> v;		
-		Object.DWord = pCharacter->GetSpellTemplateData()->GetNanoSpellList(v);
+		Object.DWord = P_CHARACTER->get_spell_template_data()->GetNanoSpellList(v);
 		Object.Type = pUintType;
 		break;
 	}
@@ -127,7 +127,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			LSIndex *pIndex = (LSIndex*)IndexObject.Ptr;
 			if (pIndex->GetType() != pNanoSpellType)
 				return false;
-			Object.DWord = pCharacter->GetSpellTemplateData()->BuildLSNanoSpellList(pIndex);
+			Object.DWord = P_CHARACTER->get_spell_template_data()->BuildLSNanoSpellList(pIndex);
 			Object.Type = pUintType;
 			return true;
 		}
@@ -196,7 +196,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			LSIndex *pIndex = (LSIndex*)IndexObject.Ptr;
 			if (pIndex->GetType() != pSpecialActionTemplateType)
 				return false;
-			Object.DWord = pCharacter->GetSpecialActionHolder()->BuildLSSpecialActions(pIndex);
+			Object.DWord = P_CHARACTER->GetSpecialActionHolder()->BuildLSSpecialActions(pIndex);
 			Object.Type = pUintType;
 			return true;
 		}
@@ -204,7 +204,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	}
 	case ToActor:
 	{
-		Object.Ptr = pCharacter;
+		Object.Ptr = P_CHARACTER;
 		Object.Type = pActorType;
 		break;
 	}
@@ -212,7 +212,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		return false;
 	}
 	return true;
-#undef pCharacter
+#undef P_CHARACTER
 }
 
 bool CharacterType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int argc, char* argv[])
@@ -254,9 +254,9 @@ bool CharacterType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int bufl
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define pCharacter ((character*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64u", pCharacter->get_identity().get_combined_identity());
-#undef pCharacter
+#define P_CHARACTER ((character*)ObjectData.Ptr)
+	sprintf_s(buf, buflen, "%I64u", P_CHARACTER->get_identity().get_combined_identity());
+#undef P_CHARACTER
 
 	return true;
 }

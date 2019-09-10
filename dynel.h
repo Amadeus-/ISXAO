@@ -37,7 +37,7 @@ public:
 	AOLIB_OBJECT bool is_vending_machine();
 	AOLIB_OBJECT bool is_weapon_instance();
 	AOLIB_OBJECT void send_iir_to_observers(info_item_remote*);
-	AOLIB_OBJECT Actor* to_actor();
+	AOLIB_OBJECT actor* to_actor();
 	AOLIB_OBJECT character* to_character();
 	AOLIB_OBJECT Pet* to_pet();
 	AOLIB_OBJECT Player* to_player();

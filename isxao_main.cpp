@@ -82,7 +82,7 @@ namespace isxao
 
 	DWORD GetActorIndexFromActorVector(LSIndex *index)
 	{
-		std::vector<Actor*> v;
+		std::vector<actor*> v;
 		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 			index->AddItem(reinterpret_cast<LSOBJECTDATA&>(*it));

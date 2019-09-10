@@ -4,9 +4,8 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	auto r = get_breed_str_local(BT_ATROX);
-	// printf("%" PRIX32, r);
-	printf(r);
+	auto r = GetProcAddress(gui_module_handle, "?m_pcInstance@TargetingModule_t@@0PAV1@A");
+	printf("%" PRIX32, DWORD(r));
 	return 0;
 }
 

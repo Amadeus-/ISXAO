@@ -1,6 +1,6 @@
 #pragma once
 
-class Pet : public Actor
+class Pet : public actor
 {
 public:
 	AOLIB_OBJECT void Attack();

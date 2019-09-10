@@ -18,7 +18,8 @@ namespace isxao_globals
 	AOLIB_VAR MODULEINFO gamecode_module_info;
 	AOLIB_VAR HMODULE n3_module_handle;
 	AOLIB_VAR MODULEINFO n3_module_info;
-	AOLIB_VAR DWORD hGUI;
+	AOLIB_VAR HMODULE gui_module_handle;
+	AOLIB_VAR MODULEINFO gui_module_info;
 	AOLIB_VAR DWORD hVehicle;
 	AOLIB_VAR DWORD hMessageProtocol;
 	AOLIB_VAR DWORD hInterfaces;
@@ -173,6 +174,27 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__m_pc_instance;
 	AOLIB_VAR isxao_classes::engine_client_anarchy **pp_engine_client_anarchy;
 #define P_ENGINE_CLIENT_ANARCHY (*pp_engine_client_anarchy)  // NOLINT(cppcoreguidelines-macro-usage)
+
+#pragma endregion
+
+#pragma region GUI
+
+	AOLIB_VAR DWORD TargetingModule_t__m_pcInstance;
+	AOLIB_VAR TargetingModule** ppTargetingModule;
+#define pTargetingModule (*ppTargetingModule)
+	AOLIB_VAR DWORD TargetingModule_t__m_pcSelectionIndicator;
+	AOLIB_VAR indicator_t** ppSelectionIndicator;
+#define pSelectionIndicator (*ppSelectionIndicator)
+	AOLIB_VAR DWORD TargetingModule_t__m_pcAttackingIndicator;
+	AOLIB_VAR indicator_t** ppAttackingIndicator;
+#define pAttackingIndicator (*ppAttackingIndicator)
+	AOLIB_VAR DWORD TargetingModule_t__m_cLastTarget;
+	AOLIB_VAR identity_t* pLastTarget;
+#define LastTarget (*pLastTarget)
+	AOLIB_VAR DWORD TargetingModule_t__RemoveTarget;
+	AOLIB_VAR DWORD TargetingModule_t__SelectSelf;
+	AOLIB_VAR DWORD TargetingModule_t__SetTarget;
+	AOLIB_VAR DWORD TargetingModule_t__SetTargetPet;
 
 #pragma endregion
 
@@ -364,22 +386,7 @@ namespace isxao_globals
 
 #pragma region TargetingModule
 
-	AOLIB_VAR DWORD TargetingModule_t__m_pcInstance;
-	AOLIB_VAR TargetingModule** ppTargetingModule;
-#define pTargetingModule (*ppTargetingModule)
-	AOLIB_VAR DWORD TargetingModule_t__m_pcSelectionIndicator;
-	AOLIB_VAR indicator_t** ppSelectionIndicator;
-#define pSelectionIndicator (*ppSelectionIndicator)
-	AOLIB_VAR DWORD TargetingModule_t__m_pcAttackingIndicator;
-	AOLIB_VAR indicator_t** ppAttackingIndicator;
-#define pAttackingIndicator (*ppAttackingIndicator)
-	AOLIB_VAR DWORD TargetingModule_t__m_cLastTarget;
-	AOLIB_VAR identity_t* pLastTarget;
-#define LastTarget (*pLastTarget)
-	AOLIB_VAR DWORD TargetingModule_t__RemoveTarget;
-	AOLIB_VAR DWORD TargetingModule_t__SelectSelf;
-	AOLIB_VAR DWORD TargetingModule_t__SetTarget;
-	AOLIB_VAR DWORD TargetingModule_t__SetTargetPet;
+	
 
 
 

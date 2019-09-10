@@ -7,27 +7,27 @@ namespace isxao_classes
 
 	InventoryHolder* character::GetInventoryHolder()
 	{
-		return reinterpret_cast<InventoryHolder*>(GetSimpleCharData()->p_container_inventory);
+		return reinterpret_cast<InventoryHolder*>(get_simple_char_data()->p_container_inventory);
 	}
 
 	NpcHolder* character::GetNPCHolder()
 	{
-		return reinterpret_cast<NpcHolder*>(GetSimpleCharData()->p_npc_holder);
+		return reinterpret_cast<NpcHolder*>(get_simple_char_data()->p_npc_holder);
 	}
 
 	PerkHolder* character::GetPerkHolder()
 	{
-		return reinterpret_cast<PerkHolder*>(GetSimpleCharData()->p_perk_holder);
+		return reinterpret_cast<PerkHolder*>(get_simple_char_data()->p_perk_holder);
 	}
 
 	SpecialActionHolder* character::GetSpecialActionHolder()
 	{
-		return reinterpret_cast<SpecialActionHolder*>(GetSimpleCharData()->p_special_action_holder);
+		return reinterpret_cast<SpecialActionHolder*>(get_simple_char_data()->p_special_action_holder);
 	}
 
 	StatHolder* character::GetStatHolder()
 	{
-		return reinterpret_cast<StatHolder*>(GetSimpleCharData()->p_map_holder);
+		return reinterpret_cast<StatHolder*>(get_simple_char_data()->p_map_holder);
 	}
 
 	void character::GetStatMap(std::map<DWORD, LONG> &m)
@@ -124,7 +124,7 @@ namespace isxao_classes
 
 	void character::MakeTeamLeader(const identity_t& id)
 	{
-		if (P_ENGINE_CLIENT_ANARCHY && IsInTeam() && IsTeamLeader())
+		if (P_ENGINE_CLIENT_ANARCHY && is_in_team() && is_team_leader())
 			P_ENGINE_CLIENT_ANARCHY->N3Msg_TransferTeamLeadership(id);
 	}
 
@@ -145,7 +145,7 @@ namespace isxao_classes
 
 	void character::SetRotation(const quaternion_t& q)
 	{
-		GetVehicle()->SetRotation(q);
+		get_vehicle()->SetRotation(q);
 	}
 
 	void character::StopAttack() const

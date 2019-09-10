@@ -5,7 +5,7 @@ namespace isxao_classes
 
 #pragma region Forward Declarations
 
-	class Actor;
+	class actor;
 	class character;
 	class info_item_remote;
 	class InventoryItem;

@@ -18,7 +18,9 @@ namespace isxao_globals
 
 	DWORD hDatabaseController = DWORD(GetModuleHandle("DatabaseController.dll"));
 	
-	DWORD hGUI = DWORD(GetModuleHandle("GUI.dll"));
+	HMODULE gui_module_handle = GetModuleHandle("GUI.dll");
+	MODULEINFO gui_module_info;
+
 	DWORD hVehicle = DWORD(GetModuleHandle("Vehicle.dll"));
 	DWORD hMessageProtocol = DWORD(GetModuleHandle("MessageProtocol.dll"));
 	DWORD hPathFinder = DWORD(GetModuleHandle("PathFinder.dll"));
@@ -689,6 +691,22 @@ namespace isxao_globals
 		// Instances
 		n3_engine_client_anarchy_t__m_pc_instance = n3_engine_t__m_pc_instance;
 		pp_engine_client_anarchy = reinterpret_cast<isxao_classes::engine_client_anarchy**>(n3_engine_client_anarchy_t__m_pc_instance);
+
+#pragma endregion
+
+#pragma region GUI
+
+		// Module
+		GetModuleInformation(process_handle, gui_module_handle, &gui_module_info, sizeof(gui_module_info));
+		auto gui_module_base = DWORD(gui_module_handle);
+		const auto gui_data_begin = reinterpret_cast<unsigned char*>(gui_module_base);
+		const auto gui_data_end = gui_data_begin + gui_module_info.SizeOfImage;
+		const vector<unsigned char> gui_data(gui_data_begin, gui_data_end);
+
+		// Functions
+
+
+		// Instances
 
 #pragma endregion
 

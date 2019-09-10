@@ -1,6 +1,6 @@
 #pragma once
 
-class Player : public Actor
+class Player : public actor
 {
 public:
 	//AOLIB_OBJECT TeamRaid* GetTeamRaid();

@@ -523,6 +523,13 @@ constexpr DWORD n3_playfield_t__m_pc_playfield_dir_instance_bytes_to_next = 0x0;
 
 #pragma endregion
 
+#pragma region GUI
+
+// Module
+constexpr char* const gui_module_name = static_cast<char*>("GUI.dll");
+
+#pragma endregion
+
 #pragma region EngineClientAnarchy
 
 // #define n3EngineClientAnarchy_t__GetFactionStr_x							0x16942

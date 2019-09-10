@@ -13,12 +13,12 @@ namespace isxao_classes
 		return playfield_anarchy_.pf_world_z_pos;
 	}
 
-	DWORD PlayfieldAnarchy::GetPlayfieldActors(std::vector<Actor*> &v)
+	DWORD PlayfieldAnarchy::GetPlayfieldActors(std::vector<actor*> &v)
 	{
 		for (auto it = playfield_anarchy_.p_dynel_children.begin(); it != playfield_anarchy_.p_dynel_children.end(); ++it)
 		{
 			if ((*it)->identity.type == 50000)
-				v.push_back(reinterpret_cast<Actor*>(*it));
+				v.push_back(reinterpret_cast<actor*>(*it));
 		}
 		std::sort(v.begin(), v.end(), dynel::p_dynel_compare);
 		return v.size();
