@@ -95,8 +95,8 @@ public:
 	AOLIB_OBJECT LONG n3_msg_get_skill(DWORD, DWORD);
 	AOLIB_OBJECT LONG n3_msg_get_skill(const identity_t &, DWORD, DWORD, const identity_t &);
 	AOLIB_OBJECT LONG n3_msg_get_skill_max(DWORD);
-	AOLIB_OBJECT std::list<special_action_t>* n3_msg_get_special_action_list();
-	AOLIB_OBJECT DWORD N3Msg_GetSpecialActionState(const identity_t &);
+	AOLIB_OBJECT list<special_action_t>* n3_msg_get_special_action_list();
+	AOLIB_OBJECT DWORD n3_msg_get_special_action_state(const identity_t &);
 	AOLIB_OBJECT PCSTR N3Msg_GetSpecialAttackWeaponName(const identity_t &);
 	AOLIB_OBJECT p_identity_t N3Msg_GetTargetTarget(identity_t &, const identity_t &);
 	AOLIB_OBJECT PVOID N3Msg_GetTeamMemberList(LONG);
@@ -119,7 +119,7 @@ public:
 	AOLIB_OBJECT bool N3Msg_IsMoving();
 	AOLIB_OBJECT bool N3Msg_IsMyPetID(const identity_t &);
 	AOLIB_OBJECT bool N3Msg_IsNanoSelfOnly(const identity_t &);
-	AOLIB_OBJECT bool N3Msg_IsNpc(const identity_t &);
+	AOLIB_OBJECT bool n3_msg_is_npc(const identity_t &);
 	AOLIB_OBJECT bool N3Msg_IsPerk(DWORD);
 	AOLIB_OBJECT bool N3Msg_IsPetTower(const identity_t &);
 	AOLIB_OBJECT bool N3Msg_IsProfessionPerk(DWORD);

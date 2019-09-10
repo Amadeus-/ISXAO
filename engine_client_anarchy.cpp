@@ -718,7 +718,7 @@ namespace isxao_classes
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_FREE_INVENTORY_SLOTS_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_number_of_free_inventory_slots(), n3_engine_client_anarchy_t_n3_msg_get_number_of_free_inventory_slots)
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_number_of_free_inventory_slots(), n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots)
 #else
 	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_free_inventory_slots() requires a native function.");
 #endif
@@ -819,8 +819,11 @@ namespace isxao_classes
 	}
 #endif	
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetSpecialActionState_x
-	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::N3Msg_GetSpecialActionState(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetSpecialActionState);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SPECIAL_ACTION_STATE_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_special_action_state(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_special_action_state)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_special_action_state(const identity_t &) requires a native function.");
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetSpecialAttackWeaponName_x
@@ -916,8 +919,11 @@ namespace isxao_classes
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::N3Msg_IsNanoSelfOnly(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly);
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_IsNpc_x
-	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::N3Msg_IsNpc(const identity_t &), n3EngineClientAnarchy_t__N3Msg_IsNpc);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_IS_NPC_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_is_npc(const identity_t &), n3_engine_client_anarchy_t__n3_msg_is_npc)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_is_npc(const identity_t &) requires a native function.");
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsPerk_x

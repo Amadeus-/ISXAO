@@ -24,7 +24,8 @@ namespace isxao_globals
 	DWORD hVehicle = DWORD(GetModuleHandle("Vehicle.dll"));
 	DWORD hMessageProtocol = DWORD(GetModuleHandle("MessageProtocol.dll"));
 	DWORD hPathFinder = DWORD(GetModuleHandle("PathFinder.dll"));
-	DWORD hInterfaces = DWORD(GetModuleHandle("Interfaces.dll"));
+	HMODULE interfaces_module_handle = GetModuleHandle("Interfaces.dll");
+	MODULEINFO interfaces_module_info;
 
 #pragma endregion
 
@@ -40,7 +41,16 @@ namespace isxao_globals
 			printf("Could not find handle to module \"Gamecode.dll\". Aborting offset initialization.");
 			return false;
 		}		
-
+		if (!gui_module_handle)
+		{
+			printf("Could not find handle to module \"GUI.dll\". Aborting offset initialization.");
+			return false;
+		}
+		if (!interfaces_module_handle)
+		{
+			printf("Could not find handle to module \"Interfaces.dll\". Aborting offset initialization.");
+			return false;
+		}
 #pragma region Process
 
 		process_handle = GetCurrentProcess();
@@ -51,19 +61,43 @@ namespace isxao_globals
 
 		// Module
 		GetModuleInformation(process_handle, n3_module_handle, &n3_module_info, sizeof(n3_module_info));
+		// ReSharper disable once CppLocalVariableMayBeConst
 		auto n3_module_base = DWORD(n3_module_handle);
 		const auto n3_data_begin = reinterpret_cast<unsigned char*>(n3_module_base);
 		const auto n3_data_end = n3_data_begin + n3_module_info.SizeOfImage;
 		const vector<unsigned char> n3_data(n3_data_begin, n3_data_end);
 
 		// Functions
+#ifdef N3_CAMERA_T__SET_SECONDARY_TARGET_USE_PATTERN
 		GET_FUNCTION_ADDRESS(n3, n3_camera_t__set_secondary_target)
+#else
+		GET_PROC_ADDRESS(n3, n3_camera_t__set_secondary_target)
+#endif
+
+#ifdef N3_CAMERA_T__SET_SELECTED_TARGET_USE_PATTERN
 		GET_FUNCTION_ADDRESS(n3, n3_camera_t__set_selected_target)
+#else
+		GET_PROC_ADDRESS(n3, n3_camera_t__set_selected_target)
+#endif
 
 		// Functions
+#ifdef N3_DYNEL_T__N3_DYNEL_T_USE_PATTERN
 		GET_FUNCTION_ADDRESS(n3, n3_dynel_t__n3_dynel_t)
+#else
+		GET_PROC_ADDRESS(n3, n3_dynel_t__n3_dynel_t)
+#endif
+
+#ifdef N3_DYNEL_T__D_N3_DYNEL_T_USE_PATTERN
 		GET_FUNCTION_ADDRESS(n3, n3_dynel_t__d_n3_dynel_t)
+#else
+		GET_PROC_ADDRESS(n3, n3_dynel_t__d_n3_dynel_t)
+#endif
+
+#ifdef N3_DYNEL_T__GET_DYNEL_USE_PATTERN
 		GET_FUNCTION_ADDRESS(n3, n3_dynel_t__get_dynel)
+#else
+		GET_PROC_ADDRESS(n3, n3_dynel_t__get_dynel)
+#endif
 
 #ifdef N3_DYNEL_T__SEND_IIR_TO_OBSERVERS_USE_PATTERN
 		GET_FUNCTION_ADDRESS(n3, n3_dynel_t__send_iir_to_observers)
@@ -71,8 +105,17 @@ namespace isxao_globals
 		GET_PROC_ADDRESS(n3, n3_dynel_t__send_iir_to_observers)
 #endif
 
+#ifdef N3_DYNEL_T__SET_PLAYFIELD_USE_PATTERN
 		GET_FUNCTION_ADDRESS(n3, n3_dynel_t__set_playfield)
+#else
+		GET_PROC_ADDRESS(n3, n3_dynel_t__set_playfield)
+#endif
+
+#ifdef N3_DYNEL_T__UPDATE_WHERE_USE_PATTERN
 		GET_FUNCTION_ADDRESS(n3, n3_dynel_t__update_where)
+#else
+		GET_PROC_ADDRESS(n3, n3_dynel_t__update_where)
+#endif
 
 #ifdef N3_DYNEL_T__UPDATE_LOCALITY_LISTENERS_USE_PATTERN
 		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_dynel_t__update_where, n3_dynel_t__update_locality_listeners)
@@ -81,29 +124,77 @@ namespace isxao_globals
 #endif
 
 		// Instances
+#ifdef N3_DYNEL_T__M_PC_DYNEL_DIR_INSTANCE_USE_PATTERN
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(n3_dynel_t__get_dynel, n3_dynel_t__m_pc_dynel_dir_instance)
+#else
+		GET_PROC_ADDRESS(n3, n3_dynel_t__m_pc_dynel_dir_instance)
+#endif
 		pp_dynel_dir = reinterpret_cast<dynel_dir_t**>(n3_dynel_t__m_pc_dynel_dir_instance);
 
 		// Functions
+#ifdef N3_ENGINE_T__N3_ENGINE_T_USE_PATTERN
 		GET_FUNCTION_ADDRESS(n3, n3_engine_t__n3_engine_t)
+#else
+		GET_PROC_ADDRESS(n3, n3_engine_t__n3_engine_t)
+#endif
 
 		// Instances
+#ifdef N3_ENGINE_T__M_PC_INSTANCE_USE_PATTERN
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_t__n3_engine_t, n3_engine_t__m_pc_instance)
+#else
+		GET_PROC_ADDRESS(n3, n3_engine_t__m_pc_instance)
+#endif
 
 		// Functions
+#ifdef N3_ENGINE_CLIENT_T__GET_CLIENT_CONTROL_DYNEL_USE_PATTERN
 		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_camera_t__set_selected_target, n3_engine_client_t__get_client_control_dynel)
+#else
+		GET_PROC_ADDRESS(n3, n3_engine_client_t__get_client_control_dynel)
+#endif
 
 		// Functions
+#ifdef N3_PLAYFIELD_T__ADD_CHILD_DYNEL_USE_PATTERN
 		GET_FUNCTION_ADDRESS(n3, n3_playfield_t__add_child_dynel)
+#else
+		GET_PROC_ADDRESS(n3, n3_playfield_t__add_child_dynel)
+#endif
 
-		GET_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield)
+#ifdef N3_PLAYFIELD_T__GET_PLAYFIELD_1_USE_PATTERN
+		GET_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_1)
+#else
+		GET_PROC_ADDRESS(n3, n3_playfield_t__get_playfield_1)
+#endif
 
+#ifdef N3_PLAYFIELD_T__GET_PLAYFIELD_2_USE_PATTERN
+		GET_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_2)
+#else
+		GET_PROC_ADDRESS(n3, n3_playfield_t__get_playfield_2)
+#endif
+
+#ifdef N3_PLAYFIELD_T__GET_PLAYFIELD_3_USE_PATTERN
+		GET_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_3)
+#else
+		GET_PROC_ADDRESS(n3, n3_playfield_t__get_playfield_3)
+#endif
+
+#ifdef N3_PLAYFIELD_T__LINE_OF_SIGHT_USE_PATTERN
 		GET_FUNCTION_ADDRESS(n3, n3_playfield_t__line_of_sight)
+#else
+		GET_PROC_ADDRESS(n3, n3_playfield_t__line_of_sight)
+#endif
 
+#ifdef N3_PLAYFIELD_T__REMOVE_CHILD_USE_PATTERN
 		GET_FUNCTION_ADDRESS(n3, n3_playfield_t__remove_child)
+#else
+		GET_PROC_ADDRESS(n3, n3_playfield_t__remove_child)
+#endif
 
 		// Instances
-		GET_ADDRESS_FROM_FUNCTION_OFFSET(n3_playfield_t__get_playfield, n3_playfield_t__m_pc_playfield_dir_instance)
+#ifdef N3_PLAYFIELD_T__M_PC_PLAYFIELD_DIR_INSTANCE_USE_PATTERN
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(n3_playfield_t__get_playfield_2, n3_playfield_t__m_pc_playfield_dir_instance)
+#else
+		GET_PROC_ADDRESS(n3, n3_playfield_t__m_pc_playfield_dir_instance)
+#endif
 		pp_playfield_dir = reinterpret_cast<PlayfieldDir**>(n3_playfield_t__m_pc_playfield_dir_instance);
 
 #pragma endregion
@@ -600,9 +691,9 @@ namespace isxao_globals
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_FREE_INVENTORY_SLOTS_USE_PATTERN
-		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t_n3_msg_get_number_of_free_inventory_slots)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots)
 #else
-		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t_n3_msg_get_number_of_free_inventory_slots)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_USED_ALIEN_PERKS_USE_PATTERN
@@ -671,10 +762,20 @@ namespace isxao_globals
 		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_action_list)
 #endif
 
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SPECIAL_ACTION_STATE_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_action_state)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_action_state)
+#endif
 
 
 
 
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_IS_NPC_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_npc)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_npc)
+#endif
 
 #ifdef SIMPLE_CHAR_T__CHECK_LOS_USE_PATTERN
 		GET_FUNCTION_ADDRESS(gamecode, simple_char_t__check_los)
@@ -698,15 +799,76 @@ namespace isxao_globals
 
 		// Module
 		GetModuleInformation(process_handle, gui_module_handle, &gui_module_info, sizeof(gui_module_info));
+		// ReSharper disable once CppLocalVariableMayBeConst
 		auto gui_module_base = DWORD(gui_module_handle);
 		const auto gui_data_begin = reinterpret_cast<unsigned char*>(gui_module_base);
 		const auto gui_data_end = gui_data_begin + gui_module_info.SizeOfImage;
 		const vector<unsigned char> gui_data(gui_data_begin, gui_data_end);
 
 		// Functions
+#ifdef TARGETING_MODULE_T__INITIALISE_MESSAGE_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gui, targeting_module_t__initialise_message)
+#else
+		GET_PROC_ADDRESS(gui, targeting_module_t__initialise_message)
+#endif
 
+#ifdef TARGETING_MODULE_T__TARGETING_MODULE_T_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gui, targeting_module_t__targeting_module_t)
+#else
+		GET_PROC_ADDRESS(gui, targeting_module_t__targeting_module_t)
+#endif
+
+#ifdef TARGETING_MODULE_T__SET_TARGET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gui, targeting_module_t__set_target)
+#else
+		GET_PROC_ADDRESS(gui, targeting_module_t__set_target)
+#endif
 
 		// Instances
+#ifdef TARGETING_MODULE_T__M_PC_INSTANCE_USE_PATTERN
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__set_target, targeting_module_t__m_pc_instance)
+#else
+		GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_instance)
+#endif		
+
+#ifdef TARGETING_MODULE_T__M_PC_SELECTION_INDICATOR_USE_PATTERN
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__initialise_message, targeting_module_t__m_pc_selection_indicator)
+#else
+		GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_selection_indicator)
+#endif
+
+		pp_selection_indicator = reinterpret_cast<indicator_t**>(targeting_module_t__m_pc_selection_indicator);
+
+#ifdef TARGETING_MODULE_T__M_PC_ATTACKING_INDICATOR_USE_PATTERN
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__initialise_message, targeting_module_t__m_pc_attacking_indicator)
+#else
+		GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_attacking_indicator)
+#endif
+
+		pp_attacking_indicator = reinterpret_cast<indicator_t**>(targeting_module_t__m_pc_attacking_indicator);
+
+#ifdef TARGETING_MODULE_T__M_C_LAST_TARGET_USE_PATTERN
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__initialise_message, targeting_module_t__m_c_last_target)
+#else
+		GET_PROC_ADDRESS(gui, targeting_module_t__m_c_last_target)
+#endif
+
+#pragma endregion
+
+#pragma region Interfaces
+
+		// Module
+		GetModuleInformation(process_handle, interfaces_module_handle, &interfaces_module_info, sizeof(interfaces_module_info));
+		// ReSharper disable once CppLocalVariableMayBeConst
+		auto interfaces_module_base = DWORD(interfaces_module_handle);
+		const auto interfaces_data_begin = reinterpret_cast<unsigned char*>(interfaces_module_base);
+		const auto interfaces_data_end = interfaces_data_begin + interfaces_module_info.SizeOfImage;
+		const vector<unsigned char> interfaces_data(interfaces_data_begin, interfaces_data_end);
+
+		// Instances
+		GET_PROC_ADDRESS(interfaces, client_t__s_n_char_id)
+		gp_character_id = reinterpret_cast<DWORD*>(client_t__s_n_char_id);
+
 
 #pragma endregion
 
@@ -763,7 +925,9 @@ namespace isxao_globals
 
 	// Functions
 	DWORD n3_playfield_t__add_child_dynel = 0;
-	DWORD n3_playfield_t__get_playfield = 0;
+	DWORD n3_playfield_t__get_playfield_1 = 0;
+	DWORD n3_playfield_t__get_playfield_2 = 0;
+	DWORD n3_playfield_t__get_playfield_3 = 0;
 	DWORD n3_playfield_t__line_of_sight = 0;
 	DWORD n3_playfield_t__remove_child = 0;
 
@@ -858,7 +1022,7 @@ namespace isxao_globals
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_next_target = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_available_alien_perks = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_available_perks = 0;
-	DWORD n3_engine_client_anarchy_t_n3_msg_get_number_of_free_inventory_slots = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_used_alien_perks = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_used_perks = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_over_equip_level = 0;
@@ -870,7 +1034,11 @@ namespace isxao_globals
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_skill_2 = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_skill_max = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_list = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_state = 0;
 
+
+
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_npc = 0;
 
 
 	// Instances
@@ -879,11 +1047,27 @@ namespace isxao_globals
 
 #pragma endregion
 
+#pragma region GUI
+
+	DWORD targeting_module_t__m_pc_instance = 0;
+	TargetingModule** pp_targeting_module = nullptr;
+	DWORD targeting_module_t__m_pc_selection_indicator = 0;
+	indicator_t** pp_selection_indicator = nullptr;
+	DWORD targeting_module_t__m_pc_attacking_indicator = 0;
+	indicator_t** pp_attacking_indicator = nullptr;
+	DWORD targeting_module_t__m_c_last_target = 0;
+	identity_t* p_last_target = nullptr;
+	DWORD targeting_module_t__initialise_message = 0;
+	DWORD targeting_module_t__targeting_module_t = 0;
+	DWORD targeting_module_t__set_target = 0;
+
+#pragma endregion
+
 #pragma region EngineClientAnarchy
 	
 	
 	
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetSpecialActionState = 0;
+	
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetStatNameMap = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetSpecialAttackWeaponName = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetTargetTarget = 0;
@@ -907,7 +1091,7 @@ namespace isxao_globals
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsMoving = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsMyPetID = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsNpc = 0;
+	
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsPerk = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsPetTower = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsProfessionPerk = 0;
@@ -1053,17 +1237,13 @@ namespace isxao_globals
 
 #pragma region TargetingModule
 
-	DWORD TargetingModule_t__m_pcInstance = 0;
-	TargetingModule** ppTargetingModule = nullptr;
-	DWORD TargetingModule_t__m_pcSelectionIndicator = 0;
-	indicator_t** ppSelectionIndicator = nullptr;
-	DWORD TargetingModule_t__m_pcAttackingIndicator = 0;
-	indicator_t** ppAttackingIndicator = nullptr;
-	DWORD TargetingModule_t__m_cLastTarget = 0;
-	identity_t* pLastTarget = nullptr;
+	
+	
+	
+	
 	DWORD TargetingModule_t__RemoveTarget = 0;
 	DWORD TargetingModule_t__SelectSelf = 0;
-	DWORD TargetingModule_t__SetTarget = 0;
+	
 	DWORD TargetingModule_t__SetTargetPet = 0;
 
 #pragma endregion
@@ -1092,7 +1272,7 @@ namespace isxao_globals
 
 #pragma region Client
 
-	DWORD Client_t__s_nCharID = 0;
+	DWORD client_t__s_n_char_id = 0;
 	PDWORD gp_character_id = nullptr;
 	DWORD Client_t__ProcessMessage = 0;
 

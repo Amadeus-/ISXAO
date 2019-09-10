@@ -3,9 +3,10 @@
 #pragma region Testing and Debugging
 
 int CMD_AO(int argc, char *argv[])
-{
-	auto r = GetProcAddress(gui_module_handle, "?m_pcInstance@TargetingModule_t@@0PAV1@A");
-	printf("%" PRIX32, DWORD(r));
+{	
+	identity_t id = P_SELECTION_INDICATOR->identity;
+	auto d = dynel::get_dynel(id);
+	printf("%" PRIX32, d);
 	return 0;
 }
 

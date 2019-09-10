@@ -67,7 +67,7 @@ namespace isxao_classes
 	{
 		if (HasWeaponTarget())
 		{
-			id = pAttackingIndicator->identity;
+			id = P_ATTACKING_INDICATOR->identity;
 			return true;
 		}
 		return false;
@@ -77,7 +77,7 @@ namespace isxao_classes
 	{
 		if (HasTarget())
 		{
-			id = pSelectionIndicator->identity;
+			id = P_SELECTION_INDICATOR->identity;
 			return true;
 		}
 		return false;
@@ -85,12 +85,12 @@ namespace isxao_classes
 
 	bool character::HasTarget()
 	{
-		return pSelectionIndicator != nullptr;
+		return P_SELECTION_INDICATOR != nullptr;
 	}
 
 	bool character::HasWeaponTarget()
 	{
-		return pAttackingIndicator != nullptr;
+		return P_ATTACKING_INDICATOR != nullptr;
 	}
 
 #pragma endregion

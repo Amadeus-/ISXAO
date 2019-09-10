@@ -425,7 +425,7 @@ namespace isxao_utilities
 			P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{
-				if ((*it)->get_identity().type == 50000 && !P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc((*it)->get_identity()))
+				if ((*it)->get_identity().type == 50000 && !P_ENGINE_CLIENT_ANARCHY->n3_msg_is_npc((*it)->get_identity()))
 				{
 					if ((*it) != p_actor)
 					{
@@ -623,23 +623,23 @@ namespace isxao_utilities
 
 #pragma region Collections
 	
-	void RecursiveAddDynelToDynelMap(std::map<identity_t, p_n3_dynel_t>& m, p_dynel_node_t pNode, p_dynel_root_t pRoot, DWORD& count)
+	void recursive_add_dynel_to_dynel_map(std::map<identity_t, p_n3_dynel_t>& m, p_dynel_node_t p_node, const p_dynel_root_t p_root, DWORD& count)
 	{
-		m.insert_or_assign(pNode->identity, pNode->p_dynel);
+		m.insert_or_assign(p_node->identity, p_node->p_dynel);
 		count--;
-		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddDynelToDynelMap(m, pNode->p_lower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddDynelToDynelMap(m, pNode->p_higher, pRoot, count);
+		if (reinterpret_cast<PVOID>(p_node->p_lower) != reinterpret_cast<PVOID>(p_root) && count > 0)
+			recursive_add_dynel_to_dynel_map(m, p_node->p_lower, p_root, count);
+		if (reinterpret_cast<PVOID>(p_node->p_higher) != reinterpret_cast<PVOID>(p_root) && count > 0)
+			recursive_add_dynel_to_dynel_map(m, p_node->p_higher, p_root, count);
 	}
 
-	void GetDynelMap(std::map<identity_t, p_n3_dynel_t>& m)
+	void get_dynel_map(std::map<identity_t, p_n3_dynel_t>& m)
 	{
 		auto count = P_DYNEL_DIR->count;
-		auto pRoot = P_DYNEL_DIR->p_root;
-		auto pNode = pRoot->p_node;
+		const auto p_root = P_DYNEL_DIR->p_root;
+		const auto p_node = p_root->p_node;
 		if (count > 0)
-			RecursiveAddDynelToDynelMap(m, pNode, pRoot, count);
+			recursive_add_dynel_to_dynel_map(m, p_node, p_root, count);
 	}
 
 	void RecursiveAddPerkToPerkMap(std::map<identity_t, DWORD>& m, p_perk_node_t pNode, p_perk_root_t pRoot, DWORD& count)
@@ -1363,8 +1363,8 @@ namespace isxao_utilities
 	{
 		if (!P_ENGINE_CLIENT_ANARCHY)
 			return GAMESTATE_NOT_IN_GAME;
-		if (!P_PLAYFIELD_DIR->GetPlayfield())
-			return GAMESTATE_WAITING_FOR_PLAYFIELD;
+		//if (!P_PLAYFIELD_DIR->GetPlayfield())
+		//	return GAMESTATE_WAITING_FOR_PLAYFIELD;
 		if (!P_ENGINE_CLIENT_ANARCHY->get_client_char())
 			return GAMESTATE_WAITING_FOR_CLIENT_CHAR;
 		return GAMESTATE_IN_GAME;

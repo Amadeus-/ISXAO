@@ -13,6 +13,7 @@ public:
 	AOLIB_OBJECT float get_distance_x_to(vector3_t&);
 	AOLIB_OBJECT float get_distance_y_to(vector3_t&);
 	AOLIB_OBJECT float get_distance_z_to(vector3_t&);
+	AOLIB_OBJECT static dynel* get_dynel(const identity_t&);
 	AOLIB_OBJECT p_n3_dynel_t get_dynel_data();
 	AOLIB_OBJECT float get_heading();
 	AOLIB_OBJECT float get_heading_to(vector3_t &);

@@ -12,7 +12,7 @@ namespace isxao_classes
 #endif
 
 #ifdef TargetingModule_t__SetTarget_x
-	FUNCTION_AT_ADDRESS(void __cdecl TargetingModule::SetTarget(const identity_t&, bool), TargetingModule_t__SetTarget);
+	FUNCTION_AT_ADDRESS(void __cdecl TargetingModule::SetTarget(const identity_t&, bool), targeting_module_t__set_target);
 #endif
 
 //#ifdef TargetingModule_t__SetTargetPet_x

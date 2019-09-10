@@ -21,7 +21,7 @@ namespace isxao_classes
 			return 0;
 		for (auto it = pet_map.begin(); it != pet_map.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
-			auto p_dynel = isxao_utilities::GetDynel(it->first);
+			auto p_dynel = dynel::get_dynel(it->first);
 			p_index->AddItem(reinterpret_cast<LSOBJECTDATA&>(p_dynel));
 		}
 		return p_index->GetContainerUsed();
@@ -149,7 +149,7 @@ namespace isxao_classes
 
 	void actor::do_target()
 	{
-		pTargetingModule->SetTarget(this->get_identity(), false);
+		P_TARGETING_MODULE->SetTarget(this->get_identity(), false);
 	}
 
 	float actor::estimated_distance_to(vector3_t &position)
@@ -346,7 +346,7 @@ namespace isxao_classes
 		master.type = 50000;
 		id = DWORD(this->get_skill(ST_PETMASTER));
 		master.id = id;
-		return isxao_utilities::GetDynel(master)->to_actor();
+		return dynel::get_dynel(master)->to_actor();
 	}
 
 	actor* actor::get_pet(const DWORD index)
@@ -359,7 +359,7 @@ namespace isxao_classes
 		for (auto it = pet_map.begin(); it != pet_map.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
 			if (it->second == index)
-				return isxao_utilities::GetDynel(it->first)->to_actor();
+				return dynel::get_dynel(it->first)->to_actor();
 		}
 		return nullptr;
 	}
@@ -379,7 +379,7 @@ namespace isxao_classes
 			strcpy_s(name, MAX_STRING, P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name((*it).first, container_identity));
 			_strlwr_s(name);
 			if (strstr(name, search_name))
-				return isxao_utilities::GetDynel((*it).first)->to_actor();
+				return dynel::get_dynel((*it).first)->to_actor();
 		}
 		return nullptr;
 	}
@@ -396,13 +396,13 @@ namespace isxao_classes
 		if (!IsClientId(this->get_identity().id))
 		{
 			map<identity_t, p_n3_dynel_t> dynel_map;
-			GetDynelMap(dynel_map);
+			get_dynel_map(dynel_map);
 			DWORD pet_count = 0;
 			for (auto it = dynel_map.begin(); it != dynel_map.end(); ++it)  // NOLINT(modernize-loop-convert)
 			{
 				if (it->first.type == 50000)
 				{
-					const auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(it->first);
+					const auto is_npc = P_ENGINE_CLIENT_ANARCHY->n3_msg_is_npc(it->first);
 					if (is_npc)
 					{
 						auto instance = reinterpret_cast<dynel*>(it->second);
@@ -429,12 +429,12 @@ namespace isxao_classes
 			return !pet_map.empty();
 		}
 		std::map<identity_t, p_n3_dynel_t> dynel_map;
-		isxao_utilities::GetDynelMap(dynel_map);
+		isxao_utilities::get_dynel_map(dynel_map);
 		for (auto it = dynel_map.begin(); it != dynel_map.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
 			if (it->first.type == 50000)
 			{
-				const auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(it->first);
+				const auto is_npc = P_ENGINE_CLIENT_ANARCHY->n3_msg_is_npc(it->first);
 				if (is_npc)
 				{
 					auto instance = reinterpret_cast<dynel*>(it->second);

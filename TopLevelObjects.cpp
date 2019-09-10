@@ -53,14 +53,15 @@ bool __cdecl TLO_ME(int argc, char *argv[], LSTYPEVAR &Dest)
 
 #pragma region SelectionTarget
 
-bool __cdecl TLO_SELECTIONTARGET(int argc, char *argv[], LSTYPEVAR &Dest)
+bool __cdecl TLO_SELECTION_TARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 {
 	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
 	{
-		identity_t identity;
-		if (pSelectionIndicator)
+		
+		if (P_SELECTION_INDICATOR)
 		{
-			auto d = GetDynel(pSelectionIndicator->identity);
+			const auto identity = P_SELECTION_INDICATOR->identity;
+			const auto d = dynel::get_dynel(identity);
 			Dest.Ptr = d;
 			Dest.Type = isxao_utilities::GetRealType(d);
 			return true;
@@ -73,14 +74,14 @@ bool __cdecl TLO_SELECTIONTARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 
 #pragma region AttackTarget
 
-bool __cdecl TLO_ATTACKTARGET(int argc, char *argv[], LSTYPEVAR &Dest)
+bool __cdecl TLO_ATTACK_TARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 {
 	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
 	{
 		identity_t identity;
-		if (pAttackingIndicator)
+		if (P_ATTACKING_INDICATOR)
 		{
-			auto d = reinterpret_cast<dynel*>(GetDynel(pAttackingIndicator->identity));
+			const auto d = reinterpret_cast<dynel*>(dynel::get_dynel(P_ATTACKING_INDICATOR->identity));
 			Dest.Ptr = d;
 			Dest.Type = isxao_utilities::GetRealType(d);
 			return true;

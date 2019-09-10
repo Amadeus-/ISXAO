@@ -22,7 +22,8 @@ namespace isxao_globals
 	AOLIB_VAR MODULEINFO gui_module_info;
 	AOLIB_VAR DWORD hVehicle;
 	AOLIB_VAR DWORD hMessageProtocol;
-	AOLIB_VAR DWORD hInterfaces;
+	AOLIB_VAR HMODULE interfaces_module_handle;
+	AOLIB_VAR MODULEINFO interfaces_module_info;
 
 #pragma endregion
 
@@ -57,7 +58,9 @@ namespace isxao_globals
 
 	// Functions
 	AOLIB_VAR DWORD n3_playfield_t__add_child_dynel;
-	AOLIB_VAR DWORD n3_playfield_t__get_playfield;
+	AOLIB_VAR DWORD n3_playfield_t__get_playfield_1;
+	AOLIB_VAR DWORD n3_playfield_t__get_playfield_2;
+	AOLIB_VAR DWORD n3_playfield_t__get_playfield_3;
 	AOLIB_VAR DWORD n3_playfield_t__line_of_sight;
 	AOLIB_VAR DWORD n3_playfield_t__remove_child;
 
@@ -153,7 +156,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_next_target;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_available_alien_perks;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_available_perks;
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t_n3_msg_get_number_of_free_inventory_slots;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_used_alien_perks;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_used_perks;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_over_equip_level;
@@ -165,8 +168,10 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_skill_2;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_skill_max;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_list;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_state;
 
 
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_npc;
 
 	AOLIB_VAR DWORD simple_char_t__check_los;
 
@@ -179,22 +184,33 @@ namespace isxao_globals
 
 #pragma region GUI
 
-	AOLIB_VAR DWORD TargetingModule_t__m_pcInstance;
-	AOLIB_VAR TargetingModule** ppTargetingModule;
-#define pTargetingModule (*ppTargetingModule)
-	AOLIB_VAR DWORD TargetingModule_t__m_pcSelectionIndicator;
-	AOLIB_VAR indicator_t** ppSelectionIndicator;
-#define pSelectionIndicator (*ppSelectionIndicator)
-	AOLIB_VAR DWORD TargetingModule_t__m_pcAttackingIndicator;
-	AOLIB_VAR indicator_t** ppAttackingIndicator;
-#define pAttackingIndicator (*ppAttackingIndicator)
-	AOLIB_VAR DWORD TargetingModule_t__m_cLastTarget;
-	AOLIB_VAR identity_t* pLastTarget;
-#define LastTarget (*pLastTarget)
+	AOLIB_VAR DWORD targeting_module_t__m_pc_instance;
+	AOLIB_VAR TargetingModule** pp_targeting_module;
+#define P_TARGETING_MODULE (*pp_targeting_module)  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD targeting_module_t__m_pc_selection_indicator;
+	AOLIB_VAR indicator_t** pp_selection_indicator;
+#define P_SELECTION_INDICATOR (*pp_selection_indicator)  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD targeting_module_t__m_pc_attacking_indicator;
+	AOLIB_VAR indicator_t** pp_attacking_indicator;
+#define P_ATTACKING_INDICATOR (*pp_attacking_indicator)  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD targeting_module_t__m_c_last_target;
+	AOLIB_VAR identity_t* p_last_target;
+#define P_LAST_TARGET (p_last_target)  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD targeting_module_t__targeting_module_t;
+	AOLIB_VAR DWORD targeting_module_t__initialise_message;
 	AOLIB_VAR DWORD TargetingModule_t__RemoveTarget;
 	AOLIB_VAR DWORD TargetingModule_t__SelectSelf;
-	AOLIB_VAR DWORD TargetingModule_t__SetTarget;
+	AOLIB_VAR DWORD targeting_module_t__set_target;
 	AOLIB_VAR DWORD TargetingModule_t__SetTargetPet;
+
+#pragma endregion
+
+#pragma region Interfaces
+
+	AOLIB_VAR DWORD client_t__s_n_char_id;
+	AOLIB_VAR PDWORD gp_character_id;
+#define g_character_id (*gp_character_id)
+	AOLIB_VAR DWORD Client_t__ProcessMessage;
 
 #pragma endregion
 
@@ -211,7 +227,7 @@ namespace isxao_globals
 #pragma endregion
 
 #pragma region EngineClientAnarchy			
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetSpecialActionState;
+	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetSpecialAttackWeaponName;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetStatNameMap;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetTargetTarget;
@@ -235,7 +251,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsMoving;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsMyPetID;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsNpc;
+	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsPerk;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsPetTower;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsProfessionPerk;
@@ -416,10 +432,7 @@ namespace isxao_globals
 
 #pragma region Client
 
-	AOLIB_VAR DWORD Client_t__s_nCharID;
-	AOLIB_VAR PDWORD gp_character_id;
-#define g_character_id (*gp_character_id)
-	AOLIB_VAR DWORD Client_t__ProcessMessage;
+	
 
 #pragma endregion
 

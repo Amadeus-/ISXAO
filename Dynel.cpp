@@ -54,6 +54,20 @@ namespace isxao_classes
 		return vector3_t::distance_z(dynel_position, position);
 	}
 
+#ifdef N3_DYNEL_T__GET_DYNEL_USE_NATIVE
+	FUNCTION_AT_ADDRESS(dynel* dynel::get_dynel(const identity_t&), n3_dynel_t__get_dynel)
+#else
+	dynel* dynel::get_dynel(const identity_t &id)
+	{
+		map<identity_t, p_n3_dynel_t> m;
+		isxao_utilities::get_dynel_map(m);
+		const auto it = m.find(id);
+		if (it == m.end())
+			return nullptr;
+		return reinterpret_cast<dynel*>(it->second);
+	}
+#endif
+
 	float dynel::get_heading()
 	{
 		return get_rotation().get_heading();
@@ -113,7 +127,7 @@ namespace isxao_classes
 	
 	PCSTR dynel::get_name()
 	{
-		const identity_t container_identity(0.0, 0.0);
+		const identity_t container_identity(0, 0);
 		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name(this->get_identity(), container_identity);
 	}
 
@@ -134,7 +148,7 @@ namespace isxao_classes
 	LONG dynel::get_skill(DWORD stat)
 	{
 		const auto dynel_identity = this->get_identity();
-		const identity_t container_identity(0.0, 0.0);
+		const identity_t container_identity(0, 0);
 		if (!IsClientId(dynel_identity.id))
 		{
 			return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(dynel_identity, stat, 2, container_identity);
@@ -162,7 +176,7 @@ namespace isxao_classes
 		const auto dynel_identity = this->get_identity();
 		if (dynel_identity.type == 50000)
 		{
-			const auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(dynel_identity);
+			const auto is_npc = P_ENGINE_CLIENT_ANARCHY->n3_msg_is_npc(dynel_identity);
 			return is_npc;
 		}
 		return false;
@@ -173,7 +187,7 @@ namespace isxao_classes
 		const auto dynel_identity = this->get_identity();
 		if(!IsClientId(dynel_identity.id))
 		{
-			const identity_t container_identity(0.0, 0.0);
+			const identity_t container_identity(0, 0);
 			const auto profession = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(dynel_identity, ST_PROFESSION, 2, container_identity);
 			return profession != -1;
 		}
@@ -185,7 +199,7 @@ namespace isxao_classes
 		const auto dynel_identity = this->get_identity();
 		if (dynel_identity.type == 50000)
 		{
-			const auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(dynel_identity);
+			const auto is_npc = P_ENGINE_CLIENT_ANARCHY->n3_msg_is_npc(dynel_identity);
 			if (is_npc)
 			{
 				if (this->get_skill(ST_PETMASTER) != 1234567890)
@@ -200,7 +214,7 @@ namespace isxao_classes
 		const auto dynel_identity = this->get_identity();
 		if (dynel_identity.type == 50000)
 		{
-			const auto is_npc = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsNpc(dynel_identity);
+			const auto is_npc = P_ENGINE_CLIENT_ANARCHY->n3_msg_is_npc(dynel_identity);
 			return is_npc == 0;
 		}
 		return false;

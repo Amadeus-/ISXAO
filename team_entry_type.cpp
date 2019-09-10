@@ -27,7 +27,7 @@ bool TeamEntryType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		}
 		case ToTeamMember:
 		{
-			if((Object.Ptr = static_cast<TeamMember*>(isxao_utilities::GetDynel(pTeamEntry->GetIdentity()))))
+			if((Object.Ptr = static_cast<TeamMember*>(dynel::get_dynel(pTeamEntry->GetIdentity()))))
 			{
 				Object.Type = pActorType;
 				return true;
