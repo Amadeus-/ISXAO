@@ -12,7 +12,7 @@ public:
 	AOLIB_OBJECT PCSTR get_faction_str(DWORD faction_id, bool full_name);
 	AOLIB_OBJECT PCSTR get_faction_title(DWORD faction_id);
 	AOLIB_OBJECT PCSTR get_gender_string(identity_t const &id);
-	AOLIB_OBJECT p_dummy_item_base_t get_item_by_template(identity_t template_id, const identity_t &container_id);	
+	AOLIB_OBJECT p_dummy_item_base_t get_item_by_template(identity_t template_id, const identity_t &container_id);
 	AOLIB_OBJECT static PCSTR get_sex_str(gender_e gender_id);
 	AOLIB_OBJECT static PCSTR get_title_string(DWORD base, DWORD level);
 	AOLIB_OBJECT bool is_first_login();
@@ -97,7 +97,8 @@ public:
 	AOLIB_OBJECT LONG n3_msg_get_skill_max(DWORD);
 	AOLIB_OBJECT list<special_action_t>* n3_msg_get_special_action_list();
 	AOLIB_OBJECT DWORD n3_msg_get_special_action_state(const identity_t &);
-	AOLIB_OBJECT PCSTR N3Msg_GetSpecialAttackWeaponName(const identity_t &);
+	AOLIB_OBJECT PCSTR n3_msg_get_special_attack_weapon_name(const identity_t &);
+	AOLIB_OBJECT static PVOID n3_msg_get_stat_name_map();
 	AOLIB_OBJECT p_identity_t N3Msg_GetTargetTarget(identity_t &, const identity_t &);
 	AOLIB_OBJECT PVOID N3Msg_GetTeamMemberList(LONG);
 	AOLIB_OBJECT bool N3Msg_HasPerk(DWORD);

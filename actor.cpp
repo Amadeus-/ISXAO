@@ -70,7 +70,7 @@ namespace isxao_classes
 
 		if (f_delta > 0) {
 			if (f_c_max == f_r) {
-				f_h = 60 * (fmod(((f_g - f_b) / f_delta), 6));
+				f_h = 60 * float(fmod(((f_g - f_b) / f_delta), 6));
 			}
 			else if (f_c_max == f_g) {
 				f_h = 60 * (((f_b - f_r) / f_delta) + 2);
@@ -180,7 +180,7 @@ namespace isxao_classes
 
 	NanoTemplate* actor::get_ncu(const PCSTR effect_name)
 	{
-		const identity_t container_identity(0.0, 0.0);
+		const identity_t container_identity(0, 0);
 		char name[MAX_STRING] = { 0 };
 		char search_name[MAX_STRING];
 		strcpy_s(search_name, MAX_STRING, effect_name);
@@ -366,7 +366,7 @@ namespace isxao_classes
 
 	actor* actor::get_pet(const PCSTR pet_name)
 	{
-		const identity_t container_identity(0.0, 0.0);
+		const identity_t container_identity(0, 0);
 		map<identity_t, DWORD> pet_map;
 		char name[MAX_STRING];
 		char search_name[MAX_STRING];

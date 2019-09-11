@@ -19,7 +19,7 @@ namespace isxao_inlines
 
 	bool inline IsClientId(DWORD id)
 	{
-		return g_character_id == id;
+		return G_CHARACTER_ID == id;
 	}
 
 	POINT3F inline Point3fFromVector3(vector3_t &v)

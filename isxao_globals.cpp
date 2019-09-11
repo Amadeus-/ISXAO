@@ -210,6 +210,20 @@ namespace isxao_globals
 		const vector<unsigned char> gamecode_data(gamecode_data_begin, gamecode_data_end);
 
 		// Functions
+#ifdef F_GET_NANO_ITEM_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, f_get_nano_item)
+#else
+		static_assert(false, "f_get_nano_item requires a pattern for the function address to be found.")
+#endif
+
+#ifdef F_STAT_TO_STRING_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, stat_to_string)
+#else
+		GET_PROC_ADDRESS(gamecode, f_stat_to_string)
+#endif
+
+
+
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_ENGINE_CLIENT_ANARCHY_T_USE_PATTERN
 		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_engine_client_anarchy_t)
 #else
@@ -768,6 +782,26 @@ namespace isxao_globals
 		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_action_state)
 #endif
 
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SPECIAL_ATTACK_WEAPON_NAME_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_STAT_NAME_MAP_USE_PATTERN
+		static_assert(false, "PVOID engine_client_anarchy::n3_msg_get_stat_name_map() cannot be found with a pattern.");
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_stat_name_map)
+#endif
+
+
+
+
+
+
+
+
+
 
 
 
@@ -776,6 +810,16 @@ namespace isxao_globals
 #else
 		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_npc)
 #endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__ON_CLOSED_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__on_closed)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__on_closed)
+#endif
+
+
+
+
 
 #ifdef SIMPLE_CHAR_T__CHECK_LOS_USE_PATTERN
 		GET_FUNCTION_ADDRESS(gamecode, simple_char_t__check_los)
@@ -789,9 +833,38 @@ namespace isxao_globals
 		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_click_target_target)
 #endif
 
+
+
 		// Instances
 		n3_engine_client_anarchy_t__m_pc_instance = n3_engine_t__m_pc_instance;
 		pp_engine_client_anarchy = reinterpret_cast<isxao_classes::engine_client_anarchy**>(n3_engine_client_anarchy_t__m_pc_instance);
+
+#ifdef M_C_NANO_ITEM_DIR_USE_PATTERN
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(f_get_nano_item, m_c_nano_item_dir)
+#else
+		static_assert(false, "m_c_nano_item_dir requires a pattern for the function address to be found.")
+#endif
+		p_nano_item_dir = reinterpret_cast<nano_item_map_t*>(m_c_nano_item_dir);
+
+#ifdef M_C_STAT_NAME_DIR_USE_PATTERN
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(f_stat_to_string, m_c_stat_name_dir)
+#else
+		static_assert(false, "m_c_stat_name_dir requires a pattern for the function address to be found.")
+#endif
+		p_stat_name_dir = reinterpret_cast<stat_name_map_t*>(m_c_stat_name_dir);
+
+#ifdef ITEM_MANAGER_T__ITEM_MANAGER_T_USE_PATTERN
+		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__get_item_by_template, item_manager_t__item_manager_t)
+#else
+		static_assert(false, "item_manager_t__item_manager_t requires a pattern for the function address to be found.")
+#endif
+
+#ifdef ITEM_MANAGER_T__M_PPC_INSTANCE_USE_PATTERN
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(item_manager_t__item_manager_t, item_manager_t__m_ppc_instance)
+#else
+		static_assert(false, "item_manager_t__m_ppc_instance requires a pattern for the function address to be found.")
+#endif
+		ppp_item_vector = reinterpret_cast<vector<acg_game_item_t> ***>(item_manager_t__m_ppc_instance);
 
 #pragma endregion
 
@@ -887,11 +960,8 @@ namespace isxao_globals
 
 	DWORD __N3Msg_GetFullPerkMap = 0;
 	DWORD __SetTarget = 0;
-	DWORD m_cStatNameDir = 0;
-	stat_name_dir_t StatNameDir;
-	stat_name_dir_t *pStatNameDir = nullptr;
+	
 	DWORD __RequestInfo = 0;
-	DWORD __StatToString = 0;
 
 #pragma endregion
 
@@ -940,6 +1010,11 @@ namespace isxao_globals
 #pragma region Gamecode
 
 	// Functions
+	DWORD f_get_nano_item = 0;
+	DWORD f_stat_to_string = 0;
+
+	DWORD item_manager_t__item_manager_t = 0;
+
 	DWORD n3_engine_client_anarchy_t__n3_engine_client_anarchy_t = 0;
 	DWORD n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t = 0;
 	DWORD n3_engine_client_anarchy_t__convert_criteria = 0;
@@ -1035,15 +1110,25 @@ namespace isxao_globals
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_skill_max = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_list = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_state = 0;
-
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_stat_name_map = 0;
 
 
 	DWORD n3_engine_client_anarchy_t__n3_msg_is_npc = 0;
 
+	DWORD n3_engine_client_anarchy_t__on_closed = 0;
+
+	DWORD simple_char_t__check_los = 0;
 
 	// Instances
 	DWORD n3_engine_client_anarchy_t__m_pc_instance = 0;
 	isxao_classes::engine_client_anarchy **pp_engine_client_anarchy = nullptr;
+	DWORD m_c_stat_name_dir = 0;
+	stat_name_map_t* p_stat_name_dir = nullptr;
+	DWORD m_c_nano_item_dir = 0;
+	nano_item_map_t* p_nano_item_dir = nullptr;
+	DWORD item_manager_t__m_ppc_instance = 0;
+	vector<acg_game_item_t> ***ppp_item_vector = nullptr;
 
 #pragma endregion
 
@@ -1065,11 +1150,6 @@ namespace isxao_globals
 
 #pragma region EngineClientAnarchy
 	
-	
-	
-	
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetStatNameMap = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetSpecialAttackWeaponName = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetTargetTarget = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetTeamMemberList = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_HasPerk = 0;
@@ -1175,12 +1255,12 @@ namespace isxao_globals
 
 	DWORD n3EngineClient_t__SetMainDynel = 0;
 
+
 #pragma endregion
 	
 #pragma region ItemManagement
 
-	DWORD ItemManager_t__m_ppcInstance = 0;
-	std::vector<acg_game_item_t> ***pppItemVector = nullptr;
+	
 	//DWORD NanoItemManager_t__m_pcInstance = 0;
 	//nano_item_dir_t **ppNanoItemDir = nullptr;
 	//DWORD NanoItem_t__GetNanoItem = 0;
@@ -1324,7 +1404,7 @@ namespace isxao_globals
 
 	DWORD SimpleChar_t__SimpleChar_t = 0;
 	DWORD SimpleChar_t__dSimpleChar_t = 0;
-	DWORD simple_char_t__check_los = 0;
+	
 
 #pragma endregion
 
@@ -1439,7 +1519,7 @@ namespace isxao_globals
 		function_address = find_pattern(data, function_pattern, module_base_address);
 		if (function_address == DWORD(-1))
 		{
-			printf("Cannot find %s function address.", function_offset_name);
+			printf("Cannot find %s function address using pattern matching.", function_offset_name);
 			return false;
 		}
 		return true;
@@ -1491,7 +1571,7 @@ namespace isxao_globals
 		function_address = DWORD(GetProcAddress(module_handle, mangled_function_name));
 		if (function_address == 0)
 		{
-			printf("Cannot find %s function address.", function_address);
+			printf("Cannot find %s function address using GetProcAddress.", function_name);
 			return false;
 		}
 		return true;

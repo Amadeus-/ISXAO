@@ -183,7 +183,7 @@ enum TypeEvent_e : DWORD
 
 #pragma region Stats
 
-enum Stat_e : DWORD
+enum stat_e : DWORD
 {
 	ST_FLAGS = 0,
 	ST_LIFE = 1,

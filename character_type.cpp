@@ -77,7 +77,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 				if (index > v.size())
 					return false;
 				identity_t i(53019, v[index - 1]);
-				identity_t d(0.0, 0.0);
+				identity_t d(0, 0);
 				if((Object.Ptr = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d)))
 				{
 					Object.Type = pNanoSpellType;
@@ -93,7 +93,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 				for (auto it = v.begin(); it != v.end(); ++it)
 				{
 					identity_t i(53019, *it);
-					identity_t d(0.0, 0.0);
+					identity_t d(0, 0);
 					auto pSpell = reinterpret_cast<NanoItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d));
 					strcpy_s(name, sizeof(name), pSpell->GetName());
 					_strlwr_s(name);

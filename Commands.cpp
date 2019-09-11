@@ -3,10 +3,8 @@
 #pragma region Testing and Debugging
 
 int CMD_AO(int argc, char *argv[])
-{	
-	identity_t id = P_SELECTION_INDICATOR->identity;
-	auto d = dynel::get_dynel(id);
-	printf("%" PRIX32, d);
+{
+	printf("%" PRIX32, *ppp_item_vector);
 	return 0;
 }
 
@@ -30,12 +28,12 @@ int CMD_DUMPSTATS(int argc, char *argv[])
 	{
 		FILE * pFILE;
 		fopen_s(&pFILE, "stats.txt", "a");
-		std::map<DWORD, const char *> m;
-		GetStatNameMap(m);
+		std::map<stat_e, const char *> m;
+		get_stat_name_map(m);
 		for (auto it = m.begin(); it != m.end(); ++it)
 		{
 			char buffer[MAX_STRING];
-			LONG stat = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(id, static_cast<ao_data::Stat_e>((*it).first), 2, dummy);
+			LONG stat = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(id, static_cast<ao_data::stat_e>((*it).first), 2, dummy);
 			sprintf_s(buffer, "ST_%s = %d,\n", (*it).second, /*(*it).first*/stat);
 			for (auto i = 0; i < (int)strlen(buffer); i++)
 				buffer[i] = toupper(buffer[i]);
@@ -53,7 +51,7 @@ int CMD_DUMPSTATS(int argc, char *argv[])
 	//	for (auto it = m.begin(); it != m.end(); ++it)
 	//	{
 	//		char buffer[MAX_STRING];
-	//		LONG stat = P_ENGINE_CLIENT_ANARCHY->GetSkill(id, static_cast<AOData::Stat_e>((*it).first));
+	//		LONG stat = P_ENGINE_CLIENT_ANARCHY->GetSkill(id, static_cast<AOData::stat_e>((*it).first));
 	//		if (stat != 1234567890)
 	//		{
 	//			sprintf_s(buffer, "PS_%s = %d,\n", (*it).second, (*it).first);

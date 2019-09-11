@@ -74,6 +74,11 @@ namespace isxao_globals
 #pragma region Gamecode
 
 	// Functions
+	AOLIB_VAR DWORD f_get_nano_item;
+	AOLIB_VAR DWORD f_stat_to_string;
+
+	AOLIB_VAR DWORD item_manager_t__item_manager_t;
+
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_engine_client_anarchy_t;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__convert_criteria;
@@ -169,9 +174,15 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_skill_max;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_list;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_state;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_stat_name_map;
+
 
 
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_npc;
+
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__on_closed;
+
 
 	AOLIB_VAR DWORD simple_char_t__check_los;
 
@@ -179,6 +190,15 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__m_pc_instance;
 	AOLIB_VAR isxao_classes::engine_client_anarchy **pp_engine_client_anarchy;
 #define P_ENGINE_CLIENT_ANARCHY (*pp_engine_client_anarchy)  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD m_c_stat_name_dir;
+	AOLIB_VAR p_stat_name_map_t p_stat_name_dir;
+#define P_STAT_NAME_MAP p_stat_name_dir  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD m_c_nano_item_dir;
+	AOLIB_VAR p_nano_item_map_t p_nano_item_dir;
+#define P_NANO_ITEM_MAP p_nano_item_dir  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD item_manager_t__m_ppc_instance;
+	AOLIB_VAR vector<acg_game_item_t> ***ppp_item_vector;
+#define P_ITEM_VECTOR (**ppp_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
 
 #pragma endregion
 
@@ -209,7 +229,7 @@ namespace isxao_globals
 
 	AOLIB_VAR DWORD client_t__s_n_char_id;
 	AOLIB_VAR PDWORD gp_character_id;
-#define g_character_id (*gp_character_id)
+#define G_CHARACTER_ID (*gp_character_id)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD Client_t__ProcessMessage;
 
 #pragma endregion
@@ -218,18 +238,15 @@ namespace isxao_globals
 
 	AOLIB_VAR DWORD __N3Msg_GetFullPerkMap;
 	AOLIB_VAR DWORD __SetTarget;
-	AOLIB_VAR DWORD m_cStatNameDir;
-	AOLIB_VAR stat_name_dir_t StatNameDir;
-	AOLIB_VAR stat_name_dir_t *pStatNameDir;
+	
 	AOLIB_VAR DWORD __RequestInfo;
-	AOLIB_VAR DWORD __StatToString;
 
 #pragma endregion
 
 #pragma region EngineClientAnarchy			
 	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetSpecialAttackWeaponName;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetStatNameMap;
+	
+	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetTargetTarget;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetTeamMemberList;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_HasPerk;
@@ -340,9 +357,7 @@ namespace isxao_globals
 #pragma region ItemManager
 
 	// Item Vector Instance
-	AOLIB_VAR DWORD ItemManager_t__m_ppcInstance;
-	AOLIB_VAR std::vector<acg_game_item_t> ***pppItemVector;
-#define pItemVector (**pppItemVector)
+	
 	// NanoMap Instance
 //	AOLIB_VAR DWORD NanoItemManager_t__m_pcInstance;
 //	AOLIB_VAR nano_item_dir_t **ppNanoItemDir;

@@ -826,8 +826,17 @@ namespace isxao_classes
 	static_assert(false, "engine_client_anarchy::n3_msg_get_special_action_state(const identity_t &) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetSpecialAttackWeaponName_x
-	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::N3Msg_GetSpecialAttackWeaponName(const identity_t &), n3EngineClientAnarchy_t__N3Msg_GetSpecialAttackWeaponName);
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SPECIAL_ATTACK_WEAPON_NAME_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_special_attack_weapon_name(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_special_attack_weapon_name(const identity_t &) requires a native function.");
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_STAT_NAME_MAP_USE_NATIVE
+	FUNCTION_AT_ADDRESS(PVOID engine_client_anarchy::n3_msg_get_stat_name_map(), n3_engine_client_anarchy_t__n3_msg_get_stat_name_map)
+#else
+
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_GetTargetTarget_x

@@ -7,6 +7,21 @@ namespace isxao_utilities
 
 #pragma region Strings
 
+#ifdef F_STAT_TO_STRING_USE_NATIVE
+	FUNCTION_AT_ADDRESS(PCSTR stat_to_string(ao_data::stat_e stat_id), f_stat_to_string)
+#else
+	// ReSharper disable once CppParameterMayBeConst
+	PCSTR stat_to_string(ao_data::stat_e stat_id)
+	{
+		auto result = "NoName";
+		map<stat_e, PCSTR> m;
+		get_stat_name_map(m);
+		if (m.count(stat_id))
+			result = m.find(stat_id)->second;
+		return result;
+	}
+#endif
+
 	// ReSharper disable once CppParameterMayBeConst
 	PCSTR get_breed_str_local(breed_e breed_id)
 	{
@@ -121,15 +136,7 @@ namespace isxao_utilities
 		}
 	}
 
-	PCSTR GetStatName(DWORD stat)
-	{
-		auto result = "NoName";
-		std::map<DWORD, PCSTR> m;
-		GetStatNameMap(m);
-		if (m.count(stat))
-			result = m.find(stat)->second;
-		return result;
-	}
+	
 
 	PCSTR GetNanoSchoolStr(DWORD school)
 	{
@@ -156,10 +163,6 @@ namespace isxao_utilities
 		}
 		return result;
 	}
-
-#ifdef __StatToString_x
-	FUNCTION_AT_ADDRESS(PCSTR __cdecl StatToString(DWORD), __StatToString);
-#endif
 
 	PCSTR GetItemRarityStr(DWORD rarity)
 	{
@@ -197,6 +200,12 @@ namespace isxao_utilities
 
 #ifdef __GetFullPerkMap_x
 	FUNCTION_AT_ADDRESS(DWORD __cdecl GetFullPerkMap(void), __N3Msg_GetFullPerkMap);
+#endif
+
+#ifdef F_GET_NANO_ITEM_USE_NATIVE
+	FUNCTION_AT_ADDRESS(p_nano_item_t get_nano_item(DWORD), f_get_nano_item)
+#else
+	tatic_assert(false, "get_nano_item(DWORD) requires a native function.");
 #endif
 
 	bool IsValidDynel(p_n3_dynel_t pDynel)
@@ -680,44 +689,19 @@ namespace isxao_utilities
 			RecursiveAddPetToPetMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddNanoToNanoMap(std::map<DWORD, p_nano_item_t>& m, p_nano_item_node_t pNode, p_nano_item_root_t pRoot, DWORD& count)
+	void get_nano_map(std::map<DWORD, p_nano_item_t>& m)
 	{
-		m.insert_or_assign(pNode->nano_item_id, pNode->p_nano_item);
-		count--;
-		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddNanoToNanoMap(m, pNode->p_lower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddNanoToNanoMap(m, pNode->p_higher, pRoot, count);
-	}
-
-	void GetNanoMap(std::map<DWORD, p_nano_item_t>& m)
-	{
-		//auto count = pNanoItemDir->count;
-		//auto pRoot = pNanoItemDir->p_root;
-		//auto pNode = pRoot->p_node;
-		//if (count > 0)
-		//	RecursiveAddNanoToNanoMap(m, pNode, pRoot, count);
-	}
-
-	void RecursiveAddStatNameToStatNameMap(std::map<DWORD, PCSTR>& m, p_stat_name_node_t pNode, p_stat_name_root_t pRoot, DWORD& count)
-	{
-		m.insert_or_assign(pNode->stat, pNode->p_name);
-		count--;
-		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddStatNameToStatNameMap(m, pNode->p_lower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddStatNameToStatNameMap(m, pNode->p_higher, pRoot, count);
-	}
-
-	void GetStatNameMap(std::map<DWORD, PCSTR>& m)
-	{
-		if (pStatNameDir)
+		if (P_NANO_ITEM_MAP)
 		{
-			auto count = pStatNameDir->count;
-			auto pRoot = pStatNameDir->p_root;
-			auto pNode = pRoot->p_node;
-			if (count > 0)
-				RecursiveAddStatNameToStatNameMap(m, pNode, pRoot, count);
+			P_NANO_ITEM_MAP->copy_map(m);
+		}
+	}
+
+	void get_stat_name_map(map<stat_e, PCSTR>& m)
+	{
+		if (P_STAT_NAME_MAP)
+		{
+			P_STAT_NAME_MAP->copy_map(m);
 		}
 	}
 

@@ -193,7 +193,7 @@ bool __cdecl TLO_NANOSPELL(int argc, char *argv[], LSTYPEVAR&Dest)
 			strcpy_s(szSearchName, MAX_STRING, argv[0]);
 			_strlwr_s(szSearchName);
 			std::map<DWORD, p_nano_item_t> m;
-			::GetNanoMap(m);
+			::get_nano_map(m);
 			for (auto it = m.begin(); it != m.end(); ++it)
 			{
 				strcpy_s(szName, MAX_STRING, reinterpret_cast<NanoItem*>(it->second)->GetName());

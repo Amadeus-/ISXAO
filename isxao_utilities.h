@@ -4,13 +4,12 @@ namespace isxao_utilities
 {
 	
 #pragma region Strings
+	AOLIB_API PCSTR stat_to_string(stat_e stat_id);
 	AOLIB_API PCSTR get_breed_str_local(breed_e);
 	AOLIB_API PCSTR get_sex_str_local(gender_e);
 	AOLIB_API PCSTR GetProfessionStr(DWORD);
 	AOLIB_API PCSTR GetSideStr(DWORD);
-	AOLIB_API PCSTR GetStatName(DWORD);
 	AOLIB_API PCSTR GetNanoSchoolStr(DWORD);
-	AOLIB_API PCSTR __cdecl StatToString(DWORD);
 	AOLIB_API PCSTR GetItemRarityStr(DWORD);
 
 #pragma endregion
@@ -20,7 +19,7 @@ namespace isxao_utilities
 	AOLIB_API DWORD __cdecl GetFullPerkMap(void);
 	AOLIB_API dynel* __cdecl GetDynel(const identity_t &);
 	AOLIB_API actor* __cdecl GetActor(const identity_t &);
-	//AOLIB_API p_nano_item_t __cdecl GetNanoItem(DWORD);
+	AOLIB_API p_nano_item_t get_nano_item(DWORD);
 
 	AOLIB_API bool IsValidDynel(p_n3_dynel_t);
 
@@ -48,10 +47,8 @@ namespace isxao_utilities
 	AOLIB_API void GetPerkMap(std::map<identity_t, DWORD>& m, p_perk_dir_t pDir);
 	AOLIB_API void RecursiveAddPetToPetMap(std::map<identity_t, DWORD>& m, p_pet_node_t pNode, p_pet_root_t pRoot, DWORD& count);
 	AOLIB_API void GetPetMap(std::map<identity_t, DWORD>& m, p_pet_dir_t pPetDir);
-	AOLIB_API void RecursiveAddNanoToNanoMap(std::map<DWORD, p_nano_item_t>& m, p_nano_item_node_t pNode, p_nano_item_root_t pRoot, DWORD& count);
-	AOLIB_API void GetNanoMap(std::map<DWORD, p_nano_item_t>& m);
-	AOLIB_API void RecursiveAddStatNameToStatNameMap(std::map<DWORD, PCSTR>& m, p_stat_name_node_t pNode, p_stat_name_root_t pRoot, DWORD& count);
-	AOLIB_API void GetStatNameMap(std::map<DWORD, PCSTR>& m);
+	AOLIB_API void get_nano_map(std::map<DWORD, p_nano_item_t>& m);
+	AOLIB_API void get_stat_name_map(map<stat_e, PCSTR>& m);
 	AOLIB_API void GetStaticItemMap(std::map<identity_t, p_dummy_item_base_t>& m);
 	AOLIB_API void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, p_stat_node_t pNode, p_stat_root_t pRoot, DWORD& count);
 	AOLIB_API void GetStatMap(std::map<DWORD, LONG>& m, p_stat_dir_t pDir);

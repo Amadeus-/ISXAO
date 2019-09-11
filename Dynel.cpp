@@ -225,7 +225,7 @@ namespace isxao_classes
 		const auto dynel_identity = this->get_identity();
 		if (dynel_identity.type == 50000)
 		{
-			return dynel_identity.id == g_character_id;
+			return dynel_identity.id == G_CHARACTER_ID;
 		}
 		return false;
 	}

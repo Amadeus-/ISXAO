@@ -2568,7 +2568,7 @@ namespace ao_data
 		struct stat_name_node* p_lower;		// 0x00
 		struct stat_name_node* p_back;		// 0x04
 		struct stat_name_node* p_higher;	// 0x08
-		DWORD stat;							// 0x0C
+		stat_e stat;							// 0x0C
 		PCSTR p_name;						// 0x10
 	} stat_name_node_t, *p_stat_name_node_t;
 
@@ -2770,6 +2770,63 @@ namespace ao_data
 	} weapon_item_t, *p_weapon_item_t;
 
 #pragma endregion
+
+#pragma region AOMap
+
+	template <typename T, typename U>
+	struct map_node
+	{
+		struct map_node* p_lower;
+		struct map_node* p_back;
+		struct map_node* p_higher;
+		T key;
+		U value;
+	};
+
+	template <typename T, typename U>
+	struct map_root
+	{
+		struct map_node<T, U>* p_begin;
+		struct map_node<T, U>* p_node;
+		struct map_node<T, U>* p_end;
+	};
+
+	template <typename T, typename U>
+	struct ao_map {
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x01[0x4];
+		struct map_root<T, U>* p_root;
+		DWORD count;
+
+		DWORD copy_map(map<T, U>& m)
+		{
+			auto count = this->count;
+			const auto p_root = this->p_root;
+			const auto p_node = this->p_root->p_node;
+			if (count > 0)
+				this->recursive_add_to_map(m, p_node, p_root, count);
+			return m.size();
+		}
+
+	private:
+		void recursive_add_to_map(map<T, U>& m, struct map_node<T, U>* p_node, struct map_root<T, U>* p_root, DWORD& count)
+		{
+			m.insert_or_assign(p_node->key, p_node->value);
+			count--;
+			if (reinterpret_cast<PVOID>(p_node->p_lower) != reinterpret_cast<PVOID>(p_root) && count > 0)
+				this->recursive_add_to_map(m, p_node->p_lower, p_root, count);
+			if (reinterpret_cast<PVOID>(p_node->p_higher) != reinterpret_cast<PVOID>(p_root) && count > 0)
+				recursive_add_to_map(m, p_node->p_higher, p_root, count);
+		}
+	};
+
+#pragma endregion
+
+#pragma region Maps
+
+	typedef ao_map<identity_t, p_n3_dynel_t> dynel_map_t, *p_dynel_map_t;
+	typedef ao_map<DWORD, p_nano_item_t> nano_item_map_t, *p_nano_item_map_t;
+	typedef ao_map<stat_e, PCSTR> stat_name_map_t, *p_stat_name_map_t;
 
 #pragma endregion
 

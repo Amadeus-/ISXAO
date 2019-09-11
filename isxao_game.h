@@ -127,6 +127,18 @@ constexpr DWORD n3_playfield_t__m_pc_playfield_dir_instance_bytes_to_next = 0x0;
 
 constexpr char* const gamecode_module_name = static_cast<char*>("Gamecode.dll");
 
+// Functions
+constexpr char* const f_stat_to_string_mangled_name = static_cast<char*>(
+	"?fStatToString@@YAPBDW4Stat_e@GameData@@@Z");
+constexpr char* const f_stat_to_string_pattern = static_cast<char*>(
+	"55 8B EC 51 80 3D ?? ?? ?? ?? 00 75 ?? E8 ?? ?? ?? ?? 56 57 8B 7D 08 8D 45 08 50 8D 45 FC BE ?? ?? ?? ?? 50 8B CE 89 7D 08 E8 ?? ?? ?? ?? 8B 00 3B 05 ?? ?? ?? ?? 74 ?? 8D 45 08 50 8B CE 89 7D 08 E8 ?? ?? ?? ?? 8B 00");
+
+constexpr char* const f_get_nano_item_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 0C 56 8D 45 08");
+
+constexpr DWORD item_manager_t__item_manager_t_offset = 0xF3;
+constexpr DWORD item_manager_t__item_manager_t_bytes_to_next = 0x0;
+
 constexpr char* const n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_mangled_name = static_cast<char*>(
 	"??0n3EngineClientAnarchy_t@@QAE@XZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_pattern = static_cast<char*>(
@@ -577,6 +589,14 @@ constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_special_action_stat
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_special_action_state_pattern = static_cast<char*>(
 	"55 8B EC E8 ?? ?? ?? ?? 85 C0 74 ?? FF 75 08 8B C8 E8 ?? ?? ?? ?? 8B C8 E8 ?? ?? ?? ?? EB ?? 33 C0 40");
 
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name_mangled_name = static_cast<char*>(
+	"?N3Msg_GetSpecialAttackWeaponName@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name_pattern = static_cast<char*>(
+	"55 8B EC E8 ?? ?? ?? ?? 85 C0 74 ?? 8B 80 D8 01 00 00");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_stat_name_map_mangled_name = static_cast<char*>(
+	"?N3Msg_GetStatNameMap@n3EngineClientAnarchy_t@@QAEABV?$map@HPBDU?$less@H@std@@V?$allocator@U?$pair@$$CBHPBD@std@@@2@@std@@XZ");
+
 
 
 
@@ -588,7 +608,20 @@ constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_npc_pattern = static
 	"55 8B EC 6A 00 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? 6A 00 FF 75 08 FF 15 ?? ?? ?? ?? 59 50 E8 ?? ?? ?? ?? 83 C4 14 85 C0 74 ?? 80 B8 20 02 00 00 00");
 
 
+constexpr char* const n3_engine_client_anarchy_t__on_closed_mangled_name = static_cast<char*>(
+	"?OnClosed@n3EngineClientAnarchy_t@@UAEXXZ");
+constexpr char* const n3_engine_client_anarchy_t__on_closed_pattern = static_cast<char*>(
+	"56 8D B1 90 00 00 00");
+
+
 constexpr char* const simple_char_t__check_los_pattern = static_cast<char*>("55 8B EC 83 EC 30 56 57 8B 7D 08");
+
+// Instances
+constexpr DWORD m_c_nano_item_dir_offset = 0x13;
+
+constexpr DWORD m_c_stat_name_dir_offset = 0x1F;
+
+constexpr DWORD item_manager_t__m_ppc_instance_offset = 0xC;
 
 #pragma endregion
 
