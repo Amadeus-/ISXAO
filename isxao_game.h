@@ -117,6 +117,7 @@ constexpr char* const n3_playfield_t__remove_child_pattern = static_cast<char*>(
 
 // Instances
 constexpr char* const n3_playfield_t__m_pc_playfield_dir_instance_mangled_name = static_cast<char*>(
+	// ReSharper disable once StringLiteralTypo
 	"?m_pcPlayfieldDir@n3Playfield_t@@0PAV?$map@IPAVn3Playfield_t@@U?$less@I@std@@V?$allocator@U?$pair@$$CBIPAVn3Playfield_t@@@std@@@3@@std@@A");
 constexpr DWORD n3_playfield_t__m_pc_playfield_dir_instance_offset = 0x7;
 constexpr DWORD n3_playfield_t__m_pc_playfield_dir_instance_bytes_to_next = 0x0;
@@ -597,6 +598,11 @@ constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_special_attack_weap
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_stat_name_map_mangled_name = static_cast<char*>(
 	"?N3Msg_GetStatNameMap@n3EngineClientAnarchy_t@@QAEABV?$map@HPBDU?$less@H@std@@V?$allocator@U?$pair@$$CBHPBD@std@@@2@@std@@XZ");
 
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_target_target_mangled_name = static_cast<char*>(
+	"?N3Msg_GetTargetTarget@n3EngineClientAnarchy_t@@QAE?AVIdentity_t@@AAV2@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_target_target_pattern = static_cast<char*>(
+	"55 8B EC FF 75 0C E8 ?? ?? ?? ??");
+
 
 
 
@@ -614,7 +620,11 @@ constexpr char* const n3_engine_client_anarchy_t__on_closed_pattern = static_cas
 	"56 8D B1 90 00 00 00");
 
 
-constexpr char* const simple_char_t__check_los_pattern = static_cast<char*>("55 8B EC 83 EC 30 56 57 8B 7D 08");
+constexpr char* const simple_char_t__check_los_pattern = static_cast<char*>(
+	"55 8B EC 83 EC 30 56 57 8B 7D 08");
+
+constexpr DWORD static_item_manager_t__static_item_manager_t_offset = 0x76;
+constexpr DWORD static_item_manager_t__static_item_manager_t_bytes_to_next = 0x0;
 
 // Instances
 constexpr DWORD m_c_nano_item_dir_offset = 0x13;
@@ -622,6 +632,8 @@ constexpr DWORD m_c_nano_item_dir_offset = 0x13;
 constexpr DWORD m_c_stat_name_dir_offset = 0x1F;
 
 constexpr DWORD item_manager_t__m_ppc_instance_offset = 0xC;
+
+constexpr DWORD static_item_manager_t__m_ppc_instance_offset = 0xC;
 
 #pragma endregion
 

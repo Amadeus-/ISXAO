@@ -707,11 +707,11 @@ namespace isxao_utilities
 
 	void GetStaticItemMap(std::map<identity_t, p_dummy_item_base_t>& m)
 	{
-		auto count = pStaticItemVector->size();
+		auto count = P_STATIC_ITEM_VECTOR->size();
 		for (DWORD i = 0; i < count; i++)
 		{
-			if (pStaticItemVector->at(i).p_dummy_item)
-				m.insert_or_assign(pStaticItemVector->at(i).p_dummy_item->identity, pStaticItemVector->at(i).p_dummy_item);
+			if (P_STATIC_ITEM_VECTOR->at(i).p_dummy_item)
+				m.insert_or_assign(P_STATIC_ITEM_VECTOR->at(i).p_dummy_item->identity, P_STATIC_ITEM_VECTOR->at(i).p_dummy_item);
 		}
 	}
 

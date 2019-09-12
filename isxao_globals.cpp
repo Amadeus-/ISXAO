@@ -789,12 +789,16 @@ namespace isxao_globals
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_STAT_NAME_MAP_USE_PATTERN
-		static_assert(false, "PVOID engine_client_anarchy::n3_msg_get_stat_name_map() cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_stat_name_map() cannot be found with a pattern.");
 #else
 		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_stat_name_map)
 #endif
 
-
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_TARGET_TARGET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_target_target)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_target_target)
+#endif
 
 
 
@@ -866,6 +870,18 @@ namespace isxao_globals
 #endif
 		ppp_item_vector = reinterpret_cast<vector<acg_game_item_t> ***>(item_manager_t__m_ppc_instance);
 
+#ifdef STATIC_ITEM_MANAGER_T__STATIC_ITEM_MANAGER_T_USE_PATTERN
+		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__get_item_by_template, static_item_manager_t__static_item_manager_t)
+#else
+		static_assert(false, "static_item_manager_t__static_item_manager_t requires a pattern for the function address to be found.")
+#endif
+
+#ifdef STATIC_ITEM_MANAGER_T__M_PPC_INSTANCE_USE_PATTERN
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(static_item_manager_t__static_item_manager_t, static_item_manager_t__m_ppc_instance)
+#else
+		static_assert(false, "static_item_manager_t__m_ppc_instance requires a pattern for the function address to be found.")
+#endif
+		ppp_static_item_vector = reinterpret_cast<vector<static_item_t>***>(static_item_manager_t__m_ppc_instance);
 #pragma endregion
 
 #pragma region GUI
@@ -1112,6 +1128,7 @@ namespace isxao_globals
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_state = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_stat_name_map = 0;
+	DWORD n3_engine_client_anarchy_t_n3_msg_get_target_target = 0;
 
 
 	DWORD n3_engine_client_anarchy_t__n3_msg_is_npc = 0;
@@ -1119,6 +1136,8 @@ namespace isxao_globals
 	DWORD n3_engine_client_anarchy_t__on_closed = 0;
 
 	DWORD simple_char_t__check_los = 0;
+
+	DWORD static_item_manager_t__static_item_manager_t = 0;
 
 	// Instances
 	DWORD n3_engine_client_anarchy_t__m_pc_instance = 0;
@@ -1129,6 +1148,8 @@ namespace isxao_globals
 	nano_item_map_t* p_nano_item_dir = nullptr;
 	DWORD item_manager_t__m_ppc_instance = 0;
 	vector<acg_game_item_t> ***ppp_item_vector = nullptr;
+	DWORD static_item_manager_t__m_ppc_instance = 0;
+	vector<static_item_t> ***ppp_static_item_vector = nullptr;
 
 #pragma endregion
 
@@ -1150,7 +1171,7 @@ namespace isxao_globals
 
 #pragma region EngineClientAnarchy
 	
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetTargetTarget = 0;
+	
 	DWORD n3EngineClientAnarchy_t__N3Msg_GetTeamMemberList = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_HasPerk = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsAttacking = 0;
@@ -1264,8 +1285,7 @@ namespace isxao_globals
 	//DWORD NanoItemManager_t__m_pcInstance = 0;
 	//nano_item_dir_t **ppNanoItemDir = nullptr;
 	//DWORD NanoItem_t__GetNanoItem = 0;
-	DWORD StaticItemManager_t_mppcInstance;
-	std::vector<static_item_t> ***pppStaticItemVector = nullptr;
+	
 	
 
 #pragma endregion
@@ -1277,12 +1297,6 @@ namespace isxao_globals
 
 	DWORD PlayfieldAnarchy_t__PlayfieldAnarchy_t = 0;
 	DWORD PlayfieldAnarchy_t__dPlayfieldAnarchy_t = 0;
-
-#pragma endregion
-
-#pragma region Camera
-
-	
 
 #pragma endregion
 
@@ -1315,15 +1329,10 @@ namespace isxao_globals
 	
 #pragma endregion
 
-#pragma region TargetingModule
-
-	
-	
-	
+#pragma region TargetingModule	
 	
 	DWORD TargetingModule_t__RemoveTarget = 0;
-	DWORD TargetingModule_t__SelectSelf = 0;
-	
+	DWORD TargetingModule_t__SelectSelf = 0;	
 	DWORD TargetingModule_t__SetTargetPet = 0;
 
 #pragma endregion
@@ -1332,15 +1341,12 @@ namespace isxao_globals
 
 	DWORD ChatGUIModule_c__s_pcInstance = 0;
 	ChatGUIModule** ppChatGUIModule = nullptr;
-
 	DWORD ChatGUIModule_c__HandleGroupAction = 0;
 	DWORD ChatGUIModule_c__HandleGroupMessage = 0;
 	DWORD ChatGUIModule_c__HandlePrivateGroupAction = 0;
 	DWORD ChatGUIModule_c__HandlePrivateMessage = 0;
 	DWORD ChatGUIModule_c__HandleSystemMessage = 0;
 	DWORD ChatGUIModule_c__HandleVicinityMessage = 0;
-
-
 
 #pragma endregion
 
@@ -1403,8 +1409,7 @@ namespace isxao_globals
 #pragma region SimpleChar
 
 	DWORD SimpleChar_t__SimpleChar_t = 0;
-	DWORD SimpleChar_t__dSimpleChar_t = 0;
-	
+	DWORD SimpleChar_t__dSimpleChar_t = 0;	
 
 #pragma endregion
 
@@ -1464,7 +1469,6 @@ namespace isxao_globals
 #pragma region ChatWindowNode
 
 	DWORD ChatWindowNode_c__ParseTextCommand = 0;
-
 	DWORD ChatWindowNode_c__sub_1009BB79 = 0;
 
 #pragma endregion

@@ -176,7 +176,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_state;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_stat_name_map;
-
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_target_target;
 
 
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_npc;
@@ -185,6 +185,8 @@ namespace isxao_globals
 
 
 	AOLIB_VAR DWORD simple_char_t__check_los;
+
+	AOLIB_VAR DWORD static_item_manager_t__static_item_manager_t;
 
 	// Instances
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__m_pc_instance;
@@ -199,6 +201,9 @@ namespace isxao_globals
 	AOLIB_VAR DWORD item_manager_t__m_ppc_instance;
 	AOLIB_VAR vector<acg_game_item_t> ***ppp_item_vector;
 #define P_ITEM_VECTOR (**ppp_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD static_item_manager_t__m_ppc_instance;
+	AOLIB_VAR vector<static_item_t> ***ppp_static_item_vector;
+#define P_STATIC_ITEM_VECTOR (**ppp_static_item_vector)
 
 #pragma endregion
 
@@ -228,7 +233,7 @@ namespace isxao_globals
 #pragma region Interfaces
 
 	AOLIB_VAR DWORD client_t__s_n_char_id;
-	AOLIB_VAR PDWORD gp_character_id;
+	AOLIB_VAR DWORD* gp_character_id;
 #define G_CHARACTER_ID (*gp_character_id)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD Client_t__ProcessMessage;
 
@@ -237,8 +242,7 @@ namespace isxao_globals
 #pragma region Globals
 
 	AOLIB_VAR DWORD __N3Msg_GetFullPerkMap;
-	AOLIB_VAR DWORD __SetTarget;
-	
+	AOLIB_VAR DWORD __SetTarget;	
 	AOLIB_VAR DWORD __RequestInfo;
 
 #pragma endregion
@@ -246,8 +250,6 @@ namespace isxao_globals
 #pragma region EngineClientAnarchy			
 	
 	
-	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetTargetTarget;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetTeamMemberList;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_HasPerk;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsAttacking;
@@ -354,32 +356,9 @@ namespace isxao_globals
 
 #pragma endregion
 
-#pragma region ItemManager
-
-	// Item Vector Instance
-	
-	// NanoMap Instance
-//	AOLIB_VAR DWORD NanoItemManager_t__m_pcInstance;
-//	AOLIB_VAR nano_item_dir_t **ppNanoItemDir;
-//#define pNanoItemDir (*ppNanoItemDir)
-//	AOLIB_VAR DWORD NanoItem_t__GetNanoItem;
-	// Action Item Manager
-	AOLIB_VAR DWORD StaticItemManager_t_mppcInstance;
-	AOLIB_VAR std::vector<static_item_t> ***pppStaticItemVector;
-#define pStaticItemVector (**pppStaticItemVector)
-	
-#pragma endregion
-
-
 #pragma region Playfield
-
 	
 	AOLIB_VAR DWORD n3Playfield_t__OnChildDynelBeingRemoved;
-	
-
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_dynels_in_vicinity;
-
-
 	AOLIB_VAR DWORD PlayfieldAnarchy_t__PlayfieldAnarchy_t;
 	AOLIB_VAR DWORD PlayfieldAnarchy_t__dPlayfieldAnarchy_t;
 
@@ -396,7 +375,6 @@ namespace isxao_globals
 	AOLIB_VAR DWORD InputConfig_t__m_pcInstance;
 	AOLIB_VAR InputConfig** ppInputConfig;
 #define pInputConfig (*ppInputConfig)
-
 	AOLIB_VAR DWORD InputConfig_t__SetCurrentTarget;
 
 #pragma endregion
@@ -415,14 +393,6 @@ namespace isxao_globals
 
 #pragma endregion
 
-#pragma region TargetingModule
-
-	
-
-
-
-#pragma endregion
-
 #pragma region ChatGUIModule
 
 	AOLIB_VAR DWORD  ChatGUIModule_c__s_pcInstance;
@@ -436,7 +406,6 @@ namespace isxao_globals
 	AOLIB_VAR DWORD ChatGUIModule_c__HandleSystemMessage;
 	AOLIB_VAR DWORD ChatGUIModule_c__HandleVicinityMessage;
 
-
 #pragma endregion
 
 #pragma region Vehicle
@@ -445,21 +414,13 @@ namespace isxao_globals
 
 #pragma endregion
 
-#pragma region Client
-
-	
-
-#pragma endregion
-
 #pragma region Messaging
 
 	AOLIB_VAR DWORD Message_t__DataBlockSizeGet;
 	AOLIB_VAR DWORD Message_t__MessageSizeGet;
-
 	AOLIB_VAR DWORD N3Message_t__DuplicateBody;
 	AOLIB_VAR DWORD N3Message_t__MessageBodyGet;
 	AOLIB_VAR DWORD N3Message_t__MessageBodyLen;
-
 	AOLIB_VAR DWORD TextMessage_t__MessageBodyGet;
 	AOLIB_VAR DWORD TextMessage_t__MessageBodyLen;
 
@@ -496,8 +457,7 @@ namespace isxao_globals
 #pragma region SimpleChar
 
 	AOLIB_VAR DWORD SimpleChar_t__SimpleChar_t;
-	AOLIB_VAR DWORD SimpleChar_t__dSimpleChar_t;
-	
+	AOLIB_VAR DWORD SimpleChar_t__dSimpleChar_t;	
 
 #pragma endregion
 
