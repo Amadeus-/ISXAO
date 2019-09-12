@@ -613,6 +613,29 @@ constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_npc_mangled_name = s
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_npc_pattern = static_cast<char*>(
 	"55 8B EC 6A 00 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? 6A 00 FF 75 08 FF 15 ?? ?? ?? ?? 59 50 E8 ?? ?? ?? ?? 83 C4 14 85 C0 74 ?? 80 B8 20 02 00 00 00");
 
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_perform_special_action_1_mangled_name = static_cast<char*>(
+	"?N3Msg_PerformSpecialAction@n3EngineClientAnarchy_t@@QAE_NW4Action_e@@@Z");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_perform_special_action_2_mangled_name = static_cast<char*>(
+	"?N3Msg_PerformSpecialAction@n3EngineClientAnarchy_t@@QAE_NABVIdentity_t@@@Z");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_send_pet_command_mangled_name = static_cast<char*>(
+	"?N3Msg_SendPetCommand@n3EngineClientAnarchy_t@@QBEXHABVIdentity_t@@HHPBD@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_send_pet_command_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 48 53 56 57 FF 75 18");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_stop_attack_mangled_name = static_cast<char*>(
+	"?N3Msg_StopAttack@n3EngineClientAnarchy_t@@QBEXXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_stop_attack_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 1C 56 8B F1 E8 ?? ?? ?? ??");
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_use_item_mangled_name = static_cast<char*>(
+	"?N3Msg_UseItem@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@_N@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_use_item_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC A8 00 00 00 53 56 57");
+
+
+
 
 constexpr char* const n3_engine_client_anarchy_t__on_closed_mangled_name = static_cast<char*>(
 	"?OnClosed@n3EngineClientAnarchy_t@@UAEXXZ");
@@ -679,8 +702,21 @@ constexpr DWORD targeting_module_t__m_c_last_target_offset = 0x25;
 
 #pragma region Interfaces
 
+constexpr char* const interfaces_module_name = static_cast<char*>("Interfaces.dll");
+
 constexpr char* const client_t__s_n_char_id_mangled_name = static_cast<char*>(
 	"?s_nCharID@Client_t@@0IA");
+
+#pragma endregion
+
+#pragma region Vehicle
+
+constexpr char* const vehicle_module_name = static_cast<char*>("Vehicle.dll");
+
+constexpr char* const vehicle_t__set_rel_rot_mangled_name = static_cast<char*>(
+	"?SetRelRot@Vehicle_t@@QAEXABVQuaternion_t@@@Z");
+constexpr char* const vehicle_t__set_rel_rot_pattern = static_cast<char*>(
+	"55 8B EC 83 EC 18 53");
 
 #pragma endregion
 

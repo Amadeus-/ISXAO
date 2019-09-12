@@ -149,8 +149,8 @@ public:
 	AOLIB_OBJECT void N3Msg_NPCChatRequestDescription(const identity_t &, const identity_t &);
 	AOLIB_OBJECT void N3Msg_NPCChatStartTrade(const identity_t &, const identity_t &);
 	AOLIB_OBJECT void N3Msg_OrbitalAttack(const identity_t &);
-	AOLIB_OBJECT bool N3Msg_PerformSpecialAction(DWORD);
-	AOLIB_OBJECT bool N3Msg_PerformSpecialAction(const identity_t &);
+	AOLIB_OBJECT bool n3_msg_perform_special_action(DWORD);
+	AOLIB_OBJECT bool n3_msg_perform_special_action(const identity_t &);
 	AOLIB_OBJECT void N3Msg_PetDuel_Accept();
 	AOLIB_OBJECT void N3Msg_PetDuel_Challenge(const identity_t &);
 	AOLIB_OBJECT void N3Msg_PetDuel_Refuse();
@@ -164,7 +164,7 @@ public:
 	AOLIB_OBJECT std::list<inventory_entry_t>* N3Msg_RequestWeaponInventory(const identity_t &);
 	AOLIB_OBJECT bool N3Msg_SecondarySpecialAttack(const identity_t &, DWORD);
 	AOLIB_OBJECT void N3Msg_SelectedTarget(const identity_t&);
-	AOLIB_OBJECT void N3Msg_SendPetCommand(DWORD, const identity_t &, DWORD, DWORD, PCSTR); // 0, PetIdentity&, PetCommand_e, 0, nullptr
+	AOLIB_OBJECT void n3_msg_send_pet_command(DWORD, const identity_t &, DWORD, DWORD, PCSTR); // 0, PetIdentity&, PetCommand_e, 0, nullptr
 	AOLIB_OBJECT void N3Msg_SitToggle();
 	AOLIB_OBJECT bool N3Msg_SplitItem(const identity_t &, DWORD);
 	AOLIB_OBJECT void N3Msg_StartAltState();
@@ -172,7 +172,7 @@ public:
 	AOLIB_OBJECT void N3Msg_StartPvP(const identity_t &);
 	AOLIB_OBJECT bool N3Msg_StartTreatment(const identity_t &);
 	AOLIB_OBJECT void N3Msg_StopAltState();
-	AOLIB_OBJECT void N3Msg_StopAttack();
+	AOLIB_OBJECT void n3_msg_stop_attack();
 	AOLIB_OBJECT void N3Msg_StopCamping();
 	AOLIB_OBJECT DWORD N3Msg_StringToStat(PCSTR);
 	AOLIB_OBJECT void N3Msg_SwitchTarget(const identity_t &);
@@ -195,7 +195,7 @@ public:
 	AOLIB_OBJECT void N3Msg_TryAbortNanoFormula();
 	AOLIB_OBJECT void N3Msg_TryEnterSneakMode();
 	AOLIB_OBJECT bool N3Msg_UntrainPerk(DWORD);
-	AOLIB_OBJECT void N3Msg_UseItem(const identity_t &, bool);
+	AOLIB_OBJECT void n3_msg_use_item(const identity_t &, bool);
 	AOLIB_OBJECT void N3Msg_UseItemOnItem(const identity_t &, const identity_t &);	
 
 

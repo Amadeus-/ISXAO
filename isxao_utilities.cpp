@@ -227,9 +227,9 @@ namespace isxao_utilities
 
 	PVOID RequestInfo(const identity_t &id)
 	{
-		typedef PVOID(__thiscall * tRequestInfo)(SpecialActionHolder*, const identity_t&);
+		typedef PVOID(__thiscall * tRequestInfo)(special_action_holder*, const identity_t&);
 		auto pLookAt = tRequestInfo(__RequestInfo);
-		return pLookAt(P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetSpecialActionHolder(), id);
+		return pLookAt(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_special_action_holder(), id);
 	}
 
 #pragma endregion
@@ -632,25 +632,6 @@ namespace isxao_utilities
 
 #pragma region Collections
 	
-	void recursive_add_dynel_to_dynel_map(std::map<identity_t, p_n3_dynel_t>& m, p_dynel_node_t p_node, const p_dynel_root_t p_root, DWORD& count)
-	{
-		m.insert_or_assign(p_node->identity, p_node->p_dynel);
-		count--;
-		if (reinterpret_cast<PVOID>(p_node->p_lower) != reinterpret_cast<PVOID>(p_root) && count > 0)
-			recursive_add_dynel_to_dynel_map(m, p_node->p_lower, p_root, count);
-		if (reinterpret_cast<PVOID>(p_node->p_higher) != reinterpret_cast<PVOID>(p_root) && count > 0)
-			recursive_add_dynel_to_dynel_map(m, p_node->p_higher, p_root, count);
-	}
-
-	void get_dynel_map(std::map<identity_t, p_n3_dynel_t>& m)
-	{
-		auto count = P_DYNEL_DIR->count;
-		const auto p_root = P_DYNEL_DIR->p_root;
-		const auto p_node = p_root->p_node;
-		if (count > 0)
-			recursive_add_dynel_to_dynel_map(m, p_node, p_root, count);
-	}
-
 	void RecursiveAddPerkToPerkMap(std::map<identity_t, DWORD>& m, p_perk_node_t pNode, p_perk_root_t pRoot, DWORD& count)
 	{
 		m.insert_or_assign(pNode->perk_identity, pNode->perk_id);
@@ -1314,9 +1295,9 @@ namespace isxao_utilities
 		return false;
 	}
 
-	p_inventory_data_t GetInvSlotData(INVENTORYSLOT *slot)
+	p_inventory_data_t GetInvSlotData(inventory_slot_t *slot)
 	{
-		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().p_regular_inventory->p_inventory_data[slot->SlotID.id];
+		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_inventory_holder_data().p_regular_inventory->p_inventory_data[slot->slot_id.id];
 	}
 
 #pragma endregion

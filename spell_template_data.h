@@ -1,16 +1,18 @@
 #pragma once
 
-class SpellTemplateData
+// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
+class spell_template_data
 {
 public:
-	AOLIB_OBJECT DWORD BuildLSNanoSpellList(LSIndex*) const;
-	AOLIB_OBJECT DWORD GetActiveNanoEffects(std::vector<identity_t>&) const;
-	AOLIB_OBJECT CastingData* GetCastingData() const;
-	AOLIB_OBJECT DWORD GetNanoBeingCast() const;
-	AOLIB_OBJECT DWORD GetNanoSpellList(std::vector<DWORD>&) const;
-	AOLIB_OBJECT DWORD GetNanoTemplateList(std::vector<NanoTemplate>&) const;
-	AOLIB_OBJECT spell_template_data_t GetSpellTemplateDataData() const;
-	AOLIB_OBJECT bool IsCasting() const;
+	AOLIB_OBJECT DWORD build_ls_nano_spell_list(LSIndex*) const;
+	AOLIB_OBJECT DWORD get_active_nano_effects(vector<identity_t>&) const;
+	AOLIB_OBJECT casting_data* get_casting_data() const;
+	AOLIB_OBJECT DWORD get_nano_being_cast() const;
+	AOLIB_OBJECT DWORD get_nano_spell_list(vector<DWORD>&) const;
+	AOLIB_OBJECT DWORD get_nano_template_list(vector<nano_template>&) const;
+	AOLIB_OBJECT spell_template_data_t get_spell_template_data_data() const;
+	AOLIB_OBJECT bool is_casting() const;
 private:
+	// ReSharper disable once CppUninitializedNonStaticDataMember
 	spell_template_data_t spell_template_data_;
 };

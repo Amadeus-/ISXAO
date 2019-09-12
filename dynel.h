@@ -40,9 +40,9 @@ public:
 	AOLIB_OBJECT void send_iir_to_observers(info_item_remote*);
 	AOLIB_OBJECT actor* to_actor();
 	AOLIB_OBJECT character* to_character();
-	AOLIB_OBJECT Pet* to_pet();
-	AOLIB_OBJECT Player* to_player();
-	AOLIB_OBJECT TeamMember* to_team_member();
+	AOLIB_OBJECT pet* to_pet();
+	AOLIB_OBJECT player* to_player();
+	AOLIB_OBJECT team_member* to_team_member();
 	AOLIB_OBJECT void update_locality_listeners();
 	AOLIB_OBJECT static bool p_dynel_compare(dynel *p_a, dynel *p_b);
 private: 

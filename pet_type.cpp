@@ -8,12 +8,12 @@ bool PetType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc,
 		return false;
 	__try
 	{
-#define pPet ((Pet*)ObjectData.Ptr)
+#define P_PET ((::pet*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (PetTypeMembers(Member->ID))
 		{
 		case Type:
 		{
-			Object.DWord = pPet->GetPetType();
+			Object.DWord = P_PET->get_pet_type();
 			Object.Type = pUintType;
 			break;
 		}
@@ -26,7 +26,7 @@ bool PetType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc,
 
 	}
 	return true;
-#undef pPet
+#undef P_PET
 }
 
 bool PetType::GetMethod(LSOBJECTDATA &ObjectData, PLSTYPEMETHOD pMethod, int argc, char *argv[])
@@ -37,52 +37,52 @@ bool PetType::GetMethod(LSOBJECTDATA &ObjectData, PLSTYPEMETHOD pMethod, int arg
 		return false;
 	__try
 	{
-#define pPet ((Pet*)ObjectData.Ptr)
+#define P_PET ((::pet*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (PetTypeMethods(pMethod->ID))
 		{
 		case Attack:
 		{
-			pPet->Attack();
+			P_PET->attack();
 			break;
 		}
 		case Behind:
 		{
-			pPet->Behind();
+			P_PET->behind();
 			break;
 		}
 		case Follow:
 		{
-			pPet->Follow();
+			P_PET->follow();
 			break;
 		}
 		case Guard:
 		{
-			pPet->Guard();
+			P_PET->guard();
 			break;
 		}
 		case Heal:
 		{
-			pPet->Heal();
+			P_PET->heal();
 			break;
 		}
 		case Report:
 		{
-			pPet->Report();
+			P_PET->report();
 			break;
 		}
 		case Terminate:
 		{
-			pPet->Terminate();
+			P_PET->terminate();
 			break;
 		}
 		case Wait:
 		{
-			pPet->Wait();
+			P_PET->wait();
 			break;
 		}
 		default: break;
 		}
-#undef pPet
+#undef P_PET
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, pMethod->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{
@@ -97,9 +97,9 @@ bool PetType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define pPet ((Pet*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64u", pPet->get_identity().get_combined_identity());
-#undef pPet
+#define P_PET ((::pet*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
+	sprintf_s(buf, buflen, "%I64u", P_PET->get_identity().get_combined_identity());
+#undef P_PET
 
 	return true;
 }

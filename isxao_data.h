@@ -9,7 +9,7 @@ namespace ao_data
 #pragma region Common Structs (by alpha)
 	
 	// Size = 0x08
-	typedef struct identity
+	typedef struct ao_identity
 	{
 		DWORD type;
 		DWORD id;
@@ -19,36 +19,36 @@ namespace ao_data
 			return (static_cast<UINT64>(type) << 32) | id;
 		}
 
-		static struct identity get_identity_from_combined(const DWORD64 combined)
+		static struct ao_identity get_identity_from_combined(const DWORD64 combined)
 		{
-			struct identity id;
+			struct ao_identity id;
 			id.type = DWORD(combined >> 32);
 			id.id = DWORD(combined);
 			return id;
 		}
 
-		bool operator==(const struct identity& other) const
+		bool operator==(const struct ao_identity& other) const
 		{
 			return get_combined_identity() == other.get_combined_identity();
 		}
 
-		bool operator!=(const struct identity& other) const
+		bool operator!=(const struct ao_identity& other) const
 		{
 			return get_combined_identity() != other.get_combined_identity();
 		}
 
-		bool operator<(const struct identity& other) const
+		bool operator<(const struct ao_identity& other) const
 		{
 			return get_combined_identity() < other.get_combined_identity();
 		}
 
-		identity()
+		ao_identity()
 		{
 			type = 0;
 			id = 0;
 		}
 
-		identity(const DWORD t, const DWORD i)
+		ao_identity(const DWORD t, const DWORD i)
 		{
 			type = t;
 			id = i;
@@ -57,31 +57,31 @@ namespace ao_data
 	} identity_t, *p_identity_t;
 	
 	// Size = 0x0C
-	typedef struct vector3
+	typedef struct ao_vector3
 	{
 		float x;					// 0x00
 		float y;					// 0x04
 		float z;					// 0x08		
 
-		static struct vector3 add(struct vector3& v1, struct vector3& v2)
+		static struct ao_vector3 add(struct ao_vector3& v1, struct ao_vector3& v2)
 		{
-			struct vector3 a;
+			struct ao_vector3 a;
 			a.x = v1.x + v2.x;
 			a.y = v1.y + v2.y;
 			a.z = v1.z + v2.z;
 			return a;
 		}
 
-		static struct vector3 subtract(struct vector3& v1, struct vector3& v2)
+		static struct ao_vector3 subtract(struct ao_vector3& v1, struct ao_vector3& v2)
 		{
-			struct vector3 a;
+			struct ao_vector3 a;
 			a.x = v1.x - v2.x;
 			a.y = v1.y - v2.y;
 			a.z = v1.z - v2.z;
 			return a;
 		}
 
-		void copy(const struct vector3& other)
+		void copy(const struct ao_vector3& other)
 		{
 			x = other.x;
 			y = other.y;
@@ -96,9 +96,9 @@ namespace ao_data
 			z = z / m;
 		}
 
-		static struct vector3 cross(struct vector3& v1, struct vector3& v2)
+		static struct ao_vector3 cross(struct ao_vector3& v1, struct ao_vector3& v2)
 		{
-			struct vector3 c;
+			struct ao_vector3 c;
 
 			c.x = v1.y*v2.z - v1.z*v2.y;
 			c.y = v1.z*v2.x - v1.x*v2.z;
@@ -107,7 +107,7 @@ namespace ao_data
 			return c;
 		}
 
-		static float dot(struct vector3& v1, struct vector3& v2)
+		static float dot(struct ao_vector3& v1, struct ao_vector3& v2)
 		{
 			return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
 		}
@@ -122,41 +122,41 @@ namespace ao_data
 			return x*x + y*y + z*z;
 		}
 
-		static float distance(struct vector3& v1, struct vector3& v2)
+		static float distance(struct ao_vector3& v1, struct ao_vector3& v2)
 		{
 			const auto r = subtract(v1, v2);
 			return r.length();
 		}
 
-		static float distance_squared(struct vector3& v1, struct vector3& v2)
+		static float distance_squared(struct ao_vector3& v1, struct ao_vector3& v2)
 		{
 			const auto r = subtract(v1, v2);
 			return r.length_squared();
 		}
 
-		static float distance_x(struct vector3& v1, struct vector3& v2)
+		static float distance_x(struct ao_vector3& v1, struct ao_vector3& v2)
 		{
 			return abs(v1.x - v2.x);
 		}
 
-		static float distance_y(struct vector3& v1, struct vector3& v2)
+		static float distance_y(struct ao_vector3& v1, struct ao_vector3& v2)
 		{
 			return abs(v1.y - v2.y);
 		}
 
-		static float distance_z(struct vector3& v1, struct vector3& v2)
+		static float distance_z(struct ao_vector3& v1, struct ao_vector3& v2)
 		{
 			return abs(v1.z - v2.z);
 		}
 
-		static float distance_xz(struct vector3& v1, struct vector3& v2)
+		static float distance_xz(struct ao_vector3& v1, struct ao_vector3& v2)
 		{
 			const auto d_x = v1.x - v2.x;
 			const auto d_z = v1.z - v2.z;
 			return sqrt(d_x*d_x + d_z*d_z);
 		}
 
-		static float distance_xz_squared(struct vector3& v1, struct vector3& v2)
+		static float distance_xz_squared(struct ao_vector3& v1, struct ao_vector3& v2)
 		{
 			const auto d_x = v1.x - v2.x;
 			const auto d_z = v1.z - v2.z;
@@ -168,7 +168,7 @@ namespace ao_data
 			return atan2f(x, z);
 		}
 
-		vector3()
+		ao_vector3()
 		{
 			x = 0.0f;
 			y = 0.0f;
@@ -177,14 +177,14 @@ namespace ao_data
 	} vector3_t, *p_vector3_t;
 	
 	// Size = 0x10
-	typedef struct quaternion
+	typedef struct ao_quaternion
 	{
 		float x;					// 0x00
 		float y; // sin(theta/2)	// 0x04
 		float z;					// 0x08
 		float w; // cos(theta/2)	// 0x0C
 
-		void copy(const struct quaternion& other)
+		void copy(const struct ao_quaternion& other)
 		{
 			x = other.x;
 			y = other.y;
@@ -211,9 +211,9 @@ namespace ao_data
 			return atan2f(2*(x*w - y*z), 1 - 2 * x*x - 2 * z*z);
 		}
 
-		static struct quaternion get_quaternion(float& yaw, float& pitch)
+		static struct ao_quaternion get_quaternion(float& yaw, float& pitch)
 		{
-			struct quaternion q;
+			struct ao_quaternion q;
 
 			const auto c1 = cosf(yaw);
 			const auto c2 = cosf(0);
@@ -238,9 +238,9 @@ namespace ao_data
 			return q;
 		}
 
-		static struct quaternion get_quaternion(float& yaw)
+		static struct ao_quaternion get_quaternion(float& yaw)
 		{
-			struct quaternion q;
+			struct ao_quaternion q;
 
 			q.w = cosf(yaw / 2);
 			q.x = 0;
@@ -250,7 +250,7 @@ namespace ao_data
 			return q;
 		}
 
-		static struct quaternion get_quaternion_to_face(vector3_t& to, vector3_t& from)
+		static struct ao_quaternion get_quaternion_to_face(vector3_t& to, vector3_t& from)
 		{
 			// Get the unit vector pointing from the element at v1 and v2 and normalize it
 			auto dir = vector3_t::subtract(to, from);
@@ -261,7 +261,7 @@ namespace ao_data
 			return q;
 		}
 
-		quaternion()
+		ao_quaternion()
 		{
 			x = 0;
 			y = 0;
@@ -272,7 +272,7 @@ namespace ao_data
 	} quaternion_t, *p_quaternion_t;	
 
 	// Size = 0xC
-	typedef struct rdb_identity
+	typedef struct ao_rdb_identity
 	{
 		DWORD low_quality_level_id;
 		DWORD high_quality_level_id;
@@ -281,20 +281,133 @@ namespace ao_data
 	
 	// Size = 0x8
 	// From Utils.dll
-	typedef struct i_point
+	typedef struct ao_i_point
 	{
 		DWORD x;
 		DWORD y;
 	} i_point_t, *p_i_point_t;
 
+#pragma region AOMap
+
+	template <typename T, typename U>
+	struct map_node
+	{
+		struct map_node* p_lower;
+		struct map_node* p_back;
+		struct map_node* p_higher;
+		T key;
+		U value;
+	};
+
+	template <typename T, typename U>
+	struct map_root
+	{
+		struct map_node<T, U>* p_begin;
+		struct map_node<T, U>* p_node;
+		struct map_node<T, U>* p_end;
+	};
+
+	template <typename T, typename U>
+	struct ao_map {
+		// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x01[0x4];
+		struct map_root<T, U>* p_root;
+		DWORD count;
+
+		DWORD copy_map(map<T, U>& m)
+		{
+			auto count = this->count;
+			const auto p_root = this->p_root;
+			const auto p_node = this->p_root->p_node;
+			if (count > 0)
+				this->recursive_add_to_map(m, p_node, p_root, count);
+			return m.size();
+		}
+
+	private:
+		void recursive_add_to_map(map<T, U>& m, struct map_node<T, U>* p_node, struct map_root<T, U>* p_root, DWORD& count)
+		{
+			m.insert_or_assign(p_node->key, p_node->value);
+			count--;
+			if (reinterpret_cast<PVOID>(p_node->p_lower) != reinterpret_cast<PVOID>(p_root) && count > 0)
+				this->recursive_add_to_map(m, p_node->p_lower, p_root, count);
+			if (reinterpret_cast<PVOID>(p_node->p_higher) != reinterpret_cast<PVOID>(p_root) && count > 0)
+				recursive_add_to_map(m, p_node->p_higher, p_root, count);
+		}
+	};
+
+#pragma endregion
+
+#pragma region Maps
+
+	typedef ao_map<identity_t, struct ao_n3_dynel*> dynel_map_t, *p_dynel_map_t;
+	typedef ao_map<DWORD, struct ao_nano_item*> nano_item_map_t, *p_nano_item_map_t;	
+	typedef ao_map<identity_t, struct ao_playfield_anarchy*> playfield_map, *p_playfield_map;
+
+	typedef ao_map<identity_t, DWORD> perk_map_t, *p_perk_map_t;
+	typedef ao_map<identity_t, DWORD> pet_map_t, *p_pet_map_t;
+	typedef ao_map<stat_e, PCSTR> stat_name_map_t, *p_stat_name_map_t;
+	typedef ao_map<DWORD, LONG> stat_map_t, *p_stat_map_t;
+	typedef ao_map<DWORD, DWORD> lock_map_t, *p_lock_map_t;
+
+#pragma endregion
+
+#pragma region AOList
+
+	template<typename T>
+	struct ao_list_node
+	{
+		struct ao_list_node<T>* p_back;
+		struct ao_list_node<T>* p_next;
+		T value;
+	};
+
+	template<typename T>
+	struct ao_list_root
+	{
+		struct ao_list_node<T>* p_first;
+		struct ao_list_node<T>* p_last;
+	};
+
+	template<typename T>
+	struct ao_list
+	{
+		struct ao_list_root<T>* p_root;
+		DWORD count;
+
+		DWORD copy_list(vector<T>& v)
+		{
+			if (this->count == 0)
+				return this->count;
+			auto count = this->count;
+			struct ao_list_node<T>* current_node = this->p_root->p_first;
+			while (count > 0 && current_node != this->p_root->p_last)
+			{
+				v.push_back(current_node->value);
+				if (current_node != this->p_root->p_last && DWORD(current_node->p_next) != DWORD(this->p_root))
+					current_node = current_node->p_next;
+				count = count - 1;
+			}
+			return v.size();
+		}
+	};
+
+#pragma region Lists
+
+	typedef ao_list<DWORD> nano_id_list_t, *p_nano_list_id;
+
+#pragma endregion
+
+#pragma endregion
+
 #pragma endregion
 
 #pragma region ACGGameItem
 
-	typedef struct acg_game_item
+	typedef struct ao_acg_game_item
 	{
 		rdb_identity_t rdb_identity;				// 0x00
-		struct dummy_item_base* p_dummy_item_base;	// 0x04
+		struct ao_dummy_item_base* p_dummy_item_base;	// 0x04
 		DWORD interpolated_id;						// 0x10
 	} acg_game_item_t, *p_acg_game_item_t;
 
@@ -303,7 +416,7 @@ namespace ao_data
 #pragma region ActionLock
 
 	// Size = 0x10
-	typedef struct action_lock  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_action_lock  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		identity_t action_identity;		// 0x00
 		DWORD total_lockout_time;		// 0x08
@@ -316,7 +429,7 @@ namespace ao_data
 
 	// Size = 0x5C
 	// From GameData.dll
-	typedef struct area_data  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_area_data  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;				// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -332,7 +445,7 @@ namespace ao_data
 		DWORD clan_control;				// 0x28
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x2C[0x1C];		// 0x2C
-		struct vector3 center;			// 0x48
+		struct ao_vector3 center;			// 0x48
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x54[0x8];			// 0x54
 	} area_data_t, *p_area_data_t;
@@ -343,13 +456,13 @@ namespace ao_data
 
 	// Size = 0x38
 	// From Gamecode.dll
-	typedef struct bank_entry
+	typedef struct ao_bank_entry
 	{
 		PVOID p_v_table;									// 0x00
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x04[0x4];								// 0x04
 		PVOID p_v_table_new_inventory;						// 0x08
-		std::vector <struct inventory_data*> inventory;		// 0x0C
+		std::vector <struct ao_inventory_data*> inventory;		// 0x0C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x18[0x4];								// 0x18
 		DWORD count;										// 0x1C
@@ -364,20 +477,20 @@ namespace ao_data
 
 	// Size = 0x44
 	// From BinaryStream.dll
-	typedef struct binary_stream
+	typedef struct ao_binary_stream
 	{
 		// ReSharper disable once CppInconsistentNaming
 		// ReSharper disable once IdentifierTypo
-		struct binary_stream* (__thiscall *BinaryStream__readmemAddress)(binary_stream*, PCSTR, size_t);	// 0x00
+		struct ao_binary_stream* (__thiscall *BinaryStream__readmemAddress)(ao_binary_stream*, PCSTR, size_t);	// 0x00
 		// ReSharper disable once CppInconsistentNaming
 		// ReSharper disable once IdentifierTypo
-		struct binary_stream* (__thiscall *BinaryStream__writememAddress)(binary_stream*, BYTE, size_t);	// 0x04
+		struct ao_binary_stream* (__thiscall *BinaryStream__writememAddress)(ao_binary_stream*, BYTE, size_t);	// 0x04
 		// ReSharper disable once CppInconsistentNaming
 		// ReSharper disable once IdentifierTypo
-		DWORD(__thiscall *BinaryStream__bgetcAddress)(binary_stream*);										// 0x08
+		DWORD(__thiscall *BinaryStream__bgetcAddress)(ao_binary_stream*);										// 0x08
 		// ReSharper disable once CppInconsistentNaming
 		// ReSharper disable once IdentifierTypo
-		DWORD(__thiscall *BinaryStream__bputcAddress)(binary_stream*, BYTE);								// 0x0C
+		DWORD(__thiscall *BinaryStream__bputcAddress)(ao_binary_stream*, BYTE);								// 0x0C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x10[0x2C];																			// 0x10
 		DWORD machine_endian;																				// 0x3C
@@ -390,7 +503,7 @@ namespace ao_data
 
 	// Size = 0x1EC
 	// From N3.dll
-	typedef struct camera_vehicle  // NOLINT(cppcoreguidelines-pro-type-member-init, hicpp-member-init)
+	typedef struct ao_camera_vehicle  // NOLINT(cppcoreguidelines-pro-type-member-init, hicpp-member-init)
 	{
 		PVOID p_v_table;									// 0x0000
 		// ReSharper disable once CppInconsistentNaming
@@ -398,7 +511,7 @@ namespace ao_data
 		PVOID p_locality_listener_i;						// 0x0024
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x28[0x4];								// 0x0028
-		struct dummy_vehicle* p_parent_vehicle;				// 0x002C
+		struct ao_dummy_vehicle* p_parent_vehicle;				// 0x002C
 		PVOID p_vehicle_body_i;								// 0x0030
 		float mass;											// 0x0034
 		float max_force;									// 0x0038
@@ -428,14 +541,14 @@ namespace ao_data
 		quaternion_t parent_body_rot;						// 0x00E8
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0xF8[0x5C];							// 0x00F8	
-		struct n3_tile_map_surface* p_n3_tile_map_surface;	// 0x0154
+		struct ao_n3_tile_map_surface* p_n3_tile_map_surface;	// 0x0154
 		DWORD playfield_instance_id;						// 0x0158
 		BYTE surface_collision_enabled;						// 0x015C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x15D[0x3];							// 0x015D
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x160[0x1C];							// 0x0160
-		struct char_vehicle* p_secondary_target_vehicle;	// 0x017C
+		struct ao_char_vehicle* p_secondary_target_vehicle;	// 0x017C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x180[0x6C];							// 0x180
 	} camera_vehicle_t, *p_camera_vehicle_t;
@@ -446,7 +559,7 @@ namespace ao_data
 
 	// Size = 0x30
 	// From Gamecode.dll
-	typedef struct cast_nanospell_iir  // NOLINT(cppcoreguidelines-pro-type-member-init, hicpp-member-init)
+	typedef struct ao_cast_nanospell_iir  // NOLINT(cppcoreguidelines-pro-type-member-init, hicpp-member-init)
 	{
 		PVOID p_v_table;
 		identity_t identity;		
@@ -470,7 +583,7 @@ namespace ao_data
 
 	// Size = 0x34
 	// From Gamecode.dll
-	typedef struct char_movement_status
+	typedef struct ao_char_movement_status
 	{
 		PVOID p_v_table;				// 0x00
 		DWORD movement_mode;			// 0x04
@@ -494,7 +607,7 @@ namespace ao_data
 
 	// Size = 0x3AC
 	// From Gamecode.dll
-	typedef struct char_vehicle  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_char_vehicle  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;									// 0x0000
 		// ReSharper disable once CppInconsistentNaming
@@ -505,7 +618,7 @@ namespace ao_data
 		PVOID p_locality_listener_i;						// 0x0024
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x28[0x4];								// 0x0028
-		struct dummy_vehicle* p_parent_vehicle;				// 0x002C
+		struct ao_dummy_vehicle* p_parent_vehicle;				// 0x002C
 		PVOID p_vehicle_body_i;								// 0x0030
 		float mass;											// 0x0034
 		float max_force;									// 0x0038
@@ -536,7 +649,7 @@ namespace ao_data
 		quaternion_t parent_body_rot;						// 0x00E8
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0xF8[0x5C];							// 0x00F8	
-		struct n3_tile_map_surface* p_n3_tile_map_surface;	// 0x0154
+		struct ao_n3_tile_map_surface* p_n3_tile_map_surface;	// 0x0154
 		DWORD playfield_instance_id;						// 0x0158
 		BYTE surface_collision_enabled;						// 0x015C
 		// ReSharper disable once CppInconsistentNaming
@@ -549,7 +662,7 @@ namespace ao_data
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x174[0x4];							// 0x0174
 		p_char_movement_status_t p_char_movement_status;	// 0x0178
-		struct char_vehicle* p_this_vehicle;				// 0x017C
+		struct ao_char_vehicle* p_this_vehicle;				// 0x017C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x180[0x22C];							// 0x0180
 	} char_vehicle_t, *p_char_vehicle_t;
@@ -560,7 +673,7 @@ namespace ao_data
 
 	// Size = 0x2C0
 	// From GUI.dll
-	typedef struct chat_gui_module
+	typedef struct ao_chat_gui_module
 	{
 		PVOID p_v_table;					// 0x00
 		// ReSharper disable CppInconsistentNaming
@@ -592,7 +705,7 @@ namespace ao_data
 
 	// Size = 0x218
 	// From GUI.dll
-	typedef struct chat_window_node
+	typedef struct ao_chat_window_node
 	{
 		PVOID p_v_table;				// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -603,23 +716,23 @@ namespace ao_data
 		BYTE unknown_0x24[0x1F4];		// 0x24
 	} chat_window_node_t, *p_chat_window_node_t;
 
-	typedef struct chat_window_node_node
+	typedef struct ao_chat_window_node_node
 	{
-		struct chat_window_node_node* p_lower;		// 0x00
-		struct chat_window_node_node* p_back;		// 0x04
-		struct chat_window_node_node* p_higher;		// 0x08
+		struct ao_chat_window_node_node* p_lower;		// 0x00
+		struct ao_chat_window_node_node* p_back;		// 0x04
+		struct ao_chat_window_node_node* p_higher;		// 0x08
 		string window_name;							// 0x0C
-		struct chat_window_node* p_chat_window;		// 0x24
+		struct ao_chat_window_node* p_chat_window;		// 0x24
 	} chat_window_node_node_t, *p_chat_window_node_node_t;
 
-	typedef struct chat_window_node_root
+	typedef struct ao_chat_window_node_root
 	{
-		struct chat_window_node_node* p_begin;
-		struct chat_window_node_node* p_node;
-		struct chat_window_node_node* pEnd;
+		struct ao_chat_window_node_node* p_begin;
+		struct ao_chat_window_node_node* p_node;
+		struct ao_chat_window_node_node* pEnd;
 	} chat_window_node_root_t, *p_chat_window_node_root_t;
 
-	typedef struct chat_window_node_dir
+	typedef struct ao_chat_window_node_dir
 	{
 		BYTE unknown_0x00[0x4];
 		p_chat_window_node_root_t p_root;
@@ -632,7 +745,7 @@ namespace ao_data
 	
 	// Size = 0x80
 	// From GUI.dll
-	typedef struct chat_window_controller
+	typedef struct ao_chat_window_controller
 	{
 		PVOID p_v_table;										// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -648,7 +761,7 @@ namespace ao_data
 
 	// Size = 0x80
 	// From GUI.dll
-	typedef struct command_interpreter
+	typedef struct ao_command_interpreter
 	{
 		PVOID p_v_table;				// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -660,7 +773,7 @@ namespace ao_data
 
 	// Size = 0x14
 	// From 
-	typedef struct coll_info
+	typedef struct ao_coll_info
 	{
 		identity_t identity;	// 0x00
 		vector3_t location;		// 0x08
@@ -672,14 +785,14 @@ namespace ao_data
 
 	// Size = 0x1E8
 	// From Gamecode.dll
-	typedef struct chest  // NOLINT(cppcoreguidelines-pro-type-member-init, hicpp-member-init)
+	typedef struct ao_chest  // NOLINT(cppcoreguidelines-pro-type-member-init, hicpp-member-init)
 	{
 		PVOID p_v_table;									// 0x0000
 		PVOID p_v_table_n3_dynel_event_source;				// 0x0004
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x08[0x4];								// 0x0008
 		PVOID p_v_table_db_object;							// 0x000C
-		struct event_caster* p_event_caster;				// 0x0010
+		struct ao_event_caster* p_event_caster;				// 0x0010
 		identity_t identity;								// 0x0014
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x1C[0x8];								// 0x001C
@@ -690,13 +803,13 @@ namespace ao_data
 		BYTE is_dead;										// 0x003C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x3D[0x3];								// 0x003D
-		struct n3_sf_base *p_first_state_function;			// 0x0040
+		struct ao_n3_sf_base *p_first_state_function;			// 0x0040
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x44[0x4];								// 0x0044
 		BYTE is_not_snoozing;								// 0x0048
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x49[0x7];								// 0x0049
-		struct dummy_vehicle* p_vehicle;					// 0x0050
+		struct ao_dummy_vehicle* p_vehicle;					// 0x0050
 		BYTE is_ground_collision_enabled;					// 0x0054
 		BYTE is_coll_enabled;								// 0x0055
 		// ReSharper disable once CppInconsistentNaming
@@ -707,14 +820,14 @@ namespace ao_data
 		BYTE unknown_0x5A[0x2];								// 0x005A
 		struct n3_dyna_mesh_coll_sphere* p_coll_prim;		// 0x005C
 		DWORD playfield_instance_id;						// 0x0060
-		struct n3_tile_map* p_n3_tile_map;					// 0x0064
+		struct ao_n3_tile_map* p_n3_tile_map;					// 0x0064
 		BYTE is_on_border;									// 0x0068
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x69[0x2];								// 0x0069
 		// ReSharper disable once CppInconsistentNaming
 		BYTE IsInTree;										// 0x006B	
 		PVOID p_n3_info_item_remote;						// 0x006C
-		std::vector<struct n3_dynel*>* p_child_dynel_vector;// 0x0070
+		std::vector<struct ao_n3_dynel*>* p_child_dynel_vector;// 0x0070
 		identity_t parent_identity;							// 0x0074
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x7C[0x4];								// 0x007C
@@ -741,7 +854,7 @@ namespace ao_data
 		vector3_t bounding_sphere_pos;						// 0x00D0
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0xDC[0x4C];							// 0x00DC
-		struct new_inventory* p_inventory;					// 0x0128
+		struct ao_new_inventory* p_inventory;					// 0x0128
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x12C[0x1C];							// 0x012C
 		PVOID p_v_table_signal_holder;						// 0x0148
@@ -764,7 +877,7 @@ namespace ao_data
 
 	// Size = 0x08
 	// From DatabaseController.dll
-	typedef struct database_controller
+	typedef struct ao_database_controller
 	{
 		PVOID p_v_table;		// 0x00
 		// ReSharper disable CppInconsistentNaming
@@ -779,10 +892,10 @@ namespace ao_data
 	
 	// Size = 0x18
 	// From DatabaseController.dll
-	typedef struct db_object
+	typedef struct ao_db_object  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;						// 0x00
-		struct event_caster* p_event_caster;	// 0x04
+		struct ao_event_caster* p_event_caster;	// 0x04
 		identity_t identity;					// 0x08
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x10[0x8];					// 0x10
@@ -794,7 +907,7 @@ namespace ao_data
 
 	// Size = 0x6C
 	// From GameData.dll
-	typedef struct district_data  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_district_data  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;				// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -823,7 +936,7 @@ namespace ao_data
 
 	// Size = 0xA4
 	// From Gamecode.dll
-	typedef struct dummy_item_base  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_dummy_item_base  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;					// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -845,7 +958,7 @@ namespace ao_data
 
 	// Size = 0x160
 	// From N3.dll
-	typedef struct dummy_vehicle  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_dummy_vehicle  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;									// 0x0000
 		// ReSharper disable once CppInconsistentNaming
@@ -856,7 +969,7 @@ namespace ao_data
 		PVOID p_locality_listener_i;						// 0x0024
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x28[0x4];								// 0x0028
-		struct dummy_vehicle* p_parent_vehicle;				// 0x002C
+		struct ao_dummy_vehicle* p_parent_vehicle;				// 0x002C
 		PVOID p_vehicle_body_i;								// 0x0030
 		float mass;											// 0x0034
 		float max_force;									// 0x0038
@@ -887,7 +1000,7 @@ namespace ao_data
 		quaternion_t parent_body_rot;						// 0x00E8
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0xF8[0x5C];							// 0x00F8	
-		struct n3_tile_map_surface* p_n3_tile_map_surface;	// 0x0154
+		struct ao_n3_tile_map_surface* p_n3_tile_map_surface;	// 0x0154
 		DWORD playfield_instance_id;						// 0x0158
 		BYTE surface_collision_enabled;						// 0x015C
 		// ReSharper disable once CppInconsistentNaming
@@ -900,7 +1013,7 @@ namespace ao_data
 
 	// Size = 0xE8
 	// From Gamecode.dll
-	typedef struct dummy_weapon  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_dummy_weapon  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;					// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -921,65 +1034,11 @@ namespace ao_data
 
 #pragma endregion
 
-#pragma region DynelMap
-
-	typedef struct node
-	{
-		struct node* p_lower;
-		struct node* p_back;
-		struct node* p_higher;
-	} node_t, *p_node_t;
-
-	typedef struct root
-	{
-		p_node_t p_begin;
-		p_node_t p_node;
-		p_node_t p_end;
-	} root_t, *p_root_t;
-
-	typedef struct dir
-	{
-		// ReSharper disable once CppInconsistentNaming
-		BYTE unknown_0x00[0x4];
-		p_root_t p_root;
-		DWORD count;
-	} dir_t, *p_dir_t;
-
-	// Size = 0x18
-	typedef struct dynel_node  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
-	{
-		struct dynel_node* p_lower;		// 0x00
-		struct dynel_node* p_back;		// 0x04
-		struct dynel_node* p_higher;	// 0x08
-		identity_t identity;			// 0x0C
-		struct n3_dynel* p_dynel;		// 0x14
-	} dynel_node_t, *p_dynel_node_t;
-
-	// Size = 0x0C
-	typedef struct dynel_root
-	{
-		struct dynel_node* p_begin;		// 0x00
-		struct dynel_node* p_node;			// 0x04
-		struct dynel_node* p_end;			// 0x08
-	} dynel_root_t, *p_dynel_root_t;
-
-	// Size = 0x0C
-	// From Gamecode.dll
-	typedef struct dynel_dir
-	{
-		// ReSharper disable once CppInconsistentNaming
-		BYTE unknown_0x00[0x4];				// 0x00
-		p_dynel_root_t p_root;				// 0x04
-		DWORD count;						// 0x08
-	} dynel_dir_t, *p_dynel_dir;
-
-#pragma endregion
-
 #pragma region EventCaster
 
 	// Size = 0x18
 	// From N3.dll
-	typedef struct event_caster
+	typedef struct ao_event_caster
 	{
 		PVOID p_v_table;										// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -993,7 +1052,7 @@ namespace ao_data
 
 	// Size = 0x58
 	// From GUI.dll
-	typedef struct flow_control_t
+	typedef struct ao_flow_control_t
 	{
 		PVOID p_v_table;			// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -1006,7 +1065,7 @@ namespace ao_data
 
 	// Size = 0xC8
 	// From Gamecode.dll
-	typedef struct game_time
+	typedef struct ao_game_time
 	{
 		PVOID p_v_table;				// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -1054,7 +1113,7 @@ namespace ao_data
 
 	// Size = 0x24
 	// From PathFinder.dll
-	typedef struct graph_path_finder
+	typedef struct ao_graph_path_finder
 	{
 		PVOID p_v_table;			// 0x00
 		PVOID p_astar_graph_t;		// 0x04
@@ -1073,7 +1132,7 @@ namespace ao_data
 
 	// Size = 0x3C
 	// From Vehicle.dll
-	typedef struct grid_space
+	typedef struct ao_grid_space
 	{
 		PVOID p_v_table;						// 0x00
 		PVOID p_v_table_change_listener_i;		// 0x04
@@ -1094,7 +1153,7 @@ namespace ao_data
 
 	//From GameData.dll
 	// Size = 0x6C
-	typedef struct hash_spawn_point  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_hash_spawn_point  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;					// 0x00
 		vector3_t center_pos;				// 0x04
@@ -1129,7 +1188,7 @@ namespace ao_data
 
 	// Size = 0x54
 	// From GUI.dll
-	typedef struct hot_spot
+	typedef struct ao_hot_spot
 	{
 		PVOID p_v_table;				// 0x00
 		DWORD sort_level;			// 0x04
@@ -1166,7 +1225,7 @@ namespace ao_data
 
 	// Size = 0x50
 	// From GUI.dll
-	typedef struct html_parser
+	typedef struct ao_html_parser
 	{
 		PVOID p_v_table;			// 0x00
 		string html_text;			// 0x04;
@@ -1186,7 +1245,7 @@ namespace ao_data
 
 	// Size = 0x3C
 	// From GUI.dll
-	typedef struct indicator  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_indicator  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;			// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -1202,7 +1261,7 @@ namespace ao_data
 
 	// Size = 0x1D0
 	// From GUI.dll
-	typedef struct input_config  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_input_config  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;									// 0x0000
 		// ReSharper disable once CppInconsistentNaming
@@ -1236,7 +1295,7 @@ namespace ao_data
 
 	// Size = 0x2C
 	// From Gamecode.dll
-	typedef struct inventory_data  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_inventory_data  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x00[0x2];			// 0x00
@@ -1245,12 +1304,12 @@ namespace ao_data
 		rdb_identity_t rdb_identity;	// 0x0C
 		DWORD quality_level;			// 0x14
 		// ReSharper disable once CppInconsistentNaming
-		BYTE unknown_0x18[0x14];		// 0x18
+		BYTE unknown_0x18[0x10];		// 0x1C
 	} inventory_data_t, *p_inventory_data_t;
 
 	// Size = 0x2C
 	// From Gamecode.dll
-	typedef struct new_inventory
+	typedef struct ao_new_inventory
 	{
 		PVOID p_v_table;									// 0x00
 		std::vector <p_inventory_data_t> p_inventory_data;	// 0x04
@@ -1264,9 +1323,9 @@ namespace ao_data
 
 	// Size = 0x1B8
 	// From Gamecode.dll
-	typedef struct inventory_holder
+	typedef struct ao_inventory_holder
 	{
-		struct simple_char* p_client_control_dynel;	// 0x0000
+		struct ao_simple_char* p_client_control_dynel;	// 0x0000
 		identity_t* p_client_identity;				// 0x0004
 		p_new_inventory_t p_regular_inventory;		// 0x0008
 		p_new_inventory_t p_unknown_inventory;		// 0x000C
@@ -1278,7 +1337,7 @@ namespace ao_data
 		BYTE unknown_0x180[0x38];					// 0x0180
 	} inventory_holder_t, *p_inventory_holder_t;
 
-	typedef struct inventory_entry  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_inventory_entry  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		identity_t template_identity;	// 0x00
 		DWORD unknown1;					// 0x04
@@ -1322,7 +1381,7 @@ namespace ao_data
 
 	// Size = 0x24
 	// From Gamecode.dll
-	typedef struct look_at_iir  // NOLINT(cppcoreguidelines-pro-type-member-init, hicpp-member-init)
+	typedef struct ao_look_at_iir  // NOLINT(cppcoreguidelines-pro-type-member-init, hicpp-member-init)
 	{
 		PVOID p_v_table;				// 0x00
 		identity_t client_id;	// 0x04
@@ -1344,7 +1403,7 @@ namespace ao_data
 
 	// Size = 0xB8
 	// From GUI.dll
-	typedef struct login_module
+	typedef struct ao_login_module
 	{
 		PVOID p_v_table;			// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -1361,17 +1420,17 @@ namespace ao_data
 
 #pragma region StatHolder
 
-	typedef struct stat_holder
+	typedef struct ao_stat_holder
 	{
-		std::vector<action_lock_t>* p_skill_locks;	// 0x00
-		struct stat_dir* p_stat_map_dir;			// 0x04
+		vector<action_lock_t>* p_skill_locks;	// 0x00
+		p_stat_map_t p_stat_map_dir;			// 0x04
 	} stat_holder_t, *p_stat_holder_t;
 
 #pragma endregion
 
 #pragma region Message
 
-	typedef struct message
+	typedef struct ao_message
 	{
 		PVOID p_v_table;			// 0x00
 		WORD message_id;			// 0x04
@@ -1391,7 +1450,7 @@ namespace ao_data
 
 	// Size - 0x258
 	// From N3.dll
-	typedef struct n3_camera
+	typedef struct ao_n3_camera  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;								// 0x0000
 		PVOID p_v_table_n3_dynel_event_source;			// 0x0004
@@ -1410,7 +1469,7 @@ namespace ao_data
 		BYTE is_dead;									// 0x003C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x15[0x3];							// 0x003D
-		struct n3_sf_base *p_first_state_function;		// 0x0040
+		struct ao_n3_sf_base *p_first_state_function;		// 0x0040
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x44[0xC];							// 0x0044
 		p_camera_vehicle_t p_camera_vehicle;			// 0x0050
@@ -1431,7 +1490,7 @@ namespace ao_data
 
 	// Size = 0x38
 	// From N3.dll
-	typedef struct n3_cell_monitor  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_n3_cell_monitor  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;				// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -1448,11 +1507,11 @@ namespace ao_data
 
 	// Size = 0xC
 	// From N3.dll
-	typedef struct n3_database_handler
+	typedef struct ao_n3_database_handler
 	{
 		PVOID p_v_table;								// 0x00
-		struct resource_database* p_resource_database;	// 0x04
-		struct resource_database* p_game_database;		// 0x08
+		struct ao_resource_database* p_resource_database;	// 0x04
+		struct ao_resource_database* p_game_database;		// 0x08
 	} n3_database_handler_t, *p_n3_database_handler_t;
 
 #pragma endregion
@@ -1461,7 +1520,7 @@ namespace ao_data
 
 	// Size = 0x18
 	// From Collision.dll
-	typedef struct coll_prim  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_coll_prim  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;				// 0x00
 		vector3_t global_pos;			// 0x04
@@ -1472,26 +1531,26 @@ namespace ao_data
 
 	// Size = 0x1C
 	// From Collision.dll
-	typedef struct coll_sphere  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_coll_sphere  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
-		struct coll_prim coll_prim;		// 0x00
+		struct ao_coll_prim coll_prim;		// 0x00
 		float possible_radius;			// 0x18
 	} coll_sphere_t, *p_coll_sphere_t;
 
 	// Size = 0x1C
 	// From Collision.dll
-	typedef struct mesh_coll_sphere
+	typedef struct ao_mesh_coll_sphere
 	{
-		struct coll_sphere coll_sphere;				// 0x00
+		struct ao_coll_sphere coll_sphere;				// 0x00
 	} mesh_coll_sphere_t, p_mesh_coll_sphere_t;
 
 	// Size = 0x30
 	// From N3.dll
 	typedef struct n3_dyna_mesh_coll_sphere  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
-		struct mesh_coll_sphere mesh_coll_sphere;	// 0x00
+		struct ao_mesh_coll_sphere mesh_coll_sphere;	// 0x00
 		PVOID p_locality_listener_i;				// 0x1C
-		struct n3_dynel* p_owner;					// 0x20
+		struct ao_n3_dynel* p_owner;					// 0x20
 		vector3_t original_relative_position;		// 0x24
 	} n3_dyna_mesh_coll_sphere_t, *p_n3_dyna_mesh_coll_sphere_t;
 
@@ -1501,7 +1560,7 @@ namespace ao_data
 
 	// Size = 0xA0
 	// From N3.dll
-	typedef struct n3_dynel  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_n3_dynel  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;									// 0x00
 		PVOID p_v_table_n_3dynel_event_source;				// 0x04
@@ -1519,7 +1578,7 @@ namespace ao_data
 		BYTE is_dead;										// 0x3C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x3D[0x3];								// 0x3D
-		struct n3_sf_base *p_first_state_function;			// 0x40
+		struct ao_n3_sf_base *p_first_state_function;			// 0x40
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x44[0x4];								// 0x44
 		BYTE is_not_snoozing;								// 0x48
@@ -1536,13 +1595,13 @@ namespace ao_data
 		BYTE unknown_0x5A[0x2];								// 0x5A
 		p_n3_dyna_mesh_coll_sphere_t p_coll_prim;			// 0x5C
 		DWORD PlayfieldInstanceId;							// 0x60
-		struct n3_tile_map* p_n3_tile_map;					// 0x64
+		struct ao_n3_tile_map* p_n3_tile_map;					// 0x64
 		BYTE is_on_border;									// 0x68
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x69[0x2];								// 0x69
 		BYTE is_in_tree;									// 0x6B	
 		PVOID p_n3_info_item_remote;						// 0x6C
-		std::vector<struct n3_dynel*>* p_child_dynel_vector;// 0x70
+		std::vector<struct ao_n3_dynel*>* p_child_dynel_vector;// 0x70
 		identity_t parent_identity;							// 0x74
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x7C[0x4];								// 0x7C
@@ -1560,7 +1619,7 @@ namespace ao_data
 
 	// Size = 0x08
 	// From N3.dll
-	typedef struct n3_dynel_event_source
+	typedef struct ao_n3_dynel_event_source
 	{
 		PVOID p_v_table;			// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -1573,7 +1632,7 @@ namespace ao_data
 
 	// Size = 0x130
 	// From Gamecode.dll
-	typedef struct n3_engine_client_anarchy  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_n3_engine_client_anarchy  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;										// 0x0000
 		binary_stream_t binary_stream;							// 0x0004
@@ -1582,21 +1641,21 @@ namespace ao_data
 		BYTE teleport_status;									// 0x0058
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x59[0x7];									// 0x0059					
-		struct resource_database* p_resource_database;			// 0x0060
-		struct n3_root* p_n3_root;								// 0x0064
+		struct ao_resource_database* p_resource_database;			// 0x0060
+		struct ao_n3_root* p_n3_root;								// 0x0064
 		float delta_time;										// 0x0068
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x6C[0x4];									// 0x006C
 		float total_time;										// 0x0070
-		struct n3_object_factory* p_n3_object_factory;			// 0x0074
+		struct ao_n3_object_factory* p_n3_object_factory;			// 0x0074
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x78[0x4];									// 0x0078
 		p_n3_camera_t p_n3_camera;								// 0x007C
 		DWORD client_inst_id;									// 0x0080
-		struct simple_char* p_client_control_char;				// 0x0084
+		struct ao_simple_char* p_client_control_char;				// 0x0084
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x88[0x8];									// 0x0088
-		struct n3_engine_client_anarchy** pp_client_interface;	// 0x0090
+		struct ao_n3_engine_client_anarchy** pp_client_interface;	// 0x0090
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x94[0xC];									// 0x0094
 		PVOID p_grid_destination_list;							// 0x00A0
@@ -1622,7 +1681,7 @@ namespace ao_data
 
 	// Size = 0x18
 	// From N3.dll
-	typedef struct n3_f_obj
+	typedef struct ao_n3_f_obj
 	{
 		PVOID p_v_table;			// 0x00
 		// ReSharper disable CppInconsistentNaming
@@ -1638,7 +1697,7 @@ namespace ao_data
 
 	// Size = 1C
 	// From N3.dll
-	typedef struct n3_fsm
+	typedef struct ao_n3_fsm
 	{
 		PVOID p_v_table;										// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -1646,14 +1705,14 @@ namespace ao_data
 		BYTE is_dead;											// 0x14
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x15[0x3];									// 0x15
-		struct n3_sf_base *p_first_state_function;				// 0x18
+		struct ao_n3_sf_base *p_first_state_function;				// 0x18
 	} n3_fsm_t, *p_n3_fsm_t;	
 
 #pragma endregion
 
 #pragma region N3Message
 
-	typedef struct n3_message
+	typedef struct ao_n3_message
 	{
 		PVOID p_v_table;			// 0x00
 		WORD message_id;			// 0x04
@@ -1675,9 +1734,9 @@ namespace ao_data
 
 	// Size = 0x8
 	// From N3.dll
-	typedef struct n3_object_factory
+	typedef struct ao_n3_object_factory
 	{
-		struct resource_database* p_resource_database;	// 0x00
+		struct ao_resource_database* p_resource_database;	// 0x00
 		// ReSharper disable once CppInconsistentNaming
 		DWORD unknown_0x04;								// 0x04
 	} n3_object_factory_t, *p_n3_object_factory_t;
@@ -1688,7 +1747,7 @@ namespace ao_data
 
 	// Size = 0x3C
 	// From N3.dll
-	typedef struct n3_root
+	typedef struct ao_n3_root
 	{
 		PVOID p_v_table;			// 0x00
 		// ReSharper disable CppInconsistentNaming
@@ -1710,10 +1769,10 @@ namespace ao_data
 
 	// Size = 0x08
 	// From N3.dll
-	typedef struct n3_sf_base
+	typedef struct ao_n3_sf_base
 	{
 		PVOID p_v_table;			// 0x00
-		struct n3_fsm* p_n3_fsm;	// 0x04
+		struct ao_n3_fsm* p_n3_fsm;	// 0x04
 	} n3_sf_base_t, *p_n3_sf_base_t;
 
 #pragma endregion
@@ -1722,13 +1781,13 @@ namespace ao_data
 
 	// Size = 0x424
 	// From N3.dll
-	typedef struct n3_tile_map
+	typedef struct ao_n3_tile_map
 	{
 		PVOID p_v_table;					// 0x0000
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x04[0x4];				// 0x0004
 		DWORD playfield_instance_id;		// 0x0008
-		struct rdb_tile_map* p_rdb_tile_map;// 0x000C
+		struct ao_rdb_tile_map* p_rdb_tile_map;// 0x000C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x10[0x410];			// 0x0010
 		PVOID p_rdb_height_map;				// 0x0420
@@ -1740,7 +1799,7 @@ namespace ao_data
 
 	// Size = 0x18
 	// From N3.dll
-	typedef struct n3_tile_map_surface
+	typedef struct ao_n3_tile_map_surface
 	{
 		PVOID p_v_table;				// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -1753,7 +1812,7 @@ namespace ao_data
 
 	// Size = 0xE0
 	// From N3.dll
-	typedef struct n3_visual_dynel  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_n3_visual_dynel  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;									// 0x00
 		PVOID p_v_table_n3_dynel_event_source;				// 0x04
@@ -1828,7 +1887,7 @@ namespace ao_data
 #pragma region NanoItem
 
 	// Size = 0xC0
-	typedef struct nano_item  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_nano_item  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;					// 0x04
 		// ReSharper disable once CppInconsistentNaming
@@ -1853,43 +1912,11 @@ namespace ao_data
 
 #pragma endregion
 
-#pragma region NanoMap
-
-	// Size = 0x14
-	typedef struct nano_item_node
-	{
-		struct nano_item_node* p_lower;		// 0x00
-		struct nano_item_node* p_node;		// 0x04
-		struct nano_item_node* p_higher;	// 0x08
-		DWORD nano_item_id;					// 0x0C
-		p_nano_item_t p_nano_item;			// 0x10
-	} nano_item_node_t, *p_nano_item_node_t;
-
-	// Size = 0xC
-	typedef struct nano_item_root
-	{
-		p_nano_item_node_t p_begin;		// 0x00
-		p_nano_item_node_t p_node;		// 0x04
-		p_nano_item_node_t p_end;		// 0x08
-	} nano_item_root_t, *p_nano_item_root_t;
-
-	// Size = 0xC
-	// From Gamecode.dll
-	typedef struct nano_item_dir
-	{
-		// ReSharper disable once CppInconsistentNaming
-		BYTE unknown_0x00[0x4];			// 0x00
-		p_nano_item_root_t p_root;		// 0x04
-		DWORD count;					// 0x08
-	} nano_item_dir_t, *p_nano_item_dir_t;
-
-#pragma endregion
-
 #pragma region NanoTemplate
 
 	// Size = 0x1C
 	// From Gamecode.dll
-	typedef struct nano_template  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_nano_template  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		identity_t nano_identity;		// 0x00
 		DWORD start_time;				// 0x08
@@ -1930,12 +1957,12 @@ namespace ao_data
 
 	// Size = 0x2C
 	// From Gamecode.dll
-	typedef struct npc_holder
+	typedef struct ao_npc_holder
 	{
 		PVOID p_v_table;			// 0x00
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x04[0x18];	// 0x04
-		p_pet_dir_t p_pet_dir;		// 0x1C
+		p_pet_map_t p_pet_dir;		// 0x1C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x20[0xC];		// 0x20
 	} npc_holder_t, *p_npc_holder_t;
@@ -1944,13 +1971,13 @@ namespace ao_data
 
 #pragma region PerkHolder
 
-	typedef struct perk_holder
+	typedef struct ao_perk_holder
 	{
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x00[0x4];						// 0x00
-		struct perk_dir* p_perk_dir;				// 0x04
-		std::vector<action_lock_t>* p_perk_locks;	// 0x08
-	} perk_holder, *p_perk_holder_t;
+		p_perk_map_t p_perk_dir;				// 0x04
+		vector<action_lock_t>* p_perk_locks;	// 0x08
+	} perk_holder_t, *p_perk_holder_t;
 
 #pragma endregion
 
@@ -1990,7 +2017,7 @@ namespace ao_data
 		struct playfield_map_node* p_back;		// 0x04
 		struct playfield_map_node* p_higher;	// 0x08
 		DWORD playfield_instance_id;			// 0x0C
-		struct playfield_anarchy* p_playfield;	// 0x10
+		struct ao_playfield_anarchy* p_playfield;	// 0x10
 	} playfield_map_node_t, *p_playfield_map_node_t;
 
 
@@ -2011,7 +2038,7 @@ namespace ao_data
 
 	// Size - 0x110
 	// From Gamecode.dll
-	typedef struct playfield_anarchy
+	typedef struct ao_playfield_anarchy
 	{
 		PVOID p_v_table;						// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -2039,7 +2066,7 @@ namespace ao_data
 		BYTE unknown_0x70[0x14];				// 0x70
 		PVOID p_org_zone_id_list;				// 0x84
 		DWORD num_org_zones;					// 0x88
-		struct rdb_playfield* p_rdb_playfield;	// 0x8C
+		struct ao_rdb_playfield* p_rdb_playfield;	// 0x8C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x90[0x8];					// 0x90
 		DWORD number_of_waters;					// 0x98
@@ -2227,7 +2254,7 @@ namespace ao_data
 
 	// Size = 0x6C
 	// From Gamecode.dll
-	typedef struct rdb_playfield  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_rdb_playfield  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;				// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -2249,7 +2276,7 @@ namespace ao_data
 
 	// Size = 0x8270
 	// From DisplaySystem.dll
-	typedef struct rdb_tile_map  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_rdb_tile_map  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;						// 0x00
 		p_event_caster_t p_event_caster;		// 0x04
@@ -2289,7 +2316,7 @@ namespace ao_data
 
 	// Size = 0x08
 	// From DatabaseController.dll
-	typedef struct reference_counted
+	typedef struct ao_reference_counted
 	{
 		PVOID p_v_table;						// 0x00
 		p_event_caster_t p_event_caster;		// 0x04
@@ -2301,9 +2328,9 @@ namespace ao_data
 
 	// Size = 0x10
 	// From DatabaseController.dll
-	typedef struct resource_database
+	typedef struct ao_resource_database
 	{
-		struct database_controller database_controller;		// 0x00
+		struct ao_database_controller database_controller;		// 0x00
 		PVOID p_ace_token;									// 0x08
 		PVOID p_rdb_link_r_db_c;							// 0x0C
 	} resource_database_t, *p_resource_database_t;
@@ -2314,11 +2341,12 @@ namespace ao_data
 
 	// Size = 0x2D8
 	// From Gamecode.dll
-	typedef struct simple_char
+	typedef struct ao_simple_char  // NOLINT(cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;										// 0x00
 		p_n3_dynel_event_source_t p_n3_dynel_event_source;		// 0x04
-		p_db_object_t db_object;								// 0x0C
+		p_event_caster_t p_event_caster_t;						// 0x08
+		db_object_t db_object;									// 0x0C
 		vector<coll_info_t>* p_coll_info_vector;				// 0x24
 		n3_fsm_t n3_fsm;										// 0x28
 		// ReSharper disable once CppInconsistentNaming
@@ -2386,15 +2414,15 @@ namespace ao_data
 		BYTE unknown_0x170[0x4C];								// 0x170
 		p_inventory_holder_t p_container_inventory;				// 0x1BC
 		p_stat_holder_t p_map_holder;							// 0x1C0
-		struct spell_template_data* p_spell_template_data;		// 0x1C4
+		struct ao_spell_template_data* p_spell_template_data;	// 0x1C4
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x1C8[0xC];								// 0x1C8
-		struct special_action_holder* p_special_action_holder;	// 0x1D4
-		struct weapon_holder* p_weapon_holder;					// 0x1D8
+		struct ao_special_action_holder* p_special_action_holder;	// 0x1D4
+		struct ao_weapon_holder* p_weapon_holder;					// 0x1D8
 		p_npc_holder_t p_npc_holder;							// 0x1DC
 		PVOID p_anim_holder;									// 0x1E0
-		struct team_raid_holder* p_team_raid_info;				// 0x1E4
-		struct simple_char** pp_client_control_char;			// 0x1E8
+		struct ao_team_raid_holder* p_team_raid_info;				// 0x1E4
+		struct ao_simple_char** pp_client_control_char;			// 0x1E8
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x1EC[0xC];								// 0x1EC
 		p_perk_holder_t p_perk_holder;							// 0x1F8
@@ -2416,7 +2444,7 @@ namespace ao_data
 
 	// From GameData.dll
 	// Size = 0x14
-	typedef struct spawn_point  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_spawn_point  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;		// 0x00
 		vector3_t center_pos;	// 0x04
@@ -2429,7 +2457,7 @@ namespace ao_data
 #pragma region SpecialAction
 
 	// Size = 0x20
-	typedef struct special_action  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_special_action  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		identity_t identity;			// 0x00
 		identity_t weapon_identity;		// 0x08
@@ -2448,7 +2476,7 @@ namespace ao_data
 
 	// Size = 0xFC
 	// From Gamecode.dll
-	typedef struct special_action_holder  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_special_action_holder  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		p_simple_char_t p_client_control_char;				// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -2461,7 +2489,7 @@ namespace ao_data
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x7C[0x8];								// 0x7C
 		list<special_action_t>* p_special_actions_list;		// 0x84
-		p_lock_id_dir_t p_lock_id_dir;						// 0x88
+		p_lock_map_t p_lock_id_dir;							// 0x88
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x8C[0x70];							// 0x8C
 	} special_action_holder_t, *p_special_action_holder_t;
@@ -2471,7 +2499,7 @@ namespace ao_data
 #pragma region Spell
 
 	// Size = 0x4
-	typedef struct spell
+	typedef struct ao_spell
 	{
 		DWORD id;
 	} spell_t, *p_spell_t;
@@ -2480,7 +2508,7 @@ namespace ao_data
 
 #pragma region SpellTemplateData	
 
-	typedef struct casting_data  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_casting_data  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		p_nano_item_t p_nano_item;	// 0x00
 		DWORD nano_id;				// 0x04
@@ -2497,7 +2525,7 @@ namespace ao_data
 
 	// Size = 0x50
 	// From Gamecode.dll
-	typedef struct spell_template_data
+	typedef struct ao_spell_template_data
 	{
 		p_simple_char_t p_client_control_dynel;			// 0x00
 		DWORD in_cooldown;								// 0x04
@@ -2507,6 +2535,7 @@ namespace ao_data
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x10[0x4];							// 0x10
 		list<DWORD> spell_list;							// 0x14
+		// nano_id_list_t spell_list;
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x1C[0x4];							// 0x1C
 		list<nano_template_t> nano_template_list;		// 0x20
@@ -2521,7 +2550,7 @@ namespace ao_data
 		
 #pragma region Static Items
 
-	typedef struct static_item  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_static_item  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		identity_t static_identity;
 		p_dummy_item_base_t p_dummy_item;
@@ -2594,7 +2623,7 @@ namespace ao_data
 
 #pragma region TeamEntry
 
-	typedef struct team_entry
+	typedef struct ao_team_entry
 	{
 		string name;
 		// ReSharper disable once CppInconsistentNaming
@@ -2606,7 +2635,7 @@ namespace ao_data
 
 #pragma region TeamRaidHolder
 
-	typedef struct team_raid_info  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_team_raid_info  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		const char name[0x14];		// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -2614,7 +2643,7 @@ namespace ao_data
 		identity_t identity;		// 0x1C
 	} team_raid_info_t, *p_team_raid_info_t;
 
-	typedef struct team_raid_holder  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_team_raid_holder  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		identity_t team_identity;					// 0x00
 		p_simple_char_t p_client_control_dynel;		// 0x08
@@ -2637,7 +2666,7 @@ namespace ao_data
 		struct weapon_item_node* p_node;			// 0x04
 		struct weapon_item_node* p_higher;			// 0x08
 		DWORD action_id;							// 0x0C
-		struct weapon_item* p_weapon_item;			// 0x10
+		struct ao_weapon_item* p_weapon_item;			// 0x10
 	} weapon_item_node_t, *p_weapon_item_node_t;
 
 	// Size = 0x0C
@@ -2658,7 +2687,7 @@ namespace ao_data
 
 	// Size = 0xA4
 	// From Gamecode.dll
-	typedef struct weapon_holder
+	typedef struct ao_weapon_holder
 	{
 		PVOID p_v_table;						// 0x00
 		// ReSharper disable once CppInconsistentNaming
@@ -2681,7 +2710,7 @@ namespace ao_data
 
 	// Size = 0x204
 	// From Gamecode.dll
-	typedef struct weapon_item  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	typedef struct ao_weapon_item  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;									// 0x0000
 		PVOID p_v_table_n3_dynel_event_source;				// 0x0004
@@ -2771,64 +2800,9 @@ namespace ao_data
 
 #pragma endregion
 
-#pragma region AOMap
 
-	template <typename T, typename U>
-	struct map_node
-	{
-		struct map_node* p_lower;
-		struct map_node* p_back;
-		struct map_node* p_higher;
-		T key;
-		U value;
-	};
 
-	template <typename T, typename U>
-	struct map_root
-	{
-		struct map_node<T, U>* p_begin;
-		struct map_node<T, U>* p_node;
-		struct map_node<T, U>* p_end;
-	};
 
-	template <typename T, typename U>
-	struct ao_map {
-		// ReSharper disable once CppInconsistentNaming
-		BYTE unknown_0x01[0x4];
-		struct map_root<T, U>* p_root;
-		DWORD count;
-
-		DWORD copy_map(map<T, U>& m)
-		{
-			auto count = this->count;
-			const auto p_root = this->p_root;
-			const auto p_node = this->p_root->p_node;
-			if (count > 0)
-				this->recursive_add_to_map(m, p_node, p_root, count);
-			return m.size();
-		}
-
-	private:
-		void recursive_add_to_map(map<T, U>& m, struct map_node<T, U>* p_node, struct map_root<T, U>* p_root, DWORD& count)
-		{
-			m.insert_or_assign(p_node->key, p_node->value);
-			count--;
-			if (reinterpret_cast<PVOID>(p_node->p_lower) != reinterpret_cast<PVOID>(p_root) && count > 0)
-				this->recursive_add_to_map(m, p_node->p_lower, p_root, count);
-			if (reinterpret_cast<PVOID>(p_node->p_higher) != reinterpret_cast<PVOID>(p_root) && count > 0)
-				recursive_add_to_map(m, p_node->p_higher, p_root, count);
-		}
-	};
-
-#pragma endregion
-
-#pragma region Maps
-
-	typedef ao_map<identity_t, p_n3_dynel_t> dynel_map_t, *p_dynel_map_t;
-	typedef ao_map<DWORD, p_nano_item_t> nano_item_map_t, *p_nano_item_map_t;
-	typedef ao_map<stat_e, PCSTR> stat_name_map_t, *p_stat_name_map_t;
-
-#pragma endregion
 
 }
 using namespace ao_data;

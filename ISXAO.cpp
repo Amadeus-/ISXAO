@@ -210,7 +210,7 @@ void ISXAO::RegisterExtension()
 void ISXAO::ConnectServices()
 {
 	// connect to any services.  Here we connect to "Pulse" which receives a
-	// message every frame (after the frame is displayed) and "Memory" which
+	// ao_message every frame (after the frame is displayed) and "Memory" which
 	// wraps "detours" and memory modifications
 	hPulseService=pISInterface->ConnectService(this,"Pulse",PulseService);
 	hMemoryService=pISInterface->ConnectService(this,"Memory",MemoryService);
@@ -224,7 +224,7 @@ void ISXAO::ConnectServices()
 	hTriggerService=pISInterface->ConnectService(this,"Triggers",TriggerService);
 
 	// The System service provides general system-related services, including
-	// a diagnostics message that allows the extension to insert diagnostic
+	// a diagnostics ao_message that allows the extension to insert diagnostic
 	// information for the "diagnostics" command, and extension crash logs.
 	hSystemService=pISInterface->ConnectService(this,"System",SystemService);
 
@@ -273,7 +273,7 @@ void ISXAO::RegisterServices()
 	// callback
 	// set up a 1-way service (broadcast only)
 //	hISXAOService=pISInterface->RegisterService(this,"ISXAO Service",0);
-	// broadcast a message, which is worthless at this point because nobody will receive it
+	// broadcast a ao_message, which is worthless at this point because nobody will receive it
 	// (nobody has had a chance to connect)
 //	pISInterface->ServiceBroadcast(this,hISXAOService,ISXSERVICE_MSG+1,0);
 
@@ -359,7 +359,7 @@ void __cdecl PulseService(bool Broadcast, unsigned int MSG, void *lpData)
 	{
 		/*
 		 * "OnPulse"
-		 * This message is received by the extension before each frame is
+		 * This ao_message is received by the extension before each frame is
 		 * displayed by the game.  This is the place to put any repeating
 		 * tasks.
 		 */

@@ -3,81 +3,71 @@
 namespace isxao_classes
 {
 
-	identity_t SpecialActionTemplate::GetIdentity() const
+	identity_t special_action_template::get_identity() const
 	{
-		return GetSpecialActionData().identity;
+		return this->get_special_action_data().identity;
 	}
 
-	DWORD SpecialActionTemplate::GetLockedSkillId1() const
+	DWORD special_action_template::get_locked_skill_id_1() const
 	{
-		return special_action_.locked_skill_id1;
+		return this->special_action_.locked_skill_id1;
 	}
 
-	DWORD SpecialActionTemplate::GetLockedSkillId2() const
+	DWORD special_action_template::get_locked_skill_id_2() const
 	{
-		return special_action_.locked_skill_id2;
+		return this->special_action_.locked_skill_id2;
 	}
 
-	DWORD SpecialActionTemplate::GetLockoutTimeRemaining() const
+	DWORD special_action_template::get_lockout_time_remaining() const
 	{
 		DWORD a, b;
-		DWORD *pA = &a;
-		DWORD *pB = &b;
-		P_ENGINE_CLIENT_ANARCHY->n3_msg_get_action_progress(GetIdentity(), pA, pB);
+		const auto p_a = &a;
+		const auto p_b = &b;
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_get_action_progress(this->get_identity(), p_a, p_b);
 		return a;
 	}
 
-	//float SpecialAction::GetLockoutTimeRemaining() const
-	//{
-	//	DWORD a, b;
-	//	DWORD *pA = &a;
-	//	DWORD *pB = &b;
-	//	auto c = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetActionProgress(GetIdentity(), pA, pB);
-	//	return float((1.0 - c)*b);
-	//}
-
-	PCSTR SpecialActionTemplate::GetName() const
+	PCSTR special_action_template::get_name() const
 	{
-		identity_t dummy_identity;
-		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name(GetIdentity(), dummy_identity);
+		const identity_t d(0, 0);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name(this->get_identity(), d);
 	}
 
-	special_action_t SpecialActionTemplate::GetSpecialActionData() const
+	special_action_t special_action_template::get_special_action_data() const
 	{
 		return special_action_;
 	}
 
-	SpecialActionItem* SpecialActionTemplate::GetSpecialActionItem()
+	SpecialActionItem* special_action_template::get_special_action_item() const
 	{
-		identity_t dummy_identity;
-		ZeroMemory(&dummy_identity, sizeof(identity_t));
-		return reinterpret_cast<SpecialActionItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(GetIdentity(), dummy_identity));
+		const identity_t d(0, 0);
+		return reinterpret_cast<SpecialActionItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(this->get_identity(), d));
 	}
 
 
-	identity_t SpecialActionTemplate::GetWeaponIdentity() const
+	identity_t special_action_template::get_weapon_identity() const
 	{
-		return GetSpecialActionData().weapon_identity;
+		return this->get_special_action_data().weapon_identity;
 	}
 
-	bool SpecialActionTemplate::IsLocked() const
+	bool special_action_template::is_locked() const
 	{
-		return GetSpecialActionData().is_locked != 0;;
+		return this->get_special_action_data().is_locked != 0;;
 	}
 
-	double SpecialActionTemplate::GetSpecialActionProgress(DWORD &a, DWORD &b) const
+	double special_action_template::get_special_action_progress(DWORD &a, DWORD &b) const
 	{
-		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_item_progress(GetIdentity(), a, b);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_item_progress(get_identity(), a, b);
 	}
 
-	bool SpecialActionTemplate::SpecialActionCompare(SpecialActionTemplate &a, SpecialActionTemplate &b)
+	bool special_action_template::special_action_compare(special_action_template &a, special_action_template &b)
 	{
-		return a.GetIdentity().id < b.GetIdentity().id;
+		return a.get_identity().id < b.get_identity().id;
 	}
 
-	bool SpecialActionTemplate::pSpecialActionCompare(SpecialActionTemplate *a, SpecialActionTemplate *b)
+	bool special_action_template::p_special_action_compare(special_action_template *a, special_action_template *b)
 	{
-		return a->GetIdentity().id < b->GetIdentity().id;
+		return a->get_identity().id < b->get_identity().id;
 	}
 	
 }

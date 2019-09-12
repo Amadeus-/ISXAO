@@ -4,8 +4,10 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	printf("%d:%d", P_STATIC_ITEM_VECTOR->begin()->static_identity.type, P_STATIC_ITEM_VECTOR->begin()->static_identity.id);
-	// printf("%" PRIX32, ppp_static_item_vector);
+	// vector<DWORD> v;
+	auto r = &P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_simple_char_data()->identity;
+	// printf("%d", v.size());
+	printf("%" PRIX32, r);
 	return 0;
 }
 
@@ -25,7 +27,7 @@ int CMD_DUMPSTATS(int argc, char *argv[])
 {
 	identity_t id;
 	identity_t dummy;
-	if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetTarget(id))
+	if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_target(id))
 	{
 		FILE * pFILE;
 		fopen_s(&pFILE, "stats.txt", "a");
@@ -151,7 +153,7 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	printf("identity_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(input_config_t);
-	a = 0x8;
+	a = 0x1D0;
 	printf("input_config_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(inventory_data_t);
@@ -264,7 +266,7 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 
 	r = sizeof(spell_template_data_t);
 	a = 0x50;
-	printf("SPELLANDTEMPLATEDATA: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
+	printf("spell_and_template_data_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	r = sizeof(vector3_t);
 	a = 0xC;
@@ -279,7 +281,7 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 	printf("weapon_item_t: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 	
 	r = sizeof(character);
-	a = sizeof(Player);
+	a = sizeof(player);
 	printf("LocalPlayer: 0x%.8X. Should be 0x%.8X - %s", r, a, r == a ? "Passed" : "FAILED!");
 
 	return 0;

@@ -8,12 +8,12 @@ bool SpecialActionTemplateType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER
 		return false;
 	__try
 	{
-#define pSpecialActionTemplate ((SpecialActionTemplate*)ObjectData.Ptr)
+#define P_SPECIAL_ACTION_TEMPLATE ((special_action_template*)ObjectData.Ptr)
 		switch (SpecialActionTemplateTypeMembers(Member->ID))
 		{		
 		case Identity:
 		{
-			identity_t id = pSpecialActionTemplate->GetIdentity();
+			identity_t id = P_SPECIAL_ACTION_TEMPLATE->get_identity();
 			p_identity_t pId = p_identity_t(pISInterface->GetTempBuffer(sizeof(identity_t), &id));
 			Object.Ptr = pId;
 			Object.Type = pIdentityType;
@@ -21,26 +21,26 @@ bool SpecialActionTemplateType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER
 		}
 		case Name:
 		{
-			Object.ConstCharPtr = pSpecialActionTemplate->GetName();
+			Object.ConstCharPtr = P_SPECIAL_ACTION_TEMPLATE->get_name();
 			Object.Type = pStringType;
 			break;
 		}
 		case IsLocked:
 		{
-			Object.DWord = pSpecialActionTemplate->IsLocked();
+			Object.DWord = P_SPECIAL_ACTION_TEMPLATE->is_locked();
 			Object.Type = pBoolType;
 			break;
 		}
 		case LockOutRemaining:
 		{
-			Object.DWord = pSpecialActionTemplate->GetLockoutTimeRemaining();
+			Object.DWord = P_SPECIAL_ACTION_TEMPLATE->get_lockout_time_remaining();
 			Object.Type = pUintType;
 			break;
 		}
 		default: 
 			break;
 		}
-#undef pSpecialActionTemplate
+#undef P_SPECIAL_ACTION_TEMPLATE
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, Member->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{
@@ -57,17 +57,17 @@ bool SpecialActionTemplateType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHO
 		return false;
 	__try
 	{
-#define pSpecialActionTemplate ((SpecialActionTemplate*)ObjectData.Ptr)
+#define P_SPECIAL_ACTION_TEMPLATE ((special_action_template*)ObjectData.Ptr)
 		switch (SpecialActionTemplateTypeMethods(pMethod->ID))
 		{
 		case Use:
 		{
-			P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(pSpecialActionTemplate->GetIdentity());
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_perform_special_action(P_SPECIAL_ACTION_TEMPLATE->get_identity());
 			return true;
 		}
 		default: break;
 		}
-#undef pSpecialActionTemplate
+#undef P_SPECIAL_ACTION_TEMPLATE
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, pMethod->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{
@@ -82,9 +82,9 @@ bool SpecialActionTemplateType::ToText(LSOBJECTDATA ObjectData, char *buf, unsig
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define pSpecialActionTemplate ((SpecialActionTemplate*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%d", pSpecialActionTemplate->GetIdentity().id);
-#undef pSpecialActionTemplate
+#define P_SPECIAL_ACTION_TEMPLATE ((special_action_template*)ObjectData.Ptr)
+	sprintf_s(buf, buflen, "%d", P_SPECIAL_ACTION_TEMPLATE->get_identity().id);
+#undef P_SPECIAL_ACTION_TEMPLATE
 
 	return true;
 }

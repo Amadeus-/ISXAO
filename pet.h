@@ -1,15 +1,15 @@
 #pragma once
 
-class Pet : public actor
+class pet : public actor
 {
 public:
-	AOLIB_OBJECT void Attack();
-	AOLIB_OBJECT void Behind();
-	AOLIB_OBJECT void Follow();
-	AOLIB_OBJECT DWORD GetPetType();
-	AOLIB_OBJECT void Guard();
-	AOLIB_OBJECT void Heal();
-	AOLIB_OBJECT void Report();
-	AOLIB_OBJECT void Terminate();
-	AOLIB_OBJECT void Wait();
+	AOLIB_OBJECT void attack();
+	AOLIB_OBJECT void behind();
+	AOLIB_OBJECT void follow();
+	AOLIB_OBJECT DWORD get_pet_type();
+	AOLIB_OBJECT void guard();
+	AOLIB_OBJECT void heal();
+	AOLIB_OBJECT void report();
+	AOLIB_OBJECT void terminate();
+	AOLIB_OBJECT void wait();
 };

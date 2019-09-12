@@ -3,43 +3,41 @@
 namespace isxao_classes
 {
 
-	p_char_movement_status_t Vehicle::GetCharMovementStatus()
+	p_char_movement_status_t vehicle::get_char_movement_status()
 	{
-		return GetCharVehicleData()->p_char_movement_status;
+		return get_char_vehicle_data()->p_char_movement_status;
 	}
 
-#ifdef Vehicle_t__SetRelRot_x
-	FUNCTION_AT_ADDRESS(void Vehicle::SetRotation(const quaternion_t &), Vehicle_t__SetRelRot);
+#ifdef VEHICLE_T__SET_REL_ROT_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(void vehicle::set_rotation(const quaternion_t &), vehicle_t__set_rel_rot)
+#else
+	static_assert(false, "vehicle::set_rotation(const quaternion_t &) requires a native function.");
 #endif
 
-	PVOID Vehicle::GetData()
+	PVOID vehicle::get_data()
 	{
 		return &char_vehicle_;
 	}
 
-	vector3_t Vehicle::GetVelocity()
+	vector3_t vehicle::get_velocity()
 	{
-		return GetCharVehicleData()->velocity;
+		return get_char_vehicle_data()->velocity;
 	}
 
-	DWORD Vehicle::GetZoneInstanceID()
+	DWORD vehicle::get_zone_instance_id()
 	{
-		return GetCharVehicleData()->zone_instance_id;
+		return get_char_vehicle_data()->zone_instance_id;
 	}
 
-	p_char_vehicle_t Vehicle::GetCharVehicleData()
+	p_char_vehicle_t vehicle::get_char_vehicle_data()
 	{
-		return p_char_vehicle_t(GetData());
+		return p_char_vehicle_t(get_data());
 	}
 
-#ifdef PlayerVehicle_t__UseWaypointPath_x
-	FUNCTION_AT_ADDRESS(DWORD Vehicle::UseWaypointPath(std::vector<vector3_t>&, float), PlayerVehicle_t__UseWaypointPath);
-#endif
-
-	float Vehicle::GetMaxSpeed()
+	float vehicle::get_max_speed()
 	{
-		return GetCharVehicleData()->max_speed;
+		return get_char_vehicle_data()->max_speed;
 	}
-
 
 }

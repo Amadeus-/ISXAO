@@ -523,7 +523,7 @@ namespace isxao_commands
 		//		}
 		//	}
 		//	string s;
-		//	string message;
+		//	string ao_message;
 		//	int i;
 		//	if (chat_type_used)
 		//		i = 3;
@@ -540,8 +540,8 @@ namespace isxao_commands
 		//			s += string(argv[i]) + ' ';
 		//		}
 		//	}
-		//	message = "<font color=\"" + string(chat_color_name) + "\">" + s + "</font>";
-		//	pCommandInterpreter->ParseText(message);
+		//	ao_message = "<font color=\"" + string(chat_color_name) + "\">" + s + "</font>";
+		//	pCommandInterpreter->ParseText(ao_message);
 		//	return 1;
 		//}
 		return 0;

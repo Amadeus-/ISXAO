@@ -1,16 +1,20 @@
 #pragma once
 
-typedef struct _INVENTORYSLOT
-{
-	identity_t SlotID;
-	InventoryItem* pItem;
+	typedef struct inventory_slot  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+	{
+		identity_t slot_id;
+		InventoryItem* p_item;
 
-	PCSTR GetSlotName() const;	
+		PCSTR get_slot_name() const;
+		p_inventory_data_t get_inv_slot_data();
+		double get_item_progress(DWORD&, DWORD&) const;
+		bool is_item_locked() const;
 
-	p_inventory_data_t GetInvSlotData();
+		inventory_slot()
+		{
+			this->slot_id = identity_t(0, 0);
+			this->p_item = nullptr;
+		}
 
-	double GetItemProgress(DWORD&, DWORD&) const;
+	} inventory_slot_t, *p_inventory_slot_t;
 
-	bool IsItemLocked() const;
-
-} INVENTORYSLOT, *PINVENTORYSLOT;

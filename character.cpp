@@ -5,34 +5,34 @@ namespace isxao_classes
 
 #pragma region Holders
 
-	InventoryHolder* character::GetInventoryHolder()
+	inventory_holder* character::get_inventory_holder()
 	{
-		return reinterpret_cast<InventoryHolder*>(get_simple_char_data()->p_container_inventory);
+		return reinterpret_cast<inventory_holder*>(this->get_simple_char_data()->p_container_inventory);
 	}
 
-	NpcHolder* character::GetNPCHolder()
+	npc_holder* character::get_npc_holder()
 	{
-		return reinterpret_cast<NpcHolder*>(get_simple_char_data()->p_npc_holder);
+		return reinterpret_cast<npc_holder*>(this->get_simple_char_data()->p_npc_holder);
 	}
 
-	PerkHolder* character::GetPerkHolder()
+	perk_holder* character::get_perk_holder()
 	{
-		return reinterpret_cast<PerkHolder*>(get_simple_char_data()->p_perk_holder);
+		return reinterpret_cast<perk_holder*>(this->get_simple_char_data()->p_perk_holder);
 	}
 
-	SpecialActionHolder* character::GetSpecialActionHolder()
+	special_action_holder* character::get_special_action_holder()
 	{
-		return reinterpret_cast<SpecialActionHolder*>(get_simple_char_data()->p_special_action_holder);
+		return reinterpret_cast<special_action_holder*>(this->get_simple_char_data()->p_special_action_holder);
 	}
 
-	StatHolder* character::GetStatHolder()
+	stat_holder* character::get_stat_holder()
 	{
-		return reinterpret_cast<StatHolder*>(get_simple_char_data()->p_map_holder);
+		return reinterpret_cast<stat_holder*>(this->get_simple_char_data()->p_map_holder);
 	}
 
-	void character::GetStatMap(std::map<DWORD, LONG> &m)
+	void character::get_stat_map(map<DWORD, LONG> &m)
 	{
-		GetStatHolder()->GetStatMap(m);
+		get_stat_holder()->get_stat_map(m);
 	}
 
 #pragma endregion
@@ -63,9 +63,9 @@ namespace isxao_classes
 	}
 #endif
 
-	bool character::GetWeaponTarget(identity_t& id)
+	bool character::get_weapon_target(identity_t& id)
 	{
-		if (HasWeaponTarget())
+		if (character::has_weapon_target())
 		{
 			id = P_ATTACKING_INDICATOR->identity;
 			return true;
@@ -73,9 +73,9 @@ namespace isxao_classes
 		return false;
 	}
 
-	bool character::GetTarget(identity_t& id)
+	bool character::get_target(identity_t& id)
 	{
-		if (HasTarget())
+		if (character::has_target())
 		{
 			id = P_SELECTION_INDICATOR->identity;
 			return true;
@@ -83,12 +83,12 @@ namespace isxao_classes
 		return false;
 	}
 
-	bool character::HasTarget()
+	bool character::has_target()
 	{
 		return P_SELECTION_INDICATOR != nullptr;
 	}
 
-	bool character::HasWeaponTarget()
+	bool character::has_weapon_target()
 	{
 		return P_ATTACKING_INDICATOR != nullptr;
 	}
@@ -97,83 +97,56 @@ namespace isxao_classes
 
 #pragma region Actions
 
-	void character::CastNanoSpell(identity_t const& nano, identity_t const& target) const
+	void character::cast_nano_spell(identity_t const& nano, identity_t const& target)
 	{
 		P_ENGINE_CLIENT_ANARCHY->n3_msg_cast_nano_spell(nano, target);
 	}
 
-	void character::DefaultAttack(identity_t const& id) const
+	void character::default_attack(identity_t const& id)
 	{
 		P_ENGINE_CLIENT_ANARCHY->n3_msg_default_attack(id, true);
 	}
 
-	void character::Face(float heading)
+	void character::face(float heading)
 	{
 		if (heading > 180.0f)
 			heading -= 360.0f;
-		auto q = quaternion_t::get_quaternion(heading);
-		SetRotation(q);
+		const auto q = quaternion_t::get_quaternion(heading);
+		this->set_rotation(q);
 	}
 
-	void character::Face(vector3_t &location)
+	void character::face(vector3_t &location)
 	{
 		auto client_position = get_position();
-		auto q = quaternion_t::get_quaternion_to_face(location, client_position);
-		SetRotation(q);
+		const auto q = quaternion_t::get_quaternion_to_face(location, client_position);
+		this->set_rotation(q);
 	}
 
-	void character::MakeTeamLeader(const identity_t& id)
+	void character::make_team_leader(const identity_t& id)
 	{
-		if (P_ENGINE_CLIENT_ANARCHY && is_in_team() && is_team_leader())
+		if (P_ENGINE_CLIENT_ANARCHY && this->is_in_team() && this->is_team_leader())
 			P_ENGINE_CLIENT_ANARCHY->N3Msg_TransferTeamLeadership(id);
 	}
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_2_x
-	bool character::PerformSpecialAction(const identity_t &id) const
+	bool character::perform_special_action(const identity_t &id)
 	{
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(id);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_perform_special_action(id);
 	}
 
-#else
-	bool character::PerformSpecialAction(const identity_t &id) const
+	void character::set_rotation(const quaternion_t& q)
 	{
-		typedef bool(__thiscall * tPerformSpecialAction)(PVOID, identity_t const &);
-		auto pPerformSpecialAction = tPerformSpecialAction(n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_2);
-		return pPerformSpecialAction(P_ENGINE_CLIENT_ANARCHY, id);
-	}
-#endif
-
-	void character::SetRotation(const quaternion_t& q)
-	{
-		get_vehicle()->SetRotation(q);
+		this->get_vehicle()->set_rotation(q);
 	}
 
-	void character::StopAttack() const
+	void character::stop_attack()
 	{
-		typedef void(__thiscall * tStopAttack)(PVOID);
-		auto pStopAttack = tStopAttack(n3EngineClientAnarchy_t__N3Msg_StopAttack);
-		pStopAttack(P_ENGINE_CLIENT_ANARCHY);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_stop_attack();
 	}
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_UseItem_x
-	void character::UseItem(const identity_t& id)
+	void character::use_item(const identity_t& id)
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_UseItem(id, false);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_use_item(id, false);
 	}
-#else
-	void character::UseItem(identity_t const& id)
-	{
-		identity_t dummy;
-		dummy.Type = 0;
-		dummy.Id = 0;
-		if (P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, dummy))
-		{
-			typedef void(__thiscall * tUseItem)(PVOID, identity_t const &, bool);
-			auto pUseItem = tUseItem(n3EngineClientAnarchy_t__N3Msg_UseItem);
-			pUseItem(this, id, false);
-		}
-	}
-#endif
 
 #pragma endregion
 

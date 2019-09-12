@@ -8,26 +8,26 @@ bool TeamEntryType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		return false;
 	__try
 	{
-#define pTeamEntry ((TeamEntry*)ObjectData.Ptr)
+#define P_TEAM_ENTRY ((team_entry*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (TeamEntryTypeMembers(Member->ID))
 		{
 		case Name:
 		{
-			Object.ConstCharPtr = pTeamEntry->GetName();
+			Object.ConstCharPtr = P_TEAM_ENTRY->get_name();
 			Object.Type = pStringType;
 			break;
 		}
 		case Identity:
 		{
-			auto identity = pTeamEntry->GetIdentity();
-			auto p_identity = pISInterface->GetTempBuffer(sizeof(identity_t), &identity);
+			auto identity = P_TEAM_ENTRY->get_identity();
+			const auto p_identity = pISInterface->GetTempBuffer(sizeof(identity_t), &identity);
 			Object.Ptr = p_identity;
 			Object.Type = pIdentityType;
 			break;
 		}
 		case ToTeamMember:
 		{
-			if((Object.Ptr = static_cast<TeamMember*>(dynel::get_dynel(pTeamEntry->GetIdentity()))))
+			if((Object.Ptr = reinterpret_cast<team_member*>(isxao_classes::dynel::get_dynel(P_TEAM_ENTRY->get_identity()))))
 			{
 				Object.Type = pActorType;
 				return true;
@@ -37,7 +37,7 @@ bool TeamEntryType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		default:
 			return false;
 		}
-#undef pTeamEntry
+#undef P_TEAM_ENTRY
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, Member->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{
@@ -54,22 +54,22 @@ bool TeamEntryType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 		return false;
 	__try
 	{
-#define pTeamEntry ((TeamEntry*)ObjectData.Ptr)
+#define P_TEAM_ENTRY ((team_entry*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (TeamEntryTypeMethods(pMethod->ID))
 		{
 		case Kick:
 		{
-			P_ENGINE_CLIENT_ANARCHY->N3Msg_KickTeamMember(pTeamEntry->GetIdentity());
+			P_ENGINE_CLIENT_ANARCHY->N3Msg_KickTeamMember(P_TEAM_ENTRY->get_identity());
 			break;
 		}
 		case MakeLeader:
 		{
-			P_ENGINE_CLIENT_ANARCHY->N3Msg_TransferTeamLeadership(pTeamEntry->GetIdentity());
+			P_ENGINE_CLIENT_ANARCHY->N3Msg_TransferTeamLeadership(P_TEAM_ENTRY->get_identity());
 			break;
 		}
 		default: break;
 		}
-#undef pTeamEntry
+#undef P_TEAM_ENTRY
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, pMethod->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{
@@ -84,9 +84,9 @@ bool TeamEntryType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int bufl
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define pTeamEntry ((TeamMember*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64u", pTeamEntry->get_identity().get_combined_identity());
-#undef pTeamEntry
+#define P_TEAM_ENTRY ((team_entry*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
+	sprintf_s(buf, buflen, "%I64u", P_TEAM_ENTRY->get_identity().get_combined_identity());
+#undef P_TEAM_ENTRY
 
 	return true;
 }

@@ -271,11 +271,11 @@ bool __cdecl TLO_SPECIALACTION(int argc, char *argv[], LSTYPEVAR&Dest)
 			char search_name[MAX_STRING];
 			strcpy_s(search_name, sizeof(search_name), argv[0]);
 			_strlwr_s(search_name);
-			std::vector<SpecialActionTemplate*> v;
-			P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetSpecialActionHolder()->GetSpecialActions(v);
+			std::vector<special_action_template*> v;
+			P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_special_action_holder()->get_special_actions(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{
-				strcpy_s(name, sizeof(name), (*it)->GetName());
+				strcpy_s(name, sizeof(name), (*it)->get_name());
 				_strlwr_s(name);
 				if(strstr(name, search_name))
 				{

@@ -41,8 +41,6 @@ namespace isxao_utilities
 
 #pragma region Collections
 
-	AOLIB_API void recursive_add_dynel_to_dynel_map(std::map<identity_t, p_n3_dynel_t>& m, p_dynel_node_t p_node, p_dynel_root_t p_root, DWORD& count);
-	AOLIB_API void get_dynel_map(std::map<identity_t, p_n3_dynel_t>& m);
 	AOLIB_API void RecursiveAddPerkToPerkMap(std::map<identity_t, DWORD>& m, p_perk_node_t pNode, p_perk_root_t pRoot, DWORD& count);
 	AOLIB_API void GetPerkMap(std::map<identity_t, DWORD>& m, p_perk_dir_t pDir);
 	AOLIB_API void RecursiveAddPetToPetMap(std::map<identity_t, DWORD>& m, p_pet_node_t pNode, p_pet_root_t pRoot, DWORD& count);
@@ -69,7 +67,7 @@ namespace isxao_utilities
 	bool GetInvSlotIdentity(DWORD slot, identity_t& id);
 	PCSTR GetInvSlotName(const identity_t& slot);
 	bool GetInvSlotIdentity(PCSTR slot_name, identity_t &id);
-	p_inventory_data_t GetInvSlotData(INVENTORYSLOT *slot);
+	p_inventory_data_t GetInvSlotData(inventory_slot_t *slot);
 
 #pragma endregion
 

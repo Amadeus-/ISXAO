@@ -9,11 +9,11 @@ namespace isxao_classes
 	class character;
 	class info_item_remote;
 	class InventoryItem;
-	class Pet;
-	class Player;
+	class pet;
+	class player;
 	class ResourceDatabase;
-	class SpecialActionTemplate;
-	class TeamMember;
+	class special_action_template;
+	class team_member;
 	class TeamRaid;
 
 #pragma endregion

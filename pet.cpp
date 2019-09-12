@@ -3,49 +3,49 @@
 namespace isxao_classes
 {
 
-	void Pet::Attack()
+	void pet::attack()
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_SendPetCommand(0, get_identity(), PC_ATTACK, 0, nullptr);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_send_pet_command(0, get_identity(), PC_ATTACK, 0, nullptr);
 	}
 
-	void Pet::Behind()
+	void pet::behind()
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_SendPetCommand(0, get_identity(), PC_BEHIND, 0, nullptr);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_send_pet_command(0, get_identity(), PC_BEHIND, 0, nullptr);
 	}
 
-	void Pet::Follow()
+	void pet::follow()
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_SendPetCommand(0, get_identity(), PC_FOLLOW, 0, nullptr);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_send_pet_command(0, get_identity(), PC_FOLLOW, 0, nullptr);
 	}
 
-	DWORD Pet::GetPetType()
+	DWORD pet::get_pet_type()
 	{
 		return get_skill(ST_PETTYPE);
 	}
 
-	void Pet::Guard()
+	void pet::guard()
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_SendPetCommand(0, get_identity(), PC_GUARD, 0, nullptr);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_send_pet_command(0, get_identity(), PC_GUARD, 0, nullptr);
 	}
 
-	void Pet::Heal()
+	void pet::heal()
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_SendPetCommand(0, get_identity(), PC_HEAL, 0, nullptr);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_send_pet_command(0, get_identity(), PC_HEAL, 0, nullptr);
 	}
 
-	void Pet::Report()
+	void pet::report()
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_SendPetCommand(0, get_identity(), PC_REPORT, 0, nullptr);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_send_pet_command(0, get_identity(), PC_REPORT, 0, nullptr);
 	}
 
-	void Pet::Terminate()
+	void pet::terminate()
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_SendPetCommand(0, get_identity(), PC_TERMINATE, 0, nullptr);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_send_pet_command(0, get_identity(), PC_TERMINATE, 0, nullptr);
 	}
 
-	void Pet::Wait()
+	void pet::wait()
 	{
-		P_ENGINE_CLIENT_ANARCHY->N3Msg_SendPetCommand(0, get_identity(), PC_WAIT, 0, nullptr);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_send_pet_command(0, get_identity(), PC_WAIT, 0, nullptr);
 	}
 
 }

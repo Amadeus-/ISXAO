@@ -1,19 +1,21 @@
 #pragma once
 
-class SpecialActionHolder
+// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
+class special_action_holder
 {
 public:
-	AOLIB_OBJECT DWORD BuildLSSpecialActions(LSIndex*) const;
-	AOLIB_OBJECT DWORD GetLockIdMap(std::map<DWORD, DWORD> &m) const;
-	AOLIB_OBJECT special_action_holder_t GetSpecialActionHolderData() const;
-	AOLIB_OBJECT DWORD GetSpecialActions(std::vector<SpecialActionTemplate>&) const;
-	AOLIB_OBJECT DWORD GetSpecialActions(std::vector<SpecialActionTemplate*>&) const;
-	AOLIB_OBJECT SpecialActionTemplate* GetSpecialAction(PCHAR) const;
-	AOLIB_OBJECT SpecialActionTemplate* GetSpecialAction(DWORD) const;
-	AOLIB_OBJECT SpecialActionTemplate* GetSpecialAction(const identity_t&) const;
-	AOLIB_OBJECT DWORD GetSpecialActionCount() const;
-	AOLIB_OBJECT identity_t GetSpecialActionTarget() const;
-	AOLIB_OBJECT ActionLock* GetActionLock(SpecialActionTemplate*) const;	
+	AOLIB_OBJECT DWORD build_ls_special_actions(LSIndex*) const;
+	AOLIB_OBJECT DWORD get_lock_id_map(std::map<DWORD, DWORD> &m) const;
+	AOLIB_OBJECT special_action_holder_t get_special_action_holder_data() const;
+	AOLIB_OBJECT DWORD get_special_actions(vector<special_action_template>&) const;
+	AOLIB_OBJECT DWORD get_special_actions(vector<special_action_template*>&) const;
+	AOLIB_OBJECT special_action_template* get_special_action(PCSTR) const;
+	AOLIB_OBJECT special_action_template* get_special_action(DWORD) const;
+	AOLIB_OBJECT special_action_template* get_special_action(const identity_t&) const;
+	AOLIB_OBJECT DWORD get_special_action_count() const;
+	AOLIB_OBJECT identity_t get_special_action_target() const;
+	AOLIB_OBJECT action_lock* get_action_lock(special_action_template*) const;	
 private:
+	// ReSharper disable once CppUninitializedNonStaticDataMember
 	special_action_holder_t special_action_holder_;
 };

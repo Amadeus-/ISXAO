@@ -1,12 +1,13 @@
 #pragma once
 
-class PerkHolder
+// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
+class perk_holder
 {
 public:
-	AOLIB_OBJECT perk_holder GetPerkHolderData() const;
-	AOLIB_OBJECT DWORD GetPerkLocks(std::vector<ActionLock*>&) const;
-	AOLIB_OBJECT DWORD GetPerkMap(std::map<identity_t, DWORD> &m) const;
-	AOLIB_OBJECT ActionLock* GetActionLock(SpecialActionTemplate*);
+	AOLIB_OBJECT perk_holder_t get_perk_holder_data() const;
+	AOLIB_OBJECT DWORD get_perk_locks(vector<action_lock*>&) const;
+	AOLIB_OBJECT DWORD get_perk_map(map<identity_t, DWORD> &m) const;
 private:
-	perk_holder perk_holder_;
+	// ReSharper disable once CppUninitializedNonStaticDataMember
+	perk_holder_t perk_holder_;
 };

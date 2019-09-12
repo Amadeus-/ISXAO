@@ -7,7 +7,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	if (!ObjectData.Ptr)
 		return false;
 
-#define P_CHARACTER ((character*)ObjectData.Ptr)
+#define P_CHARACTER ((character*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 	switch (CharacterTypeMembers(Member->ID))
 	{
 	case Inventory:
@@ -16,19 +16,19 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		{
 			if(ISNUMBER())
 			{
-				auto s = P_CHARACTER->GetInventoryHolder()->GetInventorySlot(GETNUMBER());  // NOLINT(cert-err34-c)
-				const auto p_s = static_cast<PINVENTORYSLOT>(pISInterface->GetTempBuffer(sizeof(INVENTORYSLOT), &s));
+				auto s = P_CHARACTER->get_inventory_holder()->get_inventory_slot(GETNUMBER());  // NOLINT(cert-err34-c)
+				const auto p_s = static_cast<p_inventory_slot_t>(pISInterface->GetTempBuffer(sizeof(inventory_slot_t), &s));
 				if((Object.Ptr = p_s))
 				{
 					Object.Type = pInventorySlotType;
 					return true;
 				}
 			}
-			INVENTORYSLOT s = P_CHARACTER->GetInventoryHolder()->GetInventorySlot(argv[0]);
-			if(s.SlotID.type != 0)
+			inventory_slot_t s = P_CHARACTER->get_inventory_holder()->get_inventory_slot(argv[0]);
+			if(s.slot_id.type != 0)
 			{
-				PINVENTORYSLOT pS = static_cast<PINVENTORYSLOT>(pISInterface->GetTempBuffer(sizeof(INVENTORYSLOT), &s));
-				if ((Object.Ptr = pS))
+				auto p_s = static_cast<p_inventory_slot_t>(pISInterface->GetTempBuffer(sizeof(inventory_slot_t), &s));
+				if ((Object.Ptr = p_s))
 				{
 					Object.Type = pInventorySlotType;
 					return true;
@@ -39,7 +39,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	}
 	case InventoryCount:
 	{
-		Object.DWord = P_CHARACTER->GetInventoryHolder()->GetInventoryCount();
+		Object.DWord = P_CHARACTER->get_inventory_holder()->get_inventory_count();
 		Object.Type = pUintType;
 		break;
 	}
@@ -55,10 +55,10 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			if (MapObject.Type != pMapType)
 				return false;
 			// it's a collection:something, make sure it is collection:InventoryItemType
-			LSObjectCollection *pMap = (LSObjectCollection*)MapObject.Ptr;
+			auto*pMap = static_cast<LSObjectCollection*>(MapObject.Ptr);
 			if (pMap->GetType() != pInventoryItemType)
 				return false;
-			auto count = P_CHARACTER->GetInventoryHolder()->BuildLSInventory(pMap);
+			auto count = P_CHARACTER->get_inventory_holder()->build_ls_inventory(pMap);
 			Object.DWord = pMap->GetCount();
 			Object.Type = pUintType;
 			return true;
@@ -70,7 +70,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		if(ISINDEX())
 		{
 			std::vector<DWORD> v;
-			P_CHARACTER->get_spell_template_data()->GetNanoSpellList(v);
+			P_CHARACTER->get_spell_template_data()->get_nano_spell_list(v);
 			if(ISNUMBER())
 			{
 				auto index = DWORD(GETNUMBER());				
@@ -111,7 +111,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	case NanoSpellCount:
 	{
 		std::vector<DWORD> v;		
-		Object.DWord = P_CHARACTER->get_spell_template_data()->GetNanoSpellList(v);
+		Object.DWord = P_CHARACTER->get_spell_template_data()->get_nano_spell_list(v);
 		Object.Type = pUintType;
 		break;
 	}
@@ -127,7 +127,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			LSIndex *pIndex = (LSIndex*)IndexObject.Ptr;
 			if (pIndex->GetType() != pNanoSpellType)
 				return false;
-			Object.DWord = P_CHARACTER->get_spell_template_data()->BuildLSNanoSpellList(pIndex);
+			Object.DWord = P_CHARACTER->get_spell_template_data()->build_ls_nano_spell_list(pIndex);
 			Object.Type = pUintType;
 			return true;
 		}
@@ -162,14 +162,14 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			if (ISNUMBER())
 			{
 				auto index = DWORD(GETNUMBER());
-				if ((Object.Ptr = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetSpecialActionHolder()->GetSpecialAction(index - 1)))
+				if ((Object.Ptr = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_special_action_holder()->get_special_action(index - 1)))
 				{
 					Object.Type = pSpecialActionTemplateType;
 					return true;
 				}
 				return false;
 			}
-			if ((Object.Ptr = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetSpecialActionHolder()->GetSpecialAction(argv[0])))
+			if ((Object.Ptr = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_special_action_holder()->get_special_action(argv[0])))
 			{
 				Object.Type = pSpecialActionTemplateType;
 				return true;
@@ -180,7 +180,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 	}
 	case SpecialActionCount:
 	{
-		Object.DWord = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetSpecialActionHolder()->GetSpecialActionCount();
+		Object.DWord = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_special_action_holder()->get_special_action_count();
 		Object.Type = pUintType;
 		break;
 	}
@@ -196,7 +196,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 			LSIndex *pIndex = (LSIndex*)IndexObject.Ptr;
 			if (pIndex->GetType() != pSpecialActionTemplateType)
 				return false;
-			Object.DWord = P_CHARACTER->GetSpecialActionHolder()->BuildLSSpecialActions(pIndex);
+			Object.DWord = P_CHARACTER->get_special_action_holder()->build_ls_special_actions(pIndex);
 			Object.Type = pUintType;
 			return true;
 		}
@@ -223,7 +223,7 @@ bool CharacterType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 		return false;
 	__try
 	{
-#define pActor ((Character*)ObjectData.Ptr)
+#define P_CHARACTER ((character*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (CharacterTypeMethods(pMethod->ID))
 		{
 		case Activate:
@@ -238,7 +238,7 @@ bool CharacterType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 		}
 		default: break;
 		}
-#undef pActor
+#undef P_CHARACTER
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, pMethod->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{

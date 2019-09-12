@@ -3,48 +3,47 @@
 namespace isxao_classes
 {
 
-	identity_t NanoTemplate::GetCasterIdentity() const
+	identity_t nano_template::get_caster_identity() const
 	{
-		return GetNanoTemplateData().caster_identity;
+		return this->get_nano_template_data().caster_identity;
 	}
 
-	DWORD NanoTemplate::GetDuration() const
+	DWORD nano_template::get_duration() const
 	{
-		return GetNanoTemplateData().duration;
+		return this->get_nano_template_data().duration;
 	}
 
-	identity_t NanoTemplate::GetNanoIdentity() const
+	identity_t nano_template::get_nano_identity() const
 	{
-		return GetNanoTemplateData().nano_identity;
+		return this->get_nano_template_data().nano_identity;
 	}
 
-	nano_template_t NanoTemplate::GetNanoTemplateData() const
+	nano_template_t nano_template::get_nano_template_data() const
 	{
-		return nano_template_;
+		return this->nano_template_;
 	}
 
-	DWORD NanoTemplate::GetStartTime() const
+	DWORD nano_template::get_start_time() const
 	{
-		return GetNanoTemplateData().start_time;
+		return this->get_nano_template_data().start_time;
 	}
 
-	float NanoTemplate::GetTimeRemaining() const
+	float nano_template::get_time_remaining() const
 	{
-		auto result = 0.0f;
-		result = float(float((GetStartTime() + GetDuration()) / 100) - pGametime->GetNormalTime());
+		auto result = float(this->get_start_time() + this->get_duration()) / 100.0f - float(pGametime->GetNormalTime());
 		if (result < 0.0f)
 			result = 0.0f;
 		return result;
 	}
 
-	bool NanoTemplate::NanoTemplateCompare(NanoTemplate &a, NanoTemplate &b)
+	bool nano_template::nano_template_compare(nano_template &a, nano_template &b)
 	{
-		return a.GetNanoIdentity().id < b.GetNanoIdentity().id;
+		return a.get_nano_identity().id < b.get_nano_identity().id;
 	}
 
-	bool NanoTemplate::Remove() const
+	bool nano_template::remove() const
 	{
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_RemoveBuff(GetNanoIdentity());
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_RemoveBuff(get_nano_identity());
 	}
 
 }

@@ -3,13 +3,13 @@
 namespace isxao_classes
 {
 
-	PCSTR INVENTORYSLOT::GetSlotName() const
+	PCSTR inventory_slot::get_slot_name() const
 	{
-		switch (SlotID.type)
+		switch (slot_id.type)
 		{
 		case 101:
 		{
-			switch (SlotID.id)
+			switch (slot_id.id)
 			{
 			case 1:
 				return "WS_HUD1";
@@ -47,7 +47,7 @@ namespace isxao_classes
 		}
 		case 102:
 		{
-			switch (SlotID.id - 16)
+			switch (slot_id.id - 16)
 			{
 			case 1:
 				return "AS_NECK";
@@ -85,7 +85,7 @@ namespace isxao_classes
 		}
 		case 103:
 		{
-			switch (SlotID.id - 32)
+			switch (slot_id.id - 32)
 			{
 			case 1:
 				return "IS_EYES";
@@ -119,7 +119,7 @@ namespace isxao_classes
 		}
 		case 104:
 		{
-			switch (SlotID.id - 63)
+			switch (slot_id.id - 63)
 			{
 			case 1:
 				return "GI_64";
@@ -181,6 +181,8 @@ namespace isxao_classes
 				return "GI_92";
 			case 30:
 				return "GI_93";
+			default: 
+				return "Unknown";
 			}
 		}
 		default:
@@ -189,20 +191,20 @@ namespace isxao_classes
 		return "Unknown";
 	}
 
-	p_inventory_data_t INVENTORYSLOT::GetInvSlotData()
+	p_inventory_data_t inventory_slot::get_inv_slot_data()
 	{
-		return isxao_utilities::GetInvSlotData(this);
+		return GetInvSlotData(this);
 	}
 
-	double INVENTORYSLOT::GetItemProgress(DWORD& a, DWORD& b) const
+	double inventory_slot::get_item_progress(DWORD& a, DWORD& b) const
 	{
-		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_item_progress(SlotID, a, b);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_item_progress(slot_id, a, b);
 	}
 
-	bool INVENTORYSLOT::IsItemLocked() const
+	bool inventory_slot::is_item_locked() const
 	{
-		identity_t dummy_identity;
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_IsItemDisabled(SlotID, dummy_identity);
+		const identity_t d(0, 0);
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_IsItemDisabled(slot_id, d);
 	}
 
 }

@@ -15,17 +15,15 @@ namespace isxao_globals
 	MODULEINFO n3_module_info;
 	HMODULE gamecode_module_handle = GetModuleHandle(gamecode_module_name);
 	MODULEINFO gamecode_module_info;
-
-	DWORD hDatabaseController = DWORD(GetModuleHandle("DatabaseController.dll"));
-	
-	HMODULE gui_module_handle = GetModuleHandle("GUI.dll");
+	HMODULE gui_module_handle = GetModuleHandle(gui_module_name);
 	MODULEINFO gui_module_info;
-
-	DWORD hVehicle = DWORD(GetModuleHandle("Vehicle.dll"));
+	HMODULE interfaces_module_handle = GetModuleHandle(interfaces_module_name);
+	MODULEINFO interfaces_module_info;
+	HMODULE vehicle_module_handle = GetModuleHandle(vehicle_module_name);
+	MODULEINFO vehicle_module_info;
+	DWORD hDatabaseController = DWORD(GetModuleHandle("DatabaseController.dll"));
 	DWORD hMessageProtocol = DWORD(GetModuleHandle("MessageProtocol.dll"));
 	DWORD hPathFinder = DWORD(GetModuleHandle("PathFinder.dll"));
-	HMODULE interfaces_module_handle = GetModuleHandle("Interfaces.dll");
-	MODULEINFO interfaces_module_info;
 
 #pragma endregion
 
@@ -129,7 +127,7 @@ namespace isxao_globals
 #else
 		GET_PROC_ADDRESS(n3, n3_dynel_t__m_pc_dynel_dir_instance)
 #endif
-		pp_dynel_dir = reinterpret_cast<dynel_dir_t**>(n3_dynel_t__m_pc_dynel_dir_instance);
+		pp_dynel_dir = reinterpret_cast<dynel_map_t**>(n3_dynel_t__m_pc_dynel_dir_instance);
 
 		// Functions
 #ifdef N3_ENGINE_T__N3_ENGINE_T_USE_PATTERN
@@ -806,14 +804,43 @@ namespace isxao_globals
 
 
 
-
-
-
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_IS_NPC_USE_PATTERN
 		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_npc)
 #else
 		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_npc)
 #endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_PERFORM_SPECIAL_ACTION_1_USE_PATTERN
+		static_assert(false, "engine_client_anarchy::n3_msg_perform_special_action(DWORD) cannot be found with a pattern.");
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_1)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_PERFORM_SPECIAL_ACTION_2_USE_PATTERN
+		static_assert(false, "engine_client_anarchy::n3_msg_perform_special_action(const identity_t &) cannot be found with a pattern.");
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_2)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_SEND_PET_COMMAND_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_send_pet_command)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_send_pet_command)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_STOP_ATTACK_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_stop_attack)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_stop_attack)
+#endif
+
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_USE_ITEM_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_use_item)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_use_item)
+#endif
+
+
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__ON_CLOSED_USE_PATTERN
 		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__on_closed)
@@ -955,11 +982,31 @@ namespace isxao_globals
 		const vector<unsigned char> interfaces_data(interfaces_data_begin, interfaces_data_end);
 
 		// Instances
+#ifdef CLIENT_T__S_N_CHAR_ID_USE_PATTERN
+		static_assert(false, "client_t__s_n_char_id cannot be found with a pattern.");
+#else
 		GET_PROC_ADDRESS(interfaces, client_t__s_n_char_id)
+#endif
 		gp_character_id = reinterpret_cast<DWORD*>(client_t__s_n_char_id);
 
-
 #pragma endregion
+
+#pragma region Vehicle
+
+		// Module
+		GetModuleInformation(process_handle, vehicle_module_handle, &vehicle_module_info, sizeof(vehicle_module_info));
+		// ReSharper disable once CppLocalVariableMayBeConst
+		auto vehicle_module_base = DWORD(vehicle_module_handle);
+		const auto vehicle_data_begin = reinterpret_cast<unsigned char*>(vehicle_module_base);
+		const auto vehicle_data_end = vehicle_data_begin + vehicle_module_info.SizeOfImage;
+		const vector<unsigned char> vehicle_data(vehicle_data_begin, vehicle_data_end);
+
+#ifdef VEHICLE_T__SET_REL_ROT_USE_PATTERN
+		GET_FUNCTION_ADDRESS(vehicle, vehicle_t__set_rel_rot)
+#else
+		GET_PROC_ADDRESS(vehicle, vehicle_t__set_rel_rot)
+#endif
+
 
 #pragma endregion
 
@@ -998,7 +1045,7 @@ namespace isxao_globals
 
 	// Instances
 	DWORD n3_dynel_t__m_pc_dynel_dir_instance = 0;
-	dynel_dir_t **pp_dynel_dir = nullptr;
+	dynel_map_t **pp_dynel_dir = nullptr;
 
 	// Functions
 	DWORD n3_engine_t__n3_engine_t = 0;
@@ -1128,12 +1175,17 @@ namespace isxao_globals
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_state = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_stat_name_map = 0;
-	DWORD n3_engine_client_anarchy_t_n3_msg_get_target_target = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_target_target = 0;
 
 
 	DWORD n3_engine_client_anarchy_t__n3_msg_is_npc = 0;
-
+	DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_1 = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_2 = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_send_pet_command = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_stop_attack = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_use_item = 0;
 	DWORD n3_engine_client_anarchy_t__on_closed = 0;
+	
 
 	DWORD simple_char_t__check_los = 0;
 
@@ -1166,6 +1218,14 @@ namespace isxao_globals
 	DWORD targeting_module_t__initialise_message = 0;
 	DWORD targeting_module_t__targeting_module_t = 0;
 	DWORD targeting_module_t__set_target = 0;
+
+#pragma endregion
+
+
+
+#pragma region Vehicle
+
+	DWORD vehicle_t__set_rel_rot = 0;
 
 #pragma endregion
 
@@ -1221,8 +1281,7 @@ namespace isxao_globals
 	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatRequestDescription = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatStartTrade = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_OrbitalAttack = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_1 = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_2 = 0;
+	
 	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Accept = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Challenge = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Refuse = 0;
@@ -1236,7 +1295,7 @@ namespace isxao_globals
 	DWORD n3EngineClientAnarchy_t__N3Msg_RequestWeaponInventory = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_SecondarySpecialAttack = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_SelectedTarget = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_SendPetCommand = 0;
+	
 	DWORD n3EngineClientAnarchy_t__N3Msg_SitToggle = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_SplitItem = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_StartAltState = 0;
@@ -1244,7 +1303,7 @@ namespace isxao_globals
 	DWORD n3EngineClientAnarchy_t__N3Msg_StartPvP = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_StartTreatment;
 	DWORD n3EngineClientAnarchy_t__N3Msg_StopAltState = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_StopAttack = 0;
+	
 	DWORD n3EngineClientAnarchy_t__N3Msg_StopCamping = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_StringToStat = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_SwitchTarget = 0;
@@ -1267,7 +1326,7 @@ namespace isxao_globals
 	DWORD n3EngineClientAnarchy_t__N3Msg_TryAbortNanoFormula = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_TryEnterSneakMode = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_UntrainPerk = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_UseItem = 0;
+	
 	DWORD n3EngineClientAnarchy_t__N3Msg_UseItemOnItem = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_UseSkill = 0;
 	DWORD n3EngineClientAnarchy_t__SetMainDynel = 0;
@@ -1350,11 +1409,7 @@ namespace isxao_globals
 
 #pragma endregion
 
-#pragma region Vehicle
 
-	DWORD Vehicle_t__SetRelRot = 0;
-
-#pragma endregion
 
 #pragma region Client
 

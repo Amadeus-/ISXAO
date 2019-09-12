@@ -109,7 +109,7 @@ namespace isxao_detours
 				memcpy_s(export_message, length, message, length);
 				PN3MESSAGEINFO message_info = new N3MESSAGEINFO(export_message, length);
 				g_n3message_queue.push(message_info);
-				//auto p = isxao_classes::Parser(message, length);
+				//auto p = isxao_classes::Parser(ao_message, length);
 				//N3Header header = N3Header(p);
 				//sprintf_s(buffer, "\tN3MessageType: 0x%.8X\n", header.N3Type());
 				//pFILE = fopen("messages.txt", "a");
@@ -124,7 +124,7 @@ namespace isxao_detours
 				//case ::N3T_ADD_PET:
 				//{
 				//	export_message = malloc(length * sizeof(char));
-				//	memcpy_s(export_message, sizeof(export_message), message, length * sizeof(char));
+				//	memcpy_s(export_message, sizeof(export_message), ao_message, length * sizeof(char));
 				//	g_n3message_queue.push(export_message);
 				//	//auto apm = isxao_classes::AddPetMessage(p);
 				//	//HandleAddPetMessage(apm);
@@ -465,15 +465,15 @@ namespace isxao_detours
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);
 			//char sender[MAX_STRING];
-			//char message[MAX_STRING];
+			//char ao_message[MAX_STRING];
 			//char id[MAX_STRING];
 			//strcpy_s(sender, MAX_STRING, m->Sender.c_str());
-			//strcpy_s(message, MAX_STRING, m->Message.c_str());
+			//strcpy_s(ao_message, MAX_STRING, m->Message.c_str());
 			//identity_t identity;
 			//identity.Type = 50000;
 			//identity.Id = m->SenderId;
 			//sprintf_s(id, MAX_STRING, "%I64u", identity.get_combined_identity());
-			//char *argv[] = { sender, message, id };
+			//char *argv[] = { sender, ao_message, id };
 			//pISInterface->ExecuteEvent(GetEventId("AO_onVicinityMessageReceived"), 0, 3, argv);
 			//delete argv;
 			PPRIVATEMESSAGEINFO vicintity_message_info = new PRIVATEMESSAGEINFO(m->sender_id, m->sender, m->message);

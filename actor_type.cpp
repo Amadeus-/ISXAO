@@ -633,7 +633,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Speed:
 		{
-			Object.Float = P_ACTOR->get_vehicle()->GetVelocity().length();
+			Object.Float = P_ACTOR->get_vehicle()->get_velocity().length();
 			Object.Type = pfloatType;
 			break;
 		}
@@ -651,7 +651,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Velocity:
 		{
-			auto velocity_vector3 = P_ACTOR->get_vehicle()->GetVelocity();
+			auto velocity_vector3 = P_ACTOR->get_vehicle()->get_velocity();
 			// ReSharper disable once CppInconsistentNaming
 			auto velocity_point3f = Point3fFromVector3(velocity_vector3);
 			// ReSharper disable once CppInconsistentNaming

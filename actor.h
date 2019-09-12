@@ -1,6 +1,6 @@
 #pragma once
 
-class actor : public isxao_classes::dynel
+class actor : public dynel
 {
 public:
 	AOLIB_OBJECT DWORD build_ls_ncu(LSIndex*);
@@ -14,8 +14,8 @@ public:
 	AOLIB_OBJECT float estimated_distance_to(vector3_t &);
 	AOLIB_OBJECT actor* get_master();
 	AOLIB_OBJECT DWORD get_master_id();
-	AOLIB_OBJECT NanoTemplate* get_ncu(DWORD);
-	AOLIB_OBJECT NanoTemplate* get_ncu(PCSTR);
+	AOLIB_OBJECT nano_template* get_ncu(DWORD);
+	AOLIB_OBJECT nano_template* get_ncu(PCSTR);
 	AOLIB_OBJECT DWORD get_ncu_count();
 	AOLIB_OBJECT actor* get_pet(DWORD);
 	AOLIB_OBJECT actor* get_pet(PCSTR);
@@ -23,9 +23,9 @@ public:
 	AOLIB_OBJECT DWORD get_pet_ids(map<identity_t, DWORD>&);
 	AOLIB_OBJECT float get_scale();
 	AOLIB_OBJECT p_simple_char_t get_simple_char_data();
-	AOLIB_OBJECT SpellTemplateData* get_spell_template_data();
+	AOLIB_OBJECT spell_template_data* get_spell_template_data();
 	AOLIB_OBJECT TeamRaid* get_team_raid();
-	AOLIB_OBJECT Vehicle* get_vehicle();
+	AOLIB_OBJECT vehicle* get_vehicle();
 	AOLIB_OBJECT WeaponHolder* get_weapon_holder();
 	AOLIB_OBJECT bool has_pet();	
 	AOLIB_OBJECT bool is_backing_up();

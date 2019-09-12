@@ -3,17 +3,17 @@
 namespace isxao_classes
 {
 
-	identity_t TeamEntry::GetIdentity() const
+	identity_t team_entry::get_identity() const
 	{
-		return GetTeamEntryData().identity;
+		return get_team_entry_data().identity;
 	}
 
-	PCSTR TeamEntry::GetName() const
+	PCSTR team_entry::get_name() const
 	{
-		return GetTeamEntryData().name.c_str();
+		return get_team_entry_data().name.c_str();
 	}
 
-	team_entry_t TeamEntry::GetTeamEntryData() const
+	team_entry_t team_entry::get_team_entry_data() const
 	{
 		return team_entry_;
 	}

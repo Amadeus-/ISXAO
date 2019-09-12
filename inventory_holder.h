@@ -1,25 +1,27 @@
 #pragma once
 
-class InventoryHolder
+// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
+class inventory_holder
 {
 public:
-	AOLIB_OBJECT DWORD BuildLSInventory(LSObjectCollection *pMap) const;
-	AOLIB_OBJECT DWORD BuildLSInventory(LSIndex *pIndex) const;
-	AOLIB_OBJECT DWORD GetArmorInventory(std::vector<inventory_data_t*> &v);
-	AOLIB_OBJECT BankEntry* GetBankInventory() const;
-	AOLIB_OBJECT DWORD GetCharacterInventory(std::vector<inventory_data_t*> &v);
-	AOLIB_OBJECT DWORD GetImplantInventory(std::vector<inventory_data_t*> &v);
-	AOLIB_OBJECT DWORD GetInventoryCount() const;
-	AOLIB_OBJECT NewInventory* GetNewInventory() const;
-	AOLIB_OBJECT inventory_holder_t GetInventoryHolderData() const;
-	AOLIB_OBJECT p_identity_t GetInventoryHolderIdentity() const;
-	AOLIB_OBJECT NewInventory* GetOverflowInventory() const;
-	AOLIB_OBJECT DWORD GetInventory(std::map<identity_t, InventoryItem*>&) const;
-	AOLIB_OBJECT InventoryItem* GetInventoryItem(DWORD) const;
-	AOLIB_OBJECT InventoryItem* GetInventoryItem(PCSTR) const;
-	AOLIB_OBJECT INVENTORYSLOT GetInventorySlot(DWORD) const;
-	AOLIB_OBJECT INVENTORYSLOT GetInventorySlot(PCSTR) const;
-	AOLIB_OBJECT DWORD GetWeaponInventory(std::vector<inventory_data_t*> &v);
+	AOLIB_OBJECT DWORD build_ls_inventory(LSObjectCollection *p_map) const;
+	AOLIB_OBJECT DWORD build_ls_inventory(LSIndex *p_index) const;
+	AOLIB_OBJECT static DWORD get_armor_inventory(vector<inventory_data_t*> &v);
+	AOLIB_OBJECT bank_entry* get_bank_inventory() const;
+	AOLIB_OBJECT static DWORD get_character_inventory(std::vector<inventory_data_t*> &v);
+	AOLIB_OBJECT static DWORD get_implant_inventory(std::vector<inventory_data_t*> &v);
+	AOLIB_OBJECT DWORD get_inventory_count() const;
+	AOLIB_OBJECT new_inventory* get_new_inventory() const;
+	AOLIB_OBJECT inventory_holder_t get_inventory_holder_data() const;
+	AOLIB_OBJECT p_identity_t get_inventory_holder_identity() const;
+	AOLIB_OBJECT new_inventory* get_overflow_inventory() const;
+	AOLIB_OBJECT DWORD get_inventory(map<identity_t, InventoryItem*>&) const;
+	AOLIB_OBJECT InventoryItem* get_inventory_item(DWORD) const;
+	AOLIB_OBJECT InventoryItem* get_inventory_item(PCSTR) const;
+	AOLIB_OBJECT inventory_slot_t get_inventory_slot(DWORD) const;
+	AOLIB_OBJECT inventory_slot_t get_inventory_slot(PCSTR) const;
+	AOLIB_OBJECT static DWORD get_weapon_inventory(vector<inventory_data_t*> &v);
 private:
+	// ReSharper disable once CppUninitializedNonStaticDataMember
 	inventory_holder_t inventory_holder_;
 };

@@ -3,39 +3,38 @@
 namespace isxao_classes
 {
 
-	DWORD StatHolder::GetSkillLocks(std::vector<ActionLock*> &v) const
+	DWORD stat_holder::get_skill_locks(std::vector<action_lock*> &v) const
 	{
-		std::vector<action_lock_t>* p_skill_lock_vector = GetStatHolderData().p_skill_locks;
-		for (auto it = p_skill_lock_vector->begin(); it != p_skill_lock_vector->end(); ++it)
-			v.push_back(reinterpret_cast<ActionLock*>(&(*it)));
-		std::sort(v.begin(), v.end(), ActionLock::pActionLockCompare);
+		auto p_skill_lock_vector = this->get_stat_holder_data().p_skill_locks;
+		for (auto it = p_skill_lock_vector->begin(); it != p_skill_lock_vector->end(); ++it)  // NOLINT(modernize-loop-convert)
+			v.push_back(reinterpret_cast<action_lock*>(&(*it)));
+		std::sort(v.begin(), v.end(), action_lock::p_action_lock_compare);
 		return v.size();
 	}
 
-	ActionLock* StatHolder::GetSkillLock(SpecialActionTemplate* special_action) const
+	action_lock* stat_holder::get_skill_lock(special_action_template* special_action) const
 	{
-		std::vector<ActionLock*> v;
-		GetSkillLocks(v);
-		for (auto it = v.begin(); it != v.end(); ++it)
+		vector<action_lock*> v;
+		this->get_skill_locks(v);
+		for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
-			auto action_identity = (*it)->GetActionIdentity();
-			auto id1 = special_action->GetLockedSkillId1();
-			auto id2 = special_action->GetLockedSkillId2();
+			const auto action_identity = (*it)->get_action_identity();
+			const auto id1 = special_action->get_locked_skill_id_1();
+			const auto id2 = special_action->get_locked_skill_id_2();
 			if (action_identity.type == id1 || action_identity.type == id2 || action_identity.id == id1 || action_identity.id == id2)
 				return *it;
 		}
 		return nullptr;
 	}
 
-	stat_holder_t StatHolder::GetStatHolderData() const
+	stat_holder_t stat_holder::get_stat_holder_data() const
 	{
 		return stat_holder_;
 	}
 
-	DWORD StatHolder::GetStatMap(std::map<DWORD, LONG> &m) const
+	DWORD stat_holder::get_stat_map(std::map<DWORD, LONG> &m) const
 	{
-		isxao_utilities::GetStatMap(m, GetStatHolderData().p_stat_map_dir);
-		return m.size();
+		return this->get_stat_holder_data().p_stat_map_dir->copy_map(m);
 	}
 
 }

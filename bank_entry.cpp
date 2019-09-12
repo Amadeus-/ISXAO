@@ -3,27 +3,27 @@
 namespace isxao_classes
 {
 
-	bank_entry_t BankEntry::GetBankEntryData() const
+	bank_entry_t bank_entry::get_bank_entry_data() const
 	{
 		return bank_entry_;
 	}
 
-	DWORD BankEntry::GetInventory(std::vector<InventoryData*> &v) const
+	DWORD bank_entry::get_inventory(vector<inventory_data*> &v) const
 	{
-		auto inventory_vector = GetBankEntryData().inventory;
-		for (auto it = inventory_vector.begin(); it != inventory_vector.end(); ++it)
-			v.push_back(reinterpret_cast<InventoryData*>(*it));
+		auto inventory_vector = get_bank_entry_data().inventory;
+		for (auto it = inventory_vector.begin(); it != inventory_vector.end(); ++it)  // NOLINT(modernize-loop-convert)
+			v.push_back(reinterpret_cast<inventory_data*>(*it));
 		return v.size();
 	}
 
-	identity_t BankEntry::GetInventoryIdentity() const
+	identity_t bank_entry::get_inventory_identity() const
 	{
-		return GetBankEntryData().inventory_identity;
+		return get_bank_entry_data().inventory_identity;
 	}
 
-	DWORD BankEntry::GetInventorySize() const
+	DWORD bank_entry::get_inventory_size() const
 	{
-		return GetBankEntryData().count;
+		return get_bank_entry_data().count;
 	}
 
 }

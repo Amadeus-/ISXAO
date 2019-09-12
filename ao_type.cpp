@@ -32,7 +32,7 @@ bool AOType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER pMember, int argc,
 			from_position.x = float(atof(argv[3]));
 			from_position.y = float(atof(argv[4]));
 			from_position.z = float(atof(argv[5]));
-			Object.DWord = P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(to_position, from_position, P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_vehicle()->GetZoneInstanceID(), false);
+			Object.DWord = P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(to_position, from_position, P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_vehicle()->get_zone_instance_id(), false);
 			Object.Type = pBoolType;
 			return true;
 		}

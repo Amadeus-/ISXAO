@@ -2,29 +2,29 @@
 namespace isxao_classes
 {
 
-	identity_t CastingData::GetCaster() const
+	identity_t casting_data::get_caster() const
 	{
-		return GetCastingData().caster;
+		return get_casting_data().caster;
 	}
 
-	DWORD CastingData::GetNanoId() const
+	DWORD casting_data::get_nano_id() const
 	{
-		return GetCastingData().nano_id;
+		return get_casting_data().nano_id;
 	}
 
-	casting_data_t CastingData::GetCastingData() const
+	casting_data_t casting_data::get_casting_data() const
 	{
 		return casting_data_;
 	}
 
-	NanoItem* CastingData::GetNanoItem() const
+	NanoItem* casting_data::get_nano_item() const
 	{
-		return reinterpret_cast<NanoItem*>(GetCastingData().p_nano_item);
+		return reinterpret_cast<NanoItem*>(get_casting_data().p_nano_item);
 	}
 
-	identity_t CastingData::GetTarget() const
+	identity_t casting_data::get_target() const
 	{
-		return GetCastingData().target;
+		return get_casting_data().target;
 	}
 
 }

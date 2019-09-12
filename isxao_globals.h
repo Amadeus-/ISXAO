@@ -20,7 +20,8 @@ namespace isxao_globals
 	AOLIB_VAR MODULEINFO n3_module_info;
 	AOLIB_VAR HMODULE gui_module_handle;
 	AOLIB_VAR MODULEINFO gui_module_info;
-	AOLIB_VAR DWORD hVehicle;
+	AOLIB_VAR HMODULE vehicle_module_handle;
+	AOLIB_VAR MODULEINFO vehicle_module_info;
 	AOLIB_VAR DWORD hMessageProtocol;
 	AOLIB_VAR HMODULE interfaces_module_handle;
 	AOLIB_VAR MODULEINFO interfaces_module_info;
@@ -44,7 +45,7 @@ namespace isxao_globals
 
 	// Instances
 	AOLIB_VAR DWORD n3_dynel_t__m_pc_dynel_dir_instance;
-	AOLIB_VAR dynel_dir_t **pp_dynel_dir;
+	AOLIB_VAR dynel_map_t **pp_dynel_dir;
 #define P_DYNEL_DIR (*pp_dynel_dir)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	// Functions
@@ -180,9 +181,15 @@ namespace isxao_globals
 
 
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_npc;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_1;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_2;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_send_pet_command;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_stop_attack;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_use_item;
 
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__on_closed;
 
+	
 
 	AOLIB_VAR DWORD simple_char_t__check_los;
 
@@ -203,7 +210,7 @@ namespace isxao_globals
 #define P_ITEM_VECTOR (**ppp_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD static_item_manager_t__m_ppc_instance;
 	AOLIB_VAR vector<static_item_t> ***ppp_static_item_vector;
-#define P_STATIC_ITEM_VECTOR (**ppp_static_item_vector)
+#define P_STATIC_ITEM_VECTOR (**ppp_static_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
 
 #pragma endregion
 
@@ -236,6 +243,12 @@ namespace isxao_globals
 	AOLIB_VAR DWORD* gp_character_id;
 #define G_CHARACTER_ID (*gp_character_id)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD Client_t__ProcessMessage;
+
+#pragma endregion
+
+#pragma region Vehicle
+
+	AOLIB_VAR DWORD vehicle_t__set_rel_rot;
 
 #pragma endregion
 
@@ -299,8 +312,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatRequestDescription;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatStartTrade;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_OrbitalAttack;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_1;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PerformSpecialAction_2;
+	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Accept;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Challenge;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Refuse;
@@ -314,7 +326,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestWeaponInventory;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SecondarySpecialAttack;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SelectedTarget;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SendPetCommand;
+	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SitToggle;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SplitItem;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartAltState;
@@ -322,7 +334,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartPvP;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartTreatment;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StopAltState;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StopAttack;
+	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StopCamping;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StringToStat;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SwitchTarget;
@@ -345,7 +357,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TryAbortNanoFormula;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TryEnterSneakMode;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_UntrainPerk;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_UseItem;
+	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_UseItemOnItem;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_UseSkill;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__SetMainDynel;
@@ -408,11 +420,7 @@ namespace isxao_globals
 
 #pragma endregion
 
-#pragma region Vehicle
 
-	AOLIB_VAR DWORD Vehicle_t__SetRelRot;
-
-#pragma endregion
 
 #pragma region Messaging
 

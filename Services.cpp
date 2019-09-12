@@ -16,8 +16,8 @@ void __cdecl AOService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 	switch (MSG)
 	{
 	case ISXSERVICE_CLIENTADDED:
-		// This message indicates that a new client has been added to the service
-		// P_ENGINE_CLIENT_ANARCHY is 0, because this message is a system message from Inner Space
+		// This ao_message indicates that a new client has been added to the service
+		// P_ENGINE_CLIENT_ANARCHY is 0, because this ao_message is a system ao_message from Inner Space
 		// lpData is an ISXInterface* that is the pointer to the new client
 	{
 		// use lpData as the actual type, not as void *.  We can make a new
@@ -31,8 +31,8 @@ void __cdecl AOService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 	}
 	break;
 	case ISXSERVICE_CLIENTREMOVED:
-		// This message indicates that a client has been removed from the service
-		// P_ENGINE_CLIENT_ANARCHY is 0, because this message is a system message from Inner Space
+		// This ao_message indicates that a client has been removed from the service
+		// P_ENGINE_CLIENT_ANARCHY is 0, because this ao_message is a system ao_message from Inner Space
 		// lpData is an ISXInterface* that is the pointer to the removed client
 	{
 		// use lpData as the actual type, not as void *.  We can make a new
@@ -69,7 +69,7 @@ void __cdecl AOService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 
 
 /*
-* How to broadcast an outgoing service message (called a notification):
+* How to broadcast an outgoing service ao_message (called a notification):
 AONotification_Bar Bar;
 Bar.Text="Some text to pass as part of the notification";
 pFoo->Success=pISInterface->ServiceBroadcast(pExtension,hAOService,AO_BAR,&Bar);

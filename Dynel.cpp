@@ -102,16 +102,7 @@ namespace isxao_classes
 
 	bool dynel::is_in_line_of_sight()
 	{
-		vector3_t height_offset;
-		height_offset.x = 0.0f;
-		height_offset.y = 1.6f;
-		height_offset.z = 0.0f;
-		vector3_t client_position;
-		P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(client_position);
-		const auto offset_client_position = vector3_t::add(client_position, height_offset);
-		auto dynel_position = this->get_position();
-		const auto offset_dynel_position = vector3_t::add(dynel_position, height_offset);
-		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offset_client_position, offset_dynel_position, get_dynel_data()->p_vehicle->zone_instance_id, false);
+		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->check_los(this);
 	}
 
 	bool dynel::is_in_line_of_sight(vector3_t &position)
@@ -273,19 +264,19 @@ namespace isxao_classes
 		return static_cast<character*>(get_data());
 	}
 
-	Pet* dynel::to_pet()
+	pet* dynel::to_pet()
 	{
-		return static_cast<Pet*>(get_data());
+		return static_cast<pet*>(get_data());
 	}
 
-	Player* dynel::to_player()
+	player* dynel::to_player()
 	{
-		return static_cast<Player*>(get_data());
+		return static_cast<player*>(get_data());
 	}
 
-	TeamMember* dynel::to_team_member()
+	team_member* dynel::to_team_member()
 	{
-		return static_cast<TeamMember*>(get_data());
+		return static_cast<team_member*>(get_data());
 	}
 
 #ifdef N3_DYNEL_T__UPDATE_LOCALITY_LISTENERS_USE_NATIVE

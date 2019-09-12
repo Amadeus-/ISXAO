@@ -5,10 +5,10 @@ namespace isxao_classes
 
 	DWORD actor::build_ls_ncu(LSIndex* p_index)
 	{
-		auto l = get_spell_template_data()->GetSpellTemplateDataData().nano_template_list;
+		auto l = this->get_spell_template_data()->get_spell_template_data_data().nano_template_list;
 		for (auto it = l.begin(); it != l.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
-			auto p_nano_template = reinterpret_cast<NanoTemplate*>(&(*it));
+			auto p_nano_template = reinterpret_cast<nano_template*>(&(*it));
 			p_index->AddItem(reinterpret_cast<LSOBJECTDATA&>(p_nano_template));
 		}
 		return p_index->GetContainerUsed();
@@ -16,7 +16,7 @@ namespace isxao_classes
 
 	DWORD actor::build_ls_pets(LSIndex* p_index)
 	{
-		std::map<identity_t, DWORD> pet_map;
+		map<identity_t, DWORD> pet_map;
 		if (get_pet_ids(pet_map) == 0)
 			return 0;
 		for (auto it = pet_map.begin(); it != pet_map.end(); ++it)  // NOLINT(modernize-loop-convert)
@@ -29,7 +29,7 @@ namespace isxao_classes
 
 	DWORD actor::casting()
 	{
-		return get_spell_template_data()->GetNanoBeingCast();
+		return this->get_spell_template_data()->get_nano_being_cast();
 	}
 
 	PCSTR actor::consider()
@@ -58,12 +58,16 @@ namespace isxao_classes
 			return "White";
 		if (argb.ARGB == 0xAAAAAA)
 			return "Grey";
-		auto f_r = float(argb.R / 255.0f);
-		auto f_g = float(argb.G / 255.0f);
-		auto f_b = float(argb.B / 255.0f);
+		auto f_r = float(argb.R) / 255.0f;
+		auto f_g = float(argb.G) / 255.0f;
+		auto f_b = float(argb.B) / 255.0f;
 		auto f_h = 0.0f;
+		// ReSharper disable CppInitializedValueIsAlwaysRewritten
+		// ReSharper disable CppEntityAssignedButNoRead
 		auto f_s = 0.0f;
 		auto f_v = 0.0f;
+		// ReSharper restore CppInitializedValueIsAlwaysRewritten
+		// ReSharper restore CppEntityAssignedButNoRead
 		const auto f_c_max = max(max(f_r, f_g), f_b);
 		const auto f_c_min = min(min(f_r, f_g), f_b);
 		const auto f_delta = f_c_max - f_c_min;
@@ -80,18 +84,23 @@ namespace isxao_classes
 			}
 
 			if (f_c_max > 0) {
+				// ReSharper disable once CppAssignedValueIsNeverUsed
 				f_s = f_delta / f_c_max;
 			}
 			else {
+				// ReSharper disable once CppAssignedValueIsNeverUsed
 				f_s = 0;
 			}
 
+			// ReSharper disable once CppAssignedValueIsNeverUsed
 			f_v = f_c_max;
 		}
 		else {
 			f_h = 0;
-			f_s = 0;
+			// ReSharper disable CppAssignedValueIsNeverUsed
+			f_s = 0;			
 			f_v = f_c_max;
+			// ReSharper restore CppAssignedValueIsNeverUsed
 		}
 
 		if (f_h < 0) {
@@ -144,7 +153,7 @@ namespace isxao_classes
 		P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(client_position);
 		auto position = this->get_position();
 		const auto new_rotation = quaternion_t::get_quaternion_to_face(position, client_position);
-		P_ENGINE_CLIENT_ANARCHY->get_client_char()->SetRotation(new_rotation);
+		P_ENGINE_CLIENT_ANARCHY->get_client_char()->set_rotation(new_rotation);
 	}
 
 	void actor::do_target()
@@ -156,8 +165,8 @@ namespace isxao_classes
 	{
 		const auto dynel_position = get_position();
 		const auto uncompensated_distance = get_distance_to(position);
-		const auto x = position.x - (dynel_position.x + get_vehicle()->GetVelocity().x*uncompensated_distance);
-		const auto z = position.z - (dynel_position.z + get_vehicle()->GetVelocity().z*uncompensated_distance);
+		const auto x = position.x - (dynel_position.x + get_vehicle()->get_velocity().x*uncompensated_distance);
+		const auto z = position.z - (dynel_position.z + get_vehicle()->get_velocity().z*uncompensated_distance);
 		vector3_t estimated_position;
 		estimated_position.x = x;
 		estimated_position.y = 0.0f;
@@ -165,33 +174,33 @@ namespace isxao_classes
 		return estimated_position.length();
 	}
 
-	NanoTemplate* actor::get_ncu(const DWORD index)
+	nano_template* actor::get_ncu(const DWORD index)
 	{
-		std::vector<NanoTemplate> nano_template_vector;
+		std::vector<nano_template> nano_template_vector;
 		// ReSharper disable once CppExpressionWithoutSideEffects
-		if (this->get_spell_template_data()->GetNanoTemplateList(nano_template_vector))
+		if (this->get_spell_template_data()->get_nano_template_list(nano_template_vector))
 		{
 			if (index < 0 || index >= nano_template_vector.size())
 				return nullptr;
-			return static_cast<NanoTemplate*>(&(nano_template_vector[index]));
+			return static_cast<nano_template*>(&(nano_template_vector[index]));
 		}
 		return nullptr;		
 	}
 
-	NanoTemplate* actor::get_ncu(const PCSTR effect_name)
+	nano_template* actor::get_ncu(const PCSTR effect_name)
 	{
 		const identity_t container_identity(0, 0);
 		char name[MAX_STRING] = { 0 };
 		char search_name[MAX_STRING];
 		strcpy_s(search_name, MAX_STRING, effect_name);
 		_strlwr_s(search_name);
-		vector<NanoTemplate> nano_template_vector;
-		if (this->get_spell_template_data()->GetNanoTemplateList(nano_template_vector))
+		vector<nano_template> nano_template_vector;
+		if (this->get_spell_template_data()->get_nano_template_list(nano_template_vector))
 		{  
 			for (auto it = nano_template_vector.begin(); it != nano_template_vector.end(); ++it)  // NOLINT(modernize-loop-convert)
 			{
-				const auto entry = static_cast<NanoTemplate*>(&(*it));
-				strcpy_s(name, MAX_STRING, P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name(entry->GetNanoIdentity(), container_identity));
+				const auto entry = static_cast<nano_template*>(&(*it));
+				strcpy_s(name, MAX_STRING, P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name(entry->get_nano_identity(), container_identity));
 				_strlwr_s(name);
 				if (strstr(name, search_name))
 					return entry;
@@ -202,17 +211,17 @@ namespace isxao_classes
 
 	DWORD actor::get_ncu_count()
 	{
-		std::vector<NanoTemplate> nano_template_vector;
-		if (this->get_spell_template_data()->GetNanoTemplateList(nano_template_vector))
+		std::vector<nano_template> nano_template_vector;
+		if (this->get_spell_template_data()->get_nano_template_list(nano_template_vector))
 		{
 			return nano_template_vector.size();
 		}
 		return 0;
 	}
 
-	SpellTemplateData* actor::get_spell_template_data()
+	spell_template_data* actor::get_spell_template_data()
 	{
-		return reinterpret_cast<SpellTemplateData*>(this->get_simple_char_data()->p_spell_template_data);
+		return reinterpret_cast<spell_template_data*>(this->get_simple_char_data()->p_spell_template_data);
 	}
 
 	float actor::get_scale()
@@ -225,19 +234,19 @@ namespace isxao_classes
 		return p_simple_char_t(this->get_data());
 	}
 
-	Vehicle* actor::get_vehicle()
+	vehicle* actor::get_vehicle()
 	{
-		return reinterpret_cast<Vehicle*>(this->get_simple_char_data()->p_vehicle);
+		return reinterpret_cast<vehicle*>(this->get_simple_char_data()->p_vehicle);
 	}
 
 	bool actor::is_backing_up()
 	{
-		return this->get_vehicle()->GetCharMovementStatus()->is_moving_forward_back != 1 && get_vehicle()->GetCharMovementStatus()->forward_back_direction == 2;
+		return this->get_vehicle()->get_char_movement_status()->is_moving_forward_back != 1 && get_vehicle()->get_char_movement_status()->forward_back_direction == 2;
 	}
 
 	bool actor::is_casting()
 	{
-		return this->get_spell_template_data()->IsCasting();
+		return this->get_spell_template_data()->is_casting();
 	}
 
 	bool actor::is_fighting()
@@ -253,7 +262,7 @@ namespace isxao_classes
 
 	bool actor::is_idle()
 	{
-		return this->get_vehicle()->GetCharMovementStatus()->is_moving_forward_back == 1 && this->get_vehicle()->GetCharMovementStatus()->is_moving_strafe == 1;
+		return this->get_vehicle()->get_char_movement_status()->is_moving_forward_back == 1 && this->get_vehicle()->get_char_movement_status()->is_moving_strafe == 1;
 	}
 
 	bool actor::is_in_my_team()
@@ -277,12 +286,12 @@ namespace isxao_classes
 	{
 		if(this->is_team_member() && this->is_in_raid())
 		{
-			std::vector<TeamEntry*> v;
+			std::vector<team_entry*> v;
 			if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_team_raid()->GetTeam(v))
 			{
 				for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 				{
-					if ((*it)->GetIdentity() == this->get_identity())
+					if ((*it)->get_identity() == this->get_identity())
 						return true;
 				}
 			}			
@@ -302,7 +311,7 @@ namespace isxao_classes
 
 	bool actor::is_moving_forward()
 	{
-		return this->get_vehicle()->GetCharMovementStatus()->is_moving_forward_back != 1 && this->get_vehicle()->GetCharMovementStatus()->forward_back_direction == 1;
+		return this->get_vehicle()->get_char_movement_status()->is_moving_forward_back != 1 && this->get_vehicle()->get_char_movement_status()->forward_back_direction == 1;
 	}
 
 	bool actor::is_npc()
@@ -312,12 +321,12 @@ namespace isxao_classes
 
 	bool actor::is_strafing_left()
 	{
-		return this->get_vehicle()->GetCharMovementStatus()->is_moving_strafe != 1 && this->get_vehicle()->GetCharMovementStatus()->strafe_direction == 3;
+		return this->get_vehicle()->get_char_movement_status()->is_moving_strafe != 1 && this->get_vehicle()->get_char_movement_status()->strafe_direction == 3;
 	}
 
 	bool actor::is_strafing_right()
 	{
-		return this->get_vehicle()->GetCharMovementStatus()->is_moving_strafe != 1 && this->get_vehicle()->GetCharMovementStatus()->strafe_direction == 4;
+		return this->get_vehicle()->get_char_movement_status()->is_moving_strafe != 1 && this->get_vehicle()->get_char_movement_status()->strafe_direction == 4;
 	}
 	
 	bool actor::is_team_leader()
@@ -342,9 +351,8 @@ namespace isxao_classes
 		if (!this->is_pet())
 			return nullptr;
 		identity_t master;
-		DWORD id = 0;
 		master.type = 50000;
-		id = DWORD(this->get_skill(ST_PETMASTER));
+		const auto id = DWORD(this->get_skill(ST_PETMASTER));
 		master.id = id;
 		return dynel::get_dynel(master)->to_actor();
 	}
@@ -392,11 +400,10 @@ namespace isxao_classes
 
 	DWORD actor::get_pet_ids(map<identity_t, DWORD>& m)
 	{
-		std::map<identity_t, DWORD> pet_map;
 		if (!IsClientId(this->get_identity().id))
 		{
 			map<identity_t, p_n3_dynel_t> dynel_map;
-			get_dynel_map(dynel_map);
+			P_DYNEL_DIR->copy_map(dynel_map);
 			DWORD pet_count = 0;
 			for (auto it = dynel_map.begin(); it != dynel_map.end(); ++it)  // NOLINT(modernize-loop-convert)
 			{
@@ -406,30 +413,28 @@ namespace isxao_classes
 					if (is_npc)
 					{
 						auto instance = reinterpret_cast<dynel*>(it->second);
-						if (DWORD(instance->get_skill(ST_PETMASTER)) == get_identity().id)
+						if (DWORD(instance->get_skill(ST_PETMASTER)) == this->get_identity().id)
 						{
-							pet_map.insert_or_assign(it->first, pet_count);
+							m.insert_or_assign(it->first, pet_count);
 							pet_count++;
 						}
 					}
 				}
 			}
-			return pet_map.size();
+			return m.size();
 		}
-		isxao_utilities::GetPetMap(m, this->to_character()->GetNPCHolder()->GetNPCHolderData().p_pet_dir);
-		return m.size();
+		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_npc_holder()->get_npc_holder_data().p_pet_dir->copy_map(m);
 	}
 
 	bool actor::has_pet()
 	{
 		if(this->is_character())
 		{
-			std::map <identity_t, DWORD> pet_map;
-			isxao_utilities::GetPetMap(pet_map, to_character()->GetNPCHolder()->GetNPCHolderData().p_pet_dir);
-			return !pet_map.empty();
+			map <identity_t, DWORD> pet_map;
+			return P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_npc_holder()->get_npc_holder_data().p_pet_dir->copy_map(pet_map) != 0;
 		}
 		std::map<identity_t, p_n3_dynel_t> dynel_map;
-		isxao_utilities::get_dynel_map(dynel_map);
+		P_DYNEL_DIR->copy_map(dynel_map);
 		for (auto it = dynel_map.begin(); it != dynel_map.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
 			if (it->first.type == 50000)
@@ -467,7 +472,7 @@ namespace isxao_classes
 	void actor::make_leader()
 	{
 		if(this->is_team_member())
-			P_ENGINE_CLIENT_ANARCHY->get_client_char()->MakeTeamLeader(get_identity());
+			P_ENGINE_CLIENT_ANARCHY->get_client_char()->make_team_leader(get_identity());
 	}
 
 	bool actor::send_team_invite()

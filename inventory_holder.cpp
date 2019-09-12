@@ -3,117 +3,115 @@
 namespace isxao_classes
 {
 
-	DWORD InventoryHolder::BuildLSInventory(LSObjectCollection *pMap) const
+	DWORD inventory_holder::build_ls_inventory(LSObjectCollection *p_map) const
 	{
-		identity_t d;
-		ZeroMemory(&d, sizeof(identity_t));
-		auto count = GetNewInventory()->GetInventorySize();
+		const identity_t d(0, 0);
+		const auto count = get_new_inventory()->get_inventory_size();
 		for (DWORD i = 0; i < count; i++)
 		{
 			identity_t slot;
-			isxao_utilities::GetInvSlotIdentity(i, slot);
-			auto pItem = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(slot, d);
-			if (pItem)
+			GetInvSlotIdentity(i, slot);
+			auto p_item = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(slot, d);
+			if (p_item)
 			{
-				pMap->SetItem(isxao_utilities::GetInvSlotName(slot), reinterpret_cast<LSOBJECTDATA&>(pItem));
+				p_map->SetItem(GetInvSlotName(slot), reinterpret_cast<LSOBJECTDATA&>(p_item));
 			}
 		}
-		return pMap->GetContainerUsed();
+		return p_map->GetContainerUsed();
 	}
 
-	DWORD InventoryHolder::BuildLSInventory(LSIndex* pIndex) const
+	DWORD inventory_holder::build_ls_inventory(LSIndex* p_index) const
 	{
-		identity_t d;
-		ZeroMemory(&d, sizeof(identity_t));
-		auto count = GetNewInventory()->GetInventorySize();
+		const identity_t d(0, 0);
+		const auto count = get_new_inventory()->get_inventory_size();
 		for (DWORD i = 0; i < count; i++)
 		{
 			identity_t slot;
-			::GetInvSlotIdentity(i, slot);
-			auto pItem = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(slot, d);
-			if (pItem)
+			GetInvSlotIdentity(i, slot);
+			const auto p_item = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(slot, d);
+			if (p_item)
 			{
-				INVENTORYSLOT s;
-				s.SlotID = slot;
-				s.pItem = reinterpret_cast<InventoryItem*>(pItem);
-				auto pS = PINVENTORYSLOT(pISInterface->GetTempBuffer(sizeof(INVENTORYSLOT), &s));
-				pIndex->AddItem(reinterpret_cast<LSOBJECTDATA&>(pS));
+				inventory_slot_t s;
+				s.slot_id = slot;
+				s.p_item = reinterpret_cast<InventoryItem*>(p_item);
+				auto p_s = p_inventory_slot_t(pISInterface->GetTempBuffer(sizeof(inventory_slot_t), &s));
+				p_index->AddItem(reinterpret_cast<LSOBJECTDATA&>(p_s));
 			}
 		}
-		return pIndex->GetContainerUsed();
+		return p_index->GetContainerUsed();
 	}
 
-	DWORD InventoryHolder::GetArmorInventory(std::vector<inventory_data_t*> &v)
+	DWORD inventory_holder::get_armor_inventory(vector<inventory_data_t*> &v)
 	{
-		for (int i = 17; i < 32; i++)
+		for (auto i = 17; i < 32; i++)
 		{
-			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().p_regular_inventory->p_inventory_data[i];
+			auto p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_inventory_holder_data().p_regular_inventory->p_inventory_data[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
 		return v.size();
 	}
 	
-	BankEntry* InventoryHolder::GetBankInventory() const
+	bank_entry* inventory_holder::get_bank_inventory() const
 	{
-		return reinterpret_cast<BankEntry*>(GetInventoryHolderData().p_bank_entry);
+		return reinterpret_cast<bank_entry*>(get_inventory_holder_data().p_bank_entry);
 	}
 
-	DWORD InventoryHolder::GetCharacterInventory(std::vector<inventory_data_t*> &v)
+	DWORD inventory_holder::get_character_inventory(vector<inventory_data_t*> &v)
 	{
-		for (int i = 64; i < 94; i++)
+		for (auto i = 64; i < 94; i++)
 		{
-			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().p_regular_inventory->p_inventory_data[i];
+			auto p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_inventory_holder_data().p_regular_inventory->p_inventory_data[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
 		return v.size();
 	}
 
-	DWORD InventoryHolder::GetImplantInventory(std::vector<inventory_data_t*> &v)
+	DWORD inventory_holder::get_implant_inventory(vector<inventory_data_t*> &v)
 	{
-		for (int i = 33; i < 46; i++)
+		for (auto i = 33; i < 46; i++)
 		{
-			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().p_regular_inventory->p_inventory_data[i];
+			auto p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_inventory_holder_data().p_regular_inventory->p_inventory_data[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
 		return v.size();
 	}
 
-	DWORD InventoryHolder::GetInventoryCount() const
+	DWORD inventory_holder::get_inventory_count() const
 	{
 		std::map<identity_t, InventoryItem*> m;
-		return GetInventory(m);
+		return get_inventory(m);
 	}
 	
-	NewInventory* InventoryHolder::GetNewInventory() const
+	new_inventory* inventory_holder::get_new_inventory() const
 	{
-		return reinterpret_cast<NewInventory*>(GetInventoryHolderData().p_regular_inventory);
+		return reinterpret_cast<new_inventory*>(get_inventory_holder_data().p_regular_inventory);
 	}
 
-	inventory_holder_t InventoryHolder::GetInventoryHolderData() const
+	inventory_holder_t inventory_holder::get_inventory_holder_data() const
 	{
 		return inventory_holder_;
 	}
 
-	p_identity_t InventoryHolder::GetInventoryHolderIdentity() const
+	p_identity_t inventory_holder::get_inventory_holder_identity() const
 	{
-		return GetInventoryHolderData().p_client_identity;
+		return get_inventory_holder_data().p_client_identity;
 	}
 
-	NewInventory* InventoryHolder::GetOverflowInventory() const
+	new_inventory* inventory_holder::get_overflow_inventory() const
 	{
-		return reinterpret_cast<NewInventory*>(GetInventoryHolderData().p_overflow_inventory);
+		return reinterpret_cast<new_inventory*>(get_inventory_holder_data().p_overflow_inventory);
 	}
 
-	InventoryItem* InventoryHolder::GetInventoryItem(DWORD index) const
+	InventoryItem* inventory_holder::get_inventory_item(DWORD index) const
 	{
 		std::map<identity_t, InventoryItem*> m;
-		GetInventory(m);
+		get_inventory(m);
 		if (index < 1 || index > m.size())
 			return nullptr;
-		for (auto it = m.begin(); it != m.end(); ++it)
+		for (auto it = m.begin(); it != m.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
 			index -= 1;
 			if (index == 0)
@@ -122,136 +120,133 @@ namespace isxao_classes
 		return nullptr;
 	}
 
-	InventoryItem* InventoryHolder::GetInventoryItem(PCSTR szArg) const
+	InventoryItem* inventory_holder::get_inventory_item(const PCSTR sz_arg) const
 	{
-		identity_t id;
-		ZeroMemory(&id, sizeof(identity_t));
-		identity_t d;
-		ZeroMemory(&d, sizeof(identity_t));
-		char szName[MAX_STRING] = { 0 };
-		char szSearchName[MAX_STRING];
-		strcpy_s(szSearchName, MAX_STRING, szArg);
-		_strlwr_s(szSearchName);
-		if (!strcmp(szSearchName, "ws_hud1"))
-			GetInvSlotIdentity(::WS_HUD_1, id);
-		else if (!strcmp(szSearchName, "ws_hud2"))
-			GetInvSlotIdentity(::WS_HUD_2, id);
-		else if (!strcmp(szSearchName, "ws_hud3"))
-			GetInvSlotIdentity(::WS_HUD_3, id);
-		else if (!strcmp(szSearchName, "ws_util1"))
-			GetInvSlotIdentity(::WS_UTIL_1, id);
-		else if (!strcmp(szSearchName, "ws_util2"))
-			GetInvSlotIdentity(::WS_UTIL_2, id);
-		else if (!strcmp(szSearchName, "ws_util3"))
-			GetInvSlotIdentity(::WS_UTIL_3, id);
-		else if (!strcmp(szSearchName, "ws_rhand"))
-			GetInvSlotIdentity(::WS_R_HAND, id);
-		else if (!strcmp(szSearchName, "ws_belt"))
-			GetInvSlotIdentity(::WS_BELT, id);
-		else if (!strcmp(szSearchName, "ws_lhand"))
-			GetInvSlotIdentity(::WS_L_HAND, id);
-		else if (!strcmp(szSearchName, "ws_ncu1"))
-			GetInvSlotIdentity(::WS_NCU_1, id);
-		else if (!strcmp(szSearchName, "ws_ncu2"))
-			GetInvSlotIdentity(::WS_NCU_2, id);
-		else if (!strcmp(szSearchName, "ws_ncu3"))
-			GetInvSlotIdentity(::WS_NCU_3, id);
-		else if (!strcmp(szSearchName, "ws_ncu4"))
-			GetInvSlotIdentity(::WS_NCU_4, id);
-		else if (!strcmp(szSearchName, "ws_ncu5"))
-			GetInvSlotIdentity(::WS_NCU_5, id);
-		else if (!strcmp(szSearchName, "ws_ncu6"))
-			GetInvSlotIdentity(::WS_NCU_6, id);
-		else if (!strcmp(szSearchName, "as_neck"))
-			GetInvSlotIdentity(::AS_NECK, id);
-		else if (!strcmp(szSearchName, "as_head"))
-			GetInvSlotIdentity(::AS_HEAD, id);
-		else if (!strcmp(szSearchName, "as_back"))
-			GetInvSlotIdentity(::AS_BACK, id);
-		else if (!strcmp(szSearchName, "as_rshoulder"))
-			GetInvSlotIdentity(::AS_R_SHOULDER, id);
-		else if (!strcmp(szSearchName, "as_chest"))
-			GetInvSlotIdentity(::AS_CHEST, id);
-		else if (!strcmp(szSearchName, "as_lshoulder"))
-			GetInvSlotIdentity(::AS_L_SHOULDER, id);
-		else if (!strcmp(szSearchName, "as_rarm"))
-			GetInvSlotIdentity(::AS_R_ARM, id);
-		else if (!strcmp(szSearchName, "as_hands"))
-			GetInvSlotIdentity(::AS_HANDS, id);
-		else if (!strcmp(szSearchName, "as_larm"))
-			GetInvSlotIdentity(::AS_L_ARM, id);
-		else if (!strcmp(szSearchName, "as_rwrist"))
-			GetInvSlotIdentity(::AS_R_WRIST, id);
-		else if (!strcmp(szSearchName, "as_legs"))
-			GetInvSlotIdentity(::AS_LEGS, id);
-		else if (!strcmp(szSearchName, "as_lwrist"))
-			GetInvSlotIdentity(::AS_L_WRIST, id);
-		else if (!strcmp(szSearchName, "as_rfinger"))
-			GetInvSlotIdentity(::AS_R_FINGER, id);
-		else if (!strcmp(szSearchName, "as_feet"))
-			GetInvSlotIdentity(::AS_FEET, id);
-		else if (!strcmp(szSearchName, "as_lfinger"))
-			GetInvSlotIdentity(::AS_L_FINGER, id);
-		else if (!strcmp(szSearchName, "is_eyes"))
-			GetInvSlotIdentity(::IS_EYES, id);
-		else if (!strcmp(szSearchName, "is_head"))
-			GetInvSlotIdentity(::IS_HEAD, id);
-		else if (!strcmp(szSearchName, "is_ears"))
-			GetInvSlotIdentity(::IS_EARS, id);
-		else if (!strcmp(szSearchName, "is_rarm"))
-			GetInvSlotIdentity(::IS_R_ARM, id);
-		else if (!strcmp(szSearchName, "is_chest"))
-			GetInvSlotIdentity(::IS_CHEST, id);
-		else if (!strcmp(szSearchName, "is_larm"))
-			GetInvSlotIdentity(::IS_L_ARM, id);
-		else if (!strcmp(szSearchName, "is_rwrist"))
-			GetInvSlotIdentity(::IS_R_WRIST, id);
-		else if (!strcmp(szSearchName, "is_waist"))
-			GetInvSlotIdentity(::IS_WAIST, id);
-		else if (!strcmp(szSearchName, "is_lwrist"))
-			GetInvSlotIdentity(::IS_L_WRIST, id);
-		else if (!strcmp(szSearchName, "is_rhand"))
-			GetInvSlotIdentity(::IS_R_HAND, id);
-		else if (!strcmp(szSearchName, "is_legs"))
-			GetInvSlotIdentity(::IS_LEGS, id);
-		else if (!strcmp(szSearchName, "is_lhand"))
-			GetInvSlotIdentity(::IS_L_HAND, id);
-		else if (!strcmp(szSearchName, "is_feet"))
-			GetInvSlotIdentity(::IS_FEET, id);
+		identity_t id(0, 0);
+		const identity_t d(0,0);
+		char sz_name[MAX_STRING] = { 0 };
+		char sz_search_name[MAX_STRING];
+		strcpy_s(sz_search_name, MAX_STRING, sz_arg);
+		_strlwr_s(sz_search_name);
+		if (!strcmp(sz_search_name, "ws_hud1"))
+			GetInvSlotIdentity(WS_HUD_1, id);
+		else if (!strcmp(sz_search_name, "ws_hud2"))
+			GetInvSlotIdentity(WS_HUD_2, id);
+		else if (!strcmp(sz_search_name, "ws_hud3"))
+			GetInvSlotIdentity(WS_HUD_3, id);
+		else if (!strcmp(sz_search_name, "ws_util1"))
+			GetInvSlotIdentity(WS_UTIL_1, id);
+		else if (!strcmp(sz_search_name, "ws_util2"))
+			GetInvSlotIdentity(WS_UTIL_2, id);
+		else if (!strcmp(sz_search_name, "ws_util3"))
+			GetInvSlotIdentity(WS_UTIL_3, id);
+		else if (!strcmp(sz_search_name, "ws_rhand"))
+			GetInvSlotIdentity(WS_R_HAND, id);
+		else if (!strcmp(sz_search_name, "ws_belt"))
+			GetInvSlotIdentity(WS_BELT, id);
+		else if (!strcmp(sz_search_name, "ws_lhand"))
+			GetInvSlotIdentity(WS_L_HAND, id);
+		else if (!strcmp(sz_search_name, "ws_ncu1"))
+			GetInvSlotIdentity(WS_NCU_1, id);
+		else if (!strcmp(sz_search_name, "ws_ncu2"))
+			GetInvSlotIdentity(WS_NCU_2, id);
+		else if (!strcmp(sz_search_name, "ws_ncu3"))
+			GetInvSlotIdentity(WS_NCU_3, id);
+		else if (!strcmp(sz_search_name, "ws_ncu4"))
+			GetInvSlotIdentity(WS_NCU_4, id);
+		else if (!strcmp(sz_search_name, "ws_ncu5"))
+			GetInvSlotIdentity(WS_NCU_5, id);
+		else if (!strcmp(sz_search_name, "ws_ncu6"))
+			GetInvSlotIdentity(WS_NCU_6, id);
+		else if (!strcmp(sz_search_name, "as_neck"))
+			GetInvSlotIdentity(AS_NECK, id);
+		else if (!strcmp(sz_search_name, "as_head"))
+			GetInvSlotIdentity(AS_HEAD, id);
+		else if (!strcmp(sz_search_name, "as_back"))
+			GetInvSlotIdentity(AS_BACK, id);
+		else if (!strcmp(sz_search_name, "as_rshoulder"))
+			GetInvSlotIdentity(AS_R_SHOULDER, id);
+		else if (!strcmp(sz_search_name, "as_chest"))
+			GetInvSlotIdentity(AS_CHEST, id);
+		else if (!strcmp(sz_search_name, "as_lshoulder"))
+			GetInvSlotIdentity(AS_L_SHOULDER, id);
+		else if (!strcmp(sz_search_name, "as_rarm"))
+			GetInvSlotIdentity(AS_R_ARM, id);
+		else if (!strcmp(sz_search_name, "as_hands"))
+			GetInvSlotIdentity(AS_HANDS, id);
+		else if (!strcmp(sz_search_name, "as_larm"))
+			GetInvSlotIdentity(AS_L_ARM, id);
+		else if (!strcmp(sz_search_name, "as_rwrist"))
+			GetInvSlotIdentity(AS_R_WRIST, id);
+		else if (!strcmp(sz_search_name, "as_legs"))
+			GetInvSlotIdentity(AS_LEGS, id);
+		else if (!strcmp(sz_search_name, "as_lwrist"))
+			GetInvSlotIdentity(AS_L_WRIST, id);
+		else if (!strcmp(sz_search_name, "as_rfinger"))
+			GetInvSlotIdentity(AS_R_FINGER, id);
+		else if (!strcmp(sz_search_name, "as_feet"))
+			GetInvSlotIdentity(AS_FEET, id);
+		else if (!strcmp(sz_search_name, "as_lfinger"))
+			GetInvSlotIdentity(AS_L_FINGER, id);
+		else if (!strcmp(sz_search_name, "is_eyes"))
+			GetInvSlotIdentity(IS_EYES, id);
+		else if (!strcmp(sz_search_name, "is_head"))
+			GetInvSlotIdentity(IS_HEAD, id);
+		else if (!strcmp(sz_search_name, "is_ears"))
+			GetInvSlotIdentity(IS_EARS, id);
+		else if (!strcmp(sz_search_name, "is_rarm"))
+			GetInvSlotIdentity(IS_R_ARM, id);
+		else if (!strcmp(sz_search_name, "is_chest"))
+			GetInvSlotIdentity(IS_CHEST, id);
+		else if (!strcmp(sz_search_name, "is_larm"))
+			GetInvSlotIdentity(IS_L_ARM, id);
+		else if (!strcmp(sz_search_name, "is_rwrist"))
+			GetInvSlotIdentity(IS_R_WRIST, id);
+		else if (!strcmp(sz_search_name, "is_waist"))
+			GetInvSlotIdentity(IS_WAIST, id);
+		else if (!strcmp(sz_search_name, "is_lwrist"))
+			GetInvSlotIdentity(IS_L_WRIST, id);
+		else if (!strcmp(sz_search_name, "is_rhand"))
+			GetInvSlotIdentity(IS_R_HAND, id);
+		else if (!strcmp(sz_search_name, "is_legs"))
+			GetInvSlotIdentity(IS_LEGS, id);
+		else if (!strcmp(sz_search_name, "is_lhand"))
+			GetInvSlotIdentity(IS_L_HAND, id);
+		else if (!strcmp(sz_search_name, "is_feet"))
+			GetInvSlotIdentity(IS_FEET, id);
 		if (id.type != 0)
 			return reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d));
-		std::map<identity_t, InventoryItem*> m;
-		GetInventory(m);
-		for (auto it = m.begin(); it != m.end(); ++it)
+		map<identity_t, InventoryItem*> m;
+		get_inventory(m);
+		for (auto it = m.begin(); it != m.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
 			if (it->second)
 			{
-				strcpy_s(szName, MAX_STRING, it->second->GetName());
-				_strlwr_s(szName);
-				if (strstr(szName, szSearchName))
+				strcpy_s(sz_name, MAX_STRING, it->second->GetName());
+				_strlwr_s(sz_name);
+				if (strstr(sz_name, sz_search_name))
 					return reinterpret_cast<InventoryItem*>(it->second);
 			}
 		}
 		return nullptr;
 	}
 
-	INVENTORYSLOT InventoryHolder::GetInventorySlot(DWORD index) const
+	inventory_slot_t inventory_holder::get_inventory_slot(DWORD index) const
 	{
-		INVENTORYSLOT s;
-		ZeroMemory(&s, sizeof(INVENTORYSLOT));
+		inventory_slot_t s;
 		if (P_ENGINE_CLIENT_ANARCHY)
 		{
 			std::map<identity_t, InventoryItem*> m;
-			GetInventory(m);
+			get_inventory(m);
 			if (index < 1 || index > m.size())
 				return s;
-			for (auto it = m.begin(); it != m.end(); ++it)
+			for (auto it = m.begin(); it != m.end(); ++it)  // NOLINT(modernize-loop-convert)
 			{
 				index -= 1;
 				if (index == 0)
 				{
-					s.SlotID = it->first;
-					s.pItem = it->second;
+					s.slot_id = it->first;
+					s.p_item = it->second;
 					return s;
 				}
 			}
@@ -259,123 +254,120 @@ namespace isxao_classes
 		return s;
 	}
 
-	INVENTORYSLOT InventoryHolder::GetInventorySlot(PCSTR szArg) const
+	inventory_slot_t inventory_holder::get_inventory_slot(const PCSTR sz_arg) const
 	{
-		INVENTORYSLOT s;
-		ZeroMemory(&s, sizeof(INVENTORYSLOT));
+		inventory_slot_t s;
 		if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->get_client_char())
 		{
-			identity_t id;
-			ZeroMemory(&id, sizeof(identity_t));
-			identity_t d;
-			ZeroMemory(&d, sizeof(identity_t));
-			char szName[MAX_STRING] = { 0 };
-			char szSearchName[MAX_STRING];
-			strcpy_s(szSearchName, MAX_STRING, szArg);
-			_strlwr_s(szSearchName);
-			if (!strcmp(szSearchName, "ws_hud1"))
+			identity_t id(0, 0);
+			const identity_t d(0, 0);
+			char sz_name[MAX_STRING] = { 0 };
+			char sz_search_name[MAX_STRING];
+			strcpy_s(sz_search_name, MAX_STRING, sz_arg);
+			_strlwr_s(sz_search_name);
+			if (!strcmp(sz_search_name, "ws_hud1"))
 				GetInvSlotIdentity(::WS_HUD_1, id);
-			else if (!strcmp(szSearchName, "ws_hud2"))
+			else if (!strcmp(sz_search_name, "ws_hud2"))
 				GetInvSlotIdentity(::WS_HUD_2, id);
-			else if (!strcmp(szSearchName, "ws_hud3"))
+			else if (!strcmp(sz_search_name, "ws_hud3"))
 				GetInvSlotIdentity(::WS_HUD_3, id);
-			else if (!strcmp(szSearchName, "ws_util1"))
+			else if (!strcmp(sz_search_name, "ws_util1"))
 				GetInvSlotIdentity(::WS_UTIL_1, id);
-			else if (!strcmp(szSearchName, "ws_util2"))
+			else if (!strcmp(sz_search_name, "ws_util2"))
 				GetInvSlotIdentity(::WS_UTIL_2, id);
-			else if (!strcmp(szSearchName, "ws_util3"))
+			else if (!strcmp(sz_search_name, "ws_util3"))
 				GetInvSlotIdentity(::WS_UTIL_3, id);
-			else if (!strcmp(szSearchName, "ws_rhand"))
+			else if (!strcmp(sz_search_name, "ws_rhand"))
 				GetInvSlotIdentity(::WS_R_HAND, id);
-			else if (!strcmp(szSearchName, "ws_belt"))
+			else if (!strcmp(sz_search_name, "ws_belt"))
 				GetInvSlotIdentity(::WS_BELT, id);
-			else if (!strcmp(szSearchName, "ws_lhand"))
+			else if (!strcmp(sz_search_name, "ws_lhand"))
 				GetInvSlotIdentity(::WS_L_HAND, id);
-			else if (!strcmp(szSearchName, "ws_ncu1"))
+			else if (!strcmp(sz_search_name, "ws_ncu1"))
 				GetInvSlotIdentity(::WS_NCU_1, id);
-			else if (!strcmp(szSearchName, "ws_ncu2"))
+			else if (!strcmp(sz_search_name, "ws_ncu2"))
 				GetInvSlotIdentity(::WS_NCU_2, id);
-			else if (!strcmp(szSearchName, "ws_ncu3"))
+			else if (!strcmp(sz_search_name, "ws_ncu3"))
 				GetInvSlotIdentity(::WS_NCU_3, id);
-			else if (!strcmp(szSearchName, "ws_ncu4"))
+			else if (!strcmp(sz_search_name, "ws_ncu4"))
 				GetInvSlotIdentity(::WS_NCU_4, id);
-			else if (!strcmp(szSearchName, "ws_ncu5"))
+			else if (!strcmp(sz_search_name, "ws_ncu5"))
 				GetInvSlotIdentity(::WS_NCU_5, id);
-			else if (!strcmp(szSearchName, "ws_ncu6"))
+			else if (!strcmp(sz_search_name, "ws_ncu6"))
 				GetInvSlotIdentity(::WS_NCU_6, id);
-			else if (!strcmp(szSearchName, "as_neck"))
+			else if (!strcmp(sz_search_name, "as_neck"))
 				GetInvSlotIdentity(::AS_NECK, id);
-			else if (!strcmp(szSearchName, "as_head"))
+			else if (!strcmp(sz_search_name, "as_head"))
 				GetInvSlotIdentity(::AS_HEAD, id);
-			else if (!strcmp(szSearchName, "as_back"))
+			else if (!strcmp(sz_search_name, "as_back"))
 				GetInvSlotIdentity(::AS_BACK, id);
-			else if (!strcmp(szSearchName, "as_rshoulder"))
+			else if (!strcmp(sz_search_name, "as_rshoulder"))
 				GetInvSlotIdentity(::AS_R_SHOULDER, id);
-			else if (!strcmp(szSearchName, "as_chest"))
+			else if (!strcmp(sz_search_name, "as_chest"))
 				GetInvSlotIdentity(::AS_CHEST, id);
-			else if (!strcmp(szSearchName, "as_lshoulder"))
+			else if (!strcmp(sz_search_name, "as_lshoulder"))
 				GetInvSlotIdentity(::AS_L_SHOULDER, id);
-			else if (!strcmp(szSearchName, "as_rarm"))
+			else if (!strcmp(sz_search_name, "as_rarm"))
 				GetInvSlotIdentity(::AS_R_ARM, id);
-			else if (!strcmp(szSearchName, "as_hands"))
+			else if (!strcmp(sz_search_name, "as_hands"))
 				GetInvSlotIdentity(::AS_HANDS, id);
-			else if (!strcmp(szSearchName, "as_larm"))
+			else if (!strcmp(sz_search_name, "as_larm"))
 				GetInvSlotIdentity(::AS_L_ARM, id);
-			else if (!strcmp(szSearchName, "as_rwrist"))
+			else if (!strcmp(sz_search_name, "as_rwrist"))
 				GetInvSlotIdentity(::AS_R_WRIST, id);
-			else if (!strcmp(szSearchName, "as_legs"))
+			else if (!strcmp(sz_search_name, "as_legs"))
 				GetInvSlotIdentity(::AS_LEGS, id);
-			else if (!strcmp(szSearchName, "as_lwrist"))
+			else if (!strcmp(sz_search_name, "as_lwrist"))
 				GetInvSlotIdentity(::AS_L_WRIST, id);
-			else if (!strcmp(szSearchName, "as_rfinger"))
+			else if (!strcmp(sz_search_name, "as_rfinger"))
 				GetInvSlotIdentity(::AS_R_FINGER, id);
-			else if (!strcmp(szSearchName, "as_feet"))
+			else if (!strcmp(sz_search_name, "as_feet"))
 				GetInvSlotIdentity(::AS_FEET, id);
-			else if (!strcmp(szSearchName, "as_lfinger"))
+			else if (!strcmp(sz_search_name, "as_lfinger"))
 				GetInvSlotIdentity(::AS_L_FINGER, id);
-			else if (!strcmp(szSearchName, "is_eyes"))
+			else if (!strcmp(sz_search_name, "is_eyes"))
 				GetInvSlotIdentity(::IS_EYES, id);
-			else if (!strcmp(szSearchName, "is_head"))
+			else if (!strcmp(sz_search_name, "is_head"))
 				GetInvSlotIdentity(::IS_HEAD, id);
-			else if (!strcmp(szSearchName, "is_ears"))
+			else if (!strcmp(sz_search_name, "is_ears"))
 				GetInvSlotIdentity(::IS_EARS, id);
-			else if (!strcmp(szSearchName, "is_rarm"))
+			else if (!strcmp(sz_search_name, "is_rarm"))
 				GetInvSlotIdentity(::IS_R_ARM, id);
-			else if (!strcmp(szSearchName, "is_chest"))
+			else if (!strcmp(sz_search_name, "is_chest"))
 				GetInvSlotIdentity(::IS_CHEST, id);
-			else if (!strcmp(szSearchName, "is_larm"))
+			else if (!strcmp(sz_search_name, "is_larm"))
 				GetInvSlotIdentity(::IS_L_ARM, id);
-			else if (!strcmp(szSearchName, "is_rwrist"))
+			else if (!strcmp(sz_search_name, "is_rwrist"))
 				GetInvSlotIdentity(::IS_R_WRIST, id);
-			else if (!strcmp(szSearchName, "is_waist"))
+			else if (!strcmp(sz_search_name, "is_waist"))
 				GetInvSlotIdentity(::IS_WAIST, id);
-			else if (!strcmp(szSearchName, "is_lwrist"))
+			else if (!strcmp(sz_search_name, "is_lwrist"))
 				GetInvSlotIdentity(::IS_L_WRIST, id);
-			else if (!strcmp(szSearchName, "is_rhand"))
+			else if (!strcmp(sz_search_name, "is_rhand"))
 				GetInvSlotIdentity(::IS_R_HAND, id);
-			else if (!strcmp(szSearchName, "is_legs"))
+			else if (!strcmp(sz_search_name, "is_legs"))
 				GetInvSlotIdentity(::IS_LEGS, id);
-			else if (!strcmp(szSearchName, "is_lhand"))
+			else if (!strcmp(sz_search_name, "is_lhand"))
 				GetInvSlotIdentity(::IS_L_HAND, id);
-			else if (!strcmp(szSearchName, "is_feet"))
+			else if (!strcmp(sz_search_name, "is_feet"))
 				GetInvSlotIdentity(::IS_FEET, id);
 			if (id.type != 0)
 			{
-				s.SlotID = id;
-				s.pItem = reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d));
+				s.slot_id = id;
+				s.p_item = reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d));
 			}
-			std::map<identity_t, InventoryItem*> m;
-			GetInventory(m);
-			for (auto it = m.begin(); it != m.end(); ++it)
+			map<identity_t, InventoryItem*> m;
+			this->get_inventory(m);
+			for (auto it = m.begin(); it != m.end(); ++it)  // NOLINT(modernize-loop-convert)
 			{
 				if (it->second)
 				{
-					strcpy_s(szName, MAX_STRING, it->second->GetName());
-					_strlwr_s(szName);
-					if (strstr(szName, szSearchName))
+					strcpy_s(sz_name, MAX_STRING, it->second->GetName());
+					_strlwr_s(sz_name);
+					if (strstr(sz_name, sz_search_name))
 					{
-						s.SlotID = it->first;
-						s.pItem = reinterpret_cast<InventoryItem*>(it->second);
+						s.slot_id = it->first;
+						s.p_item = reinterpret_cast<InventoryItem*>(it->second);
 					}
 				}
 			}
@@ -383,28 +375,26 @@ namespace isxao_classes
 		return s;
 	}
 
-	DWORD InventoryHolder::GetInventory(std::map<identity_t, InventoryItem*>& m) const
+	DWORD inventory_holder::get_inventory(map<identity_t, InventoryItem*>& m) const
 	{
-		identity_t d;
-		d.type = 0;
-		d.id = 0;
-		auto count = GetNewInventory()->GetInventorySize();
+		const identity_t d(0, 0);
+		const auto count = get_new_inventory()->get_inventory_size();
 		for (DWORD i = 0; i < count; i++)
 		{
 			identity_t id;
-			isxao_utilities::GetInvSlotIdentity(i, id);
-			auto pItem = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d);
-			if (pItem)
+			GetInvSlotIdentity(i, id);
+			const auto p_item = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d);
+			if (p_item)
 				m.insert_or_assign(id, reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d)));
 		}
 		return m.size();
 	}
 
-	DWORD InventoryHolder::GetWeaponInventory(std::vector<inventory_data_t*>& v)
+	DWORD inventory_holder::get_weapon_inventory(vector<inventory_data_t*>& v)
 	{
-		for (int i = 1; i < 16; i++)
+		for (auto i = 1; i < 16; i++)
 		{
-			p_inventory_data_t p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->GetInventoryHolder()->GetInventoryHolderData().p_regular_inventory->p_inventory_data[i];
+			auto p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_inventory_holder_data().p_regular_inventory->p_inventory_data[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
