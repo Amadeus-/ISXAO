@@ -8,12 +8,12 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 		return false;
 	__try
 	{
-#define pTeamRaid ((TeamRaid*)ObjectData.Ptr)
+#define P_TEAM_RAID ((team_raid*)ObjectData.Ptr)
 		switch (TeamRaidTypeMembers(Member->ID))
 		{
 		case Leader:
 		{
-			if((Object.Ptr = pTeamRaid->GetTeamLeader()))
+			if((Object.Ptr = P_TEAM_RAID->get_team_leader()))
 			{
 				Object.Type = pTeamEntryType;
 				return true;
@@ -22,7 +22,7 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 		}
 		case RaidCount:
 		{
-			Object.DWord = pTeamRaid->GetRaidCount();
+			Object.DWord = P_TEAM_RAID->get_raid_count();
 			Object.Type = pUintType;
 			break;
 		}
@@ -31,14 +31,14 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 			if(ISINDEX())
 			{
 				DWORD index = GETNUMBER();
-				if((Object.Ptr = pTeamRaid->GetRaidMember(index - 1)))
+				if((Object.Ptr = P_TEAM_RAID->get_raid_member(index - 1)))
 				{
 					Object.Type = pTeamEntryType;
 					return true;
 				}
 				return false;
 			}
-			if ((Object.Ptr = pTeamRaid->GetRaidMember(argv[0])))
+			if ((Object.Ptr = P_TEAM_RAID->get_raid_member(argv[0])))
 			{
 				Object.Type = pTeamEntryType;
 				return true;
@@ -47,7 +47,7 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 		}
 		case TeamCount:
 		{
-			Object.DWord = pTeamRaid->GetTeamCount();
+			Object.DWord = P_TEAM_RAID->get_team_count();
 			Object.Type = pUintType;
 			break;
 		}
@@ -56,14 +56,14 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 			if (ISINDEX())
 			{
 				DWORD index = GETNUMBER();
-				if ((Object.Ptr = pTeamRaid->GetTeamMember(index - 1)))
+				if ((Object.Ptr = P_TEAM_RAID->get_team_member(index - 1)))
 				{
 					Object.Type = pTeamEntryType;
 					return true;
 				}
 				return false;
 			}
-			if ((Object.Ptr = pTeamRaid->GetTeamMember(argv[0])))
+			if ((Object.Ptr = P_TEAM_RAID->get_team_member(argv[0])))
 			{
 				Object.Type = pTeamEntryType;
 				return true;
@@ -82,7 +82,7 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 				LSIndex *pIndex = (LSIndex*)IndexObject.Ptr;
 				if (pIndex->GetType() != pTeamEntryType)
 					return false;
-				Object.DWord = pTeamRaid->BuildLSTeam(pIndex);
+				Object.DWord = P_TEAM_RAID->build_ls_team(pIndex);
 				Object.Type = pUintType;
 				return true;
 			}
@@ -100,7 +100,7 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 				LSIndex *pIndex = (LSIndex*)IndexObject.Ptr;
 				if (pIndex->GetType() != pTeamEntryType)
 					return false;
-				Object.DWord = pTeamRaid->BuildLSRaid(pIndex);
+				Object.DWord = P_TEAM_RAID->build_ls_raid(pIndex);
 				Object.Type = pUintType;
 				return true;
 			}
@@ -109,7 +109,7 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 		default:
 			return false;
 		}
-#undef pTeamRaid
+#undef P_TEAM_RAID
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, Member->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{
@@ -126,17 +126,17 @@ bool TeamRaidType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, in
 		return false;
 	__try
 	{
-#define pTeamRaid ((TeamRaid*)ObjectData.Ptr)
+#define P_TEAM_RAID ((team_raid*)ObjectData.Ptr)
 		switch (TeamRaidTypeMethods(pMethod->ID))
 		{
 		case CreateRaid:
 		{
-			pTeamRaid->CreateRaid();
+			P_TEAM_RAID->create_raid();
 			return true;
 		}
 		default: break;
 		}
-#undef pTeamRaid
+#undef P_TEAM_RAID
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, pMethod->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{
@@ -151,8 +151,8 @@ bool TeamRaidType::ToText(LSOBJECTDATA ObjectData, char* buf, unsigned buflen)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define pTeamRaid ((TeamRaid*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64d", pTeamRaid->GetTeamIdentity().get_combined_identity());
-#undef pTeamRaid
+#define P_TEAM_RAID ((team_raid*)ObjectData.Ptr)
+	sprintf_s(buf, buflen, "%I64d", P_TEAM_RAID->get_team_identity().get_combined_identity());
+#undef P_TEAM_RAID
 	return true;
 }

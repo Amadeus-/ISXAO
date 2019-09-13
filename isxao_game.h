@@ -707,6 +707,11 @@ constexpr char* const interfaces_module_name = static_cast<char*>("Interfaces.dl
 constexpr char* const client_t__s_n_char_id_mangled_name = static_cast<char*>(
 	"?s_nCharID@Client_t@@0IA");
 
+constexpr char* const client_t__process_message_mangled_name = static_cast<char*>(
+	"?ProcessMessage@Client_t@@AAEHPAVMessage_t@@@Z");
+constexpr char* const client_t__process_message_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC 40 06 00 00");
+
 #pragma endregion
 
 #pragma region Vehicle

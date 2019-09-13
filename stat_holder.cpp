@@ -3,7 +3,7 @@
 namespace isxao_classes
 {
 
-	DWORD stat_holder::get_skill_locks(std::vector<action_lock*> &v) const
+	DWORD stat_holder::get_skill_locks(vector<action_lock*> &v) const
 	{
 		auto p_skill_lock_vector = this->get_stat_holder_data().p_skill_locks;
 		for (auto it = p_skill_lock_vector->begin(); it != p_skill_lock_vector->end(); ++it)  // NOLINT(modernize-loop-convert)
@@ -15,15 +15,17 @@ namespace isxao_classes
 	action_lock* stat_holder::get_skill_lock(special_action_template* special_action) const
 	{
 		vector<action_lock*> v;
-		this->get_skill_locks(v);
-		for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+		if (this->get_skill_locks(v))
 		{
-			const auto action_identity = (*it)->get_action_identity();
-			const auto id1 = special_action->get_locked_skill_id_1();
-			const auto id2 = special_action->get_locked_skill_id_2();
-			if (action_identity.type == id1 || action_identity.type == id2 || action_identity.id == id1 || action_identity.id == id2)
-				return *it;
-		}
+			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+			{
+				const auto action_identity = (*it)->get_action_identity();
+				const auto id1 = special_action->get_locked_skill_id_1();
+				const auto id2 = special_action->get_locked_skill_id_2();
+				if (action_identity.type == id1 || action_identity.type == id2 || action_identity.id == id1 || action_identity.id == id2)
+					return *it;
+			}
+		}		
 		return nullptr;
 	}
 

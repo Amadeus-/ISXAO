@@ -3,112 +3,118 @@
 namespace isxao_classes
 {
 
-	DWORD TeamRaid::BuildLSTeam(LSIndex *pIndex) const
+	DWORD team_raid::build_ls_team(LSIndex *p_index) const
 	{
-		std::vector<team_entry*> v;
-		GetTeam(v);
-		for (auto it = v.begin(); it != v.end(); ++it)
-			pIndex->AddItem(reinterpret_cast<LSOBJECTDATA&>(*it));
-		return pIndex->GetContainerUsed();
+		vector<team_entry*> v;
+		if (this->get_team(v))
+		{
+			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+				p_index->AddItem(reinterpret_cast<LSOBJECTDATA&>(*it));
+		}		
+		return p_index->GetContainerUsed();
 	}
 
-	DWORD TeamRaid::BuildLSRaid(LSIndex *pIndex) const
+	DWORD team_raid::build_ls_raid(LSIndex *p_index) const
 	{
-		std::vector<team_entry*> v;
-		GetRaid(v);
-		for (auto it = v.begin(); it != v.end(); ++it)
-			pIndex->AddItem(reinterpret_cast<LSOBJECTDATA&>(*it));
-		return pIndex->GetContainerUsed();
+		vector<team_entry*> v;
+		if (this->get_raid(v))
+		{
+			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+				p_index->AddItem(reinterpret_cast<LSOBJECTDATA&>(*it));
+		}		
+		return p_index->GetContainerUsed();
 	}
 
-	void TeamRaid::CreateRaid()
+	void team_raid::create_raid()
 	{
 		P_ENGINE_CLIENT_ANARCHY->n3_msg_create_raid();
 	}
 
-	team_entry* TeamRaid::GetTeamLeader() const
+	team_entry* team_raid::get_team_leader() const
 	{
-		std::vector<team_entry*> raid_vector;
-		GetRaid(raid_vector);
-		for (auto it = raid_vector.begin(); it != raid_vector.end(); ++it)
+		vector<team_entry*> v;
+		if (this->get_raid(v))
 		{
-			if (P_ENGINE_CLIENT_ANARCHY->N3Msg_IsTeamLeader((*it)->get_identity()))
-				return (*it);
-		}
+			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+			{
+				if (P_ENGINE_CLIENT_ANARCHY->N3Msg_IsTeamLeader((*it)->get_identity()))
+					return (*it);
+			}
+		}		
 		return nullptr;
 	}
 
-	DWORD TeamRaid::GetRaid(std::vector<team_entry*> &v) const
+	DWORD team_raid::get_raid(std::vector<team_entry*> &v) const
 	{
-		if (!IsRaid())
+		if (!this->is_raid())
 		{
-			GetTeam(v, 0);
-			return v.size();
+			return this->get_team(v, 0);
 		}			
 		for (auto i = 0; i < 6; i++)
 		{
-			std::vector<team_entry*> team_entry_vector;
-			GetTeam(team_entry_vector, i);
-			for (auto it = team_entry_vector.begin(); it != team_entry_vector.end(); ++it)
+			vector<team_entry*> team_entry_vector;
+			if (this->get_team(team_entry_vector, i))  
 			{
-				if(!IsClientId((*it)->get_identity().id))
-					v.push_back(*it);
-			}				
+				for (auto it = team_entry_vector.begin(); it != team_entry_vector.end(); ++it)// NOLINT(modernize-loop-convert)
+				{
+					if (!IsClientId((*it)->get_identity().id))
+						v.push_back(*it);
+				}
+			}							
 		}
 		return v.size();
 	}
 
-	DWORD TeamRaid::GetRaidCount() const
+	DWORD team_raid::get_raid_count() const
 	{
-		std::vector<team_entry*> raid_vector;
-		GetRaid(raid_vector);
-		return raid_vector.size();
+		vector<team_entry*> raid_vector;
+		return this->get_raid(raid_vector);
 	}
 
-	team_entry* TeamRaid::GetRaidMember(DWORD index) const
+	team_entry* team_raid::get_raid_member(const DWORD index) const
 	{
-		std::vector<team_entry*> raid_vector;
-		GetRaid(raid_vector);
-		if (index < 0 || index >= raid_vector.size())
-			return nullptr;
-		return raid_vector[index];
+		vector<team_entry*> v;
+		if (this->get_raid(v))
+		{
+			if (index > 0 && index < v.size())				
+				return v[index];
+		}
+		return nullptr;
 	}
 
-	team_entry* TeamRaid::GetRaidMember(PCSTR raid_member_name) const
+	team_entry* team_raid::get_raid_member(const PCSTR raid_member_name) const
 	{
 		char name[MAX_STRING] = { 0 };
 		char search_name[MAX_STRING];
 		strcpy_s(search_name, MAX_STRING, raid_member_name);
 		_strlwr_s(search_name);
-		std::vector<team_entry*> raid_vector;
-		GetRaid(raid_vector);
-		for (auto it = raid_vector.begin(); it != raid_vector.end(); ++it)
+		vector<team_entry*> v;
+		if (this->get_raid(v))
 		{
-			strcpy_s(name, MAX_STRING, (*it)->get_name());
-			_strlwr_s(name);
-			if (strstr(name, search_name))
-				return (*it);
-		}
+			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+			{
+				strcpy_s(name, MAX_STRING, (*it)->get_name());
+				_strlwr_s(name);
+				if (strstr(name, search_name))
+					return (*it);
+			}
+		}		
 		return nullptr;
 	}
 
-	DWORD TeamRaid::GetTeam(std::vector<team_entry*> &v) const
+	DWORD team_raid::get_team(std::vector<team_entry*> &v) const
 	{
-		if (!IsRaid())
-		{
-			GetTeam(v, 0);
-			return v.size();
-		}
-		GetTeam(v, GetTeamRaidIndex());
-		return v.size();
+		if (!is_raid())
+			return get_team(v, 0);
+		return this->get_team(v, get_team_raid_index());
 	}
 
-	DWORD TeamRaid::GetTeam(std::vector<team_entry*> &v, DWORD index) const
+	DWORD team_raid::get_team(vector<team_entry*> &v, const DWORD index) const
 	{
 		if (index < 0 || index > 5)
 			return 0;
-		auto team_entry_vector = GetTeamRaidData().p_team_list[index];
-		for (auto it = team_entry_vector->begin(); it != team_entry_vector->end(); ++it)
+		auto team_entry_vector = get_team_raid_data().p_team_list[index];
+		for (auto it = team_entry_vector->begin(); it != team_entry_vector->end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
 			auto entry = reinterpret_cast<team_entry*>(*it);
 			if (!IsClientId(entry->get_identity().id))
@@ -117,63 +123,66 @@ namespace isxao_classes
 		return v.size();
 	}
 
-	DWORD TeamRaid::GetTeamCount() const
+	DWORD team_raid::get_team_count() const
 	{
-		std::vector<team_entry*> v;
-		GetTeam(v);
-		return v.size();
+		vector<team_entry*> v;
+		return get_team(v);;
 	}
 
-	team_entry* TeamRaid::GetTeamMember(DWORD index) const
+	team_entry* team_raid::get_team_member(const DWORD index) const
 	{
-		std::vector<team_entry*> team_entry_vector;
-		GetTeam(team_entry_vector);
-		if (index < 0 || index >= team_entry_vector.size())
-			return nullptr;
-		return team_entry_vector[index];
+		vector<team_entry*> v;
+		if (this->get_team(v))
+		{
+			if (index > 0 && index < v.size())
+				return v[index];
+		}
+		return nullptr;
 	}
 
-	team_entry* TeamRaid::GetTeamMember(PCSTR team_member_name) const
+	team_entry* team_raid::get_team_member(const PCSTR team_member_name) const
 	{
 		char name[MAX_STRING] = { 0 };
 		char search_name[MAX_STRING];
 		strcpy_s(search_name, MAX_STRING, team_member_name);
 		_strlwr_s(search_name);
-		std::vector<team_entry*> team_entry_vector;
-		GetTeam(team_entry_vector);
-		for (auto it = team_entry_vector.begin(); it != team_entry_vector.end(); ++it)
+		vector<team_entry*> v;
+		if (this->get_team(v))
 		{
-			strcpy_s(name, MAX_STRING, (*it)->get_name());
-			_strlwr_s(name);
-			if (strstr(name, search_name))
-				return (*it);
-		}
+			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+			{
+				strcpy_s(name, MAX_STRING, (*it)->get_name());
+				_strlwr_s(name);
+				if (strstr(name, search_name))
+					return (*it);
+			}
+		}		
 		return nullptr;
 	}
 
-	identity_t TeamRaid::GetTeamIdentity() const
+	identity_t team_raid::get_team_identity() const
 	{
-		return GetTeamRaidData().team_identity;
+		return get_team_raid_data().team_identity;
 	}
 
-	identity_t TeamRaid::GetTeamLeaderID() const
+	identity_t team_raid::get_team_leader_id() const
 	{
-		return GetTeamRaidData().team_leader_identity;
+		return get_team_raid_data().team_leader_identity;
 	}
 
-	team_raid_holder_t TeamRaid::GetTeamRaidData() const
+	team_raid_holder_t team_raid::get_team_raid_data() const
 	{
 		return team_raid_holder_;
 	}
 
-	DWORD TeamRaid::GetTeamRaidIndex() const
+	DWORD team_raid::get_team_raid_index() const
 	{
-		return GetTeamRaidData().raid_team_index;
+		return get_team_raid_data().raid_team_index;
 	}
 
-	bool TeamRaid::IsRaid() const
+	bool team_raid::is_raid() const
 	{
-		return GetTeamRaidData().raid_team_index != -1;
+		return get_team_raid_data().raid_team_index != -1;
 	}
 
 }

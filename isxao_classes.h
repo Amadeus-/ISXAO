@@ -14,7 +14,7 @@ namespace isxao_classes
 	class ResourceDatabase;
 	class special_action_template;
 	class team_member;
-	class TeamRaid;
+	class team_raid;
 
 #pragma endregion
 

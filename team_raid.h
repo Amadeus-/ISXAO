@@ -1,27 +1,28 @@
 #pragma once
 
-class TeamRaid
+// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
+class team_raid
 {
 public:
-	AOLIB_OBJECT DWORD BuildLSTeam(LSIndex*) const;
-	AOLIB_OBJECT DWORD BuildLSRaid(LSIndex*) const;
-	static
-	AOLIB_OBJECT void CreateRaid();
-	AOLIB_OBJECT team_entry* GetTeamLeader() const;
-	AOLIB_OBJECT DWORD GetRaid(std::vector<team_entry*>&) const;
-	AOLIB_OBJECT DWORD GetRaidCount() const;
-	AOLIB_OBJECT team_entry* GetRaidMember(DWORD) const;
-	AOLIB_OBJECT team_entry* GetRaidMember(PCSTR) const;
-	AOLIB_OBJECT DWORD GetTeam(std::vector<team_entry*>&) const;
-	AOLIB_OBJECT DWORD GetTeam(std::vector<team_entry*>&, DWORD) const;
-	AOLIB_OBJECT DWORD GetTeamCount() const;
-	AOLIB_OBJECT team_entry* GetTeamMember(DWORD) const;
-	AOLIB_OBJECT team_entry* GetTeamMember(PCSTR) const;
-	AOLIB_OBJECT identity_t GetTeamIdentity() const;
-	AOLIB_OBJECT identity_t GetTeamLeaderID() const;
-	AOLIB_OBJECT team_raid_holder_t GetTeamRaidData() const;
-	AOLIB_OBJECT DWORD GetTeamRaidIndex() const;
-	AOLIB_OBJECT bool IsRaid() const;
+	AOLIB_OBJECT DWORD build_ls_team(LSIndex*) const;
+	AOLIB_OBJECT DWORD build_ls_raid(LSIndex*) const;
+	AOLIB_OBJECT static void create_raid();
+	AOLIB_OBJECT team_entry* get_team_leader() const;
+	AOLIB_OBJECT DWORD get_raid(std::vector<team_entry*>&) const;
+	AOLIB_OBJECT DWORD get_raid_count() const;
+	AOLIB_OBJECT team_entry* get_raid_member(DWORD) const;
+	AOLIB_OBJECT team_entry* get_raid_member(PCSTR) const;
+	AOLIB_OBJECT DWORD get_team(vector<team_entry*>&) const;
+	AOLIB_OBJECT DWORD get_team(vector<team_entry*>&, DWORD) const;
+	AOLIB_OBJECT DWORD get_team_count() const;
+	AOLIB_OBJECT team_entry* get_team_member(DWORD) const;
+	AOLIB_OBJECT team_entry* get_team_member(PCSTR) const;
+	AOLIB_OBJECT identity_t get_team_identity() const;
+	AOLIB_OBJECT identity_t get_team_leader_id() const;
+	AOLIB_OBJECT team_raid_holder_t get_team_raid_data() const;
+	AOLIB_OBJECT DWORD get_team_raid_index() const;
+	AOLIB_OBJECT bool is_raid() const;
 private:
+	// ReSharper disable once CppUninitializedNonStaticDataMember
 	team_raid_holder_t team_raid_holder_;
 };

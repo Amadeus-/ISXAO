@@ -416,6 +416,8 @@
 
 #undef CLIENT_T__S_N_CHAR_ID_USE_PATTERN
 
+#undef CLIENT_T__PROCESS_MESSAGE_USE_PATTERN
+
 #pragma endregion
 
 #pragma region Vehicle

@@ -267,19 +267,19 @@ namespace isxao_classes
 
 	bool actor::is_in_my_team()
 	{
-		return this->is_player() && this->is_in_team() && (this->get_team_raid()->GetTeamIdentity() == P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_team_raid()->GetTeamIdentity());
+		return this->is_player() && this->is_in_team() && (this->get_team_raid()->get_team_identity() == P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_team_raid()->get_team_identity());
 	}
 
 	bool actor::is_in_team()
 	{
 		if(this->is_player())
-			return this->get_team_raid()->GetTeamIdentity().type != 0;
+			return this->get_team_raid()->get_team_identity().type != 0;
 		return false;
 	}
 
 	bool actor::is_in_raid()
 	{
-		return this->is_player() && this->is_in_team() && this->get_team_raid()->GetTeamRaidIndex() != DWORD(-1);
+		return this->is_player() && this->is_in_team() && this->get_team_raid()->get_team_raid_index() != DWORD(-1);
 	}
 
 	bool actor::is_in_my_raid_team()
@@ -287,7 +287,7 @@ namespace isxao_classes
 		if(this->is_team_member() && this->is_in_raid())
 		{
 			std::vector<team_entry*> v;
-			if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_team_raid()->GetTeam(v))
+			if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_team_raid()->get_team(v))
 			{
 				for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 				{
@@ -451,10 +451,10 @@ namespace isxao_classes
 		return false;
 	}
 
-	TeamRaid* actor::get_team_raid()
+	team_raid* actor::get_team_raid()
 	{
 		if(this->is_player())
-			return reinterpret_cast<TeamRaid*>(this->get_simple_char_data()->p_team_raid_info);
+			return reinterpret_cast<team_raid*>(this->get_simple_char_data()->p_team_raid_info);
 		return nullptr;
 	}
 

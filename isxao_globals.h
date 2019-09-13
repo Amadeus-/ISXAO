@@ -3,8 +3,7 @@
 #define ISXAO_GLOBALS_H
 
 namespace isxao_globals
-{
-	bool initialize_offsets();
+{	
 
 #pragma region Process
 
@@ -242,7 +241,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD client_t__s_n_char_id;
 	AOLIB_VAR DWORD* gp_character_id;
 #define G_CHARACTER_ID (*gp_character_id)  // NOLINT(cppcoreguidelines-macro-usage)
-	AOLIB_VAR DWORD Client_t__ProcessMessage;
+	AOLIB_VAR DWORD client_t__process_message;
 
 #pragma endregion
 
@@ -408,7 +407,7 @@ namespace isxao_globals
 #pragma region ChatGUIModule
 
 	AOLIB_VAR DWORD  ChatGUIModule_c__s_pcInstance;
-	AOLIB_VAR ChatGUIModule** ppChatGUIModule;
+	AOLIB_VAR chat_gui_module** ppChatGUIModule;
 #define pChatGUIModule (*ppChatGUIModule)
 
 	AOLIB_VAR DWORD ChatGUIModule_c__HandleGroupAction;
@@ -503,7 +502,7 @@ namespace isxao_globals
 #pragma region ChatWindowController
 
 	AOLIB_VAR DWORD ChatWindowController_c__m_pcInstance;
-	AOLIB_VAR ChatWindowController** ppChatWindowController;
+	AOLIB_VAR chat_window_controller** ppChatWindowController;
 #define pChatWindowController (*ppChatWindowController)
 
 	AOLIB_VAR DWORD ChatGroupController_c__sub_10083D9C;
@@ -579,6 +578,7 @@ namespace isxao_globals
 
 #pragma endregion
 
+	bool initialize_offsets();
 	bool get_function_address(const std::vector<unsigned char>& data, const char* function_pattern, DWORD& module_base_address, DWORD& function_address, const char* function_offset_name);
 	bool get_static_address_from_function(const DWORD& function_base_address, DWORD& static_address, const char* static_address_name, const size_t& offset);
 	bool get_relative_address_from_function(const DWORD& function_base_address, DWORD& relative_address, const char* relative_address_name, const size_t& offset, const size_t& bytes_to_next_line);

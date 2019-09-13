@@ -343,6 +343,7 @@ namespace ao_data
 	typedef ao_map<identity_t, struct ao_n3_dynel*> dynel_map_t, *p_dynel_map_t;
 	typedef ao_map<DWORD, struct ao_nano_item*> nano_item_map_t, *p_nano_item_map_t;	
 	typedef ao_map<identity_t, struct ao_playfield_anarchy*> playfield_map, *p_playfield_map;
+	typedef ao_map<string, struct ao_chat_window_node*> chat_window_node_map_t, *p_chat_window_node_map_t;
 
 	typedef ao_map<identity_t, DWORD> perk_map_t, *p_perk_map_t;
 	typedef ao_map<identity_t, DWORD> pet_map_t, *p_pet_map_t;
@@ -711,7 +712,7 @@ namespace ao_data
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x04[0x4];			// 0x04
 		PVOID p_v_table_base_object_c;	// 0x08
-		std::string window_name;		// 0x0C
+		string window_name;				// 0x0C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x24[0x1F4];		// 0x24
 	} chat_window_node_t, *p_chat_window_node_t;
@@ -750,7 +751,7 @@ namespace ao_data
 		PVOID p_v_table;										// 0x00
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x04[0x10];								// 0x04
-		chat_window_node_dir_t chat_window_node_dir;			// 0x18
+		chat_window_node_map_t chat_window_node_dir;			// 0x18
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x20[0x1C];								// 0x20
 	} chat_window_controller_t, *p_chat_window_controller;
@@ -2635,6 +2636,7 @@ namespace ao_data
 
 #pragma region TeamRaidHolder
 
+	// ReSharper disable once CppImplicitDefaultConstructorNotAvailable
 	typedef struct ao_team_raid_info  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		const char name[0x14];		// 0x00

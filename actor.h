@@ -24,7 +24,7 @@ public:
 	AOLIB_OBJECT float get_scale();
 	AOLIB_OBJECT p_simple_char_t get_simple_char_data();
 	AOLIB_OBJECT spell_template_data* get_spell_template_data();
-	AOLIB_OBJECT TeamRaid* get_team_raid();
+	AOLIB_OBJECT team_raid* get_team_raid();
 	AOLIB_OBJECT vehicle* get_vehicle();
 	AOLIB_OBJECT WeaponHolder* get_weapon_holder();
 	AOLIB_OBJECT bool has_pet();	

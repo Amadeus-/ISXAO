@@ -3,7 +3,7 @@
 namespace isxao_detours
 {
 
-	class AODetours
+	class ao_detours
 	{
 	public:
 		void n3EngineClientAnarchy_t__SetMainDynel_Trampoline(PVOID);
@@ -27,8 +27,8 @@ namespace isxao_detours
 		void n3Dynel_t__SetPlayfield_Trampoline(DWORD);
 		void n3Dynel_t__SetPlayfield_Detour(DWORD);
 
-		DWORD Client_t__ProcessMessage_Trampoline(Message*);
-		DWORD Client_t__ProcessMessage_Detour(Message*);
+		DWORD client_t__process_message_trampoline(Message*);
+		DWORD client_t__process_message_detour(Message*);
 
 		void n3Engine_t__SetTeleportStatus_Trampoline(bool);
 		void n3Engine_t__SetTeleportStatus_Detour(bool);
