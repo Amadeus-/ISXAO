@@ -55,8 +55,8 @@ namespace isxao_detours
 		PVOID ChatWindowNode_c__sub_1009BB79_Trampoline(int, int, string*, string*, int, int, char);
 		PVOID ChatWindowNode_c__sub_1009BB79_Detour(int, int, string*, string*, int, int, char);
 
-		bool CommandInterpreter_c__ParseTextCommand_Trampoline(ChatWindowNode*, string*);
-		bool CommandInterpreter_c__ParseTextCommand_Detour(ChatWindowNode*, string*);
+		bool CommandInterpreter_c__ParseTextCommand_Trampoline(chat_window_node*, string*);
+		bool CommandInterpreter_c__ParseTextCommand_Detour(chat_window_node*, string*);
 
 		static void Initialize();
 		static void Shutdown();

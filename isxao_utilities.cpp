@@ -734,9 +734,9 @@ namespace isxao_utilities
 			RecursiveAddWeaponItemToWeaponItemMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, p_chat_window_node_node_t pNode, p_chat_window_node_root_t pRoot, DWORD& count)
+	void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, chat_window_node*>& m, p_chat_window_node_node_t pNode, p_chat_window_node_root_t pRoot, DWORD& count)
 	{
-		m.insert_or_assign(pNode->window_name, reinterpret_cast<ChatWindowNode*>(pNode->p_chat_window));
+		m.insert_or_assign(pNode->window_name, reinterpret_cast<chat_window_node*>(pNode->p_chat_window));
 		count--;
 		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
 			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode->p_lower, pRoot, count);
@@ -744,7 +744,7 @@ namespace isxao_utilities
 			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, chat_window_node_dir_t &dir)
+	void GetChatWindowNodeMap(std::map<string, chat_window_node*>& m, chat_window_node_dir_t &dir)
 	{
 		auto count = dir.count;
 		auto pRoot = dir.p_root;

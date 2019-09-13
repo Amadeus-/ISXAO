@@ -3,79 +3,79 @@
 namespace isxao_classes
 {
 
-	DWORD GameTime::GetCurrentDay() const
+	DWORD game_time::get_current_day() const
 	{
-		return GetGameTimeData().current_day;
+		return this->get_game_time_data().current_day;
 	}
 
-	DWORD GameTime::GetCurrentHour() const
+	DWORD game_time::get_current_hour() const
 	{
-		return GetGameTimeData().current_hour;
+		return this->get_game_time_data().current_hour;
 	}
 
-	DWORD GameTime::GetCurrentMinute() const
+	DWORD game_time::get_current_minute() const
 	{
-		return GetGameTimeData().current_minute;
+		return this->get_game_time_data().current_minute;
 	}
 
-	double GameTime::GetCurrentRealTime() const
+	double game_time::get_current_real_time() const
 	{
-		return GetGameTimeData().current_real_time;
+		return this->get_game_time_data().current_real_time;
 	}
 
-	DWORD GameTime::GetCurrentSeconds() const
+	DWORD game_time::get_current_seconds() const
 	{
-		return GetGameTimeData().current_second;
+		return this->get_game_time_data().current_second;
 	}
 
-	DWORD GameTime::GetCurrentTimeInMinutes() const
+	DWORD game_time::get_current_time_in_minutes() const
 	{
-		return GetCurrentMinute() + GetCurrentHour() * GetGameTimeData().minutes_per_hour;
+		return this->get_current_minute() + this->get_current_hour() * this->get_game_time_data().minutes_per_hour;
 	}
 
-	DWORD GameTime::GetCurrentTimeInSeconds() const
+	DWORD game_time::get_current_time_in_seconds() const
 	{
-		return GetCurrentSeconds() + GetCurrentMinute() * GetGameTimeData().seconds_per_minute + GetCurrentHour() * GetGameTimeData().seconds_in_a_hour;
+		return this->get_current_seconds() + this->get_current_minute() * this->get_game_time_data().seconds_per_minute + this->get_current_hour() * this->get_game_time_data().seconds_in_a_hour;
 	}
 
-	double GameTime::GetDawnEnd() const
+	double game_time::get_dawn_end() const
 	{
-		return double((GetGameTimeData().hour_of_dawn_start + GetGameTimeData().dawn_duration_in_hours) * GetGameTimeData().seconds_in_a_hour);
+		return double((this->get_game_time_data().hour_of_dawn_start + this->get_game_time_data().dawn_duration_in_hours) * this->get_game_time_data().seconds_in_a_hour);
 	}
 
-	double GameTime::GetDawnStart() const
+	double game_time::get_dawn_start() const
 	{
-		return double(GetGameTimeData().hour_of_dawn_start * GetGameTimeData().seconds_in_a_hour);
+		return double(this->get_game_time_data().hour_of_dawn_start * this->get_game_time_data().seconds_in_a_hour);
 	}
 
-	DWORD GameTime::GetDayPeriod() const
+	DWORD game_time::get_day_period() const
 	{
-		return GetGameTimeData().day_period;
+		return this->get_game_time_data().day_period;
 	}
 
-	double GameTime::GetDeltaTime() const
+	double game_time::get_delta_time() const
 	{
-		return GetGameTimeData().delta_time;
+		return this->get_game_time_data().delta_time;
 	}
 
-	double GameTime::GetDuskEnd() const
+	double game_time::get_dusk_end() const
 	{
-		return double((GetGameTimeData().hour_of_dusk_start + GetGameTimeData().dusk_duration_in_hours) * GetGameTimeData().seconds_in_a_hour);
+		return double((this->get_game_time_data().hour_of_dusk_start + this->get_game_time_data().dusk_duration_in_hours) * this->get_game_time_data().seconds_in_a_hour);
 	}
 
-	double GameTime::GetDuskStart() const
+	double game_time::get_dusk_start() const
 	{
-		return double(GetGameTimeData().hour_of_dusk_start * GetGameTimeData().seconds_in_a_hour);
+		return double(this->get_game_time_data().hour_of_dusk_start * this->get_game_time_data().seconds_in_a_hour);
 	}
 
-	game_time_t GameTime::GetGameTimeData() const
+	game_time_t game_time::get_game_time_data() const
 	{
-		return game_time_;
+		return this->game_time_;
 	}
 
-	double GameTime::GetNormalTime() const
+	double game_time::get_normal_time() const
 	{
-		return GetGameTimeData().normal_time;
+		return this->get_game_time_data().normal_time;
 	}
 
 }

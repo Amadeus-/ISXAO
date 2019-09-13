@@ -4,10 +4,7 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	// vector<DWORD> v;
-	auto r = &P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_simple_char_data()->identity;
-	// printf("%d", v.size());
-	printf("%" PRIX32, r);
+	printf("%" PRIX32, P_GAME_TIME);
 	return 0;
 }
 

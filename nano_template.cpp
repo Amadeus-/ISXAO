@@ -30,7 +30,7 @@ namespace isxao_classes
 
 	float nano_template::get_time_remaining() const
 	{
-		auto result = float(this->get_start_time() + this->get_duration()) / 100.0f - float(pGametime->GetNormalTime());
+		auto result = float(this->get_start_time() + this->get_duration()) / 100.0f - float(P_GAME_TIME->get_normal_time());
 		if (result < 0.0f)
 			result = 0.0f;
 		return result;

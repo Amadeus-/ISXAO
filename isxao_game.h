@@ -137,6 +137,11 @@ constexpr char* const f_stat_to_string_pattern = static_cast<char*>(
 constexpr char* const f_get_nano_item_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 0C 56 8D 45 08");
 
+constexpr char* const game_time_t__get_instance_mangled_name = static_cast<char*>(
+	"?GetInstance@GameTime_t@@SAPAV1@XZ");
+constexpr char* const game_time_t__get_instance_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 83 3D ?? ?? ?? ?? 00 75 ?? 68 C8 00 00 00");
+
 constexpr DWORD item_manager_t__item_manager_t_offset = 0xF3;
 constexpr DWORD item_manager_t__item_manager_t_bytes_to_next = 0x0;
 
@@ -658,6 +663,10 @@ constexpr DWORD item_manager_t__m_ppc_instance_offset = 0xC;
 
 constexpr DWORD static_item_manager_t__m_ppc_instance_offset = 0xC;
 
+constexpr char* const game_time_t__m_pc_instance_mangled_name = static_cast<char*>(
+	"?m_pcInstance@GameTime_t@@0PAV1@A");
+constexpr DWORD game_time_t__m_pc_instance_offset = 0xB;
+
 #pragma endregion
 
 #pragma region GUI
@@ -666,6 +675,9 @@ constexpr DWORD static_item_manager_t__m_ppc_instance_offset = 0xC;
 constexpr char* const gui_module_name = static_cast<char*>("GUI.dll");
 
 // Functions
+constexpr char* const chat_window_node_c__parse_text_command_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 5C 56 FF 75 08");
+
 const char* const targeting_module_t__initialise_message_mangled_name = static_cast<char*>(
 	"?InitialiseMessage@TargetingModule_t@@CAXXZ");
 const char* const targeting_module_t__initialise_message_pattern = static_cast<char*>(
@@ -697,6 +709,8 @@ constexpr DWORD targeting_module_t__m_pc_attacking_indicator_offset = 0x1F;
 constexpr char* const targeting_module_t__m_c_last_target_mangled_name = static_cast<char*>(
 	"?m_cLastTarget@TargetingModule_t@@0VIdentity_t@@A");
 constexpr DWORD targeting_module_t__m_c_last_target_offset = 0x25;
+
+
 
 #pragma endregion
 

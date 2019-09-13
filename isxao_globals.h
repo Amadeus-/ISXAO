@@ -77,6 +77,8 @@ namespace isxao_globals
 	AOLIB_VAR DWORD f_get_nano_item;
 	AOLIB_VAR DWORD f_stat_to_string;
 
+	AOLIB_VAR DWORD game_time_t__get_instance;
+
 	AOLIB_VAR DWORD item_manager_t__item_manager_t;
 
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_engine_client_anarchy_t;
@@ -210,6 +212,9 @@ namespace isxao_globals
 	AOLIB_VAR DWORD static_item_manager_t__m_ppc_instance;
 	AOLIB_VAR vector<static_item_t> ***ppp_static_item_vector;
 #define P_STATIC_ITEM_VECTOR (**ppp_static_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD game_time_t__m_pc_instance;
+	AOLIB_VAR game_time** pp_game_time;
+#define P_GAME_TIME (*pp_game_time)
 
 #pragma endregion
 
@@ -233,6 +238,8 @@ namespace isxao_globals
 	AOLIB_VAR DWORD TargetingModule_t__SelectSelf;
 	AOLIB_VAR DWORD targeting_module_t__set_target;
 	AOLIB_VAR DWORD TargetingModule_t__SetTargetPet;
+
+	AOLIB_VAR DWORD chat_window_node_c__parse_text_command;
 
 #pragma endregion
 
@@ -376,9 +383,7 @@ namespace isxao_globals
 #pragma endregion
 
 #pragma region Gametime
-	AOLIB_VAR DWORD Gametime_t__m_pcInstance;
-	AOLIB_VAR GameTime** ppGametime;
-#define pGametime (*ppGametime)
+	
 #pragma endregion
 	
 #pragma region InputConfig
@@ -526,7 +531,7 @@ namespace isxao_globals
 
 #pragma region ChatWindowNode
 
-	AOLIB_VAR DWORD ChatWindowNode_c__ParseTextCommand;
+	
 
 	AOLIB_VAR DWORD ChatWindowNode_c__sub_1009BB79;
 
@@ -557,7 +562,7 @@ namespace isxao_globals
 #pragma region n3DatabaseHandler
 
 	AOLIB_VAR DWORD n3DatabaseHandler_t__s_pcInstance;
-	AOLIB_VAR DatabaseHandler** ppDatabaseHandler;
+	AOLIB_VAR database_handler** ppDatabaseHandler;
 #define pDatabaseHandler (*ppDatabaseHandler)
 
 #pragma endregion

@@ -1,10 +1,12 @@
 #pragma once
 
-class ChatWindowNode
+// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
+class chat_window_node
 {
 public:
-	AOLIB_OBJECT chat_window_node_t GetData() const;
-	AOLIB_OBJECT bool ParseTextCommand(string&);
+	AOLIB_OBJECT chat_window_node_t get_data() const;
+	AOLIB_OBJECT bool parse_text_command(string&);
 private:
+	// ReSharper disable once CppUninitializedNonStaticDataMember
 	chat_window_node_t chat_window_node_;
 };

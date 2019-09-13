@@ -8,13 +8,13 @@ namespace isxao_classes
 		return chat_window_controller_;
 	}
 
-	DWORD chat_window_controller::get_chat_window_nodes(map<string, ChatWindowNode*>& m) const
+	DWORD chat_window_controller::get_chat_window_nodes(map<string, chat_window_node*>& m) const
 	{
 		std::map<string, p_chat_window_node_t> map;
 		if (this->get_chat_window_controller_data().chat_window_node_dir.copy_map(map))
 		{
 			for (auto it = map.begin(); it != map.end(); ++it)  // NOLINT(modernize-loop-convert)
-				m.insert_or_assign(it->first, reinterpret_cast<ChatWindowNode*>(it->second));
+				m.insert_or_assign(it->first, reinterpret_cast<chat_window_node*>(it->second));
 		}		
 		return m.size();
 	}

@@ -13,6 +13,6 @@ namespace isxao_classes
 		return ParseText(nullptr, text);
 	}
 
-	FUNCTION_AT_ADDRESS(bool CommandInterpreter::ParseText(ChatWindowNode*, string&), CommandInterpreter_c__ParseTextCommand);
+	FUNCTION_AT_ADDRESS(bool CommandInterpreter::ParseText(chat_window_node*, string&), CommandInterpreter_c__ParseTextCommand);
 
 }

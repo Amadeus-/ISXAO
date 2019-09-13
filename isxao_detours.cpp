@@ -691,9 +691,9 @@ namespace isxao_detours
 
 #pragma region CommandInterpreter
 
-	DETOUR_TRAMPOLINE_EMPTY(bool ao_detours::CommandInterpreter_c__ParseTextCommand_Trampoline(ChatWindowNode*, string*));
+	DETOUR_TRAMPOLINE_EMPTY(bool ao_detours::CommandInterpreter_c__ParseTextCommand_Trampoline(chat_window_node*, string*));
 
-	bool ao_detours::CommandInterpreter_c__ParseTextCommand_Detour(ChatWindowNode* node, string* text)
+	bool ao_detours::CommandInterpreter_c__ParseTextCommand_Detour(chat_window_node* node, string* text)
 	{
 		if(text->c_str()[0] == '/')
 		{

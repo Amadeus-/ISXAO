@@ -90,6 +90,10 @@ namespace isxao_globals
 	DWORD f_get_nano_item = 0;
 	DWORD f_stat_to_string = 0;
 
+	DWORD game_time_t__get_instance = 0;
+	DWORD game_time_t__m_pc_instance = 0;
+	game_time** pp_game_time = nullptr;
+
 	DWORD item_manager_t__item_manager_t = 0;
 
 	DWORD n3_engine_client_anarchy_t__n3_engine_client_anarchy_t = 0;
@@ -233,6 +237,8 @@ namespace isxao_globals
 	DWORD targeting_module_t__targeting_module_t = 0;
 	DWORD targeting_module_t__set_target = 0;
 
+	DWORD chat_window_node_c__parse_text_command = 0;
+
 #pragma endregion
 
 #pragma region Interfaces
@@ -370,8 +376,7 @@ namespace isxao_globals
 
 #pragma region Gametime
 
-	DWORD Gametime_t__m_pcInstance = 0;
-	GameTime** ppGametime = nullptr;
+	
 
 #pragma endregion
 
@@ -522,7 +527,7 @@ namespace isxao_globals
 
 #pragma region ChatWindowNode
 
-	DWORD ChatWindowNode_c__ParseTextCommand = 0;
+	
 	DWORD ChatWindowNode_c__sub_1009BB79 = 0;
 
 #pragma endregion
@@ -552,7 +557,7 @@ namespace isxao_globals
 #pragma region n3DatabaseController
 
 	DWORD n3DatabaseHandler_t__s_pcInstance = 0;
-	DatabaseHandler** ppDatabaseHandler = nullptr;
+	database_handler** ppDatabaseHandler = nullptr;
 
 #pragma endregion
 
@@ -760,587 +765,591 @@ namespace isxao_globals
 #endif
 
 #ifdef F_STAT_TO_STRING_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, stat_to_string)
+		GET_FUNCTION_ADDRESS(gamecode, stat_to_string)
 #else
-			GET_PROC_ADDRESS(gamecode, f_stat_to_string)
+		GET_PROC_ADDRESS(gamecode, f_stat_to_string)
 #endif
 
-
+#ifdef GAME_TIME_T__GET_INSTANCE_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, game_time_t__get_instance)
+#else
+		GET_PROC_ADDRESS(gamecode, game_time_t__get_instance)
+#endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_ENGINE_CLIENT_ANARCHY_T_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_engine_client_anarchy_t)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_engine_client_anarchy_t)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_engine_client_anarchy_t)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_engine_client_anarchy_t)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__D_N3_ENGINE_CLIENT_ANARCHY_T_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__CONVERT_CRITERIA_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__convert_criteria)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__convert_criteria)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__convert_criteria)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__convert_criteria)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_BREED_STR_USE_PATTERN
-			GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__convert_criteria, n3_engine_client_anarchy_t__get_breed_str)
+		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__convert_criteria, n3_engine_client_anarchy_t__get_breed_str)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_breed_str)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_breed_str)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_CLIENT_CHAR_USE_PATTERN
-			n3_engine_client_anarchy_t__get_client_char = n3_engine_client_t__get_client_control_dynel;
+		n3_engine_client_anarchy_t__get_client_char = n3_engine_client_t__get_client_control_dynel;
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_client_char)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_client_char)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_CLIENT_DYNEL_ID_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_client_dynel_id)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_client_dynel_id)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_client_dynel_id)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_client_dynel_id)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_CURRENT_MOVEMENT_MODE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_current_movement_mode)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_current_movement_mode)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_current_movement_mode)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_current_movement_mode)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_FACTION_STR_USE_PATTERN		
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_faction_str)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_faction_str)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_faction_str)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_faction_str)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_FACTION_TITLE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_faction_title)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_faction_title)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_faction_title)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_faction_title)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_GENDER_STRING_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_gender_string)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_gender_string)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_gender_string)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_gender_string)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_ITEM_BY_TEMPLATE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_item_by_template)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_item_by_template)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_item_by_template)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_item_by_template)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_SEX_STR_USE_PATTERN
-			GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__convert_criteria, n3_engine_client_anarchy_t__get_sex_str)
+		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__convert_criteria, n3_engine_client_anarchy_t__get_sex_str)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_sex_str)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_sex_str)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_TITLE_STR_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_title_str)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_title_str)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_title_str)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_title_str)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__IS_FIRST_LOGIN_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__is_first_login)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__is_first_login)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__is_first_login)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__is_first_login)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__IS_FIXTURE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__is_fixture)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__is_fixture)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__is_fixture)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__is_fixture)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_ACTIVATE_MECH_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_activate_mech)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_activate_mech)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_activate_mech)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_activate_mech)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_AIRSTRIKE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_airstrike)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_airstrike)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_airstrike)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_airstrike)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_ARTILLERY_ATTACK_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_artillery_attack)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_artillery_attack)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_artillery_attack)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_artillery_attack)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_ASSIST_FIGHT_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_assist_fight)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_assist_fight)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_assist_fight)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_assist_fight)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CAN_ATTACK_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_attack)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_attack)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_attack)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_attack)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CAST_NANO_SPELL_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_cast_nano_spell)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_cast_nano_spell)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_cast_nano_spell)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_cast_nano_spell)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CONSIDER_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_consider)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_consider)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_consider)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_consider)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CONTAINER_ADD_ITEM_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_container_add_item)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_container_add_item)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_container_add_item)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_container_add_item)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CRAWL_TOGGLE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_crawl_toggle)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_crawl_toggle)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_crawl_toggle)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_crawl_toggle)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CREATE_RAID_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_create_raid)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_create_raid)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_create_raid)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_create_raid)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DEFAULT_ACTION_ON_DYNEL_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DEFAULT_ATTACK_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_default_attack)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_default_attack)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_default_attack)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_default_attack)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DELETE_ITEM_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_delete_item)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_delete_item)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_delete_item)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_delete_item)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DELETE_NANO_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_delete_nano)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_delete_nano)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_delete_nano)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_delete_nano)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DO_SOCIAL_ACTION_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_do_social_action)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_do_social_action)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_do_social_action)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_do_social_action)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DROP_ITEM_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_drop_item)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_drop_item)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_drop_item)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_drop_item)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_ACCEPT_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_accept)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_accept)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_accept)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_accept)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_CHALLENGE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_challenge)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_challenge)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_challenge)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_challenge)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_DRAW_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_draw)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_draw)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_draw)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_draw)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_REFUSE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_refuse)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_refuse)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_refuse)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_refuse)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_STOP_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_stop)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_stop)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_stop)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_duel_stop)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_FORAGE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_forage)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_forage)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_forage)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_forage)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ACTION_BY_NAME_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_get_action_by_name(PCSTR) cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_action_by_name(PCSTR) cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_action_by_name)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_action_by_name)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ACTION_PROGRESS_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_action_progress)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_action_progress)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_action_progress)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_action_progress)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_AGG_DEF_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_agg_def)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_agg_def)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_agg_def)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_agg_def)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ALIEN_LEVEL_STRING_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_alien_level_string)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_alien_level_string)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_alien_level_string)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_alien_level_string)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_AREA_NAME_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_area_name)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_area_name)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_area_name)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_area_name)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ATTACKING_ID_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_attacking_id)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_attacking_id)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_attacking_id)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_attacking_id)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_BREED_STR_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_breed_str)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_breed_str)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_breed_str)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_breed_str)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_BUFF_CURRENT_TIME_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_get_buff_current_time(const identity_t&, const identity_t&) cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_buff_current_time(const identity_t&, const identity_t&) cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_buff_current_time)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_buff_current_time)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_BUFF_TOTAL_TIME_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_get_buff_total_time(const identity_t&, const identity_t&) cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_buff_total_time(const identity_t&, const identity_t&) cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_buff_total_time)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_buff_total_time)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CHARACTER_BODY_SHAPE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_character_body_shape)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_character_body_shape)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_character_body_shape)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_character_body_shape)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CHAR_ORIENTATION_DATA_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CITY_NAME_FOR_CLAN_MEMBER_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CLAN_LEVEL_STRING_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_clan_level_string)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_clan_level_string)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_clan_level_string)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_clan_level_string)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CLAN_STRING_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_clan_string)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_clan_string)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_clan_string)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_clan_string)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CLIENT_PET_ID_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_client_pet_id)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_client_pet_id)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_client_pet_id)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_client_pet_id)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CLOSE_TARGET_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_close_target)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_close_target)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_close_target)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_close_target)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CONTAINER_INVENTORY_LIST_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CORRECT_ACTION_ID_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_get_correct_action_id(identity_t &) cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_correct_action_id(identity_t &) cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_correct_action_id)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_correct_action_id)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CURRENT_ROOM_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_current_room)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_current_room)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_current_room)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_current_room)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CURRENT_ROOM_NAME_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_current_room_name)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_current_room_name)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_current_room_name)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_current_room_name)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_DISTRICT_FIGHT_MODE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_district_fight_mode)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_district_fight_mode)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_district_fight_mode)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_district_fight_mode)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_DYNELS_IN_VICINITY_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_dynels_in_vicinity)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_dynels_in_vicinity)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_dynels_in_vicinity)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_dynels_in_vicinity)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FACTION_INFO_STRING_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_faction_info_string)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_faction_info_string)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_faction_info_string)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_faction_info_string)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FACTION_RANGE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_faction_range)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_faction_range)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_faction_range)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_faction_range)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FIRST_NAME_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_first_name)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_first_name)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_first_name)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_first_name)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FORMULA_PROGRESS_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_formula_progress)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_formula_progress)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_formula_progress)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_formula_progress)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FORMULA_RADIUS_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_formula_radius)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_formula_radius)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_formula_radius)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_formula_radius)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GLOBAL_CHARACTER_POSITION_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_position)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_position)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_position)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_position)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GLOBAL_CHARACTER_ROTATION_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GRID_DESTINATION_1_LIST_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GRID_DESTINATION_2_LIST_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_2)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_2)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_2)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_2)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_INVENTORY_VEC_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_inventory_vec)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_inventory_vec)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_inventory_vec)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_inventory_vec)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ITEM_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_item)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_item)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_item)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_item)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ITEM_PROGRESS_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_item_progress)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_item_progress)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_item_progress)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_item_progress)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_MOVEMENT_MODE_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_get_correct_action_id(identity_t &) cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_correct_action_id(identity_t &) cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_movement_mode)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_movement_mode)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NAME_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_name)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_name)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_name)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_name)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_COST_MODIFIER_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_cost_modifier)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_cost_modifier)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_cost_modifier)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_cost_modifier)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_SPELL_LIST_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_TEMPLATE_INFO_LIST_1_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_TEMPLATE_INFO_LIST_2_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NEXT_TARGET_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_next_target)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_next_target)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_next_target)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_next_target)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_AVAILABLE_ALIEN_PERKS_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_available_alien_perks() cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_available_alien_perks() cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_available_alien_perks)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_available_alien_perks)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_AVAILABLE_PERKS_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_available_perks() cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_available_perks() cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_available_perks)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_available_perks)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_FREE_INVENTORY_SLOTS_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_USED_ALIEN_PERKS_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_used_alien_perks() cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_used_alien_perks() cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_used_alien_perks)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_used_alien_perks)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_USED_PERKS_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_used_perks() cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_used_perks() cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_used_perks)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_number_of_used_perks)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_OVER_EQUIP_LEVEL_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_over_equip_level)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_over_equip_level)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_over_equip_level)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_over_equip_level)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_PLAYFIELD_NAME_1_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_get_pf_name(DWORD) cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_pf_name(DWORD) cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_pf_name_1)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_pf_name_1)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_PLAYFIELD_NAME_2_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_pf_name_2)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_pf_name_2)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_pf_name_2)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_pf_name_2)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_PARENT_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_parent)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_parent)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_parent)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_parent)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_POS_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_pos)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_pos)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_pos)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_pos)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SKILL_1_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_skill_1)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_skill_1)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_skill_1)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_skill_1)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SKILL_2_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_skill_2)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_skill_2)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_skill_2)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_skill_2)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SKILL_MAX_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_get_skill_max(DWORD) cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_skill_max(DWORD) cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_skill_max)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_skill_max)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SPECIAL_ACTION_LIST_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_action_list)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_action_list)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_action_list)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_action_list)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SPECIAL_ACTION_STATE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_action_state)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_action_state)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_action_state)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_action_state)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SPECIAL_ATTACK_WEAPON_NAME_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_STAT_NAME_MAP_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_get_stat_name_map() cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_get_stat_name_map() cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_stat_name_map)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_stat_name_map)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_TARGET_TARGET_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_target_target)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_target_target)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_target_target)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_target_target)
 #endif
 
 
@@ -1350,47 +1359,47 @@ namespace isxao_globals
 
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_IS_NPC_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_npc)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_npc)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_npc)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_npc)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_PERFORM_SPECIAL_ACTION_1_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_perform_special_action(DWORD) cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_perform_special_action(DWORD) cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_1)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_1)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_PERFORM_SPECIAL_ACTION_2_USE_PATTERN
-			static_assert(false, "engine_client_anarchy::n3_msg_perform_special_action(const identity_t &) cannot be found with a pattern.");
+		static_assert(false, "engine_client_anarchy::n3_msg_perform_special_action(const identity_t &) cannot be found with a pattern.");
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_2)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_2)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_SEND_PET_COMMAND_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_send_pet_command)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_send_pet_command)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_send_pet_command)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_send_pet_command)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_STOP_ATTACK_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_stop_attack)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_stop_attack)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_stop_attack)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_stop_attack)
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_USE_ITEM_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_use_item)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_use_item)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_use_item)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_use_item)
 #endif
 
 
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__ON_CLOSED_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__on_closed)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__on_closed)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__on_closed)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__on_closed)
 #endif
 
 
@@ -1398,36 +1407,40 @@ namespace isxao_globals
 
 
 #ifdef SIMPLE_CHAR_T__CHECK_LOS_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, simple_char_t__check_los)
+		GET_FUNCTION_ADDRESS(gamecode, simple_char_t__check_los)
 #else
-			static_assert(false, "simple_char_t__check_los requires a pattern for the function address to be found.")
+		static_assert(false, "simple_char_t__check_los requires a pattern for the function address to be found.")
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CAN_CLICK_TARGET_TARGET_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_click_target_target)
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_click_target_target)
 #else
-			GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_click_target_target)
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_can_click_target_target)
 #endif
 
-
-
-			// Instances
-			n3_engine_client_anarchy_t__m_pc_instance = n3_engine_t__m_pc_instance;
+		// Instances
+		n3_engine_client_anarchy_t__m_pc_instance = n3_engine_t__m_pc_instance;
 		pp_engine_client_anarchy = reinterpret_cast<isxao_classes::engine_client_anarchy**>(n3_engine_client_anarchy_t__m_pc_instance);
+
+#ifdef GAME_TIME_T__M_PC_INSTANCE_USE_PATTERN
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(game_time_t__get_instance, game_time_t__m_pc_instance)
+#else
+		GET_PROC_ADDRESS(gamecode, game_time_t__m_pc_instance)
+#endif
 
 #ifdef M_C_NANO_ITEM_DIR_USE_PATTERN
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(f_get_nano_item, m_c_nano_item_dir)
 #else
 		static_assert(false, "m_c_nano_item_dir requires a pattern for the function address to be found.")
 #endif
-			p_nano_item_dir = reinterpret_cast<nano_item_map_t*>(m_c_nano_item_dir);
+		p_nano_item_dir = reinterpret_cast<nano_item_map_t*>(m_c_nano_item_dir);
 
 #ifdef M_C_STAT_NAME_DIR_USE_PATTERN
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(f_stat_to_string, m_c_stat_name_dir)
 #else
 		static_assert(false, "m_c_stat_name_dir requires a pattern for the function address to be found.")
 #endif
-			p_stat_name_dir = reinterpret_cast<stat_name_map_t*>(m_c_stat_name_dir);
+		p_stat_name_dir = reinterpret_cast<stat_name_map_t*>(m_c_stat_name_dir);
 
 #ifdef ITEM_MANAGER_T__ITEM_MANAGER_T_USE_PATTERN
 		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__get_item_by_template, item_manager_t__item_manager_t)
@@ -1436,11 +1449,11 @@ namespace isxao_globals
 #endif
 
 #ifdef ITEM_MANAGER_T__M_PPC_INSTANCE_USE_PATTERN
-			GET_ADDRESS_FROM_FUNCTION_OFFSET(item_manager_t__item_manager_t, item_manager_t__m_ppc_instance)
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(item_manager_t__item_manager_t, item_manager_t__m_ppc_instance)
 #else
-			static_assert(false, "item_manager_t__m_ppc_instance requires a pattern for the function address to be found.")
+		static_assert(false, "item_manager_t__m_ppc_instance requires a pattern for the function address to be found.")
 #endif
-			ppp_item_vector = reinterpret_cast<vector<acg_game_item_t> ***>(item_manager_t__m_ppc_instance);
+		ppp_item_vector = reinterpret_cast<vector<acg_game_item_t> ***>(item_manager_t__m_ppc_instance);
 
 #ifdef STATIC_ITEM_MANAGER_T__STATIC_ITEM_MANAGER_T_USE_PATTERN
 		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__get_item_by_template, static_item_manager_t__static_item_manager_t)
@@ -1449,11 +1462,11 @@ namespace isxao_globals
 #endif
 
 #ifdef STATIC_ITEM_MANAGER_T__M_PPC_INSTANCE_USE_PATTERN
-			GET_ADDRESS_FROM_FUNCTION_OFFSET(static_item_manager_t__static_item_manager_t, static_item_manager_t__m_ppc_instance)
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(static_item_manager_t__static_item_manager_t, static_item_manager_t__m_ppc_instance)
 #else
-			static_assert(false, "static_item_manager_t__m_ppc_instance requires a pattern for the function address to be found.")
+		static_assert(false, "static_item_manager_t__m_ppc_instance requires a pattern for the function address to be found.")
 #endif
-			ppp_static_item_vector = reinterpret_cast<vector<static_item_t>***>(static_item_manager_t__m_ppc_instance);
+		ppp_static_item_vector = reinterpret_cast<vector<static_item_t>***>(static_item_manager_t__m_ppc_instance);
 #pragma endregion
 
 #pragma region GUI
@@ -1467,6 +1480,12 @@ namespace isxao_globals
 		const vector<unsigned char> gui_data(gui_data_begin, gui_data_end);
 
 		// Functions
+#ifdef CHAT_WINDOW_NODE_C__PARSE_TEXT_COMMAND_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gui, chat_window_node_c__parse_text_command)
+#else
+
+#endif
+
 #ifdef TARGETING_MODULE_T__INITIALISE_MESSAGE_USE_PATTERN
 		GET_FUNCTION_ADDRESS(gui, targeting_module_t__initialise_message)
 #else
@@ -1474,31 +1493,31 @@ namespace isxao_globals
 #endif
 
 #ifdef TARGETING_MODULE_T__TARGETING_MODULE_T_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gui, targeting_module_t__targeting_module_t)
+		GET_FUNCTION_ADDRESS(gui, targeting_module_t__targeting_module_t)
 #else
-			GET_PROC_ADDRESS(gui, targeting_module_t__targeting_module_t)
+		GET_PROC_ADDRESS(gui, targeting_module_t__targeting_module_t)
 #endif
 
 #ifdef TARGETING_MODULE_T__SET_TARGET_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gui, targeting_module_t__set_target)
+		GET_FUNCTION_ADDRESS(gui, targeting_module_t__set_target)
 #else
-			GET_PROC_ADDRESS(gui, targeting_module_t__set_target)
+		GET_PROC_ADDRESS(gui, targeting_module_t__set_target)
 #endif
 
-			// Instances
+		// Instances
 #ifdef TARGETING_MODULE_T__M_PC_INSTANCE_USE_PATTERN
-			GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__set_target, targeting_module_t__m_pc_instance)
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__set_target, targeting_module_t__m_pc_instance)
 #else
-			GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_instance)
+		GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_instance)
 #endif		
 
 #ifdef TARGETING_MODULE_T__M_PC_SELECTION_INDICATOR_USE_PATTERN
-			GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__initialise_message, targeting_module_t__m_pc_selection_indicator)
+		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__initialise_message, targeting_module_t__m_pc_selection_indicator)
 #else
-			GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_selection_indicator)
+		GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_selection_indicator)
 #endif
 
-			pp_selection_indicator = reinterpret_cast<indicator_t**>(targeting_module_t__m_pc_selection_indicator);
+		pp_selection_indicator = reinterpret_cast<indicator_t**>(targeting_module_t__m_pc_selection_indicator);
 
 #ifdef TARGETING_MODULE_T__M_PC_ATTACKING_INDICATOR_USE_PATTERN
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__initialise_message, targeting_module_t__m_pc_attacking_indicator)
@@ -1506,7 +1525,7 @@ namespace isxao_globals
 		GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_attacking_indicator)
 #endif
 
-			pp_attacking_indicator = reinterpret_cast<indicator_t**>(targeting_module_t__m_pc_attacking_indicator);
+		pp_attacking_indicator = reinterpret_cast<indicator_t**>(targeting_module_t__m_pc_attacking_indicator);
 
 #ifdef TARGETING_MODULE_T__M_C_LAST_TARGET_USE_PATTERN
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__initialise_message, targeting_module_t__m_c_last_target)

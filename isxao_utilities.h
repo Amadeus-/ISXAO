@@ -52,8 +52,8 @@ namespace isxao_utilities
 	AOLIB_API void GetStatMap(std::map<DWORD, LONG>& m, p_stat_dir_t pDir);
 	AOLIB_API void RecursiveAddWeaponItemToWeaponItemMap(std::map<DWORD, p_weapon_item_t>& m, p_weapon_item_node_t pNode, p_weapon_item_root_t pRoot, DWORD& count);
 	AOLIB_API void GetWeaponItemMap(std::map<DWORD, p_weapon_item_t>& m, weapon_item_dir_t& dir);
-	AOLIB_API void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, p_chat_window_node_node_t pNode, p_chat_window_node_root_t pRoot, DWORD& count);
-	AOLIB_API void GetChatWindowNodeMap(std::map<string, ChatWindowNode*>& m, chat_window_node_dir_t &dir);
+	AOLIB_API void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, chat_window_node*>& m, p_chat_window_node_node_t pNode, p_chat_window_node_root_t pRoot, DWORD& count);
+	AOLIB_API void GetChatWindowNodeMap(std::map<string, chat_window_node*>& m, chat_window_node_dir_t &dir);
 	AOLIB_API void RecursiveAddLockIdToLockIdMap(std::map<DWORD, DWORD>& m, p_lock_id_node_t pNode, p_lock_id_root_t pRoot, DWORD& count);
 	AOLIB_API void GetLockIdMap(std::map<DWORD, DWORD>& m, p_lock_id_dir_t pDir);
 
