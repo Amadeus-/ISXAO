@@ -739,6 +739,35 @@ constexpr char* const vehicle_t__set_rel_rot_pattern = static_cast<char*>(
 
 #pragma endregion
 
+#pragma region Pathfinder
+
+constexpr char* const pathfinder_module_name = static_cast<char*>("Pathfinder.dll");
+
+constexpr char* const graph_path_finder_t__graph_path_finder_t_1_mangled_name = static_cast<char*>(
+	"??0GraphPathFinder_t@@QAE@ABV0@@Z");
+constexpr char* const graph_path_finder_t__graph_path_finder_t_1_pattern = static_cast<char*>(
+	"55 8B EC 8B C1 8B 4D 08 C7 00 ?? ?? ?? ??");
+
+constexpr char* const graph_path_finder_t__graph_path_finder_t_2_mangled_name = static_cast<char*>(
+	"??0GraphPathFinder_t@@QAE@I@Z");
+constexpr char* const graph_path_finder_t__graph_path_finder_t_2_pattern = static_cast<char*>(
+	"56 8B F1 E8 ?? ?? ?? ?? D9 05 ?? ?? ?? ??");
+
+constexpr char* const graph_path_finder_t__d_graph_path_finder_t_mangled_name = static_cast<char*>(
+	"??1GraphPathFinder_t@@UAE@XZ");
+constexpr char* const graph_path_finder_t__d_graph_path_finder_t_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 56 8B F1 57 89 75 F0");
+
+constexpr char* const graph_path_finder_t__configure_mangled_name = static_cast<char*>(
+	"?Configure@GraphPathFinder_t@@QAEXHHMM@Z");
+constexpr char* const graph_path_finder_t__configure_pattern = static_cast<char*>(
+	"55 8B EC 8B 45 08 D9 45 10");
+
+constexpr char* const graph_path_finder_t__create_from_data_mangled_name = static_cast<char*>(
+	"?CreateFromData@GraphPathFinder_t@@QAEXABVVisibilityGraphData_t@GameData@@@Z");
+
+#pragma endregion
+
 #pragma region EngineClientAnarchy
 
 // #define n3EngineClientAnarchy_t__GetFactionStr_x							0x16942

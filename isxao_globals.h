@@ -20,10 +20,11 @@ namespace isxao_globals
 	AOLIB_VAR HMODULE gui_module_handle;
 	AOLIB_VAR MODULEINFO gui_module_info;
 	AOLIB_VAR HMODULE vehicle_module_handle;
-	AOLIB_VAR MODULEINFO vehicle_module_info;
-	AOLIB_VAR DWORD hMessageProtocol;
+	AOLIB_VAR MODULEINFO vehicle_module_info;	
 	AOLIB_VAR HMODULE interfaces_module_handle;
 	AOLIB_VAR MODULEINFO interfaces_module_info;
+	AOLIB_VAR HMODULE pathfinder_module_handle;
+	AOLIB_VAR MODULEINFO pathfinder_module_info;
 
 #pragma endregion
 
@@ -255,6 +256,22 @@ namespace isxao_globals
 #pragma region Vehicle
 
 	AOLIB_VAR DWORD vehicle_t__set_rel_rot;
+
+#pragma endregion
+
+#pragma region Pathfinder
+
+	AOLIB_VAR DWORD graph_path_finder_t__graph_path_finder_t_1;
+	AOLIB_VAR DWORD graph_path_finder_t__graph_path_finder_t_2;
+	AOLIB_VAR DWORD graph_path_finder_t__d_graph_path_finder_t;
+	AOLIB_VAR DWORD graph_path_finder_t__configure;
+	AOLIB_VAR DWORD graph_path_finder_t__create_from_data;
+	AOLIB_VAR DWORD GraphPathFinder_t__FindPath;
+	AOLIB_VAR DWORD GraphPathFinder_t__GenerateGraph;
+	AOLIB_VAR DWORD GraphPathFinder_t__GenerateGraphForRoom;
+	AOLIB_VAR DWORD GraphPathFinder_t__Init;
+	AOLIB_VAR DWORD GraphPathFinder_t__SetSpaceForGraph;
+	AOLIB_VAR DWORD GraphPathFinder_t__SetSurface;
 
 #pragma endregion
 
@@ -569,11 +586,11 @@ namespace isxao_globals
 
 #pragma region GraphPathFinder
 
-	AOLIB_VAR DWORD GraphPathFinder_t__GraphPathFinder_t;
+	AOLIB_VAR DWORD graph_path_finder_t__graph_path_finder_t;
 	AOLIB_VAR DWORD GraphPathFinder_t__GraphPathFinder_t_Copy;
-	AOLIB_VAR DWORD GraphPathFinder_t__dGraphPathFinder_t;
-	AOLIB_VAR DWORD GraphPathFinder_t__Configure;
-	AOLIB_VAR DWORD GraphPathFinder_t__CreateFromData;
+	AOLIB_VAR DWORD graph_path_finder_t__d_graph_path_finder_t;
+	AOLIB_VAR DWORD graph_path_finder_t__configure;
+	AOLIB_VAR DWORD graph_path_finder_t__create_from_data;
 	AOLIB_VAR DWORD GraphPathFinder_t__FindPath;
 	AOLIB_VAR DWORD GraphPathFinder_t__GenerateGraph;
 	AOLIB_VAR DWORD GraphPathFinder_t__GenerateGraphForRoom;

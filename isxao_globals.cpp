@@ -23,7 +23,8 @@ namespace isxao_globals
 	MODULEINFO vehicle_module_info;
 	DWORD hDatabaseController = DWORD(GetModuleHandle("DatabaseController.dll"));
 	DWORD hMessageProtocol = DWORD(GetModuleHandle("MessageProtocol.dll"));
-	DWORD hPathFinder = DWORD(GetModuleHandle("PathFinder.dll"));
+	HMODULE pathfinder_module_handle = GetModuleHandle("PathFinder.dll");
+	MODULEINFO pathfinder_module_info;
 
 #pragma endregion
 	
@@ -255,6 +256,22 @@ namespace isxao_globals
 
 #pragma endregion
 
+#pragma region Pathfinder
+
+	DWORD graph_path_finder_t__graph_path_finder_t_1 = 0;
+	DWORD graph_path_finder_t__graph_path_finder_t_2 = 0;
+	DWORD graph_path_finder_t__d_graph_path_finder_t = 0;
+	DWORD graph_path_finder_t__configure = 0;
+	DWORD graph_path_finder_t__create_from_data = 0;
+	DWORD GraphPathFinder_t__FindPath = 0;
+	DWORD GraphPathFinder_t__GenerateGraph = 0;
+	DWORD GraphPathFinder_t__GenerateGraphForRoom = 0;
+	DWORD GraphPathFinder_t__Init = 0;
+	DWORD GraphPathFinder_t__SetSpaceForGraph = 0;
+	DWORD GraphPathFinder_t__SetSurface = 0;
+
+#pragma endregion
+
 #pragma region EngineClientAnarchy
 	
 	
@@ -371,12 +388,6 @@ namespace isxao_globals
 
 	DWORD PlayfieldAnarchy_t__PlayfieldAnarchy_t = 0;
 	DWORD PlayfieldAnarchy_t__dPlayfieldAnarchy_t = 0;
-
-#pragma endregion
-
-#pragma region Gametime
-
-	
 
 #pragma endregion
 
@@ -561,22 +572,6 @@ namespace isxao_globals
 
 #pragma endregion
 
-#pragma region GraphPathFinder
-
-	DWORD GraphPathFinder_t__GraphPathFinder_t = 0;
-	DWORD GraphPathFinder_t__GraphPathFinder_t_Copy = 0;
-	DWORD GraphPathFinder_t__dGraphPathFinder_t = 0;
-	DWORD GraphPathFinder_t__Configure = 0;
-	DWORD GraphPathFinder_t__CreateFromData = 0;
-	DWORD GraphPathFinder_t__FindPath = 0;
-	DWORD GraphPathFinder_t__GenerateGraph = 0;
-	DWORD GraphPathFinder_t__GenerateGraphForRoom = 0;
-	DWORD GraphPathFinder_t__Init = 0;
-	DWORD GraphPathFinder_t__SetSpaceForGraph = 0;
-	DWORD GraphPathFinder_t__SetSurface = 0;
-
-#pragma endregion
-
 	bool initialize_offsets()
 	{
 		if (!n3_module_handle)
@@ -597,6 +592,11 @@ namespace isxao_globals
 		if (!interfaces_module_handle)
 		{
 			printf("Could not find handle to module \"Interfaces.dll\". Aborting offset initialization.");
+			return false;
+		}
+		if (!pathfinder_module_handle)
+		{
+			printf("Could not find handle to module \"Pathfinder.dll\". Aborting offset initialization.");
 			return false;
 		}
 #pragma region Process
@@ -1577,6 +1577,49 @@ namespace isxao_globals
 		GET_PROC_ADDRESS(vehicle, vehicle_t__set_rel_rot)
 #endif
 
+
+#pragma endregion
+
+#pragma region Pathfinder
+
+		// Module
+		GetModuleInformation(process_handle, pathfinder_module_handle, &pathfinder_module_info, sizeof(pathfinder_module_info));
+		// ReSharper disable once CppLocalVariableMayBeConst
+		auto pathfinder_module_base = DWORD(pathfinder_module_handle);
+		const auto pathfinder_data_begin = reinterpret_cast<unsigned char*>(pathfinder_module_base);
+		const auto pathfinder_data_end = pathfinder_data_begin + pathfinder_module_info.SizeOfImage;
+		const vector<unsigned char> pathfinder_data(pathfinder_data_begin, pathfinder_data_end);
+
+		//Functions
+#ifdef GRAPH_PATH_FINDER_T__GRAPH_PATH_FINDER_T_1_USE_PATTERN
+		GET_FUNCTION_ADDRESS(pathfinder, graph_path_finder_t__graph_path_finder_t_1)
+#else
+		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__graph_path_finder_t_1)
+#endif
+
+#ifdef GRAPH_PATH_FINDER_T__GRAPH_PATH_FINDER_T_2_USE_PATTERN
+		GET_FUNCTION_ADDRESS(pathfinder, graph_path_finder_t__graph_path_finder_t_2)
+#else
+		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__graph_path_finder_t_2)
+#endif
+
+#ifdef GRAPH_PATH_FINDER_T__D_GRAPH_PATH_FINDER_T_USE_PATTERN
+		GET_FUNCTION_ADDRESS(pathfinder, graph_path_finder_t__d_graph_path_finder_t)
+#else
+		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__d_graph_path_finder_t)
+#endif
+
+#ifdef GRAPH_PATH_FINDER_T__CONFIGURE_USE_PATTERN
+		GET_FUNCTION_ADDRESS(pathfinder, graph_path_finder_t__configure)
+#else
+		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__configure)
+#endif
+
+#ifdef GRAPH_PATH_FINDER_T__CREATE_FROM_DATA_USE_PATTERN
+		static_assert(false, "graph_path_finder::create_from_data(PVOID) cannot be found with a pattern.");
+#else
+		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__create_from_data)
+#endif
 
 #pragma endregion
 
