@@ -226,6 +226,11 @@ namespace isxao_globals
 
 #pragma region GUI
 
+	DWORD html_parser_c__html_parser_c_1 = 0;
+	DWORD html_parser_c__html_parser_c_2 = 0;
+	DWORD html_parser_c__d_html_parser_c = 0;	
+	DWORD html_parser_c__extract_text = 0;
+
 	DWORD targeting_module_t__m_pc_instance = 0;
 	TargetingModule** pp_targeting_module = nullptr;
 	DWORD targeting_module_t__m_pc_selection_indicator = 0;
@@ -263,12 +268,12 @@ namespace isxao_globals
 	DWORD graph_path_finder_t__d_graph_path_finder_t = 0;
 	DWORD graph_path_finder_t__configure = 0;
 	DWORD graph_path_finder_t__create_from_data = 0;
-	DWORD GraphPathFinder_t__FindPath = 0;
-	DWORD GraphPathFinder_t__GenerateGraph = 0;
-	DWORD GraphPathFinder_t__GenerateGraphForRoom = 0;
-	DWORD GraphPathFinder_t__Init = 0;
-	DWORD GraphPathFinder_t__SetSpaceForGraph = 0;
-	DWORD GraphPathFinder_t__SetSurface = 0;
+	DWORD graph_path_finder_t__find_path = 0;
+	DWORD graph_path_finder_t__generate_graph = 0;
+	DWORD graph_path_finder_t__generate_graph_for_room = 0;
+	DWORD graph_path_finder_t__init = 0;
+	DWORD graph_path_finder_t__set_space_for_graph = 0;
+	DWORD graph_path_finder_t__set_surface = 0;
 
 #pragma endregion
 
@@ -545,10 +550,7 @@ namespace isxao_globals
 
 #pragma region HTMLParser
 
-	DWORD HTMLParser_c__HTMLParser_c = 0;
-	DWORD HTMLParser_c__dHTMLParser_c = 0;
-	DWORD HTMLParser_c__HTMLParser_c_copy = 0;
-	DWORD HTMLParser_c__ExtractText = 0;
+	
 
 #pragma endregion
 
@@ -1483,7 +1485,31 @@ namespace isxao_globals
 #ifdef CHAT_WINDOW_NODE_C__PARSE_TEXT_COMMAND_USE_PATTERN
 		GET_FUNCTION_ADDRESS(gui, chat_window_node_c__parse_text_command)
 #else
+		static_assert(false, "chat_window_node_c__parse_text_command requires a pattern for the function address to be found.")
+#endif
 
+#ifdef HTML_PARSER_C__HTML_PARSER_1_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_1)
+#else
+		GET_PROC_ADDRESS(gui, html_parser_c__html_parser_c_1)
+#endif
+
+#ifdef HTML_PARSER_C__HTML_PARSER_2_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_2)
+#else
+		GET_PROC_ADDRESS(gui, html_parser_c__html_parser_c_2)
+#endif
+
+#ifdef HTML_PARSER_C__D_HTML_PARSER_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gui, html_parser_c__d_html_parser_c)
+#else
+		GET_PROC_ADDRESS(gui, html_parser_c__d_html_parser_c)
+#endif
+
+#ifdef HTML_PARSER_C__EXTRACT_TEXT_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gui, html_parser_c__extract_text)
+#else
+		GET_PROC_ADDRESS(gui, html_parser_c__extract_text)
 #endif
 
 #ifdef TARGETING_MODULE_T__INITIALISE_MESSAGE_USE_PATTERN
@@ -1619,6 +1645,42 @@ namespace isxao_globals
 		static_assert(false, "graph_path_finder::create_from_data(PVOID) cannot be found with a pattern.");
 #else
 		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__create_from_data)
+#endif
+
+#ifdef GRAPH_PATH_FINDER_T__FIND_PATH_USE_PATTERN
+		GET_FUNCTION_ADDRESS(pathfinder, graph_path_finder_t__find_path)
+#else
+		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__find_path)
+#endif
+
+#ifdef GRAPH_PATH_FINDER_T__GENERATE_GRAPH_USE_PATTERN
+		GET_FUNCTION_ADDRESS(pathfinder, graph_path_finder_t__generate_graph)
+#else
+		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__generate_graph)
+#endif
+
+#ifdef GRAPH_PATH_FINDER_T__GENERATE_GRAPH_FOR_ROOM_USE_PATTERN
+		GET_FUNCTION_ADDRESS(pathfinder, graph_path_finder_t__generate_graph_for_room)
+#else
+		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__generate_graph_for_room)
+#endif
+
+#ifdef GRAPH_PATH_FINDER_T__INIT_USE_PATTERN
+		GET_FUNCTION_ADDRESS(pathfinder, graph_path_finder_t__init)
+#else
+		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__init)
+#endif
+
+#ifdef GRAPH_PATH_FINDER_T__SET_SPACE_FOR_GRAPH_USE_PATTERN
+		GET_FUNCTION_ADDRESS(pathfinder, graph_path_finder_t__set_space_for_graph)
+#else
+		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__set_space_for_graph)
+#endif
+
+#ifdef GRAPH_PATH_FINDER_T__SET_SURFACE_USE_PATTERN
+		GET_FUNCTION_ADDRESS(pathfinder, graph_path_finder_t__set_surface)
+#else
+		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__set_surface)
 #endif
 
 #pragma endregion

@@ -221,6 +221,13 @@ namespace isxao_globals
 
 #pragma region GUI
 
+	AOLIB_VAR DWORD chat_window_node_c__parse_text_command;
+
+	AOLIB_VAR DWORD html_parser_c__html_parser_c_1;
+	AOLIB_VAR DWORD html_parser_c__html_parser_c_2;
+	AOLIB_VAR DWORD html_parser_c__d_html_parser_c;	
+	AOLIB_VAR DWORD html_parser_c__extract_text;
+
 	AOLIB_VAR DWORD targeting_module_t__m_pc_instance;
 	AOLIB_VAR TargetingModule** pp_targeting_module;
 #define P_TARGETING_MODULE (*pp_targeting_module)  // NOLINT(cppcoreguidelines-macro-usage)
@@ -240,7 +247,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD targeting_module_t__set_target;
 	AOLIB_VAR DWORD TargetingModule_t__SetTargetPet;
 
-	AOLIB_VAR DWORD chat_window_node_c__parse_text_command;
+	
 
 #pragma endregion
 
@@ -266,12 +273,12 @@ namespace isxao_globals
 	AOLIB_VAR DWORD graph_path_finder_t__d_graph_path_finder_t;
 	AOLIB_VAR DWORD graph_path_finder_t__configure;
 	AOLIB_VAR DWORD graph_path_finder_t__create_from_data;
-	AOLIB_VAR DWORD GraphPathFinder_t__FindPath;
-	AOLIB_VAR DWORD GraphPathFinder_t__GenerateGraph;
-	AOLIB_VAR DWORD GraphPathFinder_t__GenerateGraphForRoom;
-	AOLIB_VAR DWORD GraphPathFinder_t__Init;
-	AOLIB_VAR DWORD GraphPathFinder_t__SetSpaceForGraph;
-	AOLIB_VAR DWORD GraphPathFinder_t__SetSurface;
+	AOLIB_VAR DWORD graph_path_finder_t__find_path;
+	AOLIB_VAR DWORD graph_path_finder_t__generate_graph;
+	AOLIB_VAR DWORD graph_path_finder_t__generate_graph_for_room;
+	AOLIB_VAR DWORD graph_path_finder_t__init;
+	AOLIB_VAR DWORD graph_path_finder_t__set_space_for_graph;
+	AOLIB_VAR DWORD graph_path_finder_t__set_surface;
 
 #pragma endregion
 
@@ -546,20 +553,9 @@ namespace isxao_globals
 
 #pragma endregion
 
-#pragma region ChatWindowNode
-
-	
+#pragma region ChatWindowNode	
 
 	AOLIB_VAR DWORD ChatWindowNode_c__sub_1009BB79;
-
-#pragma endregion
-
-#pragma region HTMLParser
-
-	AOLIB_VAR DWORD HTMLParser_c__HTMLParser_c;
-	AOLIB_VAR DWORD HTMLParser_c__dHTMLParser_c;
-	AOLIB_VAR DWORD HTMLParser_c__HTMLParser_c_copy;
-	AOLIB_VAR DWORD HTMLParser_c__ExtractText;
 
 #pragma endregion
 
@@ -581,22 +577,6 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3DatabaseHandler_t__s_pcInstance;
 	AOLIB_VAR database_handler** ppDatabaseHandler;
 #define pDatabaseHandler (*ppDatabaseHandler)
-
-#pragma endregion
-
-#pragma region GraphPathFinder
-
-	AOLIB_VAR DWORD graph_path_finder_t__graph_path_finder_t;
-	AOLIB_VAR DWORD GraphPathFinder_t__GraphPathFinder_t_Copy;
-	AOLIB_VAR DWORD graph_path_finder_t__d_graph_path_finder_t;
-	AOLIB_VAR DWORD graph_path_finder_t__configure;
-	AOLIB_VAR DWORD graph_path_finder_t__create_from_data;
-	AOLIB_VAR DWORD GraphPathFinder_t__FindPath;
-	AOLIB_VAR DWORD GraphPathFinder_t__GenerateGraph;
-	AOLIB_VAR DWORD GraphPathFinder_t__GenerateGraphForRoom;
-	AOLIB_VAR DWORD GraphPathFinder_t__Init;
-	AOLIB_VAR DWORD GraphPathFinder_t__SetSpaceForGraph;
-	AOLIB_VAR DWORD GraphPathFinder_t__SetSurface;
 
 #pragma endregion
 

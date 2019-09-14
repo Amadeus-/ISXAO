@@ -37,15 +37,40 @@ namespace isxao_classes
 	static_assert(false, "graph_path_finder::create_from_data(PVOID) requires a native function.");
 #endif
 
-	FUNCTION_AT_ADDRESS(int graph_path_finder::find_path(const vector3_t&, const vector3_t&, vector<vector3_t>&, PVOID, bool, bool), GraphPathFinder_t__FindPath);
+#ifdef GRAPH_PATH_FINDER_T__FIND_PATH_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(int graph_path_finder::find_path(const vector3_t&, const vector3_t&, vector<vector3_t>&, PVOID, bool, bool), graph_path_finder_t__find_path)
+#else
+	static_assert(false, "graph_path_finder::find_path(const vector3_t&, const vector3_t&, vector<vector3_t>&, PVOID, bool, bool) requires a native function.");
+#endif
 
-	FUNCTION_AT_ADDRESS(PVOID graph_path_finder::generate_graph(vector<vector3_t>&, float, float, float, float, PVOID, bool), GraphPathFinder_t__GenerateGraph);
+#ifdef GRAPH_PATH_FINDER_T__GENERATE_GRAPH_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(void graph_path_finder::generate_graph(vector<vector3_t>&, float, float, float, float, PVOID, bool), graph_path_finder_t__generate_graph)
+#else
+	static_assert(false, "graph_path_finder::generate_graph(vector<vector3_t>&, float, float, float, float, PVOID, bool) requires a native function.");
+#endif
 
-	FUNCTION_AT_ADDRESS(void graph_path_finder::init(), GraphPathFinder_t__Init);
+#ifdef GRAPH_PATH_FINDER_T__INIT_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(void graph_path_finder::init(), graph_path_finder_t__init)
+#else
+	static_assert(false, "graph_path_finder::init() requires a native function.");
+#endif
 
-	FUNCTION_AT_ADDRESS(void graph_path_finder::set_space_for_graph(PVOID), GraphPathFinder_t__SetSpaceForGraph);
+#ifdef GRAPH_PATH_FINDER_T__SET_SPACE_FOR_GRAPH_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(void graph_path_finder::set_space_for_graph(PVOID), graph_path_finder_t__set_space_for_graph)
+#else
+	static_assert(false, "graph_path_finder::set_space_for_graph(PVOID) requires a native function.");
+#endif
 
-	FUNCTION_AT_ADDRESS(void graph_path_finder::set_surface(PVOID), GraphPathFinder_t__SetSurface);
+#ifdef GRAPH_PATH_FINDER_T__SET_SURFACE_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(void graph_path_finder::set_surface(PVOID), graph_path_finder_t__set_surface)
+#else
+	static_assert(false, "graph_path_finder::set_surface(PVOID) requires a native function.");
+#endif
 
 
 }

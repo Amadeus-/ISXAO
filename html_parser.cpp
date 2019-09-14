@@ -3,33 +3,31 @@
 namespace isxao_classes
 {
 
-	//FUNCTION_AT_ADDRESS(HTMLParser::HTMLParser(std::string*, int, int, DWORD), HTMLParser_c__HTMLParser_c);
+#ifdef HTML_PARSER_C__HTML_PARSER_1_USE_NATIVE
+	// ReSharper disable once CppPossiblyUninitializedMember
+	FUNCTION_AT_ADDRESS(html_parser::html_parser(html_parser&) noexcept, html_parser_c__html_parser_c_1)
+#else
+	static_assert(false, "html_parser::html_parser(html_parser&) requires a native function.");
+#endif
 
-	HTMLParser::HTMLParser(const string &a, DWORD b, int c, bool d)
-	{
-		typedef void(__thiscall *tHTMLParser)(HTMLParser*, const string&, DWORD, int, bool);
-		auto pHTMLParser = tHTMLParser(HTMLParser_c__HTMLParser_c);
-		pHTMLParser(this, a, b, c, d);
-	}
+#ifdef HTML_PARSER_C__HTML_PARSER_2_USE_NATIVE
+	// ReSharper disable once CppPossiblyUninitializedMember
+	FUNCTION_AT_ADDRESS(html_parser::html_parser(const string&, DWORD, int, bool) noexcept, html_parser_c__html_parser_c_2)
+#else
+	static_assert(false, "html_parser::html_parser(const string&, DWORD, int, bool) requires a native function.");
+#endif
 
-	//FUNCTION_AT_ADDRESS(HTMLParser::HTMLParser(class HTMLParser&), HTMLParser_c__HTMLParser_c_copy);
+#ifdef HTML_PARSER_C__D_HTML_PARSER_USE_NATIVE
+	FUNCTION_AT_ADDRESS(html_parser::~html_parser(), html_parser_c__d_html_parser_c)
+#else
+	static_assert(false, "html_parser::~html_parser() requires a native function.");
+#endif
 
-	HTMLParser::HTMLParser(HTMLParser& h)
-	{
-		typedef void(__thiscall *tHTMLParser)(HTMLParser*, HTMLParser&);
-		auto pHTMLParser = tHTMLParser(HTMLParser_c__HTMLParser_c_copy);
-		pHTMLParser(this, h);
-	}
-
-
-	HTMLParser::~HTMLParser()
-	{
-		typedef void(__thiscall *tdHTMLParser)(HTMLParser*);
-		auto pdHTMLParser = tdHTMLParser(HTMLParser_c__dHTMLParser_c);
-		pdHTMLParser(this);
-	}
-
-
-	FUNCTION_AT_ADDRESS(string* HTMLParser::ExtractText(string*, int, int, DWORD), HTMLParser_c__ExtractText);
+#ifdef HTML_PARSER_C__EXTRACT_TEXT_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(string* html_parser::extract_text(string*, int, int, DWORD), html_parser_c__extract_text)
+#else
+	static_assert(false, "tml_parser::extract_text(string*, int, int, DWORD) requires a native function.");
+#endif
 
 }

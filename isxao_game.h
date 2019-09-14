@@ -678,6 +678,26 @@ constexpr char* const gui_module_name = static_cast<char*>("GUI.dll");
 constexpr char* const chat_window_node_c__parse_text_command_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 5C 56 FF 75 08");
 
+const char* const html_parser_c__html_parser_c_1_mangled_name = static_cast<char*>(
+	"??0HTMLParser_c@@QAE@ABV0@@Z");
+const char* const html_parser_c__html_parser_c_1_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 56 57 8B 7D 08 8B F1 8D 47 04");
+
+const char* const html_parser_c__html_parser_c_2_mangled_name = static_cast<char*>(
+	"??0HTMLParser_c@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@IW4FontID_e@@_N@Z");
+const char* const html_parser_c__html_parser_c_2_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 48 53 56 8B F1 57 FF 75 08");
+
+const char* const html_parser_c__d_html_parser_c_mangled_name = static_cast<char*>(
+	"??1HTMLParser_c@@UAE@XZ");
+const char* const html_parser_c__d_html_parser_c_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 56 8B F1 89 75 F0 C7 06 ?? ?? ?? ?? 8D 4E 30");
+
+const char* const html_parser_c__extract_text_mangled_name = static_cast<char*>(
+	"?ExtractText@HTMLParser_c@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HHI@Z");
+const char* const html_parser_c__extract_text_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 20 83 65 F0 00 53 8B 5D 10");
+
 const char* const targeting_module_t__initialise_message_mangled_name = static_cast<char*>(
 	"?InitialiseMessage@TargetingModule_t@@CAXXZ");
 const char* const targeting_module_t__initialise_message_pattern = static_cast<char*>(
@@ -765,6 +785,36 @@ constexpr char* const graph_path_finder_t__configure_pattern = static_cast<char*
 
 constexpr char* const graph_path_finder_t__create_from_data_mangled_name = static_cast<char*>(
 	"?CreateFromData@GraphPathFinder_t@@QAEXABVVisibilityGraphData_t@GameData@@@Z");
+
+constexpr char* const graph_path_finder_t__find_path_mangled_name = static_cast<char*>(
+	"?FindPath@GraphPathFinder_t@@UBE?AW4PathStatus_e@Pathfinder_i@@ABVVector3_t@@0AAV?$vector@VVector3_t@@V?$allocator@VVector3_t@@@std@@@std@@PAVLocalitySource_t@@_N3@Z");
+constexpr char* const graph_path_finder_t__find_path_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 44 53 56 8B F1 33 DB");
+
+constexpr char* const graph_path_finder_t__generate_graph_mangled_name = static_cast<char*>(
+	"?GenerateGraph@GraphPathFinder_t@@QAEXAAV?$vector@VVector3_t@@V?$allocator@VVector3_t@@@std@@@std@@MMMMPAVProgressMonitor_i@@_N@Z");
+constexpr char* const graph_path_finder_t__generate_graph_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC 80 00 00 00");
+
+constexpr char* const graph_path_finder_t__generate_graph_for_room_mangled_name = static_cast<char*>(
+	"?GenerateGraphForRoom@GraphPathFinder_t@@QAEXABV?$vector@VBoxRegion_t@@V?$allocator@VBoxRegion_t@@@std@@@std@@ABV?$vector@VVector3_t@@V?$allocator@VVector3_t@@@std@@@3@ABV?$vector@U?$pair@IVVector3_t@@@std@@V?$allocator@U?$pair@IVVector3_t@@@std@@@2@@3@MMMMH@Z");
+constexpr char* const graph_path_finder_t__generate_graph_for_room_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 64 53 56 8B F1 E8 ?? ?? ?? ??");
+
+constexpr char* const graph_path_finder_t__init_mangled_name = static_cast<char*>(
+	"?Init@GraphPathFinder_t@@QAEXXZ");
+constexpr char* const graph_path_finder_t__init_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 56 8B F1 57 8B 7E 04");
+
+constexpr char* const graph_path_finder_t__set_space_for_graph_mangled_name = static_cast<char*>(
+	"?SetSpaceForGraph@GraphPathFinder_t@@QAEXPAVSpace_i@@@Z");
+constexpr char* const graph_path_finder_t__set_space_for_graph_pattern = static_cast<char*>(
+	"55 8B EC 56 8B F1 8B 4E 0C");
+
+constexpr char* const graph_path_finder_t__set_surface_mangled_name = static_cast<char*>(
+	"?SetSurface@GraphPathFinder_t@@QAEXPBVSurface_i@@@Z");
+constexpr char* const graph_path_finder_t__set_surface_pattern = static_cast<char*>(
+	"55 8B EC 8B 45 08 89 41 10");
 
 #pragma endregion
 
