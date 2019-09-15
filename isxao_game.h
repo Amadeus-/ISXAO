@@ -698,6 +698,11 @@ const char* const html_parser_c__extract_text_mangled_name = static_cast<char*>(
 const char* const html_parser_c__extract_text_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 20 83 65 F0 00 53 8B 5D 10");
 
+const char* const input_config_t__set_current_target_mangled_name = static_cast<char*>(
+	"?SetCurrentTarget@InputConfig_t@@QAEXABVIdentity_t@@@Z");
+const char* const input_config_t__set_current_target_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 0C 56 57 8B 7D 08 8D B1 C0 00 00 00");
+
 const char* const targeting_module_t__initialise_message_mangled_name = static_cast<char*>(
 	"?InitialiseMessage@TargetingModule_t@@CAXXZ");
 const char* const targeting_module_t__initialise_message_pattern = static_cast<char*>(

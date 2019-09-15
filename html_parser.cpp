@@ -27,7 +27,7 @@ namespace isxao_classes
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	FUNCTION_AT_ADDRESS(string* html_parser::extract_text(string*, int, int, DWORD), html_parser_c__extract_text)
 #else
-	static_assert(false, "tml_parser::extract_text(string*, int, int, DWORD) requires a native function.");
+	static_assert(false, "html_parser::extract_text(string*, int, int, DWORD) requires a native function.");
 #endif
 
 }

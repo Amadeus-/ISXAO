@@ -228,6 +228,11 @@ namespace isxao_globals
 	AOLIB_VAR DWORD html_parser_c__d_html_parser_c;	
 	AOLIB_VAR DWORD html_parser_c__extract_text;
 
+	AOLIB_VAR DWORD InputConfig_t__m_pcInstance;
+	AOLIB_VAR input_config** ppInputConfig;
+#define pInputConfig (*ppInputConfig)
+	AOLIB_VAR DWORD input_config_t__set_current_target;
+
 	AOLIB_VAR DWORD targeting_module_t__m_pc_instance;
 	AOLIB_VAR TargetingModule** pp_targeting_module;
 #define P_TARGETING_MODULE (*pp_targeting_module)  // NOLINT(cppcoreguidelines-macro-usage)
@@ -412,10 +417,7 @@ namespace isxao_globals
 	
 #pragma region InputConfig
 	
-	AOLIB_VAR DWORD InputConfig_t__m_pcInstance;
-	AOLIB_VAR InputConfig** ppInputConfig;
-#define pInputConfig (*ppInputConfig)
-	AOLIB_VAR DWORD InputConfig_t__SetCurrentTarget;
+	
 
 #pragma endregion
 

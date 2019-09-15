@@ -231,6 +231,10 @@ namespace isxao_globals
 	DWORD html_parser_c__d_html_parser_c = 0;	
 	DWORD html_parser_c__extract_text = 0;
 
+	DWORD InputConfig_t__m_pcInstance = 0;
+	input_config** ppInputConfig = nullptr;
+	DWORD input_config_t__set_current_target = 0;
+
 	DWORD targeting_module_t__m_pc_instance = 0;
 	TargetingModule** pp_targeting_module = nullptr;
 	DWORD targeting_module_t__m_pc_selection_indicator = 0;
@@ -398,10 +402,7 @@ namespace isxao_globals
 
 #pragma region InputConfig
 
-	DWORD InputConfig_t__m_pcInstance = 0;
-	InputConfig** ppInputConfig = nullptr;
-
-	DWORD InputConfig_t__SetCurrentTarget = 0;
+	
 
 #pragma endregion
 
@@ -1510,6 +1511,12 @@ namespace isxao_globals
 		GET_FUNCTION_ADDRESS(gui, html_parser_c__extract_text)
 #else
 		GET_PROC_ADDRESS(gui, html_parser_c__extract_text)
+#endif
+
+#ifdef INPUT_CONFIG_T__SET_CURRENT_TARGET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gui, input_config_t__set_current_target)
+#else
+		GET_PROC_ADDRESS(gui, input_config_t__set_current_target)
 #endif
 
 #ifdef TARGETING_MODULE_T__INITIALISE_MESSAGE_USE_PATTERN
