@@ -3,9 +3,9 @@
 namespace isxao_classes
 {
 
-	ResourceDatabase* database_handler::get_resource_database() const
+	resource_database* database_handler::get_resource_database() const
 	{
-		return reinterpret_cast<ResourceDatabase*>(n3_database_handler_.p_resource_database);
+		return reinterpret_cast<resource_database*>(n3_database_handler_.p_resource_database);
 	}
 
 }

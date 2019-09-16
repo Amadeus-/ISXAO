@@ -1351,9 +1351,9 @@ namespace isxao_utilities
 
 	void HandleN3Message(PN3MESSAGEINFO message_info)
 	{
-		auto parser = Parser(PCHAR(message_info->message), message_info->size);
-		auto n3_header = N3Header(parser);
-		switch(N3MessageType_e(n3_header.N3Type()))
+		auto parser = isxao_classes::parser(PCHAR(message_info->message), message_info->size);
+		const auto n3_header = isxao_classes::n3_header(parser);
+		switch(N3MessageType_e(n3_header.n3_type()))
 		{
 		case N3T_KNUBOT_NPC_DESCRIPTION: break;
 		case N3T_ADD_TEMPLATE: break;
@@ -1371,7 +1371,7 @@ namespace isxao_utilities
 		{
 			if(message_info->size == 0x15)
 			{
-				auto add_pet_message = AddPetMessage(parser);
+				const auto add_pet_message = isxao_classes::add_pet_message(parser);
 				HandleAddPetMessage(add_pet_message);
 			}			
 			break;
@@ -1399,10 +1399,10 @@ namespace isxao_utilities
 		{
 			if(message_info->size == 0x1D)
 			{
-				auto a1 = parser.PopInteger();
-				auto a2 = parser.PopInteger();
-				auto a3 = parser.PopInteger();
-				auto a4 = parser.PopInteger();
+				auto a1 = parser.pop_integer();
+				auto a2 = parser.pop_integer();
+				auto a3 = parser.pop_integer();
+				auto a4 = parser.pop_integer();
 				printf("%d %d %d %d", a1, a2, a3, a4);
 			}
 			//printf("0x%.8X", message_info->size);
@@ -1412,7 +1412,7 @@ namespace isxao_utilities
 		{			
 			if(message_info->size == 0x25)
 			{
-				auto cast_nano_spell_message = CastNanoSpellMessage(parser);
+				auto cast_nano_spell_message = isxao_classes::cast_nano_spell_message(parser);
 				HandleCastNanoSpellMessage(cast_nano_spell_message);
 			}			
 			break;
@@ -1422,7 +1422,7 @@ namespace isxao_utilities
 		{
 			if(message_info->size == 0x28)
 			{
-				auto follow_target_message = FollowTargetMessage(parser);
+				auto follow_target_message = isxao_classes::follow_target_message(parser);
 				HandleFollowTargetMessage(follow_target_message);
 			}			
 			break;
@@ -1437,7 +1437,7 @@ namespace isxao_utilities
 		{
 			if(message_info->size == 0x16)
 			{
-				auto attack_message = AttackMessage(parser);
+				auto attack_message = isxao_classes::attack_message(parser);
 				HandleAttackMessage(attack_message);
 			}			
 			break;
@@ -1529,7 +1529,7 @@ namespace isxao_utilities
 		{
 			if (message_info->size == 0x15)
 			{
-				auto remove_pet_message = RemovePetMessage(parser);
+				auto remove_pet_message = isxao_classes::remove_pet_message(parser);
 				HandleRemovePetMessage(remove_pet_message);
 			}			
 			break;
@@ -1548,7 +1548,7 @@ namespace isxao_utilities
 		{
 			if(message_info->size == 0x27)
 			{
-				auto character_action_message = CharacterActionMessage(parser);
+				auto character_action_message = isxao_classes::character_action_message(parser);
 				HandleCharacterActionMessage(character_action_message);
 			}			
 			break;
@@ -1578,52 +1578,52 @@ namespace isxao_utilities
 		delete message_info;
 	}
 
-	void HandleAddPetMessage(AddPetMessage pet_message)
+	void HandleAddPetMessage(add_pet_message pet_message)
 	{
 		char pet[MAX_STRING];
-		sprintf_s(pet, sizeof(pet), "%I64u",pet_message.Identity().CombinedIdentity());
+		sprintf_s(pet, sizeof(pet), "%I64u",pet_message.identity().combined_identity());
 		char *argv[] = { pet };
 		pISInterface->ExecuteEvent(GetEventId("AO_onAddPet"), 0, 1, argv);
 		//delete argv;
 	}
 
-	void HandleAttackMessage(AttackMessage attack_message)
+	void HandleAttackMessage(attack_message attack_message)
 	{
 		char target[MAX_STRING];
-		sprintf_s(target, sizeof(target), "%I64u", attack_message.Target().CombinedIdentity());
+		sprintf_s(target, sizeof(target), "%I64u", attack_message.target().combined_identity());
 		char *argv[] = { target };
 		pISInterface->ExecuteEvent(GetEventId("AO_onAttack"), 0, 1, argv);
 		//delete argv;
 	}
 
-	void HandleCastNanoSpellMessage(CastNanoSpellMessage cast_nano_spell_message)
+	void HandleCastNanoSpellMessage(cast_nano_spell_message cast_nano_spell_message)
 	{
 		char nano_id[MAX_STRING];
 		char target[MAX_STRING];
 		char caster[MAX_STRING];
-		sprintf_s(nano_id, sizeof(nano_id), "%d", cast_nano_spell_message.NanoId());
-		sprintf_s(target, sizeof(target), "%I64u", cast_nano_spell_message.Target().CombinedIdentity());
-		sprintf_s(caster, sizeof(caster), "%I64u", cast_nano_spell_message.Caster().CombinedIdentity());
+		sprintf_s(nano_id, sizeof(nano_id), "%d", cast_nano_spell_message.nano_id());
+		sprintf_s(target, sizeof(target), "%I64u", cast_nano_spell_message.target().combined_identity());
+		sprintf_s(caster, sizeof(caster), "%I64u", cast_nano_spell_message.caster().combined_identity());
 		char *argv[] = { nano_id, target, caster };
 		pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell"), 0, 3, argv);
-		if (IsClientId(cast_nano_spell_message.Target().Id()))
+		if (IsClientId(cast_nano_spell_message.target().id()))
 			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_TargetSelf"), 0, 3, argv);
 		else
 			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_TargetOther"), 0, 3, argv);
-		if (IsClientId(cast_nano_spell_message.Caster().Id()))
+		if (IsClientId(cast_nano_spell_message.caster().id()))
 			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_CasterSelf"), 0, 3, argv);
 		else
 			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_CasterOther"), 0, 3, argv);
 	}
 
-	void HandleCharacterActionMessage(isxao_classes::CharacterActionMessage character_action_message)
+	void HandleCharacterActionMessage(isxao_classes::character_action_message character_action_message)
 	{
-		switch (::TypeCharacterAction_e(character_action_message.CharacterActionType()))
+		switch (::TypeCharacterAction_e(character_action_message.character_action_type()))
 		{
 		case ::CAT_FINISH_NANO_CASTING:
 		{
 			char nano_id[MAX_STRING];
-			sprintf_s(nano_id, sizeof(nano_id), "%d", character_action_message.Param2());
+			sprintf_s(nano_id, sizeof(nano_id), "%d", character_action_message.param_2());
 			char * argv[] = { nano_id };
 			pISInterface->ExecuteEvent(GetEventId("AO_onFinishedCastingNano"), 0, 1, argv);
 			break;
@@ -1632,13 +1632,13 @@ namespace isxao_utilities
 		{
 			identity_t caster_identity;
 			caster_identity.type = 50000;
-			caster_identity.id = character_action_message.Param1();
+			caster_identity.id = character_action_message.param_1();
 			char nano_id[MAX_STRING];
-			sprintf_s(nano_id, sizeof(nano_id), "%d", character_action_message.Identity().Id());
+			sprintf_s(nano_id, sizeof(nano_id), "%d", character_action_message.identity().id());
 			char caster_id[MAX_STRING];
 			sprintf_s(caster_id, sizeof(caster_id), "%I64u", caster_identity.get_combined_identity());
 			char duration[MAX_STRING];
-			sprintf_s(duration, sizeof(duration), "%d", character_action_message.Param2());
+			sprintf_s(duration, sizeof(duration), "%d", character_action_message.param_2());
 			char * argv[] = { nano_id, caster_id, duration };
 			pISInterface->ExecuteEvent(GetEventId("AO_onNanoApplied"), 0, 3, argv);
 			break;
@@ -1680,30 +1680,30 @@ namespace isxao_utilities
 		}
 	}
 
-	void HandleFollowTargetMessage(FollowTargetMessage follow_message)
+	void HandleFollowTargetMessage(follow_target_message follow_message)
 	{
 		char target[MAX_STRING];
-		sprintf_s(target, sizeof(target), "%I64u", follow_message.Target().CombinedIdentity());
+		sprintf_s(target, sizeof(target), "%I64u", follow_message.target().combined_identity());
 		char *argv[] = { target };
 		pISInterface->ExecuteEvent(GetEventId("AO_onFollowTarget"), 0, 1, argv);
 		//delete argv;
 	}
 	
-	void HandleRemovePetMessage(RemovePetMessage remove_pet_message)
+	void HandleRemovePetMessage(remove_pet_message remove_pet_message)
 	{
 		char pet[MAX_STRING];
-		sprintf_s(pet, sizeof(pet), "%I64u", remove_pet_message.Identity().CombinedIdentity());
+		sprintf_s(pet, sizeof(pet), "%I64u", remove_pet_message.identity().combined_identity());
 		char *argv[] = { pet };
 		pISInterface->ExecuteEvent(GetEventId("AO_onRemovePet"), 0, 1, argv);
 		//delete argv;
 	}
 
-	void HandleShieldAttackMessage(ShieldAttackMessage shield_attack_message)
+	void HandleShieldAttackMessage(shield_attack_message shield_attack_message)
 	{
 		char damage[MAX_STRING];
 		char shieldee[MAX_STRING];
-		sprintf_s(damage, sizeof(damage), "%d", shield_attack_message.DamageShielded());
-		sprintf_s(shieldee, sizeof(shieldee), "%I64u", shield_attack_message.Shieldee().CombinedIdentity());
+		sprintf_s(damage, sizeof(damage), "%d", shield_attack_message.damage_shielded());
+		sprintf_s(shieldee, sizeof(shieldee), "%I64u", shield_attack_message.shieldee().combined_identity());
 		char *argv[] = { damage, shieldee };
 		pISInterface->ExecuteEvent(GetEventId("AO_onAttackShielded"), 0, 2, argv);
 		//delete argv;

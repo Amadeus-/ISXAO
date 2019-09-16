@@ -3,18 +3,51 @@
 namespace isxao_classes
 {
 	
-	Parser::Parser(char* memory, unsigned int size)
+	parser::parser(char* memory, const unsigned int size)
 		: start_(memory)
 		, end_(memory + size)
 		, pos_(memory)
 	{
 	}
 
-	Parser::~Parser()
+	parser::parser(parser& other)
 	{
+		this->start_ = nullptr;
+		this->end_ = nullptr;
+		this->pos_ = nullptr;
+		this->set_start(other.get_start());
+		this->set_end(other.get_end());
+		this->set_pos(other.get_pos());
 	}
 
-	DWORD Parser::BytesRemaining() const
+	parser::parser(parser&& other) noexcept
+	{
+		this->start_ = std::exchange(other.start_, nullptr);
+		this->end_ = std::exchange(other.end_, nullptr);
+		this->pos_ = std::exchange(other.pos_, nullptr);
+	}
+
+	parser::~parser() = default;
+
+	parser& parser::operator=(const parser& other)
+	{
+		if (&other == this)
+			return *this;
+		this->set_start(other.get_start());
+		this->set_end(other.get_end());
+		this->set_pos(other.get_pos());
+		return *this;
+	}
+
+	parser& parser::operator=(parser&& other) noexcept
+	{
+		this->start_ = std::exchange(other.start_, nullptr);
+		this->end_ = std::exchange(other.end_, nullptr);
+		this->pos_ = std::exchange(other.pos_, nullptr);
+		return *this;
+	}
+
+	DWORD parser::bytes_remaining() const
 	{
 		if (end_ > start_) {
 			return static_cast<DWORD>(end_ - pos_);
@@ -22,138 +55,136 @@ namespace isxao_classes
 		return 0;
 	}
 
-	void Parser::Skip(DWORD count) const
+	void parser::skip(DWORD count) const
 	{
 		assert(count <= remaining());
 
-		if (count <= BytesRemaining()) {
+		if (count <= bytes_remaining()) {
 			pos_ += count;
 		}
 	}
 
-	BYTE Parser::PopChar() const
+	BYTE parser::pop_char() const
 	{
 		return *(pos_++);
 	}
 
-	WORD Parser::PopShort() const
+	WORD parser::pop_short() const
 	{
-		unsigned short retval = 0;
-		memcpy(&retval, pos_, 2);
+		unsigned short result = 0;
+		memcpy(&result, pos_, 2);
 		pos_ += 2;
-		return _byteswap_ushort(retval);
+		return _byteswap_ushort(result);
 	}
 
-	DWORD Parser::PopInteger() const
+	DWORD parser::pop_integer() const
 	{
-		unsigned int retval = 0;
-		memcpy(&retval, pos_, 4);
+		unsigned int result = 0;
+		memcpy(&result, pos_, 4);
 		pos_ += 4;
-		return _byteswap_ulong(retval);
+		return _byteswap_ulong(result);
 	}
 
-	std::string Parser::PopString() const
+	std::string parser::pop_string() const
 	{
-		unsigned short len = PopChar();
-		std::string retval(pos_, len);
-		pos_ += len + 1;
-		return retval;
+		const unsigned short length = pop_char();
+		std::string result(pos_, length);
+		pos_ += length + 1;
+		return result;
 	}
 
-	DWORD Parser::Pop3F1Count() const
+	DWORD parser::pop_3f1_count() const
 	{
-		unsigned int val = PopInteger();
-		return (val / 1009) - 1;
+		const unsigned int value = pop_integer();
+		return (value / 1009) - 1;
 	}
 
-	SerializedIdentity::SerializedIdentity()
+	serialized_identity::serialized_identity()
 		: type_(0)
 		, id_(0)
-	{
+	{	}
 
+	serialized_identity::serialized_identity(parser &p)
+	{
+		type_ = p.pop_integer();
+		id_ = p.pop_integer();
 	}
 
-	SerializedIdentity::SerializedIdentity(Parser &p)
+	n3_header::n3_header(parser &p)
 	{
-		type_ = p.PopInteger();
-		id_ = p.PopInteger();
+		n3_type_ = p.pop_integer();				// 0x00
+		identity_ = serialized_identity(p);		// 0x04
+		unknown0xC_ = p.pop_char();				// 0x0C
 	}
 
-	N3Header::N3Header(Parser &p)
+	add_pet_message::add_pet_message(parser &p)
 	{
-		n3_type_ = p.PopInteger();				// 0x00
-		identity_ = SerializedIdentity(p);		// 0x04
-		unknown0xC_ = p.PopChar();				// 0x0C
+		pet_id_ = serialized_identity(p);
 	}
 
-	AddPetMessage::AddPetMessage(Parser &p)
+	attack_message::attack_message(parser &p)
 	{
-		pet_id_ = SerializedIdentity(p);
+		target_ = serialized_identity(p);
+		unknown_ = p.pop_char();
 	}
 
-	AttackMessage::AttackMessage(Parser &p)
+	cast_nano_spell_message::cast_nano_spell_message(parser &p)
 	{
-		target_ = SerializedIdentity(p);
-		unknown_ = p.PopChar();
+		nano_id_ = p.pop_integer();
+		target_ = serialized_identity(p);
+		unknown0xC_ = p.pop_integer();
+		caster_ = serialized_identity(p);
 	}
 
-	CastNanoSpellMessage::CastNanoSpellMessage(Parser &p)
+	character_action_message::character_action_message(parser& p)
 	{
-		nano_id_ = p.PopInteger();
-		target_ = SerializedIdentity(p);
-		unknown0xC_ = p.PopInteger();
-		caster_ = SerializedIdentity(p);
+		character_action_type_ = p.pop_integer();
+		unknown0x4_ = p.pop_integer();
+		identity_ = serialized_identity(p);
+		param1_ = p.pop_integer();
+		param2_ = p.pop_integer();
+		param3_ = p.pop_short();
 	}
 
-	CharacterActionMessage::CharacterActionMessage(Parser& p)
+	follow_target_message::follow_target_message(parser &p)
 	{
-		character_action_type = p.PopInteger();
-		unknown0x4_ = p.PopInteger();
-		identity_ = SerializedIdentity(p);
-		param1_ = p.PopInteger();
-		param2_ = p.PopInteger();
-		param3_ = p.PopShort();
+		p.skip(2);
+		target_ = serialized_identity(p);
+		p.skip(17);
 	}
 
-	FollowTargetMessage::FollowTargetMessage(Parser &p)
+	remove_pet_message::remove_pet_message(parser& p)
 	{
-		p.Skip(2);
-		target_ = SerializedIdentity(p);
-		p.Skip(17);
+		pet_id_ = serialized_identity(p);
 	}
 
-	RemovePetMessage::RemovePetMessage(Parser& p)
+	shield_attack_message::shield_attack_message(parser& p)
 	{
-		pet_id_ = SerializedIdentity(p);
+		damage_shielded_ = DWORD(p.pop_integer());
+		shieldee_ = serialized_identity(p);
+		unknown_0x19 = p.pop_integer();
 	}
 
-	ShieldAttackMessage::ShieldAttackMessage(Parser& p)
+	special_attack_weapon_message::special_attack_weapon_message(parser& p)
 	{
-		damage_shielded_ = DWORD(p.PopInteger());
-		shieldee_ = SerializedIdentity(p);
-		Unknown0x19 = p.PopInteger();
-	}
-
-	SpecialAttackWeaponMessage::SpecialAttackWeaponMessage(Parser& p)
-	{
-		m_Unknown1 = p.PopInteger();
-		m_Unknown2 = p.PopInteger();
-		m_Unknown3 = p.PopInteger();
-		m_Unknown4 = p.PopInteger();
-		m_Unknown5 = p.PopInteger();
-		m_Unknown6 = p.PopInteger();
-		m_Unknown7 = p.PopInteger();
-		m_Unknown8 = p.PopInteger();
-		m_Unknown9 = p.PopInteger();
-		m_Unknown10 = p.PopInteger();
-		m_Unknown11 = p.PopInteger();
-		m_Unknown12 = p.PopInteger();
-		m_Unknown13 = p.PopInteger();
-		m_Unknown14 = p.PopInteger();
-		m_Unknown15 = p.PopInteger();
-		m_Unknown16 = p.PopInteger();
-		m_Unknown17 = p.PopInteger();
-		m_nAggDef = p.PopInteger();
+		m_Unknown1 = p.pop_integer();
+		m_Unknown2 = p.pop_integer();
+		m_Unknown3 = p.pop_integer();
+		m_Unknown4 = p.pop_integer();
+		m_Unknown5 = p.pop_integer();
+		m_Unknown6 = p.pop_integer();
+		m_Unknown7 = p.pop_integer();
+		m_Unknown8 = p.pop_integer();
+		m_Unknown9 = p.pop_integer();
+		m_Unknown10 = p.pop_integer();
+		m_Unknown11 = p.pop_integer();
+		m_Unknown12 = p.pop_integer();
+		m_Unknown13 = p.pop_integer();
+		m_Unknown14 = p.pop_integer();
+		m_Unknown15 = p.pop_integer();
+		m_Unknown16 = p.pop_integer();
+		m_Unknown17 = p.pop_integer();
+		m_nAggDef = p.pop_integer();
 	}
 
 }

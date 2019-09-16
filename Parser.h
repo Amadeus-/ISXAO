@@ -1,36 +1,44 @@
 #pragma once
 
-class Parser
+class parser
 {
 public:
-	Parser(char* memory, unsigned int size);
-	~Parser();
+	parser(char* memory, unsigned int size);
+	parser(parser& other);
+	parser(parser&& other) noexcept;
+	~parser();
+
+	parser& operator=(const parser& other);
+	parser& operator=(parser&& other) noexcept;
 
 	// Number of bytes remaining to be parsed
-	DWORD BytesRemaining() const;
+	DWORD bytes_remaining() const;
 
 	// Moves the current position the number of bytes ahead
-	void Skip(DWORD count) const;
+	void skip(DWORD count) const;
 
 	// Get the next byte
-	BYTE PopChar() const;
+	BYTE pop_char() const;
 
 	// Get the next 2 bytes 
-	WORD PopShort() const;
+	WORD pop_short() const;
 
 	// Get the next 4 bytes
-	DWORD PopInteger() const;
+	DWORD pop_integer() const;
 
 	// Get the string at current position. <len><char[]><NULL>
-	std::string PopString() const;
+	string pop_string() const;
 
 	// Get the 3F1 encoded counter value 
 	// counter = (x/1009)-1
-	DWORD Pop3F1Count() const;
+	DWORD pop_3f1_count() const;
 
-	char* Start() const { return start_; }
-	char* End() const { return end_; }
-	char* Pos() const { return pos_; }
+	char* get_start() const { return start_; }
+	void set_start(char* start) { this->start_ = start; }
+	char* get_end() const { return end_; }
+	void set_end(char* end) { this->end_ = end; }
+	char* get_pos() const { return pos_; }
+	void set_pos(char* pos) const { this->pos_ = pos; }
 
 private:
 	char* start_;
@@ -38,20 +46,20 @@ private:
 	mutable char* pos_;
 };
 
-class SerializedIdentity
+class serialized_identity
 {
 public:
-	SerializedIdentity();
-	SerializedIdentity(Parser &p);
-	DWORD Type() const
+	serialized_identity();
+	serialized_identity(isxao_classes::parser &p);
+	DWORD type() const
 	{
 		return type_;
 	}
-	DWORD Id() const
+	DWORD id() const
 	{
 		return id_;
 	}
-	DWORD64 CombinedIdentity() const
+	DWORD64 combined_identity() const
 	{
 		return (static_cast<UINT64>(type_) << 32) | id_;
 	}
@@ -60,164 +68,164 @@ private:
 	DWORD id_;
 };
 
-class N3Header
+class n3_header
 {
 public:
-	N3Header(Parser &p);
-	DWORD N3Type() const
+	n3_header(isxao_classes::parser &p);
+	DWORD n3_type() const
 	{
 		return n3_type_;
 	}
-	SerializedIdentity Identity() const
+	isxao_classes::serialized_identity identity() const
 	{
 		return identity_;
 	}
-	BYTE Unknown0xC() const
+	BYTE unknown_0xC() const
 	{
 		return unknown0xC_;
 	}
 private:
 	DWORD n3_type_;
-	SerializedIdentity identity_;
+	isxao_classes::serialized_identity identity_;
 	BYTE unknown0xC_;
 };
 
-class AddPetMessage
+class add_pet_message
 {
 public:
-	AddPetMessage(Parser &p);
-	SerializedIdentity Identity() const
+	add_pet_message(isxao_classes::parser &p);
+	isxao_classes::serialized_identity identity() const
 	{
 		return pet_id_;
 	}
 private:
-	SerializedIdentity pet_id_;
+	isxao_classes::serialized_identity pet_id_;
 };
 
-class AttackMessage
+class attack_message
 {
 public:
-	AttackMessage(Parser &p);
-	SerializedIdentity Target() const
+	attack_message(isxao_classes::parser &p);
+	isxao_classes::serialized_identity target() const
 	{
 		return target_;
 	}
 private:
-	SerializedIdentity target_;
+	isxao_classes::serialized_identity target_;
 	BYTE unknown_;
 };
 
-class CastNanoSpellMessage
+class cast_nano_spell_message
 {
 public:
-	CastNanoSpellMessage(Parser &p);
-	DWORD NanoId() const
+	cast_nano_spell_message(isxao_classes::parser &p);
+	DWORD nano_id() const
 	{
 		return nano_id_;
 	}
-	SerializedIdentity Target() const
+	isxao_classes::serialized_identity target() const
 	{
 		return target_;
 	}
-	DWORD Unknown0xC() const
+	DWORD unknown_0xC() const
 	{
 		return unknown0xC_;
 	}
-	SerializedIdentity Caster() const
+	isxao_classes::serialized_identity caster() const
 	{
 		return caster_;
 	}
 private:
 	DWORD nano_id_;
-	SerializedIdentity target_;
+	isxao_classes::serialized_identity target_;
 	DWORD unknown0xC_;
-	SerializedIdentity caster_;
+	isxao_classes::serialized_identity caster_;
 };
 
-class CharacterActionMessage
+class character_action_message
 {
 public:
-	CharacterActionMessage(Parser &p);
-	DWORD CharacterActionType() const
+	character_action_message(isxao_classes::parser &p);
+	DWORD character_action_type() const
 	{
-		return character_action_type;
+		return character_action_type_;
 	}
-	SerializedIdentity Identity() const
+	isxao_classes::serialized_identity identity() const
 	{
 		return identity_;
 	}
-	DWORD Param1() const
+	DWORD param_1() const
 	{
 		return param1_;
 	}
-	DWORD Param2() const
+	DWORD param_2() const
 	{
 		return param2_;
 	}
-	DWORD Unknown0x4() const
+	DWORD unknown_0x4() const
 	{
 		return unknown0x4_;
 	}
-	WORD Param3() const
+	WORD param_3() const
 	{
 		return param3_;
 	}
 private:
-	DWORD character_action_type;
+	DWORD character_action_type_;
 	DWORD unknown0x4_;
-	SerializedIdentity identity_;
+	isxao_classes::serialized_identity identity_;
 	DWORD param1_;
 	DWORD param2_;
 	WORD param3_;
 };
 
-class FollowTargetMessage
+class follow_target_message
 {
 public:
-	FollowTargetMessage(Parser &p);
-	SerializedIdentity Target() const
+	follow_target_message(isxao_classes::parser &p);
+	isxao_classes::serialized_identity target() const
 	{
 		return target_;
 	}
 private:
-	SerializedIdentity target_;
+	isxao_classes::serialized_identity target_;
 
 };
 
-class RemovePetMessage
+class remove_pet_message
 {
 public:
-	RemovePetMessage(Parser &p);
-	SerializedIdentity Identity() const
+	remove_pet_message(isxao_classes::parser &p);
+	isxao_classes::serialized_identity identity() const
 	{
 		return pet_id_;
 	}
 private:
-	SerializedIdentity pet_id_;
+	isxao_classes::serialized_identity pet_id_;
 };
 
-class ShieldAttackMessage
+class shield_attack_message
 {
 public:
-	ShieldAttackMessage(Parser &p);
-	DWORD DamageShielded() const
+	shield_attack_message(isxao_classes::parser &p);
+	DWORD damage_shielded() const
 	{
 		return damage_shielded_;
 	}
-	SerializedIdentity Shieldee() const
+	isxao_classes::serialized_identity shieldee() const
 	{
 		return shieldee_;
 	}
 private:
 	DWORD damage_shielded_;
-	SerializedIdentity shieldee_;
-	int Unknown0x19;
+	isxao_classes::serialized_identity shieldee_;
+	int unknown_0x19;
 };
 
-class SpecialAttackWeaponMessage
+class special_attack_weapon_message
 {
 public:
-	SpecialAttackWeaponMessage(Parser &p);
+	special_attack_weapon_message(isxao_classes::parser &p);
 	DWORD m_Unknown1;
 	DWORD m_Unknown2;
 	DWORD m_Unknown3;

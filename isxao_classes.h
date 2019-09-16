@@ -8,10 +8,10 @@ namespace isxao_classes
 	class actor;
 	class character;
 	class info_item_remote;
-	class InventoryItem;
+	class inventory_item;
 	class pet;
 	class player;
-	class ResourceDatabase;
+	class resource_database;
 	class special_action_template;
 	class team_member;
 	class team_raid;
@@ -113,8 +113,6 @@ namespace isxao_classes
 #include "resource_database.h"
 
 #include "graph_path_finder.h"
-
-
 
 }
 using namespace isxao_classes;

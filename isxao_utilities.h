@@ -87,13 +87,13 @@ namespace isxao_utilities
 #pragma region Message Handling
 
 	void HandleN3Message(PN3MESSAGEINFO message_info);
-	void HandleAddPetMessage(AddPetMessage);
-	void HandleAttackMessage(AttackMessage);
-	void HandleCastNanoSpellMessage(CastNanoSpellMessage);
-	void HandleCharacterActionMessage(CharacterActionMessage);
-	void HandleFollowTargetMessage(FollowTargetMessage);
-	void HandleRemovePetMessage(RemovePetMessage);
-	void HandleShieldAttackMessage(ShieldAttackMessage);
+	void HandleAddPetMessage(add_pet_message);
+	void HandleAttackMessage(attack_message);
+	void HandleCastNanoSpellMessage(cast_nano_spell_message);
+	void HandleCharacterActionMessage(character_action_message);
+	void HandleFollowTargetMessage(follow_target_message);
+	void HandleRemovePetMessage(remove_pet_message);
+	void HandleShieldAttackMessage(shield_attack_message);
 
 	void HandleGroupMessage(PGROUPMESSAGEINFO);
 
