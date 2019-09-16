@@ -145,6 +145,9 @@ constexpr char* const game_time_t__get_instance_pattern = static_cast<char*>(
 constexpr DWORD item_manager_t__item_manager_t_offset = 0xF3;
 constexpr DWORD item_manager_t__item_manager_t_bytes_to_next = 0x0;
 
+constexpr char* const look_at_iir_t__look_at_iir_t_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 1C 53 56 6A 0B 8B F1 33 DB 68 ?? ?? ?? ?? 8D 4D D8 C7 45 EC 0F 00 00 00 89 5D E8 88 5D D8 E8 ?? ?? ?? ?? 8D 45 D8 50 FF 75 08 8B CE 89 5D FC FF 15 ?? ?? ?? ?? 53 6A 01 8D 4D D8 E8 ?? ?? ?? ?? 8B 45 0C C7 06 ?? ?? ?? ??");
+
 constexpr char* const n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_mangled_name = static_cast<char*>(
 	"??0n3EngineClientAnarchy_t@@QAE@XZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_pattern = static_cast<char*>(
@@ -698,6 +701,11 @@ const char* const html_parser_c__extract_text_mangled_name = static_cast<char*>(
 const char* const html_parser_c__extract_text_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 20 83 65 F0 00 53 8B 5D 10");
 
+const char* const input_config_t__get_instance_mangled_name = static_cast<char*>(
+	"?GetInstance@InputConfig_t@@SAPAV1@XZ");
+const char* const input_config_t__get_instance_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 83 3D ?? ?? ?? ?? 00 75 ?? 68 D0 01 00 00");
+
 const char* const input_config_t__set_current_target_mangled_name = static_cast<char*>(
 	"?SetCurrentTarget@InputConfig_t@@QAEXABVIdentity_t@@@Z");
 const char* const input_config_t__set_current_target_pattern = static_cast<char*>(
@@ -719,6 +727,10 @@ const char* const targeting_module_t__set_target_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 51 A1 ?? ?? ?? ??");
 
 // Instances
+constexpr char* const input_config_t__m_pc_instance_mangled_name = static_cast<char*>(
+	"?m_pcInstance@InputConfig_t@@0PAV1@A");
+constexpr DWORD input_config_t__m_pc_instance_offset = 0xB;
+
 constexpr char* const targeting_module_t__m_pc_instance_mangled_name = static_cast<char*>(
 	"?m_pcInstance@TargetingModule_t@@0PAV1@A");
 constexpr DWORD targeting_module_t__m_pc_instance_offset = 0xD;
@@ -820,6 +832,65 @@ constexpr char* const graph_path_finder_t__set_surface_mangled_name = static_cas
 	"?SetSurface@GraphPathFinder_t@@QAEXPBVSurface_i@@@Z");
 constexpr char* const graph_path_finder_t__set_surface_pattern = static_cast<char*>(
 	"55 8B EC 8B 45 08 89 41 10");
+
+#pragma endregion
+
+#pragma region MessageProtocol
+
+constexpr char* const message_protocol_module_name = static_cast<char*>("MessageProtocol.dll");
+
+constexpr char* const message_t__data_block_size_get_mangled_name = static_cast<char*>(
+	"?DataBlockSizeGet@Message_t@@QBEIXZ");
+constexpr char* const message_t__data_block_size_get_pattern = static_cast<char*>(
+	"E8 ?? ?? ?? ?? 83 C0 03 83 E0 FC C3");
+
+constexpr char* const message_t__dest_id_get_mangled_name = static_cast<char*>(
+	"?DestIdGet@Message_t@@QBEIXZ");
+constexpr char* const message_t__dest_id_get_pattern = static_cast<char*>(
+	"8B 41 10 C3");
+
+constexpr char* const message_t__header_size_mangled_name = static_cast<char*>(
+	"?HeaderSize@Message_t@@SAII@Z");
+constexpr char* const message_t__header_size_pattern = static_cast<char*>(
+	"55 8B EC 8B 4D 08 33 C0");
+
+constexpr char* const message_t__message_size_get_mangled_name = static_cast<char*>(
+	"?MessageSizeGet@Message_t@@QBEIXZ");
+constexpr char* const message_t__message_size_get_pattern = static_cast<char*>(
+	"8B D1");
+
+constexpr char* const message_t__message_type_get_mangled_name = static_cast<char*>(
+	"?MessageTypeGet@Message_t@@QBEIXZ");
+constexpr char* const message_t__message_type_get_pattern = static_cast<char*>(
+	"8B 41 08 C3");
+
+constexpr char* const message_t__priority_get_mangled_name = static_cast<char*>(
+	"?PriorityGet@Message_t@@QBEKXZ");
+constexpr char* const message_t__priority_get_pattern = static_cast<char*>(
+	"8B 41 14 C3");
+
+constexpr char* const message_t__source_id_get_mangled_name = static_cast<char*>(
+	"?SourceIdGet@Message_t@@QBEIXZ");
+constexpr char* const message_t__source_id_get_pattern = static_cast<char*>(
+	"8B 41 0C");
+
+constexpr char* const n3_message_t__duplicate_body_mangled_name = static_cast<char*>(
+	"?DuplicateBody@N3Message_t@@QBEPAVACE_Data_Block@@XZ");
+
+constexpr char* const n3_message_t__message_body_get_mangled_name = static_cast<char*>(
+	"?MessageBodyGet@N3Message_t@@UBEPADXZ");
+constexpr char* const n3_message_t__message_body_get_pattern = static_cast<char*>(
+	"8B 41 1C 85 C0");
+
+constexpr char* const text_message_t__message_body_get_mangled_name = static_cast<char*>(
+	"?MessageBodyGet@TextMessage_t@@UBEPADXZ");
+constexpr char* const text_message_t__message_body_get_pattern = static_cast<char*>(
+	"8B 41 1C 8B 40 14");
+
+constexpr char* const text_message_t__message_body_len_mangled_name = static_cast<char*>(
+	"?MessageBodyLen@TextMessage_t@@UBEIXZ");
+constexpr char* const text_message_t__message_body_len_pattern = static_cast<char*>(
+	"8B 41 24 C3");
 
 #pragma endregion
 

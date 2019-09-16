@@ -25,6 +25,8 @@ namespace isxao_globals
 	AOLIB_VAR MODULEINFO interfaces_module_info;
 	AOLIB_VAR HMODULE pathfinder_module_handle;
 	AOLIB_VAR MODULEINFO pathfinder_module_info;
+	AOLIB_VAR HMODULE message_protocol_module_handle;
+	AOLIB_VAR MODULEINFO message_protocol_module_info;
 
 #pragma endregion
 
@@ -81,6 +83,8 @@ namespace isxao_globals
 	AOLIB_VAR DWORD game_time_t__get_instance;
 
 	AOLIB_VAR DWORD item_manager_t__item_manager_t;
+
+	AOLIB_VAR DWORD look_at_iir_t__look_at_iir_t;
 
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_engine_client_anarchy_t;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t;
@@ -228,9 +232,10 @@ namespace isxao_globals
 	AOLIB_VAR DWORD html_parser_c__d_html_parser_c;	
 	AOLIB_VAR DWORD html_parser_c__extract_text;
 
-	AOLIB_VAR DWORD InputConfig_t__m_pcInstance;
-	AOLIB_VAR input_config** ppInputConfig;
-#define pInputConfig (*ppInputConfig)
+	AOLIB_VAR DWORD input_config_t__m_pc_instance;
+	AOLIB_VAR input_config** pp_input_config;
+#define P_INPUT_CONFIG (*pp_input_config)  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD input_config_t__get_instance;
 	AOLIB_VAR DWORD input_config_t__set_current_target;
 
 	AOLIB_VAR DWORD targeting_module_t__m_pc_instance;
@@ -284,6 +289,24 @@ namespace isxao_globals
 	AOLIB_VAR DWORD graph_path_finder_t__init;
 	AOLIB_VAR DWORD graph_path_finder_t__set_space_for_graph;
 	AOLIB_VAR DWORD graph_path_finder_t__set_surface;
+
+#pragma endregion
+
+#pragma region MessageProtocol
+
+	AOLIB_VAR DWORD message_t__data_block_size_get;
+	AOLIB_VAR DWORD message_t__dest_id_get;
+	AOLIB_VAR DWORD message_t__header_size;
+	AOLIB_VAR DWORD message_t__message_size_get;
+	AOLIB_VAR DWORD message_t__message_type_get;
+	AOLIB_VAR DWORD message_t__priority_get;
+	AOLIB_VAR DWORD message_t__source_id_get;
+	
+	AOLIB_VAR DWORD n3_message_t__duplicate_body;
+	AOLIB_VAR DWORD n3_message_t__message_body_get;
+
+	AOLIB_VAR DWORD text_message_t__message_body_get;
+	AOLIB_VAR DWORD text_message_t__message_body_len;
 
 #pragma endregion
 
@@ -410,10 +433,6 @@ namespace isxao_globals
 	AOLIB_VAR DWORD PlayfieldAnarchy_t__dPlayfieldAnarchy_t;
 
 #pragma endregion
-
-#pragma region Gametime
-	
-#pragma endregion
 	
 #pragma region InputConfig
 	
@@ -447,20 +466,6 @@ namespace isxao_globals
 	AOLIB_VAR DWORD ChatGUIModule_c__HandlePrivateMessage;
 	AOLIB_VAR DWORD ChatGUIModule_c__HandleSystemMessage;
 	AOLIB_VAR DWORD ChatGUIModule_c__HandleVicinityMessage;
-
-#pragma endregion
-
-
-
-#pragma region Messaging
-
-	AOLIB_VAR DWORD Message_t__DataBlockSizeGet;
-	AOLIB_VAR DWORD Message_t__MessageSizeGet;
-	AOLIB_VAR DWORD N3Message_t__DuplicateBody;
-	AOLIB_VAR DWORD N3Message_t__MessageBodyGet;
-	AOLIB_VAR DWORD N3Message_t__MessageBodyLen;
-	AOLIB_VAR DWORD TextMessage_t__MessageBodyGet;
-	AOLIB_VAR DWORD TextMessage_t__MessageBodyLen;
 
 #pragma endregion
 

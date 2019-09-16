@@ -85,16 +85,16 @@ namespace isxao_detours
 
 #pragma region Client ProcessMessage and Handling
 
-	DETOUR_TRAMPOLINE_EMPTY(DWORD ao_detours::client_t__process_message_trampoline(Message*));
+	DETOUR_TRAMPOLINE_EMPTY(DWORD ao_detours::client_t__process_message_trampoline(message*));
 
-	DWORD ao_detours::client_t__process_message_detour(Message* p1)
+	DWORD ao_detours::client_t__process_message_detour(message* p1)
 	{
 		//if (GetGameState() == GAMESTATE_IN_GAME)
 		//{
 			//FILE * pFILE;
 			//char buffer[MAX_STRING];
 
-			switch (::PacketType_e(p1->MessageTypeGet()))
+			switch (::PacketType_e(p1->message_type_get()))
 			{
 			case ::PT_SYSTEM_MESSAGE: break;
 			case ::PT_TEXT_MESSAGE:
@@ -103,8 +103,8 @@ namespace isxao_detours
 			}
 			case ::PT_N3_MESSAGE:
 			{
-				size_t length = static_cast<N3Message*>(p1)->MessageBodyLen();
-				PCHAR message = static_cast<N3Message*>(p1)->MessageBodyGet();
+				size_t length = static_cast<n3_message*>(p1)->message_body_len();
+				PCHAR message = static_cast<n3_message*>(p1)->message_body_get();
 				PVOID export_message = malloc(length);
 				memcpy_s(export_message, length, message, length);
 				PN3MESSAGEINFO message_info = new N3MESSAGEINFO(export_message, length);

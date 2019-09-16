@@ -1,12 +1,14 @@
 #pragma once
 
-class N3Message : public Message
+// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
+class n3_message : public message
 {
 public:
-	AOLIB_OBJECT char* DuplicateBody();
-	AOLIB_OBJECT p_n3_message_t GetN3MessageData();
-	AOLIB_OBJECT PCHAR MessageBodyGet();
-	AOLIB_OBJECT DWORD MessageBodyLen();
+	AOLIB_OBJECT char* duplicate_body();
+	AOLIB_OBJECT p_n3_message_t get_n3_message_data();
+	AOLIB_OBJECT PCHAR message_body_get();
+	AOLIB_OBJECT DWORD message_body_len();
 private:
-	n3_message_t n3message_;
+	// ReSharper disable once CppUninitializedNonStaticDataMember
+	n3_message_t n3_message_;
 };

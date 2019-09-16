@@ -21,10 +21,13 @@ namespace isxao_globals
 	MODULEINFO interfaces_module_info;
 	HMODULE vehicle_module_handle = GetModuleHandle(vehicle_module_name);
 	MODULEINFO vehicle_module_info;
-	DWORD hDatabaseController = DWORD(GetModuleHandle("DatabaseController.dll"));
-	DWORD hMessageProtocol = DWORD(GetModuleHandle("MessageProtocol.dll"));
-	HMODULE pathfinder_module_handle = GetModuleHandle("PathFinder.dll");
+	HMODULE pathfinder_module_handle = GetModuleHandle(pathfinder_module_name);
 	MODULEINFO pathfinder_module_info;
+	HMODULE message_protocol_module_handle = GetModuleHandle(message_protocol_module_name);
+	MODULEINFO message_protocol_module_info;
+	DWORD hDatabaseController = DWORD(GetModuleHandle("DatabaseController.dll"));
+
+	
 
 #pragma endregion
 	
@@ -96,6 +99,8 @@ namespace isxao_globals
 	game_time** pp_game_time = nullptr;
 
 	DWORD item_manager_t__item_manager_t = 0;
+
+	DWORD look_at_iir_t__look_at_iir_t = 0;
 
 	DWORD n3_engine_client_anarchy_t__n3_engine_client_anarchy_t = 0;
 	DWORD n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t = 0;
@@ -231,8 +236,9 @@ namespace isxao_globals
 	DWORD html_parser_c__d_html_parser_c = 0;	
 	DWORD html_parser_c__extract_text = 0;
 
-	DWORD InputConfig_t__m_pcInstance = 0;
-	input_config** ppInputConfig = nullptr;
+	DWORD input_config_t__m_pc_instance = 0;
+	input_config** pp_input_config = nullptr;
+	DWORD input_config_t__get_instance = 0;
 	DWORD input_config_t__set_current_target = 0;
 
 	DWORD targeting_module_t__m_pc_instance = 0;
@@ -278,6 +284,24 @@ namespace isxao_globals
 	DWORD graph_path_finder_t__init = 0;
 	DWORD graph_path_finder_t__set_space_for_graph = 0;
 	DWORD graph_path_finder_t__set_surface = 0;
+
+#pragma endregion
+
+#pragma region MessageProtocol
+
+	DWORD message_t__data_block_size_get = 0;
+	DWORD message_t__dest_id_get = 0;
+	DWORD message_t__header_size = 0;
+	DWORD message_t__message_size_get = 0;
+	DWORD message_t__message_type_get = 0;
+	DWORD message_t__priority_get = 0;
+	DWORD message_t__source_id_get = 0;
+
+	DWORD n3_message_t__duplicate_body = 0;
+	DWORD n3_message_t__message_body_get = 0;
+
+	DWORD text_message_t__message_body_get = 0;
+	DWORD text_message_t__message_body_len = 0;
 
 #pragma endregion
 
@@ -440,20 +464,6 @@ namespace isxao_globals
 
 #pragma endregion
 
-#pragma region Message
-
-	DWORD Message_t__DataBlockSizeGet = 0;
-	DWORD Message_t__MessageSizeGet = 0;
-
-	DWORD N3Message_t__DuplicateBody = 0;
-	DWORD N3Message_t__MessageBodyGet = 0;
-	DWORD N3Message_t__MessageBodyLen = 0;
-
-	DWORD TextMessage_t__MessageBodyGet = 0;
-	DWORD TextMessage_t__MessageBodyLen = 0;
-
-#pragma endregion
-
 #pragma region Logger
 
 	ISXAOLog* gp_isxao_log = nullptr;
@@ -602,6 +612,12 @@ namespace isxao_globals
 			printf("Could not find handle to module \"Pathfinder.dll\". Aborting offset initialization.");
 			return false;
 		}
+		if (!message_protocol_module_handle)
+		{
+			printf("Could not find handle to module \"MessageProtocol.dll\". Aborting offset initialization.");
+			return false;
+		}
+
 #pragma region Process
 
 		process_handle = GetCurrentProcess();
@@ -777,6 +793,12 @@ namespace isxao_globals
 		GET_FUNCTION_ADDRESS(gamecode, game_time_t__get_instance)
 #else
 		GET_PROC_ADDRESS(gamecode, game_time_t__get_instance)
+#endif
+
+#ifdef LOOK_AT_IIR_T__LOOK_AT_IIR_T_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, look_at_iir_t__look_at_iir_t)
+#else
+		static_assert(false, "look_at_iir_t__look_at_iir_t requires a pattern for the function address to be found.")
 #endif
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_ENGINE_CLIENT_ANARCHY_T_USE_PATTERN
@@ -1490,54 +1512,67 @@ namespace isxao_globals
 #endif
 
 #ifdef HTML_PARSER_C__HTML_PARSER_1_USE_PATTERN
-		GET_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_1)
+			GET_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_1)
 #else
-		GET_PROC_ADDRESS(gui, html_parser_c__html_parser_c_1)
+			GET_PROC_ADDRESS(gui, html_parser_c__html_parser_c_1)
 #endif
 
 #ifdef HTML_PARSER_C__HTML_PARSER_2_USE_PATTERN
-		GET_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_2)
+			GET_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_2)
 #else
-		GET_PROC_ADDRESS(gui, html_parser_c__html_parser_c_2)
+			GET_PROC_ADDRESS(gui, html_parser_c__html_parser_c_2)
 #endif
 
 #ifdef HTML_PARSER_C__D_HTML_PARSER_USE_PATTERN
-		GET_FUNCTION_ADDRESS(gui, html_parser_c__d_html_parser_c)
+			GET_FUNCTION_ADDRESS(gui, html_parser_c__d_html_parser_c)
 #else
-		GET_PROC_ADDRESS(gui, html_parser_c__d_html_parser_c)
+			GET_PROC_ADDRESS(gui, html_parser_c__d_html_parser_c)
 #endif
 
 #ifdef HTML_PARSER_C__EXTRACT_TEXT_USE_PATTERN
-		GET_FUNCTION_ADDRESS(gui, html_parser_c__extract_text)
+			GET_FUNCTION_ADDRESS(gui, html_parser_c__extract_text)
 #else
-		GET_PROC_ADDRESS(gui, html_parser_c__extract_text)
+			GET_PROC_ADDRESS(gui, html_parser_c__extract_text)
+#endif
+
+#ifdef INPUT_CONFIG_T__GET_INSTANCE_USE_PATTERN
+			GET_FUNCTION_ADDRESS(gui, input_config_t__get_instance)
+#else
+			GET_PROC_ADDRESS(gui, input_config_t__get_instance)
 #endif
 
 #ifdef INPUT_CONFIG_T__SET_CURRENT_TARGET_USE_PATTERN
-		GET_FUNCTION_ADDRESS(gui, input_config_t__set_current_target)
+			GET_FUNCTION_ADDRESS(gui, input_config_t__set_current_target)
 #else
-		GET_PROC_ADDRESS(gui, input_config_t__set_current_target)
+			GET_PROC_ADDRESS(gui, input_config_t__set_current_target)
 #endif
 
 #ifdef TARGETING_MODULE_T__INITIALISE_MESSAGE_USE_PATTERN
-		GET_FUNCTION_ADDRESS(gui, targeting_module_t__initialise_message)
+			GET_FUNCTION_ADDRESS(gui, targeting_module_t__initialise_message)
 #else
-		GET_PROC_ADDRESS(gui, targeting_module_t__initialise_message)
+			GET_PROC_ADDRESS(gui, targeting_module_t__initialise_message)
 #endif
 
 #ifdef TARGETING_MODULE_T__TARGETING_MODULE_T_USE_PATTERN
-		GET_FUNCTION_ADDRESS(gui, targeting_module_t__targeting_module_t)
+			GET_FUNCTION_ADDRESS(gui, targeting_module_t__targeting_module_t)
 #else
-		GET_PROC_ADDRESS(gui, targeting_module_t__targeting_module_t)
+			GET_PROC_ADDRESS(gui, targeting_module_t__targeting_module_t)
 #endif
 
 #ifdef TARGETING_MODULE_T__SET_TARGET_USE_PATTERN
-		GET_FUNCTION_ADDRESS(gui, targeting_module_t__set_target)
+			GET_FUNCTION_ADDRESS(gui, targeting_module_t__set_target)
 #else
-		GET_PROC_ADDRESS(gui, targeting_module_t__set_target)
+			GET_PROC_ADDRESS(gui, targeting_module_t__set_target)
 #endif
 
-		// Instances
+			// Instances
+#ifdef INPUT_CONFIG_T__M_PC_INSTANCE_USE_PATTERN
+			GET_ADDRESS_FROM_FUNCTION_OFFSET(input_config_t__get_instance, input_config_t__m_pc_instance)
+#else
+			GET_PROC_ADDRESS(gui, input_config_t__m_pc_instance)
+#endif
+			pp_input_config = reinterpret_cast<input_config**>(input_config_t__m_pc_instance);
+
 #ifdef TARGETING_MODULE_T__M_PC_INSTANCE_USE_PATTERN
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__set_target, targeting_module_t__m_pc_instance)
 #else
@@ -1688,6 +1723,85 @@ namespace isxao_globals
 		GET_FUNCTION_ADDRESS(pathfinder, graph_path_finder_t__set_surface)
 #else
 		GET_PROC_ADDRESS(pathfinder, graph_path_finder_t__set_surface)
+#endif
+
+#pragma endregion
+
+#pragma region MessageProtocol
+
+		// Module
+		GetModuleInformation(process_handle, message_protocol_module_handle, &message_protocol_module_info, sizeof(message_protocol_module_info));
+		// ReSharper disable once CppLocalVariableMayBeConst
+		auto message_protocol_module_base = DWORD(message_protocol_module_handle);
+		const auto message_protocol_data_begin = reinterpret_cast<unsigned char*>(message_protocol_module_base);
+		const auto message_protocol_data_end = message_protocol_data_begin + message_protocol_module_info.SizeOfImage;
+		const vector<unsigned char> message_protocol_data(message_protocol_data_begin, message_protocol_data_end);
+
+		// Functions
+#ifdef MESSAGE_T__DATA_BLOCK_SIZE_GET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(message_protocol, message_t__data_block_size_get)
+#else
+		GET_PROC_ADDRESS(message_protocol, message_t__data_block_size_get)
+#endif
+
+#ifdef MESSAGE_T__DEST_ID_GET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(message_protocol, message_t__dest_id_get)
+#else
+		GET_PROC_ADDRESS(message_protocol, message_t__dest_id_get)
+#endif
+
+#ifdef MESSAGE_T__HEADER_SIZE_USE_PATTERN
+		GET_FUNCTION_ADDRESS(message_protocol, message_t__header_size)
+#else
+		GET_PROC_ADDRESS(message_protocol, message_t__header_size)
+#endif
+
+#ifdef MESSAGE_T__MESSAGE_SIZE_GET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(message_protocol, message_t__message_size_get)
+#else
+		GET_PROC_ADDRESS(message_protocol, message_t__message_size_get)
+#endif
+
+#ifdef MESSAGE_T__MESSAGE_TYPE_GET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(message_protocol, message_t__message_type_get)
+#else
+		GET_PROC_ADDRESS(message_protocol, message_t__message_type_get)
+#endif
+
+#ifdef MESSAGE_T__PRIORITY_GET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(message_protocol, message_t__priority_get)
+#else
+		GET_PROC_ADDRESS(message_protocol, message_t__priority_get)
+#endif
+
+#ifdef MESSAGE_T__SOURCE_ID_GET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(message_protocol, message_t__source_id_get)
+#else
+		GET_PROC_ADDRESS(message_protocol, message_t__source_id_get)
+#endif
+
+#ifdef N3_MESSAGE_T__DUPLICATE_BODY_USE_PATTERN
+		static_assert(false, "n3_message::duplicate_body() cannot be found with a pattern.");
+#else
+		GET_PROC_ADDRESS(message_protocol, n3_message_t__duplicate_body)
+#endif
+
+#ifdef N3_MESSAGE_T__MESSAGE_BODY_GET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(message_protocol, n3_message_t__message_body_get)
+#else
+		GET_PROC_ADDRESS(message_protocol, n3_message_t__message_body_get)
+#endif
+
+#ifdef TEXT_MESSAGE_T__MESSAGE_BODY_GET_USE_PATTERN
+		GET_FUNCTION_ADDRESS(message_protocol, text_message_t__message_body_get)
+#else
+		GET_PROC_ADDRESS(message_protocol, text_message_t__message_body_get)
+#endif
+
+#ifdef TEXT_MESSAGE_T__MESSAGE_BODY_LEN_USE_PATTERN
+		GET_FUNCTION_ADDRESS(message_protocol, text_message_t__message_body_len)
+#else
+		GET_PROC_ADDRESS(message_protocol, text_message_t__message_body_len)
 #endif
 
 #pragma endregion

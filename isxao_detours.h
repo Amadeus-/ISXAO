@@ -27,8 +27,8 @@ namespace isxao_detours
 		void n3Dynel_t__SetPlayfield_Trampoline(DWORD);
 		void n3Dynel_t__SetPlayfield_Detour(DWORD);
 
-		DWORD client_t__process_message_trampoline(Message*);
-		DWORD client_t__process_message_detour(Message*);
+		DWORD client_t__process_message_trampoline(message*);
+		DWORD client_t__process_message_detour(message*);
 
 		void n3Engine_t__SetTeleportStatus_Trampoline(bool);
 		void n3Engine_t__SetTeleportStatus_Detour(bool);

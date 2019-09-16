@@ -1,9 +1,20 @@
 #include "isxao_main.h"
 
-#ifdef TextMessage_t__MessageBodyGet_x
-FUNCTION_AT_ADDRESS(PCHAR TextMessage::MessageBodyGet(), TextMessage_t__MessageBodyGet);
+namespace isxao_classes
+{
+
+#ifdef TEXT_MESSAGE_T__MESSAGE_BODY_GET_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(PCSTR text_message::message_body_get(), text_message_t__message_body_get)
+#else
+	static_assert(false, "text_message::message_body_get() requires a native function.");
 #endif
 
-#ifdef TextMessage_t__MessageBodyLen_x
-FUNCTION_AT_ADDRESS(DWORD TextMessage::MessageBodyLen(), TextMessage_t__MessageBodyLen);
+#ifdef TEXT_MESSAGE_T__MESSAGE_BODY_LEN_USE_NATIVE
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(DWORD text_message::message_body_len(), text_message_t__message_body_len)
+#else
+	static_assert(false, "text_message::message_body_len() requires a native function.");
 #endif
+
+}

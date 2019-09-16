@@ -1,8 +1,8 @@
 #pragma once
 
-class TextMessage : public Message
+class text_message : public message
 {
 public:
-	PCHAR MessageBodyGet();
-	DWORD MessageBodyLen();
+	PCSTR message_body_get();
+	DWORD message_body_len();
 };
