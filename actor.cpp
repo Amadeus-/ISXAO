@@ -16,7 +16,7 @@ namespace isxao_classes
 
 	DWORD actor::build_ls_pets(LSIndex* p_index)
 	{
-		map<identity_t, DWORD> pet_map;
+		std::map<identity_t, DWORD> pet_map;
 		if (get_pet_ids(pet_map) == 0)
 			return 0;
 		for (auto it = pet_map.begin(); it != pet_map.end(); ++it)  // NOLINT(modernize-loop-convert)
@@ -194,7 +194,7 @@ namespace isxao_classes
 		char search_name[MAX_STRING];
 		strcpy_s(search_name, MAX_STRING, effect_name);
 		_strlwr_s(search_name);
-		vector<nano_template> nano_template_vector;
+		std::vector<nano_template> nano_template_vector;
 		if (this->get_spell_template_data()->get_nano_template_list(nano_template_vector))
 		{  
 			for (auto it = nano_template_vector.begin(); it != nano_template_vector.end(); ++it)  // NOLINT(modernize-loop-convert)
@@ -359,7 +359,7 @@ namespace isxao_classes
 
 	actor* actor::get_pet(const DWORD index)
 	{
-		map<identity_t, DWORD> pet_map;
+		std::map<identity_t, DWORD> pet_map;
 		if (this->get_pet_ids(pet_map) == 0)
 			return nullptr;
 		if (index < 0 || index >= pet_map.size())
@@ -375,7 +375,7 @@ namespace isxao_classes
 	actor* actor::get_pet(const PCSTR pet_name)
 	{
 		const identity_t container_identity(0, 0);
-		map<identity_t, DWORD> pet_map;
+		std::map<identity_t, DWORD> pet_map;
 		char name[MAX_STRING];
 		char search_name[MAX_STRING];
 		if (get_pet_ids(pet_map) == 0)
@@ -398,11 +398,11 @@ namespace isxao_classes
 		return get_pet_ids(pet_map);
 	}
 
-	DWORD actor::get_pet_ids(map<identity_t, DWORD>& m)
+	DWORD actor::get_pet_ids(std::map<identity_t, DWORD>& m)
 	{
 		if (!IsClientId(this->get_identity().id))
 		{
-			map<identity_t, p_n3_dynel_t> dynel_map;
+			std::map<identity_t, p_n3_dynel_t> dynel_map;
 			P_DYNEL_DIR->copy_map(dynel_map);
 			DWORD pet_count = 0;
 			for (auto it = dynel_map.begin(); it != dynel_map.end(); ++it)  // NOLINT(modernize-loop-convert)

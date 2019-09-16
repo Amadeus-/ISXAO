@@ -1,5 +1,8 @@
 
 
+#ifndef ISXAO_INTERNAL_H
+#define ISXAO_INTERNAL_H
+
 namespace isxao_internal
 {
 #pragma region SearchDynel
@@ -216,3 +219,4 @@ namespace isxao_internal
 
 }
 using namespace isxao_internal;
+#endif // ISXAO_INTERNAL_H

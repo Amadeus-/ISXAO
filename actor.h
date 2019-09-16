@@ -20,7 +20,7 @@ public:
 	AOLIB_OBJECT actor* get_pet(DWORD);
 	AOLIB_OBJECT actor* get_pet(PCSTR);
 	AOLIB_OBJECT DWORD get_pet_count();
-	AOLIB_OBJECT DWORD get_pet_ids(map<identity_t, DWORD>&);
+	AOLIB_OBJECT DWORD get_pet_ids(std::map<identity_t, DWORD>&);
 	AOLIB_OBJECT float get_scale();
 	AOLIB_OBJECT p_simple_char_t get_simple_char_data();
 	AOLIB_OBJECT spell_template_data* get_spell_template_data();

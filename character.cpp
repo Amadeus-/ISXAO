@@ -30,7 +30,7 @@ namespace isxao_classes
 		return reinterpret_cast<stat_holder*>(this->get_simple_char_data()->p_map_holder);
 	}
 
-	void character::get_stat_map(map<DWORD, LONG> &m)
+	void character::get_stat_map(std::map<DWORD, LONG> &m)
 	{
 		get_stat_holder()->get_stat_map(m);
 	}

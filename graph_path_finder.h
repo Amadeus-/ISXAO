@@ -8,8 +8,8 @@ public:
 	~graph_path_finder();
 	void configure(int, int, float, float);
 	void create_from_data(PVOID);
-	int find_path(const vector3_t&, const vector3_t&, vector<vector3_t>&, PVOID, bool, bool);
-	void generate_graph(vector<vector3_t>&, float, float, float, float, PVOID, bool);
+	int find_path(const vector3_t&, const vector3_t&, std::vector<vector3_t>&, PVOID, bool, bool);
+	void generate_graph(std::vector<vector3_t>&, float, float, float, float, PVOID, bool);
 	void init();
 	void set_space_for_graph(PVOID);
 	void set_surface(PVOID);

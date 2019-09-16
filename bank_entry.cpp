@@ -8,7 +8,7 @@ namespace isxao_classes
 		return bank_entry_;
 	}
 
-	DWORD bank_entry::get_inventory(vector<inventory_data*> &v) const
+	DWORD bank_entry::get_inventory(std::vector<inventory_data*> &v) const
 	{
 		auto inventory_vector = get_bank_entry_data().inventory;
 		for (auto it = inventory_vector.begin(); it != inventory_vector.end(); ++it)  // NOLINT(modernize-loop-convert)

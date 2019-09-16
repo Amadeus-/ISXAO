@@ -39,14 +39,14 @@ namespace isxao_classes
 
 #ifdef GRAPH_PATH_FINDER_T__FIND_PATH_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
-	FUNCTION_AT_ADDRESS(int graph_path_finder::find_path(const vector3_t&, const vector3_t&, vector<vector3_t>&, PVOID, bool, bool), graph_path_finder_t__find_path)
+	FUNCTION_AT_ADDRESS(int graph_path_finder::find_path(const vector3_t&, const vector3_t&, std::vector<vector3_t>&, PVOID, bool, bool), graph_path_finder_t__find_path)
 #else
 	static_assert(false, "graph_path_finder::find_path(const vector3_t&, const vector3_t&, vector<vector3_t>&, PVOID, bool, bool) requires a native function.");
 #endif
 
 #ifdef GRAPH_PATH_FINDER_T__GENERATE_GRAPH_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
-	FUNCTION_AT_ADDRESS(void graph_path_finder::generate_graph(vector<vector3_t>&, float, float, float, float, PVOID, bool), graph_path_finder_t__generate_graph)
+	FUNCTION_AT_ADDRESS(void graph_path_finder::generate_graph(std::vector<vector3_t>&, float, float, float, float, PVOID, bool), graph_path_finder_t__generate_graph)
 #else
 	static_assert(false, "graph_path_finder::generate_graph(vector<vector3_t>&, float, float, float, float, PVOID, bool) requires a native function.");
 #endif

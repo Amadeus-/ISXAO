@@ -14,7 +14,7 @@ namespace isxao_utilities
 	PCSTR stat_to_string(ao_data::stat_e stat_id)
 	{
 		auto result = "NoName";
-		map<stat_e, PCSTR> m;
+		std::map<stat_e, PCSTR> m;
 		get_stat_name_map(m);
 		if (m.count(stat_id))
 			result = m.find(stat_id)->second;
@@ -678,7 +678,7 @@ namespace isxao_utilities
 		}
 	}
 
-	void get_stat_name_map(map<stat_e, PCSTR>& m)
+	void get_stat_name_map(std::map<stat_e, PCSTR>& m)
 	{
 		if (P_STAT_NAME_MAP)
 		{

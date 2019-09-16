@@ -3,7 +3,7 @@
 namespace isxao_classes
 {
 
-	DWORD stat_holder::get_skill_locks(vector<action_lock*> &v) const
+	DWORD stat_holder::get_skill_locks(std::vector<action_lock*> &v) const
 	{
 		auto p_skill_lock_vector = this->get_stat_holder_data().p_skill_locks;
 		for (auto it = p_skill_lock_vector->begin(); it != p_skill_lock_vector->end(); ++it)  // NOLINT(modernize-loop-convert)
@@ -14,7 +14,7 @@ namespace isxao_classes
 
 	action_lock* stat_holder::get_skill_lock(special_action_template* special_action) const
 	{
-		vector<action_lock*> v;
+		std::vector<action_lock*> v;
 		if (this->get_skill_locks(v))
 		{
 			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)

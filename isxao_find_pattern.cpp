@@ -33,7 +33,7 @@ namespace isxao_find_pattern
 		return 0;
 	}
 
-	static bool transform_pattern(string pattern_text, vector<pattern_byte> & pattern)
+	static bool transform_pattern(string pattern_text, std::vector<pattern_byte> & pattern)
 	{
 		pattern.clear();
 		pattern_text = format_pattern(pattern_text);
@@ -89,10 +89,10 @@ namespace isxao_find_pattern
 		return (matched == 2);
 	}
 
-	size_t find_pattern(vector<unsigned char> data, const char* pattern_text, const size_t base_address, const size_t offset, const int occurrence)
+	size_t find_pattern(std::vector<unsigned char> data, const char* pattern_text, const size_t base_address, const size_t offset, const int occurrence)
 	{
 		// Build vectored pattern..
-		vector<pattern_byte> pattern_data;
+		std::vector<pattern_byte> pattern_data;
 		if (!transform_pattern(pattern_text, pattern_data))
 			return -1;
 

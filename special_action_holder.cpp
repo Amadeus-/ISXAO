@@ -5,7 +5,7 @@ namespace isxao_classes
 
 	DWORD special_action_holder::build_ls_special_actions(LSIndex* p_index) const
 	{
-		vector<special_action_template*> v;
+		std::vector<special_action_template*> v;
 		this->get_special_actions(v);
 		for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 			p_index->AddItem(reinterpret_cast<LSOBJECTDATA&>((*it)));
@@ -22,7 +22,7 @@ namespace isxao_classes
 		return this->special_action_holder_;
 	}
 
-	DWORD special_action_holder::get_special_actions(vector<special_action_template> &v) const
+	DWORD special_action_holder::get_special_actions(std::vector<special_action_template> &v) const
 	{
 		auto p_special_actions_vector = this->get_special_action_holder_data().p_special_actions_list;
 		for (auto it = p_special_actions_vector->begin(); it != p_special_actions_vector->end(); ++it)  // NOLINT(modernize-loop-convert)
@@ -42,7 +42,7 @@ namespace isxao_classes
 
 	special_action_template* special_action_holder::get_special_action(const DWORD index) const
 	{
-		vector<special_action_template*> v;
+		std::vector<special_action_template*> v;
 		const auto count = this->get_special_actions(v);
 		if (index < 0 || index >= count)
 			return nullptr;
@@ -55,7 +55,7 @@ namespace isxao_classes
 		char search_name[MAX_STRING];
 		strcpy_s(search_name, sizeof(search_name), special_action_name);
 		_strlwr_s(search_name);
-		vector<special_action_template> v;
+		std::vector<special_action_template> v;
 		this->get_special_actions(v);
 		for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
@@ -69,7 +69,7 @@ namespace isxao_classes
 
 	special_action_template* special_action_holder::get_special_action(const identity_t& id) const
 	{
-		vector<special_action_template> v;
+		std::vector<special_action_template> v;
 		this->get_special_actions(v);
 		for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
@@ -81,7 +81,7 @@ namespace isxao_classes
 
 	DWORD special_action_holder::get_special_action_count() const
 	{
-		vector<special_action_template*> v;
+		std::vector<special_action_template*> v;
 		return this->get_special_actions(v);
 	}
 
@@ -106,7 +106,7 @@ namespace isxao_classes
 		}
 		if (lock_id)
 			return nullptr;
-		vector<action_lock*> v;
+		std::vector<action_lock*> v;
 		P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_stat_holder()->get_skill_locks(v);
 		for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{

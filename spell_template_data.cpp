@@ -5,7 +5,7 @@ namespace isxao_classes
 
 	DWORD spell_template_data::build_ls_nano_spell_list(LSIndex* p_index) const
 	{
-		vector<DWORD> v;
+		std::vector<DWORD> v;
 		this->get_nano_spell_list(v);
 		for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
@@ -18,7 +18,7 @@ namespace isxao_classes
 		return p_index->GetContainerUsed();
 	}
 
-	DWORD spell_template_data::get_active_nano_effects(vector<identity_t> &v) const
+	DWORD spell_template_data::get_active_nano_effects(std::vector<identity_t> &v) const
 	{
 		auto nano_identity_vector = this->get_spell_template_data_data().active_nanos;
 		for (auto it = nano_identity_vector.begin(); it != nano_identity_vector.end(); ++it)  // NOLINT(modernize-loop-convert)
@@ -45,7 +45,7 @@ namespace isxao_classes
 		return result;
 	}
 
-	DWORD spell_template_data::get_nano_spell_list(vector<DWORD> &v) const
+	DWORD spell_template_data::get_nano_spell_list(std::vector<DWORD> &v) const
 	{
 		// this->get_spell_template_data_data().spell_list.copy_list(v);
 		auto nano_list = this->get_spell_template_data_data().spell_list;

@@ -223,9 +223,9 @@ namespace isxao_globals
 	DWORD m_c_nano_item_dir = 0;
 	nano_item_map_t* p_nano_item_dir = nullptr;
 	DWORD item_manager_t__m_ppc_instance = 0;
-	vector<acg_game_item_t> ***ppp_item_vector = nullptr;
+	std::vector<acg_game_item_t> ***ppp_item_vector = nullptr;
 	DWORD static_item_manager_t__m_ppc_instance = 0;
-	vector<static_item_t> ***ppp_static_item_vector = nullptr;
+	std::vector<static_item_t> ***ppp_static_item_vector = nullptr;
 
 #pragma endregion
 
@@ -632,7 +632,7 @@ namespace isxao_globals
 		auto n3_module_base = DWORD(n3_module_handle);
 		const auto n3_data_begin = reinterpret_cast<unsigned char*>(n3_module_base);
 		const auto n3_data_end = n3_data_begin + n3_module_info.SizeOfImage;
-		const vector<unsigned char> n3_data(n3_data_begin, n3_data_end);
+		const std::vector<unsigned char> n3_data(n3_data_begin, n3_data_end);
 
 		// Functions
 #ifdef N3_CAMERA_T__SET_SECONDARY_TARGET_USE_PATTERN
@@ -774,7 +774,7 @@ namespace isxao_globals
 		auto gamecode_module_base = DWORD(gamecode_module_handle);
 		const auto gamecode_data_begin = reinterpret_cast<unsigned char*>(gamecode_module_base);
 		const auto gamecode_data_end = gamecode_data_begin + gamecode_module_info.SizeOfImage;
-		const vector<unsigned char> gamecode_data(gamecode_data_begin, gamecode_data_end);
+		const std::vector<unsigned char> gamecode_data(gamecode_data_begin, gamecode_data_end);
 
 		// Functions
 #ifdef F_GET_NANO_ITEM_USE_PATTERN
@@ -1478,7 +1478,7 @@ namespace isxao_globals
 #else
 		static_assert(false, "item_manager_t__m_ppc_instance requires a pattern for the function address to be found.")
 #endif
-		ppp_item_vector = reinterpret_cast<vector<acg_game_item_t> ***>(item_manager_t__m_ppc_instance);
+		ppp_item_vector = reinterpret_cast<std::vector<acg_game_item_t> ***>(item_manager_t__m_ppc_instance);
 
 #ifdef STATIC_ITEM_MANAGER_T__STATIC_ITEM_MANAGER_T_USE_PATTERN
 		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__get_item_by_template, static_item_manager_t__static_item_manager_t)
@@ -1491,7 +1491,7 @@ namespace isxao_globals
 #else
 		static_assert(false, "static_item_manager_t__m_ppc_instance requires a pattern for the function address to be found.")
 #endif
-		ppp_static_item_vector = reinterpret_cast<vector<static_item_t>***>(static_item_manager_t__m_ppc_instance);
+		ppp_static_item_vector = reinterpret_cast<std::vector<static_item_t>***>(static_item_manager_t__m_ppc_instance);
 #pragma endregion
 
 #pragma region GUI
@@ -1502,7 +1502,7 @@ namespace isxao_globals
 		auto gui_module_base = DWORD(gui_module_handle);
 		const auto gui_data_begin = reinterpret_cast<unsigned char*>(gui_module_base);
 		const auto gui_data_end = gui_data_begin + gui_module_info.SizeOfImage;
-		const vector<unsigned char> gui_data(gui_data_begin, gui_data_end);
+		const std::vector<unsigned char> gui_data(gui_data_begin, gui_data_end);
 
 		// Functions
 #ifdef CHAT_WINDOW_NODE_C__PARSE_TEXT_COMMAND_USE_PATTERN
@@ -1611,7 +1611,7 @@ namespace isxao_globals
 		auto interfaces_module_base = DWORD(interfaces_module_handle);
 		const auto interfaces_data_begin = reinterpret_cast<unsigned char*>(interfaces_module_base);
 		const auto interfaces_data_end = interfaces_data_begin + interfaces_module_info.SizeOfImage;
-		const vector<unsigned char> interfaces_data(interfaces_data_begin, interfaces_data_end);
+		const std::vector<unsigned char> interfaces_data(interfaces_data_begin, interfaces_data_end);
 
 		// Instances
 #ifdef CLIENT_T__S_N_CHAR_ID_USE_PATTERN
@@ -1637,7 +1637,7 @@ namespace isxao_globals
 		auto vehicle_module_base = DWORD(vehicle_module_handle);
 		const auto vehicle_data_begin = reinterpret_cast<unsigned char*>(vehicle_module_base);
 		const auto vehicle_data_end = vehicle_data_begin + vehicle_module_info.SizeOfImage;
-		const vector<unsigned char> vehicle_data(vehicle_data_begin, vehicle_data_end);
+		const std::vector<unsigned char> vehicle_data(vehicle_data_begin, vehicle_data_end);
 
 #ifdef VEHICLE_T__SET_REL_ROT_USE_PATTERN
 		GET_FUNCTION_ADDRESS(vehicle, vehicle_t__set_rel_rot)
@@ -1656,7 +1656,7 @@ namespace isxao_globals
 		auto pathfinder_module_base = DWORD(pathfinder_module_handle);
 		const auto pathfinder_data_begin = reinterpret_cast<unsigned char*>(pathfinder_module_base);
 		const auto pathfinder_data_end = pathfinder_data_begin + pathfinder_module_info.SizeOfImage;
-		const vector<unsigned char> pathfinder_data(pathfinder_data_begin, pathfinder_data_end);
+		const std::vector<unsigned char> pathfinder_data(pathfinder_data_begin, pathfinder_data_end);
 
 		//Functions
 #ifdef GRAPH_PATH_FINDER_T__GRAPH_PATH_FINDER_T_1_USE_PATTERN
@@ -1735,7 +1735,7 @@ namespace isxao_globals
 		auto message_protocol_module_base = DWORD(message_protocol_module_handle);
 		const auto message_protocol_data_begin = reinterpret_cast<unsigned char*>(message_protocol_module_base);
 		const auto message_protocol_data_end = message_protocol_data_begin + message_protocol_module_info.SizeOfImage;
-		const vector<unsigned char> message_protocol_data(message_protocol_data_begin, message_protocol_data_end);
+		const std::vector<unsigned char> message_protocol_data(message_protocol_data_begin, message_protocol_data_end);
 
 		// Functions
 #ifdef MESSAGE_T__DATA_BLOCK_SIZE_GET_USE_PATTERN

@@ -314,7 +314,7 @@ namespace ao_data
 		struct map_root<T, U>* p_root;
 		DWORD count;
 
-		DWORD copy_map(map<T, U>& m)
+		DWORD copy_map(std::map<T, U>& m)
 		{
 			auto count = this->count;
 			const auto p_root = this->p_root;
@@ -325,7 +325,7 @@ namespace ao_data
 		}
 
 	private:
-		void recursive_add_to_map(map<T, U>& m, struct map_node<T, U>* p_node, struct map_root<T, U>* p_root, DWORD& count)
+		void recursive_add_to_map(std::map<T, U>& m, struct map_node<T, U>* p_node, struct map_root<T, U>* p_root, DWORD& count)
 		{
 			m.insert_or_assign(p_node->key, p_node->value);
 			count--;
@@ -376,7 +376,7 @@ namespace ao_data
 		struct ao_list_root<T>* p_root;
 		DWORD count;
 
-		DWORD copy_list(vector<T>& v)
+		DWORD copy_list(std::vector<T>& v)
 		{
 			if (this->count == 0)
 				return this->count;
@@ -1423,7 +1423,7 @@ namespace ao_data
 
 	typedef struct ao_stat_holder
 	{
-		vector<action_lock_t>* p_skill_locks;	// 0x00
+		std::vector<action_lock_t>* p_skill_locks;	// 0x00
 		p_stat_map_t p_stat_map_dir;			// 0x04
 	} stat_holder_t, *p_stat_holder_t;
 
@@ -1977,7 +1977,7 @@ namespace ao_data
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x00[0x4];						// 0x00
 		p_perk_map_t p_perk_dir;				// 0x04
-		vector<action_lock_t>* p_perk_locks;	// 0x08
+		std::vector<action_lock_t>* p_perk_locks;	// 0x08
 	} perk_holder_t, *p_perk_holder_t;
 
 #pragma endregion
@@ -2348,7 +2348,7 @@ namespace ao_data
 		p_n3_dynel_event_source_t p_n3_dynel_event_source;		// 0x04
 		p_event_caster_t p_event_caster_t;						// 0x08
 		db_object_t db_object;									// 0x0C
-		vector<coll_info_t>* p_coll_info_vector;				// 0x24
+		std::vector<coll_info_t>* p_coll_info_vector;				// 0x24
 		n3_fsm_t n3_fsm;										// 0x28
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x44[0x4];									// 0x44
@@ -2372,7 +2372,7 @@ namespace ao_data
 		BYTE unknown_0x69[0x2];									// 0x69
 		BYTE is_in_tree;										// 0x6B	
 		PVOID p_n3_info_item_remote_t;							// 0x6C
-		vector<p_n3_dynel_t>* p_child_dynel_vector;				// 0x70
+		std::vector<p_n3_dynel_t>* p_child_dynel_vector;				// 0x70
 		identity_t parent_identity;								// 0x74
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x7C[0x4];									// 0x7C
@@ -2406,7 +2406,7 @@ namespace ao_data
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0xF0[0x30];								// 0xF0
 		PVOID p_v_table_stat_holder_t;							// 0x120
-		vector<LONG>* p_stat_vector;							// 0x124
+		std::vector<LONG>* p_stat_vector;							// 0x124
 		identity_t identity;									// 0x128
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x130[0x28];								// 0x130
@@ -2542,7 +2542,7 @@ namespace ao_data
 		list<nano_template_t> nano_template_list;		// 0x20
 		BYTE unknown_0x28[0x4];							// 0x28
 		list<p_casting_data_t>* p_spellcasting_info;	// 0x2C
-		vector<p_identity_t> active_nanos;				// 0x30
+		std::vector<p_identity_t> active_nanos;				// 0x30
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x3C[0x14];						// 0x3C
 	} spell_template_data_t, *p_spell_template_data_t;
@@ -2654,7 +2654,7 @@ namespace ao_data
 		identity_t team_leader_identity;			// 0x14
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x1C[0x4];						// 0x1C
-		vector<p_team_raid_info_t*>* p_team_list[6];// 0x20
+		std::vector<p_team_raid_info_t*>* p_team_list[6];// 0x20
 		LONG raid_team_index;							// 0x38
 	} team_raid_holder_t, *p_team_raid_holder_t;
 
@@ -2723,7 +2723,7 @@ namespace ao_data
 		identity_t instance_identity;						// 0x0014
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x1C[0x8];								// 0x001C
-		vector<coll_info_t>* p_coll_info_vector;			// 0x0024
+		std::vector<coll_info_t>* p_coll_info_vector;			// 0x0024
 		PVOID p_v_table_n3_fsm;								// 0x0028
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x2C[0x10];							// 0x002C
@@ -2753,7 +2753,7 @@ namespace ao_data
 		BYTE unknown_0x69[0x2];								// 0x0069
 		BYTE is_in_tree;									// 0x006B	
 		PVOID p_n3_info_item_remote;						// 0x006C
-		vector<p_n3_dynel_t>* p_child_dynel_vector;			// 0x0070
+		std::vector<p_n3_dynel_t>* p_child_dynel_vector;			// 0x0070
 		identity_t parent_identity;							// 0x0074
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x7C[0x4];								// 0x007C
@@ -2787,7 +2787,7 @@ namespace ao_data
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x15C[0x30];							// 0x015C
 		PVOID p_v_table_stat_holder;						// 0x018C
-		vector<LONG>* p_stat_vector;						// 0x0190
+		std::vector<LONG>* p_stat_vector;						// 0x0190
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x194[0x34];							// 0x0194
 		identity_t unknown_identity2;						// 0x01C8

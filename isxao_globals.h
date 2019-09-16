@@ -212,10 +212,10 @@ namespace isxao_globals
 	AOLIB_VAR p_nano_item_map_t p_nano_item_dir;
 #define P_NANO_ITEM_MAP p_nano_item_dir  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD item_manager_t__m_ppc_instance;
-	AOLIB_VAR vector<acg_game_item_t> ***ppp_item_vector;
+	AOLIB_VAR std::vector<acg_game_item_t> ***ppp_item_vector;
 #define P_ITEM_VECTOR (**ppp_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD static_item_manager_t__m_ppc_instance;
-	AOLIB_VAR vector<static_item_t> ***ppp_static_item_vector;
+	AOLIB_VAR std::vector<static_item_t> ***ppp_static_item_vector;
 #define P_STATIC_ITEM_VECTOR (**ppp_static_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD game_time_t__m_pc_instance;
 	AOLIB_VAR game_time** pp_game_time;

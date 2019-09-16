@@ -62,7 +62,7 @@ public:
 	AOLIB_OBJECT LONG n3_msg_get_current_room();
 	AOLIB_OBJECT PCSTR n3_msg_get_current_room_name();
 	AOLIB_OBJECT DWORD n3_msg_get_district_fight_mode();
-	AOLIB_OBJECT void n3_msg_get_dynels_in_vicinity(vector<identity_t>&, bool, bool, type_id_e);
+	AOLIB_OBJECT void n3_msg_get_dynels_in_vicinity(std::vector<identity_t>&, bool, bool, type_id_e);
 	AOLIB_OBJECT bool n3_msg_get_faction_info_string(const identity_t &, string &);
 	AOLIB_OBJECT bool n3_msg_get_faction_range(DWORD, DWORD &, DWORD &);
 	AOLIB_OBJECT PCSTR n3_msg_get_first_name(const identity_t &);
@@ -72,7 +72,7 @@ public:
 	AOLIB_OBJECT void n3_msg_get_global_character_rotation(quaternion_t &);
 	AOLIB_OBJECT PVOID n3_msg_get_grid_destination_list(const identity_t &);
 	AOLIB_OBJECT PVOID n3_msg_get_grid_destination_list();
-	AOLIB_OBJECT vector<p_inventory_data_t>* n3_msg_get_inventory_vec(const identity_t &);
+	AOLIB_OBJECT std::vector<p_inventory_data_t>* n3_msg_get_inventory_vec(const identity_t &);
 	AOLIB_OBJECT void n3_msg_get_item(const identity_t &);
 	AOLIB_OBJECT double n3_msg_get_item_progress(const identity_t &, DWORD &, DWORD &);
 	AOLIB_OBJECT DWORD n3_msg_get_movement_mode();

@@ -16,7 +16,7 @@
 #include <functional>
 #include <concurrent_queue.h>
 
-using namespace std;
+// using namespace std;
 
 #include "isxao_game.h"
 

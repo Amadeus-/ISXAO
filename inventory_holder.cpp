@@ -41,7 +41,7 @@ namespace isxao_classes
 		return p_index->GetContainerUsed();
 	}
 
-	DWORD inventory_holder::get_armor_inventory(vector<inventory_data_t*> &v)
+	DWORD inventory_holder::get_armor_inventory(std::vector<inventory_data_t*> &v)
 	{
 		for (auto i = 17; i < 32; i++)
 		{
@@ -57,7 +57,7 @@ namespace isxao_classes
 		return reinterpret_cast<bank_entry*>(get_inventory_holder_data().p_bank_entry);
 	}
 
-	DWORD inventory_holder::get_character_inventory(vector<inventory_data_t*> &v)
+	DWORD inventory_holder::get_character_inventory(std::vector<inventory_data_t*> &v)
 	{
 		for (auto i = 64; i < 94; i++)
 		{
@@ -68,7 +68,7 @@ namespace isxao_classes
 		return v.size();
 	}
 
-	DWORD inventory_holder::get_implant_inventory(vector<inventory_data_t*> &v)
+	DWORD inventory_holder::get_implant_inventory(std::vector<inventory_data_t*> &v)
 	{
 		for (auto i = 33; i < 46; i++)
 		{
@@ -216,7 +216,7 @@ namespace isxao_classes
 			GetInvSlotIdentity(IS_FEET, id);
 		if (id.type != 0)
 			return reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d));
-		map<identity_t, InventoryItem*> m;
+		std::map<identity_t, InventoryItem*> m;
 		get_inventory(m);
 		for (auto it = m.begin(); it != m.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
@@ -356,7 +356,7 @@ namespace isxao_classes
 				s.slot_id = id;
 				s.p_item = reinterpret_cast<InventoryItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d));
 			}
-			map<identity_t, InventoryItem*> m;
+			std::map<identity_t, InventoryItem*> m;
 			this->get_inventory(m);
 			for (auto it = m.begin(); it != m.end(); ++it)  // NOLINT(modernize-loop-convert)
 			{
@@ -375,7 +375,7 @@ namespace isxao_classes
 		return s;
 	}
 
-	DWORD inventory_holder::get_inventory(map<identity_t, InventoryItem*>& m) const
+	DWORD inventory_holder::get_inventory(std::map<identity_t, InventoryItem*>& m) const
 	{
 		const identity_t d(0, 0);
 		const auto count = get_new_inventory()->get_inventory_size();
@@ -390,7 +390,7 @@ namespace isxao_classes
 		return m.size();
 	}
 
-	DWORD inventory_holder::get_weapon_inventory(vector<inventory_data_t*>& v)
+	DWORD inventory_holder::get_weapon_inventory(std::vector<inventory_data_t*>& v)
 	{
 		for (auto i = 1; i < 16; i++)
 		{

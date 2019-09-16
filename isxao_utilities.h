@@ -46,7 +46,7 @@ namespace isxao_utilities
 	AOLIB_API void RecursiveAddPetToPetMap(std::map<identity_t, DWORD>& m, p_pet_node_t pNode, p_pet_root_t pRoot, DWORD& count);
 	AOLIB_API void GetPetMap(std::map<identity_t, DWORD>& m, p_pet_dir_t pPetDir);
 	AOLIB_API void get_nano_map(std::map<DWORD, p_nano_item_t>& m);
-	AOLIB_API void get_stat_name_map(map<stat_e, PCSTR>& m);
+	AOLIB_API void get_stat_name_map(std::map<stat_e, PCSTR>& m);
 	AOLIB_API void GetStaticItemMap(std::map<identity_t, p_dummy_item_base_t>& m);
 	AOLIB_API void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, p_stat_node_t pNode, p_stat_root_t pRoot, DWORD& count);
 	AOLIB_API void GetStatMap(std::map<DWORD, LONG>& m, p_stat_dir_t pDir);

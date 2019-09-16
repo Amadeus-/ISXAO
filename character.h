@@ -29,6 +29,6 @@ public:
 	AOLIB_OBJECT static void use_item(identity_t const &);
 
 private:
-	AOLIB_OBJECT void get_stat_map(map<DWORD, LONG>&);
+	AOLIB_OBJECT void get_stat_map(std::map<DWORD, LONG>&);
 
 };

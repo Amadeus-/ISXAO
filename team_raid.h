@@ -12,8 +12,8 @@ public:
 	AOLIB_OBJECT DWORD get_raid_count() const;
 	AOLIB_OBJECT team_entry* get_raid_member(DWORD) const;
 	AOLIB_OBJECT team_entry* get_raid_member(PCSTR) const;
-	AOLIB_OBJECT DWORD get_team(vector<team_entry*>&) const;
-	AOLIB_OBJECT DWORD get_team(vector<team_entry*>&, DWORD) const;
+	AOLIB_OBJECT DWORD get_team(std::vector<team_entry*>&) const;
+	AOLIB_OBJECT DWORD get_team(std::vector<team_entry*>&, DWORD) const;
 	AOLIB_OBJECT DWORD get_team_count() const;
 	AOLIB_OBJECT team_entry* get_team_member(DWORD) const;
 	AOLIB_OBJECT team_entry* get_team_member(PCSTR) const;

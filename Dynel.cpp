@@ -59,7 +59,7 @@ namespace isxao_classes
 #else
 	dynel* dynel::get_dynel(const identity_t &id)
 	{
-		map<identity_t, p_n3_dynel_t> m;
+		std::map<identity_t, p_n3_dynel_t> m;
 		isxao_utilities::get_dynel_map(m);
 		const auto it = m.find(id);
 		if (it == m.end())

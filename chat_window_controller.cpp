@@ -8,7 +8,7 @@ namespace isxao_classes
 		return chat_window_controller_;
 	}
 
-	DWORD chat_window_controller::get_chat_window_nodes(map<string, chat_window_node*>& m) const
+	DWORD chat_window_controller::get_chat_window_nodes(std::map<string, chat_window_node*>& m) const
 	{
 		std::map<string, p_chat_window_node_t> map;
 		if (this->get_chat_window_controller_data().chat_window_node_dir.copy_map(map))

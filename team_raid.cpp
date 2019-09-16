@@ -5,7 +5,7 @@ namespace isxao_classes
 
 	DWORD team_raid::build_ls_team(LSIndex *p_index) const
 	{
-		vector<team_entry*> v;
+		std::vector<team_entry*> v;
 		if (this->get_team(v))
 		{
 			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
@@ -16,7 +16,7 @@ namespace isxao_classes
 
 	DWORD team_raid::build_ls_raid(LSIndex *p_index) const
 	{
-		vector<team_entry*> v;
+		std::vector<team_entry*> v;
 		if (this->get_raid(v))
 		{
 			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
@@ -32,7 +32,7 @@ namespace isxao_classes
 
 	team_entry* team_raid::get_team_leader() const
 	{
-		vector<team_entry*> v;
+		std::vector<team_entry*> v;
 		if (this->get_raid(v))
 		{
 			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
@@ -52,7 +52,7 @@ namespace isxao_classes
 		}			
 		for (auto i = 0; i < 6; i++)
 		{
-			vector<team_entry*> team_entry_vector;
+			std::vector<team_entry*> team_entry_vector;
 			if (this->get_team(team_entry_vector, i))  
 			{
 				for (auto it = team_entry_vector.begin(); it != team_entry_vector.end(); ++it)// NOLINT(modernize-loop-convert)
@@ -67,13 +67,13 @@ namespace isxao_classes
 
 	DWORD team_raid::get_raid_count() const
 	{
-		vector<team_entry*> raid_vector;
+		std::vector<team_entry*> raid_vector;
 		return this->get_raid(raid_vector);
 	}
 
 	team_entry* team_raid::get_raid_member(const DWORD index) const
 	{
-		vector<team_entry*> v;
+		std::vector<team_entry*> v;
 		if (this->get_raid(v))
 		{
 			if (index > 0 && index < v.size())				
@@ -88,7 +88,7 @@ namespace isxao_classes
 		char search_name[MAX_STRING];
 		strcpy_s(search_name, MAX_STRING, raid_member_name);
 		_strlwr_s(search_name);
-		vector<team_entry*> v;
+		std::vector<team_entry*> v;
 		if (this->get_raid(v))
 		{
 			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
@@ -109,7 +109,7 @@ namespace isxao_classes
 		return this->get_team(v, get_team_raid_index());
 	}
 
-	DWORD team_raid::get_team(vector<team_entry*> &v, const DWORD index) const
+	DWORD team_raid::get_team(std::vector<team_entry*> &v, const DWORD index) const
 	{
 		if (index < 0 || index > 5)
 			return 0;
@@ -125,13 +125,13 @@ namespace isxao_classes
 
 	DWORD team_raid::get_team_count() const
 	{
-		vector<team_entry*> v;
+		std::vector<team_entry*> v;
 		return get_team(v);;
 	}
 
 	team_entry* team_raid::get_team_member(const DWORD index) const
 	{
-		vector<team_entry*> v;
+		std::vector<team_entry*> v;
 		if (this->get_team(v))
 		{
 			if (index > 0 && index < v.size())
@@ -146,7 +146,7 @@ namespace isxao_classes
 		char search_name[MAX_STRING];
 		strcpy_s(search_name, MAX_STRING, team_member_name);
 		_strlwr_s(search_name);
-		vector<team_entry*> v;
+		std::vector<team_entry*> v;
 		if (this->get_team(v))
 		{
 			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
