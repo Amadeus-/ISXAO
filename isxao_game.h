@@ -165,8 +165,15 @@ constexpr DWORD  game_time_t__get_instance_bytes_to_next = 0;
 
 #pragma endregion
 
+#pragma region item_manager_t__item_manager_t
+
+constexpr bool item_manager_t__item_manager_t_use_native = true;
+constexpr char* const item_manager_t__item_manager_t_mangled_name = static_cast<char*>(nullptr);
+constexpr char* const item_manager_t__item_manager_t_pattern = static_cast<char*>(nullptr);
 constexpr DWORD item_manager_t__item_manager_t_offset = 0xF3;
 constexpr DWORD item_manager_t__item_manager_t_bytes_to_next = 0x0;
+
+#pragma endregion
 
 #pragma region look_at_iir_t__look_at_iir_t
 
@@ -217,7 +224,7 @@ constexpr DWORD  n3_engine_client_anarchy_t__convert_criteria_bytes_to_next = 0;
 
 #pragma region n3_engine_client_anarchy_t__get_breed_str
 
-constexpr bool n3_engine_client_anarchy_t__get_breed_str_use_native = false;
+constexpr bool n3_engine_client_anarchy_t__get_breed_str_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__get_breed_str_mangled_name = static_cast<char*>(
 	"?GetBreedStr@n3EngineClientAnarchy_t@@SAPBDH@Z");
 constexpr char* const n3_engine_client_anarchy_t__get_breed_str_pattern = static_cast<char*>(nullptr);
@@ -1351,6 +1358,24 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_target_target_bytes_to_ne
 
 #pragma endregion
 
+#pragma region n3_engine_client_anarchy_t__n3_msg_get_team_member_list
+
+constexpr bool n3_engine_client_anarchy_t__n3_msg_get_team_member_list_use_native = static_cast<bool>(true);
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_team_member_list_mangled_name = static_cast<char*>(
+	"?N3Msg_GetTeamMemberList@n3EngineClientAnarchy_t@@QAEPAV?$vector@PAVTeamEntry_t@@V?$allocator@PAVTeamEntry_t@@@std@@@std@@H@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_team_member_list_pattern = static_cast<char*>(
+	"55 8B EC 56 FF 15 ?? ?? ?? ?? 8B F0 85 F6 74 ?? 8B CE E8 ?? ?? ?? ?? 8B C8 E8 ?? ?? ?? ?? 84 C0 74 ?? 8B CE E8 ?? ?? ?? ?? 8B C8");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_team_member_list_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_team_member_list_bytes_to_next = 0x0;
+
+#pragma endregion
+
+
+
+
+
+
+
 #pragma region n3_engine_client_anarchy_t__n3_msg_is_npc
 
 constexpr bool n3_engine_client_anarchy_t__n3_msg_is_npc_use_native = true;
@@ -1460,22 +1485,37 @@ constexpr DWORD static_item_manager_t__static_item_manager_t_bytes_to_next = 0x0
 
 constexpr char* const game_time_t__m_pc_instance_mangled_name = static_cast<char*>(
 	"?m_pcInstance@GameTime_t@@0PAV1@A");
-constexpr char* const game_time_t__m_pc_instance_pattern = static_cast<char*>(nullptr);
 constexpr DWORD game_time_t__m_pc_instance_offset = 0xB;
-constexpr DWORD game_time_t__m_pc_instance_bytes_to_next = 0x0;
 
 #pragma endregion
 
+#pragma region m_c_nano_item_dir
 
+constexpr char* const m_c_nano_item_dir_mangled_name = static_cast<char*>(nullptr);
 constexpr DWORD m_c_nano_item_dir_offset = 0x13;
 
+#pragma endregion
+
+#pragma region m_c_stat_name_dir
+
+constexpr char* const m_c_stat_name_dir_mangled_name = static_cast<char*>(nullptr);
 constexpr DWORD m_c_stat_name_dir_offset = 0x1F;
 
+#pragma endregion
+
+#pragma region item_manager_t__m_ppc_instance
+
+constexpr char* const item_manager_t__m_ppc_instance_mangled_name = static_cast<char*>(nullptr);
 constexpr DWORD item_manager_t__m_ppc_instance_offset = 0xC;
 
+#pragma endregion
+
+#pragma region static_item_manager_t__m_ppc_instance
+
+constexpr char* const static_item_manager_t__m_ppc_instance_mangled_name = static_cast<char*>(nullptr);
 constexpr DWORD static_item_manager_t__m_ppc_instance_offset = 0xC;
 
-
+#pragma endregion
 
 #pragma endregion
 

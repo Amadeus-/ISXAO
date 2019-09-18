@@ -185,7 +185,27 @@ namespace isxao
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_stat_name_map;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_target_target;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_team_member_list;
 
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_HasPerk;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsAttacking;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsBattleStation;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsCharacterInMech;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsCharacterMorphed;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsDungeon;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsFormulaReady;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsGeneralPerk;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsGroupPerk;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsInRaidTeam;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsInTeam;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemDisabled;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemMine;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemNFCrystal;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToUnWear;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToWear;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsMoving;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsMyPetID;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly;
 
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_npc;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_1;
@@ -206,21 +226,26 @@ namespace isxao
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__m_pc_instance;
 	AOLIB_VAR ao::engine_client_anarchy **pp_engine_client_anarchy;
 #define P_ENGINE_CLIENT_ANARCHY (*pp_engine_client_anarchy)  // NOLINT(cppcoreguidelines-macro-usage)
+
 	AOLIB_VAR DWORD m_c_stat_name_dir;
 	AOLIB_VAR ao::p_stat_name_map_t p_stat_name_dir;
 #define P_STAT_NAME_MAP p_stat_name_dir  // NOLINT(cppcoreguidelines-macro-usage)
+
 	AOLIB_VAR DWORD m_c_nano_item_dir;
 	AOLIB_VAR ao::p_nano_item_map_t p_nano_item_dir;
 #define P_NANO_ITEM_MAP p_nano_item_dir  // NOLINT(cppcoreguidelines-macro-usage)
+
 	AOLIB_VAR DWORD item_manager_t__m_ppc_instance;
 	AOLIB_VAR std::vector<ao::acg_game_item_t> ***ppp_item_vector;
 #define P_ITEM_VECTOR (**ppp_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
+
 	AOLIB_VAR DWORD static_item_manager_t__m_ppc_instance;
 	AOLIB_VAR std::vector<ao::static_item_t> ***ppp_static_item_vector;
 #define P_STATIC_ITEM_VECTOR (**ppp_static_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
+
 	AOLIB_VAR DWORD game_time_t__m_pc_instance;
 	AOLIB_VAR ao::game_time** pp_game_time;
-#define P_GAME_TIME (*pp_game_time)
+#define P_GAME_TIME (*pp_game_time)  // NOLINT(cppcoreguidelines-macro-usage)
 
 #pragma endregion
 
@@ -322,26 +347,7 @@ namespace isxao
 #pragma region EngineClientAnarchy			
 	
 	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_GetTeamMemberList;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_HasPerk;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsAttacking;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsBattleStation;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsCharacterInMech;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsCharacterMorphed;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsDungeon;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsFormulaReady;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsGeneralPerk;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsGroupPerk;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsInRaidTeam;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsInTeam;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemDisabled;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemMine;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemNFCrystal;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToUnWear;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToWear;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsMoving;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsMyPetID;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly;
+	
 	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsPerk;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsPetTower;

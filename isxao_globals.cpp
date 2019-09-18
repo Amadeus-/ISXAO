@@ -204,6 +204,26 @@ namespace isxao
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_stat_name_map = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_target_target = 0;
 
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_team_member_list = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_HasPerk = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsAttacking = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsBattleStation = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsCharacterInMech = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsCharacterMorphed = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsDungeon = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsFormulaReady = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsGeneralPerk = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsGroupPerk = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsInRaidTeam = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsInTeam = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemDisabled = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemMine = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemNFCrystal = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToUnWear = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToWear = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsMoving = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsMyPetID = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly = 0;
 
 	DWORD n3_engine_client_anarchy_t__n3_msg_is_npc = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_1 = 0;
@@ -311,26 +331,7 @@ namespace isxao
 #pragma region EngineClientAnarchy
 	
 	
-	DWORD n3EngineClientAnarchy_t__N3Msg_GetTeamMemberList = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_HasPerk = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsAttacking = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsBattleStation = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsCharacterInMech = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsCharacterMorphed = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsDungeon = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsFormulaReady = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsGeneralPerk = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsGroupPerk = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsInRaidTeam = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsInTeam = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemDisabled = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemMine = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemNFCrystal = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToUnWear = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToWear = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsMoving = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsMyPetID = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly = 0;
+	
 	
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsPerk = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsPetTower = 0;
@@ -783,6 +784,7 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gamecode, f_get_nano_item)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, f_stat_to_string)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, game_time_t__get_instance)
+		
 		RESOLVE_FUNCTION_ADDRESS(gamecode, look_at_iir_t__look_at_iir_t)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_engine_client_anarchy_t)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t)
@@ -880,6 +882,8 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_stat_name_map)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_target_target)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_team_member_list)
+
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_npc)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_1)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_2)
@@ -889,6 +893,7 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__on_closed)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, simple_char_t__check_los)
 
+		RESOLVE_FUNCTION_ADDRESS(gamecode, item_manager_t__item_manager_t, n3_engine_client_anarchy_t__get_item_by_template) // Depends on n3_engine_client_anarchy_t__get_item_by_template
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_breed_str, n3_engine_client_anarchy_t__convert_criteria) // Depends on n3_engine_client_anarchy_t__convert_criteria
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_sex_str, n3_engine_client_anarchy_t__convert_criteria) // Depends on n3_engine_client_anarchy_t__convert_criteria
 		RESOLVE_FUNCTION_ADDRESS(gamecode, static_item_manager_t__static_item_manager_t, n3_engine_client_anarchy_t__get_item_by_template) // Depends on n3_engine_client_anarchy_t__get_item_by_template
@@ -896,54 +901,22 @@ namespace isxao
 		// Instances
 		n3_engine_client_anarchy_t__m_pc_instance = n3_engine_t__m_pc_instance;
 		pp_engine_client_anarchy = reinterpret_cast<ao::engine_client_anarchy**>(n3_engine_client_anarchy_t__m_pc_instance);
-		RESOLVE_STATIC_INSTANCE_ADDRESS(gamecode, game_time_t__m_pc_instance, game_time_t__get_instance)
 
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gamecode, game_time_t__m_pc_instance, game_time_t__get_instance) // Depends on game_time_t__get_instance
+		pp_game_time = reinterpret_cast<ao::game_time**>(game_time_t__m_pc_instance);
 
-#ifdef GAME_TIME_T__M_PC_INSTANCE_USE_PATTERN
-		GET_ADDRESS_FROM_FUNCTION_OFFSET(game_time_t__get_instance, game_time_t__m_pc_instance)
-#else
-		GET_PROC_ADDRESS(gamecode, game_time_t__m_pc_instance)
-#endif
-
-#ifdef M_C_NANO_ITEM_DIR_USE_PATTERN
-		GET_ADDRESS_FROM_FUNCTION_OFFSET(f_get_nano_item, m_c_nano_item_dir)
-#else
-		static_assert(false, "m_c_nano_item_dir requires a pattern for the function address to be found.")
-#endif
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gamecode, m_c_nano_item_dir, f_get_nano_item) // Depends on f_get_nano_item
 		p_nano_item_dir = reinterpret_cast<ao::nano_item_map_t*>(m_c_nano_item_dir);
 
-#ifdef M_C_STAT_NAME_DIR_USE_PATTERN
-		GET_ADDRESS_FROM_FUNCTION_OFFSET(f_stat_to_string, m_c_stat_name_dir)
-#else
-		static_assert(false, "m_c_stat_name_dir requires a pattern for the function address to be found.")
-#endif
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gamecode, m_c_stat_name_dir, f_stat_to_string) // Depends on f_stat_to_string
 		p_stat_name_dir = reinterpret_cast<ao::stat_name_map_t*>(m_c_stat_name_dir);
 
-#ifdef ITEM_MANAGER_T__ITEM_MANAGER_T_USE_PATTERN
-		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__get_item_by_template, item_manager_t__item_manager_t)
-#else
-		static_assert(false, "item_manager_t__item_manager_t requires a pattern for the function address to be found.")
-#endif
-
-#ifdef ITEM_MANAGER_T__M_PPC_INSTANCE_USE_PATTERN
-		GET_ADDRESS_FROM_FUNCTION_OFFSET(item_manager_t__item_manager_t, item_manager_t__m_ppc_instance)
-#else
-		static_assert(false, "item_manager_t__m_ppc_instance requires a pattern for the function address to be found.")
-#endif
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gamecode, item_manager_t__m_ppc_instance, item_manager_t__item_manager_t) // Depends on item_manager_t__item_manager_t
 		ppp_item_vector = reinterpret_cast<std::vector<ao::acg_game_item_t> ***>(item_manager_t__m_ppc_instance);
 
-#ifdef STATIC_ITEM_MANAGER_T__STATIC_ITEM_MANAGER_T_USE_PATTERN
-		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__get_item_by_template, static_item_manager_t__static_item_manager_t)
-#else
-		static_assert(false, "static_item_manager_t__static_item_manager_t requires a pattern for the function address to be found.")
-#endif
-
-#ifdef STATIC_ITEM_MANAGER_T__M_PPC_INSTANCE_USE_PATTERN
-		GET_ADDRESS_FROM_FUNCTION_OFFSET(static_item_manager_t__static_item_manager_t, static_item_manager_t__m_ppc_instance)
-#else
-		static_assert(false, "static_item_manager_t__m_ppc_instance requires a pattern for the function address to be found.")
-#endif
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gamecode, static_item_manager_t__m_ppc_instance, static_item_manager_t__static_item_manager_t) // Depends on static_item_manager_t__static_item_manager_t
 		ppp_static_item_vector = reinterpret_cast<std::vector<ao::static_item_t>***>(static_item_manager_t__m_ppc_instance);
+		
 #pragma endregion
 
 #pragma region GUI

@@ -4,7 +4,8 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	printf("%" PRIX32, P_ENGINE_CLIENT_ANARCHY->n3_msg_get_full_perk_map());
+	printf("%" PRIX32, ppp_item_vector);
+	printf("%" PRIX32, ppp_static_item_vector);
 	return 0;
 }
 

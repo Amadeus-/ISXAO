@@ -2,7 +2,7 @@
 
 namespace ao
 {
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_BREED_STR_USE_NATIVE
+#if (n3_engine_client_anarchy_t__get_breed_str_use_native == true)
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::get_breed_str(breed_e), n3_engine_client_anarchy_t__get_breed_str)
@@ -882,8 +882,8 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::N3Msg_GetTargetTarget(identity_t &, const identity_t &) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_GetTeamMemberList_x
-	FUNCTION_AT_ADDRESS(PVOID engine_client_anarchy::N3Msg_GetTeamMemberList(LONG), n3EngineClientAnarchy_t__N3Msg_GetTeamMemberList);
+#if true
+	FUNCTION_AT_ADDRESS(PVOID engine_client_anarchy::N3Msg_GetTeamMemberList(LONG), n3_engine_client_anarchy_t__n3_msg_get_team_member_list);
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_HasPerk_x
