@@ -171,7 +171,7 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 		if(g_game_state != GAMESTATE_NOT_IN_GAME)
 		{
 			g_game_state = GAMESTATE_NOT_IN_GAME;
-			gp_isxao_log->AddLine("Gamestate Changed to GAMESTATE_NOT_IN_GAME\n");
+			gp_isxao_log->add_line("Gamestate Changed to GAMESTATE_NOT_IN_GAME\n");
 			char new_state[MAX_VARSTRING];
 			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_NOT_IN_GAME");
 			char *argv[] = { new_state };
@@ -185,7 +185,7 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 		if(g_game_state != GAMESTATE_WAITING_FOR_PLAYFIELD)
 		{
 			g_game_state = GAMESTATE_WAITING_FOR_PLAYFIELD;
-			gp_isxao_log->AddLine("Gamestate Changed to GAMESTATE_WAITING_FOR_PLAYFIELD\n");
+			gp_isxao_log->add_line("Gamestate Changed to GAMESTATE_WAITING_FOR_PLAYFIELD\n");
 			char new_state[MAX_VARSTRING];
 			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_WAITING_FOR_PLAYFIELD");
 			char *argv[] = { new_state };
@@ -199,7 +199,7 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 		if (g_game_state != GAMESTATE_WAITING_FOR_CLIENT_CHAR)
 		{
 			g_game_state = GAMESTATE_WAITING_FOR_CLIENT_CHAR;
-			gp_isxao_log->AddLine("Gamestate Changed to GAMESTATE_WAITING_FOR_CLIENT_CHAR\n");
+			gp_isxao_log->add_line("Gamestate Changed to GAMESTATE_WAITING_FOR_CLIENT_CHAR\n");
 			char new_state[MAX_VARSTRING];
 			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_WAITING_FOR_CLIENT_CHAR");
 			char *argv[] = { new_state };
@@ -213,7 +213,7 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 		if (g_game_state != GAMESTATE_IN_GAME)
 		{
 			g_game_state = GAMESTATE_IN_GAME;
-			gp_isxao_log->AddLine("Gamestate Changed to GAMESTATE_IN_GAME\n");
+			gp_isxao_log->add_line("Gamestate Changed to GAMESTATE_IN_GAME\n");
 			char new_state[MAX_VARSTRING];
 			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_IN_GAME");
 			char *argv[] = { new_state };

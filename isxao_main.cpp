@@ -5,7 +5,16 @@ namespace isxao
 
 	void InitializeLogging()
 	{
-		gp_isxao_log = new ISXAOLog(GetModuleHandle("ISXAO.dll"));
+		SYSTEMTIME system_time;
+		GetLocalTime(&system_time);
+		const auto ms = system_time.wMilliseconds;
+		char time[32] = { 0 };
+		GetTimeFormatA(LOCALE_USER_DEFAULT, TIME_FORCE24HOURFORMAT, &system_time, "hh'_'mm'_'ss", time, 32);
+		char time_ms[32] = { 0 };
+		sprintf_s(time_ms, sizeof(time_ms), "%s_%d", time, ms);
+		char log_file_name[MAX_PATH] = { 0 };
+		sprintf_s(log_file_name, sizeof(log_file_name), "ISXAO_%s.txt", time_ms);
+		gp_isxao_log = new isxao_log(GetModuleHandle("ISXAO.dll"), log_file_name);
 	}
 
 	void ShutdownLogging()
@@ -20,17 +29,17 @@ namespace isxao
 
 		// Initialize logging
 		InitializeLogging();
-		gp_isxao_log->AddLine("Logging initialized\n");
+		gp_isxao_log->add_line("Logging initialized");
 
 		// Initialize offsets
-		gp_isxao_log->AddLine("Initializing offsets...\n");
+		gp_isxao_log->add_line("Initializing offsets...");
 		g_offsets_initialized = initialize_offsets();
 		if (g_offsets_initialized)
-			gp_isxao_log->AddLine("Offsets initialized.\n");
+			gp_isxao_log->add_line("Offsets initialized.");
 		else
 		{
 			g_isxao_initialized = g_offsets_initialized;
-			gp_isxao_log->AddLine("Offsets failed to initialize.\n");
+			gp_isxao_log->add_line("Offsets failed to initialize.");
 		}	
 
 		// Initialize globals
@@ -76,7 +85,7 @@ namespace isxao
 		//AODetours::Shutdown();
 
 		printf("ISXAO unloaded.");
-		gp_isxao_log->AddLine("Shutting down logging\n");
+		gp_isxao_log->add_line("Shutting down logging");
 		ShutdownLogging();
 	}
 

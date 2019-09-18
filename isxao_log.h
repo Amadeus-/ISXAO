@@ -1,19 +1,19 @@
 #pragma once
 
-class ISXAOLog
+class isxao_log
 {
 	std::string base_directory_, log_file_;
 	HMODULE module_handle;
 
-	void addLine(std::string line) const;
+	void add_line_internal(const std::string& line) const;
 public:
-	ISXAOLog(HMODULE module_handle, std::string log_file = "Log.txt");
+	isxao_log(HMODULE module_handle, const std::string& log_file = "Log.txt");
 
-	void AddLine(const char * format_, ...) const;
+	void add_line(const char * format, ...) const;
 
-	void SetBaseDir(std::string path_);
-	std::string GetBaseDirFile(std::string file_name_) const;
-	HMODULE GetHModule() const;
+	void set_base_dir(std::string path);
+	std::string get_base_dir_file(const std::string& file_name) const;
+	HMODULE get_h_module() const;
 };
 
-#define DBGLOG gp_isxao_log->AddLine
+#define DEBUG_LOG gp_isxao_log->AddLine

@@ -472,7 +472,7 @@ namespace isxao
 
 #pragma region Logger
 
-	AOLIB_VAR ISXAOLog* gp_isxao_log;
+	AOLIB_VAR isxao_log* gp_isxao_log;
 
 #pragma endregion
 	
@@ -593,6 +593,8 @@ namespace isxao
 	bool get_static_address_from_function(const DWORD& function_base_address, DWORD& static_address, const char* static_address_name, const size_t& offset);
 	bool get_relative_address_from_function(const DWORD& function_base_address, DWORD& relative_address, const char* relative_address_name, const size_t& offset, const size_t& bytes_to_next_line);
 	bool get_proc_address(const HMODULE& module_handle, DWORD& function_address, const char* function_name, const char* mangled_function_name);
+	bool resolve_function_address(const std::vector<BYTE>& data, HMODULE& module_handle, DWORD& function_address, const char* function_address_name, const char* mangled_function_name, const char* function_pattern, DWORD offset = 0x0, DWORD bytes_to_next_line = 0x0, DWORD relative_function_base_address = 0x0);
+	bool resolve_static_instance_address(HMODULE& module_handle, DWORD& static_instance_address, const char* static_instance_name, const char* mangled_name, DWORD offset = 0, DWORD relative_function_base_address = 0);
 
 }
 

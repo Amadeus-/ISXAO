@@ -457,7 +457,7 @@ void ISXAO::ExceptionMessage(const char * pszFormatString, ...)
 	va_end(args);
 
 	FILE * pFile = 0;
-	if (fopen_s(&pFile, gp_isxao_log->GetBaseDirFile("ISXAO_Crashlog.txt").c_str(), "a+") == 0)
+	if (fopen_s(&pFile, gp_isxao_log->get_base_dir_file("ISXAO_Crashlog.txt").c_str(), "a+") == 0)
 	{
 		if (!pFile)
 			return;
