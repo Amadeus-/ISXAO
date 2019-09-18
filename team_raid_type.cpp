@@ -8,7 +8,7 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 		return false;
 	__try
 	{
-#define P_TEAM_RAID ((team_raid*)ObjectData.Ptr)
+#define P_TEAM_RAID ((ao::team_raid*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (TeamRaidTypeMembers(Member->ID))
 		{
 		case Leader:
@@ -28,9 +28,9 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 		}
 		case Raid:
 		{
-			if(ISINDEX())
+			if(IS_INDEX())
 			{
-				DWORD index = GETNUMBER();
+				DWORD index = GET_NUMBER();
 				if((Object.Ptr = P_TEAM_RAID->get_raid_member(index - 1)))
 				{
 					Object.Type = pTeamEntryType;
@@ -53,9 +53,9 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 		}
 		case Team:
 		{
-			if (ISINDEX())
+			if (IS_INDEX())
 			{
-				DWORD index = GETNUMBER();
+				DWORD index = GET_NUMBER();
 				if ((Object.Ptr = P_TEAM_RAID->get_team_member(index - 1)))
 				{
 					Object.Type = pTeamEntryType;
@@ -72,7 +72,7 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 		}
 		case GetTeam:
 		{
-			if(ISINDEX())
+			if(IS_INDEX())
 			{
 				LSOBJECT IndexObject;
 				if (!pISInterface->DataParse(argv[0], IndexObject))
@@ -90,7 +90,7 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 		}
 		case GetRaid:
 		{
-			if (ISINDEX())
+			if (IS_INDEX())
 			{
 				LSOBJECT IndexObject;
 				if (!pISInterface->DataParse(argv[0], IndexObject))
@@ -126,7 +126,7 @@ bool TeamRaidType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, in
 		return false;
 	__try
 	{
-#define P_TEAM_RAID ((team_raid*)ObjectData.Ptr)
+#define P_TEAM_RAID ((ao::team_raid*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (TeamRaidTypeMethods(pMethod->ID))
 		{
 		case CreateRaid:
@@ -151,7 +151,7 @@ bool TeamRaidType::ToText(LSOBJECTDATA ObjectData, char* buf, unsigned buflen)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define P_TEAM_RAID ((team_raid*)ObjectData.Ptr)
+#define P_TEAM_RAID ((ao::team_raid*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 	sprintf_s(buf, buflen, "%I64d", P_TEAM_RAID->get_team_identity().get_combined_identity());
 #undef P_TEAM_RAID
 	return true;

@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 	
 #ifdef GRAPH_PATH_FINDER_T__GRAPH_PATH_FINDER_T_1_USE_NATIVE

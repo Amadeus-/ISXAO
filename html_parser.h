@@ -8,5 +8,5 @@ public:
 	~html_parser();
 	string* extract_text(string*, int, int, DWORD);
 private:
-	html_parser_t html_parser_;
+	ao::html_parser_t html_parser_;
 };

@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 	identity_t special_action_template::get_identity() const
@@ -38,10 +38,10 @@ namespace isxao_classes
 		return special_action_;
 	}
 
-	SpecialActionItem* special_action_template::get_special_action_item() const
+	special_action_item* special_action_template::get_special_action_item() const
 	{
 		const identity_t d(0, 0);
-		return reinterpret_cast<SpecialActionItem*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(this->get_identity(), d));
+		return reinterpret_cast<special_action_item*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(this->get_identity(), d));
 	}
 
 

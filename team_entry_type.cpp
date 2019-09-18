@@ -8,7 +8,7 @@ bool TeamEntryType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		return false;
 	__try
 	{
-#define P_TEAM_ENTRY ((team_entry*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_TEAM_ENTRY ((ao::team_entry*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (TeamEntryTypeMembers(Member->ID))
 		{
 		case Name:
@@ -20,14 +20,14 @@ bool TeamEntryType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		case Identity:
 		{
 			auto identity = P_TEAM_ENTRY->get_identity();
-			const auto p_identity = pISInterface->GetTempBuffer(sizeof(identity_t), &identity);
+			const auto p_identity = pISInterface->GetTempBuffer(sizeof(ao::identity_t), &identity);
 			Object.Ptr = p_identity;
 			Object.Type = pIdentityType;
 			break;
 		}
 		case ToTeamMember:
 		{
-			if((Object.Ptr = reinterpret_cast<team_member*>(isxao_classes::dynel::get_dynel(P_TEAM_ENTRY->get_identity()))))
+			if((Object.Ptr = reinterpret_cast<ao::team_member*>(ao::dynel::get_dynel(P_TEAM_ENTRY->get_identity()))))
 			{
 				Object.Type = pActorType;
 				return true;
@@ -54,7 +54,7 @@ bool TeamEntryType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 		return false;
 	__try
 	{
-#define P_TEAM_ENTRY ((team_entry*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_TEAM_ENTRY ((ao::team_entry*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (TeamEntryTypeMethods(pMethod->ID))
 		{
 		case Kick:
@@ -84,7 +84,7 @@ bool TeamEntryType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int bufl
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define P_TEAM_ENTRY ((team_entry*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_TEAM_ENTRY ((ao::team_entry*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 	sprintf_s(buf, buflen, "%I64u", P_TEAM_ENTRY->get_identity().get_combined_identity());
 #undef P_TEAM_ENTRY
 

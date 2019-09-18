@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 	DWORD team_raid::build_ls_team(LSIndex *p_index) const
@@ -57,7 +57,7 @@ namespace isxao_classes
 			{
 				for (auto it = team_entry_vector.begin(); it != team_entry_vector.end(); ++it)// NOLINT(modernize-loop-convert)
 				{
-					if (!IsClientId((*it)->get_identity().id))
+					if (!is_client_id((*it)->get_identity().id))
 						v.push_back(*it);
 				}
 			}							
@@ -84,16 +84,16 @@ namespace isxao_classes
 
 	team_entry* team_raid::get_raid_member(const PCSTR raid_member_name) const
 	{
-		char name[MAX_STRING] = { 0 };
-		char search_name[MAX_STRING];
-		strcpy_s(search_name, MAX_STRING, raid_member_name);
+		char name[MAX_VARSTRING] = { 0 };
+		char search_name[MAX_VARSTRING];
+		strcpy_s(search_name, MAX_VARSTRING, raid_member_name);
 		_strlwr_s(search_name);
 		std::vector<team_entry*> v;
 		if (this->get_raid(v))
 		{
 			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 			{
-				strcpy_s(name, MAX_STRING, (*it)->get_name());
+				strcpy_s(name, MAX_VARSTRING, (*it)->get_name());
 				_strlwr_s(name);
 				if (strstr(name, search_name))
 					return (*it);
@@ -117,7 +117,7 @@ namespace isxao_classes
 		for (auto it = team_entry_vector->begin(); it != team_entry_vector->end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
 			auto entry = reinterpret_cast<team_entry*>(*it);
-			if (!IsClientId(entry->get_identity().id))
+			if (!is_client_id(entry->get_identity().id))
 				v.push_back(entry);
 		}
 		return v.size();
@@ -142,16 +142,16 @@ namespace isxao_classes
 
 	team_entry* team_raid::get_team_member(const PCSTR team_member_name) const
 	{
-		char name[MAX_STRING] = { 0 };
-		char search_name[MAX_STRING];
-		strcpy_s(search_name, MAX_STRING, team_member_name);
+		char name[MAX_VARSTRING] = { 0 };
+		char search_name[MAX_VARSTRING];
+		strcpy_s(search_name, MAX_VARSTRING, team_member_name);
 		_strlwr_s(search_name);
 		std::vector<team_entry*> v;
 		if (this->get_team(v))
 		{
 			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 			{
-				strcpy_s(name, MAX_STRING, (*it)->get_name());
+				strcpy_s(name, MAX_VARSTRING, (*it)->get_name());
 				_strlwr_s(name);
 				if (strstr(name, search_name))
 					return (*it);

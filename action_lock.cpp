@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 	identity_t action_lock::get_action_identity() const

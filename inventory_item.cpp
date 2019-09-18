@@ -1,132 +1,132 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
-	bool InventoryItem::CanApplyOnFightingTarget()
+	bool inventory_item::can_apply_on_fighting_target()
 	{
-		return (GetCanFlags() & ICF_APPLY_ON_FIGHTING_TARGET) == 1;
+		return (get_can_flags() & ICF_APPLY_ON_FIGHTING_TARGET) == 1;
 	}
 
-	bool InventoryItem::CanApplyOnFriendly()
+	bool inventory_item::can_apply_on_friendly()
 	{
-		return (GetCanFlags() & ICF_APPLY_ON_FRIENDLY) == 1;
+		return (get_can_flags() & ICF_APPLY_ON_FRIENDLY) == 1;
 	}
 
-	bool InventoryItem::CanApplyOnHostile()
+	bool inventory_item::can_apply_on_hostile()
 	{
-		return (GetCanFlags() & ICF_APPLY_ON_HOSTILE) == 1;
+		return (get_can_flags() & ICF_APPLY_ON_HOSTILE) == 1;
 	}
 
-	bool InventoryItem::CanApplyOnSelf()
+	bool inventory_item::can_apply_on_self()
 	{
-		return (GetCanFlags() & ICF_APPLY_ON_SELF) == 1;
+		return (get_can_flags() & ICF_APPLY_ON_SELF) == 1;
 	}
 
-	bool InventoryItem::CanBeSplit()
+	bool inventory_item::can_be_split()
 	{
-		return (GetCanFlags() & ICF_CANT_SPLIT) == 0;
+		return (get_can_flags() & ICF_CANT_SPLIT) == 0;
 	}
 
-	bool InventoryItem::CanUse()
+	bool inventory_item::can_use()
 	{
-		return (GetCanFlags() & ICF_USE) == 1;
+		return (get_can_flags() & ICF_USE) == 1;
 	}
 
-	DWORD InventoryItem::GetCanFlags()
+	DWORD inventory_item::get_can_flags()
 	{
-		return GetSkill(ST_CAN);
+		return get_skill(ST_CAN);
 	}
 
-	DWORD InventoryItem::GetMass()
+	DWORD inventory_item::get_mass()
 	{
-		return GetSkill(ST_VOLUMEMASS);
+		return get_skill(ST_VOLUMEMASS);
 	}
 
-	DWORD InventoryItem::GetNoneFlags()
+	DWORD inventory_item::get_none_flags()
 	{
-		return GetSkill(ST_FLAGS);
+		return get_skill(ST_FLAGS);
 	}
 
-	DWORD InventoryItem::GetQL()
+	DWORD inventory_item::get_ql()
 	{
-		return GetSkill(ST_LEVEL);
+		return get_skill(ST_LEVEL);
 	}
 
-	PCSTR InventoryItem::GetRarity()
+	PCSTR inventory_item::get_rarity()
 	{
-		return isxao_utilities::GetItemRarityStr(GetSkill(ST_RARITY));
+		return isxao_utilities::get_item_rarity_str(get_skill(ST_RARITY));
 	}
 
 
-	DWORD InventoryItem::GetValue()
+	DWORD inventory_item::get_value()
 	{
-		return GetSkill(ST_PRICE);
+		return get_skill(ST_PRICE);
 	}
 
-	LONG InventoryItem::GetSkill(DWORD stat)
+	LONG inventory_item::get_skill(DWORD stat)
 	{
 		identity_t dummy_identity;
 		ZeroMemory(&dummy_identity, sizeof(identity_t));
 		auto result = 1234567890;
 		if (P_ENGINE_CLIENT_ANARCHY)
-			result = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(GetIdentity(), stat, 2, dummy_identity);
+			result = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(get_identity(), stat, 2, dummy_identity);
 		return result;
 	}
 
-	bool InventoryItem::IsArmor()
+	bool inventory_item::is_armor()
 	{
-		return GetSkill(ST_ITEMCLASS) == IT_ARMOR;
+		return get_skill(ST_ITEMCLASS) == IT_ARMOR;
 	}
 
-	bool InventoryItem::IsConsumable()
+	bool inventory_item::is_consumable()
 	{
-		return (GetCanFlags() & ICF_CONSUME) == 1;
+		return (get_can_flags() & ICF_CONSUME) == 1;
 	}
 
-	bool InventoryItem::IsImplant()
+	bool inventory_item::is_implant()
 	{
-		return GetSkill(ST_ITEMCLASS) == IT_IMPLANT;
+		return get_skill(ST_ITEMCLASS) == IT_IMPLANT;
 	}
 
-	bool InventoryItem::IsMisc()
+	bool inventory_item::is_misc()
 	{
-		return GetSkill(ST_ITEMCLASS) == IT_MISC;
+		return get_skill(ST_ITEMCLASS) == IT_MISC;
 	}
 
-	bool InventoryItem::IsNPC()
+	bool inventory_item::is_npc()
 	{
-		return GetSkill(ST_ITEMCLASS) == IT_NPC;
+		return get_skill(ST_ITEMCLASS) == IT_NPC;
 	}
 
-	bool InventoryItem::IsSpirit()
+	bool inventory_item::is_spirit()
 	{
-		return GetSkill(ST_ITEMCLASS) == IT_SPIRIT;
+		return get_skill(ST_ITEMCLASS) == IT_SPIRIT;
 	}
 
-	bool InventoryItem::IsStackable()
+	bool inventory_item::is_stackable()
 	{
-		return (GetCanFlags() & ICF_STACKABLE) == 1;
+		return (get_can_flags() & ICF_STACKABLE) == 1;
 	}
 
-	bool InventoryItem::IsTower()
+	bool inventory_item::is_tower()
 	{
-		return GetSkill(ST_ITEMCLASS) == IT_TOWER;
+		return get_skill(ST_ITEMCLASS) == IT_TOWER;
 	}
 
-	bool InventoryItem::IsUtility()
+	bool inventory_item::is_utility()
 	{
-		return GetSkill(ST_ITEMCLASS) == IT_UTILITY;
+		return get_skill(ST_ITEMCLASS) == IT_UTILITY;
 	}
 
-	bool InventoryItem::IsWeapon()
+	bool inventory_item::is_weapon()
 	{
-		return GetSkill(ST_ITEMCLASS) == IT_WEAPON;
+		return get_skill(ST_ITEMCLASS) == IT_WEAPON;
 	}
 
-	bool InventoryItem::MustSitToUse()
+	bool inventory_item::must_sit_to_use()
 	{
-		return (GetCanFlags() & ICF_SIT) == 1;
+		return (get_can_flags() & ICF_SIT) == 1;
 	}
 
 }

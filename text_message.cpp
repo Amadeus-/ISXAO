@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 #ifdef TEXT_MESSAGE_T__MESSAGE_BODY_GET_USE_NATIVE

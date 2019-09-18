@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 	
 chat_window_node_t chat_window_node::get_data() const

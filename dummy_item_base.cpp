@@ -1,36 +1,36 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
-	PVOID DummyItemBase::GetData()
+	PVOID dummy_item_base::get_data()
 	{
 		return &dummy_item_base_;
 	}
 
-	p_dummy_item_base_t DummyItemBase::GetDummyItemBaseData()
+	p_dummy_item_base_t dummy_item_base::get_dummy_item_base_data()
 	{
-		return p_dummy_item_base_t(GetData());
+		return p_dummy_item_base_t(get_data());
 	}
 
-	PCSTR DummyItemBase::GetDescription()
+	PCSTR dummy_item_base::get_description()
 	{
-		return GetDummyItemBaseData()->description;
+		return get_dummy_item_base_data()->description;
 	}
 
-	identity_t DummyItemBase::GetIdentity()
+	identity_t dummy_item_base::get_identity()
 	{
-		return GetDummyItemBaseData()->identity;
+		return get_dummy_item_base_data()->identity;
 	}
 
-	identity_t DummyItemBase::GetParentIdentity()
+	identity_t dummy_item_base::get_parent_identity()
 	{
-		return GetDummyItemBaseData()->parent_identity;
+		return get_dummy_item_base_data()->parent_identity;
 	}
 
-	PCSTR DummyItemBase::GetName()
+	PCSTR dummy_item_base::get_name()
 	{
-		return GetDummyItemBaseData()->name;
+		return get_dummy_item_base_data()->name;
 	}
 
 }

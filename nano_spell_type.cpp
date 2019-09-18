@@ -8,36 +8,36 @@ bool NanoSpellType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		return false;
 	__try
 	{
-#define pNanoSpell ((NanoItem*)ObjectData.Ptr)
+#define P_NANO_SPELL ((ao::nano_item*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (NanoSpellTypeMembers(Member->ID))
 		{
 		case CanApplyOnFriendly:
 		{
-			Object.DWord = pNanoSpell->CanApplyOnFriendly();
+			Object.DWord = P_NANO_SPELL->can_apply_on_friendly();
 			Object.Type = pBoolType;
 			break;
 		}
 		case CanApplyOnFightingTarget:
 		{
-			Object.DWord = pNanoSpell->CanApplyOnFightingTarget();
+			Object.DWord = P_NANO_SPELL->can_apply_on_fighting_target();
 			Object.Type = pBoolType;
 			break;
 		}
 		case CanApplyOnHostile:
 		{
-			Object.DWord = pNanoSpell->CanApplyOnHostile();
+			Object.DWord = P_NANO_SPELL->can_apply_on_hostile();
 			Object.Type = pBoolType;
 			break;
 		}
 		case CanApplyOnSelf:
 		{
-			Object.DWord = pNanoSpell->CanApplyOnSelf();
+			Object.DWord = P_NANO_SPELL->can_apply_on_self();
 			Object.Type = pBoolType;
 			break;
 		}
 		case CastingTime:
 		{
-			Object.Float = pNanoSpell->GetAttackDelay();
+			Object.Float = P_NANO_SPELL->get_attack_delay();
 			Object.Type = pfloatType;
 			break;
 		}
@@ -45,129 +45,129 @@ bool NanoSpellType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		{
 			DWORD a;
 			DWORD b;
-			double result = pNanoSpell->GetFormulaProgress(a, b);
+			double result = P_NANO_SPELL->get_formula_progress(a, b);
 			Object.DWord = b;
 			Object.Type = pUintType;
 			break;
 		}
 		case FormulaRadius:
 		{
-			Object.DWord = pNanoSpell->GetFormulaRadius();
+			Object.DWord = P_NANO_SPELL->get_formula_radius();
 			Object.Type = pUintType;
 			break;
 		}
 		case IsBuff:
 		{
-			Object.DWord = pNanoSpell->IsBuff();
+			Object.DWord = P_NANO_SPELL->is_buff();
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsHostile:
 		{
-			Object.DWord = pNanoSpell->IsHostile();
+			Object.DWord = P_NANO_SPELL->is_hostile();
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsNoResistCannotFumble:
 		{
-			Object.DWord = pNanoSpell->IsNoResistCannotFumble();
+			Object.DWord = P_NANO_SPELL->is_no_resist_cannot_fumble();
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsReady:
 		{
-			Object.DWord = pNanoSpell->IsReady();
+			Object.DWord = P_NANO_SPELL->is_ready();
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsSelfOnly:
 		{
-			Object.DWord = pNanoSpell->IsNanoSelfOnly();
+			Object.DWord = P_NANO_SPELL->is_nano_self_only();
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsShapeChangeNano:
 		{
-			Object.DWord = pNanoSpell->IsShapeChangeNano();
+			Object.DWord = P_NANO_SPELL->is_shape_change_nano();
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsTeamNano:
 		{
-			Object.DWord = pNanoSpell->IsTeamNano();
+			Object.DWord = P_NANO_SPELL->is_team_nano();
 			Object.Type = pBoolType;
 			break;
 		}
 		case Name:
 		{
-			Object.ConstCharPtr = pNanoSpell->GetName();
+			Object.ConstCharPtr = P_NANO_SPELL->get_name();
 			Object.Type = pStringType;
 			break;
 		}
 		case NanoId:
 		{
-			Object.DWord = pNanoSpell->GetNanoIdentity().id;
+			Object.DWord = P_NANO_SPELL->get_nano_identity().id;
 			Object.Type = pUintType;
 			break;
 		}
 		case NanoSchool:
 		{
-			Object.ConstCharPtr = isxao_utilities::GetNanoSchoolStr(pNanoSpell->GetNanoSchool());
+			Object.ConstCharPtr = ao::engine_client_anarchy::get_nano_school_str(P_NANO_SPELL->get_nano_school());
 			Object.Type = pStringType;
 			break;
 		}
 		case NanoStrain:
 		{
-			Object.DWord = pNanoSpell->GetNanoStrain();
+			Object.DWord = P_NANO_SPELL->get_nano_strain();
 			Object.Type = pUintType;
 			break;
 		}
 		case NCUCost:
 		{
-			Object.DWord = pNanoSpell->GetNCUCost();
+			Object.DWord = P_NANO_SPELL->get_ncu_cost();
 			Object.Type = pUintType;
 			break;
 		}
 		case Range:
 		{
-			Object.DWord = pNanoSpell->GetAttackRange();
+			Object.DWord = P_NANO_SPELL->get_attack_range();
 			Object.Type = pUintType;
 			break;
 		}
 		case RechargeDelay:
 		{
-			Object.Float = pNanoSpell->GetRechargeDelay();
+			Object.Float = P_NANO_SPELL->get_recharge_delay();
 			Object.Type = pfloatType;
 			break;
 		}
 		case StackingOrder:
 		{
-			Object.DWord = pNanoSpell->GetStackingOrder();
+			Object.DWord = P_NANO_SPELL->get_stacking_order();
 			Object.Type = pUintType;
 			break;
 		}
 		case WillBreakOnAttack:
 		{
-			Object.DWord = pNanoSpell->WillBreakOnAttack();
+			Object.DWord = P_NANO_SPELL->will_break_on_attack();
 			Object.Type = pBoolType;
 			break;
 		}
 		case WillBreakOnDebuff:
 		{
-			Object.DWord = pNanoSpell->WillBreakOnDebuff();
+			Object.DWord = P_NANO_SPELL->will_break_on_debuff();
 			Object.Type = pBoolType;
 			break;
 		}
 		case WillBreakOnSpellAttack:
 		{
-			Object.DWord = pNanoSpell->WillBreakOnSpellAttack();
+			Object.DWord = P_NANO_SPELL->will_break_on_spell_attack();
 			Object.Type = pBoolType;
 			break;
 		}
 		default:
 			return false;
 		}
-#undef pNanoSpell
+#undef P_NANO_SPELL
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, Member->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{
@@ -184,16 +184,16 @@ bool NanoSpellType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 		return false;
 	__try
 	{
-#define pNanoSpell ((NanoItem*)ObjectData.Ptr)
+#define P_NANO_SPELL ((ao::nano_item*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (NanoSpellTypeMethods(pMethod->ID))
 		{
 		case Cast:
 		{
-			pNanoSpell->Cast();
+			P_NANO_SPELL->cast();
 		}
 		default: break;
 		}
-#undef pNanoSpell
+#undef P_NANO_SPELL
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, pMethod->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{
@@ -208,9 +208,9 @@ bool NanoSpellType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int bufl
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define pNanoSpell ((NanoItem*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%d", pNanoSpell->GetNanoIdentity().id);
-#undef pNanoSpell
+#define P_NANO_SPELL ((ao::nano_item*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
+	sprintf_s(buf, buflen, "%d", P_NANO_SPELL->get_nano_identity().id);
+#undef P_NANO_SPELL
 
 	return true;
 }

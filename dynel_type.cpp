@@ -8,13 +8,13 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		return false;
 	__try
 	{
-#define P_DYNEL ((dynel*)ObjectData.Ptr)
+#define P_DYNEL ((ao::dynel*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (DynelTypeMembers(Member->ID))
 		{
 		case Identity:
 		{
 			auto id = P_DYNEL->get_identity();
-			const auto p_id = static_cast<p_identity_t>(pISInterface->GetTempBuffer(sizeof(identity_t), &id));
+			const auto p_id = static_cast<ao::p_identity_t>(pISInterface->GetTempBuffer(sizeof(ao::identity_t), &id));
 			Object.Ptr = p_id;
 			Object.Type = pIdentityType;
 			break;
@@ -28,7 +28,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case Loc:
 		{
 			auto v = P_DYNEL->get_position();
-			auto p = Point3fFromVector3(v);
+			auto p = point3f_from_vector3(v);
 			const auto p_p = PPOINT3F(pISInterface->GetTempBuffer(sizeof(p), &p));
 			Object.Ptr = p_p;
 			Object.Type = pPoint3fType;
@@ -54,7 +54,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Distance:
 		{
-			vector3_t v;
+			ao::vector3_t v;
 			P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
 			Object.Float = P_DYNEL->get_distance_3d_to(v);
 			Object.Type = pfloatType;
@@ -62,7 +62,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Distance2D:
 		{
-			vector3_t v;
+			ao::vector3_t v;
 			P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
 			Object.Float = P_DYNEL->get_distance_to(v);
 			Object.Type = pfloatType;
@@ -85,17 +85,17 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			float heading;
 			if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->get_client_char())
 			{
-				vector3_t v;
+				ao::vector3_t v;
 				P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
 				const auto raw_heading = P_DYNEL->get_heading_to(v);
 				if (raw_heading > 0.0f)
 					heading = float(raw_heading * 180.0f / M_PI);
 				else
 					heading = float(raw_heading * 180.0f / M_PI) + 360.0f;
-				if (ISINDEX() && !ISNUMBER())
+				if (IS_INDEX() && !IS_NUMBER())
 				{
-					char arg[MAX_STRING];
-					strcpy_s(arg, MAX_STRING, argv[0]);
+					char arg[MAX_VARSTRING];
+					strcpy_s(arg, MAX_VARSTRING, argv[0]);
 					_strlwr_s(arg);
 					if (!strcmp(arg, "asstring"))
 					{
@@ -147,15 +147,15 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case HeadingToLoc:
 		{
 			float heading;
-			if (ISINDEX() && argc == 2 && IsNumber(argv[0]) && IsNumber(argv[1]))
+			if (IS_INDEX() && argc == 2 && IsNumber(argv[0]) && IsNumber(argv[1]))
 			{
 				const auto x = float(atof(argv[0]));  // NOLINT(cert-err34-c)
 				const auto z = float(atof(argv[1]));  // NOLINT(cert-err34-c)
-				vector3_t offset;
+				ao::vector3_t offset;
 				offset.x = x;
 				offset.y = 0.0f;
 				offset.z = z;
-				vector3_t v;
+				ao::vector3_t v;
 				P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
 				const auto raw_heading = P_DYNEL->get_heading_to_loc(v, offset);
 				if (raw_heading > 0.0f)
@@ -172,7 +172,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case CheckCollision:
 		{
-			if (!ISINDEX())
+			if (!IS_INDEX())
 			{
 				if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->get_client_char())
 				{
@@ -193,14 +193,14 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 					return false;
 				}
 				const auto p = PPOINT3F(object.Ptr);
-				auto v = Vector3FrompPoint3f(p);
+				auto v = vector3_from_p_point3f(p);
 				Object.DWord = P_DYNEL->is_in_line_of_sight(v);
 				Object.Type = pBoolType;
 				return true;
 			}
 			else if (argc == 3 && IsNumber(argv[0]) && IsNumber(argv[1]) && IsNumber(argv[2]))
 			{
-				vector3_t v;
+				ao::vector3_t v;
 				v.x = float(atof(argv[0]));  // NOLINT(cert-err34-c)
 				v.y = float(atof(argv[1]));  // NOLINT(cert-err34-c)
 				v.z = float(atof(argv[2]));  // NOLINT(cert-err34-c)
@@ -212,7 +212,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case NearestDynel:
 		{
-			if (IsClientId(P_DYNEL->get_identity().id))
+			if (is_client_id(P_DYNEL->get_identity().id))
 			{
 				return (TLO_ACTORSEARCH(argc, argv, Object) != 0);
 			}
@@ -233,7 +233,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				if (result)
 				{
 					Object.Ptr = result;
-					Object.Type = ::GetRealType(reinterpret_cast<dynel*>(result));
+					Object.Type = ::GetRealType(reinterpret_cast<ao::dynel*>(result));
 					return true;
 				}
 			}
@@ -299,7 +299,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case IsCharacter:
 		{
-			Object.DWord = isxao_inlines::IsClientId(P_DYNEL->get_identity().id);
+			Object.DWord = isxao::is_client_id(P_DYNEL->get_identity().id);
 			Object.Type = pBoolType;
 			break;
 		}
@@ -311,7 +311,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case IsMyPet:
 		{
-			Object.DWord = P_DYNEL->is_pet() && isxao_inlines::IsClientId(P_DYNEL->to_actor()->get_master_id());
+			Object.DWord = P_DYNEL->is_pet() && isxao::is_client_id(P_DYNEL->to_actor()->get_master_id());
 			Object.Type = pBoolType;
 			break;
 		}
@@ -360,7 +360,7 @@ bool DynelType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int a
 		return false;
 	__try
 	{
-#define P_DYNEL ((dynel*)ObjectData.Ptr)
+#define P_DYNEL ((ao::dynel*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (DynelTypeMethods(pMethod->ID))
 		{
 		case Interact:
@@ -388,9 +388,9 @@ bool DynelType::ToText(LSOBJECTDATA ObjectData, char *buf, const unsigned int bu
 {
 	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
 		return false;
-	if (!ObjectData.Ptr)
+	if (!ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage, cppcoreguidelines-macro-usage)
 		return false;
-#define P_DYNEL ((dynel*)ObjectData.Ptr)
+#define P_DYNEL ((ao::dynel*)ObjectData.Ptr)
 	sprintf_s(buf, buffer_length, "%I64d", P_DYNEL->get_identity().get_combined_identity());
 #undef P_DYNEL
 

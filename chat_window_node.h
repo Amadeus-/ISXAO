@@ -4,9 +4,9 @@
 class chat_window_node
 {
 public:
-	AOLIB_OBJECT chat_window_node_t get_data() const;
-	AOLIB_OBJECT bool parse_text_command(string&);
+	ao::chat_window_node_t get_data() const;
+	bool parse_text_command(string&);
 private:
 	// ReSharper disable once CppUninitializedNonStaticDataMember
-	chat_window_node_t chat_window_node_;
+	ao::chat_window_node_t chat_window_node_;
 };

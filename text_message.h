@@ -1,6 +1,6 @@
 #pragma once
 
-class text_message : public message
+class text_message : public ao::message
 {
 public:
 	PCSTR message_body_get();

@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_BREED_STR_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
@@ -91,6 +91,28 @@ namespace isxao_classes
 	static_assert(false, "engine_client_anarchy::get_item_by_template(identity_t, identity_t const &) requires a native function.");
 #endif
 
+	PCSTR engine_client_anarchy::get_item_rarity_str(const DWORD rarity_id)
+	{
+		return isxao_utilities::get_item_rarity_str(rarity_id);
+	}
+
+#ifdef F_GET_NANO_ITEM_USE_NATIVE
+	FUNCTION_AT_ADDRESS(ao::p_nano_item_t engine_client_anarchy::get_nano_item(DWORD), f_get_nano_item)
+#else
+	static_assert(false, "engine_client_anarchy::get_nano_item(DWORD) requires a native function.");
+#endif
+
+	PCSTR engine_client_anarchy::get_nano_school_str(const DWORD school_id)
+	{
+		return isxao_utilities::get_nano_school_str(school_id);
+	}
+
+	PCSTR engine_client_anarchy::get_profession_str(const ao::profession_e prof_id)
+	{
+		return isxao_utilities::get_profession_str(prof_id);
+	}
+
+
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_SEX_STR_USE_NATIVE
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::get_sex_str(gender_e), n3_engine_client_anarchy_t__get_sex_str)
 #else
@@ -100,6 +122,11 @@ namespace isxao_classes
 		return get_sex_str_local(gender_id);
 	}
 #endif
+
+	PCSTR engine_client_anarchy::get_side_str(const ao::side_e side_id)
+	{
+		return isxao_utilities::get_side_str(side_id);
+	}
 
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_TITLE_STR_USE_NATIVE
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::get_title_string(DWORD, DWORD), n3_engine_client_anarchy_t__get_title_str)
@@ -561,6 +588,12 @@ namespace isxao_classes
 	}
 #endif
 
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FULL_PERK_MAP_USE_NATIVE
+	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_full_perk_map(), n3_engine_client_anarchy_t__n3_msg_get_full_perk_map)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_full_perk_map() requires a native function.");
+#endif
+
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GLOBAL_CHARACTER_ROTATION_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
@@ -654,10 +687,10 @@ namespace isxao_classes
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_SPELL_LIST_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(list<DWORD>* engine_client_anarchy::n3_msg_get_nano_spell_list(), n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list)
+	FUNCTION_AT_ADDRESS(std::list<DWORD>* engine_client_anarchy::n3_msg_get_nano_spell_list(), n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list)
 #else
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	list<DWORD>* engine_client_anarchy::n3_msg_get_nano_spell_list()
+	std::list<DWORD>* engine_client_anarchy::n3_msg_get_nano_spell_list()
 	{
 		if (GetGameState() == GAMESTATE_IN_GAME)
 		{
@@ -670,7 +703,7 @@ namespace isxao_classes
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_TEMPLATE_INFO_LIST_1_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(list<nano_template_t>* engine_client_anarchy::n3_msg_get_nano_template_info_list(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1)
+	FUNCTION_AT_ADDRESS(std::list<nano_template_t>* engine_client_anarchy::n3_msg_get_nano_template_info_list(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1)
 #else
 	static_assert(false, "engine_client_anarchy::n3_msg_get_nano_template_info_list(const identity_t &) requires a native function.");
 #endif
@@ -678,10 +711,10 @@ namespace isxao_classes
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_TEMPLATE_INFO_LIST_2_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(list<nano_template_t>* engine_client_anarchy::n3_msg_get_nano_template_info_list(), n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2);
+	FUNCTION_AT_ADDRESS(std::list<nano_template_t>* engine_client_anarchy::n3_msg_get_nano_template_info_list(), n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2);
 #else
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	list<nano_template>* engine_client_anarchy::n3_msg_get_nano_template_info_list()
+	std::list<nano_template>* engine_client_anarchy::n3_msg_get_nano_template_info_list()
 	{
 		if (GetGameState() == GAMESTATE_IN_GAME)
 		{
@@ -806,10 +839,10 @@ namespace isxao_classes
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SPECIAL_ACTION_LIST_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(list<special_action_t>* engine_client_anarchy::n3_msg_get_special_action_list(), n3_engine_client_anarchy_t__n3_msg_get_special_action_list)
+	FUNCTION_AT_ADDRESS(std::list<special_action_t>* engine_client_anarchy::n3_msg_get_special_action_list(), n3_engine_client_anarchy_t__n3_msg_get_special_action_list)
 #else
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	list<special_action_t>* engine_client_anarchy::n3_msg_get_special_action_list()
+	std::list<special_action_t>* engine_client_anarchy::n3_msg_get_special_action_list()
 	{
 		if (GetGameState() == GAMESTATE_IN_GAME)
 		{

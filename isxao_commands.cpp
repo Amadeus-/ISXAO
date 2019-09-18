@@ -5,7 +5,7 @@ namespace isxao_commands
 	
 	bool IsISXAOCommand(PCHAR text)
 	{
-		//char command[MAX_STRING];
+		//char command[MAX_VARSTRING];
 		//strcpy_s(command, sizeof(command), text);
 		//_strlwr_s(command);
 		//if (!strcmp(command, "/activate"))
@@ -76,7 +76,7 @@ namespace isxao_commands
 		//		}
 		//		return 0;
 		//	}
-		//	char second_arg[MAX_STRING]; // Second argument is a string
+		//	char second_arg[MAX_VARSTRING]; // Second argument is a string
 		//	strcpy_s(second_arg, sizeof(second_arg), argv[(1 + begin_inclusive)]);
 		//	_strlwr_s(second_arg);
 		//	if(!strcmp(second_arg, "me")) // Check to see it the target is "me"
@@ -134,390 +134,390 @@ namespace isxao_commands
 		//if (argc > 1)
 		//{
 		//	bool chat_type_used = false;
-		//	char chat_color_name[MAX_STRING] = "ct_system";
-		//	char chat_type[MAX_STRING];
-		//	char first_arg[MAX_STRING];
+		//	char chat_color_name[MAX_VARSTRING] = "ct_system";
+		//	char chat_type[MAX_VARSTRING];
+		//	char first_arg[MAX_VARSTRING];
 		//	if (argv[1][0] == '-' && argc > 2) // check for chat config type
 		//	{
-		//		strcpy_s(first_arg, MAX_STRING, argv[1]);
+		//		strcpy_s(first_arg, MAX_VARSTRING, argv[1]);
 		//		_strlwr_s(first_arg);
 		//		if (!strcmp(first_arg, "-chattype"))
 		//		{
-		//			strcpy_s(chat_type, MAX_STRING, argv[2]);
+		//			strcpy_s(chat_type, MAX_VARSTRING, argv[2]);
 		//			_strlwr_s(chat_type);
 		//			if (!strcmp(chat_type, "black"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "black");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "black");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "green"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "green");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "green");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "silver"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "silver");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "silver");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "lime"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "lime");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "lime");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "gray"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "gray");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "gray");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "olive"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "olive");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "olive");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "white"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "white");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "white");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "yellow"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "yellow");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "yellow");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "maroon"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "maroon");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "maroon");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "navy"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "navy");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "navy");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "red"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "red");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "red");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "blue"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "blue");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "blue");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "purple"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "purple");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "purple");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "teal"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "teal");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "teal");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "fuchsia"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "fuchsia");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "fuchsia");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "aqua"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "aqua");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "aqua");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "error"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ct_error");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ct_error");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "system"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ct_system");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ct_system");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "cmdfeedback"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ct_cmd_feedback");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ct_cmd_feedback");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "otell"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ct_otell");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ct_otell");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "itell"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ct_itell");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ct_itell");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "admin"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_admin");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_admin");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "clan"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_clan");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_clan");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "emote"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_emote");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_emote");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "gm"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_gm");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_gm");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "misc"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_misc");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_misc");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "newbie"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_newbie");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_newbie");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "news"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_news");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_news");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "pgroup"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_pgroup");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_pgroup");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "seekingteam"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_seekingteam");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_seekingteam");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "shout"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_shout");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_shout");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "team"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_team");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_team");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "raid"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_raid");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_raid");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "tell"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_tell");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_tell");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "vicinity"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_vicinity");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_vicinity");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "whisper"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_whisper");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_whisper");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "tower"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_tower");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_tower");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "mypet"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_mypet");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_mypet");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "otherpet"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_otherpet");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_otherpet");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "research"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "ctch_research");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "ctch_research");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "none"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCNoneColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCNoneColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "comm"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCCommColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCCommColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "mehitbynano"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCMeHitByNanoColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCMeHitByNanoColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "otherhitbynano"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCOtherHitByNanoColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCOtherHitByNanoColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "monsterhitme"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCMonsterHitMeColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCMonsterHitMeColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "playerhitme"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCPlayerHitMeColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCPlayerHitMeColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "mehitother"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCMeHitOtherColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCMeHitOtherColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "otherhitothermypet"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCOtherHitOtherMyPetColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCOtherHitOtherMyPetColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "mehealed"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCMeHealedColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCMeHealedColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "megotxp"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCMeGotXpColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCMeGotXpColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "mecastnano"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCMeCastNano");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCMeCastNano");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "skill"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCSkillColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCSkillColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "showfullname"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCShowFullNameColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCShowFullNameColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "link"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCLinkColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCLinkColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "tooltip"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCToolTipColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCToolTipColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "cash"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCCashColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCCashColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "infoheadline"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCInfoHeadline");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCInfoHeadline");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "infoheader"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCInfoHeader");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCInfoHeader");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "infotext"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCInfoText");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCInfoText");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "infotextbold"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCInfoTextBold");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCInfoTextBold");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "text"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCCCTextColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCCCTextColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "header"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCCCHeaderColor");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCCCHeaderColor");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "npcchat"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCNPCChatText");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCNPCChatText");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "npcooc"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCNPCOOCText");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCNPCOOCText");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "npcemote"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCNPCChatEmote");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCNPCChatEmote");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "npcsystem"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCNPCChatSystem");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCNPCChatSystem");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "npcquestion"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCNPCChatQuestion");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCNPCChatQuestion");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "npcdescription"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCNPCChatDescription");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCNPCChatDescription");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "npctrade"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCNPCChatTrade");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCNPCChatTrade");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "itemunknown"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCItemUnknown");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCItemUnknown");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "itemtrash"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCItemTrash");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCItemTrash");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "itemnormal"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCItemNormal");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCItemNormal");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "itemexotic"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCItemExotic");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCItemExotic");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "itemquest"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCItemQuest");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCItemQuest");
 		//				chat_type_used = true;
 		//			}
 		//			else if (!strcmp(chat_type, "itemsocial"))
 		//			{
-		//				strcpy_s(chat_color_name, MAX_STRING, "CCItemSocial");
+		//				strcpy_s(chat_color_name, MAX_VARSTRING, "CCItemSocial");
 		//				chat_type_used = true;
 		//			}
 		//		}
@@ -577,7 +577,7 @@ namespace isxao_commands
 		//	{
 		//		if (IsNumber(argv[0 + begin_inclusive]))
 		//			return 0;
-		//		char first_arg[MAX_STRING];
+		//		char first_arg[MAX_VARSTRING];
 		//		strcpy_s(first_arg, sizeof(first_arg), argv[0 + begin_inclusive]);
 		//		_strlwr_s(first_arg);
 		//		if(!strcmp(first_arg, "off"))
@@ -619,8 +619,8 @@ namespace isxao_commands
 		//	}
 		//	if (argc == (1 + begin_inclusive) && !IsNumber(argv[(0 + begin_inclusive)]))
 		//	{
-		//		char name[MAX_STRING];
-		//		char search_name[MAX_STRING];
+		//		char name[MAX_VARSTRING];
+		//		char search_name[MAX_VARSTRING];
 		//		strcpy_s(search_name, sizeof(search_name), argv[(0 + begin_inclusive)]);
 		//		_strlwr_s(search_name);
 		//		std::vector<DWORD> v;
@@ -663,7 +663,7 @@ namespace isxao_commands
 		//		nano_identity.Id = nano_id;
 		//		NanoItem* pNanoItem = reinterpret_cast<NanoItem*>(isxao_utilities::GetNanoItem(nano_id));		
 		//		bool valid_target = false;
-		//		char second_arg[MAX_STRING];
+		//		char second_arg[MAX_VARSTRING];
 		//		strcpy_s(second_arg, sizeof(second_arg), argv[(1 + begin_inclusive)]);
 		//		_strlwr_s(second_arg);
 		//		identity_t target_identity;
@@ -688,8 +688,8 @@ namespace isxao_commands
 		//	{
 		//		identity_t nano_identity;
 		//		ZeroMemory(&nano_identity, sizeof(identity_t));
-		//		char name[MAX_STRING];
-		//		char search_name[MAX_STRING];
+		//		char name[MAX_VARSTRING];
+		//		char search_name[MAX_VARSTRING];
 		//		strcpy_s(search_name, sizeof(search_name), argv[(0 + begin_inclusive)]);
 		//		_strlwr_s(search_name);
 		//		std::vector<DWORD> v;
@@ -719,8 +719,8 @@ namespace isxao_commands
 		//	{
 		//		identity_t nano_identity;
 		//		ZeroMemory(&nano_identity, sizeof(identity_t));
-		//		char name[MAX_STRING];
-		//		char search_name[MAX_STRING];
+		//		char name[MAX_VARSTRING];
+		//		char search_name[MAX_VARSTRING];
 		//		strcpy_s(search_name, sizeof(search_name), argv[(0 + begin_inclusive)]);
 		//		_strlwr_s(search_name);
 		//		std::vector<DWORD> v;
@@ -739,7 +739,7 @@ namespace isxao_commands
 		//		if (nano_identity.Id == 0)
 		//			return 0;
 		//		bool valid_target = false;
-		//		char second_arg[MAX_STRING];
+		//		char second_arg[MAX_VARSTRING];
 		//		strcpy_s(second_arg, sizeof(second_arg), argv[(1 + begin_inclusive)]);
 		//		_strlwr_s(second_arg);
 		//		identity_t target_identity;
@@ -778,8 +778,8 @@ namespace isxao_commands
 		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(action_identity);
 		//			return 1;
 		//		}
-		//		char name[MAX_STRING]; // ActionName
-		//		char search_name[MAX_STRING];
+		//		char name[MAX_VARSTRING]; // ActionName
+		//		char search_name[MAX_VARSTRING];
 		//		strcpy_s(search_name, sizeof(search_name), argv[1]);
 		//		_strlwr_s(search_name);
 		//		std::vector<SpecialActionTemplate*> v;
@@ -858,8 +858,8 @@ namespace isxao_commands
 		//		}
 		//		if(!IsNumber(argv[1]) && IsNumber(argv[2])) // ActionName, TargetId
 		//		{
-		//			char name[MAX_STRING]; // ActionName
-		//			char search_name[MAX_STRING];
+		//			char name[MAX_VARSTRING]; // ActionName
+		//			char search_name[MAX_VARSTRING];
 		//			strcpy_s(search_name, sizeof(search_name), argv[1]);
 		//			_strlwr_s(search_name);
 		//			std::vector<SpecialActionTemplate*> v;
@@ -904,8 +904,8 @@ namespace isxao_commands
 		//		}
 		//		if (!IsNumber(argv[1]) && !IsNumber(argv[2])) // ActionName, TargetName
 		//		{
-		//			char name[MAX_STRING]; // ActionName
-		//			char search_name[MAX_STRING];
+		//			char name[MAX_VARSTRING]; // ActionName
+		//			char search_name[MAX_VARSTRING];
 		//			strcpy_s(search_name, sizeof(search_name), argv[1]);
 		//			_strlwr_s(search_name);
 		//			std::vector<SpecialActionTemplate*> v;
@@ -960,15 +960,15 @@ namespace isxao_commands
 		//{
 		//	if (argc == 2 && !IsNumber(argv[1])) // Check to see if a name was provided
 		//	{
-		//		char search_name[MAX_STRING];
-		//		strcpy_s(search_name, MAX_STRING, argv[1]);
+		//		char search_name[MAX_VARSTRING];
+		//		strcpy_s(search_name, MAX_VARSTRING, argv[1]);
 		//		_strlwr_s(search_name);
 		//		std::vector<actor*> v;
 		//		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		//		for (auto it = v.begin(); it != v.end(); ++it)
 		//		{
-		//			char name[MAX_STRING];
-		//			strcpy_s(name, MAX_STRING, (*it)->GetName());
+		//			char name[MAX_VARSTRING];
+		//			strcpy_s(name, MAX_VARSTRING, (*it)->GetName());
 		//			_strlwr_s(name);
 		//			if (strstr(name, search_name))
 		//			{
@@ -1034,8 +1034,8 @@ namespace isxao_commands
 		//	}
 		//	return 0;
 		//}
-		//char arg[MAX_STRING];
-		//strcpy_s(arg, MAX_STRING, argv[1]);
+		//char arg[MAX_VARSTRING];
+		//strcpy_s(arg, MAX_VARSTRING, argv[1]);
 		//_strlwr_s(arg);		
 		//if (!strcmp(arg, "me")) // Check for me
 		//{
@@ -1079,8 +1079,8 @@ namespace isxao_commands
 		//}
 		//for (auto it = v.begin(); it != v.end(); ++it) // Assume it is a name
 		//{
-		//	char name[MAX_STRING];
-		//	strcpy_s(name, MAX_STRING, (*it)->GetName());
+		//	char name[MAX_VARSTRING];
+		//	strcpy_s(name, MAX_VARSTRING, (*it)->GetName());
 		//	_strlwr_s(name);
 		//	if (strstr(name, arg))
 		//	{

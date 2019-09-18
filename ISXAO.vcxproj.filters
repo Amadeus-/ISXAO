@@ -442,13 +442,7 @@
     <ClInclude Include="isxao_classes.h">
       <Filter>Header Files\Base\Internal</Filter>
     </ClInclude>
-    <ClInclude Include="isxao_data.h">
-      <Filter>Header Files\Base\Internal</Filter>
-    </ClInclude>
     <ClInclude Include="isxao_detours.h">
-      <Filter>Header Files\Base\Internal</Filter>
-    </ClInclude>
-    <ClInclude Include="isxao_enums.h">
       <Filter>Header Files\Base\Internal</Filter>
     </ClInclude>
     <ClInclude Include="isxao_game.h">
@@ -576,6 +570,15 @@
     </ClInclude>
     <ClInclude Include="isxao_native_defines.h">
       <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="ao_classes.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ao_structs.h">
+      <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ao_enums.h">
+      <Filter>Header Files\Base\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 	bank_entry_t bank_entry::get_bank_entry_data() const

@@ -1,12 +1,14 @@
 #pragma once
 
-class WeaponHolder
+// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
+class weapon_holder
 {
 public:
-	AOLIB_OBJECT weapon_holder_t GetWeaponHolderData() const;
-	AOLIB_OBJECT DWORD GetWeaponItems(std::map<DWORD, p_weapon_item_t>&) const;
-	AOLIB_OBJECT identity_t GetWeaponTarget() const;
-	AOLIB_OBJECT bool IsAttacking() const;
+	ao::weapon_holder_t get_weapon_holder_data() const;
+	DWORD get_weapon_items(std::map<DWORD, ao::p_weapon_item_t>&) const;
+	ao::identity_t get_weapon_target() const;
+	bool is_attacking() const;
 private:
-	weapon_holder_t weapon_holder_;
+	// ReSharper disable once CppUninitializedNonStaticDataMember
+	ao::weapon_holder_t weapon_holder_;
 };

@@ -1,14 +1,16 @@
 #pragma once
 
-class DummyItemBase
+// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
+class dummy_item_base
 {
 public:
-	AOLIB_OBJECT PVOID GetData();
-	AOLIB_OBJECT p_dummy_item_base_t GetDummyItemBaseData();
-	AOLIB_OBJECT PCSTR GetDescription();
-	AOLIB_OBJECT identity_t GetIdentity();
-	AOLIB_OBJECT PCSTR GetName();
-	AOLIB_OBJECT identity_t GetParentIdentity();
+	PVOID get_data();
+	ao::p_dummy_item_base_t get_dummy_item_base_data();
+	PCSTR get_description();
+	ao::identity_t get_identity();
+	PCSTR get_name();
+	ao::identity_t get_parent_identity();
 private:
-	dummy_item_base_t dummy_item_base_;
+	// ReSharper disable once CppUninitializedNonStaticDataMember
+	ao::dummy_item_base_t dummy_item_base_;
 };

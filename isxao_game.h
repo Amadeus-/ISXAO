@@ -467,6 +467,11 @@ constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_formula_radius_mang
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_formula_radius_pattern = static_cast<char*>(
 	"55 8B EC 8B 45 08 81 38 1B CF 00 00 75 ?? FF 70 04 E8 ?? ?? ?? ?? 59 85 C0 74 ?? 8B 80 B8 00 00 00");
 
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_full_perk_map_mangled_name = static_cast<char*>(
+	"?N3Msg_GetFullPerkMap@n3EngineClientAnarchy_t@@QBEABV?$vector@VPerk_t@@V?$allocator@VPerk_t@@@std@@@std@@XZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_full_perk_map_pattern = static_cast<char*>(
+	"E8 ?? ?? ?? ?? 83 C0 34 C3");
+
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_global_character_position_mangled_name = static_cast<char*>(
 	"?N3Msg_GetGlobalCharacterPosition@n3EngineClientAnarchy_t@@QAEXAAVVector3_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_global_character_position_pattern = static_cast<char*>(

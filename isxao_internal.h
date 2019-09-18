@@ -26,9 +26,9 @@ namespace isxao_internal
 		DWORD64 not_id;
 		DWORD from_actor_id;
 		FLOAT radius;
-		char name[MAX_STRING];
-		char breed[MAX_STRING];
-		char profession[MAX_STRING];
+		char name[MAX_VARSTRING];
+		char breed[MAX_VARSTRING];
+		char profession[MAX_VARSTRING];
 		BOOL is_healer;
 		BOOL is_tank;
 		BOOL is_support;
@@ -64,8 +64,8 @@ namespace isxao_internal
 	//	DWORD MaxLevel;
 	//	DWORD64 Id;
 	//	DWORD64 NotId;
-	//	char Profession[MAX_STRING];
-	//	char Breed[MAX_STRING];
+	//	char Profession[MAX_VARSTRING];
+	//	char Breed[MAX_VARSTRING];
 	//	float MinRadius;
 	//	float MaxRadius;
 	//	vector3_t Range;
@@ -170,7 +170,7 @@ namespace isxao_internal
 
 	typedef struct _GROUPMESSAGEINFO
 	{
-		identity_t SenderIdentity;
+		ao::identity_t SenderIdentity;
 		std::string SenderName;
 		std::string ChatChannel;
 		std::string Message;
@@ -188,7 +188,7 @@ namespace isxao_internal
 
 	typedef struct _PRIVATEMESSAGEINFO
 	{
-		identity_t SenderIdentity;
+		ao::identity_t SenderIdentity;
 		std::string SenderName;
 		std::string Message;
 

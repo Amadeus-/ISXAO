@@ -1,6 +1,6 @@
 #pragma once
 
-class player : public actor
+class player : public ao::actor
 {
 public:
 };

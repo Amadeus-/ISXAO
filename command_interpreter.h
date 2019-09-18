@@ -1,11 +1,13 @@
 #pragma once
 
-class CommandInterpreter
+// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
+class command_interpreter
 {
 public:
-	AOLIB_OBJECT command_interpreter_t GetCommandInterpreterData() const;
-	AOLIB_OBJECT bool ParseText(string&);
+	ao::command_interpreter_t get_command_interpreter_data() const;
+	bool ParseText(string&);
 private:
-	bool ParseText(chat_window_node*, string&);
-	command_interpreter_t command_interpreter_;
+	bool ParseText(ao::chat_window_node*, string&);
+	// ReSharper disable once CppUninitializedNonStaticDataMember
+	ao::command_interpreter_t command_interpreter_;
 };

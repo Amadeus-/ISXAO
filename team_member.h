@@ -1,6 +1,6 @@
 #pragma once
 
-class team_member : public player
+class team_member : public ao::player
 {
 public:
 };

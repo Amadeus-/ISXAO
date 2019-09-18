@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 	DWORD stat_holder::get_skill_locks(std::vector<action_lock*> &v) const

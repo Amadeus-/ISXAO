@@ -1,167 +1,167 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 	
-	bool NanoItem::CanApplyOnFightingTarget()
+	bool nano_item::can_apply_on_fighting_target()
 	{
-		return (GetNanoCanFlags() & ICF_APPLY_ON_FIGHTING_TARGET) == 1;
+		return (get_nano_can_flags() & ICF_APPLY_ON_FIGHTING_TARGET) == 1;
 	}
 
-	bool NanoItem::CanApplyOnFriendly()
+	bool nano_item::can_apply_on_friendly()
 	{
-		return (GetNanoCanFlags() & ICF_APPLY_ON_FRIENDLY) == 1;
+		return (get_nano_can_flags() & ICF_APPLY_ON_FRIENDLY) == 1;
 	}
 
-	bool NanoItem::CanApplyOnHostile()
+	bool nano_item::can_apply_on_hostile()
 	{
-		return (GetNanoCanFlags() & ICF_APPLY_ON_HOSTILE) == 1;
+		return (get_nano_can_flags() & ICF_APPLY_ON_HOSTILE) == 1;
 	}
 
-	bool NanoItem::CanApplyOnSelf()
+	bool nano_item::can_apply_on_self()
 	{
-		return (GetNanoCanFlags() & ICF_APPLY_ON_SELF) == 1;
+		return (get_nano_can_flags() & ICF_APPLY_ON_SELF) == 1;
 	}
 
-	void NanoItem::Cast()
+	void nano_item::cast()
 	{
 		if(P_SELECTION_INDICATOR)
-			P_ENGINE_CLIENT_ANARCHY->get_client_char()->cast_nano_spell(GetNanoIdentity(), P_SELECTION_INDICATOR->identity);
+			P_ENGINE_CLIENT_ANARCHY->get_client_char()->cast_nano_spell(get_nano_identity(), P_SELECTION_INDICATOR->identity);
 	}
 
-	float NanoItem::GetAttackDelay()
+	float nano_item::get_attack_delay()
 	{
-		return GetSkill(ST_ITEMDELAY) / 100.0f;
+		return get_skill(ST_ITEMDELAY) / 100.0f;
 	}
 
-	DWORD NanoItem::GetAttackRange()
+	DWORD nano_item::get_attack_range()
 	{
-		return GetSkill(ST_ATTACKRANGE);
+		return get_skill(ST_ATTACKRANGE);
 	}
 
-	float NanoItem::GetCooldownRemaining()
+	float nano_item::get_cooldown_remaining()
 	{
 		DWORD a;
 		DWORD b;
-		auto c = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_formula_progress(GetNanoIdentity(), a, b);
+		auto c = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_formula_progress(get_nano_identity(), a, b);
 		return float((1.0 - c)*b);
 	}
 
-	double NanoItem::GetFormulaProgress(DWORD &a, DWORD &b)
+	double nano_item::get_formula_progress(DWORD &a, DWORD &b)
 	{
-		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_formula_progress(GetNanoIdentity(), a, b);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_formula_progress(get_nano_identity(), a, b);
 	}
 
-	DWORD NanoItem::GetFormulaRadius()
+	DWORD nano_item::get_formula_radius()
 	{
-		return GetNanoItemData()->radius;
+		return get_nano_item_data()->radius;
 	}
 
-	DWORD NanoItem::GetNanoCanFlags()
+	DWORD nano_item::get_nano_can_flags()
 	{
-		return GetSkill(ST_CAN);
+		return get_skill(ST_CAN);
 	}
 
-	identity_t NanoItem::GetNanoIdentity()
+	identity_t nano_item::get_nano_identity()
 	{
-		return GetNanoItemData()->nano_identity;
+		return get_nano_item_data()->nano_identity;
 	}
 
-	p_nano_item_t NanoItem::GetNanoItemData()
+	p_nano_item_t nano_item::get_nano_item_data()
 	{
-		return p_nano_item_t(GetData());
+		return p_nano_item_t(get_data());
 	}
 
-	DWORD NanoItem::GetNCUCost()
+	DWORD nano_item::get_ncu_cost()
 	{
-		return GetSkill(ST_LEVEL);
+		return get_skill(ST_LEVEL);
 	}
 
-	DWORD NanoItem::GetNanoNoneFlags()
+	DWORD nano_item::get_nano_none_flags()
 	{
-		return GetSkill(ST_FLAGS);
+		return get_skill(ST_FLAGS);
 	}
 
-	DWORD NanoItem::GetNanoPoints()
+	DWORD nano_item::get_nano_points()
 	{
-		return GetSkill(ST_NANOPOINTS);
+		return get_skill(ST_NANOPOINTS);
 	}
 
-	DWORD NanoItem::GetNanoSchool()
+	DWORD nano_item::get_nano_school()
 	{
-		return GetSkill(ST_SCHOOL);
+		return get_skill(ST_SCHOOL);
 	}
 
-	DWORD NanoItem::GetNanoStrain()
+	DWORD nano_item::get_nano_strain()
 	{
-		return GetSkill(ST_METATYPE);
+		return get_skill(ST_METATYPE);
 	}
 
-	float NanoItem::GetRechargeDelay()
+	float nano_item::get_recharge_delay()
 	{
-		return GetSkill(ST_RECHARGEDELAY) / 100.0f;
+		return get_skill(ST_RECHARGEDELAY) / 100.0f;
 	}
 
-	LONG NanoItem::GetSkill(DWORD stat)
+	LONG nano_item::get_skill(DWORD stat)
 	{
 		identity_t dummy_identity;
 		ZeroMemory(&dummy_identity, sizeof(identity_t));
-		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(GetNanoIdentity(), stat, 2, dummy_identity);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(get_nano_identity(), stat, 2, dummy_identity);
 	}
 
-	DWORD NanoItem::GetStackingOrder()
+	DWORD nano_item::get_stacking_order()
 	{
-		return GetSkill(ST_STACKINGORDER);
+		return get_skill(ST_STACKINGORDER);
 	}
 
-	bool NanoItem::IsReady()
+	bool nano_item::is_ready()
 	{
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_IsFormulaReady(GetNanoIdentity());
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_IsFormulaReady(get_nano_identity());
 	}
 
-	bool NanoItem::IsBuff()
+	bool nano_item::is_buff()
 	{
-		return (GetNanoNoneFlags() & NNF_IS_BUFF) == 1;
+		return (get_nano_none_flags() & NNF_IS_BUFF) == 1;
 	}
 
-	bool NanoItem::IsHostile()
+	bool nano_item::is_hostile()
 	{
-		return (GetNanoNoneFlags() & NNF_IS_HOSTILE) == 1;
+		return (get_nano_none_flags() & NNF_IS_HOSTILE) == 1;
 	}
 
-	bool NanoItem::IsNanoSelfOnly()
+	bool nano_item::is_nano_self_only()
 	{
-		return GetNanoItemData()->is_nano_self_only == 1;
+		return get_nano_item_data()->is_nano_self_only == 1;
 	}
 
-	bool NanoItem::IsNoResistCannotFumble()
+	bool nano_item::is_no_resist_cannot_fumble()
 	{
-		return (GetNanoNoneFlags() & NNF_NO_RESIST_CANNOT_FUMBLE) == 1;
+		return (get_nano_none_flags() & NNF_NO_RESIST_CANNOT_FUMBLE) == 1;
 	}
 
-	bool NanoItem::IsShapeChangeNano()
+	bool nano_item::is_shape_change_nano()
 	{
-		return (GetNanoNoneFlags() & NNF_IS_SHAPE_CHANGE_NANO) == 1;
+		return (get_nano_none_flags() & NNF_IS_SHAPE_CHANGE_NANO) == 1;
 	}
 
-	bool NanoItem::IsTeamNano()
+	bool nano_item::is_team_nano()
 	{
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_IsTeamNano(GetNanoIdentity());
+		return P_ENGINE_CLIENT_ANARCHY->N3Msg_IsTeamNano(get_nano_identity());
 	}
 
-	bool NanoItem::WillBreakOnAttack()
+	bool nano_item::will_break_on_attack()
 	{
-		return (GetNanoNoneFlags() & NNF_BREAK_ON_ATTACK) == 1;
+		return (get_nano_none_flags() & NNF_BREAK_ON_ATTACK) == 1;
 	}
 
-	bool NanoItem::WillBreakOnDebuff()
+	bool nano_item::will_break_on_debuff()
 	{
-		return (GetNanoNoneFlags() & NNF_BREAK_ON_DEBUFF) == 1;
+		return (get_nano_none_flags() & NNF_BREAK_ON_DEBUFF) == 1;
 	}
 
-	bool NanoItem::WillBreakOnSpellAttack()
+	bool nano_item::will_break_on_spell_attack()
 	{
-		return (GetNanoNoneFlags() * NNF_BREAK_ON_SPELL_ATTACK) == 1;
+		return (get_nano_none_flags() * NNF_BREAK_ON_SPELL_ATTACK) == 1;
 	}
 
 }

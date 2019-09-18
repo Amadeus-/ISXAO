@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 	
 	chat_window_controller_t chat_window_controller::get_chat_window_controller_data() const

@@ -1,108 +1,108 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
-	bool SpecialActionItem::CanApplyOnFightingTarget()
+	bool special_action_item::can_apply_on_fighting_target()
 	{
-		return (GetSkill(ST_CAN) & ICF_APPLY_ON_FIGHTING_TARGET) == 1;
+		return (get_skill(ST_CAN) & ICF_APPLY_ON_FIGHTING_TARGET) == 1;
 	}
 
-	bool SpecialActionItem::CanApplyOnFriendly()
+	bool special_action_item::can_apply_on_friendly()
 	{
-		return (GetSkill(ST_CAN) & ICF_APPLY_ON_FRIENDLY) == 1;
+		return (get_skill(ST_CAN) & ICF_APPLY_ON_FRIENDLY) == 1;
 	}
 
-	bool SpecialActionItem::CanApplyOnHostile()
+	bool special_action_item::can_apply_on_hostile()
 	{
-		return (GetSkill(ST_CAN) & ICF_APPLY_ON_HOSTILE) == 1;
+		return (get_skill(ST_CAN) & ICF_APPLY_ON_HOSTILE) == 1;
 	}
 
-	bool SpecialActionItem::CanApplyOnSelf()
+	bool special_action_item::can_apply_on_self()
 	{
-		return (GetSkill(ST_CAN) & ICF_APPLY_ON_SELF) == 1;
+		return (get_skill(ST_CAN) & ICF_APPLY_ON_SELF) == 1;
 	}
 
-	bool SpecialActionItem::CanUse()
+	bool special_action_item::can_use()
 	{
-		return (GetSkill(ST_CAN) & ICF_USE) == 1;
+		return (get_skill(ST_CAN) & ICF_USE) == 1;
 	}
 
-	float SpecialActionItem::GetAttackDelay()
+	float special_action_item::get_attack_delay()
 	{
-		return float(GetSkill(ST_ITEMDELAY) / 100.0f);
+		return float(get_skill(ST_ITEMDELAY) / 100.0f);
 	}
 
-	DWORD SpecialActionItem::GetRange()
+	DWORD special_action_item::get_range()
 	{
-		return GetSkill(ST_ATTACKRANGE);
+		return get_skill(ST_ATTACKRANGE);
 	}
 
-	LONG SpecialActionItem::GetSkill(DWORD stat)
+	LONG special_action_item::get_skill(DWORD stat)
 	{
 		identity_t dummy_identity;
 		ZeroMemory(&dummy_identity, sizeof(identity_t));
-		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(GetIdentity(), stat, 2, dummy_identity);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(get_identity(), stat, 2, dummy_identity);
 	}
 
-	bool SpecialActionItem::IsBuff()
+	bool special_action_item::is_buff()
 	{
-		return (GetSkill(ST_FLAGS) & NNF_IS_BUFF) == 1;
+		return (get_skill(ST_FLAGS) & NNF_IS_BUFF) == 1;
 	}
 
-	bool SpecialActionItem::IsGeneralAction()
+	bool special_action_item::is_general_action()
 	{
-		return GetSkill(ST_ACTIONCATEGORY) == 2;
+		return get_skill(ST_ACTIONCATEGORY) == 2;
 	}
 
-	bool SpecialActionItem::IsHostile()
+	bool special_action_item::is_hostile()
 	{
-		return (GetSkill(ST_FLAGS) & NNF_IS_HOSTILE) == 1;
+		return (get_skill(ST_FLAGS) & NNF_IS_HOSTILE) == 1;
 	}
 
-	bool SpecialActionItem::IsNoRemoveNoNCUIsFriendly()
+	bool special_action_item::is_no_remove_no_ncu_is_friendly()
 	{
-		return (GetSkill(ST_FLAGS) & NNF_NO_REMOVE_NO_NCU_IS_FRIENDLY) == 1;
+		return (get_skill(ST_FLAGS) & NNF_NO_REMOVE_NO_NCU_IS_FRIENDLY) == 1;
 	}
 
-	bool SpecialActionItem::IsNoResist()
+	bool special_action_item::is_no_resist()
 	{
-		return (GetSkill(ST_FLAGS) & NNF_NO_RESIST) == 1;
+		return (get_skill(ST_FLAGS) & NNF_NO_RESIST) == 1;
 	}
 
-	bool SpecialActionItem::IsNoResistNoFumble()
+	bool special_action_item::is_no_resist_no_fumble()
 	{
-		return (GetSkill(ST_FLAGS) & NNF_NO_RESIST_CANNOT_FUMBLE) == 1;
+		return (get_skill(ST_FLAGS) & NNF_NO_RESIST_CANNOT_FUMBLE) == 1;
 	}
 
-	bool SpecialActionItem::IsNotRemovable()
+	bool special_action_item::is_not_removable()
 	{
-		return (GetSkill(ST_FLAGS) & NNF_NOT_REMOVABLE) == 1;
+		return (get_skill(ST_FLAGS) & NNF_NOT_REMOVABLE) == 1;
 	}
 
-	bool SpecialActionItem::IsPerk()
+	bool special_action_item::is_perk()
 	{
-		return GetSkill(ST_ACTIONCATEGORY) == 1;
+		return get_skill(ST_ACTIONCATEGORY) == 1;
 	}
 
-	bool SpecialActionItem::IsSpecialAction()
+	bool special_action_item::is_special_action()
 	{
-		return GetSkill(ST_ACTIONCATEGORY) == 3;
+		return get_skill(ST_ACTIONCATEGORY) == 3;
 	}
 
-	bool SpecialActionItem::WillBreakOnAttack()
+	bool special_action_item::will_break_on_attack()
 	{
-		return (GetSkill(ST_FLAGS) & NNF_BREAK_ON_ATTACK) == 1;
+		return (get_skill(ST_FLAGS) & NNF_BREAK_ON_ATTACK) == 1;
 	}
 
-	bool SpecialActionItem::WillBreakOnDebuff()
+	bool special_action_item::will_break_on_debuff()
 	{
-		return (GetSkill(ST_FLAGS) & NNF_BREAK_ON_DEBUFF) == 1;
+		return (get_skill(ST_FLAGS) & NNF_BREAK_ON_DEBUFF) == 1;
 	}
 
-	bool SpecialActionItem::WillBreakOnSpellAttack()
+	bool special_action_item::will_break_on_spell_attack()
 	{
-		return (GetSkill(ST_FLAGS) & NNF_BREAK_ON_SPELL_ATTACK) == 1;
+		return (get_skill(ST_FLAGS) & NNF_BREAK_ON_SPELL_ATTACK) == 1;
 	}
 
 

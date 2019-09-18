@@ -8,13 +8,13 @@ bool SpecialActionTemplateType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER
 		return false;
 	__try
 	{
-#define P_SPECIAL_ACTION_TEMPLATE ((special_action_template*)ObjectData.Ptr)
+#define P_SPECIAL_ACTION_TEMPLATE ((ao::special_action_template*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (SpecialActionTemplateTypeMembers(Member->ID))
 		{		
 		case Identity:
 		{
-			identity_t id = P_SPECIAL_ACTION_TEMPLATE->get_identity();
-			p_identity_t pId = p_identity_t(pISInterface->GetTempBuffer(sizeof(identity_t), &id));
+			auto id = P_SPECIAL_ACTION_TEMPLATE->get_identity();
+			const auto pId = ao::p_identity_t(pISInterface->GetTempBuffer(sizeof(ao::identity_t), &id));
 			Object.Ptr = pId;
 			Object.Type = pIdentityType;
 			break;
@@ -57,7 +57,7 @@ bool SpecialActionTemplateType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHO
 		return false;
 	__try
 	{
-#define P_SPECIAL_ACTION_TEMPLATE ((special_action_template*)ObjectData.Ptr)
+#define P_SPECIAL_ACTION_TEMPLATE ((ao::special_action_template*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (SpecialActionTemplateTypeMethods(pMethod->ID))
 		{
 		case Use:
@@ -82,7 +82,7 @@ bool SpecialActionTemplateType::ToText(LSOBJECTDATA ObjectData, char *buf, unsig
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define P_SPECIAL_ACTION_TEMPLATE ((special_action_template*)ObjectData.Ptr)
+#define P_SPECIAL_ACTION_TEMPLATE ((ao::special_action_template*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 	sprintf_s(buf, buflen, "%d", P_SPECIAL_ACTION_TEMPLATE->get_identity().id);
 #undef P_SPECIAL_ACTION_TEMPLATE
 

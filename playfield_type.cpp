@@ -8,18 +8,18 @@ bool PlayfieldType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 		return false;
 	__try
 	{
-#define pPlayfield ((PlayfieldAnarchy*)ObjectData.Ptr)
+#define P_PLAYFIELD ((ao::PlayfieldAnarchy*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (PlayfieldTypeMembers(Member->ID))
 		{
 		case Name:
 		{
-			Object.ConstCharPtr = pPlayfield->GetPlayfieldName();
+			Object.ConstCharPtr = P_PLAYFIELD->GetPlayfieldName();
 			Object.Type = pStringType;
 			break;
 		}
 		case ID:
 		{
-			Object.DWord = pPlayfield->GetPlayfieldInstance();
+			Object.DWord = P_PLAYFIELD->GetPlayfieldInstance();
 			Object.Type = pUintType;
 			break;
 		}
@@ -41,8 +41,8 @@ bool PlayfieldType::ToText(LSOBJECTDATA ObjectData, char* buf, unsigned buflen)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define pPlayfield ((PlayfieldAnarchy*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%s", pPlayfield->GetPlayfieldName());
+#define P_PLAYFIELD ((ao::PlayfieldAnarchy*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
+	sprintf_s(buf, buflen, "%s", P_PLAYFIELD->GetPlayfieldName());
 #undef pIdentity
 	return true;
 }

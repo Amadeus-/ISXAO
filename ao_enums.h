@@ -1027,11 +1027,11 @@ enum SpecialAction_e : DWORD
 
 #pragma region Professions
 
-enum Profession_e
+enum profession_e
 {
 	PT_NONE = 0,
 	PT_SOLDIER = 1,
-	PT_MARTIALARTIST = 2,
+	PT_MARTIAL_ARTIST = 2,
 	PT_ENGINEER = 3,
 	PT_FIXER = 4,
 	PT_AGENT = 5,
@@ -1040,8 +1040,8 @@ enum Profession_e
 	PT_BUREAUCRAT = 8,
 	PT_ENFORCER = 9,
 	PT_DOCTOR = 10,
-	PT_NANOTECHNICIAN = 11,
-	PT_METAPHYSICIST = 12,
+	PT_NANO_TECHNICIAN = 11,
+	PT_META_PHYSICIST = 12,
 	PT_MONSTER = 13,
 	PT_KEEPER = 14,
 	PT_SHADE = 15
@@ -1124,7 +1124,7 @@ enum social_action_e
 
 #pragma region PetCommands
 
-enum PetCommand_e
+enum pet_command_e
 {
 	PC_FOLLOW = 1,
 	PC_BEHIND = 2,

@@ -1,9 +1,9 @@
 #pragma once
 
-class look_at_iir : public info_item_remote
+class look_at_iir : public ao::info_item_remote
 {
 public:
-	AOLIB_OBJECT look_at_iir(const identity_t*, const identity_t*, int);
+	look_at_iir(const ao::identity_t*, const ao::identity_t*, int);
 private:
-	look_at_iir_t look_at_iir_;
+	ao::look_at_iir_t look_at_iir_;
 };

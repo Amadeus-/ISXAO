@@ -1,49 +1,49 @@
 #pragma once
-#include <windows.h>
+#include <Windows.h>
+#include "Psapi.h"
 #include <algorithm>
+#include <functional>
+#include <cassert>
+
 #include <cctype>
+#include <cinttypes>
+
 #include <string>
 #include <vector>
 #include <list>
 #include <map>
-#include "psapi.h"
+#include <concurrent_queue.h>
+
 #define _USE_MATH_DEFINES
 #define _USE_MATH_CONSTANTS
 #include <cmath>
-#include <cinttypes>
-#include <math.h>
-#include <cassert>
-#include <functional>
-#include <concurrent_queue.h>
-
-// using namespace std;
 
 #include "isxao_game.h"
 
 #ifdef AOLIB_EXPORTS
-#define AOLIB_API extern "C" __declspec(dllexport)
-#define AOLIB_VAR extern "C" __declspec(dllexport)
-#define AOLIB_OBJECT __declspec(dllexport)
+#define AOLIB_API extern "C" __declspec(dllexport)  // NOLINT(cppcoreguidelines-macro-usage)
+#define AOLIB_VAR extern "C" __declspec(dllexport)  // NOLINT(cppcoreguidelines-macro-usage)
+#define AOLIB_OBJECT __declspec(dllexport)  // NOLINT(cppcoreguidelines-macro-usage)
 #else
-#define AOLIB_API extern "C" __declspec(dllimport)
-#define AOLIB_VAR extern "C" __declspec(dllimport)
-#define AOLIB_OBJECT __declspec(dllimport)
+#define AOLIB_API extern "C" __declspec(dllimport)  // NOLINT(cppcoreguidelines-macro-usage)
+#define AOLIB_VAR extern "C" __declspec(dllimport)  // NOLINT(cppcoreguidelines-macro-usage)
+#define AOLIB_OBJECT __declspec(dllimport)  // NOLINT(cppcoreguidelines-macro-usage)
 #endif
 
-#define ISINDEX() (argc>0)
-#define ISNUMBER() (IsNumber(argv[0]))
-#define GETNUMBER() (atoi(argv[0]))
-#define GETFIRST()    argv[0]
-#define GET_VARIABLE_NAME(Variable) (#Variable)
+#define IS_INDEX() (argc>0)  // NOLINT(cppcoreguidelines-macro-usage)
+#define IS_NUMBER() (IsNumber(argv[0]))  // NOLINT(cppcoreguidelines-macro-usage)
+#define GET_NUMBER() (atoi(argv[0]))  // NOLINT(cppcoreguidelines-macro-usage)
+#define GET_FIRST()    argv[0]  // NOLINT(cppcoreguidelines-macro-usage)
+#define GET_VARIABLE_NAME(Variable) (#Variable)  // NOLINT(cppcoreguidelines-macro-usage)
 
-#define MAX_STRING 2048
-#define MAX_LEVEL 300
+#define MAX_LEVEL 300  // NOLINT(cppcoreguidelines-macro-usage)
 
 #include "isxao_find_pattern.h"
 #include "register_events.h"
 #include "ISXAO.h"
-#include "isxao_data.h"
+#include "ao_structs.h"
 #include "isxao_internal.h"
+#include "ao_classes.h"
 #include "isxao_classes.h"
 #include "isxao_log.h"
 #include "isxao_native_defines.h"

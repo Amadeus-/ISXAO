@@ -8,7 +8,7 @@ bool PetType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc,
 		return false;
 	__try
 	{
-#define P_PET ((::pet*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_PET ((ao::pet*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (PetTypeMembers(Member->ID))
 		{
 		case Type:
@@ -37,7 +37,7 @@ bool PetType::GetMethod(LSOBJECTDATA &ObjectData, PLSTYPEMETHOD pMethod, int arg
 		return false;
 	__try
 	{
-#define P_PET ((::pet*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_PET ((ao::pet*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (PetTypeMethods(pMethod->ID))
 		{
 		case Attack:
@@ -97,7 +97,7 @@ bool PetType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define P_PET ((::pet*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_PET ((ao::pet*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 	sprintf_s(buf, buflen, "%I64u", P_PET->get_identity().get_combined_identity());
 #undef P_PET
 

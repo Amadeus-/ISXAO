@@ -8,14 +8,14 @@ bool NanoTemplateType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, 
 		return false;
 	__try
 	{
-#define P_NANO_TEMPLATE ((nano_template*)ObjectData.Ptr)
+#define P_NANO_TEMPLATE ((ao::nano_template*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (NanoTemplateTypeMembers(Member->ID))
 		{
 		case CasterId:
 		{
-			identity_t id = P_NANO_TEMPLATE->get_caster_identity();
-			p_identity_t pId = static_cast<p_identity_t>(pISInterface->GetTempBuffer(sizeof(identity_t), &id));
-			Object.Ptr = pId;
+			auto id = P_NANO_TEMPLATE->get_caster_identity();
+			const auto p_id = static_cast<ao::p_identity_t>(pISInterface->GetTempBuffer(sizeof(ao::identity_t), &id));
+			Object.Ptr = p_id;
 			Object.Type = pIdentityType;
 			break;
 		}
@@ -62,11 +62,12 @@ bool NanoTemplateType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod
 		return false;
 	__try
 	{
-#define P_NANO_TEMPLATE ((nano_template*)ObjectData.Ptr)
+#define P_NANO_TEMPLATE ((ao::nano_template*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (NanoTemplateTypeMethods(pMethod->ID))
 		{
 		case Remove:
 		{
+			// ReSharper disable once CppExpressionWithoutSideEffects
 			P_NANO_TEMPLATE->remove();
 			return true;
 		}
@@ -87,7 +88,7 @@ bool NanoTemplateType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int b
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define P_NANO_TEMPLATE ((nano_template*)ObjectData.Ptr)
+#define P_NANO_TEMPLATE ((ao::nano_template*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 	sprintf_s(buf, buflen, "%d", P_NANO_TEMPLATE->get_nano_identity().id);
 #undef P_NANO_TEMPLATE
 

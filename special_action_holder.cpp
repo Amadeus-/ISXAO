@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 	DWORD special_action_holder::build_ls_special_actions(LSIndex* p_index) const
@@ -51,8 +51,8 @@ namespace isxao_classes
 
 	special_action_template* special_action_holder::get_special_action(const PCSTR special_action_name) const
 	{
-		char name[MAX_STRING];
-		char search_name[MAX_STRING];
+		char name[MAX_VARSTRING];
+		char search_name[MAX_VARSTRING];
 		strcpy_s(search_name, sizeof(search_name), special_action_name);
 		_strlwr_s(search_name);
 		std::vector<special_action_template> v;

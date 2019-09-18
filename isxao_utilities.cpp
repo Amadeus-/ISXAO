@@ -8,7 +8,7 @@ namespace isxao_utilities
 #pragma region Strings
 
 #ifdef F_STAT_TO_STRING_USE_NATIVE
-	FUNCTION_AT_ADDRESS(PCSTR stat_to_string(ao_data::stat_e stat_id), f_stat_to_string)
+	FUNCTION_AT_ADDRESS(PCSTR stat_to_string(ao::stat_e stat_id), f_stat_to_string)
 #else
 	// ReSharper disable once CppParameterMayBeConst
 	PCSTR stat_to_string(ao_data::stat_e stat_id)
@@ -23,25 +23,25 @@ namespace isxao_utilities
 #endif
 
 	// ReSharper disable once CppParameterMayBeConst
-	PCSTR get_breed_str_local(breed_e breed_id)
+	PCSTR get_breed_str_local(ao::breed_e breed_id)
 	{
 		switch(breed_id)
 		{
-		case BT_NOTHING:
+		case ao::BT_NOTHING:
 			return "Nothing";
-		case BT_SOLITUS:
+		case ao::BT_SOLITUS:
 			return "Solitus";
-		case BT_OPIFEX:
+		case ao::BT_OPIFEX:
 			return "Opifex";
-		case BT_NANOMAGE:
+		case ao::BT_NANOMAGE:
 			return "Nanomage";
-		case BT_ATROX:
+		case ao::BT_ATROX:
 			return "Atrox";
-		case BT_SPECIAL:
+		case ao::BT_SPECIAL:
 			return "Special";
-		case BT_MONSTER:
+		case ao::BT_MONSTER:
 			return "Monster";
-		case BT_HUMAN_MONSTER: 
+		case ao::BT_HUMAN_MONSTER: 
 			return "human monster";
 		default:			
 			char buffer[MAX_VARSTRING];
@@ -51,17 +51,17 @@ namespace isxao_utilities
 	}
 
 	// ReSharper disable once CppParameterMayBeConst
-	PCSTR get_sex_str_local(gender_e gender_id)
+	PCSTR get_sex_str_local(ao::gender_e gender_id)
 	{
 		switch(gender_id)
 		{
-		case GT_NONE:
+		case ao::GT_NONE:
 			return "NONE";
-		case GT_UNI: 
+		case ao::GT_UNI: 
 			return "uni";
-		case GT_MALE: 
+		case ao::GT_MALE: 
 			return "male";
-		case GT_FEMALE: 
+		case ao::GT_FEMALE: 
 			return "female";
 		default:
 			char buffer[MAX_VARSTRING];
@@ -70,66 +70,66 @@ namespace isxao_utilities
 		}
 	}
 
-	PCSTR GetProfessionStr(DWORD prof)
+	PCSTR get_profession_str(const DWORD prof)
 	{
 		switch (prof)
 		{
-		case PT_NONE:
+		case ao::PT_NONE:
 			return "None";
-		case PT_SOLDIER:
+		case ao::PT_SOLDIER:
 			return "Soldier";
-		case PT_MARTIALARTIST:
+		case ao::PT_MARTIAL_ARTIST:
 			return "Martial Artist";
-		case PT_ENGINEER:
+		case ao::PT_ENGINEER:
 			return "Engineer";
-		case PT_FIXER:
+		case ao::PT_FIXER:
 			return "Fixer";
-		case PT_AGENT:
+		case ao::PT_AGENT:
 			return "Agent";
-		case PT_ADVENTURER:
+		case ao::PT_ADVENTURER:
 			return "Adventurer";
-		case PT_TRADER:
+		case ao::PT_TRADER:
 			return "Trader";
-		case PT_BUREAUCRAT:
+		case ao::PT_BUREAUCRAT:
 			return "Bureaucrat";
-		case PT_ENFORCER:
+		case ao::PT_ENFORCER:
 			return "Enforcer";
-		case PT_DOCTOR:
+		case ao::PT_DOCTOR:
 			return "Doctor";
-		case PT_NANOTECHNICIAN:
+		case ao::PT_NANO_TECHNICIAN:
 			return "Nano Technician";
-		case PT_METAPHYSICIST:
+		case ao::PT_META_PHYSICIST:
 			return "Meta-Physicist";
-		case PT_MONSTER:
+		case ao::PT_MONSTER:
 			return "Monster";
-		case PT_KEEPER:
+		case ao::PT_KEEPER:
 			return "Keeper";
-		case PT_SHADE:
+		case ao::PT_SHADE:
 			return "Shade";
 		default:
 			return "Unknown";
 		}
 	}
 
-	PCSTR GetSideStr(DWORD side)
+	PCSTR get_side_str(const DWORD side)
 	{
 		switch (side)
 		{
-		case SD_NEUTRAL:
+		case ao::SD_NEUTRAL:
 			return "Neutral";
-		case SD_CLAN:
+		case ao::SD_CLAN:
 			return "Clan";
-		case SD_OMNI:
+		case ao::SD_OMNI:
 			return "Omni";
-		case SD_MONSTER:
+		case ao::SD_MONSTER:
 			return "Monster";
-		case SD_ADVISOR:
+		case ao::SD_ADVISOR:
 			return "Advisor";
-		case SD_GUARDIAN:
+		case ao::SD_GUARDIAN:
 			return "Guardian";
-		case SD_GM:
+		case ao::SD_GM:
 			return "GM";
-		case SD_MIXED:
+		case ao::SD_MIXED:
 			return "Mixed";
 		default:
 			return "Unknown";
@@ -138,7 +138,7 @@ namespace isxao_utilities
 
 	
 
-	PCSTR GetNanoSchoolStr(DWORD school)
+	PCSTR get_nano_school_str(const DWORD school)
 	{
 		auto result = "Unknown";
 		switch(school)
@@ -164,9 +164,9 @@ namespace isxao_utilities
 		return result;
 	}
 
-	PCSTR GetItemRarityStr(DWORD rarity)
+	PCSTR get_item_rarity_str(const DWORD rarity)
 	{
-		PCSTR result = "Unknown";
+		auto result = "Unknown";
 		switch(rarity)
 		{
 		case 1:
@@ -195,25 +195,16 @@ namespace isxao_utilities
 
 #pragma region Objects
 
-	FUNCTION_AT_ADDRESS(dynel* __cdecl GetDynel(const identity_t &), n3_dynel_t__get_dynel);
-	FUNCTION_AT_ADDRESS(actor* __cdecl GetActor(const identity_t &), n3_dynel_t__get_dynel);
-
 #ifdef __GetFullPerkMap_x
 	FUNCTION_AT_ADDRESS(DWORD __cdecl GetFullPerkMap(void), __N3Msg_GetFullPerkMap);
 #endif
 
-#ifdef F_GET_NANO_ITEM_USE_NATIVE
-	FUNCTION_AT_ADDRESS(p_nano_item_t get_nano_item(DWORD), f_get_nano_item)
-#else
-	tatic_assert(false, "get_nano_item(DWORD) requires a native function.");
-#endif
-
-	bool IsValidDynel(p_n3_dynel_t pDynel)
+	bool IsValidDynel(ao::p_n3_dynel_t pDynel)
 	{
 		if (pDynel && pDynel->p_v_table)
 		{
 			auto d = DWORD(pDynel->p_v_table);
-			if (d < DWORD(gamecode_module_handle) || d > DWORD(gamecode_module_handle + GetModuleInfo("Gamecode.dll").SizeOfImage))
+			if (d < DWORD(gamecode_module_handle) || d > DWORD(gamecode_module_handle + gamecode_module_info.SizeOfImage))
 				return false;
 			if (d == AccessCard_t__vTable || d == CentralController_t__vTable || d == Chest_t__vTable || d == CityTerminal_t__vTable ||
 				d == Corpse_t__vTable || d == Door_t__vTable || d == LockableItem_t__vTable || d == Mine_t__vTable ||
@@ -225,9 +216,9 @@ namespace isxao_utilities
 		return false;
 	}
 
-	PVOID RequestInfo(const identity_t &id)
+	PVOID RequestInfo(const ao::identity_t &id)
 	{
-		typedef PVOID(__thiscall * tRequestInfo)(special_action_holder*, const identity_t&);
+		typedef PVOID(__thiscall * tRequestInfo)(ao::special_action_holder*, const ao::identity_t&);
 		auto pLookAt = tRequestInfo(__RequestInfo);
 		return pLookAt(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_special_action_holder(), id);
 	}
@@ -362,16 +353,16 @@ namespace isxao_utilities
 			arg += ParseSearchActorArg(arg, end_exclusive, argv, search_actor);
 	}
 
-	bool ActorMatchesSearch(PSEARCHACTOR p_search_actor, actor* p_character, actor* p_actor)
+	bool ActorMatchesSearch(PSEARCHACTOR p_search_actor, ao::actor* p_character, ao::actor* p_actor)
 	{
-		char szName[MAX_STRING] = { 0 };
-		char szSearchName[MAX_STRING] = { 0 };
+		char szName[MAX_VARSTRING] = { 0 };
+		char szSearchName[MAX_VARSTRING] = { 0 };
 		DWORD actor_type;
 		if (p_actor->get_identity().type != 50000)
 			actor_type = MOB_OTHER;
 		else if (p_actor->is_actor())
 		{
-			if (p_actor->is_pet() && IsClientId(p_actor->get_master_id()))
+			if (p_actor->is_pet() && is_client_id(p_actor->get_master_id()))
 				actor_type = MOB_MYPET;
 			else if (p_actor->is_pet())
 				actor_type = MOB_PET;
@@ -382,15 +373,15 @@ namespace isxao_utilities
 			actor_type = MOB_PC;
 		if (p_search_actor->actor_type != actor_type && p_search_actor->actor_type != MOB_NONE)
 			return false;
-		strcpy_s(szName, MAX_STRING, p_actor->get_name());
+		strcpy_s(szName, MAX_VARSTRING, p_actor->get_name());
 		_strlwr_s(szName);
-		strcpy_s(szSearchName, MAX_STRING, p_search_actor->name);
+		strcpy_s(szSearchName, MAX_VARSTRING, p_search_actor->name);
 		_strlwr_s(szSearchName);
 		if (!strstr(szName, szSearchName))
 			return false;
-		if (p_search_actor->min_level && DWORD(p_actor->get_skill(ST_LEVEL)) < p_search_actor->min_level)
+		if (p_search_actor->min_level && DWORD(p_actor->get_skill(ao::ST_LEVEL)) < p_search_actor->min_level)
 			return false;
-		if (p_search_actor->max_level && DWORD(p_actor->get_skill(ST_LEVEL)) > p_search_actor->max_level)
+		if (p_search_actor->max_level && DWORD(p_actor->get_skill(ao::ST_LEVEL)) > p_search_actor->max_level)
 			return false;
 		if (p_search_actor->not_id == p_actor->get_identity().get_combined_identity())
 			return false;
@@ -400,7 +391,7 @@ namespace isxao_utilities
 		{
 			if (p_search_actor->x_loc != p_actor->get_position().x || p_search_actor->z_loc != p_actor->get_position().z)
 			{
-				vector3_t knownLoc;
+				ao::vector3_t knownLoc;
 				knownLoc.x = p_search_actor->x_loc;
 				knownLoc.y = 0.0f;
 				knownLoc.z = p_search_actor->z_loc;
@@ -412,25 +403,25 @@ namespace isxao_utilities
 			return false;
 		if (g_y_filter < 10000.0f)
 		{
-			vector3_t client = p_character->get_position();
+			ao::vector3_t client = p_character->get_position();
 			if (p_actor->get_position().y > client.y + g_y_filter || p_actor->get_position().y < client.y - g_y_filter)
 				return false;
 		}
 		if (p_search_actor->y_radius < 10000.0f)
 		{
-			vector3_t client = p_character->get_position();
+			ao::vector3_t client = p_character->get_position();
 			if (p_actor->get_position().y > client.y + p_search_actor->y_radius || p_actor->get_position().y < client.y - p_search_actor->y_radius)
 				return false;
 		}
 		return true;
 	}
 
-	bool IsPCNear(actor* p_actor, float radius)
+	bool IsPCNear(ao::actor* p_actor, float radius)
 	{
-		actor* p_close_actor = nullptr;
+		ao::actor* p_close_actor = nullptr;
 		if (P_ENGINE_CLIENT_ANARCHY)
 		{
-			std::vector<actor*> v;
+			std::vector<ao::actor*> v;
 			P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{
@@ -438,7 +429,7 @@ namespace isxao_utilities
 				{
 					if ((*it) != p_actor)
 					{
-						vector3_t c = (*it)->get_position();
+						ao::vector3_t c = (*it)->get_position();
 						if (p_actor->get_distance_to(c) < radius)
 							return true;
 					}
@@ -448,12 +439,12 @@ namespace isxao_utilities
 		return false;
 	}
 
-	DWORD CountMatchingActors(PSEARCHACTOR p_search_actor, actor* p_character, bool include_char)
+	DWORD CountMatchingActors(PSEARCHACTOR p_search_actor, ao::actor* p_character, bool include_char)
 	{
 		if (!p_search_actor || !p_character)
 			return 0;
 		DWORD total_matching = 0;
-		std::vector<actor*> v;
+		std::vector<ao::actor*> v;
 		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 		{
@@ -475,13 +466,13 @@ namespace isxao_utilities
 		return total_matching;
 	}
 
-	actor* NthNearestActor(PSEARCHACTOR p_search_actor, DWORD nth, actor* p_origin, bool include_char)
+	ao::actor* NthNearestActor(PSEARCHACTOR p_search_actor, DWORD nth, ao::actor* p_origin, bool include_char)
 	{
 		if (!p_search_actor || !nth || !p_origin)
 			return nullptr;
 		CIndex<PAORANK> actor_set;
-		vector3_t pos = p_origin->get_position();
-		std::vector<actor*> v;
+		ao::vector3_t pos = p_origin->get_position();
+		std::vector<ao::actor*> v;
 		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		DWORD TotalMatching = 0;
 		if (include_char)
@@ -518,7 +509,7 @@ namespace isxao_utilities
 			return nullptr;
 		}
 		std::sort(&actor_set.List[0], &actor_set[0] + TotalMatching, pAORankFloatCompare);
-		auto p_actor = static_cast<actor*>(actor_set[nth - 1]->VarPtr.Ptr);
+		auto p_actor = static_cast<ao::actor*>(actor_set[nth - 1]->VarPtr.Ptr);
 		actor_set.Cleanup();
 		return p_actor;
 	}
@@ -632,7 +623,7 @@ namespace isxao_utilities
 
 #pragma region Collections
 	
-	void RecursiveAddPerkToPerkMap(std::map<identity_t, DWORD>& m, p_perk_node_t pNode, p_perk_root_t pRoot, DWORD& count)
+	void RecursiveAddPerkToPerkMap(std::map<ao::identity_t, DWORD>& m, ao::p_perk_node_t pNode, ao::p_perk_root_t pRoot, DWORD& count)
 	{
 		m.insert_or_assign(pNode->perk_identity, pNode->perk_id);
 		count--;
@@ -642,7 +633,7 @@ namespace isxao_utilities
 			RecursiveAddPerkToPerkMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetPerkMap(std::map<identity_t, DWORD>& m, p_perk_dir_t pDir)
+	void GetPerkMap(std::map<ao::identity_t, DWORD>& m, ao::p_perk_dir_t pDir)
 	{
 		auto count = pDir->count;
 		auto pRoot = pDir->p_root;
@@ -651,7 +642,7 @@ namespace isxao_utilities
 			RecursiveAddPerkToPerkMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddPetToPetMap(std::map<identity_t, DWORD>& m, p_pet_node_t pNode, p_pet_root_t pRoot, DWORD& count)
+	void RecursiveAddPetToPetMap(std::map<ao::identity_t, DWORD>& m, ao::p_pet_node_t pNode, ao::p_pet_root_t pRoot, DWORD& count)
 	{
 		m.insert_or_assign(pNode->identity, pNode->index);
 		count--;
@@ -661,7 +652,7 @@ namespace isxao_utilities
 			RecursiveAddPetToPetMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetPetMap(std::map<identity_t, DWORD>& m, p_pet_dir_t pPetDir)
+	void GetPetMap(std::map<ao::identity_t, DWORD>& m, ao::p_pet_dir_t pPetDir)
 	{
 		auto count = pPetDir->count;
 		auto pRoot = pPetDir->p_root;
@@ -670,7 +661,7 @@ namespace isxao_utilities
 			RecursiveAddPetToPetMap(m, pNode, pRoot, count);
 	}
 
-	void get_nano_map(std::map<DWORD, p_nano_item_t>& m)
+	void get_nano_map(std::map<DWORD, ao::p_nano_item_t>& m)
 	{
 		if (P_NANO_ITEM_MAP)
 		{
@@ -678,7 +669,7 @@ namespace isxao_utilities
 		}
 	}
 
-	void get_stat_name_map(std::map<stat_e, PCSTR>& m)
+	void get_stat_name_map(std::map<ao::stat_e, PCSTR>& m)
 	{
 		if (P_STAT_NAME_MAP)
 		{
@@ -686,7 +677,7 @@ namespace isxao_utilities
 		}
 	}
 
-	void GetStaticItemMap(std::map<identity_t, p_dummy_item_base_t>& m)
+	void GetStaticItemMap(std::map<ao::identity_t, ao::p_dummy_item_base_t>& m)
 	{
 		auto count = P_STATIC_ITEM_VECTOR->size();
 		for (DWORD i = 0; i < count; i++)
@@ -696,7 +687,7 @@ namespace isxao_utilities
 		}
 	}
 
-	void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, p_stat_node_t pNode, p_stat_root_t pRoot, DWORD& count)
+	void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, ao::p_stat_node_t pNode, ao::p_stat_root_t pRoot, DWORD& count)
 	{
 		m.insert_or_assign(pNode->stat, pNode->modifier);
 		count--;
@@ -706,7 +697,7 @@ namespace isxao_utilities
 			RecursiveAddStatToStatMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetStatMap(std::map<DWORD, LONG>& m, p_stat_dir_t pDir)
+	void GetStatMap(std::map<DWORD, LONG>& m, ao::p_stat_dir_t pDir)
 	{
 		auto count = pDir->count;
 		auto pRoot = pDir->p_root;
@@ -715,7 +706,7 @@ namespace isxao_utilities
 			RecursiveAddStatToStatMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddWeaponItemToWeaponItemMap(std::map<DWORD, p_weapon_item_t>& m, p_weapon_item_node_t pNode, p_weapon_item_root_t pRoot, DWORD& count)
+	void RecursiveAddWeaponItemToWeaponItemMap(std::map<DWORD, ao::p_weapon_item_t>& m, ao::p_weapon_item_node_t pNode, ao::p_weapon_item_root_t pRoot, DWORD& count)
 	{
 		m.insert_or_assign(pNode->action_id, pNode->p_weapon_item);
 		count--;
@@ -725,7 +716,7 @@ namespace isxao_utilities
 			RecursiveAddWeaponItemToWeaponItemMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetWeaponItemMap(std::map<DWORD, p_weapon_item_t>& m, weapon_item_dir_t& dir)
+	void GetWeaponItemMap(std::map<DWORD, ao::p_weapon_item_t>& m, ao::weapon_item_dir_t& dir)
 	{
 		auto count = dir.count;
 		auto pRoot = dir.p_root;
@@ -734,9 +725,9 @@ namespace isxao_utilities
 			RecursiveAddWeaponItemToWeaponItemMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, chat_window_node*>& m, p_chat_window_node_node_t pNode, p_chat_window_node_root_t pRoot, DWORD& count)
+	void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ao::chat_window_node*>& m, ao::p_chat_window_node_node_t pNode, ao::p_chat_window_node_root_t pRoot, DWORD& count)
 	{
-		m.insert_or_assign(pNode->window_name, reinterpret_cast<chat_window_node*>(pNode->p_chat_window));
+		m.insert_or_assign(pNode->window_name, reinterpret_cast<ao::chat_window_node*>(pNode->p_chat_window));
 		count--;
 		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
 			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode->p_lower, pRoot, count);
@@ -744,7 +735,7 @@ namespace isxao_utilities
 			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetChatWindowNodeMap(std::map<string, chat_window_node*>& m, chat_window_node_dir_t &dir)
+	void GetChatWindowNodeMap(std::map<string, ao::chat_window_node*>& m, ao::chat_window_node_dir_t &dir)
 	{
 		auto count = dir.count;
 		auto pRoot = dir.p_root;
@@ -753,7 +744,7 @@ namespace isxao_utilities
 			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode, pRoot, count);
 	}
 
-	void RecursiveAddLockIdToLockIdMap(std::map<DWORD, DWORD>& m, p_lock_id_node_t pNode, p_lock_id_root_t pRoot, DWORD& count)
+	void RecursiveAddLockIdToLockIdMap(std::map<DWORD, DWORD>& m, ao::p_lock_id_node_t pNode, ao::p_lock_id_root_t pRoot, DWORD& count)
 	{
 		m.insert_or_assign(pNode->lock_id, pNode->action_id);
 		count--;
@@ -763,7 +754,7 @@ namespace isxao_utilities
 			RecursiveAddLockIdToLockIdMap(m, pNode->p_higher, pRoot, count);
 	}
 
-	void GetLockIdMap(std::map<DWORD, DWORD>& m, p_lock_id_dir_t pDir)
+	void GetLockIdMap(std::map<DWORD, DWORD>& m, ao::p_lock_id_dir_t pDir)
 	{
 		auto count = pDir->count;
 		auto pRoot = pDir->p_root;
@@ -776,26 +767,26 @@ namespace isxao_utilities
 
 #pragma region Inventory
 
-	bool GetInvSlotIdentity(ao_data::ArmorSlot_e slot, identity_t& id)
+	bool GetInvSlotIdentity(ao::ArmorSlot_e slot, ao::identity_t& id)
 	{
 		id.type = 102;
 		switch (slot)
 		{
-		case AS_NECK:
-		case AS_HEAD:
-		case AS_BACK:
-		case AS_R_SHOULDER:
-		case AS_CHEST:
-		case AS_L_SHOULDER:
-		case AS_R_ARM:
-		case AS_HANDS:
-		case AS_L_ARM:
-		case AS_R_WRIST:
-		case AS_LEGS:
-		case AS_L_WRIST:
-		case AS_R_FINGER:
-		case AS_FEET:
-		case AS_L_FINGER:
+		case ao::AS_NECK:
+		case ao::AS_HEAD:
+		case ao::AS_BACK:
+		case ao::AS_R_SHOULDER:
+		case ao::AS_CHEST:
+		case ao::AS_L_SHOULDER:
+		case ao::AS_R_ARM:
+		case ao::AS_HANDS:
+		case ao::AS_L_ARM:
+		case ao::AS_R_WRIST:
+		case ao::AS_LEGS:
+		case ao::AS_L_WRIST:
+		case ao::AS_R_FINGER:
+		case ao::AS_FEET:
+		case ao::AS_L_FINGER:
 			id.id = DWORD(slot) + 16;
 			break;
 		default:
@@ -804,24 +795,24 @@ namespace isxao_utilities
 		return true;
 	}
 
-	bool GetInvSlotIdentity(ao_data::ImplantSlot_e slot, identity_t& id)
+	bool GetInvSlotIdentity(ao::ImplantSlot_e slot, ao::identity_t& id)
 	{
 		id.type = 103;
 		switch (slot)
 		{
-		case IS_EYES:
-		case IS_HEAD:
-		case IS_EARS:
-		case IS_R_ARM:
-		case IS_CHEST:
-		case IS_L_ARM:
-		case IS_R_WRIST:
-		case IS_WAIST:
-		case IS_L_WRIST:
-		case IS_R_HAND:
-		case IS_LEGS:
-		case IS_L_HAND:
-		case IS_FEET:
+		case ao::IS_EYES:
+		case ao::IS_HEAD:
+		case ao::IS_EARS:
+		case ao::IS_R_ARM:
+		case ao::IS_CHEST:
+		case ao::IS_L_ARM:
+		case ao::IS_R_WRIST:
+		case ao::IS_WAIST:
+		case ao::IS_L_WRIST:
+		case ao::IS_R_HAND:
+		case ao::IS_LEGS:
+		case ao::IS_L_HAND:
+		case ao::IS_FEET:
 			id.id = DWORD(slot) + 32;
 			break;
 		default:
@@ -830,26 +821,26 @@ namespace isxao_utilities
 		return true;
 	}
 
-	bool GetInvSlotIdentity(ao_data::WeaponSlot_e slot, identity_t& id)
+	bool GetInvSlotIdentity(ao::WeaponSlot_e slot, ao::identity_t& id)
 	{
 		id.type = 101;
 		switch (slot)
 		{
-		case WS_HUD_1:
-		case WS_HUD_3:
-		case WS_UTIL_1:
-		case WS_UTIL_2:
-		case WS_UTIL_3:
-		case WS_R_HAND:
-		case WS_BELT:
-		case WS_L_HAND:
-		case WS_NCU_1:
-		case WS_NCU_2:
-		case WS_NCU_3:
-		case WS_NCU_4:
-		case WS_NCU_5:
-		case WS_NCU_6:
-		case WS_HUD_2:
+		case ao::WS_HUD_1:
+		case ao::WS_HUD_3:
+		case ao::WS_UTIL_1:
+		case ao::WS_UTIL_2:
+		case ao::WS_UTIL_3:
+		case ao::WS_R_HAND:
+		case ao::WS_BELT:
+		case ao::WS_L_HAND:
+		case ao::WS_NCU_1:
+		case ao::WS_NCU_2:
+		case ao::WS_NCU_3:
+		case ao::WS_NCU_4:
+		case ao::WS_NCU_5:
+		case ao::WS_NCU_6:
+		case ao::WS_HUD_2:
 			id.id = DWORD(slot);
 			break;
 		default:
@@ -858,7 +849,7 @@ namespace isxao_utilities
 		return true;
 	}
 
-	bool GetInvSlotIdentity(DWORD slot, identity_t& id)
+	bool GetInvSlotIdentity(DWORD slot, ao::identity_t& id)
 	{
 		id.id = slot;
 		switch (slot)
@@ -951,7 +942,7 @@ namespace isxao_utilities
 		return true;
 	}
 
-	PCSTR GetInvSlotName(const identity_t& slot)
+	PCSTR GetInvSlotName(const ao::identity_t& slot)
 	{
 		switch (slot.type)
 		{
@@ -1137,97 +1128,97 @@ namespace isxao_utilities
 		return "Unknown";
 	}
 
-	bool GetInvSlotIdentity(PCSTR slot_name, identity_t &id)
+	bool GetInvSlotIdentity(PCSTR slot_name, ao::identity_t &id)
 	{
-		char search_name[MAX_STRING];
-		strcpy_s(search_name, MAX_STRING, slot_name);
+		char search_name[MAX_VARSTRING];
+		strcpy_s(search_name, MAX_VARSTRING, slot_name);
 		_strlwr_s(search_name);
 		if (!strcmp(search_name, "ws_hud1"))
-			GetInvSlotIdentity(::WS_HUD_1, id);
+			GetInvSlotIdentity(ao::WS_HUD_1, id);
 		else if (!strcmp(search_name, "ws_hud2"))
-			GetInvSlotIdentity(::WS_HUD_2, id);
+			GetInvSlotIdentity(ao::WS_HUD_2, id);
 		else if (!strcmp(search_name, "ws_hud3"))
-			GetInvSlotIdentity(::WS_HUD_3, id);
+			GetInvSlotIdentity(ao::WS_HUD_3, id);
 		else if (!strcmp(search_name, "ws_util1"))
-			GetInvSlotIdentity(::WS_UTIL_1, id);
+			GetInvSlotIdentity(ao::WS_UTIL_1, id);
 		else if (!strcmp(search_name, "ws_util2"))
-			GetInvSlotIdentity(::WS_UTIL_2, id);
+			GetInvSlotIdentity(ao::WS_UTIL_2, id);
 		else if (!strcmp(search_name, "ws_util3"))
-			GetInvSlotIdentity(::WS_UTIL_3, id);
+			GetInvSlotIdentity(ao::WS_UTIL_3, id);
 		else if (!strcmp(search_name, "ws_rhand"))
-			GetInvSlotIdentity(::WS_R_HAND, id);
+			GetInvSlotIdentity(ao::WS_R_HAND, id);
 		else if (!strcmp(search_name, "ws_belt"))
-			GetInvSlotIdentity(::WS_BELT, id);
+			GetInvSlotIdentity(ao::WS_BELT, id);
 		else if (!strcmp(search_name, "ws_lhand"))
-			GetInvSlotIdentity(::WS_L_HAND, id);
+			GetInvSlotIdentity(ao::WS_L_HAND, id);
 		else if (!strcmp(search_name, "ws_ncu1"))
-			GetInvSlotIdentity(::WS_NCU_1, id);
+			GetInvSlotIdentity(ao::WS_NCU_1, id);
 		else if (!strcmp(search_name, "ws_ncu2"))
-			GetInvSlotIdentity(::WS_NCU_2, id);
+			GetInvSlotIdentity(ao::WS_NCU_2, id);
 		else if (!strcmp(search_name, "ws_ncu3"))
-			GetInvSlotIdentity(::WS_NCU_3, id);
+			GetInvSlotIdentity(ao::WS_NCU_3, id);
 		else if (!strcmp(search_name, "ws_ncu4"))
-			GetInvSlotIdentity(::WS_NCU_4, id);
+			GetInvSlotIdentity(ao::WS_NCU_4, id);
 		else if (!strcmp(search_name, "ws_ncu5"))
-			GetInvSlotIdentity(::WS_NCU_5, id);
+			GetInvSlotIdentity(ao::WS_NCU_5, id);
 		else if (!strcmp(search_name, "ws_ncu6"))
-			GetInvSlotIdentity(::WS_NCU_6, id);
+			GetInvSlotIdentity(ao::WS_NCU_6, id);
 		else if (!strcmp(search_name, "as_neck"))
-			GetInvSlotIdentity(::AS_NECK, id);
+			GetInvSlotIdentity(ao::AS_NECK, id);
 		else if (!strcmp(search_name, "as_head"))
-			GetInvSlotIdentity(::AS_HEAD, id);
+			GetInvSlotIdentity(ao::AS_HEAD, id);
 		else if (!strcmp(search_name, "as_back"))
-			GetInvSlotIdentity(::AS_BACK, id);
+			GetInvSlotIdentity(ao::AS_BACK, id);
 		else if (!strcmp(search_name, "as_rshoulder"))
-			GetInvSlotIdentity(::AS_R_SHOULDER, id);
+			GetInvSlotIdentity(ao::AS_R_SHOULDER, id);
 		else if (!strcmp(search_name, "as_chest"))
-			GetInvSlotIdentity(::AS_CHEST, id);
+			GetInvSlotIdentity(ao::AS_CHEST, id);
 		else if (!strcmp(search_name, "as_lshoulder"))
-			GetInvSlotIdentity(::AS_L_SHOULDER, id);
+			GetInvSlotIdentity(ao::AS_L_SHOULDER, id);
 		else if (!strcmp(search_name, "as_rarm"))
-			GetInvSlotIdentity(::AS_R_ARM, id);
+			GetInvSlotIdentity(ao::AS_R_ARM, id);
 		else if (!strcmp(search_name, "as_hands"))
-			GetInvSlotIdentity(::AS_HANDS, id);
+			GetInvSlotIdentity(ao::AS_HANDS, id);
 		else if (!strcmp(search_name, "as_larm"))
-			GetInvSlotIdentity(::AS_L_ARM, id);
+			GetInvSlotIdentity(ao::AS_L_ARM, id);
 		else if (!strcmp(search_name, "as_rwrist"))
-			GetInvSlotIdentity(::AS_R_WRIST, id);
+			GetInvSlotIdentity(ao::AS_R_WRIST, id);
 		else if (!strcmp(search_name, "as_legs"))
-			GetInvSlotIdentity(::AS_LEGS, id);
+			GetInvSlotIdentity(ao::AS_LEGS, id);
 		else if (!strcmp(search_name, "as_lwrist"))
-			GetInvSlotIdentity(::AS_L_WRIST, id);
+			GetInvSlotIdentity(ao::AS_L_WRIST, id);
 		else if (!strcmp(search_name, "as_rfinger"))
-			GetInvSlotIdentity(::AS_R_FINGER, id);
+			GetInvSlotIdentity(ao::AS_R_FINGER, id);
 		else if (!strcmp(search_name, "as_feet"))
-			GetInvSlotIdentity(::AS_FEET, id);
+			GetInvSlotIdentity(ao::AS_FEET, id);
 		else if (!strcmp(search_name, "as_lfinger"))
-			GetInvSlotIdentity(::AS_L_FINGER, id);
+			GetInvSlotIdentity(ao::AS_L_FINGER, id);
 		else if (!strcmp(search_name, "is_eyes"))
-			GetInvSlotIdentity(::IS_EYES, id);
+			GetInvSlotIdentity(ao::IS_EYES, id);
 		else if (!strcmp(search_name, "is_head"))
-			GetInvSlotIdentity(::IS_HEAD, id);
+			GetInvSlotIdentity(ao::IS_HEAD, id);
 		else if (!strcmp(search_name, "is_ears"))
-			GetInvSlotIdentity(::IS_EARS, id);
+			GetInvSlotIdentity(ao::IS_EARS, id);
 		else if (!strcmp(search_name, "is_rarm"))
-			GetInvSlotIdentity(::IS_R_ARM, id);
+			GetInvSlotIdentity(ao::IS_R_ARM, id);
 		else if (!strcmp(search_name, "is_chest"))
-			GetInvSlotIdentity(::IS_CHEST, id);
+			GetInvSlotIdentity(ao::IS_CHEST, id);
 		else if (!strcmp(search_name, "is_larm"))
-			GetInvSlotIdentity(::IS_L_ARM, id);
+			GetInvSlotIdentity(ao::IS_L_ARM, id);
 		else if (!strcmp(search_name, "is_rwrist"))
-			GetInvSlotIdentity(::IS_R_WRIST, id);
+			GetInvSlotIdentity(ao::IS_R_WRIST, id);
 		else if (!strcmp(search_name, "is_waist"))
-			GetInvSlotIdentity(::IS_WAIST, id);
+			GetInvSlotIdentity(ao::IS_WAIST, id);
 		else if (!strcmp(search_name, "is_lwrist"))
-			GetInvSlotIdentity(::IS_L_WRIST, id);
+			GetInvSlotIdentity(ao::IS_L_WRIST, id);
 		else if (!strcmp(search_name, "is_rhand"))
-			GetInvSlotIdentity(::IS_R_HAND, id);
+			GetInvSlotIdentity(ao::IS_R_HAND, id);
 		else if (!strcmp(search_name, "is_legs"))
-			GetInvSlotIdentity(::IS_LEGS, id);
+			GetInvSlotIdentity(ao::IS_LEGS, id);
 		else if (!strcmp(search_name, "is_lhand"))
-			GetInvSlotIdentity(::IS_L_HAND, id);
+			GetInvSlotIdentity(ao::IS_L_HAND, id);
 		else if (!strcmp(search_name, "is_feet"))
-			GetInvSlotIdentity(::IS_FEET, id);
+			GetInvSlotIdentity(ao::IS_FEET, id);
 		else if (!strcmp(search_name, "gi_64"))
 			GetInvSlotIdentity(64, id);
 		else if (!strcmp(search_name, "gi_65"))
@@ -1295,7 +1286,7 @@ namespace isxao_utilities
 		return false;
 	}
 
-	p_inventory_data_t GetInvSlotData(inventory_slot_t *slot)
+	ao::p_inventory_data_t GetInvSlotData(ao::inventory_slot_t *slot)
 	{
 		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_inventory_holder_data().p_regular_inventory->p_inventory_data[slot->slot_id.id];
 	}
@@ -1304,7 +1295,7 @@ namespace isxao_utilities
 
 #pragma region Lavishscript
 
-	LSTypeDefinition* GetRealType(dynel* pObject)
+	LSTypeDefinition* GetRealType(ao::dynel* pObject)
 	{
 		if (pObject && pObject->get_identity().type == 50000)
 		{
@@ -1312,7 +1303,7 @@ namespace isxao_utilities
 				return pCharacterType;
 			if (pObject->is_player())
 				return pActorType;	
-			if (pObject->is_pet() && isxao_inlines::IsClientId(pObject->to_actor()->get_master_id()))
+			if (pObject->is_pet() && isxao::is_client_id(pObject->to_actor()->get_master_id()))
 				return pPetType;
 			if (pObject->is_actor())
 				return pActorType;
@@ -1353,21 +1344,21 @@ namespace isxao_utilities
 	{
 		auto parser = isxao_classes::parser(PCHAR(message_info->message), message_info->size);
 		const auto n3_header = isxao_classes::n3_header(parser);
-		switch(N3MessageType_e(n3_header.n3_type()))
+		switch(ao::N3MessageType_e(n3_header.n3_type()))
 		{
-		case N3T_KNUBOT_NPC_DESCRIPTION: break;
-		case N3T_ADD_TEMPLATE: break;
-		case N3T_GRID_DESTINATION_SELECT: break;
-		case N3T_WEATHER_CONTROL: break;
-		case N3T_PET_TO_MASTER:
+		case ao::N3T_KNUBOT_NPC_DESCRIPTION: break;
+		case ao::N3T_ADD_TEMPLATE: break;
+		case ao::N3T_GRID_DESTINATION_SELECT: break;
+		case ao::N3T_WEATHER_CONTROL: break;
+		case ao::N3T_PET_TO_MASTER:
 		{
 			break;
 		}
-		case N3T_FLUSH_RDB_CACHES: break;
-		case N3T_SHOP_SEARCH_RESULT: break;
-		case N3T_SHOP_SEARCH_REQUEST: break;
-		case N3T_ACCEPT_BS_INVITE: break;
-		case N3T_ADD_PET:
+		case ao::N3T_FLUSH_RDB_CACHES: break;
+		case ao::N3T_SHOP_SEARCH_RESULT: break;
+		case ao::N3T_SHOP_SEARCH_REQUEST: break;
+		case ao::N3T_ACCEPT_BS_INVITE: break;
+		case ao::N3T_ADD_PET:
 		{
 			if(message_info->size == 0x15)
 			{
@@ -1376,26 +1367,26 @@ namespace isxao_utilities
 			}			
 			break;
 		}
-		case N3T_SET_POS: break;
-		case N3T_REFLECT_ATTACK:
+		case ao::N3T_SET_POS: break;
+		case ao::N3T_REFLECT_ATTACK:
 		{
 			//printf("0x%.8X", message_info->size);
 			break;
 		}
-		case N3T_SPECIAL_ATTACK_WEAPON: break;
-		case N3T_MENTOR_INVITE: break;
-		case N3T_ACTION:
+		case ao::N3T_SPECIAL_ATTACK_WEAPON: break;
+		case ao::N3T_MENTOR_INVITE: break;
+		case ao::N3T_ACTION:
 		{
 			//printf("0x%.8X", message_info->size);
 			break;
 		}
-		case N3T_SCRIPT: break;
-		case N3T_FORMAT_FEEDBACK: break;
-		case N3T_KNUBOT_ANSWER: break;
-		case N3T_QUEST: break;
-		case N3T_MINE_FULL_UPDATE: break;
-		case N3T_LOOK_AT: break;
-		case N3T_SHIELD_ATTACK:
+		case ao::N3T_SCRIPT: break;
+		case ao::N3T_FORMAT_FEEDBACK: break;
+		case ao::N3T_KNUBOT_ANSWER: break;
+		case ao::N3T_QUEST: break;
+		case ao::N3T_MINE_FULL_UPDATE: break;
+		case ao::N3T_LOOK_AT: break;
+		case ao::N3T_SHIELD_ATTACK:
 		{
 			if(message_info->size == 0x1D)
 			{
@@ -1408,7 +1399,7 @@ namespace isxao_utilities
 			//printf("0x%.8X", message_info->size);
 			break;
 		}
-		case N3T_CAST_NANO_SPELL:
+		case ao::N3T_CAST_NANO_SPELL:
 		{			
 			if(message_info->size == 0x25)
 			{
@@ -1417,8 +1408,8 @@ namespace isxao_utilities
 			}			
 			break;
 		}
-		case N3T_RESEARCH_UPDATE: break;
-		case N3T_FOLLOW_TARGET:
+		case ao::N3T_RESEARCH_UPDATE: break;
+		case ao::N3T_FOLLOW_TARGET:
 		{
 			if(message_info->size == 0x28)
 			{
@@ -1427,13 +1418,13 @@ namespace isxao_utilities
 			}			
 			break;
 		}
-		case N3T_RELOCATE_DYNELS: break;
-		case N3T_ABSORB: break;
-		case N3T_RELOAD: break;
-		case N3T_KNUBOT_CLOSE_CHAT_WINDOW: break;
-		case N3T_SIMPLE_CHAR_FULL_UPDATE: break;
-		case N3T_START_LOGOUT: break;
-		case N3T_ATTACK:
+		case ao::N3T_RELOCATE_DYNELS: break;
+		case ao::N3T_ABSORB: break;
+		case ao::N3T_RELOAD: break;
+		case ao::N3T_KNUBOT_CLOSE_CHAT_WINDOW: break;
+		case ao::N3T_SIMPLE_CHAR_FULL_UPDATE: break;
+		case ao::N3T_START_LOGOUT: break;
+		case ao::N3T_ATTACK:
 		{
 			if(message_info->size == 0x16)
 			{
@@ -1442,90 +1433,90 @@ namespace isxao_utilities
 			}			
 			break;
 		}
-		case N3T_TEAM_MEMBER_INFO: break;
-		case N3T_FULL_CHARACTER: break;
-		case N3T_LASER_TARGET_LIST: break;
-		case N3T_TRAP_DISARMED: break;
-		case N3T_FOV: break;
-		case N3T_STAT: break;
-		case N3T_QUEUE_UPDATE: break;
-		case N3T_KNUBOT_REJECTED_ITEMS: break;
-		case N3T_PLAYER_SHOP_FULL_UPDATE: break;
-		case N3T_ORG_INFO_PACKET: break;
-		case N3T_N3_PLAYFIELD_FULL_UPDATE: break;
-		case N3T_RESEARCH_REQUEST: break;
-		case N3T_AREA_FORMULA: break;
-		case N3T_IN_FROM_PLAYER: break;
-		case N3T_MAIL: break;
-		case N3T_APPLY_SPELLS: break;
-		case N3T_BANK: break;
-		case N3T_SHOP_INVENTORY: break;
-		case N3T_TEMPLATE_ACTION: break;
-		case N3T_TRADE: break;
-		case N3T_DESPAWN: break;
-		case N3T_DOOR_FULL_UPDATE: break;
-		case N3T_CITY_ADVANTAGES: break;
-		case N3T_HEALTH_DAMAGE: break;
-		case N3T_FIGHT_MODE_UPDATE: break;
-		case N3T_SET_SHOP_NAME: break;
-		case N3T_BUFF: break;
-		case N3T_KNUBOT_TRADE: break;
-		case N3T_DROP_TEMPLATE: break;
-		case N3T_GRID_SELECTED: break;
-		case N3T_SIMPLEITEM_FULL_UPDATE: break;
-		case N3T_KNUBOT_OPEN_CHAT_WINDOW: break;
-		case N3T_WEAPONITEM_FULL_UPDATE: break;
-		case N3T_SOCIAL_ACTION_CMD: break;
-		case N3T_RAID: break;
-		case N3T_SHADOW_LEVEL: break;
-		case N3T_CLONE: break;
-		case N3T_SHOP_COMMISSION: break;
-		case N3T_SERVER_PATH_POS_DEBUG_INFO: break;
-		case N3T_SKILL: break;
-		case N3T_LEAVE_BATTLE: break;
-		case N3T_SHOP_INFO: break;
-		case N3T_APPEARANCE_UPDATE: break;
-		case N3T_N3_TELEPORT: break;
-		case N3T_PERK_UPDATE: break;
-		case N3T_SEND_SCORE: break;
-		case N3T_RESURRECT: break;
-		case N3T_UPDATE_CLIENT_VISUAL: break;
-		case N3T_HOUSE_DEMOLISH_START: break;
-		case N3T_PLAY_SOUND1: break;
-		case N3T_ATTACK_INFO: break;
-		case N3T_TEAM_MEMBER: break;
-		case N3T_SPAWN_MECH: break;
-		case N3T_QUEST_FULL_UPDATE: break;
-		case N3T_CHESTITEM_FULL_UPDATE: break;
-		case N3T_NANO_ATTACK: break;
-		case N3T_DROP_DYNEL: break;
-		case N3T_CONTAINER_ADD_ITEM: break;
-		case N3T_VISIBILITY: break;
-		case N3T_STOP_FIGHT: break;
-		case N3T_BATTLE_OVER: break;
-		case N3T_INVENTORY_UPDATED: break;
-		case N3T_DOOR_STATUS_UPDATE: break;
-		case N3T_TEAM_INVITE: break;
-		case N3T_SHOP_STATUS: break;
-		case N3T_INFO_PACKET: break;
-		case N3T_SPELL_LIST: break;
-		case N3T_INVENTORY_UPDATE: break;
-		case N3T_CORPSE_FULL_UPDATE: break;
-		case N3T_FEEDBACK: break;
-		case N3T_CHAR_SEC_SPEC_ATTACK: break;
-		case N3T_BANK_CORPSE: break;
-		case N3T_GENERIC_CMD: break;
-		case N3T_PATH_MOVE_CMD: break;
-		case N3T_ARRIVE_AT_BS: break;
-		case N3T_CHAR_DC_MOVE: break;
-		case N3T_PLAYFIELD_ALL_TOWERS: break;
-		case N3T_KNUBOT_FINISH_TRADE: break;
-		case N3T_KNUBOT_ANSWER_LIST: break;
-		case N3T_STOP_LOGOUT: break;
-		case N3T_CHAR_IN_PLAY: break;
-		case N3T_SHOP_UPDATE: break;
-		case N3T_MECH_INFO: break;
-		case N3T_REMOVE_PET:
+		case ao::N3T_TEAM_MEMBER_INFO: break;
+		case ao::N3T_FULL_CHARACTER: break;
+		case ao::N3T_LASER_TARGET_LIST: break;
+		case ao::N3T_TRAP_DISARMED: break;
+		case ao::N3T_FOV: break;
+		case ao::N3T_STAT: break;
+		case ao::N3T_QUEUE_UPDATE: break;
+		case ao::N3T_KNUBOT_REJECTED_ITEMS: break;
+		case ao::N3T_PLAYER_SHOP_FULL_UPDATE: break;
+		case ao::N3T_ORG_INFO_PACKET: break;
+		case ao::N3T_N3_PLAYFIELD_FULL_UPDATE: break;
+		case ao::N3T_RESEARCH_REQUEST: break;
+		case ao::N3T_AREA_FORMULA: break;
+		case ao::N3T_IN_FROM_PLAYER: break;
+		case ao::N3T_MAIL: break;
+		case ao::N3T_APPLY_SPELLS: break;
+		case ao::N3T_BANK: break;
+		case ao::N3T_SHOP_INVENTORY: break;
+		case ao::N3T_TEMPLATE_ACTION: break;
+		case ao::N3T_TRADE: break;
+		case ao::N3T_DESPAWN: break;
+		case ao::N3T_DOOR_FULL_UPDATE: break;
+		case ao::N3T_CITY_ADVANTAGES: break;
+		case ao::N3T_HEALTH_DAMAGE: break;
+		case ao::N3T_FIGHT_MODE_UPDATE: break;
+		case ao::N3T_SET_SHOP_NAME: break;
+		case ao::N3T_BUFF: break;
+		case ao::N3T_KNUBOT_TRADE: break;
+		case ao::N3T_DROP_TEMPLATE: break;
+		case ao::N3T_GRID_SELECTED: break;
+		case ao::N3T_SIMPLEITEM_FULL_UPDATE: break;
+		case ao::N3T_KNUBOT_OPEN_CHAT_WINDOW: break;
+		case ao::N3T_WEAPONITEM_FULL_UPDATE: break;
+		case ao::N3T_SOCIAL_ACTION_CMD: break;
+		case ao::N3T_RAID: break;
+		case ao::N3T_SHADOW_LEVEL: break;
+		case ao::N3T_CLONE: break;
+		case ao::N3T_SHOP_COMMISSION: break;
+		case ao::N3T_SERVER_PATH_POS_DEBUG_INFO: break;
+		case ao::N3T_SKILL: break;
+		case ao::N3T_LEAVE_BATTLE: break;
+		case ao::N3T_SHOP_INFO: break;
+		case ao::N3T_APPEARANCE_UPDATE: break;
+		case ao::N3T_N3_TELEPORT: break;
+		case ao::N3T_PERK_UPDATE: break;
+		case ao::N3T_SEND_SCORE: break;
+		case ao::N3T_RESURRECT: break;
+		case ao::N3T_UPDATE_CLIENT_VISUAL: break;
+		case ao::N3T_HOUSE_DEMOLISH_START: break;
+		case ao::N3T_PLAY_SOUND1: break;
+		case ao::N3T_ATTACK_INFO: break;
+		case ao::N3T_TEAM_MEMBER: break;
+		case ao::N3T_SPAWN_MECH: break;
+		case ao::N3T_QUEST_FULL_UPDATE: break;
+		case ao::N3T_CHESTITEM_FULL_UPDATE: break;
+		case ao::N3T_NANO_ATTACK: break;
+		case ao::N3T_DROP_DYNEL: break;
+		case ao::N3T_CONTAINER_ADD_ITEM: break;
+		case ao::N3T_VISIBILITY: break;
+		case ao::N3T_STOP_FIGHT: break;
+		case ao::N3T_BATTLE_OVER: break;
+		case ao::N3T_INVENTORY_UPDATED: break;
+		case ao::N3T_DOOR_STATUS_UPDATE: break;
+		case ao::N3T_TEAM_INVITE: break;
+		case ao::N3T_SHOP_STATUS: break;
+		case ao::N3T_INFO_PACKET: break;
+		case ao::N3T_SPELL_LIST: break;
+		case ao::N3T_INVENTORY_UPDATE: break;
+		case ao::N3T_CORPSE_FULL_UPDATE: break;
+		case ao::N3T_FEEDBACK: break;
+		case ao::N3T_CHAR_SEC_SPEC_ATTACK: break;
+		case ao::N3T_BANK_CORPSE: break;
+		case ao::N3T_GENERIC_CMD: break;
+		case ao::N3T_PATH_MOVE_CMD: break;
+		case ao::N3T_ARRIVE_AT_BS: break;
+		case ao::N3T_CHAR_DC_MOVE: break;
+		case ao::N3T_PLAYFIELD_ALL_TOWERS: break;
+		case ao::N3T_KNUBOT_FINISH_TRADE: break;
+		case ao::N3T_KNUBOT_ANSWER_LIST: break;
+		case ao::N3T_STOP_LOGOUT: break;
+		case ao::N3T_CHAR_IN_PLAY: break;
+		case ao::N3T_SHOP_UPDATE: break;
+		case ao::N3T_MECH_INFO: break;
+		case ao::N3T_REMOVE_PET:
 		{
 			if (message_info->size == 0x15)
 			{
@@ -1534,17 +1525,17 @@ namespace isxao_utilities
 			}			
 			break;
 		}
-		case N3T_PLAYFIELD_ALL_CITIES: break;
-		case N3T_TRAPITEM_FULL_UPDATE: break;
-		case N3T_INSPECT: break;
-		case N3T_PLAYFIELD_TOWER_UPDATE_CLIENT: break;
-		case N3T_SERVER_POS_DEBUG_INFO: break;
-		case N3T_QUEST_ALTERNATIVE: break;
-		case N3T_FULL_AUTO: break;
-		case N3T_CHAT_CMD: break;
-		case N3T_MISSED_ATTACK_INFO: break;
-		case N3T_KNUBOT_APPEND_TEXT: break;
-		case N3T_CHARACTER_ACTION:
+		case ao::N3T_PLAYFIELD_ALL_CITIES: break;
+		case ao::N3T_TRAPITEM_FULL_UPDATE: break;
+		case ao::N3T_INSPECT: break;
+		case ao::N3T_PLAYFIELD_TOWER_UPDATE_CLIENT: break;
+		case ao::N3T_SERVER_POS_DEBUG_INFO: break;
+		case ao::N3T_QUEST_ALTERNATIVE: break;
+		case ao::N3T_FULL_AUTO: break;
+		case ao::N3T_CHAT_CMD: break;
+		case ao::N3T_MISSED_ATTACK_INFO: break;
+		case ao::N3T_KNUBOT_APPEND_TEXT: break;
+		case ao::N3T_CHARACTER_ACTION:
 		{
 			if(message_info->size == 0x27)
 			{
@@ -1553,64 +1544,64 @@ namespace isxao_utilities
 			}			
 			break;
 		}
-		case N3T_HOUSE_DISAPPEARED: break;
-		case N3T_IMPULSE: break;
-		case N3T_PLAYFIELD_ANARCHY_F: break;
-		case N3T_CHAT_TEXT: break;
-		case N3T_GAME_TIME: break;
-		case N3T_SET_WANTED_DIRECTION: break;
-		case N3T_AO_TRANSPORT_SIGNAL: break;
-		case N3T_PET_COMMAND: break;
-		case N3T_ORG_SERVER: break;
-		case N3T_SET_STAT: break;
-		case N3T_SET_NAME: break;
-		case N3T_STOP_MOVING_CMD: break;
-		case N3T_SPECIAL_ATTACK_INFO: break;
-		case N3T_GIVE_QUEST_TO_MEMBER: break;
-		case N3T_KNUBOT_START_TRADE: break;
-		case N3T_GFX_TRIGGER: break;
-		case N3T_SHOP_ITEM_PRICE: break;
-		case N3T_NEW_LEVEL: break;
-		case N3T_ORG_CLIENT: break;
-		case N3T_VENDING_MACHINE_FULL_UPDATE: break;
+		case ao::N3T_HOUSE_DISAPPEARED: break;
+		case ao::N3T_IMPULSE: break;
+		case ao::N3T_PLAYFIELD_ANARCHY_F: break;
+		case ao::N3T_CHAT_TEXT: break;
+		case ao::N3T_GAME_TIME: break;
+		case ao::N3T_SET_WANTED_DIRECTION: break;
+		case ao::N3T_AO_TRANSPORT_SIGNAL: break;
+		case ao::N3T_PET_COMMAND: break;
+		case ao::N3T_ORG_SERVER: break;
+		case ao::N3T_SET_STAT: break;
+		case ao::N3T_SET_NAME: break;
+		case ao::N3T_STOP_MOVING_CMD: break;
+		case ao::N3T_SPECIAL_ATTACK_INFO: break;
+		case ao::N3T_GIVE_QUEST_TO_MEMBER: break;
+		case ao::N3T_KNUBOT_START_TRADE: break;
+		case ao::N3T_GFX_TRIGGER: break;
+		case ao::N3T_SHOP_ITEM_PRICE: break;
+		case ao::N3T_NEW_LEVEL: break;
+		case ao::N3T_ORG_CLIENT: break;
+		case ao::N3T_VENDING_MACHINE_FULL_UPDATE: break;
 		default: break;
 		}
 		delete message_info;
 	}
 
-	void HandleAddPetMessage(add_pet_message pet_message)
+	void HandleAddPetMessage(isxao_classes::add_pet_message pet_message)
 	{
-		char pet[MAX_STRING];
+		char pet[MAX_VARSTRING];
 		sprintf_s(pet, sizeof(pet), "%I64u",pet_message.identity().combined_identity());
 		char *argv[] = { pet };
 		pISInterface->ExecuteEvent(GetEventId("AO_onAddPet"), 0, 1, argv);
 		//delete argv;
 	}
 
-	void HandleAttackMessage(attack_message attack_message)
+	void HandleAttackMessage(isxao_classes::attack_message attack_message)
 	{
-		char target[MAX_STRING];
+		char target[MAX_VARSTRING];
 		sprintf_s(target, sizeof(target), "%I64u", attack_message.target().combined_identity());
 		char *argv[] = { target };
 		pISInterface->ExecuteEvent(GetEventId("AO_onAttack"), 0, 1, argv);
 		//delete argv;
 	}
 
-	void HandleCastNanoSpellMessage(cast_nano_spell_message cast_nano_spell_message)
+	void HandleCastNanoSpellMessage(isxao_classes::cast_nano_spell_message cast_nano_spell_message)
 	{
-		char nano_id[MAX_STRING];
-		char target[MAX_STRING];
-		char caster[MAX_STRING];
+		char nano_id[MAX_VARSTRING];
+		char target[MAX_VARSTRING];
+		char caster[MAX_VARSTRING];
 		sprintf_s(nano_id, sizeof(nano_id), "%d", cast_nano_spell_message.nano_id());
 		sprintf_s(target, sizeof(target), "%I64u", cast_nano_spell_message.target().combined_identity());
 		sprintf_s(caster, sizeof(caster), "%I64u", cast_nano_spell_message.caster().combined_identity());
 		char *argv[] = { nano_id, target, caster };
 		pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell"), 0, 3, argv);
-		if (IsClientId(cast_nano_spell_message.target().id()))
+		if (is_client_id(cast_nano_spell_message.target().id()))
 			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_TargetSelf"), 0, 3, argv);
 		else
 			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_TargetOther"), 0, 3, argv);
-		if (IsClientId(cast_nano_spell_message.caster().id()))
+		if (is_client_id(cast_nano_spell_message.caster().id()))
 			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_CasterSelf"), 0, 3, argv);
 		else
 			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_CasterOther"), 0, 3, argv);
@@ -1618,90 +1609,90 @@ namespace isxao_utilities
 
 	void HandleCharacterActionMessage(isxao_classes::character_action_message character_action_message)
 	{
-		switch (::TypeCharacterAction_e(character_action_message.character_action_type()))
+		switch (ao::TypeCharacterAction_e(character_action_message.character_action_type()))
 		{
-		case ::CAT_FINISH_NANO_CASTING:
+		case ao::CAT_FINISH_NANO_CASTING:
 		{
-			char nano_id[MAX_STRING];
+			char nano_id[MAX_VARSTRING];
 			sprintf_s(nano_id, sizeof(nano_id), "%d", character_action_message.param_2());
 			char * argv[] = { nano_id };
 			pISInterface->ExecuteEvent(GetEventId("AO_onFinishedCastingNano"), 0, 1, argv);
 			break;
 		}
-		case ::CAT_SET_NANO_DURATION:
+		case ao::CAT_SET_NANO_DURATION:
 		{
-			identity_t caster_identity;
+			ao::identity_t caster_identity;
 			caster_identity.type = 50000;
 			caster_identity.id = character_action_message.param_1();
-			char nano_id[MAX_STRING];
+			char nano_id[MAX_VARSTRING];
 			sprintf_s(nano_id, sizeof(nano_id), "%d", character_action_message.identity().id());
-			char caster_id[MAX_STRING];
+			char caster_id[MAX_VARSTRING];
 			sprintf_s(caster_id, sizeof(caster_id), "%I64u", caster_identity.get_combined_identity());
-			char duration[MAX_STRING];
+			char duration[MAX_VARSTRING];
 			sprintf_s(duration, sizeof(duration), "%d", character_action_message.param_2());
 			char * argv[] = { nano_id, caster_id, duration };
 			pISInterface->ExecuteEvent(GetEventId("AO_onNanoApplied"), 0, 3, argv);
 			break;
 		}
-		case ::CAT_STAND_UP:
+		case ao::CAT_STAND_UP:
 		{
 			pISInterface->ExecuteEvent(GetEventId("AO_onStand"));
 			break;
 		}
-		case ::CAT_TEAM_REQUEST: break;
-		case ::CAT_CAST_NANO: break;
-		case ::CAT_TEAM_REQUEST_REPLY: break;
-		case ::CAT_LEAVE_TEAM: break;
-		case ::CAT_ACCEPT_TEAM_REQUEST: break;
-		case ::CAT_REMOVE_FRIENDLY_NANO: break;
-		case ::CAT_USE_ITEM_ON_ITEM: break;
-		case ::CAT_UNKNOWN_3: break;
-		case ::CAT_INFO_REQUEST: break;
-		case ::CAT_INTERRUPT_NANO_CASTING: break;
-		case ::CAT_DELETE_ITEM: break;
-		case ::CAT_LOGOUT: break;
-		case ::CAT_STOPLOGOUT: break;
-		case ::CAT_EQUIP: break;
-		case ::CAT_STARTED_SNEAKING: break;
-		case ::CAT_START_SNEAK: break;
-		case ::CAT_CHANGE_VISUAL_FLAG: break;
-		case ::CAT_CHANGE_ANIMATION_AND_STANCE: break;
-		case ::CAT_UPLOAD_NANO: break;
-		case ::CAT_TRADESKILL_SOURCE_CHANGED: break;
-		case ::CAT_TRADESKILL_TARGET_CHANGED: break;
-		case ::CAT_TRADESKILL_BUILD_PRESSED: break;
-		case ::CAT_TRADESKILL_SOURCE: break;
-		case ::CAT_TRADESKILL_TARGET: break;
-		case ::CAT_TRADESKILL_NOT_VALID: break;
-		case ::CAT_TRADESKILL_OUT_OF_RANGE: break;
-		case ::CAT_TRADESKILL_REQUIREMENT: break;
-		case ::CAT_TRADESKILL_RESULT: break;
+		case ao::CAT_TEAM_REQUEST: break;
+		case ao::CAT_CAST_NANO: break;
+		case ao::CAT_TEAM_REQUEST_REPLY: break;
+		case ao::CAT_LEAVE_TEAM: break;
+		case ao::CAT_ACCEPT_TEAM_REQUEST: break;
+		case ao::CAT_REMOVE_FRIENDLY_NANO: break;
+		case ao::CAT_USE_ITEM_ON_ITEM: break;
+		case ao::CAT_UNKNOWN_3: break;
+		case ao::CAT_INFO_REQUEST: break;
+		case ao::CAT_INTERRUPT_NANO_CASTING: break;
+		case ao::CAT_DELETE_ITEM: break;
+		case ao::CAT_LOGOUT: break;
+		case ao::CAT_STOPLOGOUT: break;
+		case ao::CAT_EQUIP: break;
+		case ao::CAT_STARTED_SNEAKING: break;
+		case ao::CAT_START_SNEAK: break;
+		case ao::CAT_CHANGE_VISUAL_FLAG: break;
+		case ao::CAT_CHANGE_ANIMATION_AND_STANCE: break;
+		case ao::CAT_UPLOAD_NANO: break;
+		case ao::CAT_TRADESKILL_SOURCE_CHANGED: break;
+		case ao::CAT_TRADESKILL_TARGET_CHANGED: break;
+		case ao::CAT_TRADESKILL_BUILD_PRESSED: break;
+		case ao::CAT_TRADESKILL_SOURCE: break;
+		case ao::CAT_TRADESKILL_TARGET: break;
+		case ao::CAT_TRADESKILL_NOT_VALID: break;
+		case ao::CAT_TRADESKILL_OUT_OF_RANGE: break;
+		case ao::CAT_TRADESKILL_REQUIREMENT: break;
+		case ao::CAT_TRADESKILL_RESULT: break;
 		default: break;
 		}
 	}
 
-	void HandleFollowTargetMessage(follow_target_message follow_message)
+	void HandleFollowTargetMessage(isxao_classes::follow_target_message follow_message)
 	{
-		char target[MAX_STRING];
+		char target[MAX_VARSTRING];
 		sprintf_s(target, sizeof(target), "%I64u", follow_message.target().combined_identity());
 		char *argv[] = { target };
 		pISInterface->ExecuteEvent(GetEventId("AO_onFollowTarget"), 0, 1, argv);
 		//delete argv;
 	}
 	
-	void HandleRemovePetMessage(remove_pet_message remove_pet_message)
+	void HandleRemovePetMessage(isxao_classes::remove_pet_message remove_pet_message)
 	{
-		char pet[MAX_STRING];
+		char pet[MAX_VARSTRING];
 		sprintf_s(pet, sizeof(pet), "%I64u", remove_pet_message.identity().combined_identity());
 		char *argv[] = { pet };
 		pISInterface->ExecuteEvent(GetEventId("AO_onRemovePet"), 0, 1, argv);
 		//delete argv;
 	}
 
-	void HandleShieldAttackMessage(shield_attack_message shield_attack_message)
+	void HandleShieldAttackMessage(isxao_classes::shield_attack_message shield_attack_message)
 	{
-		char damage[MAX_STRING];
-		char shieldee[MAX_STRING];
+		char damage[MAX_VARSTRING];
+		char shieldee[MAX_VARSTRING];
 		sprintf_s(damage, sizeof(damage), "%d", shield_attack_message.damage_shielded());
 		sprintf_s(shieldee, sizeof(shieldee), "%I64u", shield_attack_message.shieldee().combined_identity());
 		char *argv[] = { damage, shieldee };
@@ -1714,7 +1705,7 @@ namespace isxao_utilities
 		char* sender = _strdup(group_message_info->SenderName.c_str());
 		char* channel = _strdup(group_message_info->ChatChannel.c_str());
 		char* message = _strdup(group_message_info->Message.c_str());
-		char id[MAX_STRING];
+		char id[MAX_VARSTRING];
 		sprintf_s(id, sizeof(id), "%I64u", group_message_info->SenderIdentity.get_combined_identity());
 		char *argv[] = { sender, channel, message, id };
 		pISInterface->ExecuteEvent(GetEventId("AO_onGroupMessageReceived"), 0, 4, argv);
@@ -1725,7 +1716,7 @@ namespace isxao_utilities
 	{
 		char* sender = _strdup(private_message_info->SenderName.c_str());
 		char* message = _strdup(private_message_info->Message.c_str());
-		char id[MAX_STRING];
+		char id[MAX_VARSTRING];
 		sprintf_s(id, sizeof(id), "%I64u", private_message_info->SenderIdentity.get_combined_identity());
 		char *argv[] = { sender, message, id };
 		pISInterface->ExecuteEvent(GetEventId("AO_onTellReceived"), 0, 3, argv);
@@ -1736,7 +1727,7 @@ namespace isxao_utilities
 	{
 		char* sender = _strdup(vicinity_message_info->SenderName.c_str());
 		char* message = _strdup(vicinity_message_info->Message.c_str());
-		char id[MAX_STRING];
+		char id[MAX_VARSTRING];
 		sprintf_s(id, sizeof(id), "%I64u", vicinity_message_info->SenderIdentity.get_combined_identity());
 		char *argv[] = { sender, message, id };
 		pISInterface->ExecuteEvent(GetEventId("AO_onVicinityMessageReceived"), 0, 3, argv);
@@ -1745,146 +1736,146 @@ namespace isxao_utilities
 
 	void HandleSystemChat(PSYSTEMCHATINFO system_chat_info)
 	{
-		char chat_type[MAX_STRING];
+		char chat_type[MAX_VARSTRING];
 		char* text = _strdup(system_chat_info->Text.c_str());
-		switch (::ChatGroup_e(system_chat_info->ChatType))
+		switch (ao::ChatGroup_e(system_chat_info->ChatType))
 		{
-		case ::CG_SYSTEM:
+		case ao::CG_SYSTEM:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "SYSTEM");
 			break;
 		}
-		case ::CG_VICINITY:
+		case ao::CG_VICINITY:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "VICINITY");
 			break;
 		}
-		case ::CG_TELL_MESSAGES:
+		case ao::CG_TELL_MESSAGES:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "TELL_MESSAGES");
 			break;
 		}
-		case ::CG_YOUR_PETS:
+		case ao::CG_YOUR_PETS:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "YOUR_PETS");
 			break;
 		}
-		case ::CG_OTHERS_PETS:
+		case ao::CG_OTHERS_PETS:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "OTHERS_PETS");
 			break;
 		}
-		case ::CG_ME_HIT_BY_ENVIRONMENT:
+		case ao::CG_ME_HIT_BY_ENVIRONMENT:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_ENVIRONMENT");
 			break;
 		}
-		case ::CG_ME_HIT_BY_NANO:
+		case ao::CG_ME_HIT_BY_NANO:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_NANO");
 			break;
 		}
-		case ::CG_YOUR_PET_HIT_BY_NANO:
+		case ao::CG_YOUR_PET_HIT_BY_NANO:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "YOUR_PET_HIT_BY_NANO");
 			break;
 		}
-		case ::CG_OTHER_HIT_BY_NANO:
+		case ao::CG_OTHER_HIT_BY_NANO:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "OTHER_HIT_BY_NANO");
 			break;
 		}
-		case ::CG_YOU_HIT_OTHER_WITH_NANO:
+		case ao::CG_YOU_HIT_OTHER_WITH_NANO:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "YOU_HIT_OTHER_WITH_NANO");
 			break;
 		}
-		case ::CG_ME_HIT_BY_MONSTER:
+		case ao::CG_ME_HIT_BY_MONSTER:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_MONSTER");
 			break;
 		}
-		case ::CG_ME_HIT_BY_PLAYER:
+		case ao::CG_ME_HIT_BY_PLAYER:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "ME_HIT_BY_PLAYER");
 			break;
 		}
-		case ::CG_YOU_HIT_OTHER:
+		case ao::CG_YOU_HIT_OTHER:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "YOU_HIT_OTHER");
 			break;
 		}
-		case ::CG_YOUR_PET_HIT_BY_OTHER:
+		case ao::CG_YOUR_PET_HIT_BY_OTHER:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "YOUR_PET_HIT_BY_OTHER");
 			break;
 		}
-		case ::CG_OTHER_HIT_BY_OTHER:
+		case ao::CG_OTHER_HIT_BY_OTHER:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "OTHER_HIT_BY_OTHER");
 			break;
 		}
-		case ::CG_ME_GOT_XP:
+		case ao::CG_ME_GOT_XP:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_XP");
 			break;
 		}
-		case ::CG_ME_GOT_SK:
+		case ao::CG_ME_GOT_SK:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_SK");
 			break;
 		}
-		case ::CG_YOUR_PET_HIT_BY_MONSTER:
+		case ao::CG_YOUR_PET_HIT_BY_MONSTER:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "YOUR_PET_HIT_BY_MONSTER");
 			break;
 		}
-		case ::CG_YOUR_MISSES:
+		case ao::CG_YOUR_MISSES:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "YOUR_MISSES");
 			break;
 		}
-		case ::CG_OTHER_MISSES:
+		case ao::CG_OTHER_MISSES:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "OTHER_MISSES");
 			break;
 		}
-		case ::CG_YOU_GAVE_HEALTH:
+		case ao::CG_YOU_GAVE_HEALTH:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "YOU_GAVE_HEALTH");
 			break;
 		}
-		case ::CG_ME_GOT_HEALTH:
+		case ao::CG_ME_GOT_HEALTH:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_HEALTH");
 			break;
 		}
-		case ::CG_ME_GOT_NANO:
+		case ao::CG_ME_GOT_NANO:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "ME_GOT_NANO");
 			break;
 		}
-		case ::CG_YOU_GAVE_NANO:
+		case ao::CG_YOU_GAVE_NANO:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "YOU_GAVE_NANO");
 			break;
 		}
-		case ::CG_ME_CAST_NANO:
+		case ao::CG_ME_CAST_NANO:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "ME_CAST_NANO");
 			break;
 		}
-		case ::CG_TEAM_LOOT_MESSAGES:
+		case ao::CG_TEAM_LOOT_MESSAGES:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "TEAM_LOOT_MESSAGES");
 			break;
 		}
-		case ::CG_VICINITY_LOOT_MESSAGES:
+		case ao::CG_VICINITY_LOOT_MESSAGES:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "VICINITY_LOOT_MESSAGES");
 			break;
 		}
-		case ::CG_RESEARCH:
+		case ao::CG_RESEARCH:
 		{
 			strcpy_s(chat_type, sizeof(chat_type), "RESEARCH");
 			break;

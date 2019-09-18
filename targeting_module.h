@@ -1,10 +1,10 @@
 #pragma once
 
-class TargetingModule
+class targeting_module
 {
 public:
-	AOLIB_OBJECT static void __cdecl RemoveTarget(const identity_t &);
-	AOLIB_OBJECT void SelectSelf();
-	AOLIB_OBJECT static void __cdecl SetTarget(const identity_t&, bool);
-	//AOLIB_OBJECT static void __cdecl SetTargetPet(DWORD);
+	static void __cdecl remove_target(const ao::identity_t &);
+	void select_self();
+	static void __cdecl set_target(const ao::identity_t&, bool);
+	//static void __cdecl SetTargetPet(DWORD);
 };

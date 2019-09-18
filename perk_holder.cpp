@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 	perk_holder_t perk_holder::get_perk_holder_data() const

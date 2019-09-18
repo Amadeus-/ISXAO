@@ -4,11 +4,11 @@
 class stat_holder
 {
 public:
-	AOLIB_OBJECT DWORD get_skill_locks(std::vector<action_lock*>&) const;
-	AOLIB_OBJECT action_lock* get_skill_lock(special_action_template*) const;
-	AOLIB_OBJECT stat_holder_t get_stat_holder_data() const;
-	AOLIB_OBJECT DWORD get_stat_map(std::map<DWORD, LONG>&) const;
+	DWORD get_skill_locks(std::vector<ao::action_lock*>&) const;
+	ao::action_lock* get_skill_lock(ao::special_action_template*) const;
+	ao::stat_holder_t get_stat_holder_data() const;
+	DWORD get_stat_map(std::map<DWORD, LONG>&) const;
 private:
 	// ReSharper disable once CppUninitializedNonStaticDataMember
-	stat_holder_t stat_holder_;
+	ao::stat_holder_t stat_holder_;
 };

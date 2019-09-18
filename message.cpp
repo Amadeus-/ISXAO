@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 	
 #ifdef MESSAGE_T__DATA_BLOCK_SIZE_GET_USE_NATIVE

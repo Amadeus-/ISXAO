@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 	p_char_movement_status_t vehicle::get_char_movement_status()

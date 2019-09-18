@@ -2,7 +2,7 @@
 #ifndef ISXAO_GLOBALS_H
 #define ISXAO_GLOBALS_H
 
-namespace isxao_globals
+namespace isxao
 {	
 
 #pragma region Process
@@ -47,7 +47,7 @@ namespace isxao_globals
 
 	// Instances
 	AOLIB_VAR DWORD n3_dynel_t__m_pc_dynel_dir_instance;
-	AOLIB_VAR dynel_map_t **pp_dynel_dir;
+	AOLIB_VAR ao::dynel_map_t **pp_dynel_dir;
 #define P_DYNEL_DIR (*pp_dynel_dir)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	// Functions
@@ -69,7 +69,7 @@ namespace isxao_globals
 
 	// Instances
 	AOLIB_VAR DWORD n3_playfield_t__m_pc_playfield_dir_instance;
-	AOLIB_VAR PlayfieldDir** pp_playfield_dir;
+	AOLIB_VAR ao::PlayfieldDir** pp_playfield_dir;
 #define P_PLAYFIELD_DIR (*pp_playfield_dir)  // NOLINT(cppcoreguidelines-macro-usage)
 
 #pragma endregion
@@ -152,6 +152,7 @@ namespace isxao_globals
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_first_name;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_formula_progress;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_formula_radius;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_full_perk_map;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_global_character_position;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1;
@@ -203,22 +204,22 @@ namespace isxao_globals
 
 	// Instances
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__m_pc_instance;
-	AOLIB_VAR isxao_classes::engine_client_anarchy **pp_engine_client_anarchy;
+	AOLIB_VAR ao::engine_client_anarchy **pp_engine_client_anarchy;
 #define P_ENGINE_CLIENT_ANARCHY (*pp_engine_client_anarchy)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD m_c_stat_name_dir;
-	AOLIB_VAR p_stat_name_map_t p_stat_name_dir;
+	AOLIB_VAR ao::p_stat_name_map_t p_stat_name_dir;
 #define P_STAT_NAME_MAP p_stat_name_dir  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD m_c_nano_item_dir;
-	AOLIB_VAR p_nano_item_map_t p_nano_item_dir;
+	AOLIB_VAR ao::p_nano_item_map_t p_nano_item_dir;
 #define P_NANO_ITEM_MAP p_nano_item_dir  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD item_manager_t__m_ppc_instance;
-	AOLIB_VAR std::vector<acg_game_item_t> ***ppp_item_vector;
+	AOLIB_VAR std::vector<ao::acg_game_item_t> ***ppp_item_vector;
 #define P_ITEM_VECTOR (**ppp_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD static_item_manager_t__m_ppc_instance;
-	AOLIB_VAR std::vector<static_item_t> ***ppp_static_item_vector;
+	AOLIB_VAR std::vector<ao::static_item_t> ***ppp_static_item_vector;
 #define P_STATIC_ITEM_VECTOR (**ppp_static_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD game_time_t__m_pc_instance;
-	AOLIB_VAR game_time** pp_game_time;
+	AOLIB_VAR ao::game_time** pp_game_time;
 #define P_GAME_TIME (*pp_game_time)
 
 #pragma endregion
@@ -233,22 +234,22 @@ namespace isxao_globals
 	AOLIB_VAR DWORD html_parser_c__extract_text;
 
 	AOLIB_VAR DWORD input_config_t__m_pc_instance;
-	AOLIB_VAR input_config** pp_input_config;
+	AOLIB_VAR ao::input_config** pp_input_config;
 #define P_INPUT_CONFIG (*pp_input_config)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD input_config_t__get_instance;
 	AOLIB_VAR DWORD input_config_t__set_current_target;
 
 	AOLIB_VAR DWORD targeting_module_t__m_pc_instance;
-	AOLIB_VAR TargetingModule** pp_targeting_module;
+	AOLIB_VAR ao::targeting_module** pp_targeting_module;
 #define P_TARGETING_MODULE (*pp_targeting_module)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD targeting_module_t__m_pc_selection_indicator;
-	AOLIB_VAR indicator_t** pp_selection_indicator;
+	AOLIB_VAR ao::indicator_t** pp_selection_indicator;
 #define P_SELECTION_INDICATOR (*pp_selection_indicator)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD targeting_module_t__m_pc_attacking_indicator;
-	AOLIB_VAR indicator_t** pp_attacking_indicator;
+	AOLIB_VAR ao::indicator_t** pp_attacking_indicator;
 #define P_ATTACKING_INDICATOR (*pp_attacking_indicator)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD targeting_module_t__m_c_last_target;
-	AOLIB_VAR identity_t* p_last_target;
+	AOLIB_VAR ao::identity_t* p_last_target;
 #define P_LAST_TARGET (p_last_target)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD targeting_module_t__targeting_module_t;
 	AOLIB_VAR DWORD targeting_module_t__initialise_message;
@@ -457,7 +458,7 @@ namespace isxao_globals
 #pragma region ChatGUIModule
 
 	AOLIB_VAR DWORD  ChatGUIModule_c__s_pcInstance;
-	AOLIB_VAR chat_gui_module** ppChatGUIModule;
+	AOLIB_VAR ao::chat_gui_module** ppChatGUIModule;
 #define pChatGUIModule (*ppChatGUIModule)
 
 	AOLIB_VAR DWORD ChatGUIModule_c__HandleGroupAction;
@@ -530,7 +531,7 @@ namespace isxao_globals
 #pragma region LoginModule
 
 	AOLIB_VAR DWORD LoginModule_c__m_pcInstance;
-	AOLIB_VAR login_module_t** ppLoginModule;
+	AOLIB_VAR ao::login_module_t** ppLoginModule;
 #define pLoginModule (*ppLoginModule)
 
 #pragma endregion
@@ -538,7 +539,7 @@ namespace isxao_globals
 #pragma region ChatWindowController
 
 	AOLIB_VAR DWORD ChatWindowController_c__m_pcInstance;
-	AOLIB_VAR chat_window_controller** ppChatWindowController;
+	AOLIB_VAR ao::chat_window_controller** ppChatWindowController;
 #define pChatWindowController (*ppChatWindowController)
 
 	AOLIB_VAR DWORD ChatGroupController_c__sub_10083D9C;
@@ -554,7 +555,7 @@ namespace isxao_globals
 #pragma region CommandInterpreter
 
 	AOLIB_VAR DWORD CommandInterpreter_c__m_pcInstance;
-	AOLIB_VAR CommandInterpreter** ppCommandInterpreter;
+	AOLIB_VAR ao::command_interpreter** ppCommandInterpreter;
 #define pCommandInterpreter (*ppCommandInterpreter)
 	AOLIB_VAR DWORD CommandInterpreter_c__ParseTextCommand;
 
@@ -582,7 +583,7 @@ namespace isxao_globals
 #pragma region n3DatabaseHandler
 
 	AOLIB_VAR DWORD n3DatabaseHandler_t__s_pcInstance;
-	AOLIB_VAR database_handler** ppDatabaseHandler;
+	AOLIB_VAR ao::database_handler** ppDatabaseHandler;
 #define pDatabaseHandler (*ppDatabaseHandler)
 
 #pragma endregion
@@ -594,5 +595,5 @@ namespace isxao_globals
 	bool get_proc_address(const HMODULE& module_handle, DWORD& function_address, const char* function_name, const char* mangled_function_name);
 
 }
-using namespace isxao_globals;
+
 #endif // ISXAO_GLOBALS_H

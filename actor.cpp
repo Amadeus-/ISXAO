@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 	DWORD actor::build_ls_ncu(LSIndex* p_index)
@@ -158,7 +158,7 @@ namespace isxao_classes
 
 	void actor::do_target()
 	{
-		P_TARGETING_MODULE->SetTarget(this->get_identity(), false);
+		P_TARGETING_MODULE->set_target(this->get_identity(), false);
 	}
 
 	float actor::estimated_distance_to(vector3_t &position)
@@ -190,9 +190,9 @@ namespace isxao_classes
 	nano_template* actor::get_ncu(const PCSTR effect_name)
 	{
 		const identity_t container_identity(0, 0);
-		char name[MAX_STRING] = { 0 };
-		char search_name[MAX_STRING];
-		strcpy_s(search_name, MAX_STRING, effect_name);
+		char name[MAX_VARSTRING] = { 0 };
+		char search_name[MAX_VARSTRING];
+		strcpy_s(search_name, MAX_VARSTRING, effect_name);
 		_strlwr_s(search_name);
 		std::vector<nano_template> nano_template_vector;
 		if (this->get_spell_template_data()->get_nano_template_list(nano_template_vector))
@@ -200,7 +200,7 @@ namespace isxao_classes
 			for (auto it = nano_template_vector.begin(); it != nano_template_vector.end(); ++it)  // NOLINT(modernize-loop-convert)
 			{
 				const auto entry = static_cast<nano_template*>(&(*it));
-				strcpy_s(name, MAX_STRING, P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name(entry->get_nano_identity(), container_identity));
+				strcpy_s(name, MAX_VARSTRING, P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name(entry->get_nano_identity(), container_identity));
 				_strlwr_s(name);
 				if (strstr(name, search_name))
 					return entry;
@@ -257,7 +257,7 @@ namespace isxao_classes
 
 	bool actor::is_fighting_me()
 	{
-		return IsClientId(this->get_simple_char_data()->p_weapon_holder->weapon_target_identity.id);
+		return is_client_id(this->get_simple_char_data()->p_weapon_holder->weapon_target_identity.id);
 	}
 
 	bool actor::is_idle()
@@ -376,15 +376,15 @@ namespace isxao_classes
 	{
 		const identity_t container_identity(0, 0);
 		std::map<identity_t, DWORD> pet_map;
-		char name[MAX_STRING];
-		char search_name[MAX_STRING];
+		char name[MAX_VARSTRING];
+		char search_name[MAX_VARSTRING];
 		if (get_pet_ids(pet_map) == 0)
 			return nullptr;		
-		strcpy_s(search_name, MAX_STRING, pet_name);
+		strcpy_s(search_name, MAX_VARSTRING, pet_name);
 		_strlwr_s(search_name);
 		for (auto it = pet_map.begin(); it != pet_map.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
-			strcpy_s(name, MAX_STRING, P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name((*it).first, container_identity));
+			strcpy_s(name, MAX_VARSTRING, P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name((*it).first, container_identity));
 			_strlwr_s(name);
 			if (strstr(name, search_name))
 				return dynel::get_dynel((*it).first)->to_actor();
@@ -400,7 +400,7 @@ namespace isxao_classes
 
 	DWORD actor::get_pet_ids(std::map<identity_t, DWORD>& m)
 	{
-		if (!IsClientId(this->get_identity().id))
+		if (!is_client_id(this->get_identity().id))
 		{
 			std::map<identity_t, p_n3_dynel_t> dynel_map;
 			P_DYNEL_DIR->copy_map(dynel_map);
@@ -458,9 +458,9 @@ namespace isxao_classes
 		return nullptr;
 	}
 
-	WeaponHolder* actor::get_weapon_holder()
+	weapon_holder* actor::get_weapon_holder()
 	{
-		return reinterpret_cast<WeaponHolder*>(this->get_simple_char_data()->p_weapon_holder);
+		return reinterpret_cast<weapon_holder*>(this->get_simple_char_data()->p_weapon_holder);
 	}
 
 	void actor::kick()

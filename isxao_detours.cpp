@@ -60,9 +60,9 @@ namespace isxao_detours
 
 #pragma region Adding and Removing Playfield Dynels
 
-	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::Playfield_t__AddChildDynel_Trampoline(dynel*, const vector3_t&, const quaternion_t&));
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::Playfield_t__AddChildDynel_Trampoline(ao::dynel*, const ao::vector3_t&, const ao::quaternion_t&));
 
-	void ao_detours::Playfield_t__AddChildDynel_Detour(dynel* p_dynel, const vector3_t &position, const quaternion_t &rotation)
+	void ao_detours::Playfield_t__AddChildDynel_Detour(ao::dynel* p_dynel, const ao::vector3_t &position, const ao::quaternion_t &rotation)
 	{
 		ActorService(pExtension, AddActor, p_dynel);
 		Playfield_t__AddChildDynel_Trampoline(p_dynel, position, rotation);
@@ -74,7 +74,7 @@ namespace isxao_detours
 	{
 		if (instance == 0)
 		{
-			p_n3_dynel_t p_dynel;
+			ao::p_n3_dynel_t p_dynel;
 			__asm {mov[p_dynel], ecx};
 			ActorService(pExtension, RemoveActor, p_dynel);
 		}
@@ -85,26 +85,26 @@ namespace isxao_detours
 
 #pragma region Client ProcessMessage and Handling
 
-	DETOUR_TRAMPOLINE_EMPTY(DWORD ao_detours::client_t__process_message_trampoline(message*));
+	DETOUR_TRAMPOLINE_EMPTY(DWORD ao_detours::client_t__process_message_trampoline(ao::message*));
 
-	DWORD ao_detours::client_t__process_message_detour(message* p1)
+	DWORD ao_detours::client_t__process_message_detour(ao::message* p1)
 	{
 		//if (GetGameState() == GAMESTATE_IN_GAME)
 		//{
 			//FILE * pFILE;
-			//char buffer[MAX_STRING];
+			//char buffer[MAX_VARSTRING];
 
-			switch (::PacketType_e(p1->message_type_get()))
+			switch (ao::PacketType_e(p1->message_type_get()))
 			{
-			case ::PT_SYSTEM_MESSAGE: break;
-			case ::PT_TEXT_MESSAGE:
+			case ao::PT_SYSTEM_MESSAGE: break;
+			case ao::PT_TEXT_MESSAGE:
 			{
 				break;
 			}
-			case ::PT_N3_MESSAGE:
+			case ao::PT_N3_MESSAGE:
 			{
-				size_t length = static_cast<n3_message*>(p1)->message_body_len();
-				PCHAR message = static_cast<n3_message*>(p1)->message_body_get();
+				size_t length = static_cast<ao::n3_message*>(p1)->message_body_len();
+				PCHAR message = static_cast<ao::n3_message*>(p1)->message_body_get();
 				PVOID export_message = malloc(length);
 				memcpy_s(export_message, length, message, length);
 				PN3MESSAGEINFO message_info = new N3MESSAGEINFO(export_message, length);
@@ -338,9 +338,9 @@ namespace isxao_detours
 				//}
 				break;
 			}
-			case ::PT_PING_MESSAGE: break;
-			case ::PT_OPERATOR_MESSAGE: break;
-			case ::PT_INITIATE_COMPRESSION_MESSAGE: break;
+			case ao::PT_PING_MESSAGE: break;
+			case ao::PT_OPERATOR_MESSAGE: break;
+			case ao::PT_INITIATE_COMPRESSION_MESSAGE: break;
 			default: break;
 			}
 		//}
@@ -373,14 +373,14 @@ namespace isxao_detours
 
 #pragma region ChatGUIModule Message Handling
 
-	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::ChatGUIModule_c__HandleGroupAction_Trampoline(p_ppj_client_group_action_t));
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::ChatGUIModule_c__HandleGroupAction_Trampoline(ao::p_ppj_client_group_action_t));
 
-	void ao_detours::ChatGUIModule_c__HandleGroupAction_Detour(p_ppj_client_group_action_t m)
+	void ao_detours::ChatGUIModule_c__HandleGroupAction_Detour(ao::p_ppj_client_group_action_t m)
 	{
 		if(GetGameState() == GAMESTATE_IN_GAME)
 		{
 /*			FILE * pFILE;
-			char buffer[MAX_STRING];
+			char buffer[MAX_VARSTRING];
 			sprintf_s(buffer, "Group Action:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n", m->unknown_0x4, m->Unknown0x8, m->String1.c_str(), m->unknown_0x28, m->unknown_0x2C, m->unknown_0x30, m->Unknown0x34, m->Unknown0x38, m->Unknown0x3C, m->unknown_0x40, m->unknown_0x44);
 			fopen_s(&pFILE, "messages.txt", "a");
 			fputs(buffer, pFILE);
@@ -389,9 +389,9 @@ namespace isxao_detours
 		ChatGUIModule_c__HandleGroupAction_Trampoline(m);
 	}
 
-	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::ChatGUIModule_c__HandleGroupMessage_Trampoline(p_ppj_group_message_t));
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::ChatGUIModule_c__HandleGroupMessage_Trampoline(ao::p_ppj_group_message_t));
 
-	void ao_detours::ChatGUIModule_c__HandleGroupMessage_Detour(p_ppj_group_message_t m)
+	void ao_detours::ChatGUIModule_c__HandleGroupMessage_Detour(ao::p_ppj_group_message_t m)
 	{
 		if(GetGameState() == GAMESTATE_IN_GAME)
 		{
@@ -401,14 +401,14 @@ namespace isxao_detours
 		ChatGUIModule_c__HandleGroupMessage_Trampoline(m);
 	}
 	
-	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::ChatGUIModule_c__HandlePrivateGroupAction_Trampoline(p_ppj_client_private_group_action_t));
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::ChatGUIModule_c__HandlePrivateGroupAction_Trampoline(ao::p_ppj_client_private_group_action_t));
 
-	void ao_detours::ChatGUIModule_c__HandlePrivateGroupAction_Detour(p_ppj_client_private_group_action_t m)
+	void ao_detours::ChatGUIModule_c__HandlePrivateGroupAction_Detour(ao::p_ppj_client_private_group_action_t m)
 	{
 		if(GetGameState() == GAMESTATE_IN_GAME)
 		{
 			//FILE * pFILE;
-			//char buffer[MAX_STRING];
+			//char buffer[MAX_VARSTRING];
 			//sprintf_s(buffer, "PrivateGroupAction Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%s\n", m->unknown_0x04, m->unknown_0x08, m->String1.c_str(), m->unknown_0x28, m->unknown_0x2C, m->String2.c_str());
 			//fopen_s(&pFILE, "messages.txt", "a");
 			//fputs(buffer, pFILE);
@@ -417,14 +417,14 @@ namespace isxao_detours
 		ChatGUIModule_c__HandlePrivateGroupAction_Trampoline(m);
 	}
 
-	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::ChatGUIModule_c__HandlePrivateMessage_Trampoline(p_ppj_client_private_message_t));
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::ChatGUIModule_c__HandlePrivateMessage_Trampoline(ao::p_ppj_client_private_message_t));
 
-	void ao_detours::ChatGUIModule_c__HandlePrivateMessage_Detour(p_ppj_client_private_message_t m)
+	void ao_detours::ChatGUIModule_c__HandlePrivateMessage_Detour(ao::p_ppj_client_private_message_t m)
 	{
 		if(GetGameState() == GAMESTATE_IN_GAME)
 		{
 			//FILE * pFILE;
-			//char buffer[MAX_STRING];
+			//char buffer[MAX_VARSTRING];
 			//sprintf_s(buffer, "Private Message:\n\t%d\n\t%d\n\t%s\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n", m->unknown_0x4, m->SenderId, m->Sender.c_str(), m->Message.c_str(), m->unknown_0x44, m->unknown_0x48, m->Unknown0x4C, m->Unknown0x50);
 			//fopen_s(&pFILE,"messages.txt", "a");
 			//fputs(buffer, pFILE);
@@ -436,14 +436,14 @@ namespace isxao_detours
 		ChatGUIModule_c__HandlePrivateMessage_Trampoline(m);
 	}
 
-	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::ChatGUIModule_c__HandleSystemMessage_Trampoline(p_ppj_client_system_message_t));
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::ChatGUIModule_c__HandleSystemMessage_Trampoline(ao::p_ppj_client_system_message_t));
 
-	void ao_detours::ChatGUIModule_c__HandleSystemMessage_Detour(p_ppj_client_system_message_t m)
+	void ao_detours::ChatGUIModule_c__HandleSystemMessage_Detour(ao::p_ppj_client_system_message_t m)
 	{
 		if(GetGameState() == GAMESTATE_IN_GAME)
 		{
 			//FILE * pFILE;
-			//char buffer[MAX_STRING];
+			//char buffer[MAX_VARSTRING];
 			//sprintf_s(buffer, "System Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%s\n", m->unknown_0x4, m->Unknown0x8, m->String1.c_str(), m->unknown_0x28, m->String2.c_str());
 			//fopen_s(&pFILE, "messages.txt", "a");
 			//fputs(buffer, pFILE);
@@ -452,27 +452,27 @@ namespace isxao_detours
 		ChatGUIModule_c__HandleSystemMessage_Trampoline(m);
 	}
 
-	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::ChatGUIModule_c__HandleVicinityMessage_Trampoline(p_ppj_client_vicinity_message_t));
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::ChatGUIModule_c__HandleVicinityMessage_Trampoline(ao::p_ppj_client_vicinity_message_t));
 
-	void ao_detours::ChatGUIModule_c__HandleVicinityMessage_Detour(p_ppj_client_vicinity_message_t m)
+	void ao_detours::ChatGUIModule_c__HandleVicinityMessage_Detour(ao::p_ppj_client_vicinity_message_t m)
 	{
 		if (GetGameState() == GAMESTATE_IN_GAME)
 		{
 			//FILE * pFILE;
-			//char buffer[MAX_STRING];
+			//char buffer[MAX_VARSTRING];
 			//sprintf_s(buffer, "Vicinity Message:\n\t%d\n\t%d\n\t%s\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n", m->unknown_0x4, m->SenderId, m->Sender.c_str(), m->Message.c_str(), m->unknown_0x44, m->unknown_0x48, m->Unknown0x4C, m->Unknown0x50);
 			//fopen_s(&pFILE, "messages.txt", "a");
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);
-			//char sender[MAX_STRING];
-			//char ao_message[MAX_STRING];
-			//char id[MAX_STRING];
-			//strcpy_s(sender, MAX_STRING, m->Sender.c_str());
-			//strcpy_s(ao_message, MAX_STRING, m->Message.c_str());
+			//char sender[MAX_VARSTRING];
+			//char ao_message[MAX_VARSTRING];
+			//char id[MAX_VARSTRING];
+			//strcpy_s(sender, MAX_VARSTRING, m->Sender.c_str());
+			//strcpy_s(ao_message, MAX_VARSTRING, m->Message.c_str());
 			//identity_t identity;
 			//identity.Type = 50000;
 			//identity.Id = m->SenderId;
-			//sprintf_s(id, MAX_STRING, "%I64u", identity.get_combined_identity());
+			//sprintf_s(id, MAX_VARSTRING, "%I64u", identity.get_combined_identity());
 			//char *argv[] = { sender, ao_message, id };
 			//pISInterface->ExecuteEvent(GetEventId("AO_onVicinityMessageReceived"), 0, 3, argv);
 			//delete argv;
@@ -492,9 +492,9 @@ namespace isxao_detours
 	{
 		if (GetGameState() == GAMESTATE_IN_GAME)
 		{
-			//char text[MAX_STRING];
+			//char text[MAX_VARSTRING];
 			//strcpy_s(text, sizeof(text), chat_text->c_str());		
-			//char chat_type[MAX_STRING];
+			//char chat_type[MAX_VARSTRING];
 			//switch (::ChatGroup_e(group_id))
 			//{
 			//case ::CG_SYSTEM:
@@ -661,7 +661,7 @@ namespace isxao_detours
 	PVOID ao_detours::FriendListController_c__sub_100A68E6_Detour(string* a, int sender_id, string* c, int d)
 	{
 		//FILE * pFILE;
-		//char buffer[MAX_STRING];
+		//char buffer[MAX_VARSTRING];
 		//sprintf_s(buffer, "Chat Text:\n\t%s\n\t%d\n\t%s\n\t%d\n", a->c_str(), sender_id, c->c_str(), d);
 		//fopen_s(&pFILE, "messages.txt", "a");
 		//fputs(buffer, pFILE);
@@ -678,7 +678,7 @@ namespace isxao_detours
 	PVOID ao_detours::ChatWindowNode_c__sub_1009BB79_Detour(int a, int b, string* c, string* d, int e, int f, char g)
 	{
 		//FILE * pFILE;
-		//char buffer[MAX_STRING];
+		//char buffer[MAX_VARSTRING];
 		//sprintf_s(buffer, "Text:\n\t%d\n\t%d\n\t%s\n\t%s\n\t%d\n\t%d\n\t%d\n", a, b, c->c_str(), d->c_str(), e, f, g);
 		//fopen_s(&pFILE, "messages.txt", "a");
 		//fputs(buffer, pFILE);
@@ -691,14 +691,14 @@ namespace isxao_detours
 
 #pragma region CommandInterpreter
 
-	DETOUR_TRAMPOLINE_EMPTY(bool ao_detours::CommandInterpreter_c__ParseTextCommand_Trampoline(chat_window_node*, string*));
+	DETOUR_TRAMPOLINE_EMPTY(bool ao_detours::CommandInterpreter_c__ParseTextCommand_Trampoline(ao::chat_window_node*, string*));
 
-	bool ao_detours::CommandInterpreter_c__ParseTextCommand_Detour(chat_window_node* node, string* text)
+	bool ao_detours::CommandInterpreter_c__ParseTextCommand_Detour(ao::chat_window_node* node, string* text)
 	{
 		if(text->c_str()[0] == '/')
 		{
 			std::vector<PCHAR> v;
-			char line[MAX_STRING];
+			char line[MAX_VARSTRING];
 			strcpy_s(line, sizeof(line), text->c_str());
 			PCSTR delim = " ";
 			PCHAR token;

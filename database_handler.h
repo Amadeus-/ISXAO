@@ -4,8 +4,8 @@
 class database_handler
 {
 public:
-	isxao_classes::resource_database* get_resource_database() const;
+	ao::resource_database* get_resource_database() const;
 private:
 	// ReSharper disable once CppUninitializedNonStaticDataMember
-	n3_database_handler_t n3_database_handler_;
+	ao::n3_database_handler_t n3_database_handler_;
 };

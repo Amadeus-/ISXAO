@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 #ifdef HTML_PARSER_C__HTML_PARSER_1_USE_NATIVE

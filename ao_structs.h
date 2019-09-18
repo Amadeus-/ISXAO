@@ -1,8 +1,8 @@
 #pragma once
 
-namespace ao_data
+namespace ao
 {
-#include "isxao_enums.h"
+#include "ao_enums.h"
 
 #pragma region Struct Definitions and Typedefines
 	
@@ -2489,7 +2489,7 @@ namespace ao_data
 		PVOID p_area_data;									// 0x78
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x7C[0x8];								// 0x7C
-		list<special_action_t>* p_special_actions_list;		// 0x84
+		std::list<special_action_t>* p_special_actions_list;		// 0x84
 		p_lock_map_t p_lock_id_dir;							// 0x88
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x8C[0x70];							// 0x8C
@@ -2535,13 +2535,13 @@ namespace ao_data
 		DWORD casting_id;								// 0x0C
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x10[0x4];							// 0x10
-		list<DWORD> spell_list;							// 0x14
+		std::list<DWORD> spell_list;							// 0x14
 		// nano_id_list_t spell_list;
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x1C[0x4];							// 0x1C
-		list<nano_template_t> nano_template_list;		// 0x20
+		std::list<nano_template_t> nano_template_list;		// 0x20
 		BYTE unknown_0x28[0x4];							// 0x28
-		list<p_casting_data_t>* p_spellcasting_info;	// 0x2C
+		std::list<p_casting_data_t>* p_spellcasting_info;	// 0x2C
 		std::vector<p_identity_t> active_nanos;				// 0x30
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x3C[0x14];						// 0x3C
@@ -2807,4 +2807,3 @@ namespace ao_data
 
 
 }
-using namespace ao_data;

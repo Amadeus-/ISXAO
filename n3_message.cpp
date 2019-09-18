@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 #ifdef N3_MESSAGE_T__DUPLICATE_BODY_USE_NATIVE

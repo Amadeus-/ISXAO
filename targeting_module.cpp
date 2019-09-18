@@ -1,18 +1,18 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 #ifdef TargetingModule_t__RemoveTarget_x
-	FUNCTION_AT_ADDRESS(void __cdecl TargetingModule::RemoveTarget(const identity_t &), TargetingModule_t__RemoveTarget);
+	FUNCTION_AT_ADDRESS(void __cdecl targeting_module::remove_target(const identity_t &), TargetingModule_t__RemoveTarget);
 #endif
 
 #ifdef TargetingModule_t__SelectSelf_x
-	FUNCTION_AT_ADDRESS(void TargetingModule::SelectSelf(), TargetingModule_t__SelectSelf);
+	FUNCTION_AT_ADDRESS(void targeting_module::select_self(), TargetingModule_t__SelectSelf);
 #endif
 
 #ifdef TargetingModule_t__SetTarget_x
-	FUNCTION_AT_ADDRESS(void __cdecl TargetingModule::SetTarget(const identity_t&, bool), targeting_module_t__set_target);
+	FUNCTION_AT_ADDRESS(void __cdecl targeting_module::set_target(const identity_t&, bool), targeting_module_t__set_target);
 #endif
 
 //#ifdef TargetingModule_t__SetTargetPet_x

@@ -99,6 +99,36 @@ namespace isxao_classes
 		return (value / 1009) - 1;
 	}
 
+	char* parser::get_start() const
+	{
+		return start_;
+	}
+
+	void parser::set_start(char* start)
+	{
+		this->start_ = start;
+	}
+
+	char* parser::get_end() const
+	{
+		return end_;
+	}
+
+	void parser::set_end(char* end)
+	{
+		this->end_ = end;
+	}
+
+	char* parser::get_pos() const
+	{
+		return pos_;
+	}
+
+	void parser::set_pos(char* pos) const
+	{
+		this->pos_ = pos;
+	}
+
 	serialized_identity::serialized_identity()
 		: type_(0)
 		, id_(0)

@@ -4,9 +4,9 @@
 class npc_holder
 {
 public:
-	AOLIB_OBJECT npc_holder_t get_npc_holder_data() const;
-	AOLIB_OBJECT DWORD get_pet_map(std::map<DWORD, identity_t> &m) const;
+	ao::npc_holder_t get_npc_holder_data() const;
+	DWORD get_pet_map(std::map<DWORD, ao::identity_t> &m) const;
 private:
 	// ReSharper disable once CppUninitializedNonStaticDataMember
-	npc_holder_t npc_holder_;
+	ao::npc_holder_t npc_holder_;
 };

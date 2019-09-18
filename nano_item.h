@@ -1,38 +1,38 @@
 #pragma once
 
-class NanoItem : public DummyItemBase
+class nano_item : public ao::dummy_item_base
 {
 public:
-	AOLIB_OBJECT bool CanApplyOnFriendly();
-	AOLIB_OBJECT bool CanApplyOnHostile();
-	AOLIB_OBJECT bool CanApplyOnSelf();
-	AOLIB_OBJECT bool CanApplyOnFightingTarget();
-	AOLIB_OBJECT void Cast();
-	AOLIB_OBJECT float GetAttackDelay();
-	AOLIB_OBJECT DWORD GetAttackRange();
-	AOLIB_OBJECT float GetCooldownRemaining();
-	AOLIB_OBJECT double GetFormulaProgress(DWORD&, DWORD&);
-	AOLIB_OBJECT DWORD GetFormulaRadius();
-	AOLIB_OBJECT identity_t GetNanoIdentity();
-	AOLIB_OBJECT p_nano_item_t GetNanoItemData();
-	AOLIB_OBJECT DWORD GetNCUCost();
-	AOLIB_OBJECT DWORD GetNanoPoints();
-	AOLIB_OBJECT DWORD GetNanoSchool();
-	AOLIB_OBJECT DWORD GetNanoStrain();
-	AOLIB_OBJECT float GetRechargeDelay();
-	AOLIB_OBJECT LONG GetSkill(DWORD);
-	AOLIB_OBJECT DWORD GetStackingOrder();
-	AOLIB_OBJECT bool IsBuff();
-	AOLIB_OBJECT bool IsHostile();
-	AOLIB_OBJECT bool IsNanoSelfOnly();
-	AOLIB_OBJECT bool IsNoResistCannotFumble();
-	AOLIB_OBJECT bool IsReady();
-	AOLIB_OBJECT bool IsShapeChangeNano();
-	AOLIB_OBJECT bool IsTeamNano();
-	AOLIB_OBJECT bool WillBreakOnAttack();
-	AOLIB_OBJECT bool WillBreakOnDebuff();
-	AOLIB_OBJECT bool WillBreakOnSpellAttack();
+	bool can_apply_on_friendly();
+	bool can_apply_on_hostile();
+	bool can_apply_on_self();
+	bool can_apply_on_fighting_target();
+	void cast();
+	float get_attack_delay();
+	DWORD get_attack_range();
+	float get_cooldown_remaining();
+	double get_formula_progress(DWORD&, DWORD&);
+	DWORD get_formula_radius();
+	ao::identity_t get_nano_identity();
+	ao::p_nano_item_t get_nano_item_data();
+	DWORD get_ncu_cost();
+	DWORD get_nano_points();
+	DWORD get_nano_school();
+	DWORD get_nano_strain();
+	float get_recharge_delay();
+	LONG get_skill(DWORD);
+	DWORD get_stacking_order();
+	bool is_buff();
+	bool is_hostile();
+	bool is_nano_self_only();
+	bool is_no_resist_cannot_fumble();
+	bool is_ready();
+	bool is_shape_change_nano();
+	bool is_team_nano();
+	bool will_break_on_attack();
+	bool will_break_on_debuff();
+	bool will_break_on_spell_attack();
 private:
-	DWORD GetNanoNoneFlags();
-	DWORD GetNanoCanFlags();
+	DWORD get_nano_none_flags();
+	DWORD get_nano_can_flags();
 };

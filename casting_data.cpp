@@ -1,5 +1,6 @@
 #include "isxao_main.h"
-namespace isxao_classes
+
+namespace ao
 {
 
 	identity_t casting_data::get_caster() const
@@ -17,9 +18,9 @@ namespace isxao_classes
 		return casting_data_;
 	}
 
-	NanoItem* casting_data::get_nano_item() const
+	nano_item* casting_data::get_nano_item() const
 	{
-		return reinterpret_cast<NanoItem*>(get_casting_data().p_nano_item);
+		return reinterpret_cast<nano_item*>(get_casting_data().p_nano_item);
 	}
 
 	identity_t casting_data::get_target() const

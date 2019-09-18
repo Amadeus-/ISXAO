@@ -203,6 +203,7 @@
     <ClInclude Include="action_lock.h" />
     <ClInclude Include="actor.h" />
     <ClInclude Include="actor_type.h" />
+    <ClInclude Include="ao_classes.h" />
     <ClInclude Include="ao_type.h" />
     <ClInclude Include="chat_gui_module.h" />
     <ClInclude Include="chat_window_controller.h" />
@@ -215,8 +216,8 @@
     <ClInclude Include="input_config.h" />
     <ClInclude Include="isxao_classes.h" />
     <ClInclude Include="isxao_commands.h" />
-    <ClInclude Include="isxao_data.h" />
-    <ClInclude Include="isxao_enums.h" />
+    <ClInclude Include="ao_structs.h" />
+    <ClInclude Include="ao_enums.h" />
     <ClInclude Include="isxao_find_pattern.h" />
     <ClInclude Include="isxao_game.h" />
     <ClInclude Include="isxao_globals.h" />

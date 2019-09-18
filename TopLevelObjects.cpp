@@ -61,7 +61,7 @@ bool __cdecl TLO_SELECTION_TARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 		if (P_SELECTION_INDICATOR)
 		{
 			const auto identity = P_SELECTION_INDICATOR->identity;
-			const auto d = dynel::get_dynel(identity);
+			const auto d = ao::dynel::get_dynel(identity);
 			Dest.Ptr = d;
 			Dest.Type = isxao_utilities::GetRealType(d);
 			return true;
@@ -78,10 +78,10 @@ bool __cdecl TLO_ATTACK_TARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 {
 	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
 	{
-		identity_t identity;
+		ao::identity_t identity;
 		if (P_ATTACKING_INDICATOR)
 		{
-			const auto d = reinterpret_cast<dynel*>(dynel::get_dynel(P_ATTACKING_INDICATOR->identity));
+			const auto d = reinterpret_cast<ao::dynel*>(ao::dynel::get_dynel(P_ATTACKING_INDICATOR->identity));
 			Dest.Ptr = d;
 			Dest.Type = isxao_utilities::GetRealType(d);
 			return true;
@@ -98,19 +98,19 @@ bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 {
 	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
 	{
-		if (ISINDEX())
+		if (IS_INDEX())
 		{
 			DWORD nth;
 			SEARCHACTOR search_actor;
 			ClearSearchActor(&search_actor);
 			search_actor.f_radius = 999999.0f;
-			identity_t identity;
-			std::vector<actor*> v;
-			auto actor_count = P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
-			if (!ISNUMBER())
+			ao::identity_t identity;
+			std::vector<ao::actor*> v;
+			const auto actor_count = P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
+			if (!IS_NUMBER())
 			{
-				char first_arg[MAX_STRING];
-				sprintf_s(first_arg, MAX_STRING, argv[0]);
+				char first_arg[MAX_VARSTRING];
+				sprintf_s(first_arg, MAX_VARSTRING, argv[0]);
 				_strlwr_s(first_arg);
 				if (!strcmp(first_arg, "me"))
 				{
@@ -123,7 +123,7 @@ bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 			}
 			else
 			{
-				nth = GETNUMBER();
+				nth = GET_NUMBER();
 				ParseSearchActor(1, argc, argv, search_actor);
 			}
 			for (DWORD N = 0; N < actor_count; N++)
@@ -149,7 +149,7 @@ bool __cdecl TLO_ACTORSEARCHCOUNT(int argc, char *argv[], LSTYPEVAR&Dest)
 {
 	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
 	{
-		if (ISINDEX())
+		if (IS_INDEX())
 		{
 			SEARCHACTOR search_actor;
 			ClearSearchActor(&search_actor);
@@ -158,7 +158,7 @@ bool __cdecl TLO_ACTORSEARCHCOUNT(int argc, char *argv[], LSTYPEVAR&Dest)
 			Dest.Type = pUintType;
 			return true;
 		}
-		std::vector<actor*> v;
+		std::vector<ao::actor*> v;
 		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
 		Dest.DWord = v.size();
 		Dest.Type = pUintType;
@@ -175,12 +175,12 @@ bool __cdecl TLO_NANOSPELL(int argc, char *argv[], LSTYPEVAR&Dest)
 {
 	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
 	{
-		if (ISINDEX())
+		if (IS_INDEX())
 		{
-			if (ISNUMBER())
+			if (IS_NUMBER())
 			{
-				const identity_t i(53019, GETNUMBER());
-				const identity_t d(0, 0);
+				const ao::identity_t i(53019, GET_NUMBER());
+				const ao::identity_t d(0, 0);
 				if ((Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d)))
 				{
 					Dest.Type = pNanoSpellType;
@@ -188,15 +188,15 @@ bool __cdecl TLO_NANOSPELL(int argc, char *argv[], LSTYPEVAR&Dest)
 				}
 				return false;
 			}
-			char szName[MAX_STRING];
-			char szSearchName[MAX_STRING];
-			strcpy_s(szSearchName, MAX_STRING, argv[0]);
+			char szName[MAX_VARSTRING];
+			char szSearchName[MAX_VARSTRING];
+			strcpy_s(szSearchName, MAX_VARSTRING, argv[0]);
 			_strlwr_s(szSearchName);
-			std::map<DWORD, p_nano_item_t> m;
+			std::map<DWORD, ao::p_nano_item_t> m;
 			::get_nano_map(m);
 			for (auto it = m.begin(); it != m.end(); ++it)
 			{
-				strcpy_s(szName, MAX_STRING, reinterpret_cast<NanoItem*>(it->second)->GetName());
+				strcpy_s(szName, MAX_VARSTRING, reinterpret_cast<ao::nano_item*>(it->second)->get_name());
 				_strlwr_s(szName);
 
 				if (strstr(szName, szSearchName))
@@ -252,12 +252,12 @@ bool __cdecl TLO_SPECIALACTION(int argc, char *argv[], LSTYPEVAR&Dest)
 {
 	if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
 	{
-		if(ISINDEX())
+		if(IS_INDEX())
 		{
-			if(ISNUMBER())
+			if(IS_NUMBER())
 			{
-				identity_t dummy_identity;
-				identity_t identity;
+				ao::identity_t dummy_identity;
+				ao::identity_t identity;
 				identity.type = 57008;
 				identity.id = atoi(argv[0]);
 				if ((Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(identity, dummy_identity)))
@@ -267,11 +267,11 @@ bool __cdecl TLO_SPECIALACTION(int argc, char *argv[], LSTYPEVAR&Dest)
 				}
 				return false;
 			}
-			char name[MAX_STRING];
-			char search_name[MAX_STRING];
+			char name[MAX_VARSTRING];
+			char search_name[MAX_VARSTRING];
 			strcpy_s(search_name, sizeof(search_name), argv[0]);
 			_strlwr_s(search_name);
-			std::vector<special_action_template*> v;
+			std::vector<ao::special_action_template*> v;
 			P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_special_action_holder()->get_special_actions(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{

@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 	npc_holder_t npc_holder::get_npc_holder_data() const

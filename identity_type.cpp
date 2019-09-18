@@ -8,31 +8,31 @@ bool IdentityType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 		return false;
 	__try
 	{
-#define pIdentity ((identity_t*)ObjectData.Ptr)
+#define P_IDENTITY ((ao::identity_t*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 		switch (IdentityTypeMembers(Member->ID))
 		{
 		case Type:
 		{
-			Object.DWord = pIdentity->type;
+			Object.DWord = P_IDENTITY->type;
 			Object.Type = pUintType;
 			break;
 		}
 		case Id:
 		{
-			Object.DWord = pIdentity->id;
+			Object.DWord = P_IDENTITY->id;
 			Object.Type = pUintType;
 			break;
 		}
 		case Combined:
 		{
-			Object.Int64 = pIdentity->get_combined_identity();
+			Object.Int64 = P_IDENTITY->get_combined_identity();
 			Object.Type = pInt64Type;
 			break;
 		}
 		default:
 			return false;
 		}
-#undef pIdentity
+#undef P_IDENTITY
 	}
 	__except (pExtension->HandleLSTypeCrash(__FUNCTION__, Member->ID, ObjectData.Ptr, argc, argv, GetExceptionCode(), GetExceptionInformation()))
 	{
@@ -47,8 +47,8 @@ bool IdentityType::ToText(LSOBJECTDATA ObjectData, char* buf, unsigned buflen)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
-#define pIdentity ((identity_t*)ObjectData.Ptr)
-	sprintf_s(buf, buflen, "%I64d", pIdentity->get_combined_identity());
-#undef pIdentity
+#define P_IDENTITY ((ao::identity_t*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
+	sprintf_s(buf, buflen, "%I64d", P_IDENTITY->get_combined_identity());
+#undef P_IDENTITY
 	return true;
 }

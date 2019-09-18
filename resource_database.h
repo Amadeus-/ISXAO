@@ -4,9 +4,9 @@
 class resource_database
 {
 public:
-	p_db_object_t get_db_object(const identity_t&);
-	void get_identity_vec(std::vector<identity_t>&, int);
+	ao::p_db_object_t get_db_object(const ao::identity_t&);
+	void get_identity_vec(std::vector<ao::identity_t>&, int);
 private:
 	// ReSharper disable once CppUninitializedNonStaticDataMember
-	resource_database_t resource_database_;
+	ao::resource_database_t resource_database_;
 };

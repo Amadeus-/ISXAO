@@ -5,7 +5,7 @@
 #define GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(function_base, relative_address) get_relative_address_from_function((function_base), (relative_address), #relative_address, (relative_address##_offset), (relative_address##_bytes_to_next));  // NOLINT(cppcoreguidelines-macro-usage)
 #define GET_PROC_ADDRESS(module, function_address) get_proc_address((module##_module_handle), (function_address), #function_address, (function_address##_mangled_name));  // NOLINT(cppcoreguidelines-macro-usage)
 
-namespace isxao_globals
+namespace isxao
 {
 
 #pragma region Modules
@@ -63,7 +63,7 @@ namespace isxao_globals
 
 	// Instances
 	DWORD n3_dynel_t__m_pc_dynel_dir_instance = 0;
-	dynel_map_t **pp_dynel_dir = nullptr;
+	ao::dynel_map_t **pp_dynel_dir = nullptr;
 
 	// Functions
 	DWORD n3_engine_t__n3_engine_t = 0;
@@ -84,7 +84,7 @@ namespace isxao_globals
 
 	// Instances
 	DWORD n3_playfield_t__m_pc_playfield_dir_instance = 0;
-	PlayfieldDir** pp_playfield_dir = nullptr;
+	ao::PlayfieldDir** pp_playfield_dir = nullptr;
 
 #pragma endregion
 
@@ -96,7 +96,7 @@ namespace isxao_globals
 
 	DWORD game_time_t__get_instance = 0;
 	DWORD game_time_t__m_pc_instance = 0;
-	game_time** pp_game_time = nullptr;
+	ao::game_time** pp_game_time = nullptr;
 
 	DWORD item_manager_t__item_manager_t = 0;
 
@@ -168,6 +168,7 @@ namespace isxao_globals
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_first_name = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_formula_progress = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_formula_radius = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_get_full_perk_map = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_global_character_position = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1 = 0;
@@ -217,15 +218,15 @@ namespace isxao_globals
 
 	// Instances
 	DWORD n3_engine_client_anarchy_t__m_pc_instance = 0;
-	isxao_classes::engine_client_anarchy **pp_engine_client_anarchy = nullptr;
+	ao::engine_client_anarchy **pp_engine_client_anarchy = nullptr;
 	DWORD m_c_stat_name_dir = 0;
-	stat_name_map_t* p_stat_name_dir = nullptr;
+	ao::stat_name_map_t* p_stat_name_dir = nullptr;
 	DWORD m_c_nano_item_dir = 0;
-	nano_item_map_t* p_nano_item_dir = nullptr;
+	ao::nano_item_map_t* p_nano_item_dir = nullptr;
 	DWORD item_manager_t__m_ppc_instance = 0;
-	std::vector<acg_game_item_t> ***ppp_item_vector = nullptr;
+	std::vector<ao::acg_game_item_t> ***ppp_item_vector = nullptr;
 	DWORD static_item_manager_t__m_ppc_instance = 0;
-	std::vector<static_item_t> ***ppp_static_item_vector = nullptr;
+	std::vector<ao::static_item_t> ***ppp_static_item_vector = nullptr;
 
 #pragma endregion
 
@@ -237,18 +238,18 @@ namespace isxao_globals
 	DWORD html_parser_c__extract_text = 0;
 
 	DWORD input_config_t__m_pc_instance = 0;
-	input_config** pp_input_config = nullptr;
+	ao::input_config** pp_input_config = nullptr;
 	DWORD input_config_t__get_instance = 0;
 	DWORD input_config_t__set_current_target = 0;
 
 	DWORD targeting_module_t__m_pc_instance = 0;
-	TargetingModule** pp_targeting_module = nullptr;
+	ao::targeting_module** pp_targeting_module = nullptr;
 	DWORD targeting_module_t__m_pc_selection_indicator = 0;
-	indicator_t** pp_selection_indicator = nullptr;
+	ao::indicator_t** pp_selection_indicator = nullptr;
 	DWORD targeting_module_t__m_pc_attacking_indicator = 0;
-	indicator_t** pp_attacking_indicator = nullptr;
+	ao::indicator_t** pp_attacking_indicator = nullptr;
 	DWORD targeting_module_t__m_c_last_target = 0;
-	identity_t* p_last_target = nullptr;
+	ao::identity_t* p_last_target = nullptr;
 	DWORD targeting_module_t__initialise_message = 0;
 	DWORD targeting_module_t__targeting_module_t = 0;
 	DWORD targeting_module_t__set_target = 0;
@@ -454,7 +455,7 @@ namespace isxao_globals
 #pragma region ChatGUIModule
 
 	DWORD ChatGUIModule_c__s_pcInstance = 0;
-	chat_gui_module** ppChatGUIModule = nullptr;
+	ao::chat_gui_module** ppChatGUIModule = nullptr;
 	DWORD ChatGUIModule_c__HandleGroupAction = 0;
 	DWORD ChatGUIModule_c__HandleGroupMessage = 0;
 	DWORD ChatGUIModule_c__HandlePrivateGroupAction = 0;
@@ -525,14 +526,14 @@ namespace isxao_globals
 #pragma region LoginModule
 
 	DWORD LoginModule_c__m_pcInstance = 0;
-	login_module_t** ppLoginModule = nullptr;
+	ao::login_module_t** ppLoginModule = nullptr;
 
 #pragma endregion
 
 #pragma region ChatWindowController
 
 	DWORD ChatWindowController_c__m_pcInstance = 0;
-	chat_window_controller** ppChatWindowController = nullptr;
+	ao::chat_window_controller** ppChatWindowController = nullptr;
 
 	DWORD ChatGroupController_c__sub_10083D9C = 0;
 
@@ -547,7 +548,7 @@ namespace isxao_globals
 #pragma region CommandInterpreter
 
 	DWORD CommandInterpreter_c__m_pcInstance = 0;
-	CommandInterpreter** ppCommandInterpreter = nullptr;
+	ao::command_interpreter** ppCommandInterpreter = nullptr;
 	DWORD CommandInterpreter_c__ParseTextCommand = 0;
 
 #pragma endregion
@@ -581,7 +582,7 @@ namespace isxao_globals
 #pragma region n3DatabaseController
 
 	DWORD n3DatabaseHandler_t__s_pcInstance = 0;
-	database_handler** ppDatabaseHandler = nullptr;
+	ao::database_handler** ppDatabaseHandler = nullptr;
 
 #pragma endregion
 
@@ -696,7 +697,7 @@ namespace isxao_globals
 #else
 			GET_PROC_ADDRESS(n3, n3_dynel_t__m_pc_dynel_dir_instance)
 #endif
-			pp_dynel_dir = reinterpret_cast<dynel_map_t**>(n3_dynel_t__m_pc_dynel_dir_instance);
+			pp_dynel_dir = reinterpret_cast<ao::dynel_map_t**>(n3_dynel_t__m_pc_dynel_dir_instance);
 
 		// Functions
 #ifdef N3_ENGINE_T__N3_ENGINE_T_USE_PATTERN
@@ -762,7 +763,7 @@ namespace isxao_globals
 #else
 			GET_PROC_ADDRESS(n3, n3_playfield_t__m_pc_playfield_dir_instance)
 #endif
-			pp_playfield_dir = reinterpret_cast<PlayfieldDir**>(n3_playfield_t__m_pc_playfield_dir_instance);
+			pp_playfield_dir = reinterpret_cast<ao::PlayfieldDir**>(n3_playfield_t__m_pc_playfield_dir_instance);
 
 #pragma endregion
 
@@ -1185,6 +1186,12 @@ namespace isxao_globals
 		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_formula_radius)
 #endif
 
+#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FULL_PERK_MAP_USE_PATTERN
+		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_full_perk_map)
+#else
+		GET_PROC_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_full_perk_map)
+#endif
+
 #ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GLOBAL_CHARACTER_POSITION_USE_PATTERN
 		GET_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_global_character_position)
 #else
@@ -1445,7 +1452,7 @@ namespace isxao_globals
 
 		// Instances
 		n3_engine_client_anarchy_t__m_pc_instance = n3_engine_t__m_pc_instance;
-		pp_engine_client_anarchy = reinterpret_cast<isxao_classes::engine_client_anarchy**>(n3_engine_client_anarchy_t__m_pc_instance);
+		pp_engine_client_anarchy = reinterpret_cast<ao::engine_client_anarchy**>(n3_engine_client_anarchy_t__m_pc_instance);
 
 #ifdef GAME_TIME_T__M_PC_INSTANCE_USE_PATTERN
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(game_time_t__get_instance, game_time_t__m_pc_instance)
@@ -1458,14 +1465,14 @@ namespace isxao_globals
 #else
 		static_assert(false, "m_c_nano_item_dir requires a pattern for the function address to be found.")
 #endif
-		p_nano_item_dir = reinterpret_cast<nano_item_map_t*>(m_c_nano_item_dir);
+		p_nano_item_dir = reinterpret_cast<ao::nano_item_map_t*>(m_c_nano_item_dir);
 
 #ifdef M_C_STAT_NAME_DIR_USE_PATTERN
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(f_stat_to_string, m_c_stat_name_dir)
 #else
 		static_assert(false, "m_c_stat_name_dir requires a pattern for the function address to be found.")
 #endif
-		p_stat_name_dir = reinterpret_cast<stat_name_map_t*>(m_c_stat_name_dir);
+		p_stat_name_dir = reinterpret_cast<ao::stat_name_map_t*>(m_c_stat_name_dir);
 
 #ifdef ITEM_MANAGER_T__ITEM_MANAGER_T_USE_PATTERN
 		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__get_item_by_template, item_manager_t__item_manager_t)
@@ -1478,7 +1485,7 @@ namespace isxao_globals
 #else
 		static_assert(false, "item_manager_t__m_ppc_instance requires a pattern for the function address to be found.")
 #endif
-		ppp_item_vector = reinterpret_cast<std::vector<acg_game_item_t> ***>(item_manager_t__m_ppc_instance);
+		ppp_item_vector = reinterpret_cast<std::vector<ao::acg_game_item_t> ***>(item_manager_t__m_ppc_instance);
 
 #ifdef STATIC_ITEM_MANAGER_T__STATIC_ITEM_MANAGER_T_USE_PATTERN
 		GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_client_anarchy_t__get_item_by_template, static_item_manager_t__static_item_manager_t)
@@ -1491,7 +1498,7 @@ namespace isxao_globals
 #else
 		static_assert(false, "static_item_manager_t__m_ppc_instance requires a pattern for the function address to be found.")
 #endif
-		ppp_static_item_vector = reinterpret_cast<std::vector<static_item_t>***>(static_item_manager_t__m_ppc_instance);
+		ppp_static_item_vector = reinterpret_cast<std::vector<ao::static_item_t>***>(static_item_manager_t__m_ppc_instance);
 #pragma endregion
 
 #pragma region GUI
@@ -1571,7 +1578,7 @@ namespace isxao_globals
 #else
 			GET_PROC_ADDRESS(gui, input_config_t__m_pc_instance)
 #endif
-			pp_input_config = reinterpret_cast<input_config**>(input_config_t__m_pc_instance);
+			pp_input_config = reinterpret_cast<ao::input_config**>(input_config_t__m_pc_instance);
 
 #ifdef TARGETING_MODULE_T__M_PC_INSTANCE_USE_PATTERN
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__set_target, targeting_module_t__m_pc_instance)
@@ -1585,7 +1592,7 @@ namespace isxao_globals
 		GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_selection_indicator)
 #endif
 
-		pp_selection_indicator = reinterpret_cast<indicator_t**>(targeting_module_t__m_pc_selection_indicator);
+		pp_selection_indicator = reinterpret_cast<ao::indicator_t**>(targeting_module_t__m_pc_selection_indicator);
 
 #ifdef TARGETING_MODULE_T__M_PC_ATTACKING_INDICATOR_USE_PATTERN
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__initialise_message, targeting_module_t__m_pc_attacking_indicator)
@@ -1593,7 +1600,7 @@ namespace isxao_globals
 		GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_attacking_indicator)
 #endif
 
-		pp_attacking_indicator = reinterpret_cast<indicator_t**>(targeting_module_t__m_pc_attacking_indicator);
+		pp_attacking_indicator = reinterpret_cast<ao::indicator_t**>(targeting_module_t__m_pc_attacking_indicator);
 
 #ifdef TARGETING_MODULE_T__M_C_LAST_TARGET_USE_PATTERN
 		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__initialise_message, targeting_module_t__m_c_last_target)

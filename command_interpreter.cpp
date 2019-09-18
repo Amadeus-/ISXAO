@@ -1,18 +1,18 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
-	command_interpreter_t CommandInterpreter::GetCommandInterpreterData() const
+	command_interpreter_t command_interpreter::get_command_interpreter_data() const
 	{
 		return command_interpreter_;
 	}
 
-	bool CommandInterpreter::ParseText(string& text)
+	bool command_interpreter::ParseText(string& text)
 	{
 		return ParseText(nullptr, text);
 	}
 
-	FUNCTION_AT_ADDRESS(bool CommandInterpreter::ParseText(chat_window_node*, string&), CommandInterpreter_c__ParseTextCommand);
+	FUNCTION_AT_ADDRESS(bool command_interpreter::ParseText(chat_window_node*, string&), CommandInterpreter_c__ParseTextCommand);
 
 }

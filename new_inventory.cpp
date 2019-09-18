@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 	DWORD new_inventory::get_inventory(std::vector<inventory_data*> &v) const

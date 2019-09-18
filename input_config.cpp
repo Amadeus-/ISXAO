@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 #ifdef INPUT_CONFIG_T__SET_CURRENT_TARGET_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic

@@ -83,13 +83,13 @@ void __cdecl ActorService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 	{
 		if (lpData)
 		{
-			actor* p_actor = static_cast<actor*>(lpData);
+			ao::actor* p_actor = static_cast<ao::actor*>(lpData);
 			if (p_actor->get_identity().type == 50000)
 			{
-				char name[MAX_STRING];
-				char identity[MAX_STRING];
-				strcpy_s(name, MAX_STRING, reinterpret_cast<actor*>(p_actor)->get_name());
-				sprintf_s(identity, MAX_STRING, "%I64d", reinterpret_cast<actor*>(p_actor)->get_identity().get_combined_identity());
+				char name[MAX_VARSTRING];
+				char identity[MAX_VARSTRING];
+				strcpy_s(name, MAX_VARSTRING, reinterpret_cast<ao::actor*>(p_actor)->get_name());
+				sprintf_s(identity, MAX_VARSTRING, "%I64d", reinterpret_cast<ao::actor*>(p_actor)->get_identity().get_combined_identity());
 				char *argv[] = { name, identity };
 				pISInterface->ExecuteEvent(GetEventId("AO_onActorSpawned"), 0, 2, argv);
 				pISInterface->ServiceBroadcast(pExtension, hActorService, AddActor, p_actor);
@@ -101,13 +101,13 @@ void __cdecl ActorService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 	{
 		if(lpData)
 		{
-			actor* p_actor = static_cast<actor*>(lpData);
+			ao::actor* p_actor = static_cast<ao::actor*>(lpData);
 			if (p_actor->get_identity().type == 50000)
 			{
-				char name[MAX_STRING];
-				char identity[MAX_STRING];
-				strcpy_s(name, MAX_STRING, reinterpret_cast<actor*>(p_actor)->get_name());
-				sprintf_s(identity, MAX_STRING, "%I64d", reinterpret_cast<actor*>(p_actor)->get_identity().get_combined_identity());
+				char name[MAX_VARSTRING];
+				char identity[MAX_VARSTRING];
+				strcpy_s(name, MAX_VARSTRING, reinterpret_cast<ao::actor*>(p_actor)->get_name());
+				sprintf_s(identity, MAX_VARSTRING, "%I64d", reinterpret_cast<ao::actor*>(p_actor)->get_identity().get_combined_identity());
 				char *argv[] = { name, identity };
 				pISInterface->ExecuteEvent(GetEventId("AO_onActorDespawned"), 0, 2, argv);
 				pISInterface->ServiceBroadcast(pExtension, hActorService, RemoveActor, p_actor);
@@ -172,8 +172,8 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 		{
 			g_game_state = GAMESTATE_NOT_IN_GAME;
 			gp_isxao_log->AddLine("Gamestate Changed to GAMESTATE_NOT_IN_GAME\n");
-			char new_state[MAX_STRING];
-			sprintf_s(new_state, MAX_STRING, "GAMESTATE_NOT_IN_GAME");
+			char new_state[MAX_VARSTRING];
+			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_NOT_IN_GAME");
 			char *argv[] = { new_state };
 			pISInterface->ExecuteEvent(GetEventId("AO_onGamestateChanged"), 0, 1, argv);
 			pISInterface->ServiceBroadcast(pExtension, hGamestateService, GamestateNotInGame, nullptr);
@@ -186,8 +186,8 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 		{
 			g_game_state = GAMESTATE_WAITING_FOR_PLAYFIELD;
 			gp_isxao_log->AddLine("Gamestate Changed to GAMESTATE_WAITING_FOR_PLAYFIELD\n");
-			char new_state[MAX_STRING];
-			sprintf_s(new_state, MAX_STRING, "GAMESTATE_WAITING_FOR_PLAYFIELD");
+			char new_state[MAX_VARSTRING];
+			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_WAITING_FOR_PLAYFIELD");
 			char *argv[] = { new_state };
 			pISInterface->ExecuteEvent(GetEventId("AO_onGamestateChanged"), 0, 1, argv);
 			pISInterface->ServiceBroadcast(pExtension, hGamestateService, GamestateWaitingForPlayfield, nullptr);
@@ -200,8 +200,8 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 		{
 			g_game_state = GAMESTATE_WAITING_FOR_CLIENT_CHAR;
 			gp_isxao_log->AddLine("Gamestate Changed to GAMESTATE_WAITING_FOR_CLIENT_CHAR\n");
-			char new_state[MAX_STRING];
-			sprintf_s(new_state, MAX_STRING, "GAMESTATE_WAITING_FOR_CLIENT_CHAR");
+			char new_state[MAX_VARSTRING];
+			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_WAITING_FOR_CLIENT_CHAR");
 			char *argv[] = { new_state };
 			pISInterface->ExecuteEvent(GetEventId("AO_onGamestateChanged"), 0, 1, argv);
 			pISInterface->ServiceBroadcast(pExtension, hGamestateService, GamestateWaitingForCharacter, nullptr);
@@ -214,8 +214,8 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 		{
 			g_game_state = GAMESTATE_IN_GAME;
 			gp_isxao_log->AddLine("Gamestate Changed to GAMESTATE_IN_GAME\n");
-			char new_state[MAX_STRING];
-			sprintf_s(new_state, MAX_STRING, "GAMESTATE_IN_GAME");
+			char new_state[MAX_VARSTRING];
+			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_IN_GAME");
 			char *argv[] = { new_state };
 			pISInterface->ExecuteEvent(GetEventId("AO_onGamestateChanged"), 0, 1, argv);
 			pISInterface->ServiceBroadcast(pExtension, hGamestateService, GamestateInGame, nullptr);

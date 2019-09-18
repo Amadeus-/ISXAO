@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_classes
+namespace ao
 {
 
 	FUNCTION_AT_ADDRESS(p_db_object_t resource_database::get_db_object(const identity_t&), ResourceDatabase_t__GetDbObject_1);
