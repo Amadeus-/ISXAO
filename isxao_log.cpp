@@ -49,7 +49,7 @@ void isxao_log::add_line_internal(const std::string& line) const
 		GetTimeFormatA(LOCALE_USER_DEFAULT, TIME_FORCE24HOURFORMAT, &system_time, "hh':'mm':'ss", time, 32);
 		char time_ms[32] = { 0 };
 		sprintf_s(time_ms, sizeof(time_ms), "%s.%d", time, ms);
-		output_file_stream << "[" << time_ms << "]: " << line << "\n";
+		output_file_stream << "[" << time_ms << "]:\t" << line << "\n";
 
 		output_file_stream.close();
 	}

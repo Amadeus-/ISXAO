@@ -1,5 +1,7 @@
 #pragma once
 
+namespace isxao
+{
 #pragma region Globals
 
 #define __GetSexStr_x												0x16930		// Gamecode
@@ -132,7 +134,6 @@ constexpr char* const gamecode_module_name = static_cast<char*>("Gamecode.dll");
 
 #pragma region f_stat_to_string
 
-constexpr bool f_stat_to_string_use_native = true;
 constexpr char* const f_stat_to_string_mangled_name = static_cast<char*>(
 	"?fStatToString@@YAPBDW4Stat_e@GameData@@@Z");
 constexpr char* const f_stat_to_string_pattern = static_cast<char*>(
@@ -144,7 +145,6 @@ constexpr DWORD f_stat_to_string_bytes_to_next = 0;
 
 #pragma region f_get_nano_item
 
-constexpr bool f_get_nano_item_use_native = true;
 constexpr char* const f_get_nano_item_mangled_name = static_cast<char*>(nullptr);
 constexpr char* const f_get_nano_item_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 0C 56 8D 45 08");
@@ -155,7 +155,6 @@ constexpr DWORD  f_get_nano_item_bytes_to_next = 0;
 
 #pragma region game_time_t__get_instance
 
-constexpr bool game_time_t__get_instance_use_native = true;
 constexpr char* const game_time_t__get_instance_mangled_name = static_cast<char*>(
 	"?GetInstance@GameTime_t@@SAPAV1@XZ");
 constexpr char* const game_time_t__get_instance_pattern = static_cast<char*>(
@@ -167,7 +166,6 @@ constexpr DWORD  game_time_t__get_instance_bytes_to_next = 0;
 
 #pragma region item_manager_t__item_manager_t
 
-constexpr bool item_manager_t__item_manager_t_use_native = true;
 constexpr char* const item_manager_t__item_manager_t_mangled_name = static_cast<char*>(nullptr);
 constexpr char* const item_manager_t__item_manager_t_pattern = static_cast<char*>(nullptr);
 constexpr DWORD item_manager_t__item_manager_t_offset = 0xF3;
@@ -177,7 +175,6 @@ constexpr DWORD item_manager_t__item_manager_t_bytes_to_next = 0x0;
 
 #pragma region look_at_iir_t__look_at_iir_t
 
-constexpr bool look_at_iir_t__look_at_iir_t_use_native = true;
 constexpr char* const look_at_iir_t__look_at_iir_t_mangled_name = static_cast<char*>(nullptr);
 constexpr char* const look_at_iir_t__look_at_iir_t_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 1C 53 56 6A 0B 8B F1 33 DB 68 ?? ?? ?? ?? 8D 4D D8 C7 45 EC 0F 00 00 00 89 5D E8 88 5D D8 E8 ?? ?? ?? ?? 8D 45 D8 50 FF 75 08 8B CE 89 5D FC FF 15 ?? ?? ?? ?? 53 6A 01 8D 4D D8 E8 ?? ?? ?? ?? 8B 45 0C C7 06 ?? ?? ?? ??");
@@ -188,7 +185,6 @@ constexpr DWORD  look_at_iir_t__look_at_iir_t_bytes_to_next = 0;
 
 #pragma region n3_engine_client_anarchy_t__n3_engine_client_anarchy_t
 
-constexpr bool n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_use_native = false;
 constexpr char* const n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_mangled_name = static_cast<char*>(
 	"??0n3EngineClientAnarchy_t@@QAE@XZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_pattern = static_cast<char*>(
@@ -200,7 +196,6 @@ constexpr DWORD  n3_engine_client_anarchy_t__n3_engine_client_anarchy_t_bytes_to
 
 #pragma region n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t
 
-constexpr bool n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t_use_native = false;
 constexpr char* const n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t_mangled_name = static_cast<char*>(
 	"??1n3EngineClientAnarchy_t@@UAE@XZ");
 constexpr char* const n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t_pattern = static_cast<char*>(
@@ -212,7 +207,6 @@ constexpr DWORD  n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t_bytes_
 
 #pragma region n3_engine_client_anarchy_t__convert_criteria
 
-constexpr bool n3_engine_client_anarchy_t__convert_criteria_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__convert_criteria_mangled_name = static_cast<char*>(
 	"?ConvertCriteria@n3EngineClientAnarchy_t@@ABE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVCriterion_t@GameData@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__convert_criteria_pattern = static_cast<char*>(
@@ -224,7 +218,6 @@ constexpr DWORD  n3_engine_client_anarchy_t__convert_criteria_bytes_to_next = 0;
 
 #pragma region n3_engine_client_anarchy_t__get_breed_str
 
-constexpr bool n3_engine_client_anarchy_t__get_breed_str_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__get_breed_str_mangled_name = static_cast<char*>(
 	"?GetBreedStr@n3EngineClientAnarchy_t@@SAPBDH@Z");
 constexpr char* const n3_engine_client_anarchy_t__get_breed_str_pattern = static_cast<char*>(nullptr);
@@ -235,7 +228,6 @@ constexpr DWORD n3_engine_client_anarchy_t__get_breed_str_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__get_client_char
 
-constexpr bool n3_engine_client_anarchy_t__get_client_char_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__get_client_char_mangled_name = static_cast<char*>(
 	"?GetClientChar@n3EngineClientAnarchy_t@@QBEPAVSimpleChar_t@@XZ");
 constexpr char* const n3_engine_client_anarchy_t__get_client_char_pattern = static_cast<char*>(nullptr);
@@ -246,7 +238,6 @@ constexpr DWORD n3_engine_client_anarchy_t__get_client_char_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__get_client_dynel_id
 
-constexpr bool n3_engine_client_anarchy_t__get_client_dynel_id_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__get_client_dynel_id_mangled_name = static_cast<char*>(
 	"?GetClientDynelId@n3EngineClientAnarchy_t@@UBE?AVIdentity_t@@XZ");
 constexpr char* const n3_engine_client_anarchy_t__get_client_dynel_id_pattern = static_cast<char*>(
@@ -258,7 +249,6 @@ constexpr DWORD n3_engine_client_anarchy_t__get_client_dynel_id_bytes_to_next = 
 
 #pragma region n3_engine_client_anarchy_t__get_current_movement_mode
 
-constexpr bool n3_engine_client_anarchy_t__get_current_movement_mode_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__get_current_movement_mode_mangled_name = static_cast<char*>(
 	"?GetCurrentMovementMode@n3EngineClientAnarchy_t@@QBE?AW4Mode_e@Movement_n@@XZ");
 constexpr char* const n3_engine_client_anarchy_t__get_current_movement_mode_pattern = static_cast<char*>(
@@ -270,7 +260,6 @@ constexpr DWORD n3_engine_client_anarchy_t__get_current_movement_mode_bytes_to_n
 
 #pragma region n3_engine_client_anarchy_t__get_faction_str
 
-constexpr bool n3_engine_client_anarchy_t__get_faction_str_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__get_faction_str_mangled_name = static_cast<char*>(
 	"?GetFactionStr@n3EngineClientAnarchy_t@@QBEPBDH_N@Z");
 constexpr char* const n3_engine_client_anarchy_t__get_faction_str_pattern = static_cast<char*>(
@@ -282,7 +271,6 @@ constexpr DWORD n3_engine_client_anarchy_t__get_faction_str_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__get_faction_title
 
-constexpr bool n3_engine_client_anarchy_t__get_faction_title_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__get_faction_title_mangled_name = static_cast<char*>(
 	"?GetFactionTitle@n3EngineClientAnarchy_t@@QBEPBDH@Z");
 constexpr char* const n3_engine_client_anarchy_t__get_faction_title_pattern = static_cast<char*>(
@@ -294,7 +282,6 @@ constexpr DWORD n3_engine_client_anarchy_t__get_faction_title_bytes_to_next = 0x
 
 #pragma region n3_engine_client_anarchy_t__get_gender_string
 
-constexpr bool n3_engine_client_anarchy_t__get_gender_string_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__get_gender_string_mangled_name = static_cast<char*>(
 	"?GetGenderString@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__get_gender_string_pattern = static_cast<char*>(
@@ -306,7 +293,6 @@ constexpr DWORD n3_engine_client_anarchy_t__get_gender_string_bytes_to_next = 0x
 
 #pragma region n3_engine_client_anarchy_t__get_item_by_template
 
-constexpr bool n3_engine_client_anarchy_t__get_item_by_template_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__get_item_by_template_mangled_name = static_cast<char*>(
 	"?GetItemByTemplate@n3EngineClientAnarchy_t@@ABEPAVDummyItemBase_t@@VIdentity_t@@ABV3@@Z");
 constexpr char* const n3_engine_client_anarchy_t__get_item_by_template_pattern = static_cast<char*>(
@@ -318,7 +304,6 @@ constexpr DWORD n3_engine_client_anarchy_t__get_item_by_template_bytes_to_next =
 
 #pragma region n3_engine_client_anarchy_t__get_sex_str
 
-constexpr bool n3_engine_client_anarchy_t__get_sex_str_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__get_sex_str_mangled_name = static_cast<char*>(
 	"?GetSexStr@n3EngineClientAnarchy_t@@SAPBDH@Z");
 constexpr char* const n3_engine_client_anarchy_t__get_sex_str_pattern = static_cast<char*>(nullptr);
@@ -329,7 +314,6 @@ constexpr DWORD n3_engine_client_anarchy_t__get_sex_str_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__get_title_str
 
-constexpr bool n3_engine_client_anarchy_t__get_title_str_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__get_title_str_mangled_name = static_cast<char*>(
 	"?GetTitleStr@n3EngineClientAnarchy_t@@QBEPBDHH@Z");
 constexpr char* const n3_engine_client_anarchy_t__get_title_str_pattern = static_cast<char*>(
@@ -341,7 +325,6 @@ constexpr DWORD n3_engine_client_anarchy_t__get_title_str_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__is_first_login
 
-constexpr bool n3_engine_client_anarchy_t__is_first_login_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__is_first_login_mangled_name = static_cast<char*>(
 	"?IsFirstLogin@n3EngineClientAnarchy_t@@QBE_NXZ");
 constexpr char* const n3_engine_client_anarchy_t__is_first_login_pattern = static_cast<char*>("8A 81 04 01 00 00");
@@ -352,7 +335,6 @@ constexpr DWORD n3_engine_client_anarchy_t__is_first_login_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__is_fixture
 
-constexpr bool n3_engine_client_anarchy_t__is_fixture_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__is_fixture_mangled_name = static_cast<char*>(
 	"?IsFixture@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@0@Z");
 constexpr char* const n3_engine_client_anarchy_t__is_fixture_pattern = static_cast<char*>(
@@ -364,7 +346,6 @@ constexpr DWORD n3_engine_client_anarchy_t__is_fixture_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_activate_mech
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_activate_mech_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_activate_mech_mangled_name = static_cast<char*>(
 	"?N3Msg_AddToQueue@n3EngineClientAnarchy_t@@QAEXH@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_activate_mech_pattern = static_cast<char*>(
@@ -376,7 +357,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_activate_mech_bytes_to_next =
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_airstrike
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_airstrike_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_airstrike_mangled_name = static_cast<char*>(
 	"?N3Msg_Airstrike@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_airstrike_pattern = static_cast<char*>(
@@ -388,7 +368,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_airstrike_bytes_to_next = 0x0
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_artillery_attack
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_artillery_attack_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_artillery_attack_mangled_name = static_cast<char*>(
 	"?N3Msg_ArtilleryAttack@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_artillery_attack_pattern = static_cast<char*>(
@@ -400,7 +379,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_artillery_attack_bytes_to_nex
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_assist_fight
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_assist_fight_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_assist_fight_mangled_name = static_cast<char*>(
 	"?N3Msg_AssistFight@n3EngineClientAnarchy_t@@QBEXABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_assist_fight_pattern = static_cast<char*>(
@@ -412,7 +390,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_assist_fight_bytes_to_next = 
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_can_attack
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_can_attack_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_attack_mangled_name = static_cast<char*>(
 	"?N3Msg_CanAttack@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_attack_pattern = static_cast<char*>(
@@ -424,7 +401,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_can_attack_bytes_to_next = 0x
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_can_click_target_target
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_can_click_target_target_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_click_target_target_mangled_name = static_cast<char*>(
 	"?N3Msg_CanClickTargetTarget@n3EngineClientAnarchy_t@@QAE_NABVIdentity_t@@0@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_click_target_target_pattern = static_cast<char*>(
@@ -436,7 +412,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_can_click_target_target_bytes
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_can_use_mech
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_can_use_mech_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_use_mech_mangled_name = static_cast<char*>(
 	"?N3Msg_CanUseMech@n3EngineClientAnarchy_t@@QAE_NXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_can_use_mech_pattern = static_cast<char*>(
@@ -448,7 +423,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_can_use_mech_bytes_to_next = 
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_cast_nano_spell
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_cast_nano_spell_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_cast_nano_spell_mangled_name = static_cast<char*>(
 	"?N3Msg_CastNanoSpell@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@0@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_cast_nano_spell_pattern = static_cast<char*>(
@@ -460,7 +434,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_cast_nano_spell_bytes_to_next
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_consider
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_consider_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_consider_mangled_name = static_cast<char*>(
 	"?N3Msg_Consider@n3EngineClientAnarchy_t@@QBE?AW4Consider_e@@ABVIdentity_t@@AAM@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_consider_pattern = static_cast<char*>(
@@ -472,7 +445,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_consider_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_container_add_item
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_container_add_item_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_container_add_item_mangled_name = static_cast<char*>(
 	"?N3Msg_ContainerAddItem@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@0@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_container_add_item_pattern = static_cast<char*>(
@@ -484,7 +456,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_container_add_item_bytes_to_n
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_crawl_toggle
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_crawl_toggle_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_crawl_toggle_mangled_name = static_cast<char*>(
 	"?N3Msg_CrawlToggle@n3EngineClientAnarchy_t@@QAEXXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_crawl_toggle_pattern = static_cast<char*>(
@@ -496,7 +467,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_crawl_toggle_bytes_to_next = 
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_create_raid
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_create_raid_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_create_raid_mangled_name = static_cast<char*>(
 	"?N3Msg_CreateRaid@n3EngineClientAnarchy_t@@QAEXXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_create_raid_pattern = static_cast<char*>(
@@ -508,7 +478,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_create_raid_bytes_to_next = 0
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel_mangled_name = static_cast<char*>(
 	"?N3Msg_DefaultActionOnDynel@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel_pattern = static_cast<char*>(
@@ -520,7 +489,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel_bytes
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_default_attack
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_default_attack_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_default_attack_mangled_name = static_cast<char*>(
 	"?N3Msg_DefaultAttack@n3EngineClientAnarchy_t@@QBEXABVIdentity_t@@_N@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_default_attack_pattern = static_cast<char*>(
@@ -532,7 +500,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_default_attack_bytes_to_next 
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_delete_item
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_delete_item_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_delete_item_mangled_name = static_cast<char*>(
 	"?N3Msg_DeleteItem@n3EngineClientAnarchy_t@@QBEXABVIdentity_t@@0@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_delete_item_pattern = static_cast<char*>(
@@ -544,7 +511,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_delete_item_bytes_to_next = 0
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_delete_nano
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_delete_nano_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_delete_nano_mangled_name = static_cast<char*>(
 	"?N3Msg_DeleteNano@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_delete_nano_pattern = static_cast<char*>(
@@ -556,7 +522,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_delete_nano_bytes_to_next = 0
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_do_social_action
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_do_social_action_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_do_social_action_mangled_name = static_cast<char*>(
 	"?N3Msg_DoSocialAction@n3EngineClientAnarchy_t@@QAEXW4AbstractAnimID_e@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_do_social_action_pattern = static_cast<char*>(
@@ -568,7 +533,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_do_social_action_bytes_to_nex
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_drop_item
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_drop_item_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_drop_item_mangled_name = static_cast<char*>(
 	"?N3Msg_DropItem@n3EngineClientAnarchy_t@@QBEXABVIdentity_t@@ABVVector3_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_drop_item_pattern = static_cast<char*>(
@@ -580,7 +544,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_drop_item_bytes_to_next = 0x0
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_duel_accept
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_duel_accept_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_accept_mangled_name = static_cast<char*>(
 	"?N3Msg_Duel_Accept@n3EngineClientAnarchy_t@@QAEXXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_accept_pattern = static_cast<char*>(
@@ -592,7 +555,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_duel_accept_bytes_to_next = 0
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_duel_challenge
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_duel_challenge_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_challenge_mangled_name = static_cast<char*>(
 	"?N3Msg_Duel_Challenge@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_challenge_pattern = static_cast<char*>(
@@ -604,7 +566,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_duel_challenge_bytes_to_next 
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_duel_draw
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_duel_draw_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_draw_mangled_name = static_cast<char*>(
 	"?N3Msg_Duel_Draw@n3EngineClientAnarchy_t@@QAEXXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_draw_pattern = static_cast<char*>(
@@ -616,7 +577,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_duel_draw_bytes_to_next = 0x0
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_duel_refuse
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_duel_refuse_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_refuse_mangled_name = static_cast<char*>(
 	"?N3Msg_Duel_Refuse@n3EngineClientAnarchy_t@@QAEXXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_refuse_pattern = static_cast<char*>(
@@ -628,7 +588,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_duel_refuse_bytes_to_next = 0
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_duel_stop
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_duel_stop_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_stop_mangled_name = static_cast<char*>(
 	"?N3Msg_Duel_Stop@n3EngineClientAnarchy_t@@QAEXXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_duel_stop_pattern = static_cast<char*>(
@@ -640,7 +599,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_duel_stop_bytes_to_next = 0x0
 
 #pragma region  n3_engine_client_anarchy_t__n3_msg_forage
 
-constexpr bool  n3_engine_client_anarchy_t__n3_msg_forage_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_forage_mangled_name = static_cast<char*>(
 	"?N3Msg_Forage@n3EngineClientAnarchy_t@@QAEXXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_forage_pattern = static_cast<char*>(
@@ -652,7 +610,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_forage_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_action_by_name
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_action_by_name_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_action_by_name_mangled_name = static_cast<char*>(
 	"?N3Msg_GetActionByName@n3EngineClientAnarchy_t@@QBE?AW4AbstractAnimID_e@@PBD@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_action_by_name_pattern = static_cast<char*>(nullptr);
@@ -663,7 +620,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_action_by_name_bytes_to_n
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_action_progress
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_action_progress_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_action_progress_mangled_name = static_cast<char*>(
 	"?N3Msg_GetActionProgress@n3EngineClientAnarchy_t@@QBEMABVIdentity_t@@PAH1@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_action_progress_pattern = static_cast<char*>(
@@ -675,7 +631,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_action_progress_bytes_to_
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_agg_def
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_agg_def_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_agg_def_mangled_name = static_cast<char*>(
 	"?N3Msg_GetAggDef@n3EngineClientAnarchy_t@@QBEHXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_agg_def_pattern = static_cast<char*>(
@@ -687,7 +642,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_agg_def_bytes_to_next = 0
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_alien_level_string
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_alien_level_string_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_alien_level_string_mangled_name = static_cast<char*>(
 	"?N3Msg_GetAlienLevelString@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_alien_level_string_pattern = static_cast<char*>(
@@ -699,7 +653,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_alien_level_string_bytes_
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_area_name
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_area_name_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_area_name_mangled_name = static_cast<char*>(
 	"?N3Msg_GetAreaName@n3EngineClientAnarchy_t@@QBEXPAPBD@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_area_name_pattern = static_cast<char*>(
@@ -711,7 +664,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_area_name_bytes_to_next =
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_attacking_id
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_attacking_id_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_attacking_id_mangled_name = static_cast<char*>(
 	"?N3Msg_GetAttackingID@n3EngineClientAnarchy_t@@QBE_NAAVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_attacking_id_pattern = static_cast<char*>(
@@ -723,7 +675,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_attacking_id_bytes_to_nex
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_breed_str
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_breed_str_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_breed_str_mangled_name = static_cast<char*>(
 	"?N3Msg_GetBreedStr@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_breed_str_pattern = static_cast<char*>(
@@ -735,7 +686,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_breed_str_bytes_to_next =
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_buff_current_time
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_buff_current_time_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_buff_current_time_mangled_name = static_cast<char*>(
 	"?N3Msg_GetBuffCurrentTime@n3EngineClientAnarchy_t@@QAEHABVIdentity_t@@0@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_buff_current_time_pattern = static_cast<char*>(nullptr);
@@ -746,7 +696,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_buff_current_time_bytes_t
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_buff_total_time
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_buff_total_time_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_buff_total_time_mangled_name = static_cast<char*>(
 	"?N3Msg_GetBuffTotalTime@n3EngineClientAnarchy_t@@QAEHABVIdentity_t@@0@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_buff_total_time_pattern = static_cast<char*>(nullptr);
@@ -757,7 +706,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_buff_total_time_bytes_to_
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_character_body_shape
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_character_body_shape_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_character_body_shape_mangled_name = static_cast<char*>(
 	"?N3Msg_GetCharacterBodyShape@n3EngineClientAnarchy_t@@QAE_NAAEVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_character_body_shape_pattern = static_cast<char*>(
@@ -769,7 +717,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_character_body_shape_byte
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data_mangled_name = static_cast<char*>(
 	"?N3Msg_GetCharOrientationData@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@AAVVector3_t@@AAVQuaternion_t@@AAM@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data_pattern = static_cast<char*>(
@@ -781,7 +728,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data_byt
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member_mangled_name = static_cast<char*>(
 	"?N3Msg_GetCityNameForClanMember@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member_pattern = static_cast<char*>(
@@ -793,7 +739,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_clan_level_string
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_clan_level_string_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_clan_level_string_mangled_name = static_cast<char*>(
 	"?N3Msg_GetClanLevelString@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_clan_level_string_pattern = static_cast<char*>(
@@ -805,7 +750,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_clan_level_string_bytes_t
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_clan_string
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_clan_string_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_clan_string_mangled_name = static_cast<char*>(
 	"?N3Msg_GetClanString@n3EngineClientAnarchy_t@@QBEPBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_clan_string_pattern = static_cast<char*>(
@@ -817,7 +761,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_clan_string_bytes_to_next
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_client_pet_id
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_client_pet_id_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_client_pet_id_mangled_name = static_cast<char*>(
 	"?N3Msg_GetClientPetID@n3EngineClientAnarchy_t@@QBE?AVIdentity_t@@H@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_client_pet_id_pattern = static_cast<char*>(
@@ -829,7 +772,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_client_pet_id_bytes_to_ne
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_close_target
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_close_target_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_close_target_mangled_name = static_cast<char*>(
 	"?N3Msg_GetCloseTarget@n3EngineClientAnarchy_t@@QBE_NAAVIdentity_t@@_N1@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_close_target_pattern = static_cast<char*>(
@@ -841,7 +783,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_close_target_bytes_to_nex
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list_mangled_name = static_cast<char*>(
 	"?N3Msg_GetContainerInventoryList@n3EngineClientAnarchy_t@@QBEPBV?$list@VInventoryEntry_t@@V?$allocator@VInventoryEntry_t@@@std@@@std@@ABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list_pattern = static_cast<char*>(
@@ -853,7 +794,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list_
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_correct_action_id
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_correct_action_id_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_correct_action_id_mangled_name = static_cast<char*>(
 	"?N3Msg_GetCorrectActionID@n3EngineClientAnarchy_t@@QBEXAAVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_correct_action_id_pattern = static_cast<char*>(nullptr);
@@ -864,7 +804,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_correct_action_id_bytes_t
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_current_room
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_current_room_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_current_room_mangled_name = static_cast<char*>(
 	"?N3Msg_GetCurrentRoom@n3EngineClientAnarchy_t@@QBEIXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_current_room_pattern = static_cast<char*>(
@@ -876,7 +815,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_current_room_bytes_to_nex
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_current_room_name
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_current_room_name_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_current_room_name_mangled_name = static_cast<char*>(
 	"?N3Msg_GetCurrentRoomName@n3EngineClientAnarchy_t@@QBEPBDXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_current_room_name_pattern = static_cast<char*>(
@@ -888,7 +826,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_current_room_name_bytes_t
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_district_fight_mode
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_district_fight_mode_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_district_fight_mode_mangled_name = static_cast<char*>(
 	"?N3Msg_GetDistrictFightMode@n3EngineClientAnarchy_t@@QAE?AW4FightTypeAllowed_e@@XZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_district_fight_mode_pattern = static_cast<char*>(
@@ -900,7 +837,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_district_fight_mode_bytes
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_dynels_in_vicinity
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_dynels_in_vicinity_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_dynels_in_vicinity_mangled_name = static_cast<char*>(
 	"?N3Msg_GetDynelsInVicinity@n3EngineClientAnarchy_t@@QBEXAAV?$vector@VIdentity_t@@V?$allocator@VIdentity_t@@@std@@@std@@_N1W4TypeID_e@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_dynels_in_vicinity_pattern = static_cast<char*>(
@@ -912,7 +848,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_dynels_in_vicinity_bytes_
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_faction_info_string
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_faction_info_string_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_faction_info_string_mangled_name = static_cast<char*>(
 	"?N3Msg_GetFactionInfoString@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@AAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_faction_info_string_pattern = static_cast<char*>(
@@ -924,7 +859,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_faction_info_string_bytes
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_faction_range
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_faction_range_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_faction_range_mangled_name = static_cast<char*>(
 	"?N3Msg_GetFactionRange@n3EngineClientAnarchy_t@@QBE_NHAAH0@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_faction_range_pattern = static_cast<char*>(
@@ -936,7 +870,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_faction_range_bytes_to_ne
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_first_name
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_first_name_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_first_name_mangled_name = static_cast<char*>(
 	"?N3Msg_GetFirstName@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_first_name_pattern = static_cast<char*>(
@@ -948,7 +881,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_first_name_bytes_to_next 
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_formula_progress
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_formula_progress_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_formula_progress_mangled_name = static_cast<char*>(
 	"?N3Msg_GetFormulaProgress@n3EngineClientAnarchy_t@@QBEMABVIdentity_t@@PAH1@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_formula_progress_pattern = static_cast<char*>(
@@ -960,7 +892,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_formula_progress_bytes_to
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_formula_radius
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_formula_radius_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_formula_radius_mangled_name = static_cast<char*>(
 	"?N3Msg_GetFormularRadius@n3EngineClientAnarchy_t@@QBEHABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_formula_radius_pattern = static_cast<char*>(
@@ -972,7 +903,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_formula_radius_bytes_to_n
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_full_perk_map
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_full_perk_map_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_full_perk_map_mangled_name = static_cast<char*>(
 	"?N3Msg_GetFullPerkMap@n3EngineClientAnarchy_t@@QBEABV?$vector@VPerk_t@@V?$allocator@VPerk_t@@@std@@@std@@XZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_full_perk_map_pattern = static_cast<char*>(
@@ -984,7 +914,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_full_perk_map_bytes_to_ne
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_global_character_position
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_global_character_position_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_global_character_position_mangled_name = static_cast<char*>(
 	"?N3Msg_GetGlobalCharacterPosition@n3EngineClientAnarchy_t@@QAEXAAVVector3_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_global_character_position_pattern = static_cast<char*>(
@@ -996,7 +925,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_global_character_position
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation_mangled_name = static_cast<char*>(
 	"?N3Msg_GetGlobalCharacterRotation@n3EngineClientAnarchy_t@@QAEXAAVQuaternion_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation_pattern = static_cast<char*>(
@@ -1008,7 +936,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1_mangled_name = static_cast<char*>(
 	"?N3Msg_GetGridDestinationList@n3EngineClientAnarchy_t@@QBEPBVGridDestinationList_t@@ABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1_pattern = static_cast<char*>(
@@ -1020,7 +947,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1_b
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_2
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_2_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_2_mangled_name = static_cast<char*>(
 	"?N3Msg_GetGridDestinationList@n3EngineClientAnarchy_t@@QBEPBVGridDestinationList_t@@ABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_2_pattern = static_cast<char*>(
@@ -1032,7 +958,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_2_b
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_inventory_vec
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_inventory_vec_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_inventory_vec_mangled_name = static_cast<char*>(
 	"?N3Msg_GetInventoryVec@n3EngineClientAnarchy_t@@QAEPBV?$vector@PAVNewInventoryEntry_t@@V?$allocator@PAVNewInventoryEntry_t@@@std@@@std@@ABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_inventory_vec_pattern = static_cast<char*>(
@@ -1044,7 +969,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_inventory_vec_bytes_to_ne
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_item
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_item_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_item_mangled_name = static_cast<char*>(
 	"?N3Msg_GetItem@n3EngineClientAnarchy_t@@QBEXABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_item_pattern = static_cast<char*>(
@@ -1056,7 +980,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_item_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_item_progress
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_item_progress_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_item_progress_mangled_name = static_cast<char*>(
 	"?N3Msg_GetItemProgress@n3EngineClientAnarchy_t@@QBEMABVIdentity_t@@PAH1@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_item_progress_pattern = static_cast<char*>(
@@ -1068,7 +991,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_item_progress_bytes_to_ne
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_movement_mode
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_movement_mode_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_movement_mode_mangled_name = static_cast<char*>(
 	"?N3Msg_GetMovementMode@n3EngineClientAnarchy_t@@QBEHXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_movement_mode_pattern = static_cast<char*>(nullptr);
@@ -1079,7 +1001,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_movement_mode_bytes_to_ne
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_name
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_name_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_name_mangled_name = static_cast<char*>(
 	"?N3Msg_GetName@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@0@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_name_pattern = static_cast<char*>(
@@ -1091,7 +1012,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_name_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_nano_cost_modifier
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_nano_cost_modifier_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_nano_cost_modifier_mangled_name = static_cast<char*>(
 	"?N3Msg_GetNanoCostModifier@n3EngineClientAnarchy_t@@QBEHXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_nano_cost_modifier_pattern = static_cast<char*>(
@@ -1103,7 +1023,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_nano_cost_modifier_bytes_
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list_mangled_name = static_cast<char*>(
 	"?N3Msg_GetNanoSpellList@n3EngineClientAnarchy_t@@QAEPBV?$list@HV?$allocator@H@std@@@std@@XZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list_pattern = static_cast<char*>(
@@ -1115,7 +1034,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list_bytes_to_
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1_mangled_name = static_cast<char*>(
 	"?N3Msg_GetNanoTemplateInfoList@n3EngineClientAnarchy_t@@QBEPAV?$list@VNanoTemplateInfo_c@@V?$allocator@VNanoTemplateInfo_c@@@std@@@std@@ABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1_pattern = static_cast<char*>(
@@ -1127,7 +1045,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2_mangled_name = static_cast<char*>(
 	"?N3Msg_GetNanoTemplateInfoList@n3EngineClientAnarchy_t@@QBEPAV?$list@VNanoTemplateInfo_c@@V?$allocator@VNanoTemplateInfo_c@@@std@@@std@@XZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2_pattern = static_cast<char*>(
@@ -1139,7 +1056,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_next_target
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_next_target_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_next_target_mangled_name = static_cast<char*>(
 	"?N3Msg_GetNextTarget@n3EngineClientAnarchy_t@@QAE?AVIdentity_t@@ABV2@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_next_target_pattern = static_cast<char*>(
@@ -1151,7 +1067,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_next_target_bytes_to_next
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_number_of_available_alien_perks
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_number_of_available_alien_perks_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_number_of_available_alien_perks_mangled_name = static_cast<char*>(
 	"?N3Msg_GetNumberOfAvailableAlienPerks@n3EngineClientAnarchy_t@@QAEHXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_number_of_available_alien_perks_pattern = static_cast<char*>(nullptr);
@@ -1162,7 +1077,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_available_alien
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_number_of_available_perks
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_number_of_available_perks_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_number_of_available_perks_mangled_name = static_cast<char*>(
 	"?N3Msg_GetNumberOfAvailablePerks@n3EngineClientAnarchy_t@@QAEHXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_number_of_available_perks_pattern = static_cast<char*>(nullptr);
@@ -1173,7 +1087,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_available_perks
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots_mangled_name = static_cast<char*>(
 	"?N3Msg_GetNumberOfFreeInventorySlots@n3EngineClientAnarchy_t@@QAEHXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots_pattern = static_cast<char*>(
@@ -1185,7 +1098,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_number_of_used_alien_perks
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_number_of_used_alien_perks_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_number_of_used_alien_perks_mangled_name = static_cast<char*>(
 	"?N3Msg_GetNumberOfUsedAlienPerks@n3EngineClientAnarchy_t@@QAEHXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_number_of_used_alien_perks_pattern = static_cast<char*>(nullptr);
@@ -1196,7 +1108,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_used_alien_perk
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_number_of_used_perks
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_number_of_used_perks_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_number_of_used_perks_mangled_name = static_cast<char*>(
 	"?N3Msg_GetNumberOfUsedPerks@n3EngineClientAnarchy_t@@QAEHXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_number_of_used_perks_pattern = static_cast<char*>(nullptr);
@@ -1207,7 +1118,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_number_of_used_perks_byte
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_over_equip_level
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_over_equip_level_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_over_equip_level_mangled_name = static_cast<char*>(
 	"?N3Msg_GetOverEquipLevel@n3EngineClientAnarchy_t@@QBEHABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_over_equip_level_pattern = static_cast<char*>(
@@ -1219,7 +1129,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_over_equip_level_bytes_to
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_pf_name_1
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_pf_name_1_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_pf_name_1_mangled_name = static_cast<char*>(
 	"?N3Msg_GetPFName@n3EngineClientAnarchy_t@@QBEPBDI@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_pf_name_1_pattern = static_cast<char*>(nullptr);
@@ -1230,7 +1139,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_pf_name_1_bytes_to_next =
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_pf_name_2
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_pf_name_2_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_pf_name_2_mangled_name = static_cast<char*>(
 	"?N3Msg_GetPFName@n3EngineClientAnarchy_t@@QBEPBDXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_pf_name_2_pattern = static_cast<char*>(
@@ -1242,7 +1150,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_pf_name_2_bytes_to_next =
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_parent
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_parent_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_parent_mangled_name = static_cast<char*>(
 	"?N3Msg_GetParent@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@AAV2@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_parent_pattern = static_cast<char*>(
@@ -1254,7 +1161,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_parent_bytes_to_next = 0x
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_pos
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_pos_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_pos_mangled_name = static_cast<char*>(
 	"?N3Msg_GetPos@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@AAVVector3_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_pos_pattern = static_cast<char*>(
@@ -1266,7 +1172,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_pos_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_skill_1
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_skill_1_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_skill_1_mangled_name = static_cast<char*>(
 	"?N3Msg_GetSkill@n3EngineClientAnarchy_t@@QBEHW4Stat_e@GameData@@H@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_skill_1_pattern = static_cast<char*>(
@@ -1278,7 +1183,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_skill_1_bytes_to_next = 0
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_skill_2
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_skill_2_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_skill_2_mangled_name = static_cast<char*>(
 	"?N3Msg_GetSkill@n3EngineClientAnarchy_t@@QBEHABVIdentity_t@@W4Stat_e@GameData@@H0@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_skill_2_pattern = static_cast<char*>(
@@ -1290,7 +1194,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_skill_2_bytes_to_next = 0
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_skill_max
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_skill_max_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_skill_max_mangled_name = static_cast<char*>(
 	"?N3Msg_GetSkillMax@n3EngineClientAnarchy_t@@QAEHW4Stat_e@GameData@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_skill_max_pattern = static_cast<char*>(nullptr);
@@ -1301,7 +1204,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_skill_max_bytes_to_next =
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_special_action_list
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_special_action_list_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_special_action_list_mangled_name = static_cast<char*>(
 	"?N3Msg_GetSpecialActionList@n3EngineClientAnarchy_t@@QAEPAV?$list@VSpecialAction_t@@V?$allocator@VSpecialAction_t@@@std@@@std@@XZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_special_action_list_pattern = static_cast<char*>(
@@ -1313,7 +1215,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_list_bytes
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_special_action_state
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_special_action_state_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_special_action_state_mangled_name = static_cast<char*>(
 	"?N3Msg_GetSpecialActionState@n3EngineClientAnarchy_t@@QAEHABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_special_action_state_pattern = static_cast<char*>(
@@ -1325,7 +1226,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_special_action_state_byte
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name_mangled_name = static_cast<char*>(
 	"?N3Msg_GetSpecialAttackWeaponName@n3EngineClientAnarchy_t@@QBEPBDABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name_pattern = static_cast<char*>(
@@ -1337,7 +1237,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_nam
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_stat_name_map
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_stat_name_map_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_stat_name_map_mangled_name = static_cast<char*>(
 	"?N3Msg_GetStatNameMap@n3EngineClientAnarchy_t@@QAEABV?$map@HPBDU?$less@H@std@@V?$allocator@U?$pair@$$CBHPBD@std@@@2@@std@@XZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_stat_name_map_pattern = static_cast<char*>(nullptr);
@@ -1348,7 +1247,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_stat_name_map_bytes_to_ne
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_target_target
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_target_target_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_target_target_mangled_name = static_cast<char*>(
 	"?N3Msg_GetTargetTarget@n3EngineClientAnarchy_t@@QAE?AVIdentity_t@@AAV2@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_target_target_pattern = static_cast<char*>(
@@ -1360,7 +1258,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_target_target_bytes_to_ne
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_get_team_member_list
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_get_team_member_list_use_native = static_cast<bool>(true);
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_team_member_list_mangled_name = static_cast<char*>(
 	"?N3Msg_GetTeamMemberList@n3EngineClientAnarchy_t@@QAEPAV?$vector@PAVTeamEntry_t@@V?$allocator@PAVTeamEntry_t@@@std@@@std@@H@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_get_team_member_list_pattern = static_cast<char*>(
@@ -1370,7 +1267,81 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_team_member_list_bytes_to
 
 #pragma endregion
 
+#pragma region n3_engine_client_anarchy_t__n3_msg_has_perk
 
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_has_perk_mangled_name = static_cast<char*>(
+	"?N3Msg_HasPerk@n3EngineClientAnarchy_t@@QAE_NI@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_has_perk_pattern = static_cast<char*>(
+	"55 8B EC E8 ?? ?? ?? ?? 85 C0 74 ?? FF 75 08 8B C8 E8 ?? ?? ?? ?? 8B C8 E8 ?? ?? ?? ?? F7 D8");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_has_perk_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_has_perk_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_hide_against_opponent
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_hide_against_opponent_mangled_name = static_cast<char*>(
+	"?N3Msg_HideAgainstOpponent@n3EngineClientAnarchy_t@@QBEXABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_hide_against_opponent_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 70 53 56 33 DB 53 8B F1 68 ?? ?? ?? ?? 8D 4D D0 C7 45 E4 0F 00 00 00 89 5D E0 88 5D D0 E8 ?? ?? ?? ?? 8B 86 84 00 00 00 8D 4D D0 51 8D 4D EC 51 6A 36");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_hide_against_opponent_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_hide_against_opponent_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_attacking
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_attacking_mangled_name = static_cast<char*>(
+	"?N3Msg_IsAttacking@n3EngineClientAnarchy_t@@QBE_NXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_attacking_pattern = static_cast<char*>(
+	"53 32 DB E8 ?? ?? ?? ??");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_attacking_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_attacking_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_battle_station
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_battle_station_mangled_name = static_cast<char*>(
+	"?N3Msg_IsBattleStation@n3EngineClientAnarchy_t@@QAE_NXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_battle_station_pattern = static_cast<char*>(
+	"FF 15 ?? ?? ?? ?? 85 C0 74 ?? 8B C8 FF 15 ?? ?? ?? ?? 50 FF 15 ?? ?? ?? ?? 59 85 C0 74 ?? 8B C8");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_battle_station_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_battle_station_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_character_in_mech
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_character_in_mech_mangled_name = static_cast<char*>(
+	"?N3Msg_IsCharacterInMech@n3EngineClientAnarchy_t@@QAE_NVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_character_in_mech_pattern = static_cast<char*>(
+	"55 8B EC 83 7D 0C 00 75 ?? 83 7D 08 00 75 ?? FF 15 ?? ?? ?? ?? EB ?? 8D 45 08 50 E8 ?? ?? ?? ?? 59 85 C0 75 ?? 32 C0 EB ?? 8B C8");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_character_in_mech_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_character_in_mech_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_character_morphed
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_character_morphed_mangled_name = static_cast<char*>(
+	"?N3Msg_IsCharacterMorphed@n3EngineClientAnarchy_t@@QAE_NVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_character_morphed_pattern = static_cast<char*>(
+	"55 8B EC 83 7D 0C 00 75 ?? 83 7D 08 00 75 ?? FF 15 ?? ?? ?? ?? EB ?? 8D 45 08 50 E8 ?? ?? ?? ?? 59 85 C0 75 ?? 32 C0 EB ?? 8B 80 DC 01 00 00");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_character_morphed_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_character_morphed_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_dungeon
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_dungeon_mangled_name = static_cast<char*>(
+	"?N3Msg_IsDungeon@n3EngineClientAnarchy_t@@QBE_NXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_dungeon_pattern = static_cast<char*>(
+	"8B 89 84 00 00 00 85 C9 74 ?? FF 15 ?? ?? ?? ??");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_dungeon_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_dungeon_bytes_to_next = 0x0;
+
+#pragma endregion
 
 
 
@@ -1378,7 +1349,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_get_team_member_list_bytes_to
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_is_npc
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_is_npc_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_npc_mangled_name = static_cast<char*>(
 	"?N3Msg_IsNpc@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_npc_pattern = static_cast<char*>(
@@ -1390,7 +1360,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_npc_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_perform_special_action_1
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_perform_special_action_1_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_perform_special_action_1_mangled_name = static_cast<char*>(
 	"?N3Msg_PerformSpecialAction@n3EngineClientAnarchy_t@@QAE_NW4Action_e@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_perform_special_action_1_pattern = static_cast<char*>(nullptr);
@@ -1401,7 +1370,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_1_byte
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_perform_special_action_2
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_perform_special_action_2_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_perform_special_action_2_mangled_name = static_cast<char*>(
 	"?N3Msg_PerformSpecialAction@n3EngineClientAnarchy_t@@QAE_NABVIdentity_t@@@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_perform_special_action_2_pattern = static_cast<char*>(nullptr);
@@ -1412,7 +1380,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_2_byte
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_send_pet_command
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_send_pet_command_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_send_pet_command_mangled_name = static_cast<char*>(
 	"?N3Msg_SendPetCommand@n3EngineClientAnarchy_t@@QBEXHABVIdentity_t@@HHPBD@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_send_pet_command_pattern = static_cast<char*>(
@@ -1424,7 +1391,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_send_pet_command_bytes_to_nex
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_stop_attack
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_stop_attack_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_stop_attack_mangled_name = static_cast<char*>(
 	"?N3Msg_StopAttack@n3EngineClientAnarchy_t@@QBEXXZ");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_stop_attack_pattern = static_cast<char*>(
@@ -1436,7 +1402,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_stop_attack_bytes_to_next = 0
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_use_item
 
-constexpr bool n3_engine_client_anarchy_t__n3_msg_use_item_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_use_item_mangled_name = static_cast<char*>(
 	"?N3Msg_UseItem@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@_N@Z");
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_use_item_pattern = static_cast<char*>(
@@ -1448,7 +1413,6 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_use_item_bytes_to_next = 0x0;
 
 #pragma region n3_engine_client_anarchy_t__on_closed
 
-constexpr bool n3_engine_client_anarchy_t__on_closed_use_native = true;
 constexpr char* const n3_engine_client_anarchy_t__on_closed_mangled_name = static_cast<char*>(
 	"?OnClosed@n3EngineClientAnarchy_t@@UAEXXZ");
 constexpr char* const n3_engine_client_anarchy_t__on_closed_pattern = static_cast<char*>(
@@ -1460,7 +1424,6 @@ constexpr DWORD n3_engine_client_anarchy_t__on_closed_bytes_to_next = 0x0;
 
 #pragma region simple_char_t__check_los
 
-constexpr bool simple_char_t__check_los_use_native = true;
 constexpr char* const simple_char_t__check_los_mangled_name = static_cast<char*>(nullptr);
 constexpr char* const simple_char_t__check_los_pattern = static_cast<char*>(
 	"55 8B EC 83 EC 30 56 57 8B 7D 08");
@@ -1471,7 +1434,6 @@ constexpr DWORD simple_char_t__check_los_bytes_to_next = 0x0;
 
 #pragma region static_item_manager_t__static_item_manager_t
 
-constexpr bool static_item_manager_t__static_item_manager_t_use_native = true;
 constexpr char* const static_item_manager_t__static_item_manager_t_mangled_name = static_cast<char*>(nullptr);
 constexpr char* const static_item_manager_t__static_item_manager_t_pattern = static_cast<char*>(nullptr);
 constexpr DWORD static_item_manager_t__static_item_manager_t_offset = 0x76;
@@ -2167,3 +2129,4 @@ constexpr char* const text_message_t__message_body_len_pattern = static_cast<cha
 
 #pragma endregion
 
+}

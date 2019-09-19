@@ -186,13 +186,13 @@ namespace isxao
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_stat_name_map;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_target_target;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_get_team_member_list;
-
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_HasPerk;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsAttacking;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsBattleStation;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsCharacterInMech;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsCharacterMorphed;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsDungeon;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_has_perk;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_hide_against_opponent;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_attacking;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_battle_station;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_character_in_mech;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_character_morphed;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_dungeon;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsFormulaReady;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsGeneralPerk;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsGroupPerk;
@@ -206,7 +206,6 @@ namespace isxao
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsMoving;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsMyPetID;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly;
-
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_npc;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_1;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_2;

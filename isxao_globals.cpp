@@ -203,14 +203,14 @@ namespace isxao
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_stat_name_map = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_target_target = 0;
-
 	DWORD n3_engine_client_anarchy_t__n3_msg_get_team_member_list = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_HasPerk = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsAttacking = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsBattleStation = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsCharacterInMech = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsCharacterMorphed = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsDungeon = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_has_perk = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_hide_against_opponent = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_attacking = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_battle_station = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_character_in_mech = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_character_morphed = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_dungeon = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsFormulaReady = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsGeneralPerk = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsGroupPerk = 0;
@@ -224,7 +224,6 @@ namespace isxao
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsMoving = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsMyPetID = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly = 0;
-
 	DWORD n3_engine_client_anarchy_t__n3_msg_is_npc = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_1 = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_2 = 0;
@@ -783,8 +782,7 @@ namespace isxao
 		// Functions
 		RESOLVE_FUNCTION_ADDRESS(gamecode, f_get_nano_item)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, f_stat_to_string)
-		RESOLVE_FUNCTION_ADDRESS(gamecode, game_time_t__get_instance)
-		
+		RESOLVE_FUNCTION_ADDRESS(gamecode, game_time_t__get_instance)		
 		RESOLVE_FUNCTION_ADDRESS(gamecode, look_at_iir_t__look_at_iir_t)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_engine_client_anarchy_t)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t)
@@ -883,6 +881,14 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_stat_name_map)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_target_target)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_get_team_member_list)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_has_perk)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_hide_against_opponent)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_attacking)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_battle_station)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_character_in_mech)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_character_morphed)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_dungeon)
+
 
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_npc)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_1)

@@ -2,7 +2,8 @@
 
 namespace ao
 {
-#if (n3_engine_client_anarchy_t__get_breed_str_use_native == true)
+
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::get_breed_str(breed_e), n3_engine_client_anarchy_t__get_breed_str)
@@ -15,7 +16,7 @@ namespace ao
 #endif
 
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_CLIENT_CHAR_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(character* engine_client_anarchy::get_client_char(), n3_engine_client_anarchy_t__get_client_char)
@@ -27,7 +28,7 @@ namespace ao
 	}
 #endif	
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_CLIENT_DYNEL_ID_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(p_identity_t engine_client_anarchy::get_client_dynel_id(identity_t &), n3_engine_client_anarchy_t__get_client_dynel_id)
@@ -41,7 +42,7 @@ namespace ao
 	}
 #endif	
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_CURRENT_MOVEMENT_MODE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::get_current_movement_mode(), n3_engine_client_anarchy_t__get_current_movement_mode)
@@ -58,7 +59,7 @@ namespace ao
 		return n3_engine_client_anarchy_;
 	}
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_FACTION_STR_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::get_faction_str(DWORD, bool), n3_engine_client_anarchy_t__get_faction_str)
@@ -66,7 +67,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::get_faction_str(DWORD, bool) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_FACTION_TITLE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::get_faction_title(DWORD), n3_engine_client_anarchy_t__get_faction_title)
@@ -75,7 +76,7 @@ namespace ao
 #endif
 
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_GENDER_STRING_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::get_gender_string(identity_t const &), n3_engine_client_anarchy_t__get_gender_string)
@@ -83,7 +84,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::get_gender_string(const identity_t&) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_ITEM_BY_TEMPLATE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(p_dummy_item_base_t engine_client_anarchy::get_item_by_template(identity_t, identity_t const &), n3_engine_client_anarchy_t__get_item_by_template)
@@ -96,7 +97,7 @@ namespace ao
 		return isxao_utilities::get_item_rarity_str(rarity_id);
 	}
 
-#ifdef F_GET_NANO_ITEM_USE_NATIVE
+#if true
 	FUNCTION_AT_ADDRESS(ao::p_nano_item_t engine_client_anarchy::get_nano_item(DWORD), f_get_nano_item)
 #else
 	static_assert(false, "engine_client_anarchy::get_nano_item(DWORD) requires a native function.");
@@ -113,7 +114,7 @@ namespace ao
 	}
 
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_SEX_STR_USE_NATIVE
+#if true
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::get_sex_str(gender_e), n3_engine_client_anarchy_t__get_sex_str)
 #else
 	// ReSharper disable once CppParameterMayBeConst
@@ -128,13 +129,13 @@ namespace ao
 		return isxao_utilities::get_side_str(side_id);
 	}
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__GET_TITLE_STR_USE_NATIVE
+#if true
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::get_title_string(DWORD, DWORD), n3_engine_client_anarchy_t__get_title_str)
 #else
 	static_assert(false, "engine_client_anarchy::get_title_string(DWORD, DWORD) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__IS_FIRST_LOGIN_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::is_first_login(), n3_engine_client_anarchy_t__is_first_login)
@@ -146,7 +147,7 @@ namespace ao
 	}
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__IS_FIXTURE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::is_fixture(const identity_t &, const identity_t &), n3_engine_client_anarchy_t__is_fixture)
@@ -154,7 +155,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::is_fixture(const identity_t &, const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_ACTIVATE_MECH_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_activate_mech(DWORD), n3_engine_client_anarchy_t__n3_msg_activate_mech);
@@ -162,7 +163,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_activate_mech(DWORD) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_AIRSTRIKE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_airstrike(const identity_t &), n3_engine_client_anarchy_t__n3_msg_airstrike)
@@ -170,7 +171,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_airstrike(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_ARTILLERY_ATTACK_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_artillery_attack(const identity_t &), n3_engine_client_anarchy_t__n3_msg_artillery_attack)
@@ -178,7 +179,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_artillery_attack(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_ASSIST_FIGHT_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_assist_fight(const identity_t &), n3_engine_client_anarchy_t__n3_msg_assist_fight)
@@ -186,7 +187,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_artillery_attack(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CAN_ATTACK_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_can_attack(const identity_t &), n3_engine_client_anarchy_t__n3_msg_can_attack)
@@ -194,7 +195,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_can_attack(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CAN_CLICK_TARGET_TARGET_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_can_click_target_target(const identity_t &, const identity_t &), n3_engine_client_anarchy_t__n3_msg_can_click_target_target)
@@ -202,7 +203,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_can_click_target_target(const identity_t &, const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CAN_USE_MECH_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_can_use_mech(), n3_engine_client_anarchy_t__n3_msg_can_use_mech)
@@ -210,7 +211,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_can_use_mech(void) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CAST_NANO_SPELL_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_cast_nano_spell(const identity_t &, const identity_t &), n3_engine_client_anarchy_t__n3_msg_cast_nano_spell)
@@ -218,7 +219,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_cast_nano_spell(const identity_t &, const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CONSIDER_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_consider(const identity_t &, float &), n3_engine_client_anarchy_t__n3_msg_consider)
@@ -226,7 +227,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_consider(const identity_t &, float &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CONTAINER_ADD_ITEM_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_container_add_item(const identity_t &, const identity_t &), n3_engine_client_anarchy_t__n3_msg_container_add_item)
@@ -234,7 +235,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_container_add_item(const identity_t &, const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CRAWL_TOGGLE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_crawl_toggle(), n3_engine_client_anarchy_t__n3_msg_crawl_toggle)
@@ -242,7 +243,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_crawl_toggle(void) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_CREATE_RAID_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_create_raid(), n3_engine_client_anarchy_t__n3_msg_create_raid)
@@ -250,7 +251,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_create_raid(void) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DEFAULT_ACTION_ON_DYNEL_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_default_action_on_dynel(const identity_t &), n3_engine_client_anarchy_t__n3_msg_default_action_on_dynel)
@@ -258,7 +259,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_default_action_on_dynel(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DEFAULT_ATTACK_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_default_attack(const identity_t &, bool), n3_engine_client_anarchy_t__n3_msg_default_attack)
@@ -266,7 +267,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_default_attack(const identity_t &, bool) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DELETE_ITEM_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_delete_item(const identity_t&, const identity_t&), n3_engine_client_anarchy_t__n3_msg_delete_item)
@@ -274,7 +275,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_delete_item(const identity_t&, const identity_t&) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DELETE_NANO_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_delete_nano(const identity_t &), n3_engine_client_anarchy_t__n3_msg_delete_nano)
@@ -282,7 +283,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_delete_nano(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DO_SOCIAL_ACTION_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_do_social_action(social_action_e), n3_engine_client_anarchy_t__n3_msg_do_social_action)
@@ -290,7 +291,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_do_social_action(social_action_e) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DROP_ITEM_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_drop_item(const identity_t &, const vector3_t &), n3_engine_client_anarchy_t__n3_msg_drop_item)
@@ -298,7 +299,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_drop_item(const identity_t &, const vector3_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_ACCEPT_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_duel_accept(), n3_engine_client_anarchy_t__n3_msg_duel_accept)
@@ -306,7 +307,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_duel_accept() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_CHALLENGE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_duel_challenge(const identity_t &), n3_engine_client_anarchy_t__n3_msg_duel_challenge)
@@ -314,7 +315,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_duel_challenge(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_DRAW_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_duel_draw(), n3_engine_client_anarchy_t__n3_msg_duel_draw)
@@ -322,7 +323,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_duel_draw() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_REFUSE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_duel_refuse(), n3_engine_client_anarchy_t__n3_msg_duel_refuse);
@@ -330,7 +331,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_duel_refuse() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_DUEL_STOP_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_duel_stop(), n3_engine_client_anarchy_t__n3_msg_duel_stop)
@@ -338,7 +339,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_duel_stop() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_FORAGE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_forage(), n3_engine_client_anarchy_t__n3_msg_forage)
@@ -346,7 +347,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_forage() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ACTION_BY_NAME_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_action_by_name(PCSTR), n3_engine_client_anarchy_t__n3_msg_get_action_by_name)
@@ -354,7 +355,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_action_by_name(PCSTR) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ACTION_PROGRESS_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(float engine_client_anarchy::n3_msg_get_action_progress(const identity_t &, DWORD*, DWORD*), n3_engine_client_anarchy_t__n3_msg_get_action_progress)
@@ -362,7 +363,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_action_progress(const identity_t &, DWORD*, DWORD*) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_AGG_DEF_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::n3_msg_get_agg_def(), n3_engine_client_anarchy_t__n3_msg_get_agg_def)
@@ -370,7 +371,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_agg_def() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ALIEN_LEVEL_STRING_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_alien_level_string(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_alien_level_string)
@@ -378,7 +379,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_alien_level_string(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_AREA_NAME_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_get_area_name(PCSTR*), n3_engine_client_anarchy_t__n3_msg_get_area_name)
@@ -386,7 +387,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_area_name(PCSTR*) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ATTACKING_ID_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_get_attacking_id(identity_t &), n3_engine_client_anarchy_t__n3_msg_get_attacking_id)
@@ -403,7 +404,7 @@ namespace ao
 	}
 #endif	
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_BREED_STR_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_breed_str(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_breed_str)
@@ -411,7 +412,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_breed_str(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_BUFF_CURRENT_TIME_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_buff_current_time(const identity_t &, const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_buff_current_time)
@@ -419,7 +420,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_buff_current_time(const identity_t &, const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_BUFF_TOTAL_TIME_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_buff_total_time(const identity_t &, const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_buff_total_time)
@@ -427,7 +428,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_buff_total_time(const identity_t &, const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CHARACTER_BODY_SHAPE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_get_character_body_shape(BYTE &, identity_t), n3_engine_client_anarchy_t__n3_msg_get_character_body_shape)
@@ -435,7 +436,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_character_body_shape(BYTE &, identity_t) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CHAR_ORIENTATION_DATA_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_get_char_orientation_data(const identity_t &, vector3_t &, quaternion_t &, float &), n3_engine_client_anarchy_t__n3_msg_get_char_orientation_data)
@@ -443,7 +444,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_char_orientation_data(const identity_t &, vector3_t &, quaternion_t &, float &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CITY_NAME_FOR_CLAN_MEMBER_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_city_name_for_clan_member(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_city_name_for_clan_member)
@@ -451,7 +452,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_city_name_for_clan_member(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CLAN_LEVEL_STRING_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_clan_level_string(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_clan_level_string)
@@ -459,7 +460,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_clan_level_string(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CLAN_STRING_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(string* engine_client_anarchy::n3_msg_get_clan_string(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_clan_string)
@@ -467,7 +468,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_clan_string(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CLIENT_PET_ID_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(p_identity_t engine_client_anarchy::n3_msg_get_client_pet_id(identity_t &, DWORD), n3_engine_client_anarchy_t__n3_msg_get_client_pet_id)
@@ -475,7 +476,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_client_pet_id(identity_t &, DWORD) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CLOSE_TARGET_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_get_close_target(identity_t &, bool, bool), n3_engine_client_anarchy_t__n3_msg_get_close_target)
@@ -483,7 +484,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_close_target(identity_t &, bool, bool) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CONTAINER_INVENTORY_LIST_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(p_inventory_holder_t engine_client_anarchy::n3_msg_get_container_inventory_list(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_container_inventory_list)
@@ -491,7 +492,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_container_inventory_list(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CORRECT_ACTION_ID_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_get_correct_action_id(identity_t &), n3_engine_client_anarchy_t__n3_msg_get_correct_action_id)
@@ -499,7 +500,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_correct_action_id(identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CURRENT_ROOM_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::n3_msg_get_current_room(), n3_engine_client_anarchy_t__n3_msg_get_current_room)
@@ -507,7 +508,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_current_room() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_CURRENT_ROOM_NAME_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_current_room_name(), n3_engine_client_anarchy_t__n3_msg_get_current_room_name)
@@ -515,7 +516,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_current_room_name() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_DISTRICT_FIGHT_MODE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_district_fight_mode(), n3_engine_client_anarchy_t__n3_msg_get_district_fight_mode)
@@ -523,7 +524,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_district_fight_mode() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_DYNELS_IN_VICINITY_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_get_dynels_in_vicinity(vector<identity_t>&, bool, bool, type_id_e), n3_engine_client_anarchy_t__n3_msg_get_dynels_in_vicinity)
@@ -531,7 +532,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_dynels_in_vicinity(vector<identity_t>&, bool, bool, type_id_e) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FACTION_INFO_STRING_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_get_faction_info_string(const identity_t &, string &), n3_engine_client_anarchy_t__n3_msg_get_faction_info_string)
@@ -539,7 +540,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_faction_info_string(const identity_t &, string &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FACTION_RANGE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_get_faction_range(DWORD, DWORD &, DWORD &), n3_engine_client_anarchy_t__n3_msg_get_faction_range)
@@ -547,7 +548,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_faction_range(DWORD, DWORD &, DWORD &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FIRST_NAME_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_first_name(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_first_name)
@@ -555,7 +556,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_first_name(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FORMULA_PROGRESS_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(double engine_client_anarchy::n3_msg_get_formula_progress(const identity_t &, DWORD &, DWORD &), n3_engine_client_anarchy_t__n3_msg_get_formula_progress)
@@ -563,7 +564,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_formula_progress(const identity_t &, DWORD &, DWORD &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FORMULA_RADIUS_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_formula_radius(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_formula_radius)
@@ -571,7 +572,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_formula_radius(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GLOBAL_CHARACTER_POSITION_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_get_global_character_position(vector3_t &), n3_engine_client_anarchy_t__n3_msg_get_global_character_position)
@@ -588,13 +589,13 @@ namespace ao
 	}
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_FULL_PERK_MAP_USE_NATIVE
+#if true
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_full_perk_map(), n3_engine_client_anarchy_t__n3_msg_get_full_perk_map)
 #else
 	static_assert(false, "engine_client_anarchy::n3_msg_get_full_perk_map() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GLOBAL_CHARACTER_ROTATION_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_get_global_character_rotation(quaternion_t &), n3_engine_client_anarchy_t__n3_msg_get_global_character_rotation)
@@ -612,7 +613,7 @@ namespace ao
 
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GRID_DESTINATION_1_LIST_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PVOID engine_client_anarchy::n3_msg_get_grid_destination_list(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_1)
@@ -620,7 +621,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_grid_destination_list(const identity_t &) requires a native function.");
 #endif
 
-#ifdef  N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_GRID_DESTINATION_2_LIST_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PVOID engine_client_anarchy::n3_msg_get_grid_destination_list(), n3_engine_client_anarchy_t__n3_msg_get_grid_destination_list_2);
@@ -636,7 +637,7 @@ namespace ao
 	}
 #endif	
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_INVENTORY_VEC_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(std::vector<p_inventory_data_t>* engine_client_anarchy::n3_msg_get_inventory_vec(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_inventory_vec)
@@ -644,7 +645,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_inventory_vec(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ITEM_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_get_item(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_item)
@@ -652,7 +653,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_item(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_ITEM_PROGRESS_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(double engine_client_anarchy::n3_msg_get_item_progress(const identity_t &, DWORD &, DWORD &), n3_engine_client_anarchy_t__n3_msg_get_item_progress)
@@ -660,7 +661,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_item_progress(const identity_t &, DWORD &, DWORD &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_MOVEMENT_MODE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_movement_mode(), n3_engine_client_anarchy_t__n3_msg_get_movement_mode)
@@ -668,7 +669,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_movement_mode() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NAME_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_name(const identity_t &, const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_name)
@@ -676,7 +677,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_name(const identity_t &, const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_COST_MODIFIER_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_nano_cost_modifier(), n3_engine_client_anarchy_t__n3_msg_get_nano_cost_modifier)
@@ -684,7 +685,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_nano_cost_modifier() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_SPELL_LIST_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(std::list<DWORD>* engine_client_anarchy::n3_msg_get_nano_spell_list(), n3_engine_client_anarchy_t__n3_msg_get_nano_spell_list)
@@ -700,7 +701,7 @@ namespace ao
 	}
 #endif	
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_TEMPLATE_INFO_LIST_1_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(std::list<nano_template_t>* engine_client_anarchy::n3_msg_get_nano_template_info_list(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_1)
@@ -708,7 +709,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_nano_template_info_list(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NANO_TEMPLATE_INFO_LIST_2_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(std::list<nano_template_t>* engine_client_anarchy::n3_msg_get_nano_template_info_list(), n3_engine_client_anarchy_t__n3_msg_get_nano_template_info_list_2);
@@ -724,7 +725,7 @@ namespace ao
 	}
 #endif	
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NEXT_TARGET_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(p_identity_t engine_client_anarchy::n3_msg_get_next_target(identity_t &, DWORD), n3_engine_client_anarchy_t__n3_msg_get_next_target)
@@ -732,7 +733,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_next_target(identity_t &, DWORD) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_AVAILABLE_ALIEN_PERKS_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_number_of_available_alien_perks(), n3_engine_client_anarchy_t__n3_msg_get_number_of_available_alien_perks)
@@ -740,7 +741,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_available_alien_perks() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_AVAILABLE_PERKS_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_number_of_available_perks(), n3_engine_client_anarchy_t__n3_msg_get_number_of_available_perks)
@@ -748,7 +749,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_available_perks() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_FREE_INVENTORY_SLOTS_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_number_of_free_inventory_slots(), n3_engine_client_anarchy_t__n3_msg_get_number_of_free_inventory_slots)
@@ -756,7 +757,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_free_inventory_slots() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_USED_ALIEN_PERKS_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_number_of_used_alien_perks(), n3_engine_client_anarchy_t__n3_msg_get_number_of_used_alien_perks)
@@ -764,7 +765,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_used_alien_perks() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_NUMBER_OF_USED_PERKS_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_number_of_used_perks(), n3_engine_client_anarchy_t__n3_msg_get_number_of_used_perks)
@@ -772,7 +773,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_used_perks() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_OVER_EQUIP_LEVEL_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_over_equip_level(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_over_equip_level)
@@ -780,7 +781,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_number_of_used_perks() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_PLAYFIELD_NAME_1_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_pf_name(DWORD), n3_engine_client_anarchy_t__n3_msg_get_pf_name_1)
@@ -788,7 +789,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_pf_name(DWORD) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_PLAYFIELD_NAME_2_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_pf_name(), n3_engine_client_anarchy_t__n3_msg_get_pf_name_2)
@@ -796,7 +797,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_pf_name() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_PARENT_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_get_parent(const identity_t &, identity_t &), n3_engine_client_anarchy_t__n3_msg_get_parent)
@@ -804,7 +805,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_parent(const identity_t &, identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_POS_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_get_pos(const identity_t &, vector3_t &), n3_engine_client_anarchy_t__n3_msg_get_pos)
@@ -812,7 +813,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_pos(const identity_t &, vector3_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SKILL_1_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::n3_msg_get_skill(DWORD, DWORD), n3_engine_client_anarchy_t__n3_msg_get_skill_1)
@@ -820,7 +821,7 @@ namespace ao
 	static_assert(false, " engine_client_anarchy::n3_msg_get_skill(DWORD, DWORD) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SKILL_2_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::n3_msg_get_skill(const identity_t &, DWORD, DWORD, const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_skill_2)
@@ -828,7 +829,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_skill(const identity_t &, DWORD, DWORD, const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SKILL_MAX_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(LONG engine_client_anarchy::n3_msg_get_skill_max(DWORD), n3_engine_client_anarchy_t__n3_msg_get_skill_max)
@@ -836,7 +837,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_skill_max(DWORD) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SPECIAL_ACTION_LIST_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(std::list<special_action_t>* engine_client_anarchy::n3_msg_get_special_action_list(), n3_engine_client_anarchy_t__n3_msg_get_special_action_list)
@@ -852,7 +853,7 @@ namespace ao
 	}
 #endif	
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SPECIAL_ACTION_STATE_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD engine_client_anarchy::n3_msg_get_special_action_state(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_special_action_state)
@@ -860,7 +861,7 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_special_action_state(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_SPECIAL_ATTACK_WEAPON_NAME_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::n3_msg_get_special_attack_weapon_name(const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_special_attack_weapon_name)
@@ -868,13 +869,13 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_get_special_attack_weapon_name(const identity_t &) requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_STAT_NAME_MAP_USE_NATIVE
+#if true
 	FUNCTION_AT_ADDRESS(PVOID engine_client_anarchy::n3_msg_get_stat_name_map(), n3_engine_client_anarchy_t__n3_msg_get_stat_name_map)
 #else
-
+	static_assert(false, "engine_client_anarchy::n3_msg_get_stat_name_map() requires a native function.");
 #endif
 
-#ifdef N3_ENGINE_CLIENT_ANARCHY_T__N3_MSG_GET_TARGET_TARGET_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(p_identity_t engine_client_anarchy::N3Msg_GetTargetTarget(identity_t &, const identity_t &), n3_engine_client_anarchy_t__n3_msg_get_target_target)
@@ -883,36 +884,71 @@ namespace ao
 #endif
 
 #if true
-	FUNCTION_AT_ADDRESS(PVOID engine_client_anarchy::N3Msg_GetTeamMemberList(LONG), n3_engine_client_anarchy_t__n3_msg_get_team_member_list);
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(PVOID engine_client_anarchy::n3_msg_get_team_member_list(LONG), n3_engine_client_anarchy_t__n3_msg_get_team_member_list)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_get_team_member_list(LONG) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_HasPerk_x
-	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::N3Msg_HasPerk(DWORD), n3EngineClientAnarchy_t__N3Msg_HasPerk);
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_has_perk(DWORD), n3_engine_client_anarchy_t__n3_msg_has_perk)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_has_perk(DWORD) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_IsAttacking_x
-	FUNCTION_AT_ADDRESS(bool EngineClientAnarchy::N3Msg_IsAttacking(void), n3EngineClientAnarchy_t__N3Msg_IsAttacking);
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_hide_against_opponent(const ao::identity_t&), n3_engine_client_anarchy_t__n3_msg_hide_against_opponent)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_hide_against_opponent(const ao::identity_t&) requires a native function.");
 #endif
 
-	bool engine_client_anarchy::N3Msg_IsAttacking(void) const
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_is_attacking(), n3_engine_client_anarchy_t__n3_msg_is_attacking)
+#else
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	bool engine_client_anarchy::n3_msg_is_attacking()
 	{
 		return n3_engine_client_anarchy_.p_client_control_char->p_weapon_holder->is_attacking == 1;
 	}
-
-#ifdef n3EngineClientAnarchy_t__N3Msg_IsBattleStation_x
-	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::N3Msg_IsBattleStation(void), n3EngineClientAnarchy_t__N3Msg_IsBattleStation);
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_IsCharacterInMech_x
-	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::N3Msg_IsCharacterInMech(identity_t), n3EngineClientAnarchy_t__N3Msg_IsCharacterInMech);
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_is_battle_station(), n3_engine_client_anarchy_t__n3_msg_is_battle_station)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_is_battle_station() requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_IsCharacterMorphed_x
-	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::N3Msg_IsCharacterMorphed(identity_t), n3EngineClientAnarchy_t__N3Msg_IsCharacterMorphed);
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_is_character_in_mech(identity_t), n3_engine_client_anarchy_t__n3_msg_is_character_in_mech)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_is_character_in_mech(identity_t) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_IsDungeon_x
-	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::N3Msg_IsDungeon(void), n3EngineClientAnarchy_t__N3Msg_IsDungeon);
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_is_character_morphed(identity_t), n3_engine_client_anarchy_t__n3_msg_is_character_morphed)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_is_character_morphed(identity_t) requires a native function.");
+#endif
+
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_is_dungeon(), n3_engine_client_anarchy_t__n3_msg_is_dungeon)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_is_dungeon() requires a native function.");
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_IsFormulaReady_x

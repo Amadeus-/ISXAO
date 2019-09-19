@@ -4,8 +4,7 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	printf("%" PRIX32, ppp_item_vector);
-	printf("%" PRIX32, ppp_static_item_vector);
+	printf("%" PRIX32, 1);
 	return 0;
 }
 
