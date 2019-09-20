@@ -12,11 +12,9 @@ DATATYPE(AOType,pAOType,0);
 DATATYPE(ISXAOType, pISXAOType, 0);
 DATATYPE(IdentityType, pIdentityType, 0);
 DATATYPE(DynelType, pDynelType, 0);
-DATATYPE(ActorType, pActorType, 0);
-//DATATYPE(PlayerType, pPlayerType, pActorType);
-//DATATYPE(TeamMemberType, pTeamMemberType, pPlayerType);
-DATATYPE(PetType, pPetType, 0);
-DATATYPE(CharacterType, pCharacterType, 0);
+DATATYPE(ActorType, pActorType, pDynelType);
+DATATYPE(PetType, pPetType, pActorType);
+DATATYPE(CharacterType, pCharacterType, pActorType);
 DATATYPE(NanoSpellType, pNanoSpellType, 0);
 DATATYPE(TeamEntryType, pTeamEntryType, 0);
 DATATYPE(TeamRaidType, pTeamRaidType, 0);
@@ -25,7 +23,6 @@ DATATYPE(InventoryItemType, pInventoryItemType, 0);
 DATATYPE(InventorySlotType, pInventorySlotType, 0);
 DATATYPE(PlayfieldType, pPlayfieldType, 0);
 DATATYPE(SpecialActionTemplateType, pSpecialActionTemplateType, 0);
-//DATATYPE(ActionLockType, pActionLockType, 0);
 DATATYPE(SpecialActionType, pSpecialActionType, 0);
 
 

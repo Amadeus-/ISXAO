@@ -2,7 +2,7 @@
 
 bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char *argv[], LSOBJECT &Object)
 {
-	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -233,7 +233,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				if (result)
 				{
 					Object.Ptr = result;
-					Object.Type = ::GetRealType(reinterpret_cast<ao::dynel*>(result));
+					Object.Type = ::get_real_type(reinterpret_cast<ao::dynel*>(result));
 					return true;
 				}
 			}
@@ -354,7 +354,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 
 bool DynelType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int argc, char* argv[])
 {
-	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -386,11 +386,11 @@ bool DynelType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int a
 
 bool DynelType::ToText(LSOBJECTDATA ObjectData, char *buf, const unsigned int buffer_length)
 {
-	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage, cppcoreguidelines-macro-usage)
 		return false;
-#define P_DYNEL ((ao::dynel*)ObjectData.Ptr)
+#define P_DYNEL ((ao::dynel*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
 	sprintf_s(buf, buffer_length, "%I64d", P_DYNEL->get_identity().get_combined_identity());
 #undef P_DYNEL
 

@@ -2,7 +2,7 @@
 
 bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {
-	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -467,7 +467,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		{
 			if((Object.Ptr = P_ACTOR->get_master()))
 			{
-				Object.Type = GetRealType(static_cast<ao::dynel*>(Object.Ptr));
+				Object.Type = get_real_type(static_cast<ao::dynel*>(Object.Ptr));
 				return true;
 			}
 			return false;
@@ -545,7 +545,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				if (result)
 				{
 					Object.Ptr = result;
-					Object.Type = ::GetRealType(reinterpret_cast<ao::dynel*>(result));
+					Object.Type = ::get_real_type(reinterpret_cast<ao::dynel*>(result));
 					return true;
 				}
 			}
@@ -692,7 +692,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 
 bool ActorType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int argc, char* argv[])
 {
-	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -749,7 +749,7 @@ bool ActorType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int a
 
 bool ActorType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 {
-	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;

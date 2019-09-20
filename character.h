@@ -28,7 +28,23 @@ public:
 	static void stop_attack();
 	static void use_item(ao::identity_t const &);
 
+	// Movement
+	void move_to(const ao::vector3_t&);
+	void move_forward_start();
+	void move_forward_stop();
+	void move_backward_start();
+	void move_backward_stop();
+	void rotate_left_start();
+	void rotate_left_stop();
+	void rotate_right_start();
+	void rotate_right_stop();
+	void strafe_left_start();
+	void strafe_left_stop();
+	void strafe_right_start();
+	void strafe_right_stop();
+	void stop();
+
 private:
 	void get_stat_map(std::map<DWORD, LONG>&);
-
+	
 };

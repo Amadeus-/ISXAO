@@ -30,7 +30,7 @@ public:
 	bool is_corpse();
 	bool is_door();
 	bool is_in_line_of_sight();
-	bool is_in_line_of_sight(ao::vector3_t &);
+	bool is_in_line_of_sight(const ao::vector3_t &);
 	bool is_character();
 	bool is_actor();
 	bool is_pet();

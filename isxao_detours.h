@@ -5,26 +5,39 @@ namespace isxao
 	class ao_detours
 	{
 	public:
-		void n3_engine_client_anarchy_t__set_main_dynel__trampoline(ao::dynel*);
-		void n3_engine_client_anarchy_t__set_main_dynel__detour(ao::dynel*);
+#pragma region gamestate_service
 
-		PVOID playfield_anarchy_t__playfield_anarchy_t__trampoline(PVOID);
-		PVOID playfield_anarchy_t__playfield_anarchy_t__detour(PVOID);
+		void n3_engine_client_t__set_main_dynel__trampoline(ao::dynel*);
+		void n3_engine_client_t__set_main_dynel__detour(ao::dynel*);
 
-		void PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Trampoline();
-		void PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Detour();
 
-		PVOID n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Trampoline();
-		PVOID n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Detour();
 
-		PVOID n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Trampoline();
-		PVOID n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Detour();
+		ao::playfield_anarchy* playfield_anarchy_t__playfield_anarchy_t__trampoline(PVOID);
+		ao::playfield_anarchy* playfield_anarchy_t__playfield_anarchy_t__detour(PVOID);
 
-		void playfield_t__add_child_dynel__trampoline(ao::dynel*, const ao::vector3_t&, const ao::quaternion_t&);
-		void playfield_t__add_child_dynel__detour(ao::dynel*, const ao::vector3_t&, const ao::quaternion_t&);
+		void playfield_anarchy_t__d_playfield_anarchy_t__trampoline();
+		void playfield_anarchy_t__d_playfield_anarchy_t__detour();
 
-		void n3Dynel_t__SetPlayfield_Trampoline(DWORD);
-		void n3Dynel_t__SetPlayfield_Detour(DWORD);
+		ao::engine_client_anarchy* n3_engine_client_anarchy_t__n3_engine_client_anarchy_t__trampoline();
+		PVOID n3_engine_client_anarchy_t__n3_engine_client_anarchy_t__detour();
+
+		PVOID n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t__trampoline();
+		PVOID n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t__detour();
+
+#pragma endregion
+
+#pragma region actor_service
+
+		void n3_playfield_t__add_child_dynel__trampoline(ao::dynel*, const ao::vector3_t&, const ao::quaternion_t&);
+		void n3_playfield_t__add_child_dynel__detour(ao::dynel*, const ao::vector3_t&, const ao::quaternion_t&);
+
+		void n3_dynel_t__set_playfield__trampoline(DWORD);
+		void n3_dynel_t__set_playfield__detour(DWORD);
+
+#pragma endregion
+
+		void n3_engine_client_anarchy_t__n3_msg_movement_changed__trampoline(DWORD, float, float, bool);
+		void n3_engine_client_anarchy_t__n3_msg_movement_changed__detour(DWORD, float, float, bool);
 
 		DWORD client_t__process_message_trampoline(ao::message*);
 		DWORD client_t__process_message_detour(ao::message*);

@@ -53,12 +53,14 @@ namespace isxao
 
 	// Functions
 	AOLIB_VAR DWORD n3_engine_t__n3_engine_t;
+	AOLIB_VAR DWORD n3Engine_t__SetTeleportStatus;
 
 	// Instances
 	AOLIB_VAR DWORD n3_engine_t__m_pc_instance;
 
 	// Functions
 	AOLIB_VAR DWORD n3_engine_client_t__get_client_control_dynel;
+	AOLIB_VAR DWORD n3_engine_client_t__set_main_dynel;
 
 	// Functions
 	AOLIB_VAR DWORD n3_playfield_t__add_child_dynel;
@@ -228,6 +230,7 @@ namespace isxao
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_MeetsPerkCriteria;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_MoveItemToInventory;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_MoveRaidMember;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_movement_changed;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_name_to_id;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatAddTradeItem;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatCloseWindow;
@@ -238,14 +241,58 @@ namespace isxao
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_OrbitalAttack;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_1;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_2;
-	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_send_pet_command;
-
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Accept;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Challenge;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Refuse;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Stop;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RemoveBuff;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RemoveQuest;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestCharacterInventory;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestClothInventory;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestImplantInventory;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_request_info_packet;
-
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestSocialInventory;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestWeaponInventory;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SecondarySpecialAttack;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SelectedTarget;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_send_pet_command;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SitToggle;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SplitItem;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartAltState;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartCamping;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartPvP;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartTreatment;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StopAltState;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_stop_attack;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StopCamping;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StringToStat;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SwitchTarget;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TeamJoinRequest;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TemplateIDToDynelID;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TextCommand;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_ToggleReclaim;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeAbort;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeAccept;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeAddItem;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeConfirm;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeGetInventory;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeGetInventoryCost;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeRemoveItem;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeSetCash;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeStart;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeskillCombine;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TrainPerk;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TransferTeamLeadership;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TryAbortNanoFormula;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TryEnterSneakMode;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_UntrainPerk;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_use_item;
-
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_UseItemOnItem;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_UseSkill;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__on_closed;
+
+	
+	
 
 	AOLIB_VAR DWORD playfield_anarchy_t__playfield_anarchy_t;
 	AOLIB_VAR DWORD playfield_anarchy_t__d_playfield_anarchy_t;
@@ -384,71 +431,6 @@ namespace isxao
 	AOLIB_VAR DWORD text_message_t__message_body_len;
 
 #pragma endregion
-
-
-#pragma region EngineClientAnarchy			
-	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Accept;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Challenge;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Refuse;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Stop;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RemoveBuff;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RemoveQuest;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestCharacterInventory;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestClothInventory;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestImplantInventory;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestSocialInventory;
-
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestWeaponInventory;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SecondarySpecialAttack;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SelectedTarget;
-	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SitToggle;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SplitItem;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartAltState;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartCamping;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartPvP;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartTreatment;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StopAltState;
-	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StopCamping;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StringToStat;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SwitchTarget;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TeamJoinRequest;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TemplateIDToDynelID;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TextCommand;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_ToggleReclaim;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeAbort;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeAccept;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeAddItem;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeConfirm;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeGetInventory;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeGetInventoryCost;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeRemoveItem;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeSetCash;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeStart;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TradeskillCombine;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TrainPerk;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TransferTeamLeadership;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TryAbortNanoFormula;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_TryEnterSneakMode;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_UntrainPerk;
-	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_UseItemOnItem;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_UseSkill;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__SetMainDynel;
-
-	AOLIB_VAR DWORD n3Engine_t__SetTeleportStatus;
-
-	AOLIB_VAR DWORD n3EngineClient_t__SetMainDynel;
-
-#pragma endregion
-
-#pragma region Logger
-
-	AOLIB_VAR isxao_log* gp_isxao_log;
-
-#pragma endregion
 	
 #pragma region vTables
 
@@ -488,6 +470,14 @@ namespace isxao
 	AOLIB_VAR bool g_offsets_initialized;
 	AOLIB_VAR bool g_events_registered;
 	AOLIB_VAR bool g_isxao_initialized;
+	AOLIB_VAR isxao_log* gp_isxao_log;
+	// move_to
+	AOLIB_VAR bool g_is_moving_to_location;
+	AOLIB_VAR bool g_is_move_to_stuck;
+	AOLIB_VAR float g_distance_moved_since_last;
+	AOLIB_VAR ao::vector3_t g_move_to_location;
+	AOLIB_VAR ao::vector3_t g_last_location;
+
 	AOLIB_VAR Concurrency::concurrent_queue<PN3MESSAGEINFO> g_n3message_queue;
 	AOLIB_VAR Concurrency::concurrent_queue<PGROUPMESSAGEINFO> g_group_message_queue;
 	AOLIB_VAR Concurrency::concurrent_queue<PPRIVATEMESSAGEINFO> g_private_message_queue;

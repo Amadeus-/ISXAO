@@ -52,6 +52,7 @@
 #include "isxao_utilities.h"
 #include "isxao_detours.h"
 #include "isxao_commands.h"
+#include "move_to.h"
 
 namespace isxao
 {

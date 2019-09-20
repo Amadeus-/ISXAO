@@ -18,7 +18,7 @@ bool AOType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER pMember, int argc,
 	{
 	case CheckCollision:
 	{
-		if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+		if (g_game_state != GAMESTATE_IN_GAME)
 			return false;
 		if (!IS_INDEX())
 			return false;
@@ -40,7 +40,7 @@ bool AOType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER pMember, int argc,
 	}
 	case GetActors:
 	{
-		if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+		if (g_game_state != GAMESTATE_IN_GAME)
 			return false;
 		if (IS_INDEX())
 		{
@@ -60,7 +60,7 @@ bool AOType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER pMember, int argc,
 	}
 	case HeadingTo:
 	{
-		if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+		if (g_game_state != GAMESTATE_IN_GAME)
 			return false;
 		if (!IS_INDEX())
 			return false;
@@ -86,7 +86,7 @@ bool AOType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER pMember, int argc,
 	}
 	case Zoning:
 	{
-		if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+		if(g_game_state == GAMESTATE_IN_GAME)
 		{
 			Object.DWord = g_zoning;
 			Object.Type = pIntType;

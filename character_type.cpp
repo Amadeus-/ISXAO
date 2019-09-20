@@ -2,7 +2,7 @@
 
 bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char *argv[], LSOBJECT &Object)
 {
-	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -195,7 +195,7 @@ bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 
 bool CharacterType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int argc, char* argv[])
 {
-	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -206,12 +206,12 @@ bool CharacterType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 		{
 		case Activate:
 		{
-			if (GetGameState() == GAMESTATE_IN_GAME)
+			if (get_game_state() == GAMESTATE_IN_GAME)
 				isxao_commands::Activate(0, argc, argv);
 		}
 		case Cast:
 		{
-			if (GetGameState() == GAMESTATE_IN_GAME)
+			if (get_game_state() == GAMESTATE_IN_GAME)
 				isxao_commands::Cast(0, argc, argv);
 		}
 		default: break;
@@ -228,7 +228,7 @@ bool CharacterType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 
 bool CharacterType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 {
-	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;

@@ -48,6 +48,6 @@ public:
 	virtual bool GetMethod(LSOBJECTDATA &ObjectData, PLSTYPEMETHOD pMethod, int argc, char *argv[]);
 	virtual bool ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen);
 
-	//INHERITDIRECT(pActorType)
+	INHERITDIRECT(pActorType)
 
 };

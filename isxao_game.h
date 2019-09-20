@@ -129,6 +129,17 @@ constexpr DWORD n3_engine_client_t__get_client_control_dynel_bytes_to_next = 0x0
 
 #pragma endregion
 
+#pragma region n3_engine_client_t__set_main_dynel
+
+constexpr char* const n3_engine_client_t__set_main_dynel_mangled_name = static_cast<char*>(
+	"?SetMainDynel@n3EngineClient_t@@UAEXPAVn3Dynel_t@@@Z");
+constexpr char* const n3_engine_client_t__set_main_dynel_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B 45 08 83 EC 58");
+constexpr DWORD n3_engine_client_t__set_main_dynel_offset = 0x0;
+constexpr DWORD n3_engine_client_t__set_main_dynel_bytes_to_next = 0x0;
+
+#pragma endregion
+
 #pragma region n3_playfield_t__add_child_dynel
 
 constexpr char* const n3_playfield_t__add_child_dynel_mangled_name = static_cast<char*>(
@@ -1624,7 +1635,16 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_pet_tower_bytes_to_next = 
 
 
 
+#pragma region n3_engine_client_anarchy_t__n3_msg_movement_changed
 
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_movement_changed_mangled_name = static_cast<char*>(
+	"?N3Msg_MovementChanged@n3EngineClientAnarchy_t@@QAEXW4MovementAction_e@Movement_n@@MM_N@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_movement_changed_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 70 53 56 57 8B F9");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_movement_changed_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_movement_changed_bytes_to_next = 0x0;
+
+#pragma endregion
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_name_to_id
 

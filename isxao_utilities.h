@@ -66,13 +66,13 @@ namespace isxao_utilities
 
 #pragma region Lavishscript
 
-	AOLIB_API LSTypeDefinition* GetRealType(ao::dynel* pObject);
+	AOLIB_API LSTypeDefinition* get_real_type(ao::dynel* pObject);
 
 #pragma endregion
 
 #pragma region Utility
 
-	AOLIB_API DWORD GetGameState();
+	AOLIB_API DWORD get_game_state();
 	AOLIB_API void PrintToChat(string message, PCSTR chat_type);
 
 #pragma endregion

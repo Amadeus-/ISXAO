@@ -7,72 +7,90 @@ namespace isxao
 
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::n3_engine_client_anarchy_t__set_main_dynel__trampoline(ao::dynel*));
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::n3_engine_client_t__set_main_dynel__trampoline(ao::dynel*));
 
-	void ao_detours::n3_engine_client_anarchy_t__set_main_dynel__detour(ao::dynel* p_dynel)
+	void ao_detours::n3_engine_client_t__set_main_dynel__detour(ao::dynel* p_dynel)
 	{
 		if (!p_dynel)
 			GamestateService(pExtension, GamestateWaitingForCharacter, nullptr);
-		n3_engine_client_anarchy_t__set_main_dynel__trampoline(p_dynel);
+		n3_engine_client_t__set_main_dynel__trampoline(p_dynel);
 		if (p_dynel)
 			GamestateService(pExtension, GamestateInGame, nullptr);
 	}
 
 #pragma endregion
 
-#pragma region Playfield Ctor/Dtor
+#pragma region playfield_anarchy_t__playfield_anarchy_t
 
-	DETOUR_TRAMPOLINE_EMPTY(PVOID ao_detours::playfield_anarchy_t__playfield_anarchy_t__trampoline(PVOID));
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	DETOUR_TRAMPOLINE_EMPTY(ao::playfield_anarchy* ao_detours::playfield_anarchy_t__playfield_anarchy_t__trampoline(PVOID));
 
-	PVOID ao_detours::playfield_anarchy_t__playfield_anarchy_t__detour(PVOID p_playfield_proxy)
+	ao::playfield_anarchy* ao_detours::playfield_anarchy_t__playfield_anarchy_t__detour(PVOID p_playfield_proxy)
 	{
 		GamestateService(pExtension, GamestateWaitingForCharacter, nullptr);
 		return playfield_anarchy_t__playfield_anarchy_t__trampoline(p_playfield_proxy);		
 	}
 
-	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Trampoline());
+#pragma endregion
 
-	void ao_detours::PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Detour()
+#pragma region playfield_anarchy_t__d_playfield_anarchy_t
+
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::playfield_anarchy_t__d_playfield_anarchy_t__trampoline());
+
+	void ao_detours::playfield_anarchy_t__d_playfield_anarchy_t__detour()
 	{
 		GamestateService(pExtension, GamestateWaitingForPlayfield, nullptr);
-		PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Trampoline();
+		playfield_anarchy_t__d_playfield_anarchy_t__trampoline();
 	}
 
 #pragma endregion
 
-#pragma region n3EngineClientAnarchy Ctor/Dtor
+#pragma region n3_engine_client_anarchy_t__n3_engine_client_anarchy_t
 
-	DETOUR_TRAMPOLINE_EMPTY(PVOID ao_detours::n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Trampoline());
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	DETOUR_TRAMPOLINE_EMPTY(ao::engine_client_anarchy* ao_detours::n3_engine_client_anarchy_t__n3_engine_client_anarchy_t__trampoline());
 
-	PVOID ao_detours::n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Detour()
+	PVOID ao_detours::n3_engine_client_anarchy_t__n3_engine_client_anarchy_t__detour()
 	{
 		GamestateService(pExtension, GamestateWaitingForPlayfield, nullptr);
-		return n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Trampoline();
+		return n3_engine_client_anarchy_t__n3_engine_client_anarchy_t__trampoline();
 	}
 
-	DETOUR_TRAMPOLINE_EMPTY(PVOID ao_detours::n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Trampoline());
+#pragma endregion
 
-	PVOID ao_detours::n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Detour()
+#pragma region n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t
+
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	DETOUR_TRAMPOLINE_EMPTY(PVOID ao_detours::n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t__trampoline());
+
+	PVOID ao_detours::n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t__detour()
 	{
 		GamestateService(pExtension, GamestateNotInGame, nullptr);
-		return n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Trampoline();
+		return n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t__trampoline();
 	}
 
 #pragma endregion
 
-#pragma region Adding and Removing Playfield Dynels
+#pragma region n3_playfield_t__add_child_dynel
 
-	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::playfield_t__add_child_dynel__trampoline(ao::dynel*, const ao::vector3_t&, const ao::quaternion_t&));
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::n3_playfield_t__add_child_dynel__trampoline(ao::dynel*, const ao::vector3_t&, const ao::quaternion_t&));
 
-	void ao_detours::playfield_t__add_child_dynel__detour(ao::dynel* p_dynel, const ao::vector3_t &position, const ao::quaternion_t &rotation)
+	void ao_detours::n3_playfield_t__add_child_dynel__detour(ao::dynel* p_dynel, const ao::vector3_t &position, const ao::quaternion_t &rotation)
 	{
 		ActorService(pExtension, AddActor, p_dynel);
-		playfield_t__add_child_dynel__trampoline(p_dynel, position, rotation);
+		n3_playfield_t__add_child_dynel__trampoline(p_dynel, position, rotation);
 	}
 
-	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::n3Dynel_t__SetPlayfield_Trampoline(DWORD));
+#pragma endregion
 
-	void ao_detours::n3Dynel_t__SetPlayfield_Detour(DWORD instance)
+#pragma region n3_dynel_t__set_playfield
+
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::n3_dynel_t__set_playfield__trampoline(DWORD))
+
+	void ao_detours::n3_dynel_t__set_playfield__detour(DWORD instance)
 	{
 		if (instance == 0)
 		{
@@ -80,7 +98,22 @@ namespace isxao
 			__asm {mov[p_dynel], ecx};
 			ActorService(pExtension, RemoveActor, p_dynel);
 		}
-		n3Dynel_t__SetPlayfield_Trampoline(instance);
+		n3_dynel_t__set_playfield__trampoline(instance);
+	}
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_movement_changed
+
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::n3_engine_client_anarchy_t__n3_msg_movement_changed__trampoline(DWORD, float, float, bool))
+
+	void ao_detours::n3_engine_client_anarchy_t__n3_msg_movement_changed__detour(DWORD movement_mode, float unknown_1, float unknown_2, bool unknown_3)
+	{
+		char move_data[MAX_VARSTRING];
+		sprintf_s(move_data, sizeof(move_data), "[Move Data] Movement Mode: %d, Unknown_1: %.4f, Unknown_2: %.4f, Unknown_3: %d", movement_mode, unknown_1, unknown_2, unknown_3);
+		gp_isxao_log->add_line(move_data);
+		n3_engine_client_anarchy_t__n3_msg_movement_changed__trampoline(movement_mode, unknown_1, unknown_2, unknown_3);
 	}
 
 #pragma endregion
@@ -379,7 +412,7 @@ namespace isxao
 
 	void ao_detours::ChatGUIModule_c__HandleGroupAction_Detour(ao::p_ppj_client_group_action_t m)
 	{
-		if(GetGameState() == GAMESTATE_IN_GAME)
+		if(get_game_state() == GAMESTATE_IN_GAME)
 		{
 /*			FILE * pFILE;
 			char buffer[MAX_VARSTRING];
@@ -395,7 +428,7 @@ namespace isxao
 
 	void ao_detours::ChatGUIModule_c__HandleGroupMessage_Detour(ao::p_ppj_group_message_t m)
 	{
-		if(GetGameState() == GAMESTATE_IN_GAME)
+		if(get_game_state() == GAMESTATE_IN_GAME)
 		{
 			PGROUPMESSAGEINFO group_message_info = new GROUPMESSAGEINFO(m->sender_id, m->sender, m->channel_name, m->message);
 			g_group_message_queue.push(group_message_info);
@@ -407,7 +440,7 @@ namespace isxao
 
 	void ao_detours::ChatGUIModule_c__HandlePrivateGroupAction_Detour(ao::p_ppj_client_private_group_action_t m)
 	{
-		if(GetGameState() == GAMESTATE_IN_GAME)
+		if(get_game_state() == GAMESTATE_IN_GAME)
 		{
 			//FILE * pFILE;
 			//char buffer[MAX_VARSTRING];
@@ -423,7 +456,7 @@ namespace isxao
 
 	void ao_detours::ChatGUIModule_c__HandlePrivateMessage_Detour(ao::p_ppj_client_private_message_t m)
 	{
-		if(GetGameState() == GAMESTATE_IN_GAME)
+		if(get_game_state() == GAMESTATE_IN_GAME)
 		{
 			//FILE * pFILE;
 			//char buffer[MAX_VARSTRING];
@@ -442,7 +475,7 @@ namespace isxao
 
 	void ao_detours::ChatGUIModule_c__HandleSystemMessage_Detour(ao::p_ppj_client_system_message_t m)
 	{
-		if(GetGameState() == GAMESTATE_IN_GAME)
+		if(get_game_state() == GAMESTATE_IN_GAME)
 		{
 			//FILE * pFILE;
 			//char buffer[MAX_VARSTRING];
@@ -458,7 +491,7 @@ namespace isxao
 
 	void ao_detours::ChatGUIModule_c__HandleVicinityMessage_Detour(ao::p_ppj_client_vicinity_message_t m)
 	{
-		if (GetGameState() == GAMESTATE_IN_GAME)
+		if (get_game_state() == GAMESTATE_IN_GAME)
 		{
 			//FILE * pFILE;
 			//char buffer[MAX_VARSTRING];
@@ -492,7 +525,7 @@ namespace isxao
 
 	void ao_detours::ChatGroupController_c__sub_10083D9C_Detour(int group_id, string* chat_text, int unknown)
 	{
-		if (GetGameState() == GAMESTATE_IN_GAME)
+		if (get_game_state() == GAMESTATE_IN_GAME)
 		{
 			//char text[MAX_VARSTRING];
 			//strcpy_s(text, sizeof(text), chat_text->c_str());		
@@ -708,22 +741,9 @@ namespace isxao
 			token = strtok_s(line, delim, &next_token);
 			if(IsISXAOCommand(token))
 			{
-				/*v.push_back(token);
-				while (token != nullptr)
-				{
-					token = strtok_s(nullptr, delim, &next_token);
-					if (token != nullptr)
-						v.push_back(token);
-				}
-				int argc = v.size();
-				char **argv;
-				argv = new char*[argc];
-				for (int i = 0; i < argc; i++)
-					argv[i] = v[i];*/
 				string adjusted_text = *text;
 				adjusted_text.erase(0, 1);
 				pISInterface->ExecuteCommand(adjusted_text.c_str());
-				//delete(argv);
 				return true;
 			}			
 		}
@@ -733,17 +753,28 @@ namespace isxao
 #pragma endregion
 
 	void ao_detours::initialize()
-	{
-		//EzDetour(n3EngineClientAnarchy_t__SetMainDynel, &ao_detours::n3_engine_client_anarchy_t__set_main_dynel__detour, &ao_detours::n3_engine_client_anarchy_t__set_main_dynel__trampoline);
+	{		
+#pragma region gamestate_service
 
-		//EzDetour(PlayfieldAnarchy_t__PlayfieldAnarchy_t, &AODetours::PlayfieldAnarchy_t__PlayfieldAnarchy_t_Detour, &AODetours::PlayfieldAnarchy_t__PlayfieldAnarchy_t_Trampoline);
-		//EzDetour(PlayfieldAnarchy_t__dPlayfieldAnarchy_t, &AODetours::PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Detour, &AODetours::PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Trampoline);
 
-		//EzDetour(n3_engine_client_anarchy_t__n3_engine_client_anarchy_t, &AODetours::n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Detour, &AODetours::n3EngineClientAnarchy_t__n3EngineClientAnarchy_t_Trampoline);
-		//EzDetour(n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t, &AODetours::n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Detour, &AODetours::n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Trampoline);
+		EzDetour(n3_engine_client_t__set_main_dynel, &ao_detours::n3_engine_client_t__set_main_dynel__detour, &ao_detours::n3_engine_client_t__set_main_dynel__trampoline);
 
-		EzDetour(n3_playfield_t__add_child_dynel, &ao_detours::playfield_t__add_child_dynel__detour, &ao_detours::playfield_t__add_child_dynel__trampoline);
-		//EzDetour(n3_dynel_t__set_playfield, &AODetours::n3Dynel_t__SetPlayfield_Detour, &AODetours::n3Dynel_t__SetPlayfield_Trampoline);
+		EzDetour(playfield_anarchy_t__playfield_anarchy_t, &ao_detours::playfield_anarchy_t__playfield_anarchy_t__detour, &ao_detours::playfield_anarchy_t__playfield_anarchy_t__trampoline);
+		EzDetour(playfield_anarchy_t__d_playfield_anarchy_t, &ao_detours::playfield_anarchy_t__d_playfield_anarchy_t__detour, &ao_detours::playfield_anarchy_t__d_playfield_anarchy_t__trampoline);
+
+		EzDetour(n3_engine_client_anarchy_t__n3_engine_client_anarchy_t, &ao_detours::n3_engine_client_anarchy_t__n3_engine_client_anarchy_t__detour, &ao_detours::n3_engine_client_anarchy_t__n3_engine_client_anarchy_t__trampoline);
+		EzDetour(n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t, &ao_detours::n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t__detour, &ao_detours::n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t__trampoline);
+
+#pragma endregion
+
+#pragma region actor_service
+
+		EzDetour(n3_playfield_t__add_child_dynel, &ao_detours::n3_playfield_t__add_child_dynel__detour, &ao_detours::n3_playfield_t__add_child_dynel__trampoline);
+		EzDetour(n3_dynel_t__set_playfield, &ao_detours::n3_dynel_t__set_playfield__detour, &ao_detours::n3_dynel_t__set_playfield__trampoline);
+
+#pragma endregion
+
+		// EzDetour(n3_engine_client_anarchy_t__n3_msg_movement_changed, &n3_engine_client_anarchy_t__n3_msg_movement_changed__detour, &n3_engine_client_anarchy_t__n3_msg_movement_changed__trampoline);
 
 		EzDetour(client_t__process_message, &ao_detours::client_t__process_message_detour, &ao_detours::client_t__process_message_trampoline);
 
@@ -767,16 +798,27 @@ namespace isxao
 
 	void ao_detours::shutdown()
 	{
-		//EzUnDetour(n3EngineClientAnarchy_t__SetMainDynel);
 
-		//EzUnDetour(PlayfieldAnarchy_t__PlayfieldAnarchy_t);
-		//EzUnDetour(PlayfieldAnarchy_t__dPlayfieldAnarchy_t);
+#pragma region gamestate_service
 
-		//EzUnDetour(n3_engine_client_anarchy_t__n3_engine_client_anarchy_t);
-		//EzUnDetour(n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t);
+		EzUnDetour(n3_engine_client_t__set_main_dynel);
+
+		EzUnDetour(playfield_anarchy_t__playfield_anarchy_t);
+		EzUnDetour(playfield_anarchy_t__d_playfield_anarchy_t);
+
+		EzUnDetour(n3_engine_client_anarchy_t__n3_engine_client_anarchy_t);
+		EzUnDetour(n3_engine_client_anarchy_t__d_n3_engine_client_anarchy_t);
+
+#pragma endregion
+
+#pragma region actor_service
 
 		EzUnDetour(n3_playfield_t__add_child_dynel);
-		//EzUnDetour(n3_dynel_t__set_playfield);
+		EzUnDetour(n3_dynel_t__set_playfield);
+
+#pragma endregion
+
+		// EzUnDetour(n3_engine_client_anarchy_t__n3_msg_movement_changed);
 
 		EzUnDetour(client_t__process_message);
 

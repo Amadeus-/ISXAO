@@ -4,7 +4,18 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	printf("%" PRIX32, P_CHAT_GUI_MODULE);
+	if (P_SELECTION_INDICATOR)
+	{
+		const auto i = P_SELECTION_INDICATOR->identity;
+		const auto d = ao::dynel::get_dynel(i);
+		if (d)
+		{
+			const auto p = d->get_position();
+			P_ENGINE_CLIENT_ANARCHY->get_client_char()->move_to(p);
+		}
+	}
+	// P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(ao::MA_FORWARD_START, 0.0, 0.0, true);
+	// printf("%" PRIX32, P_CHAT_GUI_MODULE);
 	return 0;
 }
 
@@ -290,42 +301,42 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 
 int CMD_ACTIVATE(int argc, char *argv[])
 {
-	if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if(g_game_state == GAMESTATE_IN_GAME)
 		return Activate(1, argc, argv);
 	return 0;
 }
 
 int CMD_AOECHO(int argc, char *argv[])
 {
-	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if (g_game_state == GAMESTATE_IN_GAME)
 		return AOEcho(argc, argv);
 	return 0;
 }
 
 int CMD_AOEXECUTE(int argc, char *argv[])
 {
-	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if (g_game_state == GAMESTATE_IN_GAME)
 		return AOExecute(argc, argv);
 	return 0;
 }
 
 int CMD_CAST(int argc, char *argv[])
 {
-	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if (g_game_state == GAMESTATE_IN_GAME)
 		return Cast(1, argc, argv);
 	return 0;
 }
 
 int CMD_FACE(int argc, char *argv[])
 { 
-	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if (g_game_state == GAMESTATE_IN_GAME)
 		return Face(argc, argv);
 	return 0;
 }
 
 int CMD_TARGET(int argc, char *argv[])
 {
-	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if (g_game_state == GAMESTATE_IN_GAME)
 		return Target(argc, argv);
 	return 0;
 }

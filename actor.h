@@ -41,6 +41,8 @@ public:
 	bool is_kos();
 	bool is_moving_forward();
 	bool is_npc();
+	bool is_rotating_left();
+	bool is_rotating_right();
 	bool is_strafing_left();
 	bool is_strafing_right();
 	bool is_team_leader();

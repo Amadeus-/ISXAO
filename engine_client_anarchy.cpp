@@ -1153,6 +1153,13 @@ namespace ao
 
 #if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_movement_changed(movement_action_e, float, float, bool), n3_engine_client_anarchy_t__n3_msg_movement_changed)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_movement_changed(movement_action_e, float, float bool) requires a native function.");
+#endif
+
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
 	FUNCTION_AT_ADDRESS(bool engine_client_anarchy::n3_msg_name_to_id(const std::string &, identity_t &), n3_engine_client_anarchy_t__n3_msg_name_to_id)
 #else
 	static_assert(false, "engine_client_anarchy::n3_msg_name_to_id(const std::string &, identity_t &) requires a native function.");

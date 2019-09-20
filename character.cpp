@@ -150,4 +150,135 @@ namespace ao
 
 #pragma endregion
 
+#pragma region Movement
+
+	void character::move_to(const ao::vector3_t& location)
+	{
+		const auto p = this->get_position();
+		const auto d = vector3_t::distance(location, this->get_position());
+		if (d < 3.0f || !this->is_in_line_of_sight(location))
+			return;
+		g_move_to_location = location;
+		g_is_move_to_stuck = false;
+		g_distance_moved_since_last = FLT_MAX;
+		g_is_moving_to_location = true;
+		g_last_location = p;
+	}
+
+
+	void character::move_forward_start()
+	{
+		if (!this->is_moving_forward())
+		{
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(MA_FORWARD_START, 0.0, 0.0, true);
+		}
+	}
+
+	void character::move_forward_stop()
+	{
+		if (this->is_moving_forward())
+		{
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(MA_FORWARD_STOP, 0.0, 0.0, true);
+		}
+	}
+
+	void character::move_backward_start()
+	{
+		if (!this->is_backing_up())
+		{
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(MA_BACKWARD_START, 0.0, 0.0, true);
+		}
+	}
+
+	void character::move_backward_stop()
+	{
+		if (this->is_backing_up())
+		{
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(MA_BACKWARD_STOP, 0.0, 0.0, true);
+		}
+	}
+
+	void character::rotate_left_start()
+	{
+		if (!this->is_rotating_left())
+		{
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(MA_ROTATE_LEFT_START, 0.0, 0.0, true);
+		}
+	}
+
+	void character::rotate_left_stop()
+	{
+		if (this->is_rotating_left())
+		{
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(MA_ROTATE_LEFT_STOP, 0.0, 0.0, true);
+		}
+	}
+
+	void character::rotate_right_start()
+	{
+		if (!this->is_rotating_right())
+		{
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(MA_ROTATE_RIGHT_START, 0.0, 0.0, true);
+		}
+	}
+
+	void character::rotate_right_stop()
+	{
+		if (this->is_rotating_right())
+		{
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(MA_ROTATE_RIGHT_STOP, 0.0, 0.0, true);
+		}
+	}
+
+	void character::strafe_left_start()
+	{
+		if (!this->is_strafing_left())
+		{
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(MA_STRAFE_LEFT_START, 0.0, 0.0, true);
+		}
+	}
+
+	void character::strafe_left_stop()
+	{
+		if (this->is_strafing_left())
+		{
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(MA_STRAFE_LEFT_STOP, 0.0, 0.0, true);
+		}
+	}
+
+	void character::strafe_right_start()
+	{
+		if (!this->is_strafing_right())
+		{
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(MA_STRAFE_RIGHT_START, 0.0, 0.0, true);
+		}
+	}
+
+	void character::strafe_right_stop()
+	{
+		if (this->is_strafing_right())
+		{
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(MA_STRAFE_RIGHT_STOP, 0.0, 0.0, true);
+		}
+	}
+
+	void character::stop()
+	{
+		if (this->is_moving_forward())
+			this->move_forward_stop();
+		if (this->is_backing_up())
+			this->move_backward_stop();
+		if (this->is_rotating_left())
+			this->rotate_left_stop();
+		if (this->is_rotating_right())
+			this->rotate_right_stop();
+		if (this->is_strafing_left())
+			this->strafe_left_stop();
+		if (this->is_strafing_right())
+			this->strafe_right_stop();
+	}
+
+
+#pragma endregion
+
 }

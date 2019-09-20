@@ -319,6 +319,16 @@ namespace ao
 		return this->get_simple_char_data()->is_npc == 1;
 	}
 
+	bool actor::is_rotating_left()
+	{
+		return this->get_vehicle()->get_char_movement_status()->is_rotating != 1 && this->get_vehicle()->get_char_movement_status()->rotation_direction == 3;
+	}
+
+	bool actor::is_rotating_right()
+	{
+		return this->get_vehicle()->get_char_movement_status()->is_rotating != 1 && this->get_vehicle()->get_char_movement_status()->rotation_direction == 4;
+	}
+
 	bool actor::is_strafing_left()
 	{
 		return this->get_vehicle()->get_char_movement_status()->is_moving_strafe != 1 && this->get_vehicle()->get_char_movement_status()->strafe_direction == 3;

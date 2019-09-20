@@ -63,7 +63,7 @@ namespace ao
 		float y;					// 0x04
 		float z;					// 0x08		
 
-		static struct ao_vector3 add(struct ao_vector3& v1, struct ao_vector3& v2)
+		static struct ao_vector3 add(const struct ao_vector3& v1, const struct ao_vector3& v2)
 		{
 			struct ao_vector3 a;
 			a.x = v1.x + v2.x;
@@ -72,7 +72,7 @@ namespace ao
 			return a;
 		}
 
-		static struct ao_vector3 subtract(struct ao_vector3& v1, struct ao_vector3& v2)
+		static struct ao_vector3 subtract(const struct ao_vector3& v1, const struct ao_vector3& v2)
 		{
 			struct ao_vector3 a;
 			a.x = v1.x - v2.x;
@@ -96,7 +96,7 @@ namespace ao
 			z = z / m;
 		}
 
-		static struct ao_vector3 cross(struct ao_vector3& v1, struct ao_vector3& v2)
+		static struct ao_vector3 cross(const struct ao_vector3& v1, const struct ao_vector3& v2)
 		{
 			struct ao_vector3 c;
 
@@ -107,7 +107,7 @@ namespace ao
 			return c;
 		}
 
-		static float dot(struct ao_vector3& v1, struct ao_vector3& v2)
+		static float dot(const struct ao_vector3& v1, const struct ao_vector3& v2)
 		{
 			return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
 		}
@@ -122,41 +122,41 @@ namespace ao
 			return x*x + y*y + z*z;
 		}
 
-		static float distance(struct ao_vector3& v1, struct ao_vector3& v2)
+		static float distance(const struct ao_vector3& v1, const struct ao_vector3& v2)
 		{
 			const auto r = subtract(v1, v2);
 			return r.length();
 		}
 
-		static float distance_squared(struct ao_vector3& v1, struct ao_vector3& v2)
+		static float distance_squared(const struct ao_vector3& v1, const struct ao_vector3& v2)
 		{
 			const auto r = subtract(v1, v2);
 			return r.length_squared();
 		}
 
-		static float distance_x(struct ao_vector3& v1, struct ao_vector3& v2)
+		static float distance_x(const struct ao_vector3& v1, const struct ao_vector3& v2)
 		{
 			return abs(v1.x - v2.x);
 		}
 
-		static float distance_y(struct ao_vector3& v1, struct ao_vector3& v2)
+		static float distance_y(const struct ao_vector3& v1, const struct ao_vector3& v2)
 		{
 			return abs(v1.y - v2.y);
 		}
 
-		static float distance_z(struct ao_vector3& v1, struct ao_vector3& v2)
+		static float distance_z(const struct ao_vector3& v1, const struct ao_vector3& v2)
 		{
 			return abs(v1.z - v2.z);
 		}
 
-		static float distance_xz(struct ao_vector3& v1, struct ao_vector3& v2)
+		static float distance_xz(const struct ao_vector3& v1, const struct ao_vector3& v2)
 		{
 			const auto d_x = v1.x - v2.x;
 			const auto d_z = v1.z - v2.z;
 			return sqrt(d_x*d_x + d_z*d_z);
 		}
 
-		static float distance_xz_squared(struct ao_vector3& v1, struct ao_vector3& v2)
+		static float distance_xz_squared(const struct ao_vector3& v1, const struct ao_vector3& v2)
 		{
 			const auto d_x = v1.x - v2.x;
 			const auto d_z = v1.z - v2.z;
@@ -168,11 +168,25 @@ namespace ao
 			return atan2f(x, z);
 		}
 
+		void zero()
+		{
+			this->x = 0.0f;
+			this->y = 0.0f;
+			this->z = 0.0f;
+		}
+
 		ao_vector3()
 		{
 			x = 0.0f;
 			y = 0.0f;
 			z = 0.0f;
+		}
+
+		ao_vector3(const float& x, const float& y, const float& z)
+		{
+			this->x = x;
+			this->y = y;
+			this->z = z;
 		}
 	} vector3_t, *p_vector3_t;
 	

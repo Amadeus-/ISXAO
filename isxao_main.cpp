@@ -48,8 +48,17 @@ namespace isxao
 		
 
 		// Determine GAMESTATE
-		g_game_state = GetGameState();
-		gp_isxao_log->add_line("GAMESTATE = %d", g_game_state);
+		g_game_state = get_game_state();
+		char game_state[MAX_VARSTRING];
+		if (g_game_state == GAMESTATE_NOT_IN_GAME)
+			sprintf_s(game_state, sizeof(game_state), "GAMESTATE_NOT_IN_GAME");
+		else if (g_game_state == GAMESTATE_WAITING_FOR_PLAYFIELD)
+			sprintf_s(game_state, sizeof(game_state), "GAMESTATE_WAITING_FOR_PLAYFIELD");
+		else if (g_game_state == GAMESTATE_WAITING_FOR_CLIENT_CHAR)
+			sprintf_s(game_state, sizeof(game_state), "GAMESTATE_WAITING_FOR_CLIENT_CHAR");
+		else
+			sprintf_s(game_state, sizeof(game_state), "GAMESTATE_IN_GAME");
+		gp_isxao_log->add_line("Gamestate is %s.", game_state);
 
 		// Apply function hooks
 		//InitializePlayfieldHook();

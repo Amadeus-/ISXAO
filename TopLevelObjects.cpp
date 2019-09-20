@@ -40,7 +40,7 @@ bool __cdecl TLO_ISXAO(int argc, char *argv[], LSTYPEVAR &Dest)
 
 bool __cdecl TLO_ME(int argc, char *argv[], LSTYPEVAR &Dest)
 {
-	if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if(g_game_state == GAMESTATE_IN_GAME)
 	{
 		Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->get_client_char();
 		Dest.Type = pCharacterType;
@@ -55,7 +55,7 @@ bool __cdecl TLO_ME(int argc, char *argv[], LSTYPEVAR &Dest)
 
 bool __cdecl TLO_SELECTION_TARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 {
-	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if (g_game_state == GAMESTATE_IN_GAME)
 	{
 		
 		if (P_SELECTION_INDICATOR)
@@ -63,7 +63,7 @@ bool __cdecl TLO_SELECTION_TARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 			const auto identity = P_SELECTION_INDICATOR->identity;
 			const auto d = ao::dynel::get_dynel(identity);
 			Dest.Ptr = d;
-			Dest.Type = isxao_utilities::GetRealType(d);
+			Dest.Type = isxao_utilities::get_real_type(d);
 			return true;
 		}
 	}
@@ -76,14 +76,14 @@ bool __cdecl TLO_SELECTION_TARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 
 bool __cdecl TLO_ATTACK_TARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 {
-	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if (g_game_state == GAMESTATE_IN_GAME)
 	{
 		ao::identity_t identity;
 		if (P_ATTACKING_INDICATOR)
 		{
 			const auto d = reinterpret_cast<ao::dynel*>(ao::dynel::get_dynel(P_ATTACKING_INDICATOR->identity));
 			Dest.Ptr = d;
-			Dest.Type = isxao_utilities::GetRealType(d);
+			Dest.Type = isxao_utilities::get_real_type(d);
 			return true;
 		}
 	}
@@ -96,7 +96,7 @@ bool __cdecl TLO_ATTACK_TARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 
 bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 {
-	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if (g_game_state == GAMESTATE_IN_GAME)
 	{
 		if (IS_INDEX())
 		{
@@ -135,7 +135,7 @@ bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 					if (--nth == 0)
 					{
 						Dest.Ptr = v[N];
-						Dest.Type = GetRealType(v[N]);
+						Dest.Type = get_real_type(v[N]);
 						return true;
 					}
 				}
@@ -147,7 +147,7 @@ bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 
 bool __cdecl TLO_ACTORSEARCHCOUNT(int argc, char *argv[], LSTYPEVAR&Dest)
 {
-	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if (g_game_state == GAMESTATE_IN_GAME)
 	{
 		if (IS_INDEX())
 		{
@@ -173,7 +173,7 @@ bool __cdecl TLO_ACTORSEARCHCOUNT(int argc, char *argv[], LSTYPEVAR&Dest)
 
 bool __cdecl TLO_NANOSPELL(int argc, char *argv[], LSTYPEVAR&Dest)
 {
-	if (isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if (g_game_state == GAMESTATE_IN_GAME)
 	{
 		if (IS_INDEX())
 		{
@@ -220,7 +220,7 @@ bool __cdecl TLO_NANOSPELL(int argc, char *argv[], LSTYPEVAR&Dest)
 
 bool __cdecl TLO_PLAYFIELD(int argc, char *argv[], LSTYPEVAR&Dest)
 {
-	if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if(g_game_state == GAMESTATE_IN_GAME)
 	{
 		Dest.Ptr = P_PLAYFIELD_DIR->get_playfield();
 		Dest.Type = pPlayfieldType;
@@ -235,7 +235,7 @@ bool __cdecl TLO_PLAYFIELD(int argc, char *argv[], LSTYPEVAR&Dest)
 
 bool __cdecl TLO_TEAMRAID(int argc, char *argv[], LSTYPEVAR &Dest)
 {
-	if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if(g_game_state == GAMESTATE_IN_GAME)
 	{
 		Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_team_raid();
 		Dest.Type = pTeamRaidType;
@@ -250,7 +250,7 @@ bool __cdecl TLO_TEAMRAID(int argc, char *argv[], LSTYPEVAR &Dest)
 
 bool __cdecl TLO_SPECIALACTION(int argc, char *argv[], LSTYPEVAR&Dest)
 {
-	if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+	if(g_game_state == GAMESTATE_IN_GAME)
 	{
 		if(IS_INDEX())
 		{

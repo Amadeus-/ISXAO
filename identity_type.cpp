@@ -2,7 +2,7 @@
 
 bool IdentityType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {
-	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -43,7 +43,7 @@ bool IdentityType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 
 bool IdentityType::ToText(LSOBJECTDATA ObjectData, char* buf, unsigned buflen)
 {
-	if (isxao_utilities::GetGameState() != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;

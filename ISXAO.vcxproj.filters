@@ -314,6 +314,9 @@
     <ClCompile Include="isxao_find_pattern.cpp">
       <Filter>Source Files\Base\Internal</Filter>
     </ClCompile>
+    <ClCompile Include="move_to.cpp">
+      <Filter>Source Files\Base\Internal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ISXAO.h">
@@ -579,6 +582,9 @@
     </ClInclude>
     <ClInclude Include="ao_enums.h">
       <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="move_to.h">
+      <Filter>Header Files\Base\Internal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

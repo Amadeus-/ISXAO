@@ -61,9 +61,11 @@ namespace isxao
 
 	// Functions
 	DWORD n3_engine_t__n3_engine_t = 0;
+	DWORD n3Engine_t__SetTeleportStatus = 0;
 
 	// Functions
 	DWORD n3_engine_client_t__get_client_control_dynel = 0;
+	DWORD n3_engine_client_t__set_main_dynel = 0;
 
 	// Instances
 	DWORD n3_engine_t__m_pc_instance = 0;
@@ -237,6 +239,7 @@ namespace isxao
 	DWORD n3EngineClientAnarchy_t__N3Msg_MeetsPerkCriteria = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_MoveItemToInventory = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_MoveRaidMember = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_movement_changed = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_name_to_id = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatAddTradeItem = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatCloseWindow = 0;
@@ -247,12 +250,54 @@ namespace isxao
 	DWORD n3EngineClientAnarchy_t__N3Msg_OrbitalAttack = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_1 = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_2 = 0;
-
+	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Accept = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Challenge = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Refuse = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Stop = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_RemoveBuff = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_RemoveQuest = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_RequestCharacterInventory = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_RequestClothInventory = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_RequestImplantInventory = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_request_info_packet = 0;
-
+	DWORD n3EngineClientAnarchy_t__N3Msg_RequestSocialInventory = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_RequestWeaponInventory = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_SecondarySpecialAttack = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_SelectedTarget = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_send_pet_command = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_SitToggle = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_SplitItem = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_StartAltState = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_StartCamping = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_StartPvP = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_StartTreatment;
+	DWORD n3EngineClientAnarchy_t__N3Msg_StopAltState = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_stop_attack = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_StopCamping = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_StringToStat = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_SwitchTarget = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TeamJoinRequest = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TemplateIDToDynelID = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TextCommand = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_ToggleReclaim = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TradeAbort = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TradeAccept = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TradeAddItem = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TradeConfirm = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TradeGetInventory = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TradeGetInventoryCost = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TradeRemoveItem = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TradeSetCash = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TradeStart = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TradeskillCombine = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TrainPerk = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TransferTeamLeadership = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TryAbortNanoFormula = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_TryEnterSneakMode = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_UntrainPerk = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_use_item = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_UseItemOnItem = 0;
+
 	DWORD n3_engine_client_anarchy_t__on_closed = 0;
 	
 	DWORD playfield_anarchy_t__playfield_anarchy_t = 0;
@@ -369,67 +414,9 @@ namespace isxao
 
 #pragma endregion
 
-#pragma region EngineClientAnarchy	
-	
-	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Accept = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Challenge = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Refuse = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Stop = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_RemoveBuff = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_RemoveQuest = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_RequestCharacterInventory = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_RequestClothInventory = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_RequestImplantInventory = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_RequestSocialInventory = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_RequestWeaponInventory = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_SecondarySpecialAttack = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_SelectedTarget = 0;
-	
-	DWORD n3EngineClientAnarchy_t__N3Msg_SitToggle = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_SplitItem = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_StartAltState = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_StartCamping = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_StartPvP = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_StartTreatment;
-	DWORD n3EngineClientAnarchy_t__N3Msg_StopAltState = 0;
-	
-	DWORD n3EngineClientAnarchy_t__N3Msg_StopCamping = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_StringToStat = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_SwitchTarget = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TeamJoinRequest = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TemplateIDToDynelID = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TextCommand = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_ToggleReclaim = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TradeAbort = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TradeAccept = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TradeAddItem = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TradeConfirm = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TradeGetInventory = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TradeGetInventoryCost = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TradeRemoveItem = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TradeSetCash = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TradeStart = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TradeskillCombine = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TrainPerk = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TransferTeamLeadership = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TryAbortNanoFormula = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_TryEnterSneakMode = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_UntrainPerk = 0;
-	
-	DWORD n3EngineClientAnarchy_t__N3Msg_UseItemOnItem = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_UseSkill = 0;
-	DWORD n3EngineClientAnarchy_t__SetMainDynel = 0;
-
-	DWORD n3Engine_t__SetTeleportStatus = 0;
-
-	DWORD n3EngineClient_t__SetMainDynel = 0;
-
-
-#pragma endregion
-
 #pragma region Logger
 
-	isxao_log* gp_isxao_log = nullptr;
+	
 
 #pragma endregion
 
@@ -471,6 +458,12 @@ namespace isxao
 	bool g_offsets_initialized = false;
 	bool g_events_registered = false;
 	bool g_isxao_initialized = false;
+	isxao_log* gp_isxao_log = nullptr;
+	bool g_is_moving_to_location = false;
+	bool g_is_move_to_stuck = false;
+	float g_distance_moved_since_last = 0.0f;
+	ao::vector3_t g_move_to_location;
+	ao::vector3_t g_last_location;
 	Concurrency::concurrent_queue<PN3MESSAGEINFO> g_n3message_queue;
 	Concurrency::concurrent_queue<PGROUPMESSAGEINFO> g_group_message_queue;
 	Concurrency::concurrent_queue<PPRIVATEMESSAGEINFO> g_private_message_queue;
@@ -519,12 +512,6 @@ namespace isxao
 
 	
 	DWORD ChatWindowNode_c__sub_1009BB79 = 0;
-
-#pragma endregion
-
-#pragma region HTMLParser
-
-	
 
 #pragma endregion
 
@@ -607,6 +594,7 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_dynel_t__set_playfield)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_dynel_t__update_where)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_engine_t__n3_engine_t)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_engine_client_t__set_main_dynel)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__add_child_dynel)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_1)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_2)
@@ -764,6 +752,7 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_perk)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_pet_tower)
 
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_movement_changed)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_name_to_id)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_1)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_2)

@@ -148,6 +148,7 @@ public:
 	bool N3Msg_MeetsPerkCriteria(DWORD);
 	bool N3Msg_MoveItemToInventory(const ao::identity_t &, DWORD, DWORD);
 	void N3Msg_MoveRaidMember(const ao::identity_t &, DWORD);
+	void n3_msg_movement_changed(ao::movement_action_e, float, float, bool);
 	bool n3_msg_name_to_id(const std::string &, ao::identity_t &);
 	void N3Msg_NPCChatAddTradeItem(const ao::identity_t &, const ao::identity_t &, const ao::identity_t &);
 	void N3Msg_NPCChatCloseWindow(const ao::identity_t &, const ao::identity_t &);

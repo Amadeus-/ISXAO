@@ -112,13 +112,13 @@ namespace ao
 		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->check_los(this);
 	}
 
-	bool dynel::is_in_line_of_sight(vector3_t &position)
+	bool dynel::is_in_line_of_sight(const vector3_t &position)
 	{
 		vector3_t height_offset;
 		height_offset.x = 0.0f;
 		height_offset.y = 1.6f;
 		height_offset.z = 0.0f;
-		auto dynel_position = this->get_position();
+		const auto dynel_position = this->get_position();
 		const auto offset_dynel_position = vector3_t::add(dynel_position, height_offset);
 		return P_PLAYFIELD_DIR->get_playfield()->line_of_sight(position, offset_dynel_position, get_dynel_data()->p_vehicle->zone_instance_id, false);
 	}

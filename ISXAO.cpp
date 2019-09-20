@@ -365,7 +365,7 @@ void __cdecl PulseService(bool Broadcast, unsigned int MSG, void *lpData)
 		 */
 
 		g_pulse_count++;
-		/*while (!g_n3message_queue.empty())
+		while (!g_n3message_queue.empty())
 		{
 			PN3MESSAGEINFO message_info;
 			if (g_n3message_queue.try_pop(message_info))
@@ -394,7 +394,31 @@ void __cdecl PulseService(bool Broadcast, unsigned int MSG, void *lpData)
 			PSYSTEMCHATINFO system_chat_info;
 			if (g_system_chat_queue.try_pop(system_chat_info))
 				HandleSystemChat(system_chat_info);
-		}*/
+		}
+
+		//if (g_is_moving_to_location && g_game_state == GAMESTATE_IN_GAME && g_pulse_count % 20 == 0)
+		//{
+		//	auto const c = P_ENGINE_CLIENT_ANARCHY->get_client_char();
+		//	auto const p = c->get_position();
+		//	auto const d = ao::vector3_t::distance(p, g_move_to_location);
+		//	if (d > 3.0f && c->is_in_line_of_sight(g_move_to_location) && g_distance_moved_since_last > 0.1)
+		//	{
+		//		c->face(g_move_to_location);
+		//		if (!c->is_moving_forward())
+		//			c->move_forward_start();
+		//		// g_distance_moved_since_last = ao::vector3_t::distance(p, g_last_location);
+		//		// g_last_location = p;
+		//	}
+		//	else
+		//	{
+		//		c->stop();
+		//		gp_isxao_log->add_line("Move To location is either not in line of sight, is too close, or you may be stuck.");
+		//		g_move_to_location.zero();
+		//		g_is_move_to_stuck = false;
+		//		g_distance_moved_since_last = 0.0f;
+		//		g_is_moving_to_location = false;
+		//	}
+		//}
 	}
 }
 

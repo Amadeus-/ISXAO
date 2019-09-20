@@ -1285,7 +1285,7 @@ namespace isxao_utilities
 
 #pragma region Lavishscript
 
-	LSTypeDefinition* GetRealType(ao::dynel* pObject)
+	LSTypeDefinition* get_real_type(ao::dynel* pObject)
 	{
 		if (pObject && pObject->get_identity().type == 50000)
 		{
@@ -1305,12 +1305,12 @@ namespace isxao_utilities
 
 #pragma region Utility
 
-	DWORD GetGameState()
+	DWORD get_game_state()
 	{
 		if (!P_ENGINE_CLIENT_ANARCHY)
 			return GAMESTATE_NOT_IN_GAME;
-		//if (!P_PLAYFIELD_DIR->GetPlayfield())
-		//	return GAMESTATE_WAITING_FOR_PLAYFIELD;
+		if (!P_PLAYFIELD_DIR->get_playfield())
+			return GAMESTATE_WAITING_FOR_PLAYFIELD;
 		if (!P_ENGINE_CLIENT_ANARCHY->get_client_char())
 			return GAMESTATE_WAITING_FOR_CLIENT_CHAR;
 		return GAMESTATE_IN_GAME;
@@ -1318,7 +1318,7 @@ namespace isxao_utilities
 
 	void PrintToChat(string message, PCSTR chat_type)
 	{
-		if(isxao_utilities::GetGameState() == GAMESTATE_IN_GAME)
+		if(g_game_state == GAMESTATE_IN_GAME)
 		{
 			string s;
 			s = "<font color=\"" + string(chat_type) + "\">" + message + "</font>";
