@@ -20,8 +20,8 @@ namespace isxao
 		PVOID n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Trampoline();
 		PVOID n3EngineClientAnarchy_t__dn3EngineClientAnarchy_t_Detour();
 
-		void Playfield_t__AddChildDynel_Trampoline(ao::dynel*, const ao::vector3_t&, const ao::quaternion_t&);
-		void Playfield_t__AddChildDynel_Detour(ao::dynel*, const ao::vector3_t&, const ao::quaternion_t&);
+		void playfield_t__add_child_dynel__trampoline(ao::dynel*, const ao::vector3_t&, const ao::quaternion_t&);
+		void playfield_t__add_child_dynel__detour(ao::dynel*, const ao::vector3_t&, const ao::quaternion_t&);
 
 		void n3Dynel_t__SetPlayfield_Trampoline(DWORD);
 		void n3Dynel_t__SetPlayfield_Detour(DWORD);
@@ -57,8 +57,8 @@ namespace isxao
 		bool CommandInterpreter_c__ParseTextCommand_Trampoline(ao::chat_window_node*, string*);
 		bool CommandInterpreter_c__ParseTextCommand_Detour(ao::chat_window_node*, string*);
 
-		static void Initialize();
-		static void Shutdown();
+		static void initialize();
+		static void shutdown();
 	};
 
 }

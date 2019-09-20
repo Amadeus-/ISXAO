@@ -48,10 +48,8 @@ namespace isxao
 		
 
 		// Determine GAMESTATE
-		// g_game_state = GetGameState();
-		// gp_isxao_log->AddLine("GAMESTATE = %d\n", g_game_state);
-
-
+		g_game_state = GetGameState();
+		gp_isxao_log->add_line("GAMESTATE = %d", g_game_state);
 
 		// Apply function hooks
 		//InitializePlayfieldHook();
@@ -60,18 +58,18 @@ namespace isxao
 		//InitializePlayfieldChildrenHook();
 		//InitializeAOMessageHook();
 		//InitializeSimpleCharHook();
-		// AODetours::Initialize();
+		ao_detours::initialize();
 
 		// Register events
-		// gp_isxao_log->AddLine("Registering events.\n");
-		// g_events_registered = RegisterEvents();
-		/*if (g_events_registered)
-			gp_isxao_log->AddLine("Events registered.\n");
+		gp_isxao_log->add_line("Registering events.");
+		g_events_registered = RegisterEvents();
+		if (g_events_registered)
+			gp_isxao_log->add_line("Events registered.");
 		else
 		{
 			g_isxao_initialized = g_events_registered;
-			gp_isxao_log->AddLine("Events failed to register.\n");
-		}*/
+			gp_isxao_log->add_line("Events failed to register.");
+		}
 			
 	}
 
@@ -84,7 +82,7 @@ namespace isxao
 		//ShutdownSetTeleportStatusHook();
 		//ShutdownSetMainDynelHook();
 		//ShutdownPlayfieldHook();
-		//AODetours::Shutdown();
+		ao_detours::shutdown();
 
 		printf("ISXAO unloaded.");
 		gp_isxao_log->add_line("Shutting down logging");
