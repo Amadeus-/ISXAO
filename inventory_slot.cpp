@@ -204,7 +204,7 @@ namespace ao
 	bool inventory_slot::is_item_locked() const
 	{
 		const identity_t d(0, 0);
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_IsItemDisabled(slot_id, d);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_is_item_disabled(slot_id, d);
 	}
 
 }

@@ -195,9 +195,6 @@ namespace isxao_utilities
 
 #pragma region Objects
 
-#ifdef __GetFullPerkMap_x
-	FUNCTION_AT_ADDRESS(DWORD __cdecl GetFullPerkMap(void), __N3Msg_GetFullPerkMap);
-#endif
 
 	bool IsValidDynel(ao::p_n3_dynel_t pDynel)
 	{
@@ -214,13 +211,6 @@ namespace isxao_utilities
 				return true;
 		}
 		return false;
-	}
-
-	PVOID RequestInfo(const ao::identity_t &id)
-	{
-		typedef PVOID(__thiscall * tRequestInfo)(ao::special_action_holder*, const ao::identity_t&);
-		auto pLookAt = tRequestInfo(__RequestInfo);
-		return pLookAt(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_special_action_holder(), id);
 	}
 
 #pragma endregion
@@ -422,7 +412,7 @@ namespace isxao_utilities
 		if (P_ENGINE_CLIENT_ANARCHY)
 		{
 			std::vector<ao::actor*> v;
-			P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
+			P_PLAYFIELD_DIR->get_playfield()->get_playfield_actors(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{
 				if ((*it)->get_identity().type == 50000 && !P_ENGINE_CLIENT_ANARCHY->n3_msg_is_npc((*it)->get_identity()))
@@ -445,7 +435,7 @@ namespace isxao_utilities
 			return 0;
 		DWORD total_matching = 0;
 		std::vector<ao::actor*> v;
-		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
+		P_PLAYFIELD_DIR->get_playfield()->get_playfield_actors(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 		{
 			if (include_char)
@@ -473,7 +463,7 @@ namespace isxao_utilities
 		CIndex<PAORANK> actor_set;
 		ao::vector3_t pos = p_origin->get_position();
 		std::vector<ao::actor*> v;
-		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
+		P_PLAYFIELD_DIR->get_playfield()->get_playfield_actors(v);
 		DWORD TotalMatching = 0;
 		if (include_char)
 		{
@@ -1332,7 +1322,7 @@ namespace isxao_utilities
 		{
 			string s;
 			s = "<font color=\"" + string(chat_type) + "\">" + message + "</font>";
-			pCommandInterpreter->ParseText(s);
+			P_COMMAND_INTERPRETER->parse_text(s);
 		}
 	}
 

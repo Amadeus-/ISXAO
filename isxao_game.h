@@ -2,16 +2,6 @@
 
 namespace isxao
 {
-#pragma region Globals
-
-#define __GetSexStr_x												0x16930		// Gamecode
-#define	__GetFullPerkMap_x											0x282A1		// Gamecode
-#define __SetTarget_x												0x2682E		// GUI
-#define m_cStatNameDir_x											0x2E1E30	// Gamecode
-#define __RequestInfo_x												0x404A9		// Gamecode
-#define __StatToString_x											0x37162		// Gamecode
-
-#pragma endregion
 
 #pragma region N3
 
@@ -19,110 +9,220 @@ namespace isxao
 constexpr char* const n3_module_name = static_cast<char*>("N3.dll");
 
 // Functions
+
+#pragma region n3_camera_t__set_secondary_target
+
 constexpr char* const n3_camera_t__set_secondary_target_mangled_name = static_cast<char*>(
 	"?SetSecondaryTarget@n3Camera_t@@QAEXPAVLocalitySource_t@@@Z");
 constexpr char* const n3_camera_t__set_secondary_target_pattern = static_cast<char*>(
 	"55 8B EC 56 8B F1 8B 4E 50 6A 00");
+constexpr DWORD n3_camera_t__set_secondary_target_offset = 0;
+constexpr DWORD n3_camera_t__set_secondary_target_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region n3_camera_t__set_selected_target
 
 constexpr char* const n3_camera_t__set_selected_target_mangled_name = static_cast<char*>(
 	"?SetSelectedTarget@n3Camera_t@@QAEXABVIdentity_t@@@Z");
 constexpr char* const n3_camera_t__set_selected_target_pattern = static_cast<char*>(
 	"55 8B EC 83 EC 10 56 57 8B F9");
+constexpr DWORD n3_camera_t__set_selected_target_offset = 0;
+constexpr DWORD n3_camera_t__set_selected_target_bytes_to_next = 0;
 
-// Functions
+#pragma endregion
+
+#pragma region n3_dynel_t__n3_dynel_t
+
 constexpr char* const n3_dynel_t__n3_dynel_t_mangled_name = static_cast<char*>(
 	"??0n3Dynel_t@@IAE@ABVIdentity_t@@@Z");
 constexpr char* const n3_dynel_t__n3_dynel_t_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 53 56 8B F1 57 89 75 F0 FF 15 ?? ?? ?? ??");
+constexpr DWORD n3_dynel_t__n3_dynel_t_offset = 0;
+constexpr DWORD n3_dynel_t__n3_dynel_t_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region n3_dynel_t__d_n3_dynel_t
 
 constexpr char* const n3_dynel_t__d_n3_dynel_t_mangled_name = static_cast<char*>(
 	"??1n3Dynel_t@@MAE@XZ");
 constexpr char* const n3_dynel_t__d_n3_dynel_t_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 56 8B F1 57 89 75 F0 C7 06 ?? ?? ?? ?? C7 46 04 ?? ?? ?? ?? C7 46 0C ?? ?? ?? ?? FF 76 60");
+constexpr DWORD n3_dynel_t__d_n3_dynel_t_offset = 0;
+constexpr DWORD n3_dynel_t__d_n3_dynel_t_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region n3_dynel_t__get_dynel
 
 constexpr char* const n3_dynel_t__get_dynel_mangled_name = static_cast<char*>(
 	"?GetDynel@n3Dynel_t@@SAPAV1@ABVIdentity_t@@@Z");
 constexpr char* const n3_dynel_t__get_dynel_pattern = static_cast<char*>(
 	"55 8B EC 51 56 FF 75 08 8B 35 ?? ?? ?? ?? 8D 45 FC 50 8B CE E8 ?? ?? ?? ?? 8B 45 FC 3B 46 04 5E 75 ??");
+constexpr DWORD n3_dynel_t__get_dynel_offset = 0;
+constexpr DWORD n3_dynel_t__get_dynel_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region n3_dynel_t__send_iir_to_observers
 
 constexpr char* const n3_dynel_t__send_iir_to_observers_mangled_name = static_cast<char*>(
 	"?SendIIRToObservers@n3Dynel_t@@QAEXAAVn3InfoItemRemote_t@@@Z");
 constexpr char* const n3_dynel_t__send_iir_to_observers_pattern = static_cast<char*>(
 	"55 8B EC 51 80 79 6B 00");
+constexpr DWORD n3_dynel_t__send_iir_to_observers_offset = 0;
+constexpr DWORD n3_dynel_t__send_iir_to_observers_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region n3_dynel_t__set_playfield
 
 constexpr char* const n3_dynel_t__set_playfield_mangled_name = static_cast<char*>(
 	"?SetPlayfield@n3Dynel_t@@IAEXI@Z");
 constexpr char* const n3_dynel_t__set_playfield_pattern = static_cast<char*>(
 	"55 8B EC 53 8B 5D 08 56 57 8B F1");
+constexpr DWORD n3_dynel_t__set_playfield_offset = 0;
+constexpr DWORD n3_dynel_t__set_playfield_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region n3_dynel_t__update_locality_listeners
 
 constexpr char* const n3_dynel_t__update_locality_listeners_mangled_name = static_cast<char*>(
 	"?UpdateLocalityListeners@n3Dynel_t@@QAEXXZ");
+constexpr char* const n3_dynel_t__update_locality_listeners_pattern = static_cast<char*>(nullptr);
 constexpr DWORD n3_dynel_t__update_locality_listeners_offset = 0x32;
 constexpr DWORD n3_dynel_t__update_locality_listeners_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_dynel_t__update_where
 
 constexpr char* const n3_dynel_t__update_where_mangled_name = static_cast<char*>(
 	"?UpdateWhere@n3Dynel_t@@IAEXIABVVector3_t@@ABVQuaternion_t@@@Z");
 constexpr char* const n3_dynel_t__update_where_pattern = static_cast<char*>(
 	"55 8B EC 56 57 FF 75 08");
+constexpr DWORD n3_dynel_t__update_where_offset = 0;
+constexpr DWORD n3_dynel_t__update_where_bytes_to_next = 0;
 
-// Instances
-constexpr char* const n3_dynel_t__m_pc_dynel_dir_instance_mangled_name = static_cast<char*>(
-	"?m_pcDynelDir@n3Dynel_t@@0PAVDynelMap_t@@A");
-constexpr DWORD n3_dynel_t__m_pc_dynel_dir_instance_offset = 0xA;
+#pragma endregion
 
-// Functions
+#pragma region n3_engine_t__n3_engine_t
+
 constexpr char* const n3_engine_t__n3_engine_t_mangled_name = static_cast<char*>(
 	"??0n3Engine_t@@IAE@XZ");
 constexpr char* const n3_engine_t__n3_engine_t_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 10 53 56 8B F1");
+constexpr DWORD n3_engine_t__n3_engine_t_offset = 0;
+constexpr DWORD n3_engine_t__n3_engine_t_bytes_to_next = 0;
 
-// Instances
-constexpr char* const n3_engine_t__m_pc_instance_mangled_name = static_cast<char*>(
-	"?m_pcInstance@n3Engine_t@@0PAV1@A");
-constexpr DWORD n3_engine_t__m_pc_instance_offset = 0x5B;
+#pragma endregion
+
+#pragma region n3_engine_client_t__get_client_control_dynel
 
 constexpr char* const n3_engine_client_t__get_client_control_dynel_mangled_name = static_cast<char*>(
 	"?GetClientControlDynel@n3EngineClient_t@@QBEPAVn3VisualDynel_t@@XZ");
+constexpr char* const n3_engine_client_t__get_client_control_dynel_pattern = static_cast<char*>(nullptr);
 constexpr DWORD n3_engine_client_t__get_client_control_dynel_offset = 0x8D;
 constexpr DWORD n3_engine_client_t__get_client_control_dynel_bytes_to_next = 0x0;
 
-// Functions
+#pragma endregion
+
+#pragma region n3_playfield_t__add_child_dynel
+
 constexpr char* const n3_playfield_t__add_child_dynel_mangled_name = static_cast<char*>(
 	"?AddChildDynel@n3Playfield_t@@QAEXPAVn3Dynel_t@@ABVVector3_t@@ABVQuaternion_t@@@Z");
 constexpr char* const n3_playfield_t__add_child_dynel_pattern = static_cast<char*>(
 	"55 8B EC 51 56 57 8B 7D 08 8B F1 8B CF E8 ?? ?? ?? ?? 8B CF");
+constexpr DWORD n3_playfield_t__add_child_dynel_offset = 0x0;
+constexpr DWORD n3_playfield_t__add_child_dynel_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_playfield_t__get_playfield_1
 
 constexpr char* const n3_playfield_t__get_playfield_1_mangled_name = static_cast<char*>(
 	"?GetPlayfield@n3Playfield_t@@SAPAV1@ABVIdentity_t@@@Z");
 constexpr char* const n3_playfield_t__get_playfield_1_pattern = static_cast<char*>(
 	"55 8B EC 8B 45 08 FF 70 04");
+constexpr DWORD n3_playfield_t__get_playfield_1_offset = 0x0;
+constexpr DWORD n3_playfield_t__get_playfield_1_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_playfield_t__get_playfield_2
 
 constexpr char* const n3_playfield_t__get_playfield_2_mangled_name = static_cast<char*>(
 	"?GetPlayfield@n3Playfield_t@@SAPAV1@I@Z");
 constexpr char* const n3_playfield_t__get_playfield_2_pattern = static_cast<char*>(
 	"55 8B EC 51 56 8B 35 ?? ?? ?? ??");
+constexpr DWORD n3_playfield_t__get_playfield_2_offset = 0x0;
+constexpr DWORD n3_playfield_t__get_playfield_2_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_playfield_t__get_playfield_3
 
 constexpr char* const n3_playfield_t__get_playfield_3_mangled_name = static_cast<char*>(
 	"?GetPlayfield@n3Playfield_t@@SAPAV1@XZ");
 constexpr char* const n3_playfield_t__get_playfield_3_pattern = static_cast<char*>(
 	"A1 ?? ?? ?? ?? 83 78 08 00");
+constexpr DWORD n3_playfield_t__get_playfield_3_offset = 0x0;
+constexpr DWORD n3_playfield_t__get_playfield_3_bytes_to_next = 0x0;
+
+#pragma endregion
+
+
+
+#pragma region n3_playfield_t__line_of_sight
 
 constexpr char* const n3_playfield_t__line_of_sight_mangled_name = static_cast<char*>(
 	"?LineOfSight@n3Playfield_t@@QBE_NABVVector3_t@@0H_N@Z");
 constexpr char* const n3_playfield_t__line_of_sight_pattern = static_cast<char*>(
 	"55 8B EC F6 05 ?? ?? ?? ?? 01 57");
+constexpr DWORD n3_playfield_t__line_of_sight_offset = 0x0;
+constexpr DWORD n3_playfield_t__line_of_sight_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_playfield_t__remove_child
 
 constexpr char* const n3_playfield_t__remove_child_mangled_name = static_cast<char*>(
 	"?RemoveChild@n3Playfield_t@@UAEXPAVn3Dynel_t@@@Z");
 constexpr char* const n3_playfield_t__remove_child_pattern = static_cast<char*>(
 	"55 8B EC 56 57 8B 7D 08 8B F1 85 FF");
+constexpr DWORD n3_playfield_t__remove_child_offset = 0x0;
+constexpr DWORD n3_playfield_t__remove_child_bytes_to_next = 0x0;
+
+#pragma endregion
 
 // Instances
+
+#pragma region n3_dynel_t__m_pc_dynel_dir_instance
+
+constexpr char* const n3_dynel_t__m_pc_dynel_dir_instance_mangled_name = static_cast<char*>(
+	"?m_pcDynelDir@n3Dynel_t@@0PAVDynelMap_t@@A");
+constexpr DWORD n3_dynel_t__m_pc_dynel_dir_instance_offset = 0xA;
+
+#pragma endregion
+
+#pragma region n3_engine_t__m_pc_instance
+
+constexpr char* const n3_engine_t__m_pc_instance_mangled_name = static_cast<char*>(
+	"?m_pcInstance@n3Engine_t@@0PAV1@A");
+constexpr DWORD n3_engine_t__m_pc_instance_offset = 0x5B;
+
+#pragma endregion
+
+#pragma region n3_playfield_t__m_pc_playfield_dir_instance
+
 constexpr char* const n3_playfield_t__m_pc_playfield_dir_instance_mangled_name = static_cast<char*>(
 	// ReSharper disable once StringLiteralTypo
 	"?m_pcPlayfieldDir@n3Playfield_t@@0PAV?$map@IPAVn3Playfield_t@@U?$less@I@std@@V?$allocator@U?$pair@$$CBIPAVn3Playfield_t@@@std@@@3@@std@@A");
 constexpr DWORD n3_playfield_t__m_pc_playfield_dir_instance_offset = 0x7;
-constexpr DWORD n3_playfield_t__m_pc_playfield_dir_instance_bytes_to_next = 0x0;
+
+#pragma endregion
 
 #pragma endregion
 
@@ -1343,9 +1443,147 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_dungeon_bytes_to_next = 0x
 
 #pragma endregion
 
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_formula_ready
 
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_formula_ready_mangled_name = static_cast<char*>(
+	"?N3Msg_IsFormulaReady@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_formula_ready_pattern = static_cast<char*>(
+	"55 8B EC 56 6A 00 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? 6A 00 FF 15 ?? ?? ?? ??");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_formula_ready_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_formula_ready_bytes_to_next = 0x0;
 
+#pragma endregion
 
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_general_perk
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_general_perk_mangled_name = static_cast<char*>(
+	"?N3Msg_IsGeneralPerk@n3EngineClientAnarchy_t@@QBE_NI@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_general_perk_pattern = static_cast<char*>(
+	"55 8B EC E8 ?? ?? ?? ?? FF 75 08 8B C8 E8 ?? ?? ?? ?? 85 C0 74 ?? 33 C9");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_general_perk_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_general_perk_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_group_perk
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_group_perk_mangled_name = static_cast<char*>(
+	"?N3Msg_IsGroupPerk@n3EngineClientAnarchy_t@@QBE_NI@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_group_perk_pattern = static_cast<char*>(
+	"55 8B EC 56 57 E8 ?? ?? ?? ?? 8B F8");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_group_perk_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_group_perk_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_in_raid_team
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_in_raid_team_mangled_name = static_cast<char*>(
+	"?N3Msg_IsInRaidTeam@n3EngineClientAnarchy_t@@QAE_NXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_in_raid_team_pattern = static_cast<char*>(
+	"FF 15 ?? ?? ?? ?? 85 C0 74 ?? 8B C8 E8 ?? ?? ?? ?? 8B C8 E9 ?? ?? ?? ?? 32 C0");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_in_raid_team_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_in_raid_team_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_in_team
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_in_team_mangled_name = static_cast<char*>(
+	"?N3Msg_IsInTeam@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_in_team_pattern = static_cast<char*>(
+	"55 8B EC 8B 45 08 83 38 00 75 ?? 83 78 04 00 75 ?? FF 15 ?? ?? ?? ??");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_in_team_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_in_team_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_item_disabled
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_item_disabled_mangled_name = static_cast<char*>(
+	"?N3Msg_IsItemDisabled@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@0@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_item_disabled_pattern = static_cast<char*>(
+	"55 8B EC 8B 45 0C 53 33 DB 39 18 75 ?? 39 58 04 75 ?? E8 ?? ?? ?? ??");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_item_disabled_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_item_disabled_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_item_mine
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_item_mine_mangled_name = static_cast<char*>(
+	"?N3Msg_IsItemMine@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_item_mine_pattern = static_cast<char*>(
+	"55 8B EC FF 15 ?? ?? ?? ?? 85 C0 74 ?? 8B 80 BC 01 00 00");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_item_mine_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_item_mine_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_item_nf_crystal
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_item_nf_crystal_mangled_name = static_cast<char*>(
+	"?N3Msg_IsItemNFCrystal@n3EngineClientAnarchy_t@@QBE_NAAVIdentity_t@@ABV2@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_item_nf_crystal_pattern = static_cast<char*>(
+	"55 8B EC 83 EC 18 53 56 8B 75 08 8B 16");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_item_nf_crystal_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_item_nf_crystal_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_un_wear
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_un_wear_mangled_name = static_cast<char*>(
+	"?N3Msg_IsItemPossibleToUnWear@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_un_wear_pattern = static_cast<char*>(
+	"55 8B EC 56 8B 75 08 8B 06 57 8B F9 83 F8 65");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_un_wear_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_un_wear_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_wear
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_wear_mangled_name = static_cast<char*>(
+	"?N3Msg_IsItemPossibleToWear@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@HH_NW4InventoryId_e@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_wear_pattern = static_cast<char*>(
+	"55 8B EC 51 51 57 E8 ?? ?? ?? ??");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_wear_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_wear_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_moving
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_moving_mangled_name = static_cast<char*>(
+	"?N3Msg_IsMoving@n3EngineClientAnarchy_t@@QBE_NXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_moving_pattern = static_cast<char*>(nullptr);
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_moving_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_moving_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_my_pet_id
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_my_pet_id_mangled_name = static_cast<char*>(
+	"?N3Msg_IsMyPetID@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_my_pet_id_pattern = static_cast<char*>(
+	"55 8B EC FF 15 ?? ?? ?? ?? 85 C0 75 ?? 32 C0");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_my_pet_id_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_my_pet_id_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_nano_self_only
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_nano_self_only_mangled_name = static_cast<char*>(
+	"?N3Msg_IsNanoSelfOnly@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_nano_self_only_pattern = static_cast<char*>(
+	"55 8B EC 8B 45 08 81 38 1B CF 00 00 75 ?? FF 70 04 E8 ?? ?? ?? ?? 59 85 C0 74 ?? 8A 80 BC 00 00 00");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_nano_self_only_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_nano_self_only_bytes_to_next = 0x0;
+
+#pragma endregion
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_is_npc
 
@@ -1357,6 +1595,48 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_npc_offset = 0x0;
 constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_npc_bytes_to_next = 0x0;
 
 #pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_perk
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_perk_mangled_name = static_cast<char*>(
+	"?N3Msg_IsPerk@n3EngineClientAnarchy_t@@QBE_NI@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_perk_pattern = static_cast<char*>(nullptr);
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_perk_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_perk_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_is_pet_tower
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_pet_tower_mangled_name = static_cast<char*>(
+	"?N3Msg_IsPetTower@n3EngineClientAnarchy_t@@QBE_NABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_is_pet_tower_pattern = static_cast<char*>(
+	"55 8B EC FF 75 08 E8 ?? ?? ?? ?? 59 85 C0 75 ?? 32 C0 EB ?? 8D 88 EC 00 00 00 8B 01 6A 02 68 00 02 00 00");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_pet_tower_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_pet_tower_bytes_to_next = 0x0;
+
+#pragma endregion
+
+
+
+
+
+
+
+
+
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_name_to_id
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_name_to_id_mangled_name = static_cast<char*>(
+	"?N3Msg_NameToID@n3EngineClientAnarchy_t@@QBE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_name_to_id_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 10 E8 ?? ?? ?? ??");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_name_to_id_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_name_to_id_bytes_to_next = 0x0;
+
+#pragma endregion
+
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_perform_special_action_1
 
@@ -1377,6 +1657,17 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_2_offs
 constexpr DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_2_bytes_to_next = 0x0;
 
 #pragma endregion
+
+#pragma region n3_engine_client_anarchy_t__n3_msg_request_info_packet
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_request_info_packet_mangled_name = static_cast<char*>(
+	"?N3Msg_RequestInfoPacket@n3EngineClientAnarchy_t@@QAEXABVIdentity_t@@@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_request_info_packet_pattern = static_cast<char*>(nullptr);
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_request_info_packet_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_request_info_packet_bytes_to_next = 0x0;
+
+#pragma endregion
+
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_send_pet_command
 
@@ -1421,6 +1712,29 @@ constexpr DWORD n3_engine_client_anarchy_t__on_closed_offset = 0x0;
 constexpr DWORD n3_engine_client_anarchy_t__on_closed_bytes_to_next = 0x0;
 
 #pragma endregion
+
+#pragma region playfield_anarchy_t__playfield_anarchy_t
+
+constexpr char* const playfield_anarchy_t__playfield_anarchy_t_mangled_name = static_cast<char*>(
+	"??0PlayfieldAnarchy_t@@QAE@ABVPlayfieldProxy_t@@@Z");
+constexpr char* const playfield_anarchy_t__playfield_anarchy_t_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 56 57 FF 75 08 8B F1 89 75 F0 FF 15 ?? ?? ?? ??");
+constexpr DWORD playfield_anarchy_t__playfield_anarchy_t_offset = 0x0;
+constexpr DWORD playfield_anarchy_t__playfield_anarchy_t_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region playfield_anarchy_t__d_playfield_anarchy_t
+
+constexpr char* const playfield_anarchy_t__d_playfield_anarchy_t_mangled_name = static_cast<char*>(
+	"??1PlayfieldAnarchy_t@@MAE@XZ");
+constexpr char* const playfield_anarchy_t__d_playfield_anarchy_t_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 51 53 56 8B F1 57 89 75 EC C7 06 ?? ?? ?? ?? 8B 86 A0 00 00 00");
+constexpr DWORD playfield_anarchy_t__d_playfield_anarchy_t_offset = 0x0;
+constexpr DWORD playfield_anarchy_t__d_playfield_anarchy_t_bytes_to_next = 0x0;
+
+#pragma endregion
+
 
 #pragma region simple_char_t__check_los
 
@@ -1487,76 +1801,302 @@ constexpr DWORD static_item_manager_t__m_ppc_instance_offset = 0xC;
 constexpr char* const gui_module_name = static_cast<char*>("GUI.dll");
 
 // Functions
+
+#pragma region chat_gui_module_c__chat_gui_module_c
+
+constexpr char* const chat_gui_module_c__chat_gui_module_c_mangled_name = static_cast<char*>(
+	"??0ChatGUIModule_c@@QAE@XZ");
+constexpr char* const chat_gui_module_c__chat_gui_module_c_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 40 53 56 57 8B 3D ?? ?? ?? ??");
+constexpr DWORD chat_gui_module_c__chat_gui_module_c_offset = 0x0;
+constexpr DWORD chat_gui_module_c__chat_gui_module_c_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region chat_gui_module_c__handle_group_action
+
+constexpr char* const chat_gui_module_c__handle_group_action_mangled_name = static_cast<char*>(
+	"?HandleGroupAction@ChatGUIModule_c@@AAEXPBUGroupAction_t@Client_c@ppj@@@Z");
+constexpr char* const chat_gui_module_c__handle_group_action_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 3C 56 8B 75 08 8B 46 08");
+constexpr DWORD chat_gui_module_c__handle_group_action_offset = 0x0;
+constexpr DWORD chat_gui_module_c__handle_group_action_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region chat_gui_module_c__handle_group_message
+
+constexpr char* const chat_gui_module_c__handle_group_message_mangled_name = static_cast<char*>(
+	"?HandleGroupMessage@ChatGUIModule_c@@AAEXPBUGroupMessage_t@Client_c@ppj@@@Z");
+constexpr char* const chat_gui_module_c__handle_group_message_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC 18 01 00 00 53 33 DB");
+constexpr DWORD chat_gui_module_c__handle_group_message_offset = 0x0;
+constexpr DWORD chat_gui_module_c__handle_group_message_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region chat_gui_module_c__handle_private_group_action
+
+constexpr char* const chat_gui_module_c__handle_private_group_action_mangled_name = static_cast<char*>(
+	"?HandlePrivateGroupAction@ChatGUIModule_c@@AAEXPBUPrivateGroupAction_t@Client_c@ppj@@@Z");
+constexpr char* const chat_gui_module_c__handle_private_group_action_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 38 56 8B 75 08");
+constexpr DWORD chat_gui_module_c__handle_private_group_action_offset = 0x0;
+constexpr DWORD chat_gui_module_c__handle_private_group_action_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region chat_gui_module_c__handle_private_message
+
+constexpr char* const chat_gui_module_c__handle_private_message_mangled_name = static_cast<char*>(
+	"?HandlePrivateMessage@ChatGUIModule_c@@AAEXPBUPrivateMessage_t@Client_c@ppj@@@Z");
+constexpr char* const chat_gui_module_c__handle_private_message_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC 0C 07 00 00");
+constexpr DWORD chat_gui_module_c__handle_private_message_offset = 0x0;
+constexpr DWORD chat_gui_module_c__handle_private_message_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region chat_gui_module_c__handle_system_message
+
+constexpr char* const chat_gui_module_c__handle_system_message_mangled_name = static_cast<char*>(
+	"?HandleSystemMessage@ChatGUIModule_c@@AAEXPBUSystemMessage_t@Client_c@ppj@@@Z");
+constexpr char* const chat_gui_module_c__handle_system_message_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 44 53 56 8B 75 08");
+constexpr DWORD chat_gui_module_c__handle_system_message_offset = 0x0;
+constexpr DWORD chat_gui_module_c__handle_system_message_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region chat_gui_module_c__handle_vicinity_message
+
+constexpr char* const chat_gui_module_c__handle_vicinity_message_mangled_name = static_cast<char*>(
+	"?HandleVicinityMessage@ChatGUIModule_c@@AAEXPBUVisinityMessage_t@Client_c@ppj@@@Z");
+constexpr char* const chat_gui_module_c__handle_vicinity_message_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC 44 02 00 00");
+constexpr DWORD chat_gui_module_c__handle_vicinity_message_offset = 0x0;
+constexpr DWORD chat_gui_module_c__handle_vicinity_message_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region chat_window_node_c__parse_text_command
+
+constexpr char* const chat_window_node_c__parse_text_command_mangled_name = static_cast<char*>(nullptr);
 constexpr char* const chat_window_node_c__parse_text_command_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 5C 56 FF 75 08");
+constexpr DWORD chat_window_node_c__parse_text_command_offset = 0;
+constexpr DWORD chat_window_node_c__parse_text_command_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region command_interpreter_c__command_interpreter_c
+
+constexpr char* const command_interpreter_c__command_interpreter_c_mangled_name = static_cast<char*>(nullptr);
+constexpr char* const command_interpreter_c__command_interpreter_c_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 A1 ?? ?? ?? ?? 85 C0 75 ?? 68 80 00 00 00");
+constexpr DWORD command_interpreter_c__command_interpreter_c_offset = 0x0;
+constexpr DWORD command_interpreter_c__command_interpreter_c_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region command_interpreter_c__parse_text_command
+
+constexpr char* const command_interpreter_c__parse_text_command_mangled_name = static_cast<char*>(nullptr);
+constexpr char* const command_interpreter_c__parse_text_command_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC 84 00 00 00 53 56 33 F6");
+constexpr DWORD command_interpreter_c__parse_text_command_offset = 0x0;
+constexpr DWORD command_interpreter_c__parse_text_command_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region html_parser_c__html_parser_c_1
 
 const char* const html_parser_c__html_parser_c_1_mangled_name = static_cast<char*>(
 	"??0HTMLParser_c@@QAE@ABV0@@Z");
 const char* const html_parser_c__html_parser_c_1_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 56 57 8B 7D 08 8B F1 8D 47 04");
+constexpr DWORD html_parser_c__html_parser_c_1_offset = 0;
+constexpr DWORD html_parser_c__html_parser_c_1_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region html_parser_c__html_parser_c_2
 
 const char* const html_parser_c__html_parser_c_2_mangled_name = static_cast<char*>(
 	"??0HTMLParser_c@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@IW4FontID_e@@_N@Z");
 const char* const html_parser_c__html_parser_c_2_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 48 53 56 8B F1 57 FF 75 08");
+constexpr DWORD html_parser_c__html_parser_c_2_offset = 0;
+constexpr DWORD html_parser_c__html_parser_c_2_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region html_parser_c__d_html_parser_c
 
 const char* const html_parser_c__d_html_parser_c_mangled_name = static_cast<char*>(
 	"??1HTMLParser_c@@UAE@XZ");
 const char* const html_parser_c__d_html_parser_c_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 56 8B F1 89 75 F0 C7 06 ?? ?? ?? ?? 8D 4E 30");
+constexpr DWORD html_parser_c__d_html_parser_c_offset = 0;
+constexpr DWORD html_parser_c__d_html_parser_c_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region html_parser_c__extract_text
 
 const char* const html_parser_c__extract_text_mangled_name = static_cast<char*>(
 	"?ExtractText@HTMLParser_c@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HHI@Z");
 const char* const html_parser_c__extract_text_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 20 83 65 F0 00 53 8B 5D 10");
+constexpr DWORD html_parser_c__extract_text_offset = 0;
+constexpr DWORD html_parser_c__extract_text_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region input_config_t__get_instance
 
 const char* const input_config_t__get_instance_mangled_name = static_cast<char*>(
 	"?GetInstance@InputConfig_t@@SAPAV1@XZ");
 const char* const input_config_t__get_instance_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 83 3D ?? ?? ?? ?? 00 75 ?? 68 D0 01 00 00");
+constexpr DWORD input_config_t__get_instance_offset = 0;
+constexpr DWORD input_config_t__get_instance_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region input_config_t__set_current_target
 
 const char* const input_config_t__set_current_target_mangled_name = static_cast<char*>(
 	"?SetCurrentTarget@InputConfig_t@@QAEXABVIdentity_t@@@Z");
 const char* const input_config_t__set_current_target_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 0C 56 57 8B 7D 08 8D B1 C0 00 00 00");
+constexpr DWORD input_config_t__set_current_target_offset = 0;
+constexpr DWORD input_config_t__set_current_target_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region targeting_module_t__initialise_message
 
 const char* const targeting_module_t__initialise_message_mangled_name = static_cast<char*>(
 	"?InitialiseMessage@TargetingModule_t@@CAXXZ");
 const char* const targeting_module_t__initialise_message_pattern = static_cast<char*>(
 	"8B 0D ?? ?? ?? ?? 56 57");
+constexpr DWORD targeting_module_t__initialise_message_offset = 0;
+constexpr DWORD targeting_module_t__initialise_message_bytes_to_next = 0;
 
-const char* const targeting_module_t__targeting_module_t_mangled_name = static_cast<char*>(
-	"??0TargetingModule_t@@AAE@XZ");
-const char* const targeting_module_t__targeting_module_t_pattern = static_cast<char*>(
-	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 14 53 56 8B F1 57 89 75 F0 FF 15 ?? ?? ?? ?? D9 EE");
+#pragma endregion
+
+#pragma region targeting_module_t__remove_target
+
+constexpr char* const targeting_module_t__remove_target_mangled_name = static_cast<char*>(
+	"?RemoveTarget@TargetingModule_t@@CAXABVIdentity_t@@@Z");
+constexpr char* const targeting_module_t__remove_target_pattern = static_cast<char*>(
+	"55 8B EC 8B 45 08 8B 08 89 0D ?? ?? ?? ??");
+constexpr DWORD targeting_module_t__remove_target_offset = 0x0;
+constexpr DWORD targeting_module_t__remove_target_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region targeting_module_t__select_self
+
+constexpr char* const targeting_module_t__select_self_mangled_name = static_cast<char*>(
+	"?SelectSelf@TargetingModule_t@@QAEXXZ");
+constexpr char* const targeting_module_t__select_self_pattern = static_cast<char*>(
+	"55 8B EC 51 51 E8 ?? ?? ?? ?? 8B 88 D8 00 00 00");
+constexpr DWORD targeting_module_t__select_self_offset = 0x0;
+constexpr DWORD targeting_module_t__select_self_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region targeting_module_t__set_target
 
 const char* const targeting_module_t__set_target_mangled_name = static_cast<char*>(
 	"?SetTarget@TargetingModule_t@@CAXABVIdentity_t@@_N@Z");
 const char* const targeting_module_t__set_target_pattern = static_cast<char*>(
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 51 A1 ?? ?? ?? ??");
+constexpr DWORD targeting_module_t__set_target_offset = 0x0;
+constexpr DWORD targeting_module_t__set_target_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region targeting_module_t__set_target_pet
+
+constexpr char* const targeting_module_t__set_target_pet_mangled_name = static_cast<char*>(
+	"?SetTargetPet@TargetingModule_t@@AAEXH@Z");
+constexpr char* const targeting_module_t__set_target_pet_pattern = static_cast<char*>(
+	"55 8B EC 51 51 FF 75 08 8D 45 F8 50 E8 ?? ?? ?? ?? 8B C8");
+constexpr DWORD targeting_module_t__set_target_pet_offset = 0x0;
+constexpr DWORD targeting_module_t__set_target_pet_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region targeting_module_t__targeting_module_t
+
+const char* const targeting_module_t__targeting_module_t_mangled_name = static_cast<char*>(
+	"??0TargetingModule_t@@AAE@XZ");
+const char* const targeting_module_t__targeting_module_t_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 14 53 56 8B F1 57 89 75 F0 FF 15 ?? ?? ?? ?? D9 EE");
+constexpr DWORD targeting_module_t__targeting_module_t_offset = 0x0;
+constexpr DWORD targeting_module_t__targeting_module_t_bytes_to_next = 0x0;
+
+#pragma endregion
 
 // Instances
+
+#pragma region chat_gui_module_c__s_pc_instance
+
+constexpr char* const chat_gui_module_c__s_pc_instance_mangled_name = static_cast<char*>(
+	"?s_pcInstance@ChatGUIModule_c@@0PAV1@A");
+constexpr DWORD chat_gui_module_c__s_pc_instance_offset = 0x169;
+
+#pragma endregion
+
+#pragma region command_interpreter_c__m_pc_instance
+
+constexpr char* const command_interpreter_c__m_pc_instance_mangled_name = static_cast<char*>(nullptr);
+constexpr DWORD command_interpreter_c__m_pc_instance_offset = 0xC;
+
+#pragma endregion
+
+#pragma region input_config_t__m_pc_instance
+
 constexpr char* const input_config_t__m_pc_instance_mangled_name = static_cast<char*>(
 	"?m_pcInstance@InputConfig_t@@0PAV1@A");
 constexpr DWORD input_config_t__m_pc_instance_offset = 0xB;
+
+#pragma endregion
+
+#pragma region targeting_module_t__m_pc_instance
 
 constexpr char* const targeting_module_t__m_pc_instance_mangled_name = static_cast<char*>(
 	"?m_pcInstance@TargetingModule_t@@0PAV1@A");
 constexpr DWORD targeting_module_t__m_pc_instance_offset = 0xD;
 
+#pragma endregion
+
+#pragma region targeting_module_t__m_pc_selection_indicator
+
 constexpr char* const targeting_module_t__m_pc_selection_indicator_mangled_name = static_cast<char*>(
 	"?m_pcSelectionIndicator@TargetingModule_t@@0PAVIndicator_t@@A");
 constexpr DWORD targeting_module_t__m_pc_selection_indicator_offset = 0x1A;
+
+#pragma endregion
+
+#pragma region targeting_module_t__m_pc_attacking_indicator
 
 constexpr char* const targeting_module_t__m_pc_attacking_indicator_mangled_name = static_cast<char*>(
 	"?m_pcAttackingIndicator@TargetingModule_t@@0PAVIndicator_t@@A");
 constexpr DWORD targeting_module_t__m_pc_attacking_indicator_offset = 0x1F;
 
+#pragma endregion
+
+#pragma region targeting_module_t__m_c_last_target
+
 constexpr char* const targeting_module_t__m_c_last_target_mangled_name = static_cast<char*>(
 	"?m_cLastTarget@TargetingModule_t@@0VIdentity_t@@A");
 constexpr DWORD targeting_module_t__m_c_last_target_offset = 0x25;
 
-
+#pragma endregion
 
 #pragma endregion
 

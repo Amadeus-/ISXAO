@@ -8,11 +8,16 @@ namespace ao
 		return command_interpreter_;
 	}
 
-	bool command_interpreter::ParseText(string& text)
+	bool command_interpreter::parse_text(string& text)
 	{
-		return ParseText(nullptr, text);
+		return parse_text(nullptr, text);
 	}
 
-	FUNCTION_AT_ADDRESS(bool command_interpreter::ParseText(chat_window_node*, string&), CommandInterpreter_c__ParseTextCommand);
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(bool command_interpreter::parse_text(chat_window_node*, string&), command_interpreter_c__parse_text_command)
+#else
+	static_assert(false, "engine_client_anarchy::get_faction_str(DWORD, bool) requires a native function.");
+#endif
 
 }

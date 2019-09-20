@@ -40,6 +40,7 @@ namespace isxao
 	AOLIB_VAR DWORD n3_dynel_t__n3_dynel_t;
 	AOLIB_VAR DWORD n3_dynel_t__d_n3_dynel_t;
 	AOLIB_VAR DWORD n3_dynel_t__get_dynel;
+	AOLIB_VAR DWORD n3_dynel_t__is_dynel_in_engine;
 	AOLIB_VAR DWORD n3_dynel_t__send_iir_to_observers;
 	AOLIB_VAR DWORD n3_dynel_t__set_playfield;
 	AOLIB_VAR DWORD n3_dynel_t__update_locality_listeners;
@@ -69,7 +70,7 @@ namespace isxao
 
 	// Instances
 	AOLIB_VAR DWORD n3_playfield_t__m_pc_playfield_dir_instance;
-	AOLIB_VAR ao::PlayfieldDir** pp_playfield_dir;
+	AOLIB_VAR ao::playfield_dir** pp_playfield_dir;
 #define P_PLAYFIELD_DIR (*pp_playfield_dir)  // NOLINT(cppcoreguidelines-macro-usage)
 
 #pragma endregion
@@ -193,29 +194,61 @@ namespace isxao
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_character_in_mech;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_character_morphed;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_dungeon;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsFormulaReady;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsGeneralPerk;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsGroupPerk;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsInRaidTeam;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsInTeam;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemDisabled;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemMine;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemNFCrystal;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToUnWear;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToWear;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsMoving;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsMyPetID;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_formula_ready;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_general_perk;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_group_perk;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_in_raid_team;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_in_team;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_item_disabled;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_item_mine;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_item_nf_crystal;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_un_wear;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_wear;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_moving;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_my_pet_id;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_nano_self_only;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_npc;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_perk;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_is_pet_tower;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsProfessionPerk;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsResearch;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsSecondarySpecialAttackAvailable;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsShieldDisablerItem;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsSpecialPerk;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamLeader;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamMission;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamMissionCopy;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamNano;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsTower;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsVisible;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_JoinItems;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_KickTeamMember;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_LeaveBattle;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_LeaveTeam;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_MeetsPerkCriteria;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_MoveItemToInventory;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_MoveRaidMember;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_name_to_id;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatAddTradeItem;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatCloseWindow;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatEndTrade;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatRemoveTradeItem;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatRequestDescription;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatStartTrade;
+	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_OrbitalAttack;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_1;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_2;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_send_pet_command;
+
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_request_info_packet;
+
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_stop_attack;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_use_item;
 
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__on_closed;
 
-	
+	AOLIB_VAR DWORD playfield_anarchy_t__playfield_anarchy_t;
+	AOLIB_VAR DWORD playfield_anarchy_t__d_playfield_anarchy_t;
 
 	AOLIB_VAR DWORD simple_char_t__check_los;
 
@@ -250,7 +283,18 @@ namespace isxao
 
 #pragma region GUI
 
+	AOLIB_VAR DWORD chat_gui_module_c__chat_gui_module_c;
+	AOLIB_VAR DWORD chat_gui_module_c__handle_group_action;
+	AOLIB_VAR DWORD chat_gui_module_c__handle_group_message;
+	AOLIB_VAR DWORD chat_gui_module_c__handle_private_group_action;
+	AOLIB_VAR DWORD chat_gui_module_c__handle_private_message;
+	AOLIB_VAR DWORD chat_gui_module_c__handle_system_message;
+	AOLIB_VAR DWORD chat_gui_module_c__handle_vicinity_message;
+
 	AOLIB_VAR DWORD chat_window_node_c__parse_text_command;
+
+	AOLIB_VAR DWORD command_interpreter_c__command_interpreter_c;
+	AOLIB_VAR DWORD command_interpreter_c__parse_text_command;
 
 	AOLIB_VAR DWORD html_parser_c__html_parser_c_1;
 	AOLIB_VAR DWORD html_parser_c__html_parser_c_2;
@@ -277,12 +321,18 @@ namespace isxao
 #define P_LAST_TARGET (p_last_target)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD targeting_module_t__targeting_module_t;
 	AOLIB_VAR DWORD targeting_module_t__initialise_message;
-	AOLIB_VAR DWORD TargetingModule_t__RemoveTarget;
-	AOLIB_VAR DWORD TargetingModule_t__SelectSelf;
+	AOLIB_VAR DWORD targeting_module_t__remove_target;
+	AOLIB_VAR DWORD targeting_module_t__select_self;
 	AOLIB_VAR DWORD targeting_module_t__set_target;
-	AOLIB_VAR DWORD TargetingModule_t__SetTargetPet;
+	AOLIB_VAR DWORD targeting_module_t__set_target_pet;
 
+	AOLIB_VAR DWORD command_interpreter_c__m_pc_instance;
+	AOLIB_VAR ao::command_interpreter** pp_command_interpreter;
+#define P_COMMAND_INTERPRETER (*pp_command_interpreter)  // NOLINT(cppcoreguidelines-macro-usage)
 	
+	AOLIB_VAR DWORD  chat_gui_module_c__s_pc_instance;
+	AOLIB_VAR ao::chat_gui_module** pp_chat_gui_module;
+#define P_CHAT_GUI_MODULE (*pp_chat_gui_module)  // NOLINT(cppcoreguidelines-macro-usage)
 
 #pragma endregion
 
@@ -335,47 +385,8 @@ namespace isxao
 
 #pragma endregion
 
-#pragma region Globals
-
-	AOLIB_VAR DWORD __N3Msg_GetFullPerkMap;
-	AOLIB_VAR DWORD __SetTarget;	
-	AOLIB_VAR DWORD __RequestInfo;
-
-#pragma endregion
 
 #pragma region EngineClientAnarchy			
-	
-	
-	
-	
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsPerk;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsPetTower;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsProfessionPerk;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsResearch;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsSecondarySpecialAttackAvailable;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsShieldDisablerItem;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsSpecialPerk;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamLeader;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamMission;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamMissionCopy;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamNano;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsTower;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_IsVisible;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_JoinItems;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_KickTeamMember;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_LeaveBattle;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_LeaveTeam;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_MeetsPerkCriteria;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_MoveItemToInventory;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_MoveRaidMember;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NameToID;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatAddTradeItem;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatCloseWindow;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatEndTrade;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatRemoveTradeItem;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatRequestDescription;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatStartTrade;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_OrbitalAttack;
 	
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Accept;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Challenge;
@@ -387,6 +398,7 @@ namespace isxao
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestClothInventory;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestImplantInventory;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestSocialInventory;
+
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_RequestWeaponInventory;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SecondarySpecialAttack;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SelectedTarget;
@@ -429,49 +441,6 @@ namespace isxao
 	AOLIB_VAR DWORD n3Engine_t__SetTeleportStatus;
 
 	AOLIB_VAR DWORD n3EngineClient_t__SetMainDynel;
-
-#pragma endregion
-
-#pragma region Playfield
-	
-	AOLIB_VAR DWORD n3Playfield_t__OnChildDynelBeingRemoved;
-	AOLIB_VAR DWORD PlayfieldAnarchy_t__PlayfieldAnarchy_t;
-	AOLIB_VAR DWORD PlayfieldAnarchy_t__dPlayfieldAnarchy_t;
-
-#pragma endregion
-	
-#pragma region InputConfig
-	
-	
-
-#pragma endregion
-
-#pragma region FlowControl
-
-	AOLIB_VAR DWORD FlowControlModule_t__m_pcInstance;
-	AOLIB_VAR DWORD  FlowControlModule_t__m_isLauncherRun;
-	AOLIB_VAR DWORD FlowControlModule_t__m_bIsGameClosing;
-	AOLIB_VAR DWORD FlowControlModule_t__m_nCloseFrames;
-	AOLIB_VAR DWORD FlowControlModule_t__m_isTeleporting;
-	AOLIB_VAR bool* gpbIsTeleporting;
-#define gbIsTeleporting (*gpbIsTeleporting)
-	AOLIB_VAR DWORD FlowControlModule_t__m_eLoggingOutTimed;
-	AOLIB_VAR DWORD FlowControlModule_t__m_isClientToRestartAtExit;
-
-#pragma endregion
-
-#pragma region ChatGUIModule
-
-	AOLIB_VAR DWORD  ChatGUIModule_c__s_pcInstance;
-	AOLIB_VAR ao::chat_gui_module** ppChatGUIModule;
-#define pChatGUIModule (*ppChatGUIModule)
-
-	AOLIB_VAR DWORD ChatGUIModule_c__HandleGroupAction;
-	AOLIB_VAR DWORD ChatGUIModule_c__HandleGroupMessage;
-	AOLIB_VAR DWORD ChatGUIModule_c__HandlePrivateGroupAction;
-	AOLIB_VAR DWORD ChatGUIModule_c__HandlePrivateMessage;
-	AOLIB_VAR DWORD ChatGUIModule_c__HandleSystemMessage;
-	AOLIB_VAR DWORD ChatGUIModule_c__HandleVicinityMessage;
 
 #pragma endregion
 
@@ -554,15 +523,6 @@ namespace isxao
 #pragma region FriendListController
 
 	AOLIB_VAR DWORD FriendListController_c__sub_100A68E6;
-
-#pragma endregion
-
-#pragma region CommandInterpreter
-
-	AOLIB_VAR DWORD CommandInterpreter_c__m_pcInstance;
-	AOLIB_VAR ao::command_interpreter** ppCommandInterpreter;
-#define pCommandInterpreter (*ppCommandInterpreter)
-	AOLIB_VAR DWORD CommandInterpreter_c__ParseTextCommand;
 
 #pragma endregion
 

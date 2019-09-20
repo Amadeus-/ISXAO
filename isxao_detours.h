@@ -1,16 +1,15 @@
 #pragma once
 
-namespace isxao_detours
+namespace isxao
 {
-
 	class ao_detours
 	{
 	public:
-		void n3EngineClientAnarchy_t__SetMainDynel_Trampoline(PVOID);
-		void n3EngineClientAnarchy_t__SetMainDynel_Detour(PVOID);
+		void n3_engine_client_anarchy_t__set_main_dynel__trampoline(ao::dynel*);
+		void n3_engine_client_anarchy_t__set_main_dynel__detour(ao::dynel*);
 
-		PVOID PlayfieldAnarchy_t__PlayfieldAnarchy_t_Trampoline(PVOID);
-		PVOID PlayfieldAnarchy_t__PlayfieldAnarchy_t_Detour(PVOID);
+		PVOID playfield_anarchy_t__playfield_anarchy_t__trampoline(PVOID);
+		PVOID playfield_anarchy_t__playfield_anarchy_t__detour(PVOID);
 
 		void PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Trampoline();
 		void PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Detour();
@@ -63,4 +62,3 @@ namespace isxao_detours
 	};
 
 }
-using namespace isxao_detours;

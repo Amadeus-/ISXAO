@@ -344,6 +344,7 @@ namespace ao
 	typedef ao_map<DWORD, struct ao_nano_item*> nano_item_map_t, *p_nano_item_map_t;	
 	typedef ao_map<identity_t, struct ao_playfield_anarchy*> playfield_map, *p_playfield_map;
 	typedef ao_map<string, struct ao_chat_window_node*> chat_window_node_map_t, *p_chat_window_node_map_t;
+	typedef ao_map<DWORD, struct ao_playfield_anarchy*> playfield_dir_t, *p_playfield_dir_t;
 
 	typedef ao_map<identity_t, DWORD> perk_map_t, *p_perk_map_t;
 	typedef ao_map<identity_t, DWORD> pet_map_t, *p_pet_map_t;
@@ -2012,30 +2013,30 @@ namespace ao
 
 #pragma region PlayfieldAnarchy
 
-	typedef struct playfield_map_node
-	{
-		struct playfield_map_node* p_lower;		// 0x00
-		struct playfield_map_node* p_back;		// 0x04
-		struct playfield_map_node* p_higher;	// 0x08
-		DWORD playfield_instance_id;			// 0x0C
-		struct ao_playfield_anarchy* p_playfield;	// 0x10
-	} playfield_map_node_t, *p_playfield_map_node_t;
+	//typedef struct playfield_map_node
+	//{
+	//	struct playfield_map_node* p_lower;		// 0x00
+	//	struct playfield_map_node* p_back;		// 0x04
+	//	struct playfield_map_node* p_higher;	// 0x08
+	//	DWORD playfield_instance_id;			// 0x0C
+	//	struct ao_playfield_anarchy* p_playfield;	// 0x10
+	//} playfield_map_node_t, *p_playfield_map_node_t;
 
 
-	typedef struct playfield_map_root
-	{
-		p_playfield_map_node_t p_begin;
-		p_playfield_map_node_t p_node;
-		p_playfield_map_node_t p_end;
-	} playfield_map_root_t, *p_playfield_map_root_t;
+	//typedef struct playfield_map_root
+	//{
+	//	p_playfield_map_node_t p_begin;
+	//	p_playfield_map_node_t p_node;
+	//	p_playfield_map_node_t p_end;
+	//} playfield_map_root_t, *p_playfield_map_root_t;
 
-	typedef struct playfield_dir
-	{
-		// ReSharper disable once CppInconsistentNaming
-		BYTE unknown_0x00[0x4];				// 0x00
-		p_playfield_map_root_t p_root;		// 0x04
-		DWORD count;						// 0x08
-	} playfield_dir_t, *p_playfield_dir_t;
+	//typedef struct playfield_dir
+	//{
+	//	// ReSharper disable once CppInconsistentNaming
+	//	BYTE unknown_0x00[0x4];				// 0x00
+	//	p_playfield_map_root_t p_root;		// 0x04
+	//	DWORD count;						// 0x08
+	//} playfield_dir_t, *p_playfield_dir_t;
 
 	// Size - 0x110
 	// From Gamecode.dll

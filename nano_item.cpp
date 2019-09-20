@@ -116,7 +116,7 @@ namespace ao
 
 	bool nano_item::is_ready()
 	{
-		return P_ENGINE_CLIENT_ANARCHY->N3Msg_IsFormulaReady(get_nano_identity());
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_is_formula_ready(get_nano_identity());
 	}
 
 	bool nano_item::is_buff()

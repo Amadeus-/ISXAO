@@ -23,6 +23,7 @@ public:
 	ao::vector3_t get_position();
 	ao::quaternion_t get_rotation();
 	LONG get_skill(DWORD);
+	static bool is_dynel_in_engine(const ao::identity_t &);
 	bool is_info_request_completed();
 	void interact();
 	bool is_container();

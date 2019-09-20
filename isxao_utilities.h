@@ -16,11 +16,7 @@ namespace isxao_utilities
 
 #pragma region Objects
 
-	AOLIB_API DWORD __cdecl GetFullPerkMap(void);
-
 	AOLIB_API bool IsValidDynel(ao::p_n3_dynel_t);
-
-	AOLIB_API PVOID RequestInfo(const ao::identity_t &);
 
 #pragma endregion
 

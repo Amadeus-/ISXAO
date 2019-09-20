@@ -100,6 +100,13 @@ namespace ao
 		P_ENGINE_CLIENT_ANARCHY->n3_msg_default_action_on_dynel(this->get_identity());
 	}
 
+#if true
+	FUNCTION_AT_ADDRESS(bool dynel::is_dynel_in_engine(const ao::identity_t&), n3_dynel_t__is_dynel_in_engine)
+#else
+	static_assert(false, "dynel::is_dynel_in_engine(const ao::identity_t&) requires a native function.");
+#endif
+
+
 	bool dynel::is_in_line_of_sight()
 	{
 		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->check_los(this);
@@ -113,7 +120,7 @@ namespace ao
 		height_offset.z = 0.0f;
 		auto dynel_position = this->get_position();
 		const auto offset_dynel_position = vector3_t::add(dynel_position, height_offset);
-		return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(position, offset_dynel_position, get_dynel_data()->p_vehicle->zone_instance_id, false);
+		return P_PLAYFIELD_DIR->get_playfield()->line_of_sight(position, offset_dynel_position, get_dynel_data()->p_vehicle->zone_instance_id, false);
 	}
 	
 	PCSTR dynel::get_name()

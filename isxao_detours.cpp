@@ -1,17 +1,18 @@
 #include "isxao_main.h"
 
-namespace isxao_detours
+namespace isxao
 {
 
-#pragma region Set MainDynel
+#pragma region n3_engine_client_anarchy_t__set_main_dynel
 
-	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::n3EngineClientAnarchy_t__SetMainDynel_Trampoline(PVOID));
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::n3_engine_client_anarchy_t__set_main_dynel__trampoline(ao::dynel*));
 
-	void ao_detours::n3EngineClientAnarchy_t__SetMainDynel_Detour(PVOID p_dynel)
+	void ao_detours::n3_engine_client_anarchy_t__set_main_dynel__detour(ao::dynel* p_dynel)
 	{
 		if (!p_dynel)
 			GamestateService(pExtension, GamestateWaitingForCharacter, nullptr);
-		n3EngineClientAnarchy_t__SetMainDynel_Trampoline(p_dynel);
+		n3_engine_client_anarchy_t__set_main_dynel__trampoline(p_dynel);
 		if (p_dynel)
 			GamestateService(pExtension, GamestateInGame, nullptr);
 	}
@@ -20,12 +21,12 @@ namespace isxao_detours
 
 #pragma region Playfield Ctor/Dtor
 
-	DETOUR_TRAMPOLINE_EMPTY(PVOID ao_detours::PlayfieldAnarchy_t__PlayfieldAnarchy_t_Trampoline(PVOID));
+	DETOUR_TRAMPOLINE_EMPTY(PVOID ao_detours::playfield_anarchy_t__playfield_anarchy_t__trampoline(PVOID));
 
-	PVOID ao_detours::PlayfieldAnarchy_t__PlayfieldAnarchy_t_Detour(PVOID p_playfield_proxy)
+	PVOID ao_detours::playfield_anarchy_t__playfield_anarchy_t__detour(PVOID p_playfield_proxy)
 	{
 		GamestateService(pExtension, GamestateWaitingForCharacter, nullptr);
-		return PlayfieldAnarchy_t__PlayfieldAnarchy_t_Trampoline(p_playfield_proxy);		
+		return playfield_anarchy_t__playfield_anarchy_t__trampoline(p_playfield_proxy);		
 	}
 
 	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::PlayfieldAnarchy_t__dPlayfieldAnarchy_t_Trampoline());
@@ -748,11 +749,11 @@ namespace isxao_detours
 		//EzDetour(n3Engine_t__SetTeleportStatus, &AODetours::n3Engine_t__SetTeleportStatus_Detour, &AODetours::n3Engine_t__SetTeleportStatus_Trampoline);
 
 		//EzDetour(ChatGUIModule_c__HandleGroupAction, &AODetours::ChatGUIModule_c__HandleGroupAction_Detour, &AODetours::ChatGUIModule_c__HandleGroupAction_Trampoline);
-		EzDetour(ChatGUIModule_c__HandleGroupMessage, &ao_detours::ChatGUIModule_c__HandleGroupMessage_Detour, &ao_detours::ChatGUIModule_c__HandleGroupMessage_Trampoline);
+		EzDetour(chat_gui_module_c__handle_group_message, &ao_detours::ChatGUIModule_c__HandleGroupMessage_Detour, &ao_detours::ChatGUIModule_c__HandleGroupMessage_Trampoline);
 		//EzDetour(ChatGUIModule_c__HandlePrivateGroupAction, &AODetours::ChatGUIModule_c__HandlePrivateGroupAction_Detour, &AODetours::ChatGUIModule_c__HandlePrivateGroupAction_Trampoline);
-		EzDetour(ChatGUIModule_c__HandlePrivateMessage, &ao_detours::ChatGUIModule_c__HandlePrivateMessage_Detour, &ao_detours::ChatGUIModule_c__HandlePrivateMessage_Trampoline);
+		EzDetour(chat_gui_module_c__handle_private_message, &ao_detours::ChatGUIModule_c__HandlePrivateMessage_Detour, &ao_detours::ChatGUIModule_c__HandlePrivateMessage_Trampoline);
 		//EzDetour(ChatGUIModule_c__HandleSystemMessage, &AODetours::ChatGUIModule_c__HandleSystemMessage_Detour, &AODetours::ChatGUIModule_c__HandleSystemMessage_Trampoline);
-		EzDetour(ChatGUIModule_c__HandleVicinityMessage, &ao_detours::ChatGUIModule_c__HandleVicinityMessage_Detour, &ao_detours::ChatGUIModule_c__HandleVicinityMessage_Trampoline);
+		EzDetour(chat_gui_module_c__handle_vicinity_message, &ao_detours::ChatGUIModule_c__HandleVicinityMessage_Detour, &ao_detours::ChatGUIModule_c__HandleVicinityMessage_Trampoline);
 
 		EzDetour(ChatGroupController_c__sub_10083D9C, &ao_detours::ChatGroupController_c__sub_10083D9C_Detour, &ao_detours::ChatGroupController_c__sub_10083D9C_Trampoline);
 
@@ -760,7 +761,7 @@ namespace isxao_detours
 
 		//EzDetour(ChatWindowNode_c__sub_1009BB79, &AODetours::ChatWindowNode_c__sub_1009BB79_Detour, &AODetours::ChatWindowNode_c__sub_1009BB79_Trampoline);
 
-		EzDetour(CommandInterpreter_c__ParseTextCommand, &ao_detours::CommandInterpreter_c__ParseTextCommand_Detour, &ao_detours::CommandInterpreter_c__ParseTextCommand_Trampoline);
+		EzDetour(command_interpreter_c__parse_text_command, &ao_detours::CommandInterpreter_c__ParseTextCommand_Detour, &ao_detours::CommandInterpreter_c__ParseTextCommand_Trampoline);
 	}
 
 	void ao_detours::Shutdown()
@@ -781,11 +782,11 @@ namespace isxao_detours
 		//EzUnDetour(n3Engine_t__SetTeleportStatus);
 
 		//EzUnDetour(ChatGUIModule_c__HandleGroupAction);
-		EzUnDetour(ChatGUIModule_c__HandleGroupMessage);
+		EzUnDetour(chat_gui_module_c__handle_group_message);
 		//EzUnDetour(ChatGUIModule_c__HandlePrivateGroupAction);
-		EzUnDetour(ChatGUIModule_c__HandlePrivateMessage);
+		EzUnDetour(chat_gui_module_c__handle_private_message);
 		//EzUnDetour(ChatGUIModule_c__HandleSystemMessage);
-		EzUnDetour(ChatGUIModule_c__HandleVicinityMessage);
+		EzUnDetour(chat_gui_module_c__handle_vicinity_message);
 
 		EzUnDetour(ChatGroupController_c__sub_10083D9C);
 
@@ -793,7 +794,7 @@ namespace isxao_detours
 
 		//EzUnDetour(ChatWindowNode_c__sub_1009BB79);
 
-		EzUnDetour(CommandInterpreter_c__ParseTextCommand);
+		EzUnDetour(command_interpreter_c__parse_text_command);
 	}
 	
 }

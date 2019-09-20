@@ -733,7 +733,7 @@ bool ActorType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int a
 		}
 		case RequestInfo:
 		{
-			isxao_utilities::RequestInfo(P_ACTOR->get_identity());
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_request_info_packet(P_ACTOR->get_identity());
 			break;
 		}
 		default: break;

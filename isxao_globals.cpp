@@ -39,15 +39,6 @@ namespace isxao
 
 #pragma endregion
 
-#pragma region Globals
-
-	DWORD __N3Msg_GetFullPerkMap = 0;
-	DWORD __SetTarget = 0;
-	
-	DWORD __RequestInfo = 0;
-
-#pragma endregion
-
 #pragma region N3
 
 	// Functions
@@ -58,6 +49,7 @@ namespace isxao
 	DWORD n3_dynel_t__n3_dynel_t = 0;
 	DWORD n3_dynel_t__d_n3_dynel_t = 0;
 	DWORD n3_dynel_t__get_dynel = 0;
+	DWORD n3_dynel_t__is_dynel_in_engine = 0;
 	DWORD n3_dynel_t__send_iir_to_observers = 0;
 	DWORD n3_dynel_t__set_playfield = 0;
 	DWORD n3_dynel_t__update_locality_listeners = 0;
@@ -81,12 +73,14 @@ namespace isxao
 	DWORD n3_playfield_t__get_playfield_1 = 0;
 	DWORD n3_playfield_t__get_playfield_2 = 0;
 	DWORD n3_playfield_t__get_playfield_3 = 0;
+	DWORD n3_playfield_t__get_playfield_dynels_1 = 0;
+	DWORD n3_playfield_t__get_playfield_dynels_2 = 0;
 	DWORD n3_playfield_t__line_of_sight = 0;
 	DWORD n3_playfield_t__remove_child = 0;
 
 	// Instances
 	DWORD n3_playfield_t__m_pc_playfield_dir_instance = 0;
-	ao::PlayfieldDir** pp_playfield_dir = nullptr;
+	ao::playfield_dir** pp_playfield_dir = nullptr;
 
 #pragma endregion
 
@@ -96,9 +90,7 @@ namespace isxao
 	DWORD f_get_nano_item = 0;
 	DWORD f_stat_to_string = 0;
 
-	DWORD game_time_t__get_instance = 0;
-	DWORD game_time_t__m_pc_instance = 0;
-	ao::game_time** pp_game_time = nullptr;
+	DWORD game_time_t__get_instance = 0;	
 
 	DWORD item_manager_t__item_manager_t = 0;
 
@@ -211,33 +203,68 @@ namespace isxao
 	DWORD n3_engine_client_anarchy_t__n3_msg_is_character_in_mech = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_is_character_morphed = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_is_dungeon = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsFormulaReady = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsGeneralPerk = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsGroupPerk = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsInRaidTeam = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsInTeam = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemDisabled = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemMine = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemNFCrystal = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToUnWear = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsItemPossibleToWear = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsMoving = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsMyPetID = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsNanoSelfOnly = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_formula_ready = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_general_perk = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_group_perk = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_in_raid_team = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_in_team = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_item_disabled = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_item_mine = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_item_nf_crystal = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_un_wear = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_wear = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_moving = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_my_pet_id = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_nano_self_only = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_is_npc = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_perk = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_is_pet_tower = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsProfessionPerk = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsResearch = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsSecondarySpecialAttackAvailable = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsShieldDisablerItem = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsSpecialPerk = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamLeader = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamMission = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamMissionCopy = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamNano = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsTower = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_IsVisible = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_JoinItems = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_KickTeamMember = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_LeaveBattle = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_LeaveTeam = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_MeetsPerkCriteria = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_MoveItemToInventory = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_MoveRaidMember = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_name_to_id = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatAddTradeItem = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatCloseWindow = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatEndTrade = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatRemoveTradeItem = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatRequestDescription = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatStartTrade = 0;
+	DWORD n3EngineClientAnarchy_t__N3Msg_OrbitalAttack = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_1 = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_perform_special_action_2 = 0;
+
+	DWORD n3_engine_client_anarchy_t__n3_msg_request_info_packet = 0;
+
 	DWORD n3_engine_client_anarchy_t__n3_msg_send_pet_command = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_stop_attack = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_use_item = 0;
 	DWORD n3_engine_client_anarchy_t__on_closed = 0;
 	
+	DWORD playfield_anarchy_t__playfield_anarchy_t = 0;
+	DWORD playfield_anarchy_t__d_playfield_anarchy_t = 0;
 
 	DWORD simple_char_t__check_los = 0;
 
 	DWORD static_item_manager_t__static_item_manager_t = 0;
 
 	// Instances
+	DWORD game_time_t__m_pc_instance = 0;
+	ao::game_time** pp_game_time = nullptr;
 	DWORD n3_engine_client_anarchy_t__m_pc_instance = 0;
 	ao::engine_client_anarchy **pp_engine_client_anarchy = nullptr;
 	DWORD m_c_stat_name_dir = 0;
@@ -252,6 +279,20 @@ namespace isxao
 #pragma endregion
 
 #pragma region GUI
+	
+	DWORD chat_gui_module_c__chat_gui_module_c = 0;
+	DWORD chat_gui_module_c__handle_group_action = 0;
+	DWORD chat_gui_module_c__handle_group_message = 0;
+	DWORD chat_gui_module_c__handle_private_group_action = 0;
+	DWORD chat_gui_module_c__handle_private_message = 0;
+	DWORD chat_gui_module_c__handle_system_message = 0;
+	DWORD chat_gui_module_c__handle_vicinity_message = 0;
+	DWORD chat_gui_module_c__s_pc_instance = 0;
+	ao::chat_gui_module** pp_chat_gui_module = nullptr;
+
+	DWORD chat_window_node_c__parse_text_command = 0;
+
+	DWORD command_interpreter_c__command_interpreter_c = 0;
 
 	DWORD html_parser_c__html_parser_c_1 = 0;
 	DWORD html_parser_c__html_parser_c_2 = 0;
@@ -263,6 +304,12 @@ namespace isxao
 	DWORD input_config_t__get_instance = 0;
 	DWORD input_config_t__set_current_target = 0;
 
+	DWORD targeting_module_t__initialise_message = 0;
+	DWORD targeting_module_t__targeting_module_t = 0;
+	DWORD targeting_module_t__set_target = 0;
+	DWORD targeting_module_t__remove_target = 0;
+	DWORD targeting_module_t__select_self = 0;
+	DWORD targeting_module_t__set_target_pet = 0;
 	DWORD targeting_module_t__m_pc_instance = 0;
 	ao::targeting_module** pp_targeting_module = nullptr;
 	DWORD targeting_module_t__m_pc_selection_indicator = 0;
@@ -270,12 +317,7 @@ namespace isxao
 	DWORD targeting_module_t__m_pc_attacking_indicator = 0;
 	ao::indicator_t** pp_attacking_indicator = nullptr;
 	DWORD targeting_module_t__m_c_last_target = 0;
-	ao::identity_t* p_last_target = nullptr;
-	DWORD targeting_module_t__initialise_message = 0;
-	DWORD targeting_module_t__targeting_module_t = 0;
-	DWORD targeting_module_t__set_target = 0;
-
-	DWORD chat_window_node_c__parse_text_command = 0;
+	ao::identity_t* p_last_target = nullptr;	
 
 #pragma endregion
 
@@ -327,39 +369,7 @@ namespace isxao
 
 #pragma endregion
 
-#pragma region EngineClientAnarchy
-	
-	
-	
-	
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsPerk = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsPetTower = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsProfessionPerk = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsResearch = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsSecondarySpecialAttackAvailable = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsShieldDisablerItem = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsSpecialPerk = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamLeader = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamMission = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamMissionCopy = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsTeamNano = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsTower = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_IsVisible = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_JoinItems = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_KickTeamMember = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_LeaveBattle = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_LeaveTeam = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_MeetsPerkCriteria = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_MoveItemToInventory = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_MoveRaidMember = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_NameToID = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatAddTradeItem = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatCloseWindow = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatEndTrade = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatRemoveTradeItem = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatRequestDescription = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_NPCChatStartTrade = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_OrbitalAttack = 0;
+#pragma region EngineClientAnarchy	
 	
 	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Accept = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_PetDuel_Challenge = 0;
@@ -414,56 +424,6 @@ namespace isxao
 
 	DWORD n3EngineClient_t__SetMainDynel = 0;
 
-
-#pragma endregion
-	
-#pragma region Playfield	
-	
-	DWORD n3Playfield_t__OnChildDynelBeingRemoved = 0;
-	
-
-	DWORD PlayfieldAnarchy_t__PlayfieldAnarchy_t = 0;
-	DWORD PlayfieldAnarchy_t__dPlayfieldAnarchy_t = 0;
-
-#pragma endregion
-
-#pragma region InputConfig
-
-	
-
-#pragma endregion
-
-#pragma region FlowControl
-
-	DWORD FlowControlModule_t__m_pcInstance = 0;
-	DWORD FlowControlModule_t__m_isLauncherRun = 0;
-	DWORD FlowControlModule_t__m_bIsGameClosing = 0;
-	DWORD FlowControlModule_t__m_nCloseFrames = 0;
-	DWORD FlowControlModule_t__m_isTeleporting = 0;
-	bool* gpbIsTeleporting = nullptr;
-	DWORD FlowControlModule_t__m_eLoggingOutTimed = 0;
-	DWORD FlowControlModule_t__m_isClientToRestartAtExit = 0;
-	
-#pragma endregion
-
-#pragma region TargetingModule	
-	
-	DWORD TargetingModule_t__RemoveTarget = 0;
-	DWORD TargetingModule_t__SelectSelf = 0;	
-	DWORD TargetingModule_t__SetTargetPet = 0;
-
-#pragma endregion
-
-#pragma region ChatGUIModule
-
-	DWORD ChatGUIModule_c__s_pcInstance = 0;
-	ao::chat_gui_module** ppChatGUIModule = nullptr;
-	DWORD ChatGUIModule_c__HandleGroupAction = 0;
-	DWORD ChatGUIModule_c__HandleGroupMessage = 0;
-	DWORD ChatGUIModule_c__HandlePrivateGroupAction = 0;
-	DWORD ChatGUIModule_c__HandlePrivateMessage = 0;
-	DWORD ChatGUIModule_c__HandleSystemMessage = 0;
-	DWORD ChatGUIModule_c__HandleVicinityMessage = 0;
 
 #pragma endregion
 
@@ -549,9 +509,9 @@ namespace isxao
 
 #pragma region CommandInterpreter
 
-	DWORD CommandInterpreter_c__m_pcInstance = 0;
-	ao::command_interpreter** ppCommandInterpreter = nullptr;
-	DWORD CommandInterpreter_c__ParseTextCommand = 0;
+	DWORD command_interpreter_c__m_pc_instance = 0;
+	ao::command_interpreter** pp_command_interpreter = nullptr;
+	DWORD command_interpreter_c__parse_text_command = 0;
 
 #pragma endregion
 
@@ -638,134 +598,33 @@ namespace isxao
 		const std::vector<unsigned char> n3_data(n3_data_begin, n3_data_end);
 
 		// Functions
-#ifdef N3_CAMERA_T__SET_SECONDARY_TARGET_USE_PATTERN
-		GET_FUNCTION_ADDRESS(n3, n3_camera_t__set_secondary_target)
-#else
-		GET_PROC_ADDRESS(n3, n3_camera_t__set_secondary_target)
-#endif
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_camera_t__set_secondary_target)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_camera_t__set_selected_target)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_dynel_t__n3_dynel_t)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_dynel_t__d_n3_dynel_t)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_dynel_t__get_dynel)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_dynel_t__send_iir_to_observers)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_dynel_t__set_playfield)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_dynel_t__update_where)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_engine_t__n3_engine_t)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__add_child_dynel)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_1)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_2)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_3)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__line_of_sight)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__remove_child)
 
-#ifdef N3_CAMERA_T__SET_SELECTED_TARGET_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_camera_t__set_selected_target)
-#else
-			GET_PROC_ADDRESS(n3, n3_camera_t__set_selected_target)
-#endif
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_dynel_t__update_locality_listeners, n3_dynel_t__update_where)	// Depends on n3_dynel_t__update_where
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_engine_client_t__get_client_control_dynel, n3_camera_t__set_selected_target)	// Depends on n3_camera_t__set_selected_target
 
-			// Functions
-#ifdef N3_DYNEL_T__N3_DYNEL_T_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_dynel_t__n3_dynel_t)
-#else
-			GET_PROC_ADDRESS(n3, n3_dynel_t__n3_dynel_t)
-#endif
+		// Instances
+		RESOLVE_STATIC_INSTANCE_ADDRESS(n3, n3_dynel_t__m_pc_dynel_dir_instance, n3_dynel_t__get_dynel)
+		pp_dynel_dir = reinterpret_cast<ao::dynel_map_t**>(n3_dynel_t__m_pc_dynel_dir_instance);
 
-#ifdef N3_DYNEL_T__D_N3_DYNEL_T_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_dynel_t__d_n3_dynel_t)
-#else
-			GET_PROC_ADDRESS(n3, n3_dynel_t__d_n3_dynel_t)
-#endif
+		RESOLVE_STATIC_INSTANCE_ADDRESS(n3, n3_engine_t__m_pc_instance, n3_engine_t__n3_engine_t)	// Used with Gamecode to get n3_engine_client_anarchy_t__m_pc_instance
 
-#ifdef N3_DYNEL_T__GET_DYNEL_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_dynel_t__get_dynel)
-#else
-			GET_PROC_ADDRESS(n3, n3_dynel_t__get_dynel)
-#endif
-
-#ifdef N3_DYNEL_T__SEND_IIR_TO_OBSERVERS_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_dynel_t__send_iir_to_observers)
-#else
-			GET_PROC_ADDRESS(n3, n3_dynel_t__send_iir_to_observers)
-#endif
-
-#ifdef N3_DYNEL_T__SET_PLAYFIELD_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_dynel_t__set_playfield)
-#else
-			GET_PROC_ADDRESS(n3, n3_dynel_t__set_playfield)
-#endif
-
-#ifdef N3_DYNEL_T__UPDATE_WHERE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_dynel_t__update_where)
-#else
-			GET_PROC_ADDRESS(n3, n3_dynel_t__update_where)
-#endif
-
-#ifdef N3_DYNEL_T__UPDATE_LOCALITY_LISTENERS_USE_PATTERN
-			GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_dynel_t__update_where, n3_dynel_t__update_locality_listeners)
-#else
-			GET_PROC_ADDRESS(n3, n3_dynel_t__update_locality_listeners)
-#endif
-
-			// Instances
-#ifdef N3_DYNEL_T__M_PC_DYNEL_DIR_INSTANCE_USE_PATTERN
-			GET_ADDRESS_FROM_FUNCTION_OFFSET(n3_dynel_t__get_dynel, n3_dynel_t__m_pc_dynel_dir_instance)
-#else
-			GET_PROC_ADDRESS(n3, n3_dynel_t__m_pc_dynel_dir_instance)
-#endif
-			pp_dynel_dir = reinterpret_cast<ao::dynel_map_t**>(n3_dynel_t__m_pc_dynel_dir_instance);
-
-		// Functions
-#ifdef N3_ENGINE_T__N3_ENGINE_T_USE_PATTERN
-		GET_FUNCTION_ADDRESS(n3, n3_engine_t__n3_engine_t)
-#else
-		GET_PROC_ADDRESS(n3, n3_engine_t__n3_engine_t)
-#endif
-
-			// Instances
-#ifdef N3_ENGINE_T__M_PC_INSTANCE_USE_PATTERN
-			GET_ADDRESS_FROM_FUNCTION_OFFSET(n3_engine_t__n3_engine_t, n3_engine_t__m_pc_instance)
-#else
-			GET_PROC_ADDRESS(n3, n3_engine_t__m_pc_instance)
-#endif
-
-			// Functions
-#ifdef N3_ENGINE_CLIENT_T__GET_CLIENT_CONTROL_DYNEL_USE_PATTERN
-			GET_RELATIVE_ADDRESS_FROM_FUNCTION_OFFSET(n3_camera_t__set_selected_target, n3_engine_client_t__get_client_control_dynel)
-#else
-			GET_PROC_ADDRESS(n3, n3_engine_client_t__get_client_control_dynel)
-#endif
-
-			// Functions
-#ifdef N3_PLAYFIELD_T__ADD_CHILD_DYNEL_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_playfield_t__add_child_dynel)
-#else
-			GET_PROC_ADDRESS(n3, n3_playfield_t__add_child_dynel)
-#endif
-
-#ifdef N3_PLAYFIELD_T__GET_PLAYFIELD_1_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_1)
-#else
-			GET_PROC_ADDRESS(n3, n3_playfield_t__get_playfield_1)
-#endif
-
-#ifdef N3_PLAYFIELD_T__GET_PLAYFIELD_2_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_2)
-#else
-			GET_PROC_ADDRESS(n3, n3_playfield_t__get_playfield_2)
-#endif
-
-#ifdef N3_PLAYFIELD_T__GET_PLAYFIELD_3_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_3)
-#else
-			GET_PROC_ADDRESS(n3, n3_playfield_t__get_playfield_3)
-#endif
-
-#ifdef N3_PLAYFIELD_T__LINE_OF_SIGHT_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_playfield_t__line_of_sight)
-#else
-			GET_PROC_ADDRESS(n3, n3_playfield_t__line_of_sight)
-#endif
-
-#ifdef N3_PLAYFIELD_T__REMOVE_CHILD_USE_PATTERN
-			GET_FUNCTION_ADDRESS(n3, n3_playfield_t__remove_child)
-#else
-			GET_PROC_ADDRESS(n3, n3_playfield_t__remove_child)
-#endif
-
-			// Instances
-#ifdef N3_PLAYFIELD_T__M_PC_PLAYFIELD_DIR_INSTANCE_USE_PATTERN
-			GET_ADDRESS_FROM_FUNCTION_OFFSET(n3_playfield_t__get_playfield_2, n3_playfield_t__m_pc_playfield_dir_instance)
-#else
-			GET_PROC_ADDRESS(n3, n3_playfield_t__m_pc_playfield_dir_instance)
-#endif
-			pp_playfield_dir = reinterpret_cast<ao::PlayfieldDir**>(n3_playfield_t__m_pc_playfield_dir_instance);
+		RESOLVE_STATIC_INSTANCE_ADDRESS(n3, n3_playfield_t__m_pc_playfield_dir_instance, n3_playfield_t__get_playfield_2)
+		pp_playfield_dir = reinterpret_cast<ao::playfield_dir**>(n3_playfield_t__m_pc_playfield_dir_instance);
 
 #pragma endregion
 
@@ -888,15 +747,33 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_character_in_mech)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_character_morphed)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_dungeon)
-
-
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_formula_ready)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_general_perk)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_group_perk)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_in_raid_team)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_in_team)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_item_disabled)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_item_mine)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_item_nf_crystal)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_un_wear)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_item_possible_to_wear)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_moving)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_my_pet_id)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_nano_self_only)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_npc)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_perk)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_pet_tower)
+
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_name_to_id)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_1)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_2)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_request_info_packet)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_send_pet_command)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_stop_attack)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_use_item)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__on_closed)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, playfield_anarchy_t__playfield_anarchy_t)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, playfield_anarchy_t__d_playfield_anarchy_t)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, simple_char_t__check_los)
 
 		RESOLVE_FUNCTION_ADDRESS(gamecode, item_manager_t__item_manager_t, n3_engine_client_anarchy_t__get_item_by_template) // Depends on n3_engine_client_anarchy_t__get_item_by_template
@@ -905,7 +782,7 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gamecode, static_item_manager_t__static_item_manager_t, n3_engine_client_anarchy_t__get_item_by_template) // Depends on n3_engine_client_anarchy_t__get_item_by_template
 
 		// Instances
-		n3_engine_client_anarchy_t__m_pc_instance = n3_engine_t__m_pc_instance;
+		n3_engine_client_anarchy_t__m_pc_instance = n3_engine_t__m_pc_instance;	// Depends on n3_engine_t__m_pc_instance
 		pp_engine_client_anarchy = reinterpret_cast<ao::engine_client_anarchy**>(n3_engine_client_anarchy_t__m_pc_instance);
 
 		RESOLVE_STATIC_INSTANCE_ADDRESS(gamecode, game_time_t__m_pc_instance, game_time_t__get_instance) // Depends on game_time_t__get_instance
@@ -936,101 +813,50 @@ namespace isxao
 		const std::vector<unsigned char> gui_data(gui_data_begin, gui_data_end);
 
 		// Functions
-#ifdef CHAT_WINDOW_NODE_C__PARSE_TEXT_COMMAND_USE_PATTERN
-		GET_FUNCTION_ADDRESS(gui, chat_window_node_c__parse_text_command)
-#else
-		static_assert(false, "chat_window_node_c__parse_text_command requires a pattern for the function address to be found.")
-#endif
+		RESOLVE_FUNCTION_ADDRESS(gui, chat_gui_module_c__chat_gui_module_c)
+		RESOLVE_FUNCTION_ADDRESS(gui, chat_gui_module_c__handle_group_action)
+		RESOLVE_FUNCTION_ADDRESS(gui, chat_gui_module_c__handle_group_message)
+		RESOLVE_FUNCTION_ADDRESS(gui, chat_gui_module_c__handle_private_group_action)
+		RESOLVE_FUNCTION_ADDRESS(gui, chat_gui_module_c__handle_private_message)
+		RESOLVE_FUNCTION_ADDRESS(gui, chat_gui_module_c__handle_system_message)
+		RESOLVE_FUNCTION_ADDRESS(gui, chat_gui_module_c__handle_vicinity_message)
+		RESOLVE_FUNCTION_ADDRESS(gui, chat_window_node_c__parse_text_command)
+		RESOLVE_FUNCTION_ADDRESS(gui, command_interpreter_c__command_interpreter_c)
+		RESOLVE_FUNCTION_ADDRESS(gui, command_interpreter_c__parse_text_command)
+		RESOLVE_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_1)
+		RESOLVE_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_2)
+		RESOLVE_FUNCTION_ADDRESS(gui, html_parser_c__d_html_parser_c)
+		RESOLVE_FUNCTION_ADDRESS(gui, html_parser_c__extract_text)
+		RESOLVE_FUNCTION_ADDRESS(gui, input_config_t__get_instance)
+		RESOLVE_FUNCTION_ADDRESS(gui, input_config_t__set_current_target)
+		RESOLVE_FUNCTION_ADDRESS(gui, targeting_module_t__initialise_message)
+		RESOLVE_FUNCTION_ADDRESS(gui, targeting_module_t__remove_target)
+		RESOLVE_FUNCTION_ADDRESS(gui, targeting_module_t__select_self)
+		RESOLVE_FUNCTION_ADDRESS(gui, targeting_module_t__set_target)
+		RESOLVE_FUNCTION_ADDRESS(gui, targeting_module_t__set_target_pet)
+		RESOLVE_FUNCTION_ADDRESS(gui, targeting_module_t__targeting_module_t)
 
-#ifdef HTML_PARSER_C__HTML_PARSER_1_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_1)
-#else
-			GET_PROC_ADDRESS(gui, html_parser_c__html_parser_c_1)
-#endif
+		// Instances
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, chat_gui_module_c__s_pc_instance, chat_gui_module_c__chat_gui_module_c)
+		pp_chat_gui_module = reinterpret_cast<ao::chat_gui_module**>(chat_gui_module_c__s_pc_instance);
 
-#ifdef HTML_PARSER_C__HTML_PARSER_2_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_2)
-#else
-			GET_PROC_ADDRESS(gui, html_parser_c__html_parser_c_2)
-#endif
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, command_interpreter_c__m_pc_instance, command_interpreter_c__command_interpreter_c)
+		pp_command_interpreter = reinterpret_cast<ao::command_interpreter**>(command_interpreter_c__m_pc_instance);
 
-#ifdef HTML_PARSER_C__D_HTML_PARSER_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gui, html_parser_c__d_html_parser_c)
-#else
-			GET_PROC_ADDRESS(gui, html_parser_c__d_html_parser_c)
-#endif
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, input_config_t__m_pc_instance, input_config_t__get_instance)	// Depends on input_config_t__get_instance
+		pp_input_config = reinterpret_cast<ao::input_config**>(input_config_t__m_pc_instance);
 
-#ifdef HTML_PARSER_C__EXTRACT_TEXT_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gui, html_parser_c__extract_text)
-#else
-			GET_PROC_ADDRESS(gui, html_parser_c__extract_text)
-#endif
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, targeting_module_t__m_pc_instance, targeting_module_t__set_target) // Depends on targeting_module_t__set_target
+		pp_targeting_module = reinterpret_cast<ao::targeting_module**>(targeting_module_t__m_pc_instance);
 
-#ifdef INPUT_CONFIG_T__GET_INSTANCE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gui, input_config_t__get_instance)
-#else
-			GET_PROC_ADDRESS(gui, input_config_t__get_instance)
-#endif
-
-#ifdef INPUT_CONFIG_T__SET_CURRENT_TARGET_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gui, input_config_t__set_current_target)
-#else
-			GET_PROC_ADDRESS(gui, input_config_t__set_current_target)
-#endif
-
-#ifdef TARGETING_MODULE_T__INITIALISE_MESSAGE_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gui, targeting_module_t__initialise_message)
-#else
-			GET_PROC_ADDRESS(gui, targeting_module_t__initialise_message)
-#endif
-
-#ifdef TARGETING_MODULE_T__TARGETING_MODULE_T_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gui, targeting_module_t__targeting_module_t)
-#else
-			GET_PROC_ADDRESS(gui, targeting_module_t__targeting_module_t)
-#endif
-
-#ifdef TARGETING_MODULE_T__SET_TARGET_USE_PATTERN
-			GET_FUNCTION_ADDRESS(gui, targeting_module_t__set_target)
-#else
-			GET_PROC_ADDRESS(gui, targeting_module_t__set_target)
-#endif
-
-			// Instances
-#ifdef INPUT_CONFIG_T__M_PC_INSTANCE_USE_PATTERN
-			GET_ADDRESS_FROM_FUNCTION_OFFSET(input_config_t__get_instance, input_config_t__m_pc_instance)
-#else
-			GET_PROC_ADDRESS(gui, input_config_t__m_pc_instance)
-#endif
-			pp_input_config = reinterpret_cast<ao::input_config**>(input_config_t__m_pc_instance);
-
-#ifdef TARGETING_MODULE_T__M_PC_INSTANCE_USE_PATTERN
-		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__set_target, targeting_module_t__m_pc_instance)
-#else
-		GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_instance)
-#endif		
-
-#ifdef TARGETING_MODULE_T__M_PC_SELECTION_INDICATOR_USE_PATTERN
-		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__initialise_message, targeting_module_t__m_pc_selection_indicator)
-#else
-		GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_selection_indicator)
-#endif
-
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, targeting_module_t__m_pc_selection_indicator, targeting_module_t__initialise_message)	// Depends on targeting_module_t__initialise_message
 		pp_selection_indicator = reinterpret_cast<ao::indicator_t**>(targeting_module_t__m_pc_selection_indicator);
 
-#ifdef TARGETING_MODULE_T__M_PC_ATTACKING_INDICATOR_USE_PATTERN
-		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__initialise_message, targeting_module_t__m_pc_attacking_indicator)
-#else
-		GET_PROC_ADDRESS(gui, targeting_module_t__m_pc_attacking_indicator)
-#endif
-
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, targeting_module_t__m_pc_attacking_indicator, targeting_module_t__initialise_message) // Depends on targeting_module_t__initialise_message
 		pp_attacking_indicator = reinterpret_cast<ao::indicator_t**>(targeting_module_t__m_pc_attacking_indicator);
 
-#ifdef TARGETING_MODULE_T__M_C_LAST_TARGET_USE_PATTERN
-		GET_ADDRESS_FROM_FUNCTION_OFFSET(targeting_module_t__initialise_message, targeting_module_t__m_c_last_target)
-#else
-		GET_PROC_ADDRESS(gui, targeting_module_t__m_c_last_target)
-#endif
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, targeting_module_t__m_c_last_target, targeting_module_t__initialise_message)	// Depends on targeting_module_t__initialise_message
+		p_last_target = reinterpret_cast<ao::identity_t*>(targeting_module_t__m_c_last_target);
 
 #pragma endregion
 

@@ -4,7 +4,7 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	printf("%" PRIX32, 1);
+	printf("%" PRIX32, P_CHAT_GUI_MODULE);
 	return 0;
 }
 

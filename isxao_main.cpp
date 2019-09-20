@@ -7,13 +7,15 @@ namespace isxao
 	{
 		SYSTEMTIME system_time;
 		GetLocalTime(&system_time);
+		char date[64] = { 0 };
+		GetDateFormatA(LOCALE_USER_DEFAULT, 0, &system_time, "yyyy'_'MM'_'dd", date, 64);
 		const auto ms = system_time.wMilliseconds;
 		char time[32] = { 0 };
 		GetTimeFormatA(LOCALE_USER_DEFAULT, TIME_FORCE24HOURFORMAT, &system_time, "hh'_'mm'_'ss", time, 32);
 		char time_ms[32] = { 0 };
 		sprintf_s(time_ms, sizeof(time_ms), "%s_%d", time, ms);
 		char log_file_name[MAX_PATH] = { 0 };
-		sprintf_s(log_file_name, sizeof(log_file_name), "ISXAO_%s.txt", time_ms);
+		sprintf_s(log_file_name, sizeof(log_file_name), "ISXAO_%s_%s.txt", date, time_ms);
 		gp_isxao_log = new isxao_log(GetModuleHandle("ISXAO.dll"), log_file_name);
 	}
 
@@ -92,7 +94,7 @@ namespace isxao
 	DWORD GetActorIndexFromActorVector(LSIndex *index)
 	{
 		std::vector<ao::actor*> v;
-		P_PLAYFIELD_DIR->GetPlayfield()->GetPlayfieldActors(v);
+		P_PLAYFIELD_DIR->get_playfield()->get_playfield_actors(v);
 		for (auto it = v.begin(); it != v.end(); ++it)
 			index->AddItem(reinterpret_cast<LSOBJECTDATA&>(*it));
 		return index->GetContainerUsed();

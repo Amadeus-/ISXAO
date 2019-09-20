@@ -57,7 +57,7 @@ namespace ao
 			const auto offset_client = vector3_t::add(client, offset);
 			auto dynel = p_dynel->get_position();
 			const vector3_t offset_me = vector3_t::add(dynel, offset);
-			return P_PLAYFIELD_DIR->GetPlayfield()->LineOfSight(offset_client, offset_me, get_dynel_data()->p_vehicle->zone_instance_id, false);
+			return P_PLAYFIELD_DIR->get_playfield()->LineOfSight(offset_client, offset_me, get_dynel_data()->p_vehicle->zone_instance_id, false);
 		}
 		return false;
 	}
