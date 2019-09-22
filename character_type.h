@@ -24,6 +24,8 @@ public:
 		Activate,
 		Attack,
 		Cast,
+		Sit,
+		Stand
 	};
 
 	CharacterType() : LSType("character")
@@ -39,9 +41,11 @@ public:
 		TypeMember(GetSpecialActions);
 		TypeMember(ToActor);
 
-		TypeMember(Activate);
-		TypeMember(Attack);
+		TypeMethod(Activate);
+		TypeMethod(Attack);
 		TypeMethod(Cast);
+		TypeMethod(Sit);
+		TypeMethod(Stand);
 
 		PersistentClass = pISInterface->RegisterPersistentClass("character");
 		pISInterface->SetPersistentClass(this, PersistentClass);

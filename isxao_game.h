@@ -1700,6 +1700,19 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_send_pet_command_bytes_to_nex
 
 #pragma endregion
 
+#pragma region n3_engine_client_anarchy_t__n3_msg_sit_toggle
+
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_sit_toggle_mangled_name = static_cast<char*>(
+	"?N3Msg_SitToggle@n3EngineClientAnarchy_t@@QAEXXZ");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_sit_toggle_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC 04 01 00 00");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_sit_toggle_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_sit_toggle_bytes_to_next = 0x0;
+
+
+#pragma endregion
+
+
 #pragma region n3_engine_client_anarchy_t__n3_msg_stop_attack
 
 constexpr char* const n3_engine_client_anarchy_t__n3_msg_stop_attack_mangled_name = static_cast<char*>(

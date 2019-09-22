@@ -206,13 +206,19 @@ bool CharacterType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 		{
 		case Activate:
 		{
-			if (get_game_state() == GAMESTATE_IN_GAME)
-				isxao_commands::Activate(0, argc, argv);
+			isxao_commands::Activate(0, argc, argv);
 		}
 		case Cast:
 		{
-			if (get_game_state() == GAMESTATE_IN_GAME)
-				isxao_commands::Cast(0, argc, argv);
+			isxao_commands::Cast(0, argc, argv);
+		}
+		case Sit:
+		{
+			P_CHARACTER->sit();
+		}
+		case Stand:
+		{
+			P_CHARACTER->stand();
 		}
 		default: break;
 		}

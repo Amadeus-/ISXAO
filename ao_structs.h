@@ -42,6 +42,18 @@ namespace ao
 			return get_combined_identity() < other.get_combined_identity();
 		}
 
+		void zero()
+		{
+			this->type = 0;
+			this->id = 0;
+		}
+
+		void copy(const struct ao_identity& other)
+		{
+			this->type = other.type;
+			this->id = other.id;
+		}
+
 		ao_identity()
 		{
 			type = 0;

@@ -249,6 +249,11 @@ namespace ao
 		return this->get_spell_template_data()->is_casting();
 	}
 
+	bool actor::is_crawling()
+	{
+		return this->get_vehicle()->get_char_movement_status()->movement_mode == 5;
+	}
+
 	bool actor::is_fighting()
 	{
 		return this->get_simple_char_data()->p_weapon_holder->is_attacking != 1;
@@ -329,6 +334,11 @@ namespace ao
 		return this->get_vehicle()->get_char_movement_status()->is_rotating != 1 && this->get_vehicle()->get_char_movement_status()->rotation_direction == 4;
 	}
 
+	bool actor::is_sitting()
+	{
+		return this->get_vehicle()->get_char_movement_status()->movement_mode == 8;
+	}
+
 	bool actor::is_strafing_left()
 	{
 		return this->get_vehicle()->get_char_movement_status()->is_moving_strafe != 1 && this->get_vehicle()->get_char_movement_status()->strafe_direction == 3;
@@ -338,7 +348,12 @@ namespace ao
 	{
 		return this->get_vehicle()->get_char_movement_status()->is_moving_strafe != 1 && this->get_vehicle()->get_char_movement_status()->strafe_direction == 4;
 	}
-	
+
+	bool actor::is_standing()
+	{
+		return this->get_vehicle()->get_char_movement_status()->movement_mode != 8;
+	}
+
 	bool actor::is_team_leader()
 	{
 		if(this->is_player())

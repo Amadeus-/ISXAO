@@ -174,7 +174,7 @@ public:
 	bool N3Msg_SecondarySpecialAttack(const ao::identity_t &, DWORD);
 	void N3Msg_SelectedTarget(const ao::identity_t&);
 	void n3_msg_send_pet_command(DWORD, const ao::identity_t &, DWORD, DWORD, PCSTR); // 0, PetIdentity&, PetCommand_e, 0, nullptr
-	void N3Msg_SitToggle();
+	void n3_msg_sit_toggle();
 	bool N3Msg_SplitItem(const ao::identity_t &, DWORD);
 	void N3Msg_StartAltState();
 	bool N3Msg_StartCamping();

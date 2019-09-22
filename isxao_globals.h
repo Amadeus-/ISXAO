@@ -256,7 +256,7 @@ namespace isxao
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SecondarySpecialAttack;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SelectedTarget;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_send_pet_command;
-	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SitToggle;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_sit_toggle;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_SplitItem;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartAltState;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_StartCamping;

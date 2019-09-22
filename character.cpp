@@ -230,6 +230,18 @@ namespace ao
 		}
 	}
 
+	void character::sit()
+	{
+		if (!this->is_sitting())
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_sit_toggle();
+	}
+
+	void character::stand()
+	{
+		if (this->is_sitting())
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_sit_toggle();
+	}
+
 	void character::strafe_left_start()
 	{
 		if (!this->is_strafing_left())

@@ -27,9 +27,10 @@ public:
 	ao::team_raid* get_team_raid();
 	ao::vehicle* get_vehicle();
 	ao::weapon_holder* get_weapon_holder();
-	bool has_pet();	
+	bool has_pet();
 	bool is_backing_up();
 	bool is_casting();
+	bool is_crawling();
 	bool is_fighting_me();
 	bool is_fighting();
 	bool is_idle();
@@ -43,8 +44,10 @@ public:
 	bool is_npc();
 	bool is_rotating_left();
 	bool is_rotating_right();
+	bool is_sitting();
 	bool is_strafing_left();
 	bool is_strafing_right();
+	bool is_standing();
 	bool is_team_leader();
 	void kick();
 	void make_leader();

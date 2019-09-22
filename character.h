@@ -38,6 +38,8 @@ public:
 	void rotate_left_stop();
 	void rotate_right_start();
 	void rotate_right_stop();
+	void sit();
+	void stand();
 	void strafe_left_start();
 	void strafe_left_stop();
 	void strafe_right_start();

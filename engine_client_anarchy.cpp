@@ -1276,8 +1276,12 @@ namespace ao
 	static_assert(false, "engine_client_anarchy::n3_msg_send_pet_command(DWORD, const identity_t &, DWORD, DWORD, PCSTR) requires a native function.");
 #endif
 
-#ifdef n3EngineClientAnarchy_t__N3Msg_SitToggle_x
-	FUNCTION_AT_ADDRESS(void engine_client_anarchy::N3Msg_SitToggle(void), n3EngineClientAnarchy_t__N3Msg_SitToggle);
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(void engine_client_anarchy::n3_msg_sit_toggle(), n3_engine_client_anarchy_t__n3_msg_sit_toggle)
+#else
+	static_assert(false, "engine_client_anarchy::n3_msg_sit_toggle() requires a native function.");
 #endif
 
 #ifdef n3EngineClientAnarchy_t__N3Msg_SplitItem_x

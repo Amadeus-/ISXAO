@@ -4,17 +4,8 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	if (P_SELECTION_INDICATOR)
-	{
-		const auto i = P_SELECTION_INDICATOR->identity;
-		const auto d = ao::dynel::get_dynel(i);
-		if (d)
-		{
-			const auto p = d->get_position();
-			P_ENGINE_CLIENT_ANARCHY->get_client_char()->move_to(p);
-		}
-	}
-	// P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(ao::MA_FORWARD_START, 0.0, 0.0, true);
+	if(!P_ENGINE_CLIENT_ANARCHY->get_client_char()->is_sitting())
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(ao::MA_SIT_TOGGLE, 0.0, 0.0, true);
 	// printf("%" PRIX32, P_CHAT_GUI_MODULE);
 	return 0;
 }

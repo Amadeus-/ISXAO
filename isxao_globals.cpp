@@ -265,7 +265,7 @@ namespace isxao
 	DWORD n3EngineClientAnarchy_t__N3Msg_SecondarySpecialAttack = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_SelectedTarget = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_send_pet_command = 0;
-	DWORD n3EngineClientAnarchy_t__N3Msg_SitToggle = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_sit_toggle = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_SplitItem = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_StartAltState = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_StartCamping = 0;
@@ -758,6 +758,7 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_2)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_request_info_packet)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_send_pet_command)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_sit_toggle)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_stop_attack)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_use_item)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__on_closed)

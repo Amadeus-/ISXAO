@@ -4,16 +4,44 @@ namespace isxao
 {
 #pragma region constants
 
+	constexpr byte command_stick = 1;
+	constexpr byte command_move_to = 2;
+	constexpr byte command_circle = 3;
+	constexpr byte command_make_camp = 4;
+
+	constexpr byte move_walk_on = 10;
+	constexpr byte move_walk_off = 11;
+	constexpr byte move_walk_ignore = 12;
+
+	constexpr byte set_alt_camp = 20;
+	constexpr byte reset_alt_camp = 21;
+
+	constexpr byte go_forward = 30;
+	constexpr byte go_backward = 31;
+	constexpr byte go_left = 32;
+	constexpr byte go_right = 33;
+	constexpr byte kill_strafe = 34;
+	constexpr byte kill_fb = 35;
+	constexpr byte apply_to_all = 36;
+
+	constexpr byte help_settings = 50;
+
+	constexpr byte error_stick_self = 60;
+	constexpr byte error_stick_none = 61;
+	constexpr byte error_bad_move_to = 62;
+	constexpr byte error_bad_make_camp = 63;
+	constexpr byte error_bad_circle = 64;
+	constexpr byte error_bad_actor = 65;
+	constexpr byte error_bad_delay = 66;
+
+	constexpr byte debug_main = 200;
+	constexpr byte debug_stuck = 201;
+	constexpr byte debug_misc = 202;
+	constexpr byte debug_disable = 203;
+
 	constexpr float circle_quarter = 90.0f;
 	constexpr float circle_half = 180.0f;
 	constexpr float circle_max = 360.0;
-
-	constexpr float h_inactive = 10000.0f;
-	constexpr int h_fast = 0;
-	constexpr int h_loose = 1;
-	constexpr int h_true = 2;
-
-	constexpr int max_ring_size = 32;
 
 	constexpr float heading_quarter = 128.0f;
 	constexpr float heading_half = 256.0f;
@@ -25,30 +53,76 @@ namespace isxao
 	constexpr int pin_arc_min = 112;
 	constexpr int pin_arc_max = 144;
 
+	constexpr float h_inactive = 10000.0f;
+	constexpr int h_fast = 0;
+	constexpr int h_loose = 1;
+	constexpr int h_true = 2;
+
 	constexpr int t_inactive = 0;
 	constexpr int t_ready = 2;
 	constexpr int t_waiting = 1;
 
+	constexpr int max_ring_size = 32;
+
+	constexpr DWORD event_aggro_norm = 0;
+	constexpr DWORD event_miss_norm = 0;
+	constexpr DWORD event_aggro_abbrev = 0;
+	constexpr DWORD event_miss_abbrev = 0;
+	constexpr DWORD event_miss_num_only = 0;
+	constexpr DWORD event_gates = 0;
+
 #pragma endregion
 
-	class move_settings* p_settings = nullptr;
+#pragma region enums
 
-	class move_character* p_character = nullptr;
+	enum verbosity_level
+	{
+		V_SILENCE = 0,
+		V_AUTO_PAUSE = 1,
+		V_MOVE_PAUSE = 1 >> 1,
+		V_MOUSE_PAUSE = 1 >> 2,
+		V_FEIGN = 1 >> 3,
+		V_HIDE_HELP = 1 >> 4,
+		V_STICK_V = 1 >> 5,
+		V_STICK_FV = 1 >> 6,
+		V_MOVE_TO_V = 1 >> 7,
+		V_MOVE_TO_FV = 1 >> 8,
+		V_MAKE_CAMP_V = 1 >> 9,
+		V_MAKE_CAMP_FV = 1 >> 10,
+		V_CIRCLE_V = 1 >> 11,
+		V_CIRCLE_FV = 1 >> 12,
+		V_SETTINGS = 1 >> 13,
+		V_SAVED = 1 >> 14,
+		V_BREAK_ON_WARP = 1 >> 15,
+		V_BREAK_ON_AGGRO = 1 >> 16,
+		V_BREAK_ON_HIT = 1 >> 17,
+		V_BREAK_ON_SUMMON = 1 >> 18,
+		V_BREAK_ON_GM = 1 >> 19,
+		V_BREAK_ON_GATE = 1 >> 20,
+		V_STICK_ALWAYS = 1 >> 21,
+		V_ERRORS = 1 >> 22,
+		V_RANDOMIZE = 1 >> 23,
+		V_PAUSED = 1 >> 24,
+		V_VERBOSITY = V_CIRCLE_FV + V_MAKE_CAMP_V + V_MOVE_TO_V + V_STICK_V, // normal verbosity msgs
+		V_FULL_VERBOSITY = V_RANDOMIZE + V_STICK_ALWAYS + V_BREAK_ON_GATE + V_BREAK_ON_HIT + V_BREAK_ON_AGGRO + V_CIRCLE_FV + V_MAKE_CAMP_FV +  V_MOVE_TO_FV + V_STICK_FV + V_MOUSE_PAUSE + V_MOUSE_PAUSE, // full verbosity msgs
+		V_EVERYTHING = 1 >> 25, // all messages on (dont add verb + fullverb in)
+	};
 
-	class stuck_logic* p_stuck_logic = nullptr;
+#pragma endregion
 
-	class move_loc* p_summon_loc = nullptr;
-	class circle_settings* p_circle_settings = nullptr;
-	class move_to_settings* p_move_to_settings = nullptr;
-	class camp_settings* p_camp_settings = nullptr;
-	class stick_settings* p_stick_settings = nullptr;
+#pragma region globals
+
+	AOLIB_API bool g_stick_on;
+	// AOLIB_API int stick_cmd(int argc, char* argv[]);
+
+#pragma endregion
 
 	class move_loc
 	{
 	public:
 		ao::vector3_t location;
-		float cur_distance{};
-		float dif_distance{};
+		float cur_distance;
+		float dif_distance;
 		move_loc();
 	};
 
@@ -67,7 +141,7 @@ namespace isxao
 
 	protected:
 		int resume_;
-		SYSTEMTIME time_began_;
+		SYSTEMTIME time_began_{};
 		int elapsed_ms() const;
 	};
 
@@ -194,24 +268,200 @@ namespace isxao
 	class circle_command : public move_loc, public move_delay, public circle_settings
 	{
 	public:
-		bool is_on;
+		bool on;
+		circle_command();
 		bool wait();
 		void at_me();
+		void at_loc(ao::vector3_t);
+		void at_loc(float x, float y);
 
 	protected:
 		void user_defaults();
 		static int get_drunk(int);
 	};
 
-	class move_to
+	class move_to_command: public move_loc, public move_to_settings
 	{
 	public:
-		bool is_on;
+		bool on;
 		bool precise_x;
 		bool precise_y;
-		move_to();
-		void activate(const ao::vector3_t&);
-	private:		
+		move_to_command();
+		bool did_aggro();
+		void activate(ao::vector3_t);
+		void activate(float x, float y, float z);
+
+	protected:
+		void user_defaults();
+	};
+
+	class camp_command: public move_loc, public camp_settings
+	{
+	public:
+		bool on;
+		bool pc;
+		bool redo_stick;
+		bool redo_circle;
+		ao::identity_t pc_identity;
+		char pc_name[MAX_VARSTRING] = { 0 };
+		camp_command();
+		void user_defaults();
+	};
+
+	class alt_camp : public move_loc
+	{
+	public:
+		bool on;
+		float radius;
+		alt_camp();
+		void update(camp_command* p_current);
+	};
+
+	class camp_handler: public move_delay, public move_loc
+	{
+	public:
+		bool is_auto;
+		bool do_alt;
+		bool do_return;
+		bool returning;
+		camp_handler();
+		~camp_handler();
+		static void reset_both();
+		void reset_camp(bool);
+		void reset_player(bool);
+		void new_camp(bool);
+		void activate(ao::vector3_t p);
+		void activate(float x, float y);
+		void activate(ao::dynel*);
+		void var_reset();
+
+	protected:
+		void output();
+		void output_pc();
+	};
+
+	class snap_roll : public move_loc
+	{
+	public:
+		float head;
+		float bearing;
+		snap_roll();
+	};
+
+	class stick_command: public move_loc, public stick_settings
+	{
+	public:
+		snap_roll* snap;
+		bool set_dist;
+		float dist;
+		float rand_min;
+		float rand_max;
+		bool rand_flag;
+		bool move_back;
+		bool behind;
+		bool behind_once;
+		bool front;
+		bool not_front;
+		bool pin;
+		bool snap_roll;
+		bool hold;
+		bool healer;
+		bool always;
+		bool have_target;
+		bool strafe;
+		bool on;
+		ao::identity_t last_target_id;
+		ao::identity_t hold_id;
+		stick_command();
+		~stick_command();
+		void turn_on();
+		void stop_hold();
+		void first_always();
+		void new_snap_roll();
+		void reset_loc();
+		bool ready();
+		void do_randomize();
+
+	protected:
+		void user_defaults();
+		void set_rand_arc(int arc_type);
+		bool always_status();
+		bool always_ready_;
+	};
+
+	class pause_handler : public move_delay
+	{
+	public:
+		bool paused_command;
+		bool paused_move;
+		bool user_kb;
+		bool user_mouse;
+		pause_handler();
+		bool waiting() const;
+		void handle_pause();
+		void pause_timers();
+		void mouse_free();
+		bool pause_needed();
+		bool mouse_check();
+		void reset();
+
+	protected:
+		bool handle_mouse_;
+		bool handle_kb_;
+	};
+
+	class move_active
+	{
+	public:
+		bool aggro;
+		bool broke_gm;
+		bool broke_summon;
+		bool command_forward;
+		bool command_strafe;
+		bool fix_walk;
+		bool key_binds;
+		bool key_killed;
+		bool loaded;
+		bool lock_pause;
+		bool move_to_broke;
+		bool stick_broke;
+		bool rooted;
+		bool stopped_move_to;
+		int head;
+		move_active();
+		~move_active();
+		static void new_stick();
+		static void new_move_to();
+		static void new_circle();
+		static void new_commands();
+		static void new_summon();
+		void new_defaults();
+		static bool active();
+		void aggro_tlo();
+		bool broken() const;
+		void defaults();
+	};
+
+	class move_movement
+	{
+	public:
+		float change_head;
+		float root_head;
+		void auto_head();
+		void new_head(float);
+		void new_face(double);
+		void stop_heading();
+		float sane_head(float heading);
+		void do_root();
+		void stop_root();
+		float ang_dist(float, float, float);
+		float ang_dist(float, ao::vector3_t&);
+		float ang_dist(ao::quaternion_t&, ao::vector3_t&);
+		bool can_move(float, float, float);
+		bool can_move(float, ao::vector3_t&);
+		bool can_move(ao::quaternion_t&, ao::vector3_t&);
+		bool set_walk(bool);
+		void do_stand();
 	};
 
 }
