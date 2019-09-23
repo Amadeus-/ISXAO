@@ -4,9 +4,11 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	if(!P_ENGINE_CLIENT_ANARCHY->get_client_char()->is_sitting())
-		P_ENGINE_CLIENT_ANARCHY->n3_msg_movement_changed(ao::MA_SIT_TOGGLE, 0.0, 0.0, true);
-	// printf("%" PRIX32, P_CHAT_GUI_MODULE);
+	std::map<DWORD, PVOID> m;
+	P_COMMAND_LIST->p_command_map->copy_map(m);
+	for (auto it = m.begin(); it != m.end(); ++it)
+		printf("%d : 0x%.8X", it->first, it->second);
+	// printf("%" PRIX32, P_COMMAND_LIST->p_command_map->count);
 	return 0;
 }
 

@@ -70,6 +70,11 @@ namespace isxao
 		bool CommandInterpreter_c__ParseTextCommand_Trampoline(ao::chat_window_node*, string*);
 		bool CommandInterpreter_c__ParseTextCommand_Detour(ao::chat_window_node*, string*);
 
+		void window_controller_c__handle_key_down__trampoline(const DWORD&, const DWORD&);
+		void window_controller_c__handle_key_down__detour(const DWORD&, const DWORD&);
+		void window_controller_c__handle_key_up__trampoline(const DWORD&, const DWORD&);
+		void window_controller_c__handle_key_up__detour(const DWORD&, const DWORD&);
+
 		static void initialize();
 		static void shutdown();
 	};

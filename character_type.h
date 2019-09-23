@@ -38,7 +38,7 @@ public:
 		TypeMember(GetNanoSpells);
 		TypeMember(SpecialAction);
 		TypeMember(SpecialActionCount);
-		TypeMember(GetSpecialActions);
+		TypeMember(GetSpecialActions);		
 		TypeMember(ToActor);
 
 		TypeMethod(Activate);
@@ -46,6 +46,7 @@ public:
 		TypeMethod(Cast);
 		TypeMethod(Sit);
 		TypeMethod(Stand);
+		
 
 		PersistentClass = pISInterface->RegisterPersistentClass("character");
 		pISInterface->SetPersistentClass(this, PersistentClass);

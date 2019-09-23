@@ -339,6 +339,10 @@ namespace isxao
 
 	DWORD command_interpreter_c__command_interpreter_c = 0;
 
+	DWORD command_list_t__command_list_t = 0;
+	DWORD command_list_t__m_pc_instance = 0;
+	ao::command_list_t* p_command_list = nullptr;
+
 	DWORD html_parser_c__html_parser_c_1 = 0;
 	DWORD html_parser_c__html_parser_c_2 = 0;
 	DWORD html_parser_c__d_html_parser_c = 0;	
@@ -362,7 +366,12 @@ namespace isxao
 	DWORD targeting_module_t__m_pc_attacking_indicator = 0;
 	ao::indicator_t** pp_attacking_indicator = nullptr;
 	DWORD targeting_module_t__m_c_last_target = 0;
-	ao::identity_t* p_last_target = nullptr;	
+	ao::identity_t* p_last_target = nullptr;
+
+	DWORD window_controller_t__get_instance = 0;
+	DWORD window_controller_c__s_pc_instance = 0;
+	DWORD window_controller_t__handle_key_down = 0;
+	DWORD window_controller_t__handle_key_up = 0;
 
 #pragma endregion
 
@@ -414,11 +423,6 @@ namespace isxao
 
 #pragma endregion
 
-#pragma region Logger
-
-	
-
-#pragma endregion
 
 #pragma region vTable
 
@@ -813,6 +817,7 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gui, chat_window_node_c__parse_text_command)
 		RESOLVE_FUNCTION_ADDRESS(gui, command_interpreter_c__command_interpreter_c)
 		RESOLVE_FUNCTION_ADDRESS(gui, command_interpreter_c__parse_text_command)
+		RESOLVE_FUNCTION_ADDRESS(gui, command_list_t__command_list_t)
 		RESOLVE_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_1)
 		RESOLVE_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_2)
 		RESOLVE_FUNCTION_ADDRESS(gui, html_parser_c__d_html_parser_c)
@@ -825,6 +830,9 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gui, targeting_module_t__set_target)
 		RESOLVE_FUNCTION_ADDRESS(gui, targeting_module_t__set_target_pet)
 		RESOLVE_FUNCTION_ADDRESS(gui, targeting_module_t__targeting_module_t)
+		RESOLVE_FUNCTION_ADDRESS(gui, window_controller_t__get_instance)
+		RESOLVE_FUNCTION_ADDRESS(gui, window_controller_t__handle_key_down)
+		RESOLVE_FUNCTION_ADDRESS(gui, window_controller_t__handle_key_up)
 
 		// Instances
 		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, chat_gui_module_c__s_pc_instance, chat_gui_module_c__chat_gui_module_c)
@@ -832,6 +840,9 @@ namespace isxao
 
 		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, command_interpreter_c__m_pc_instance, command_interpreter_c__command_interpreter_c)
 		pp_command_interpreter = reinterpret_cast<ao::command_interpreter**>(command_interpreter_c__m_pc_instance);
+
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, command_list_t__m_pc_instance, command_list_t__command_list_t) // Depends on command_list_t__command_list_t
+		p_command_list = reinterpret_cast<ao::command_list_t*>(command_list_t__m_pc_instance);
 
 		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, input_config_t__m_pc_instance, input_config_t__get_instance)	// Depends on input_config_t__get_instance
 		pp_input_config = reinterpret_cast<ao::input_config**>(input_config_t__m_pc_instance);
@@ -847,6 +858,8 @@ namespace isxao
 
 		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, targeting_module_t__m_c_last_target, targeting_module_t__initialise_message)	// Depends on targeting_module_t__initialise_message
 		p_last_target = reinterpret_cast<ao::identity_t*>(targeting_module_t__m_c_last_target);
+
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, window_controller_c__s_pc_instance, window_controller_t__get_instance)	// Depends on window_controller_t__get_instance
 
 #pragma endregion
 

@@ -225,7 +225,7 @@ namespace isxao
 		bool walk;
 		float dist;
 		float dist_back;
-		float dist_y;
+		float dist_z;
 		float dist_x;
 		float mod;
 		move_to_settings();
@@ -273,7 +273,7 @@ namespace isxao
 		bool wait();
 		void at_me();
 		void at_loc(ao::vector3_t);
-		void at_loc(float x, float y);
+		void at_loc(float x, float z);
 
 	protected:
 		void user_defaults();
@@ -285,7 +285,7 @@ namespace isxao
 	public:
 		bool on;
 		bool precise_x;
-		bool precise_y;
+		bool precise_z;
 		move_to_command();
 		bool did_aggro();
 		void activate(ao::vector3_t);
@@ -331,7 +331,7 @@ namespace isxao
 		void reset_player(bool);
 		void new_camp(bool);
 		void activate(ao::vector3_t p);
-		void activate(float x, float y);
+		void activate(float x, float z);
 		void activate(ao::dynel*);
 		void var_reset();
 
@@ -449,19 +449,36 @@ namespace isxao
 		float root_head;
 		void auto_head();
 		void new_head(float);
-		void new_face(double);
+		static void new_face(float);
 		void stop_heading();
-		float sane_head(float heading);
+		static float sane_head(float heading);
 		void do_root();
 		void stop_root();
 		float ang_dist(float, float, float);
 		float ang_dist(float, ao::vector3_t&);
+		float ang_dist(ao::quaternion_t&, float, float);
 		float ang_dist(ao::quaternion_t&, ao::vector3_t&);
 		bool can_move(float, float, float);
 		bool can_move(float, ao::vector3_t&);
 		bool can_move(ao::quaternion_t&, ao::vector3_t&);
 		bool set_walk(bool);
 		void do_stand();
+		void walk(byte);
+		void try_move(byte, byte, float, float, float);
+		void do_move(byte, bool, byte);
+		void stop_move(byte);
+		void stick_strafe(byte);
+		move_movement();
+	private:
+		void timed_strafe(byte);
+		void turn_head(float);
+		void fast_turn(float);
+		void loose_turn(float);
+		void true_turn(float);
+		void true_move_on(byte);
+		void true_move_off(byte);
+		void sim_move_on(byte);
+		void sim_move_off(byte);
 	};
 
 }

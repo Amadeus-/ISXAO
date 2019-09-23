@@ -271,7 +271,7 @@ namespace isxao
 		this->dist = 10.0f;
 		this->dist_back = 30.0f;
 		this->dist_x = 10.0f;
-		this->dist_y = 10.0f;
+		this->dist_z = 10.0f;
 		this->mod = 0.0f;
 	}
 
@@ -351,11 +351,11 @@ namespace isxao
 		this->on = true;
 	}
 
-	void circle_command::at_loc(const float x, const float y)
+	void circle_command::at_loc(const float x, const float z)
 	{
 		this->location.zero();
 		this->location.x = x;
-		this->location.y = y;
+		this->location.z = z;
 		this->on = true;
 	}
 
@@ -363,10 +363,10 @@ namespace isxao
 	{
 		const auto p = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_position();
 		const auto h = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_rotation().get_heading();
-		const auto y = float(p.y + this->radius * sin(h * M_PI / heading_half));
+		const auto z = float(p.z + this->radius * sin(h * M_PI / heading_half));
 		const auto x = float(p.x + this->radius * cos(h * M_PI / heading_half));
 		this->location.x = x;
-		this->location.y = y;
+		this->location.z = z;
 		this->on = true;
 	}
 
@@ -402,7 +402,7 @@ namespace isxao
 	{
 		this->on = false;
 		this->precise_x = false;
-		this->precise_y = false;
+		this->precise_z = false;
 		this->user_defaults();
 	}
 
@@ -414,19 +414,19 @@ namespace isxao
 		this->uw = p_move_to_settings->uw;
 		this->walk = p_move_to_settings->walk;
 		this->dist_back = p_move_to_settings->dist_back;
-		this->dist_y = p_move_to_settings->dist_y;
+		this->dist_z = p_move_to_settings->dist_z;
 		this->dist_x = p_move_to_settings->dist_x;
 		this->mod = p_move_to_settings->mod;
 	}
 
-	void move_to_command::activate(ao::vector3_t p)
+	void move_to_command::activate(const ao::vector3_t p)
 	{
 		this->location.zero();
 		this->location.copy(p);
 		this->on = true;
 	}
 
-	void move_to_command::activate(float x, float y, float z)
+	void move_to_command::activate(const float x, const float y, const float z)
 	{
 		this->location.x = x;
 		this->location.y = y;
@@ -492,15 +492,6 @@ namespace isxao
 
 #pragma region camp_handler
 
-	camp_handler::camp_handler()
-	{
-		p_alt_camp = new alt_camp();
-		p_camp_command = new camp_command();
-		this->min = p_camp_settings->min;
-		this->max = p_camp_settings->max;
-		this->var_reset();
-	}
-
 	void camp_handler::var_reset()
 	{
 		this->is_auto = false;
@@ -508,6 +499,15 @@ namespace isxao
 		this->do_return = false;
 		this->returning = false;
 	}
+
+	camp_handler::camp_handler()
+	{
+		p_alt_camp = new alt_camp();
+		p_camp_command = new camp_command();
+		this->min = p_camp_settings->min;
+		this->max = p_camp_settings->max;
+		this->var_reset();
+	}	
 
 	camp_handler::~camp_handler()
 	{
@@ -551,7 +551,7 @@ namespace isxao
 			this->output();
 	}
 
-	void camp_handler::activate(const float x, const float y)
+	void camp_handler::activate(const float x, const float z)
 	{
 		if (p_camp_command->on && !p_camp_command->pc)
 		{
@@ -564,7 +564,7 @@ namespace isxao
 		p_camp_command->on = true;
 		p_camp_command->location.zero();
 		p_camp_command->location.x = x;
-		p_camp_command->location.y = y;
+		p_camp_command->location.z = z;
 		this->validate();
 	}
 
@@ -731,7 +731,7 @@ namespace isxao
 		this->dist_snap = p_stick_settings->dist_snap;
 	}
 
-	void stick_command::set_rand_arc(int arc_type)
+	void stick_command::set_rand_arc(const int arc_type)
 	{
 		auto temp_arc = 0.0f;
 		auto arc_size = 0.0f;
@@ -1022,6 +1022,93 @@ namespace isxao
 	{
 		return this->broke_gm || this->broke_summon;
 	}
+
+
+#pragma endregion
+
+#pragma region move_movement
+
+	void move_movement::auto_head()
+	{
+		if (this->change_head == h_inactive)
+			return;
+		// this->turn_head(this->change_head);
+	}
+
+	void move_movement::new_head(const float new_heading)
+	{
+		if (g_game_state != GAMESTATE_IN_GAME)
+			return;
+		switch(p_move_active->head)
+		{
+		case h_loose:
+		case h_true:
+			this->change_head = new_heading;
+			break;
+		case h_fast:
+		default:
+			// this->fast_turn(new_heading);
+			break;
+		}
+	}
+
+	void move_movement::new_face(const float new_face)
+	{
+		if (g_game_state != GAMESTATE_IN_GAME)
+			return;
+		switch(p_move_active->head)
+		{
+			case h_loose:
+			case h_true:
+			case h_fast:
+			default:
+				P_ENGINE_CLIENT_ANARCHY->get_client_char()->face(new_face);
+				break;
+		}
+	}
+
+	void move_movement::stop_heading()
+	{
+		if (this->change_head != h_inactive)
+		{
+			// this->turn_head(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading());
+		}
+	}
+
+	float move_movement::sane_head(float heading)
+	{
+		if (heading >= heading_max)
+			heading -= heading_max;
+		if (heading < 0.0f)
+			heading += heading_max;
+		return heading;
+	}
+
+	void move_movement::do_root()
+	{
+		if (!p_move_active->rooted || g_game_state != GAMESTATE_IN_GAME)
+			return;
+		if (offset_override)
+		{
+			this->stop_root();
+			return;
+		}
+		this->change_head = h_inactive;
+		P_ENGINE_CLIENT_ANARCHY->get_client_char()->face(this->root_head);
+		// this->true_move_off(apply_to_all);
+	}
+
+	void move_movement::stop_root()
+	{
+		if (!p_move_active->rooted)
+			return;
+		p_move_active->rooted = false;
+		this->root_head = 0.0f;
+		char temp_out[MAX_VARSTRING] = { 0 };
+		sprintf_s(temp_out, sizeof(temp_out), "You are no longer rooted");
+		// TODO: WriteLine
+	}
+
 
 
 #pragma endregion

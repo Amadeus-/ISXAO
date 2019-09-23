@@ -337,11 +337,23 @@ namespace isxao
 	AOLIB_VAR DWORD chat_gui_module_c__handle_private_message;
 	AOLIB_VAR DWORD chat_gui_module_c__handle_system_message;
 	AOLIB_VAR DWORD chat_gui_module_c__handle_vicinity_message;
+	AOLIB_VAR DWORD chat_gui_module_c__s_pc_instance;
+	AOLIB_VAR ao::chat_gui_module** pp_chat_gui_module;
+#define P_CHAT_GUI_MODULE (*pp_chat_gui_module)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD chat_window_node_c__parse_text_command;
 
 	AOLIB_VAR DWORD command_interpreter_c__command_interpreter_c;
 	AOLIB_VAR DWORD command_interpreter_c__parse_text_command;
+	AOLIB_VAR DWORD command_interpreter_c__m_pc_instance;
+	AOLIB_VAR ao::command_interpreter** pp_command_interpreter;
+#define P_COMMAND_INTERPRETER (*pp_command_interpreter)  // NOLINT(cppcoreguidelines-macro-usage)
+
+
+	AOLIB_VAR DWORD command_list_t__command_list_t;
+	AOLIB_VAR DWORD command_list_t__m_pc_instance;
+	AOLIB_VAR ao::command_list_t* p_command_list;
+#define P_COMMAND_LIST (p_command_list)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD html_parser_c__html_parser_c_1;
 	AOLIB_VAR DWORD html_parser_c__html_parser_c_2;
@@ -373,13 +385,12 @@ namespace isxao
 	AOLIB_VAR DWORD targeting_module_t__set_target;
 	AOLIB_VAR DWORD targeting_module_t__set_target_pet;
 
-	AOLIB_VAR DWORD command_interpreter_c__m_pc_instance;
-	AOLIB_VAR ao::command_interpreter** pp_command_interpreter;
-#define P_COMMAND_INTERPRETER (*pp_command_interpreter)  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD window_controller_t__get_instance;
+	AOLIB_VAR DWORD window_controller_t__handle_key_down;
+	AOLIB_VAR DWORD window_controller_t__handle_key_up;
+	AOLIB_VAR DWORD window_controller_c__s_pc_instance;
 	
-	AOLIB_VAR DWORD  chat_gui_module_c__s_pc_instance;
-	AOLIB_VAR ao::chat_gui_module** pp_chat_gui_module;
-#define P_CHAT_GUI_MODULE (*pp_chat_gui_module)  // NOLINT(cppcoreguidelines-macro-usage)
+	
 
 #pragma endregion
 

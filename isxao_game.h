@@ -1942,6 +1942,17 @@ constexpr DWORD command_interpreter_c__parse_text_command_bytes_to_next = 0x0;
 
 #pragma endregion
 
+#pragma region command_list_t__command_list_t
+
+constexpr char* const command_list_t__command_list_t_mangled_name = static_cast<char*>(
+	"??0CommandList_t@@AAE@XZ");
+constexpr char* const command_list_t__command_list_t_pattern = static_cast<char*>(
+	"56 8B F1 89 35 ?? ?? ?? ??");
+constexpr DWORD command_list_t__command_list_t_offset = 0x0;
+constexpr DWORD command_list_t__command_list_t_bytes_to_next = 0x0;
+
+#pragma endregion
+
 #pragma region html_parser_c__html_parser_c_1
 
 const char* const html_parser_c__html_parser_c_1_mangled_name = static_cast<char*>(
@@ -2074,6 +2085,39 @@ constexpr DWORD targeting_module_t__targeting_module_t_bytes_to_next = 0x0;
 
 #pragma endregion
 
+#pragma region window_controller_t__get_instance
+
+const char* const window_controller_t__get_instance_mangled_name = static_cast<char*>(
+	"?GetInstance@WindowController_c@@SAPAV1@XZ");
+const char* const window_controller_t__get_instance_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 A1 ?? ?? ?? ?? 85 C0 75 ?? 68 98 01 00 00");
+constexpr DWORD window_controller_t__get_instance_offset = 0x0;
+constexpr DWORD window_controller_t__get_instance_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region window_controller_t__handle_key_down
+
+constexpr char* const window_controller_t__handle_key_down_mangled_name = static_cast<char*>(
+	"?HandleKeyDown@WindowController_c@@QAEXABI0@Z");
+constexpr char* const window_controller_t__handle_key_down_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 10 57 8B F9 33 D2");
+constexpr DWORD window_controller_t__handle_key_down_offset = 0x0;
+constexpr DWORD window_controller_t__handle_key_down_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region window_controller_t__handle_key_up
+
+constexpr char* const window_controller_t__handle_key_up_mangled_name = static_cast<char*>(
+	"?HandleKeyUp@WindowController_c@@QAEXABI0@Z");
+constexpr char* const window_controller_t__handle_key_up_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 10 56 8B F1 33 D2");
+constexpr DWORD window_controller_t__handle_key_up_offset = 0x0;
+constexpr DWORD window_controller_t__handle_key_up_bytes_to_next = 0x0;
+
+#pragma endregion
+
 // Instances
 
 #pragma region chat_gui_module_c__s_pc_instance
@@ -2088,6 +2132,14 @@ constexpr DWORD chat_gui_module_c__s_pc_instance_offset = 0x169;
 
 constexpr char* const command_interpreter_c__m_pc_instance_mangled_name = static_cast<char*>(nullptr);
 constexpr DWORD command_interpreter_c__m_pc_instance_offset = 0xC;
+
+#pragma endregion
+
+#pragma region command_list_t__m_pc_instance
+
+constexpr char* const command_list_t__m_pc_instance_mangled_name = static_cast<char*>(
+	"?m_pcInstance@CommandList_t@@0PAV1@A");
+constexpr DWORD command_list_t__m_pc_instance_offset = 0x4;
 
 #pragma endregion
 
@@ -2128,6 +2180,14 @@ constexpr DWORD targeting_module_t__m_pc_attacking_indicator_offset = 0x1F;
 constexpr char* const targeting_module_t__m_c_last_target_mangled_name = static_cast<char*>(
 	"?m_cLastTarget@TargetingModule_t@@0VIdentity_t@@A");
 constexpr DWORD targeting_module_t__m_c_last_target_offset = 0x25;
+
+#pragma endregion
+
+#pragma region window_controller_c__s_pc_instance
+
+constexpr char* const window_controller_c__s_pc_instance_mangled_name = static_cast<char*>(
+	"?s_pcInstance@WindowController_c@@0PAV1@A");
+constexpr DWORD window_controller_c__s_pc_instance_offset = 0xC;
 
 #pragma endregion
 

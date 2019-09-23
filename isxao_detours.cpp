@@ -752,6 +752,30 @@ namespace isxao
 
 #pragma endregion
 
+#pragma region WindowController
+
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::window_controller_c__handle_key_down__trampoline(const DWORD&, const DWORD&))
+
+	void ao_detours::window_controller_c__handle_key_down__detour(const DWORD& a, const DWORD& b)
+	{
+		char message[MAX_VARSTRING];
+		sprintf_s(message, sizeof(message), "[KEY DOWN] a = %d, b = %d", a, b);
+		gp_isxao_log->add_line(message);
+		window_controller_c__handle_key_down__trampoline(a, b);
+	}
+
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::window_controller_c__handle_key_up__trampoline(const DWORD&, const DWORD&))
+
+	void ao_detours::window_controller_c__handle_key_up__detour(const DWORD& a, const DWORD& b)
+	{
+		char message[MAX_VARSTRING];
+		sprintf_s(message, sizeof(message), "[KEY UP] a = %d, b = %d", a, b);
+		gp_isxao_log->add_line(message);
+		window_controller_c__handle_key_up__trampoline(a, b);
+	}
+
+#pragma endregion
+
 	void ao_detours::initialize()
 	{		
 #pragma region gamestate_service
@@ -794,6 +818,9 @@ namespace isxao
 		//EzDetour(ChatWindowNode_c__sub_1009BB79, &AODetours::ChatWindowNode_c__sub_1009BB79_Detour, &AODetours::ChatWindowNode_c__sub_1009BB79_Trampoline);
 
 		EzDetour(command_interpreter_c__parse_text_command, &ao_detours::CommandInterpreter_c__ParseTextCommand_Detour, &ao_detours::CommandInterpreter_c__ParseTextCommand_Trampoline);
+
+		EzDetour(window_controller_t__handle_key_down, &ao_detours::window_controller_c__handle_key_down__detour, &ao_detours::window_controller_c__handle_key_down__trampoline);
+		EzDetour(window_controller_t__handle_key_up, &ao_detours::window_controller_c__handle_key_up__detour, &ao_detours::window_controller_c__handle_key_up__trampoline);
 	}
 
 	void ao_detours::shutdown()
@@ -838,6 +865,9 @@ namespace isxao
 		//EzUnDetour(ChatWindowNode_c__sub_1009BB79);
 
 		EzUnDetour(command_interpreter_c__parse_text_command);
+
+		EzUnDetour(window_controller_t__handle_key_down);
+		EzUnDetour(window_controller_t__handle_key_up);
 	}
 	
 }

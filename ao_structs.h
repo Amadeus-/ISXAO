@@ -372,6 +372,8 @@ namespace ao
 	typedef ao_map<string, struct ao_chat_window_node*> chat_window_node_map_t, *p_chat_window_node_map_t;
 	typedef ao_map<DWORD, struct ao_playfield_anarchy*> playfield_dir_t, *p_playfield_dir_t;
 
+	typedef ao_map<DWORD, PVOID> command_map_t, *p_command_map_t;
+
 	typedef ao_map<identity_t, DWORD> perk_map_t, *p_perk_map_t;
 	typedef ao_map<identity_t, DWORD> pet_map_t, *p_pet_map_t;
 	typedef ao_map<stat_e, PCSTR> stat_name_map_t, *p_stat_name_map_t;
@@ -2829,8 +2831,29 @@ namespace ao
 
 #pragma endregion
 
+#pragma region WindowController
+
+	// Size = 0x198
+	typedef struct ao_window_controller
+	{
+		PVOID p_v_table_render_sprite_base_t;
+
+	} window_controller_t, *p_window_controller_t;
 
 
+#pragma endregion
+
+
+#pragma region CommandList
+
+	typedef struct ao_command_list
+	{
+		BYTE unknown0x00[0x4];
+		p_command_map_t p_command_map;
+		BYTE unknown0x08[0x4];
+	} command_list_t, *p_command_list_t;
+
+#pragma endregion
 
 
 }
