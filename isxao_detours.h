@@ -75,6 +75,15 @@ namespace isxao
 		void window_controller_c__handle_key_up__trampoline(const DWORD&, const DWORD&);
 		void window_controller_c__handle_key_up__detour(const DWORD&, const DWORD&);
 
+		void command_t__execute__trampoline(const ao::identity_t**, int, PVOID, ao::vector3_t*);
+		void command_t__execute__detour(const ao::identity_t**, int, PVOID, ao::vector3_t*);
+
+		bool input_config_t__process_input__trampoline(int, int);
+		bool input_config_t__process_input__detour(int, int);
+
+		void input_config_t__check_input__trampoline(PVOID);
+		void input_config_t__check_input__detour(PVOID);
+
 		static void initialize();
 		static void shutdown();
 	};

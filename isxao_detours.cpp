@@ -774,6 +774,37 @@ namespace isxao
 		window_controller_c__handle_key_up__trampoline(a, b);
 	}
 
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::command_t__execute__trampoline(const ao::identity_t**, int, PVOID, ao::vector3_t*))
+
+	void ao_detours::command_t__execute__detour(const ao::identity_t** pp_id, int i, PVOID p_void, ao::vector3_t* p_v3)
+	{
+		char message[MAX_VARSTRING];
+		sprintf_s(message, sizeof(message), "[Execute] p_id = %d, i = %d, p_void = 0x%.8X, p_v3 = 0x%.8X", pp_id, i, p_void, p_v3);
+		gp_isxao_log->add_line(message);
+		command_t__execute__trampoline(pp_id, i, p_void, p_v3);
+	}
+
+	DETOUR_TRAMPOLINE_EMPTY(bool ao_detours::input_config_t__process_input__trampoline(int, int))
+
+	bool ao_detours::input_config_t__process_input__detour(int a, int b)
+	{
+		char message[MAX_VARSTRING];
+		sprintf_s(message, sizeof(message), "[PROCESS INPUT] a = %d, b = %d", a, b);
+		gp_isxao_log->add_line(message);
+		return input_config_t__process_input__trampoline(a, b);
+	}
+
+	DETOUR_TRAMPOLINE_EMPTY(void ao_detours::input_config_t__check_input__trampoline(PVOID))
+
+	void ao_detours::input_config_t__check_input__detour(PVOID p_void)
+	{
+		char message[MAX_VARSTRING];
+		sprintf_s(message, sizeof(message), "[CHECK INPUT] p_void = %p", p_void);
+		gp_isxao_log->add_line(message);
+		input_config_t__check_input__trampoline(p_void);
+	}
+
+
 #pragma endregion
 
 	void ao_detours::initialize()
@@ -819,8 +850,11 @@ namespace isxao
 
 		EzDetour(command_interpreter_c__parse_text_command, &ao_detours::CommandInterpreter_c__ParseTextCommand_Detour, &ao_detours::CommandInterpreter_c__ParseTextCommand_Trampoline);
 
-		EzDetour(window_controller_t__handle_key_down, &ao_detours::window_controller_c__handle_key_down__detour, &ao_detours::window_controller_c__handle_key_down__trampoline);
-		EzDetour(window_controller_t__handle_key_up, &ao_detours::window_controller_c__handle_key_up__detour, &ao_detours::window_controller_c__handle_key_up__trampoline);
+		// EzDetour(window_controller_t__handle_key_down, &ao_detours::window_controller_c__handle_key_down__detour, &ao_detours::window_controller_c__handle_key_down__trampoline);
+		// EzDetour(window_controller_t__handle_key_up, &ao_detours::window_controller_c__handle_key_up__detour, &ao_detours::window_controller_c__handle_key_up__trampoline);
+		// EzDetour(command_t__execute_1, &ao_detours::command_t__execute__detour, &ao_detours::command_t__execute__trampoline);
+		// EzDetour(input_config_t__process_input, &ao_detours::input_config_t__process_input__detour, &ao_detours::input_config_t__process_input__trampoline);
+		EzDetour(input_config_t__check_input, &ao_detours::input_config_t__check_input__detour, &ao_detours::input_config_t__check_input__trampoline);
 	}
 
 	void ao_detours::shutdown()
@@ -866,8 +900,11 @@ namespace isxao
 
 		EzUnDetour(command_interpreter_c__parse_text_command);
 
-		EzUnDetour(window_controller_t__handle_key_down);
-		EzUnDetour(window_controller_t__handle_key_up);
+		// EzUnDetour(window_controller_t__handle_key_down);
+		// EzUnDetour(window_controller_t__handle_key_up);
+		// EzUnDetour(command_t__execute_1);
+		// EzUnDetour(input_config_t__process_input);
+		EzUnDetour(input_config_t__check_input);
 	}
 	
 }

@@ -339,6 +339,8 @@ namespace isxao
 
 	DWORD command_interpreter_c__command_interpreter_c = 0;
 
+	DWORD command_t__execute_1 = 0;
+	
 	DWORD command_list_t__command_list_t = 0;
 	DWORD command_list_t__m_pc_instance = 0;
 	ao::command_list_t* p_command_list = nullptr;
@@ -352,6 +354,8 @@ namespace isxao
 	ao::input_config** pp_input_config = nullptr;
 	DWORD input_config_t__get_instance = 0;
 	DWORD input_config_t__set_current_target = 0;
+	DWORD input_config_t__process_input = 0;
+	DWORD input_config_t__check_input = 0;
 
 	DWORD targeting_module_t__initialise_message = 0;
 	DWORD targeting_module_t__targeting_module_t = 0;
@@ -815,6 +819,7 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gui, chat_gui_module_c__handle_system_message)
 		RESOLVE_FUNCTION_ADDRESS(gui, chat_gui_module_c__handle_vicinity_message)
 		RESOLVE_FUNCTION_ADDRESS(gui, chat_window_node_c__parse_text_command)
+		RESOLVE_FUNCTION_ADDRESS(gui, command_t__execute_1)
 		RESOLVE_FUNCTION_ADDRESS(gui, command_interpreter_c__command_interpreter_c)
 		RESOLVE_FUNCTION_ADDRESS(gui, command_interpreter_c__parse_text_command)
 		RESOLVE_FUNCTION_ADDRESS(gui, command_list_t__command_list_t)
@@ -824,6 +829,8 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gui, html_parser_c__extract_text)
 		RESOLVE_FUNCTION_ADDRESS(gui, input_config_t__get_instance)
 		RESOLVE_FUNCTION_ADDRESS(gui, input_config_t__set_current_target)
+		RESOLVE_FUNCTION_ADDRESS(gui, input_config_t__process_input)
+		RESOLVE_FUNCTION_ADDRESS(gui, input_config_t__check_input)
 		RESOLVE_FUNCTION_ADDRESS(gui, targeting_module_t__initialise_message)
 		RESOLVE_FUNCTION_ADDRESS(gui, targeting_module_t__remove_target)
 		RESOLVE_FUNCTION_ADDRESS(gui, targeting_module_t__select_self)

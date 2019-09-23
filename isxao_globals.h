@@ -349,6 +349,7 @@ namespace isxao
 	AOLIB_VAR ao::command_interpreter** pp_command_interpreter;
 #define P_COMMAND_INTERPRETER (*pp_command_interpreter)  // NOLINT(cppcoreguidelines-macro-usage)
 
+	AOLIB_VAR DWORD command_t__execute_1;
 
 	AOLIB_VAR DWORD command_list_t__command_list_t;
 	AOLIB_VAR DWORD command_list_t__m_pc_instance;
@@ -365,6 +366,8 @@ namespace isxao
 #define P_INPUT_CONFIG (*pp_input_config)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD input_config_t__get_instance;
 	AOLIB_VAR DWORD input_config_t__set_current_target;
+	AOLIB_VAR DWORD input_config_t__process_input;
+	AOLIB_VAR DWORD input_config_t__check_input;
 
 	AOLIB_VAR DWORD targeting_module_t__m_pc_instance;
 	AOLIB_VAR ao::targeting_module** pp_targeting_module;

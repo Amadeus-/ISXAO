@@ -1287,6 +1287,24 @@ namespace ao
 
 #pragma endregion
 
+#pragma region Hotkey
+
+	typedef struct ao_hotkey
+	{
+		DWORD unknown_0x00;
+		DWORD unknown_0x04;
+		DWORD unknown_0x08;
+		DWORD unknown_0x0C;
+		DWORD unknown_0x10;
+		DWORD unknown_0x14;
+		DWORD unknown_0x18;
+		DWORD unknown_0x1C;
+		DWORD unknown_0x20;
+		DWORD unknown_0x24;
+	} hotkey_t, *p_hotkey_t;
+
+#pragma endregion
+
 #pragma region InputConfig
 
 	// Size = 0x1D0

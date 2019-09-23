@@ -1942,6 +1942,17 @@ constexpr DWORD command_interpreter_c__parse_text_command_bytes_to_next = 0x0;
 
 #pragma endregion
 
+#pragma region command_t__execute_1
+
+constexpr char* const command_t__execute_1_mangled_name = static_cast<char*>(
+	"?Execute@Command_t@@QBEXPAPBVIdentity_t@@HPAXPAVVector3_t@@@Z");
+constexpr char* const command_t__execute_1_pattern = static_cast<char*>(
+	"55 8B EC 51 8B C1 83 78 04 FF");
+constexpr DWORD command_t__execute_1_offset = 0x0;
+constexpr DWORD command_t__execute_1_bytes_to_next = 0x0;
+
+#pragma endregion
+
 #pragma region command_list_t__command_list_t
 
 constexpr char* const command_list_t__command_list_t_mangled_name = static_cast<char*>(
@@ -2016,6 +2027,28 @@ const char* const input_config_t__set_current_target_pattern = static_cast<char*
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 0C 56 57 8B 7D 08 8D B1 C0 00 00 00");
 constexpr DWORD input_config_t__set_current_target_offset = 0;
 constexpr DWORD input_config_t__set_current_target_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region input_config_t__check_input
+
+constexpr char* const input_config_t__check_input_mangled_name = static_cast<char*>(
+	"?CheckInput@InputConfig_t@@QAEXABVInputInfo_t@@@Z");
+constexpr char* const input_config_t__check_input_pattern = static_cast<char*>(
+	"55 8B EC 51 53 56 57 8B 7D 08 8B F1 8B 0F");
+constexpr DWORD input_config_t__check_input_offset = 0x0;
+constexpr DWORD input_config_t__check_input_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region input_config_t__process_input
+
+constexpr char* const input_config_t__process_input_mangled_name = static_cast<char*>(
+	"?ProcessInput@InputConfig_t@@QAE_NHW4RepeatMode_e@1@@Z");
+constexpr char* const input_config_t__process_input_pattern = static_cast<char*>(
+	"55 8B EC 83 EC 24 57");
+constexpr DWORD input_config_t__process_input_offset = 0x0;
+constexpr DWORD input_config_t__process_input_bytes_to_next = 0x0;
 
 #pragma endregion
 
