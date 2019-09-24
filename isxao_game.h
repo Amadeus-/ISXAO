@@ -32,6 +32,17 @@ constexpr DWORD n3_camera_t__set_selected_target_bytes_to_next = 0;
 
 #pragma endregion
 
+#pragma region n3_database_handler_t__initialize
+
+constexpr char* const n3_database_handler_t__initialize_mangled_name = static_cast<char*>(
+	"?Initialize@n3DatabaseHandler_t@@SAXXZ");
+constexpr char* const n3_database_handler_t__initialize_pattern = static_cast<char*>(
+	"83 3D ?? ?? ?? ?? 00 75 ?? 6A 0C");
+constexpr DWORD n3_database_handler_t__initialize_offset = 0x0;
+constexpr DWORD n3_database_handler_t__initialize_bytes_to_next = 0x0;
+
+#pragma endregion
+
 #pragma region n3_dynel_t__n3_dynel_t
 
 constexpr char* const n3_dynel_t__n3_dynel_t_mangled_name = static_cast<char*>(
@@ -151,6 +162,16 @@ constexpr DWORD n3_playfield_t__add_child_dynel_bytes_to_next = 0x0;
 
 #pragma endregion
 
+#pragma region n3_playfield_t__debug_draw_pathfinder
+
+constexpr char* const n3_playfield_t__debug_draw_pathfinder_mangled_name = static_cast<char*>(
+	"?DebugDrawPathFinder@n3Playfield_t@@AAEXXZ");
+constexpr char* const n3_playfield_t__debug_draw_pathfinder_pattern = static_cast<char*>(nullptr);
+constexpr DWORD n3_playfield_t__debug_draw_pathfinder_offset = 0x0;
+constexpr DWORD n3_playfield_t__debug_draw_pathfinder_bytes_to_next = 0x0;
+
+#pragma endregion
+
 #pragma region n3_playfield_t__get_playfield_1
 
 constexpr char* const n3_playfield_t__get_playfield_1_mangled_name = static_cast<char*>(
@@ -184,8 +205,6 @@ constexpr DWORD n3_playfield_t__get_playfield_3_bytes_to_next = 0x0;
 
 #pragma endregion
 
-
-
 #pragma region n3_playfield_t__line_of_sight
 
 constexpr char* const n3_playfield_t__line_of_sight_mangled_name = static_cast<char*>(
@@ -209,6 +228,14 @@ constexpr DWORD n3_playfield_t__remove_child_bytes_to_next = 0x0;
 #pragma endregion
 
 // Instances
+
+#pragma region n3_database_handler_t__s_pc_instance
+
+constexpr char* const n3_database_handler_t__s_pc_instance_mangled_name = static_cast<char*>(
+	"?s_pcInstance@n3DatabaseHandler_t@@0PAV1@A");
+constexpr DWORD n3_database_handler_t__s_pc_instance_offset = 0x1;
+
+#pragma endregion
 
 #pragma region n3_dynel_t__m_pc_dynel_dir_instance
 
@@ -1964,6 +1991,104 @@ constexpr DWORD command_list_t__command_list_t_bytes_to_next = 0x0;
 
 #pragma endregion
 
+#pragma region flow_control_module_t__get_instance
+
+constexpr char* const flow_control_module_t__get_instance_mangled_name = static_cast<char*>(
+	"?GetInstance@FlowControlModule_t@@SAPAV1@XZ");
+constexpr char* const flow_control_module_t__get_instance_pattern = static_cast<char*>(nullptr);
+constexpr DWORD flow_control_module_t__get_instance_offset = 0x0;
+constexpr DWORD flow_control_module_t__get_instance_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region flow_control_module_t__slot_movement_back
+
+constexpr char* const flow_control_module_t__slot_movement_back_mangled_name = static_cast<char*>(
+	"?SlotMovementBack@FlowControlModule_t@@AAEX_N@Z");
+constexpr char* const flow_control_module_t__slot_movement_back_pattern = static_cast<char*>(
+	"55 8B EC 51 56 8B 35 ?? ?? ?? ?? FF D6 8B C8 FF 15 ?? ?? ?? ?? 83 F8 08 75 ?? 68 E3 00 00 00 6A 0A FF 15 ?? ?? ?? ?? 8B C8 FF 15 ?? ?? ?? ?? D9 EE 8D 45 FC 50 D9 5D FC 33 C0 38 45 08 0F 95 C0 83 C0 03");
+constexpr DWORD flow_control_module_t__slot_movement_back_offset = 0x0;
+constexpr DWORD flow_control_module_t__slot_movement_back_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region flow_control_module_t__slot_movement_forward
+
+constexpr char* const flow_control_module_t__slot_movement_forward_mangled_name = static_cast<char*>(
+	"?SlotMovementForward@FlowControlModule_t@@AAEX_N@Z");
+constexpr char* const flow_control_module_t__slot_movement_forward_pattern = static_cast<char*>(
+	"55 8B EC 51 56 8B 35 ?? ?? ?? ?? FF D6 8B C8 FF 15 ?? ?? ?? ?? 83 F8 08 75 ?? 68 E3 00 00 00 6A 0A FF 15 ?? ?? ?? ?? 8B C8 FF 15 ?? ?? ?? ?? D9 EE 8D 45 FC 50 D9 5D FC 33 C0 38 45 08 0F 95 C0 40");
+constexpr DWORD flow_control_module_t__slot_movement_forward_offset = 0x0;
+constexpr DWORD flow_control_module_t__slot_movement_forward_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region flow_control_module_t__slot_movement_jump
+
+constexpr char* const flow_control_module_t__slot_movement_jump_mangled_name = static_cast<char*>(
+	"?SlotMovementJump@FlowControlModule_t@@AAEX_N@Z");
+constexpr char* const flow_control_module_t__slot_movement_jump_pattern = static_cast<char*>(
+	"55 8B EC 80 7D 08 00 75 ?? D9 EE");
+constexpr DWORD flow_control_module_t__slot_movement_jump_offset = 0x0;
+constexpr DWORD flow_control_module_t__slot_movement_jump_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region flow_control_module_t__slot_movement_left
+
+constexpr char* const flow_control_module_t__slot_movement_left_mangled_name = static_cast<char*>(
+	"?SlotMovementLeft@FlowControlModule_t@@AAEX_N@Z");
+constexpr char* const flow_control_module_t__slot_movement_left_pattern = static_cast<char*>(
+	"55 8B EC 51 D9 EE 8D 45 FC 50 D9 5D FC 33 C0 38 45 08 0F 95 C0 8D 44 00 0C");
+constexpr DWORD flow_control_module_t__slot_movement_left_offset = 0x0;
+constexpr DWORD flow_control_module_t__slot_movement_left_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region flow_control_module_t__slot_movement_right
+
+constexpr char* const flow_control_module_t__slot_movement_right_mangled_name = static_cast<char*>(
+	"?SlotMovementRight@FlowControlModule_t@@AAEX_N@Z");
+constexpr char* const flow_control_module_t__slot_movement_right_pattern = static_cast<char*>(
+	"55 8B EC 51 D9 EE 8D 45 FC 50 D9 5D FC 33 C0 38 45 08 0F 95 C0 8D 44 00 09");
+constexpr DWORD flow_control_module_t__slot_movement_right_offset = 0x0;
+constexpr DWORD flow_control_module_t__slot_movement_right_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region flow_control_module_t__slot_movement_strafe_left
+
+constexpr char* const flow_control_module_t__slot_movement_strafe_left_mangled_name = static_cast<char*>(
+	"?SlotMovementStrafeLeft@FlowControlModule_t@@AAEX_N@Z");
+constexpr char* const flow_control_module_t__slot_movement_strafe_left_pattern = static_cast<char*>(
+	"55 8B EC 51 56 8B 35 ?? ?? ?? ?? FF D6 8B C8 FF 15 ?? ?? ?? ?? 83 F8 08 75 ?? 68 E3 00 00 00 6A 0A FF 15 ?? ?? ?? ?? 8B C8 FF 15 ?? ?? ?? ?? D9 EE 8D 45 FC 50 D9 5D FC 33 C0 38 45 08 0F 95 C0 83 C0 07");
+constexpr DWORD flow_control_module_t__slot_movement_strafe_left_offset = 0x0;
+constexpr DWORD flow_control_module_t__slot_movement_strafe_left_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region flow_control_module_t__slot_movement_strafe_right
+
+constexpr char* const flow_control_module_t__slot_movement_strafe_right_mangled_name = static_cast<char*>(
+	"?SlotMovementStrafeRight@FlowControlModule_t@@AAEX_N@Z");
+constexpr char* const flow_control_module_t__slot_movement_strafe_right_pattern = static_cast<char*>(
+	"55 8B EC 51 56 8B 35 ?? ?? ?? ?? FF D6 8B C8 FF 15 ?? ?? ?? ?? 83 F8 08 75 ?? 68 E3 00 00 00 6A 0A FF 15 ?? ?? ?? ?? 8B C8 FF 15 ?? ?? ?? ?? D9 EE 8D 45 FC 50 D9 5D FC 33 C0 38 45 08 0F 95 C0 83 C0 05");
+constexpr DWORD flow_control_module_t__slot_movement_strafe_right_offset = 0x0;
+constexpr DWORD flow_control_module_t__slot_movement_strafe_right_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region flow_control_module_t__slot_walk_toggle
+
+constexpr char* const flow_control_module_t__slot_walk_toggle_mangled_name = static_cast<char*>(
+	"?SlotMovementWalkToggle@FlowControlModule_t@@AAEX_N@Z");
+constexpr char* const flow_control_module_t__slot_walk_toggle_pattern = static_cast<char*>(
+	"55 8B EC 80 7D 08 00 75 ?? 56 8B 35 ?? ?? ?? ?? FF D6");
+constexpr DWORD flow_control_module_t__slot_walk_toggle_offset = 0x0;
+constexpr DWORD flow_control_module_t__slot_walk_toggle_bytes_to_next = 0x0;
+
+#pragma endregion
+
 #pragma region html_parser_c__html_parser_c_1
 
 const char* const html_parser_c__html_parser_c_1_mangled_name = static_cast<char*>(
@@ -2176,11 +2301,19 @@ constexpr DWORD command_list_t__m_pc_instance_offset = 0x4;
 
 #pragma endregion
 
+#pragma region flow_control_module_t__m_pc_instance
+
+constexpr char* const flow_control_module_t__m_pc_instance_mangled_name = static_cast<char*>(
+	"?m_pcInstance@FlowControlModule_t@@0PAV1@A");
+constexpr DWORD flow_control_module_t__m_pc_instance_offset = 0xC;
+
+#pragma endregion
+
 #pragma region input_config_t__m_pc_instance
 
 constexpr char* const input_config_t__m_pc_instance_mangled_name = static_cast<char*>(
 	"?m_pcInstance@InputConfig_t@@0PAV1@A");
-constexpr DWORD input_config_t__m_pc_instance_offset = 0xB;
+constexpr DWORD input_config_t__m_pc_instance_offset = 0xC;
 
 #pragma endregion
 
@@ -2366,6 +2499,23 @@ constexpr char* const text_message_t__message_body_len_mangled_name = static_cas
 	"?MessageBodyLen@TextMessage_t@@UBEIXZ");
 constexpr char* const text_message_t__message_body_len_pattern = static_cast<char*>(
 	"8B 41 24 C3");
+
+#pragma endregion
+
+#pragma region DatabaseController
+
+constexpr char* database_controller_module_name = static_cast<char*>("DatabaseController.dll");
+
+#pragma region resource_database_t__get_db_object_1
+
+constexpr char* const resource_database_t__get_db_object_1_mangled_name = static_cast<char*>(
+	"?DeleteDbObject@ResourceDatabase_t@@UAEXABVIdentity_t@@@Z");
+constexpr char* const resource_database_t__get_db_object_1_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 51 53 56 8B F1 8B 5E 08");
+constexpr DWORD resource_database_t__get_db_object_1_offset = 0x0;
+constexpr DWORD resource_database_t__get_db_object_1_bytes_to_next = 0x0;
+
+#pragma endregion
 
 #pragma endregion
 

@@ -317,6 +317,9 @@
     <ClCompile Include="move.cpp">
       <Filter>Source Files\Base\Internal</Filter>
     </ClCompile>
+    <ClCompile Include="flow_control.cpp">
+      <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ISXAO.h">
@@ -585,6 +588,9 @@
     </ClInclude>
     <ClInclude Include="move.h">
       <Filter>Header Files\Base\Internal</Filter>
+    </ClInclude>
+    <ClInclude Include="flow_control.h">
+      <Filter>Header Files\Base\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

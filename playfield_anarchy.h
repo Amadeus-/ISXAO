@@ -4,6 +4,7 @@
 class playfield_anarchy
 {
 public:
+	void debug_draw_pathfinder();
 	LONG get_pf_world_x_pos() const;
 	LONG get_pf_world_z_pos() const;
 	DWORD get_playfield_actors(std::vector<ao::actor*> &v);

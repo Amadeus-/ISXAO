@@ -11,7 +11,6 @@ namespace isxao
 {
 
 #pragma region Modules
-
 	
 	HMODULE n3_module_handle = GetModuleHandle(n3_module_name);
 	MODULEINFO n3_module_info;
@@ -27,9 +26,8 @@ namespace isxao
 	MODULEINFO pathfinder_module_info;
 	HMODULE message_protocol_module_handle = GetModuleHandle(message_protocol_module_name);
 	MODULEINFO message_protocol_module_info;
-	DWORD hDatabaseController = DWORD(GetModuleHandle("DatabaseController.dll"));
-
-	
+	HMODULE database_controller_module_handle = GetModuleHandle(database_controller_module_name);
+	MODULEINFO database_controller_module_info;	
 
 #pragma endregion
 	
@@ -44,6 +42,13 @@ namespace isxao
 	// Functions
 	DWORD n3_camera_t__set_secondary_target = 0;
 	DWORD n3_camera_t__set_selected_target = 0;	
+
+	// Functions
+	DWORD n3_database_handler_t__initialize = 0;
+
+	// Instances
+	DWORD n3_database_handler_t__s_pc_instance = 0;
+	ao::database_handler** pp_database_handler = nullptr;
 
 	// Functions
 	DWORD n3_dynel_t__n3_dynel_t = 0;
@@ -72,6 +77,7 @@ namespace isxao
 
 	// Functions
 	DWORD n3_playfield_t__add_child_dynel = 0;
+	DWORD n3_playfield_t__debug_draw_pathfinder = 0;
 	DWORD n3_playfield_t__get_playfield_1 = 0;
 	DWORD n3_playfield_t__get_playfield_2 = 0;
 	DWORD n3_playfield_t__get_playfield_3 = 0;
@@ -345,6 +351,18 @@ namespace isxao
 	DWORD command_list_t__m_pc_instance = 0;
 	ao::command_list_t* p_command_list = nullptr;
 
+	DWORD flow_control_module_t__slot_movement_back = 0;
+	DWORD flow_control_module_t__slot_movement_forward = 0;
+	DWORD flow_control_module_t__slot_movement_jump = 0;
+	DWORD flow_control_module_t__slot_movement_left = 0;
+	DWORD flow_control_module_t__slot_movement_right = 0;
+	DWORD flow_control_module_t__slot_movement_strafe_left = 0;
+	DWORD flow_control_module_t__slot_movement_strafe_right = 0;
+	DWORD flow_control_module_t__slot_walk_toggle = 0;
+	DWORD flow_control_module_t__get_instance = 0;
+	DWORD flow_control_module_t__m_pc_instance = 0;
+	ao::flow_control** pp_flow_control = nullptr;
+
 	DWORD html_parser_c__html_parser_c_1 = 0;
 	DWORD html_parser_c__html_parser_c_2 = 0;
 	DWORD html_parser_c__d_html_parser_c = 0;	
@@ -427,6 +445,11 @@ namespace isxao
 
 #pragma endregion
 
+#pragma region DatabaseController
+
+	DWORD resource_database_t__get_db_object_1 = 0;
+
+#pragma endregion
 
 #pragma region vTable
 
@@ -529,19 +552,6 @@ namespace isxao
 
 #pragma endregion
 
-#pragma region ResourceDatabase
-
-	DWORD ResourceDatabase_t__GetDbObject_1 = 0;
-	DWORD ResourceDatabase_t__GetIdentityVec = 0;
-
-#pragma endregion
-
-#pragma region n3DatabaseController
-
-	DWORD n3DatabaseHandler_t__s_pcInstance = 0;
-	ao::database_handler** ppDatabaseHandler = nullptr;
-
-#pragma endregion
 
 	bool initialize_offsets()
 	{
@@ -575,6 +585,11 @@ namespace isxao
 			printf("Could not find handle to module \"MessageProtocol.dll\". Aborting offset initialization.");
 			return false;
 		}
+		if (!database_controller_module_handle)
+		{
+			printf("Could not find handle to module \"DatabaseController.dll\". Aborting offset initialization.");
+			return false;
+		}
 
 #pragma region Process
 
@@ -595,6 +610,7 @@ namespace isxao
 		// Functions
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_camera_t__set_secondary_target)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_camera_t__set_selected_target)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_database_handler_t__initialize)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_dynel_t__n3_dynel_t)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_dynel_t__d_n3_dynel_t)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_dynel_t__get_dynel)
@@ -604,6 +620,7 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_engine_t__n3_engine_t)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_engine_client_t__set_main_dynel)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__add_child_dynel)
+		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__debug_draw_pathfinder)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_1)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_2)
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_playfield_t__get_playfield_3)
@@ -614,6 +631,9 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(n3, n3_engine_client_t__get_client_control_dynel, n3_camera_t__set_selected_target)	// Depends on n3_camera_t__set_selected_target
 
 		// Instances
+		RESOLVE_STATIC_INSTANCE_ADDRESS(n3, n3_database_handler_t__s_pc_instance, n3_database_handler_t__initialize)
+		pp_database_handler = reinterpret_cast<ao::database_handler**>(n3_database_handler_t__s_pc_instance);		
+
 		RESOLVE_STATIC_INSTANCE_ADDRESS(n3, n3_dynel_t__m_pc_dynel_dir_instance, n3_dynel_t__get_dynel)
 		pp_dynel_dir = reinterpret_cast<ao::dynel_map_t**>(n3_dynel_t__m_pc_dynel_dir_instance);
 
@@ -823,6 +843,15 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gui, command_interpreter_c__command_interpreter_c)
 		RESOLVE_FUNCTION_ADDRESS(gui, command_interpreter_c__parse_text_command)
 		RESOLVE_FUNCTION_ADDRESS(gui, command_list_t__command_list_t)
+		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__get_instance)
+		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__slot_movement_back)
+		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__slot_movement_forward)
+		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__slot_movement_jump)
+		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__slot_movement_left)
+		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__slot_movement_right)
+		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__slot_movement_strafe_left)
+		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__slot_movement_strafe_right)
+		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__slot_walk_toggle)
 		RESOLVE_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_1)
 		RESOLVE_FUNCTION_ADDRESS(gui, html_parser_c__html_parser_c_2)
 		RESOLVE_FUNCTION_ADDRESS(gui, html_parser_c__d_html_parser_c)
@@ -842,14 +871,17 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gui, window_controller_t__handle_key_up)
 
 		// Instances
-		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, chat_gui_module_c__s_pc_instance, chat_gui_module_c__chat_gui_module_c)
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, chat_gui_module_c__s_pc_instance, chat_gui_module_c__chat_gui_module_c)	// Depends on chat_gui_module_c__chat_gui_module_c
 		pp_chat_gui_module = reinterpret_cast<ao::chat_gui_module**>(chat_gui_module_c__s_pc_instance);
 
-		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, command_interpreter_c__m_pc_instance, command_interpreter_c__command_interpreter_c)
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, command_interpreter_c__m_pc_instance, command_interpreter_c__command_interpreter_c)	// Depends on command_interpreter_c__command_interpreter_c
 		pp_command_interpreter = reinterpret_cast<ao::command_interpreter**>(command_interpreter_c__m_pc_instance);
 
 		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, command_list_t__m_pc_instance, command_list_t__command_list_t) // Depends on command_list_t__command_list_t
 		p_command_list = reinterpret_cast<ao::command_list_t*>(command_list_t__m_pc_instance);
+
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, flow_control_module_t__m_pc_instance, flow_control_module_t__get_instance)	// Depends on flow_control_module_t__get_instance
+		pp_flow_control = reinterpret_cast<ao::flow_control**>(flow_control_module_t__m_pc_instance);
 
 		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, input_config_t__m_pc_instance, input_config_t__get_instance)	// Depends on input_config_t__get_instance
 		pp_input_config = reinterpret_cast<ao::input_config**>(input_config_t__m_pc_instance);
@@ -1070,6 +1102,22 @@ namespace isxao
 #else
 		GET_PROC_ADDRESS(message_protocol, text_message_t__message_body_len)
 #endif
+
+#pragma endregion
+
+#pragma region DatabaseController
+
+		// Module
+		GetModuleInformation(process_handle, database_controller_module_handle, &database_controller_module_info, sizeof(database_controller_module_info));
+		// ReSharper disable once CppLocalVariableMayBeConst
+		auto database_controller_module_base = DWORD(database_controller_module_handle);
+		const auto database_controller_data_begin = reinterpret_cast<unsigned char*>(database_controller_module_base);
+		const auto database_controller_data_end = database_controller_data_begin + database_controller_module_info.SizeOfImage;
+		const std::vector<unsigned char> database_controller_data(database_controller_data_begin, database_controller_data_end);
+
+		// Function
+		RESOLVE_FUNCTION_ADDRESS(database_controller, resource_database_t__get_db_object_1)
+		
 
 #pragma endregion
 

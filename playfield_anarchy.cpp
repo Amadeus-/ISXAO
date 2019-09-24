@@ -3,6 +3,13 @@
 namespace ao
 {
 
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(void playfield_anarchy::debug_draw_pathfinder(), n3_playfield_t__debug_draw_pathfinder)
+#else
+	static_assert(false, "playfield_anarchy::debug_draw_pathfinder() requires a native function.");
+#endif
+
 	LONG playfield_anarchy::get_pf_world_x_pos() const
 	{
 		return playfield_anarchy_.pf_world_x_pos;

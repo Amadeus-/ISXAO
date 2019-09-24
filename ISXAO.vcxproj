@@ -129,6 +129,7 @@
     <ClCompile Include="command_interpreter.cpp" />
     <ClCompile Include="database_handler.cpp" />
     <ClCompile Include="door.cpp" />
+    <ClCompile Include="flow_control.cpp" />
     <ClCompile Include="graph_path_finder.cpp" />
     <ClCompile Include="html_parser.cpp" />
     <ClCompile Include="input_config.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="command_interpreter.h" />
     <ClInclude Include="database_handler.h" />
     <ClInclude Include="door.h" />
+    <ClInclude Include="flow_control.h" />
     <ClInclude Include="html_parser.h" />
     <ClInclude Include="info_item_remote.h" />
     <ClInclude Include="input_config.h" />

@@ -27,6 +27,8 @@ namespace isxao
 	AOLIB_VAR MODULEINFO pathfinder_module_info;
 	AOLIB_VAR HMODULE message_protocol_module_handle;
 	AOLIB_VAR MODULEINFO message_protocol_module_info;
+	AOLIB_VAR HMODULE database_controller_module_handle;
+	AOLIB_VAR MODULEINFO database_controller_module_info;
 
 #pragma endregion
 
@@ -35,6 +37,14 @@ namespace isxao
 	// Functions
 	AOLIB_VAR DWORD n3_camera_t__set_secondary_target;
 	AOLIB_VAR DWORD n3_camera_t__set_selected_target;	
+
+	//Functions	
+	AOLIB_VAR DWORD n3_database_handler_t__initialize;
+
+	// Instances
+	AOLIB_VAR DWORD n3_database_handler_t__s_pc_instance;
+	AOLIB_VAR ao::database_handler** pp_database_handler;
+#define P_DATABASE_HANDLER (*pp_database_handler)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	// Functions
 	AOLIB_VAR DWORD n3_dynel_t__n3_dynel_t;
@@ -64,6 +74,7 @@ namespace isxao
 
 	// Functions
 	AOLIB_VAR DWORD n3_playfield_t__add_child_dynel;
+	AOLIB_VAR DWORD n3_playfield_t__debug_draw_pathfinder;
 	AOLIB_VAR DWORD n3_playfield_t__get_playfield_1;
 	AOLIB_VAR DWORD n3_playfield_t__get_playfield_2;
 	AOLIB_VAR DWORD n3_playfield_t__get_playfield_3;
@@ -74,6 +85,7 @@ namespace isxao
 	AOLIB_VAR DWORD n3_playfield_t__m_pc_playfield_dir_instance;
 	AOLIB_VAR ao::playfield_dir** pp_playfield_dir;
 #define P_PLAYFIELD_DIR (*pp_playfield_dir)  // NOLINT(cppcoreguidelines-macro-usage)
+	
 
 #pragma endregion
 
@@ -356,6 +368,19 @@ namespace isxao
 	AOLIB_VAR ao::command_list_t* p_command_list;
 #define P_COMMAND_LIST (p_command_list)  // NOLINT(cppcoreguidelines-macro-usage)
 
+	AOLIB_VAR DWORD flow_control_module_t__slot_movement_back;
+	AOLIB_VAR DWORD flow_control_module_t__slot_movement_forward;
+	AOLIB_VAR DWORD flow_control_module_t__slot_movement_jump;
+	AOLIB_VAR DWORD flow_control_module_t__slot_movement_left;
+	AOLIB_VAR DWORD flow_control_module_t__slot_movement_right;
+	AOLIB_VAR DWORD flow_control_module_t__slot_movement_strafe_left;
+	AOLIB_VAR DWORD flow_control_module_t__slot_movement_strafe_right;
+	AOLIB_VAR DWORD flow_control_module_t__slot_walk_toggle;
+	AOLIB_VAR DWORD flow_control_module_t__get_instance;
+	AOLIB_VAR DWORD flow_control_module_t__m_pc_instance;
+	AOLIB_VAR ao::flow_control** pp_flow_control;
+#define P_FLOW_CONTROL (*pp_flow_control)  // NOLINT(cppcoreguidelines-macro-usage)
+
 	AOLIB_VAR DWORD html_parser_c__html_parser_c_1;
 	AOLIB_VAR DWORD html_parser_c__html_parser_c_2;
 	AOLIB_VAR DWORD html_parser_c__d_html_parser_c;	
@@ -445,7 +470,13 @@ namespace isxao
 	AOLIB_VAR DWORD text_message_t__message_body_len;
 
 #pragma endregion
-	
+
+#pragma region DatabaseController
+
+	AOLIB_VAR DWORD resource_database_t__get_db_object_1;
+
+#pragma endregion
+
 #pragma region vTables
 
 	AOLIB_VAR DWORD AccessCard_t__vTable;
@@ -542,20 +573,6 @@ namespace isxao
 
 #pragma endregion
 
-#pragma region ResourceDatabase
-
-	AOLIB_VAR DWORD ResourceDatabase_t__GetDbObject_1;
-	AOLIB_VAR DWORD ResourceDatabase_t__GetIdentityVec;
-
-#pragma endregion
-
-#pragma region n3DatabaseHandler
-
-	AOLIB_VAR DWORD n3DatabaseHandler_t__s_pcInstance;
-	AOLIB_VAR ao::database_handler** ppDatabaseHandler;
-#define pDatabaseHandler (*ppDatabaseHandler)
-
-#pragma endregion
 
 	bool initialize_offsets();
 	bool get_function_address(const std::vector<unsigned char>& data, const char* function_pattern, DWORD& module_base_address, DWORD& function_address, const char* function_offset_name);

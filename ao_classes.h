@@ -112,4 +112,6 @@ namespace ao {
 
 #include "graph_path_finder.h"
 
+#include "flow_control.h"
+
 }

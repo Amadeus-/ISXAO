@@ -4,11 +4,8 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	std::map<DWORD, PVOID> m;
-	P_COMMAND_LIST->p_command_map->copy_map(m);
-	for (auto it = m.begin(); it != m.end(); ++it)
-		printf("%d : 0x%.8X", it->first, it->second);
-	// printf("%" PRIX32, P_COMMAND_LIST->p_command_map->count);
+	P_FLOW_CONTROL->slot_walk_toggle(false);
+	// printf("%" PRIX32, P_FLOW_CONTROL);
 	return 0;
 }
 
