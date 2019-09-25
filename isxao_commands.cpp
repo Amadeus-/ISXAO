@@ -526,13 +526,13 @@ namespace isxao_commands
 				}
 			}
 			string s;
-			string ao_message;
 			int i;
 			if (chat_type_used)
 				i = 3;
 			else
 				i = 1;
-			for (i; i < argc; i++)
+			// ReSharper disable once CppExpressionWithoutSideEffects
+			for (i ; i < argc; i++)
 			{
 				if (i == argc - 1)
 				{
@@ -543,7 +543,7 @@ namespace isxao_commands
 					s += string(argv[i]) + ' ';
 				}
 			}
-			ao_message = "<font color=\"" + string(chat_color_name) + "\">" + s + "</font>";
+			auto ao_message = "<font color=\"" + string(chat_color_name) + "\">" + s + "</font>";
 			P_COMMAND_INTERPRETER->parse_text(ao_message);
 			return 1;
 		}
@@ -629,26 +629,28 @@ namespace isxao_commands
 				strcpy_s(search_name, sizeof(search_name), argv[(0 + begin_inclusive)]);
 				_strlwr_s(search_name);
 				std::vector<DWORD> v;
-				P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_spell_template_data()->get_nano_spell_list(v);
-				for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+				if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_spell_template_data()->get_nano_spell_list(v))
 				{
-					const ao::identity_t i(53019, *it);
-					const ao::identity_t d(0, 0);
-					auto p_nano_spell = reinterpret_cast<ao::nano_item*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d));
-					strcpy_s(name, sizeof(name), p_nano_spell->get_name());
-					_strlwr_s(name);
-					if (strstr(name, search_name))
+					for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 					{
-						p_nano_spell->cast();
-						return 1;
-					}						
-				}
+						const ao::identity_t i(53019, *it);
+						const ao::identity_t d(0, 0);
+						auto p_nano_spell = reinterpret_cast<ao::nano_item*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d));
+						strcpy_s(name, sizeof(name), p_nano_spell->get_name());
+						_strlwr_s(name);
+						if (strstr(name, search_name))
+						{
+							p_nano_spell->cast();
+							return 1;
+						}
+					}
+				}				
 				return 0;
 			}
 			if(argc >= (2 + begin_inclusive) && IsNumber(argv[(0 + begin_inclusive)]) && IsNumber(argv[(1 + begin_inclusive)])) // nano_id, target_id
 			{
 				const DWORD nano_id = atoi(argv[(0 + begin_inclusive)]);  // NOLINT(cert-err34-c)
-				ao::identity_t i(53019, nano_id);
+				const ao::identity_t i(53019, nano_id);
 				const ao::identity_t d(0, 0);
 				const auto target_id = atoui64(argv[(1 + begin_inclusive)]);
 				const auto t = ao::identity_t::get_identity_from_combined(target_id);
@@ -662,11 +664,11 @@ namespace isxao_commands
 				return 0;
 			}
 			if(argc >= (2 + begin_inclusive) && IsNumber(argv[(0 + begin_inclusive)]) && !IsNumber(argv[(1 + begin_inclusive)])) // nano_id, target_name
-			{				
-				DWORD nano_id = atoi(argv[(0 + begin_inclusive)]);  // NOLINT(cert-err34-c)
-				ao::identity_t i(53019, nano_id);
-				ao::identity_t d(0, 0);
-				auto p_nano_item = reinterpret_cast<ao::nano_item*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d));
+			{
+				const DWORD nano_id = atoi(argv[(0 + begin_inclusive)]);  // NOLINT(cert-err34-c)
+				const ao::identity_t i(53019, nano_id);
+				const ao::identity_t d(0, 0);
+				const auto p_nano_item = reinterpret_cast<ao::nano_item*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d));
 				auto valid_target = false;
 				char second_arg[MAX_VARSTRING];
 				strcpy_s(second_arg, sizeof(second_arg), argv[(1 + begin_inclusive)]);
@@ -679,7 +681,7 @@ namespace isxao_commands
 				}
 				else
 				{
-					std::string name(argv[(1 + begin_inclusive)]);
+					const std::string name(argv[(1 + begin_inclusive)]);
 					valid_target = P_ENGINE_CLIENT_ANARCHY->n3_msg_name_to_id(name, t);
 				}
 				if (p_nano_item && valid_target)
@@ -692,30 +694,32 @@ namespace isxao_commands
 			if (argc >= (2 + begin_inclusive) && !IsNumber(argv[(0 + begin_inclusive)]) && IsNumber(argv[(1 + begin_inclusive)])) // nano_name, target_id
 			{
 				ao::identity_t i(53019, 0);
-				ao::identity_t d(0, 0);
+				const ao::identity_t d(0, 0);
 				char name[MAX_VARSTRING];
 				char search_name[MAX_VARSTRING];
 				strcpy_s(search_name, sizeof(search_name), argv[(0 + begin_inclusive)]);
 				_strlwr_s(search_name);
 				std::vector<DWORD> v;
-				P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_spell_template_data()->get_nano_spell_list(v);
-				for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+				if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_spell_template_data()->get_nano_spell_list(v))
 				{
-					i.id = *it;
-					auto p_nano_spell = reinterpret_cast<ao::nano_item*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d));
-					strcpy_s(name, sizeof(name), p_nano_spell->get_name());
-					_strlwr_s(name);
-					if (strstr(name, search_name))
+					for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 					{
-						i = p_nano_spell->get_nano_identity();
-						break;
+						i.id = *it;
+						auto p_nano_spell = reinterpret_cast<ao::nano_item*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d));
+						strcpy_s(name, sizeof(name), p_nano_spell->get_name());
+						_strlwr_s(name);
+						if (strstr(name, search_name))
+						{
+							i = p_nano_spell->get_nano_identity();
+							break;
+						}
 					}
-				}
+				}				
 				if (i.id == 0)
 					return 0;
-				auto target_id = atoui64(argv[(1 + begin_inclusive)]);
-				auto t = ao::identity_t::get_identity_from_combined(target_id);
-				auto p_target = ao::dynel::get_dynel(t);
+				const auto target_id = atoui64(argv[(1 + begin_inclusive)]);
+				const auto t = ao::identity_t::get_identity_from_combined(target_id);
+				const auto p_target = ao::dynel::get_dynel(t);
 				if (!p_target)
 					return 0;
 				P_ENGINE_CLIENT_ANARCHY->n3_msg_cast_nano_spell(i, t);
@@ -724,25 +728,27 @@ namespace isxao_commands
 			if (argc >= (2 + begin_inclusive) && !IsNumber(argv[(0 + begin_inclusive)]) && !IsNumber(argv[(1 + begin_inclusive)])) // nano_name, target_name
 			{
 				ao::identity_t i(53019, 0);
-				ao::identity_t d(0, 0);
+				const ao::identity_t d(0, 0);
 				char name[MAX_VARSTRING];
 				char search_name[MAX_VARSTRING];
 				strcpy_s(search_name, sizeof(search_name), argv[(0 + begin_inclusive)]);
 				_strlwr_s(search_name);
 				std::vector<DWORD> v;
-				P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_spell_template_data()->get_nano_spell_list(v);
-				for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+				if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_spell_template_data()->get_nano_spell_list(v))
 				{
-					i.id = *it;
-					auto p_nano_spell = reinterpret_cast<ao::nano_item*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d));
-					strcpy_s(name, sizeof(name), p_nano_spell->get_name());
-					_strlwr_s(name);
-					if (strstr(name, search_name))
+					for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 					{
-						i = p_nano_spell->get_nano_identity();
-						break;
+						i.id = *it;
+						auto p_nano_spell = reinterpret_cast<ao::nano_item*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d));
+						strcpy_s(name, sizeof(name), p_nano_spell->get_name());
+						_strlwr_s(name);
+						if (strstr(name, search_name))
+						{
+							i = p_nano_spell->get_nano_identity();
+							break;
+						}
 					}
-				}
+				}				
 				if (i.id == 0)
 					return 0;
 				auto valid_target = false;
@@ -757,7 +763,7 @@ namespace isxao_commands
 				}
 				else
 				{
-					std::string target_name(argv[(0 + begin_inclusive)]);
+					const std::string target_name(argv[(0 + begin_inclusive)]);
 					valid_target = P_ENGINE_CLIENT_ANARCHY->n3_msg_name_to_id(target_name, t);
 				}
 				if (valid_target)
@@ -773,191 +779,197 @@ namespace isxao_commands
 
 	DWORD DoAction(int argc, char* argv[])
 	{
-		//if(argc >= 2)
-		//{
-		//	if (argc == 2) // Only one argument provided
-		//	{
-		//		if(IsNumber(argv[1])) // ActionId 
-		//		{
-		//			identity_t action_identity;
-		//			action_identity.Type = 57008;
-		//			action_identity.Id = atoi(argv[1]);
-		//			P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(action_identity);
-		//			return 1;
-		//		}
-		//		char name[MAX_VARSTRING]; // ActionName
-		//		char search_name[MAX_VARSTRING];
-		//		strcpy_s(search_name, sizeof(search_name), argv[1]);
-		//		_strlwr_s(search_name);
-		//		std::vector<SpecialActionTemplate*> v;
-		//		P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
-		//		identity_t dummy_identity;
-		//		for (auto it = v.begin(); it != v.end(); ++it)
-		//		{
-		//			PCSTR action_name = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
-		//			strcpy_s(name, sizeof(name), action_name);
-		//			_strlwr_s(name);
-		//			if(strstr(name, search_name))
-		//			{
-		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction((*it)->GetIdentity());
-		//				return 1;
-		//			}
-		//		}
-		//		return 0;
-		//	}
-		//	if (argc > 2) // At least two arguments provided
-		//	{
-		//		if(IsNumber(argv[1]) && IsNumber(argv[2])) // ActionId, TargetId
-		//		{
-		//			identity_t action_identity;
-		//			action_identity.Type = 57008;
-		//			action_identity.Id = atoi(argv[1]);
-		//			DWORD64 comb_target_identity = atoui64(argv[2]);
-		//			identity_t target_identity = identity_t::get_identity_from_combined(comb_target_identity);
-		//			dynel* pDynel = isxao_utilities::GetDynel(target_identity);
-		//			if(pDynel)
-		//			{
-		//				bool has_current_target = pSelectionIndicator != nullptr;
-		//				bool current_target_is_desired_target = (pSelectionIndicator != nullptr) && (pSelectionIndicator->Identity == target_identity);
-		//				if(!current_target_is_desired_target)
-		//				{
-		//					if(has_current_target)
-		//						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Stores the old target's identity in pLastTarget
-		//					pTargetingModule->SetTarget(target_identity, false);
-		//				}
-		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(action_identity);
-		//				if(!current_target_is_desired_target)
-		//				{
-		//					if (has_current_target)
-		//						pTargetingModule->SetTarget(*pLastTarget, false);
-		//				}
-		//				return 1;
-		//			}
-		//			return 0;
-		//		}
-		//		if(IsNumber(argv[1]) && !IsNumber(argv[2])) // ActionId, TargetName
-		//		{
-		//			identity_t action_identity;
-		//			action_identity.Type = 57008;
-		//			action_identity.Id = atoi(argv[1]);
-		//			identity_t target_identity;
-		//			string target_name(argv[2]);
-		//			bool valid_target = P_ENGINE_CLIENT_ANARCHY->N3Msg_NameToID(target_name, target_identity);
-		//			if(valid_target)
-		//			{
-		//				bool has_current_target = pSelectionIndicator != nullptr;
-		//				bool current_target_is_desired_target = (pSelectionIndicator != nullptr) && (pSelectionIndicator->Identity == target_identity);
-		//				if (!current_target_is_desired_target)
-		//				{
-		//					if (has_current_target)
-		//						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Stores the old target's identity in pLastTarget
-		//					pTargetingModule->SetTarget(target_identity, false);
-		//				}
-		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(action_identity);
-		//				if (!current_target_is_desired_target)
-		//				{
-		//					if (has_current_target)
-		//						pTargetingModule->SetTarget(*pLastTarget, false);
-		//				}
-		//				return 1;
-		//			}
-		//			return 0;
-		//		}
-		//		if(!IsNumber(argv[1]) && IsNumber(argv[2])) // ActionName, TargetId
-		//		{
-		//			char name[MAX_VARSTRING]; // ActionName
-		//			char search_name[MAX_VARSTRING];
-		//			strcpy_s(search_name, sizeof(search_name), argv[1]);
-		//			_strlwr_s(search_name);
-		//			std::vector<SpecialActionTemplate*> v;
-		//			P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
-		//			identity_t dummy_identity;
-		//			identity_t action_identity;
-		//			bool valid_action = false;
-		//			for (auto it = v.begin(); it != v.end(); ++it)
-		//			{
-		//				PCSTR action_name = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
-		//				strcpy_s(name, sizeof(name), action_name);
-		//				_strlwr_s(name);
-		//				if (strstr(name, search_name))
-		//				{
-		//					action_identity = (*it)->GetIdentity();
-		//					valid_action = true;
-		//					break;
-		//				}
-		//			}
-		//			DWORD64 comb_target_identity = atoui64(argv[2]);
-		//			identity_t target_identity = identity_t::get_identity_from_combined(comb_target_identity);
-		//			dynel* pDynel = isxao_utilities::GetDynel(target_identity);
-		//			if(valid_action && pDynel)
-		//			{
-		//				bool has_current_target = pSelectionIndicator != nullptr;
-		//				bool current_target_is_desired_target = (pSelectionIndicator != nullptr) && (pSelectionIndicator->Identity == target_identity);
-		//				if (!current_target_is_desired_target)
-		//				{
-		//					if (has_current_target)
-		//						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Stores the old target's identity in pLastTarget
-		//					pTargetingModule->SetTarget(target_identity, false);
-		//				}
-		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(action_identity);
-		//				if (!current_target_is_desired_target)
-		//				{
-		//					if (has_current_target)
-		//						pTargetingModule->SetTarget(*pLastTarget, false);
-		//				}
-		//				return 1;
-		//			}
-		//			return 0;
-		//		}
-		//		if (!IsNumber(argv[1]) && !IsNumber(argv[2])) // ActionName, TargetName
-		//		{
-		//			char name[MAX_VARSTRING]; // ActionName
-		//			char search_name[MAX_VARSTRING];
-		//			strcpy_s(search_name, sizeof(search_name), argv[1]);
-		//			_strlwr_s(search_name);
-		//			std::vector<SpecialActionTemplate*> v;
-		//			P_ENGINE_CLIENT_ANARCHY->GetClientChar()->GetSpecialActionHolder()->GetSpecialActions(v);
-		//			identity_t dummy_identity;
-		//			identity_t action_identity;
-		//			bool valid_action = false;
-		//			for (auto it = v.begin(); it != v.end(); ++it)
-		//			{
-		//				PCSTR action_name = P_ENGINE_CLIENT_ANARCHY->N3Msg_GetName((*it)->GetIdentity(), dummy_identity);
-		//				strcpy_s(name, sizeof(name), action_name);
-		//				_strlwr_s(name);
-		//				if (strstr(name, search_name))
-		//				{
-		//					action_identity = (*it)->GetIdentity();
-		//					valid_action = true;
-		//					break;
-		//				}
-		//			}
-		//			identity_t target_identity;
-		//			string target_name(argv[2]);
-		//			bool valid_target = P_ENGINE_CLIENT_ANARCHY->N3Msg_NameToID(target_name, target_identity);
-		//			if(valid_action && valid_target)
-		//			{
-		//				bool has_current_target = pSelectionIndicator != nullptr;
-		//				bool current_target_is_desired_target = (pSelectionIndicator != nullptr) && (pSelectionIndicator->Identity == target_identity);
-		//				if (!current_target_is_desired_target)
-		//				{
-		//					if (has_current_target)
-		//						pTargetingModule->RemoveTarget(pSelectionIndicator->Identity); // Stores the old target's identity in pLastTarget
-		//					pTargetingModule->SetTarget(target_identity, false);
-		//				}
-		//				P_ENGINE_CLIENT_ANARCHY->N3Msg_PerformSpecialAction(action_identity);
-		//				if (!current_target_is_desired_target)
-		//				{
-		//					if (has_current_target)
-		//						pTargetingModule->SetTarget(*pLastTarget, false);
-		//				}
-		//				return 1;
-		//			}
-		//			return 0;
-		//		}
-		//	}
-		//	return 0;
-		//}
+		if(argc >= 2)
+		{
+			if (argc == 2) // Only one argument provided
+			{
+				if(IsNumber(argv[1])) // ActionId 
+				{
+					ao::identity_t action_identity;
+					action_identity.type = 57008;
+					action_identity.id = atoi(argv[1]);  // NOLINT(cert-err34-c)
+					P_ENGINE_CLIENT_ANARCHY->n3_msg_perform_special_action(action_identity);
+					return 1;
+				}
+				char name[MAX_VARSTRING]; // ActionName
+				char search_name[MAX_VARSTRING];
+				strcpy_s(search_name, sizeof(search_name), argv[1]);
+				_strlwr_s(search_name);
+				std::vector<ao::special_action_template*> v;
+				if(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_special_action_holder()->get_special_actions(v))
+				{
+					const ao::identity_t dummy_identity;
+					for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+					{
+						const auto action_name = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name((*it)->get_identity(), dummy_identity);
+						strcpy_s(name, sizeof(name), action_name);
+						_strlwr_s(name);
+						if (strstr(name, search_name))
+						{
+							P_ENGINE_CLIENT_ANARCHY->n3_msg_perform_special_action((*it)->get_identity());
+							return 1;
+						}
+					}
+				}				
+				return 0;
+			}
+			if (argc > 2) // At least two arguments provided
+			{
+				if(IsNumber(argv[1]) && IsNumber(argv[2])) // ActionId, TargetId
+				{
+					ao::identity_t action_identity;
+					action_identity.type = 57008;
+					action_identity.id = atoi(argv[1]);  // NOLINT(cert-err34-c)
+					const auto comb_target_identity = atoui64(argv[2]);
+					const auto target_identity = ao::identity_t::get_identity_from_combined(comb_target_identity);
+					const auto p_dynel = ao::dynel::get_dynel(target_identity);
+					if(p_dynel)
+					{
+						const auto has_current_target = P_SELECTION_INDICATOR != nullptr;
+						const auto current_target_is_desired_target = (P_SELECTION_INDICATOR != nullptr) && (P_SELECTION_INDICATOR->identity == target_identity);
+						if(!current_target_is_desired_target)
+						{
+							if(has_current_target)
+								P_TARGETING_MODULE->remove_target(P_SELECTION_INDICATOR->identity); // Stores the old target's identity in pLastTarget
+							P_TARGETING_MODULE->set_target(target_identity, false);
+						}
+						P_ENGINE_CLIENT_ANARCHY->n3_msg_perform_special_action(action_identity);
+						if(!current_target_is_desired_target)
+						{
+							if (has_current_target)
+								P_TARGETING_MODULE->set_target(*P_LAST_TARGET, false);
+						}
+						return 1;
+					}
+					return 0;
+				}
+				if(IsNumber(argv[1]) && !IsNumber(argv[2])) // ActionId, TargetName
+				{
+					ao::identity_t action_identity;
+					action_identity.type = 57008;
+					action_identity.id = atoi(argv[1]);  // NOLINT(cert-err34-c)
+					ao::identity_t target_identity;
+					const string target_name(argv[2]);
+					const auto valid_target = P_ENGINE_CLIENT_ANARCHY->n3_msg_name_to_id(target_name, target_identity);
+					if(valid_target)
+					{
+						const auto has_current_target = P_SELECTION_INDICATOR != nullptr;
+						const auto current_target_is_desired_target = (P_SELECTION_INDICATOR != nullptr) && (P_SELECTION_INDICATOR->identity == target_identity);
+						if (!current_target_is_desired_target)
+						{
+							if (has_current_target)
+								P_TARGETING_MODULE->remove_target(P_SELECTION_INDICATOR->identity); // Stores the old target's identity in pLastTarget
+							P_TARGETING_MODULE->set_target(target_identity, false);
+						}
+						P_ENGINE_CLIENT_ANARCHY->n3_msg_perform_special_action(action_identity);
+						if (!current_target_is_desired_target)
+						{
+							if (has_current_target)
+								P_TARGETING_MODULE->set_target(*P_LAST_TARGET, false);
+						}
+						return 1;
+					}
+					return 0;
+				}
+				if(!IsNumber(argv[1]) && IsNumber(argv[2])) // ActionName, TargetId
+				{
+					char name[MAX_VARSTRING]; // ActionName
+					char search_name[MAX_VARSTRING];
+					strcpy_s(search_name, sizeof(search_name), argv[1]);
+					_strlwr_s(search_name);
+					std::vector<ao::special_action_template*> v;
+					if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_special_action_holder()->get_special_actions(v))
+					{
+						const ao::identity_t dummy_identity;
+						ao::identity_t action_identity;
+						auto valid_action = false;
+						for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+						{
+							const auto action_name = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name((*it)->get_identity(), dummy_identity);
+							strcpy_s(name, sizeof(name), action_name);
+							_strlwr_s(name);
+							if (strstr(name, search_name))
+							{
+								action_identity = (*it)->get_identity();
+								valid_action = true;
+								break;
+							}
+						}
+						const auto comb_target_identity = atoui64(argv[2]);
+						const auto target_identity = ao::identity_t::get_identity_from_combined(comb_target_identity);
+						const auto p_dynel = ao::dynel::get_dynel(target_identity);
+						if (valid_action && p_dynel)
+						{
+							const auto has_current_target = P_SELECTION_INDICATOR != nullptr;
+							const auto current_target_is_desired_target = (P_SELECTION_INDICATOR != nullptr) && (P_SELECTION_INDICATOR->identity == target_identity);
+							if (!current_target_is_desired_target)
+							{
+								if (has_current_target)
+									P_TARGETING_MODULE->remove_target(P_SELECTION_INDICATOR->identity); // Stores the old target's identity in pLastTarget
+								P_TARGETING_MODULE->set_target(target_identity, false);
+							}
+							P_ENGINE_CLIENT_ANARCHY->n3_msg_perform_special_action(action_identity);
+							if (!current_target_is_desired_target)
+							{
+								if (has_current_target)
+									P_TARGETING_MODULE->set_target(*P_LAST_TARGET, false);
+							}
+							return 1;
+						}
+					}					
+					return 0;
+				}
+				if (!IsNumber(argv[1]) && !IsNumber(argv[2])) // ActionName, TargetName
+				{
+					char name[MAX_VARSTRING]; // ActionName
+					char search_name[MAX_VARSTRING];
+					strcpy_s(search_name, sizeof(search_name), argv[1]);
+					_strlwr_s(search_name);
+					std::vector<ao::special_action_template*> v;
+					if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_special_action_holder()->get_special_actions(v))
+					{
+						const ao::identity_t dummy_identity;
+						ao::identity_t action_identity;
+						auto valid_action = false;
+						for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+						{
+							const auto action_name = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name((*it)->get_identity(), dummy_identity);
+							strcpy_s(name, sizeof(name), action_name);
+							_strlwr_s(name);
+							if (strstr(name, search_name))
+							{
+								action_identity = (*it)->get_identity();
+								valid_action = true;
+								break;
+							}
+						}
+						ao::identity_t target_identity;
+						const string target_name(argv[2]);
+						const auto valid_target = P_ENGINE_CLIENT_ANARCHY->n3_msg_name_to_id(target_name, target_identity);
+						if (valid_action && valid_target)
+						{
+							const auto has_current_target = P_SELECTION_INDICATOR != nullptr;
+							const auto current_target_is_desired_target = (P_SELECTION_INDICATOR != nullptr) && (P_SELECTION_INDICATOR->identity == target_identity);
+							if (!current_target_is_desired_target)
+							{
+								if (has_current_target)
+									P_TARGETING_MODULE->remove_target(P_SELECTION_INDICATOR->identity); // Stores the old target's identity in pLastTarget
+								P_TARGETING_MODULE->set_target(target_identity, false);
+							}
+							P_ENGINE_CLIENT_ANARCHY->n3_msg_perform_special_action(action_identity);
+							if (!current_target_is_desired_target)
+							{
+								if (has_current_target)
+									P_TARGETING_MODULE->set_target(*P_LAST_TARGET, false);
+							}
+							return 1;
+						}					
+					}
+					return 0;
+				}
+			}
+			return 0;
+		}
 		return 0;
 	}
 
@@ -972,7 +984,7 @@ namespace isxao_commands
 				_strlwr_s(search_name);
 				std::vector<ao::actor*> v;
 				P_PLAYFIELD_DIR->get_playfield()->get_playfield_actors(v);
-				for (auto it = v.begin(); it != v.end(); ++it)
+				for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 				{
 					char name[MAX_VARSTRING];
 					strcpy_s(name, MAX_VARSTRING, (*it)->get_name());
@@ -987,7 +999,7 @@ namespace isxao_commands
 			}
 			if (argc == 2 && IsNumber(argv[1])) // Check to see if a heading was provided
 			{
-				auto heading = float(atof(argv[1]));
+				auto heading = float(atof(argv[1]));  // NOLINT(cert-err34-c)
 				if (heading < 0.0f || heading > 360.0f)
 					return 0;
 				if (heading > 180.0f)
@@ -999,18 +1011,18 @@ namespace isxao_commands
 			if (argc == 3 && IsNumber(argv[1]) && IsNumber(argv[2])) // Check to see if X and Z coords provided
 			{
 				ao::vector3_t v;
-				v.x = float(atof(argv[1]));
+				v.x = float(atof(argv[1]));  // NOLINT(cert-err34-c)
 				v.y = 0.0f;
-				v.z = float(atof(argv[2]));
+				v.z = float(atof(argv[2]));  // NOLINT(cert-err34-c)
 				P_ENGINE_CLIENT_ANARCHY->get_client_char()->face(v);
 				return 1;
 			}
 			if (argc == 4 && IsNumber(argv[1]) && IsNumber(argv[2]) && IsNumber(argv[3]))
 			{
 				ao::vector3_t v;
-				v.x = float(atof(argv[1]));
+				v.x = float(atof(argv[1]));  // NOLINT(cert-err34-c)
 				v.y = 0.0f;
-				v.z = float(atof(argv[3]));
+				v.z = float(atof(argv[3]));  // NOLINT(cert-err34-c)
 				P_ENGINE_CLIENT_ANARCHY->get_client_char()->face(v);
 				return 1;
 			}
@@ -1019,7 +1031,7 @@ namespace isxao_commands
 		// If no arguments are provided, we should try to face our current target
 		if (P_SELECTION_INDICATOR)
 		{
-			static_cast<ao::actor*>(ao::dynel::get_dynel(P_SELECTION_INDICATOR->identity))->do_face();
+			reinterpret_cast<ao::actor*>(ao::dynel::get_dynel(P_SELECTION_INDICATOR->identity))->do_face();
 			return 1;
 		}
 		return 0;
@@ -1032,7 +1044,7 @@ namespace isxao_commands
 		if (IsNumber(argv[1]))	// Check to see if an Id was provided
 		{
 			const auto combined_identity = atoui64(argv[1]);
-			auto id = ao::identity_t::get_identity_from_combined(combined_identity);
+			const auto id = ao::identity_t::get_identity_from_combined(combined_identity);
 			const auto p_dynel = ao::dynel::get_dynel(id);
 			if (p_dynel)
 			{
@@ -1052,8 +1064,8 @@ namespace isxao_commands
 		std::vector<ao::actor*> v;
 		P_PLAYFIELD_DIR->get_playfield()->get_playfield_actors(v);
 		if (!strcmp(arg, "pc")) // Check for nearest pc
-		{
-			for (auto it = v.begin(); it != v.end(); ++it)
+		{  
+			for (auto it = v.begin(); it != v.end(); ++it)	// NOLINT(modernize-loop-convert)
 			{
 				if ((*it)->is_player() && !is_client_id((*it)->get_identity().id))
 				{
@@ -1064,7 +1076,7 @@ namespace isxao_commands
 		}
 		if (!strcmp(arg, "npc")) // check for nearest npc
 		{
-			for (auto it = v.begin(); it != v.end(); ++it)
+			for (auto it = v.begin(); it != v.end(); ++it)	// NOLINT(modernize-loop-convert)
 			{
 				if ((*it)->is_npc() && !(*it)->is_pet())
 				{
@@ -1075,7 +1087,7 @@ namespace isxao_commands
 		}
 		if (!strcmp(arg, "pet")) // check for nearest pet
 		{
-			for (auto it = v.begin(); it != v.end(); ++it)
+			for (auto it = v.begin(); it != v.end(); ++it)	// NOLINT(modernize-loop-convert)
 			{
 				if ((*it)->is_pet())
 				{
@@ -1084,7 +1096,7 @@ namespace isxao_commands
 				}
 			}
 		}
-		for (auto it = v.begin(); it != v.end(); ++it) // Assume it is a name
+		for (auto it = v.begin(); it != v.end(); ++it) // Assume it is a name	// NOLINT(modernize-loop-convert)
 		{
 			char name[MAX_VARSTRING];
 			strcpy_s(name, MAX_VARSTRING, (*it)->get_name());

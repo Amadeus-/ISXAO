@@ -12,45 +12,45 @@ namespace ao
 
 	float dynel::get_distance_to(vector3_t& position)
 	{
-		auto dynel_position = this->get_position();
+		const auto dynel_position = this->get_position();
 		return vector3_t::distance_xz(dynel_position, position);
 	}
 
 	// ReSharper disable once CppInconsistentNaming
 	float dynel::get_distance_3d_to(vector3_t& position)
 	{
-		auto dynel_position = this->get_position();
+		const auto dynel_position = this->get_position();
 		return vector3_t::distance(dynel_position, position);
 	}
 
 	// ReSharper disable once CppInconsistentNaming
 	float dynel::get_distance_3d_to_squared(vector3_t& position)
 	{
-		auto dynel_position = this->get_position();
+		const auto dynel_position = this->get_position();
 		return vector3_t::distance_squared(dynel_position, position);
 	}
 
 	float dynel::get_distance_to_squared(vector3_t& position)
 	{
-		auto dynel_position = this->get_position();
+		const auto dynel_position = this->get_position();
 		return vector3_t::distance_xz_squared(dynel_position, position);
 	}
 
 	float dynel::get_distance_x_to(vector3_t& position)
 	{
-		auto dynel_position = this->get_position();
+		const auto dynel_position = this->get_position();
 		return vector3_t::distance_x(dynel_position, position);
 	}
 
 	float dynel::get_distance_y_to(vector3_t& position)
 	{
-		auto dynel_position = this->get_position();
+		const auto dynel_position = this->get_position();
 		return vector3_t::distance_y(dynel_position, position);
 	}
 
 	float dynel::get_distance_z_to(vector3_t& position)
 	{
-		auto dynel_position = this->get_position();
+		const auto dynel_position = this->get_position();
 		return vector3_t::distance_z(dynel_position, position);
 	}
 
@@ -70,12 +70,23 @@ namespace ao
 
 	float dynel::get_heading()
 	{
-		return get_rotation().get_heading();
+		float heading;
+		const auto raw_heading = this->get_raw_heading();
+		if (raw_heading > 0.0f)
+			heading = float(raw_heading * 180.0f / M_PI);
+		else
+			heading = float(raw_heading * 180.0f / M_PI) + 360.0f;
+		return heading;
+	}
+
+	float dynel::get_raw_heading()
+	{
+		return get_rotation().get_raw_heading();
 	}
 
 	float dynel::get_heading_to(vector3_t & position)
 	{
-		auto dynel_position = this->get_position();
+		const auto dynel_position = this->get_position();
 		auto direction_vector = vector3_t::subtract(dynel_position, position);
 		direction_vector.normalize();
 		return direction_vector.get_yaw();
@@ -83,8 +94,8 @@ namespace ao
 
 	float dynel::get_heading_to_loc(vector3_t &position, vector3_t &position_offset)
 	{
-		auto dynel_position = this->get_position();
-		auto new_position = vector3_t::add(dynel_position, position_offset);
+		const auto dynel_position = this->get_position();
+		const auto new_position = vector3_t::add(dynel_position, position_offset);
 		auto direction_vector = vector3_t::subtract(position, new_position);
 		direction_vector.normalize();
 		return direction_vector.get_yaw();

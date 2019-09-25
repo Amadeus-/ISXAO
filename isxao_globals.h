@@ -434,6 +434,8 @@ namespace isxao
 #pragma region Vehicle
 
 	AOLIB_VAR DWORD vehicle_t__set_rel_rot;
+	AOLIB_VAR DWORD vehicle_t__steering_dir_arrive;
+	AOLIB_VAR DWORD vehicle_t__steering_flee;
 
 #pragma endregion
 

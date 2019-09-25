@@ -4,7 +4,25 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	P_FLOW_CONTROL->slot_walk_toggle(false);
+	ao::vector3_t d;
+	if (P_SELECTION_INDICATOR)
+	{
+		auto const p_dynel = ao::dynel::get_dynel(P_SELECTION_INDICATOR->identity);
+		if (p_dynel)
+		{
+			const auto t = p_dynel->get_position();
+			P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_vehicle()->steering_flee(t, d);
+			d.normalize();
+			printf("target position: x = %.2f, y = %.2f, z = %.2f", t.x, t.y, t.z);
+			printf("steering result: x = %.2f, y = %.2f, z = %.2f", d.x, d.y, d.z);
+			printf("yaw = %.2f, pitch = %.2f", d.get_yaw() * 180.0f / M_PI, d.get_pitch() * 180.0f / M_PI);
+			const ao::quaternion_t q_1(d);
+			printf("quaternion 1: w = %.2f, x = %.2f, y = %.2f, z = %.2f", q_1.w, q_1.x, q_1.y, q_1.z);
+			const auto q_2 = ao::quaternion_t::get_quaternion_to_face(t, P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_position());
+			printf("quaternion 2: w = %.2f, x = %.2f, y = %.2f, z = %.2f", q_2.w, q_2.x, q_2.y, q_2.z);
+			P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_vehicle()->set_rotation(q_1);
+		}
+	}
 	// printf("%" PRIX32, P_FLOW_CONTROL);
 	return 0;
 }

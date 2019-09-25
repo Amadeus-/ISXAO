@@ -43,9 +43,9 @@ namespace isxao
 	constexpr float circle_half = 180.0f;
 	constexpr float circle_max = 360.0;
 
-	constexpr float heading_quarter = 128.0f;
-	constexpr float heading_half = 256.0f;
-	constexpr float heading_max = 512.0f;
+	constexpr float heading_quarter = 90.0f;
+	constexpr float heading_half = 180.0f;
+	constexpr float heading_max = 360.0f;
 
 	constexpr int behind_arc = 45;
 	constexpr int front_arc = 240;

@@ -173,7 +173,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case Heading:
 		{
 			float heading;
-			const auto raw_heading = P_ACTOR->get_heading();
+			const auto raw_heading = P_ACTOR->get_raw_heading();
 			if (raw_heading > 0.0f)
 				heading = float(raw_heading * 180.0f / M_PI);
 			else

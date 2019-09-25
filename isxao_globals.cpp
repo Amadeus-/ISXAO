@@ -408,6 +408,8 @@ namespace isxao
 #pragma region Vehicle
 
 	DWORD vehicle_t__set_rel_rot = 0;
+	DWORD vehicle_t__steering_dir_arrive = 0;
+	DWORD vehicle_t__steering_flee = 0;
 
 #pragma endregion
 
@@ -938,12 +940,9 @@ namespace isxao
 		const auto vehicle_data_end = vehicle_data_begin + vehicle_module_info.SizeOfImage;
 		const std::vector<unsigned char> vehicle_data(vehicle_data_begin, vehicle_data_end);
 
-#ifdef VEHICLE_T__SET_REL_ROT_USE_PATTERN
-		GET_FUNCTION_ADDRESS(vehicle, vehicle_t__set_rel_rot)
-#else
-		GET_PROC_ADDRESS(vehicle, vehicle_t__set_rel_rot)
-#endif
-
+		RESOLVE_FUNCTION_ADDRESS(vehicle, vehicle_t__set_rel_rot)
+		RESOLVE_FUNCTION_ADDRESS(vehicle, vehicle_t__steering_dir_arrive)
+		RESOLVE_FUNCTION_ADDRESS(vehicle, vehicle_t__steering_flee)
 
 #pragma endregion
 

@@ -362,7 +362,7 @@ namespace isxao
 	void circle_command::at_me()
 	{
 		const auto p = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_position();
-		const auto h = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_rotation().get_heading();
+		const auto h = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_rotation().get_raw_heading();
 		const auto z = float(p.z + this->radius * sin(h * M_PI / heading_half));
 		const auto x = float(p.x + this->radius * cos(h * M_PI / heading_half));
 		this->location.x = x;
@@ -1071,7 +1071,7 @@ namespace isxao
 	{
 		if (this->change_head != h_inactive)
 		{
-			// this->turn_head(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading());
+			// this->turn_head(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_raw_heading());
 		}
 	}
 

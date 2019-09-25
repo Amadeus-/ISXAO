@@ -8,8 +8,9 @@ namespace ao
 		return get_char_vehicle_data()->p_char_movement_status;
 	}
 
-#ifdef VEHICLE_T__SET_REL_ROT_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void vehicle::set_rotation(const quaternion_t &), vehicle_t__set_rel_rot)
 #else
 	static_assert(false, "vehicle::set_rotation(const quaternion_t &) requires a native function.");
@@ -39,5 +40,21 @@ namespace ao
 	{
 		return get_char_vehicle_data()->max_speed;
 	}
+
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(int vehicle::steering_direction_arrive(const ao::vector3_t&, ao::vector3_t&), vehicle_t__steering_dir_arrive)
+#else
+	static_assert(false, "vehicle::set_rotation(const quaternion_t &) requires a native function.");
+#endif
+
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(int vehicle::steering_flee(const ao::vector3_t&, ao::vector3_t&), vehicle_t__steering_flee)
+#else
+	static_assert(false, "vehicle::steering_flee(const ao::vector3_t&, ao::vector3_t&) requires a native function.");
+#endif
 
 }

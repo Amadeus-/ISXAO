@@ -180,6 +180,11 @@ namespace ao
 			return atan2f(x, z);
 		}
 
+		float get_pitch() const
+		{
+			return asinf(-y);
+		}
+
 		void zero()
 		{
 			this->x = 0.0f;
@@ -200,6 +205,7 @@ namespace ao
 			this->y = y;
 			this->z = z;
 		}
+
 	} vector3_t, *p_vector3_t;
 	
 	// Size = 0x10
@@ -227,7 +233,7 @@ namespace ao
 			w = w / m;
 		}
 
-		float get_heading() const
+		float get_raw_heading() const
 		{
 			return atan2f(2 * y*w - 2 * x*z, 1 - 2 * y*y - 2 * z*z);
 		}
@@ -237,7 +243,7 @@ namespace ao
 			return atan2f(2*(x*w - y*z), 1 - 2 * x*x - 2 * z*z);
 		}
 
-		static struct ao_quaternion get_quaternion(float& yaw, float& pitch)
+		static struct ao_quaternion get_quaternion(const float& yaw, const float& pitch)
 		{
 			struct ao_quaternion q;
 
@@ -264,7 +270,7 @@ namespace ao
 			return q;
 		}
 
-		static struct ao_quaternion get_quaternion(float& yaw)
+		static struct ao_quaternion get_quaternion(const float& yaw)
 		{
 			struct ao_quaternion q;
 
@@ -276,7 +282,7 @@ namespace ao
 			return q;
 		}
 
-		static struct ao_quaternion get_quaternion_to_face(vector3_t& to, vector3_t& from)
+		static struct ao_quaternion get_quaternion_to_face(const vector3_t& to, const vector3_t& from)
 		{
 			// Get the unit vector pointing from the element at v1 and v2 and normalize it
 			auto dir = vector3_t::subtract(to, from);
@@ -293,6 +299,32 @@ namespace ao
 			y = 0;
 			z = 0;
 			w = 0;
+		}
+
+		explicit ao_quaternion(const struct ao_vector3& v)
+		{
+			auto const yaw = v.get_yaw();
+			auto const pitch = v.get_pitch();
+			auto const roll = 0.0f;
+			const auto c1 = cosf(yaw);
+			const auto c2 = cosf(roll);
+			const auto c3 = cosf(pitch);
+
+			const auto s1 = sinf(yaw);
+			const auto s2 = sinf(roll);
+			const auto s3 = sinf(pitch);
+
+			w = sqrt(1 + c1*c2 + c1*c3 - s1*s2*s3 + c2*c3) / 2;
+			x = (c2*s3 + c1*s3 + s1*s2*c3) / (4 * w);
+			y = (s1*c2 + s1*c3 + c1*s2*s3) / (4 * w);
+			z = (-s1*s3 + c1*s2*c3 + s2) / (4 * w);
+
+			const auto m = sqrt(w*w + x*x + y*y + z*z);
+
+			w = w / m;
+			x = x / m;
+			y = y / m;
+			z = z / m;
 		}
 
 	} quaternion_t, *p_quaternion_t;	
@@ -2059,31 +2091,6 @@ namespace ao
 
 #pragma region PlayfieldAnarchy
 
-	//typedef struct playfield_map_node
-	//{
-	//	struct playfield_map_node* p_lower;		// 0x00
-	//	struct playfield_map_node* p_back;		// 0x04
-	//	struct playfield_map_node* p_higher;	// 0x08
-	//	DWORD playfield_instance_id;			// 0x0C
-	//	struct ao_playfield_anarchy* p_playfield;	// 0x10
-	//} playfield_map_node_t, *p_playfield_map_node_t;
-
-
-	//typedef struct playfield_map_root
-	//{
-	//	p_playfield_map_node_t p_begin;
-	//	p_playfield_map_node_t p_node;
-	//	p_playfield_map_node_t p_end;
-	//} playfield_map_root_t, *p_playfield_map_root_t;
-
-	//typedef struct playfield_dir
-	//{
-	//	// ReSharper disable once CppInconsistentNaming
-	//	BYTE unknown_0x00[0x4];				// 0x00
-	//	p_playfield_map_root_t p_root;		// 0x04
-	//	DWORD count;						// 0x08
-	//} playfield_dir_t, *p_playfield_dir_t;
-
 	// Size - 0x110
 	// From Gamecode.dll
 	typedef struct ao_playfield_anarchy
@@ -2384,6 +2391,70 @@ namespace ao
 	} resource_database_t, *p_resource_database_t;
 
 #pragma endregion 
+
+#pragma region PlayerVehicle
+
+	typedef struct ao_player_vehicle
+	{
+		PVOID p_v_table;									// 0x0000
+															// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x04[0x10];							// 0x0004
+		DWORD zone_instance_id;								// 0x0014
+															// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x18[0xC];								// 0x0018
+		PVOID p_locality_listener_i;						// 0x0024
+															// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x28[0x4];								// 0x0028
+		struct ao_dummy_vehicle* p_parent_vehicle;			// 0x002C
+		PVOID p_vehicle_body_i;								// 0x0030
+		float mass;											// 0x0034
+		float max_force;									// 0x0038
+		float max_vel1;										// 0x003C
+		float brake_distance;								// 0x0040
+															// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x44[0x4];								// 0x0044
+		float max_vel2;										// 0x0048
+		float radius;										// 0x004C
+		BYTE falling_enabled;								// 0x0050
+		BYTE surface_hug_enabled;							// 0x0051
+															// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x52[0x6];								// 0x0052
+		vector3_t global_pos;								// 0x0058
+		vector3_t velocity;									// 0x0064
+		quaternion_t direction;								// 0x0070
+		quaternion_t body_rot;								// 0x0080
+		float dir;											// 0x0090
+															// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x94[0x1C];							// 0x0094
+		DWORD orientation_mode;								// 0x00B0
+															// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xB4[0xC];								// 0x00B4
+		vector3_t body_forward;								// 0x00C0
+		float velocity_magnitude;							// 0x00CC
+		vector3_t last_pos;									// 0x00D0
+		vector3_t parent_global_pos;						// 0x00DC
+		quaternion_t parent_body_rot;						// 0x00E8
+															// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xF8[0x5C];							// 0x00F8	
+		struct ao_n3_tile_map_surface* p_n3_tile_map_surface;	// 0x0154
+		DWORD playfield_instance_id;						// 0x0158
+		BYTE surface_collision_enabled;						// 0x015C
+															// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x15D[0x3];							// 0x015D
+		PVOID pn_3dynel_event_listener_i;					// 0x0160
+															// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x164[0x4];							// 0x0164
+		identity_t identity;								// 0x0168
+		float max_speed;									// 0x0170
+															// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x174[0x4];							// 0x0174
+		p_char_movement_status_t p_char_movement_status;	// 0x0178
+		struct ao_char_vehicle* p_this_vehicle;				// 0x017C
+															// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x180[0x22C];							// 0x0180
+	} player_vehicle_t, *p_player_vehicle_t;
+
+#pragma endregion
 
 #pragma region SimpleChar
 

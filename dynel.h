@@ -16,6 +16,7 @@ public:
 	static dynel* get_dynel(const ao::identity_t&);
 	ao::p_n3_dynel_t get_dynel_data();
 	float get_heading();
+	float get_raw_heading();
 	float get_heading_to(ao::vector3_t &);
 	float get_heading_to_loc(ao::vector3_t &, ao::vector3_t &);
 	ao::identity_t get_identity();

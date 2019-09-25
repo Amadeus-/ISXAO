@@ -2377,10 +2377,38 @@ constexpr char* const client_t__process_message_pattern = static_cast<char*>(
 
 constexpr char* const vehicle_module_name = static_cast<char*>("Vehicle.dll");
 
+#pragma region vehicle_t__set_rel_rot
+
 constexpr char* const vehicle_t__set_rel_rot_mangled_name = static_cast<char*>(
 	"?SetRelRot@Vehicle_t@@QAEXABVQuaternion_t@@@Z");
 constexpr char* const vehicle_t__set_rel_rot_pattern = static_cast<char*>(
 	"55 8B EC 83 EC 18 53");
+constexpr DWORD vehicle_t__set_rel_rot_offset = 0;
+constexpr DWORD vehicle_t__set_rel_rot_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region vehicle_t__steering_dir_arrive
+
+constexpr char* const vehicle_t__steering_dir_arrive_mangled_name = static_cast<char*>(
+	"?SteeringDirArrive@Vehicle_t@@QBE?AW4SteeringResult_e@@ABVVector3_t@@AAV3@@Z");
+constexpr char* const vehicle_t__steering_dir_arrive_pattern = static_cast<char*>(
+	"55 8B EC 83 EC 1C 56 8B 75 08 57");
+constexpr DWORD vehicle_t__steering_dir_arrive_offset = 0;
+constexpr DWORD vehicle_t__steering_dir_arrive_bytes_to_next = 0;
+
+#pragma endregion
+
+#pragma region vehicle_t__steering_flee
+
+constexpr char* const vehicle_t__steering_flee_mangled_name = static_cast<char*>(
+	"?SteeringFlee@Vehicle_t@@QBE?AW4SteeringResult_e@@ABVVector3_t@@AAV3@@Z");
+constexpr char* const vehicle_t__steering_flee_pattern = static_cast<char*>(
+	"55 8B EC 51 53 8B 5D 0C 56 8B 75 08 57 8B FB A5 A5 A5 D9 03 D8 61 58 51");
+constexpr DWORD vehicle_t__steering_flee_offset = 0;
+constexpr DWORD vehicle_t__steering_flee_bytes_to_next = 0;
+
+#pragma endregion
 
 #pragma endregion
 
