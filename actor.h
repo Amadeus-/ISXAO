@@ -9,7 +9,7 @@ public:
 	PCSTR consider();
 	PCSTR con_color();
 	RGBCOLOR con_color_argb();
-	void do_face();
+	void do_face(bool uw = false);
 	void do_target();
 	float estimated_distance_to(ao::vector3_t &);
 	actor* get_master();

@@ -18,7 +18,9 @@ public:
 	float get_heading();
 	float get_raw_heading();
 	float get_heading_to(ao::vector3_t &);
+	float get_raw_heading_to(ao::vector3_t &);
 	float get_heading_to_loc(ao::vector3_t &, ao::vector3_t &);
+	float get_raw_heading_to_loc(ao::vector3_t &, ao::vector3_t &);
 	ao::identity_t get_identity();
 	PCSTR get_name();
 	ao::vector3_t get_position();

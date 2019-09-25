@@ -112,6 +112,7 @@ namespace isxao
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_faction_title;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_gender_string;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_item_by_template;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_last_speed_mode;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_sex_str;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__get_title_str;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__is_first_login;
@@ -240,6 +241,7 @@ namespace isxao
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_LeaveBattle;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_LeaveTeam;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_MeetsPerkCriteria;
+	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_mouse_movement;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_MoveItemToInventory;
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_MoveRaidMember;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__n3_msg_movement_changed;
@@ -338,6 +340,10 @@ namespace isxao
 	AOLIB_VAR ao::game_time** pp_game_time;
 #define P_GAME_TIME (*pp_game_time)  // NOLINT(cppcoreguidelines-macro-usage)
 
+	AOLIB_VAR DWORD mouse_look_active;
+	AOLIB_VAR byte* p_mouse_look_active;
+#define MOUSE_LOOK_ACTIVE (*p_mouse_look_active == 1)  // NOLINT(cppcoreguidelines-macro-usage)
+
 #pragma endregion
 
 #pragma region GUI
@@ -368,6 +374,7 @@ namespace isxao
 	AOLIB_VAR ao::command_list_t* p_command_list;
 #define P_COMMAND_LIST (p_command_list)  // NOLINT(cppcoreguidelines-macro-usage)
 
+	AOLIB_VAR DWORD flow_control_module_t__slot_autorun;
 	AOLIB_VAR DWORD flow_control_module_t__slot_movement_back;
 	AOLIB_VAR DWORD flow_control_module_t__slot_movement_forward;
 	AOLIB_VAR DWORD flow_control_module_t__slot_movement_jump;

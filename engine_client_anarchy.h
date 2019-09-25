@@ -13,6 +13,7 @@ public:
 	PCSTR get_faction_title(DWORD faction_id);
 	PCSTR get_gender_string(ao::identity_t const &id);
 	ao::p_dummy_item_base_t get_item_by_template(ao::identity_t template_id, const ao::identity_t &container_id);
+	int get_last_speed_mode();
 	static PCSTR get_item_rarity_str(DWORD rarity_id);
 	static ao::p_nano_item_t get_nano_item(DWORD nano_id);
 	static PCSTR get_nano_school_str(DWORD school_id);

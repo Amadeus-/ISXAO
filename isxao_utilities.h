@@ -74,6 +74,7 @@ namespace isxao_utilities
 
 	AOLIB_API DWORD get_game_state();
 	AOLIB_API void PrintToChat(string message, PCSTR chat_type);
+	AOLIB_API void get_arg(char current_arg[MAX_VARSTRING], int argc, char *argv[], DWORD& arg_num);
 
 #pragma endregion
 

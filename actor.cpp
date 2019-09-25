@@ -147,12 +147,17 @@ namespace ao
 		return argb;
 	}
 
-	void actor::do_face()
+	void actor::do_face(const bool uw)
 	{
-		vector3_t client_position;
-		P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(client_position);
-		auto position = this->get_position();
-		const auto new_rotation = quaternion_t::get_quaternion_to_face(position, client_position);
+		const auto position = this->get_position();
+		vector3_t steering_result;
+		P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_vehicle()->steering_direction_arrive(position, steering_result);
+		ao::quaternion_t new_rotation(steering_result);
+		if (!uw)
+		{
+			new_rotation.x = 0.0f;
+			new_rotation.z = 0.0f;
+		}
 		P_ENGINE_CLIENT_ANARCHY->get_client_char()->set_rotation(new_rotation);
 	}
 

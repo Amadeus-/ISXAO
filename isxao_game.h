@@ -440,6 +440,17 @@ constexpr DWORD n3_engine_client_anarchy_t__get_item_by_template_bytes_to_next =
 
 #pragma endregion
 
+#pragma region n3_engine_client_anarchy_t__get_last_speed_mode
+
+constexpr char* const n3_engine_client_anarchy_t__get_last_speed_mode_mangled_name = static_cast<char*>(
+	"?GetLastSpeedMode@n3EngineClientAnarchy_t@@QBE?AW4Mode_e@Movement_n@@XZ");
+constexpr char* const n3_engine_client_anarchy_t__get_last_speed_mode_pattern = static_cast<char*>(
+	"83 B9 84 00 00 00 00 74 ?? FF 15 ?? ?? ?? ?? 85 C0 74 ?? 8B C8 E8 ?? ?? ?? ?? 8B C8 E8 ?? ?? ?? ?? 8B 40 30");
+constexpr DWORD n3_engine_client_anarchy_t__get_last_speed_mode_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__get_last_speed_mode_bytes_to_next = 0x0;
+
+#pragma endregion
+
 #pragma region n3_engine_client_anarchy_t__get_sex_str
 
 constexpr char* const n3_engine_client_anarchy_t__get_sex_str_mangled_name = static_cast<char*>(
@@ -1660,7 +1671,16 @@ constexpr DWORD n3_engine_client_anarchy_t__n3_msg_is_pet_tower_bytes_to_next = 
 
 
 
+#pragma region n3_engine_client_anarchy_t__n3_msg_mouse_movement
 
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_mouse_movement_mangled_name = static_cast<char*>(
+	"?N3Msg_MouseMovement@n3EngineClientAnarchy_t@@QAEXMM@Z");
+constexpr char* const n3_engine_client_anarchy_t__n3_msg_mouse_movement_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 68 83 65 EC 00");
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_mouse_movement_offset = 0x0;
+constexpr DWORD n3_engine_client_anarchy_t__n3_msg_mouse_movement_bytes_to_next = 0x0;
+
+#pragma endregion
 
 #pragma region n3_engine_client_anarchy_t__n3_msg_movement_changed
 
@@ -1853,6 +1873,11 @@ constexpr DWORD static_item_manager_t__m_ppc_instance_offset = 0xC;
 
 #pragma endregion
 
+#pragma region mouse_look_active
+
+constexpr char* const mouse_look_active_mangled_name = static_cast<char*>(nullptr);
+constexpr DWORD mouse_look_active_offset = 0x2D;
+
 #pragma endregion
 
 #pragma region GUI
@@ -1998,6 +2023,17 @@ constexpr char* const flow_control_module_t__get_instance_mangled_name = static_
 constexpr char* const flow_control_module_t__get_instance_pattern = static_cast<char*>(nullptr);
 constexpr DWORD flow_control_module_t__get_instance_offset = 0x0;
 constexpr DWORD flow_control_module_t__get_instance_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region flow_control_module_t__slot_autorun
+
+constexpr char* const flow_control_module_t__slot_autorun_mangled_name = static_cast<char*>(
+	"?SlotMovementAutoRun@FlowControlModule_t@@AAEX_N@Z");
+constexpr char* const flow_control_module_t__slot_autorun_pattern = static_cast<char*>(
+	"55 8B EC 80 7D 08 00 75 ?? 6A 00");
+constexpr DWORD flow_control_module_t__slot_autorun_offset = 0x0;
+constexpr DWORD flow_control_module_t__slot_autorun_bytes_to_next = 0x0;
 
 #pragma endregion
 

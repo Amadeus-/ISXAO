@@ -87,7 +87,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			{
 				ao::vector3_t v;
 				P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
-				const auto raw_heading = P_DYNEL->get_heading_to(v);
+				const auto raw_heading = P_DYNEL->get_raw_heading_to(v);
 				if (raw_heading > 0.0f)
 					heading = float(raw_heading * 180.0f / M_PI);
 				else
@@ -157,7 +157,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				offset.z = z;
 				ao::vector3_t v;
 				P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
-				const auto raw_heading = P_DYNEL->get_heading_to_loc(v, offset);
+				const auto raw_heading = P_DYNEL->get_raw_heading_to_loc(v, offset);
 				if (raw_heading > 0.0f)
 					heading = float(raw_heading * 180.0 / M_PI);
 				else

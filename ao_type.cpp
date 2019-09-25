@@ -74,7 +74,7 @@ bool AOType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER pMember, int argc,
 			from_position.x = float(atof(argv[3]));  // NOLINT(cert-err34-c)
 			from_position.y = float(atof(argv[4]));  // NOLINT(cert-err34-c)
 			from_position.z = float(atof(argv[5]));  // NOLINT(cert-err34-c)
-			auto raw_heading = ao::vector3_t::subtract(to_position, from_position).get_yaw();
+			auto raw_heading = ao::vector3_t::subtract(to_position, from_position).get_raw_yaw();
 			auto heading = float(raw_heading * 360.0f / (2 * M_PI));
 			if (heading < 0.0f)
 				heading += 360.0f;

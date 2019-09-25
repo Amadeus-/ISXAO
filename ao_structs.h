@@ -175,14 +175,30 @@ namespace ao
 			return d_x*d_x + d_z*d_z;
 		}
 
-		float get_yaw() const
+		float get_raw_yaw() const
 		{
 			return atan2f(x, z);
 		}
 
-		float get_pitch() const
+		float get_yaw() const
+		{
+			float heading;
+			const auto raw_heading = this->get_raw_yaw();
+			if (raw_heading > 0.0f)
+				heading = float(raw_heading * 180.0f / M_PI);
+			else
+				heading = float(raw_heading * 180.0f / M_PI) + 360.0f;
+			return heading;
+		}
+
+		float get_raw_pitch() const
 		{
 			return asinf(-y);
+		}
+
+		float get_pitch() const
+		{
+			return float(this->get_raw_pitch() * 180.0f / M_PI);
 		}
 
 		void zero()
@@ -238,22 +254,38 @@ namespace ao
 			return atan2f(2 * y*w - 2 * x*z, 1 - 2 * y*y - 2 * z*z);
 		}
 
+		float get_heading() const
+		{
+			float heading;
+			const auto raw_heading = this->get_raw_heading();
+			if (raw_heading > 0.0f)
+				heading = float(raw_heading * 180.0f / M_PI);
+			else
+				heading = float(raw_heading * 180.0f / M_PI) + 360.0f;
+			return heading;
+		}
+
 		float get_raw_pitch() const
 		{
 			return atan2f(2*(x*w - y*z), 1 - 2 * x*x - 2 * z*z);
 		}
 
-		static struct ao_quaternion get_quaternion(const float& yaw, const float& pitch)
+		float get_pitch() const
+		{
+			return float(this->get_raw_pitch() * 180.0f / M_PI);
+		}
+
+		static struct ao_quaternion get_quaternion_from_raw(const float& raw_yaw, const float& raw_pitch)
 		{
 			struct ao_quaternion q;
 
-			const auto c1 = cosf(yaw);
+			const auto c1 = cosf(raw_yaw);
 			const auto c2 = cosf(0);
-			const auto c3 = cosf(pitch);
+			const auto c3 = cosf(raw_pitch);
 
-			const auto s1 = sinf(yaw);
+			const auto s1 = sinf(raw_yaw);
 			const auto s2 = sinf(0);
-			const auto s3 = sinf(pitch);
+			const auto s3 = sinf(raw_pitch);
 
 			q.w = sqrt(1 + c1*c2 + c1*c3 - s1*s2*s3 + c2*c3) / 2;
 			q.x = (c2*s3 + c1*s3 + s1*s2*c3) / (4 * q.w);
@@ -270,16 +302,37 @@ namespace ao
 			return q;
 		}
 
-		static struct ao_quaternion get_quaternion(const float& yaw)
+		static struct ao_quaternion get_quaternion_from_raw(const float& raw_yaw)
 		{
 			struct ao_quaternion q;
 
-			q.w = cosf(yaw / 2);
+			q.w = cosf(raw_yaw / 2);
 			q.x = 0;
-			q.y = sinf(yaw / 2);
+			q.y = sinf(raw_yaw / 2);
 			q.z = 0;
 
 			return q;
+		}
+
+		static struct ao_quaternion get_quaternion(const float& yaw)
+		{
+			float raw_yaw;
+			if (yaw > 180.0f)
+				raw_yaw = -1.0f * float((yaw - 180.0f) * M_PI / 180.0f);
+			else
+				raw_yaw = float(yaw * M_PI / 180.0f);
+			return ao_quaternion::get_quaternion_from_raw(raw_yaw);
+		}
+
+		static struct ao_quaternion get_quaternion(const float& yaw, const float& pitch)
+		{
+			float raw_yaw;
+			if (yaw > 180.0f)
+				raw_yaw = -1.0f * float((yaw - 180.0f) * M_PI / 180.0f);
+			else
+				raw_yaw = float(yaw * M_PI / 180.0f);
+			const auto raw_pitch = float(pitch * M_PI / 180.0f);
+			return ao_quaternion::get_quaternion_from_raw(raw_yaw, raw_pitch);
 		}
 
 		static struct ao_quaternion get_quaternion_to_face(const vector3_t& to, const vector3_t& from)
@@ -287,8 +340,8 @@ namespace ao
 			// Get the unit vector pointing from the element at v1 and v2 and normalize it
 			auto dir = vector3_t::subtract(to, from);
 			dir.normalize();
-			auto yaw = dir.get_yaw();
-			auto q = get_quaternion(yaw);
+			auto yaw = dir.get_raw_yaw();
+			auto q = get_quaternion_from_raw(yaw);
 			q.normalize();
 			return q;
 		}
@@ -303,8 +356,8 @@ namespace ao
 
 		explicit ao_quaternion(const struct ao_vector3& v)
 		{
-			auto const yaw = v.get_yaw();
-			auto const pitch = v.get_pitch();
+			auto const yaw = v.get_raw_yaw();
+			auto const pitch = v.get_raw_pitch();
 			auto const roll = 0.0f;
 			const auto c1 = cosf(yaw);
 			const auto c2 = cosf(roll);

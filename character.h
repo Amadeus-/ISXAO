@@ -29,7 +29,7 @@ public:
 	static void use_item(ao::identity_t const &);
 
 	// Movement
-	void move_to(const ao::vector3_t&);
+	static bool is_walking();
 	void move_forward_start();
 	void move_forward_stop();
 	void move_backward_start();

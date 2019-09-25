@@ -314,11 +314,11 @@
     <ClCompile Include="isxao_find_pattern.cpp">
       <Filter>Source Files\Base\Internal</Filter>
     </ClCompile>
-    <ClCompile Include="move.cpp">
-      <Filter>Source Files\Base\Internal</Filter>
-    </ClCompile>
     <ClCompile Include="flow_control.cpp">
       <Filter>Source Files\Base\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="isxao_move.cpp">
+      <Filter>Source Files\Base\Internal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -586,11 +586,11 @@
     <ClInclude Include="ao_enums.h">
       <Filter>Header Files\Base\Game</Filter>
     </ClInclude>
-    <ClInclude Include="move.h">
-      <Filter>Header Files\Base\Internal</Filter>
-    </ClInclude>
     <ClInclude Include="flow_control.h">
       <Filter>Header Files\Base\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_move.h">
+      <Filter>Header Files\Base\Internal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

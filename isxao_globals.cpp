@@ -115,6 +115,7 @@ namespace isxao
 	DWORD n3_engine_client_anarchy_t__get_faction_title = 0;
 	DWORD n3_engine_client_anarchy_t__get_gender_string = 0;
 	DWORD n3_engine_client_anarchy_t__get_item_by_template = 0;
+	DWORD n3_engine_client_anarchy_t__get_last_speed_mode = 0;
 	DWORD n3_engine_client_anarchy_t__get_sex_str = 0;
 	DWORD n3_engine_client_anarchy_t__get_title_str = 0;
 	DWORD n3_engine_client_anarchy_t__is_first_login = 0;
@@ -243,6 +244,7 @@ namespace isxao
 	DWORD n3EngineClientAnarchy_t__N3Msg_LeaveBattle = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_LeaveTeam = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_MeetsPerkCriteria = 0;
+	DWORD n3_engine_client_anarchy_t__n3_msg_mouse_movement = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_MoveItemToInventory = 0;
 	DWORD n3EngineClientAnarchy_t__N3Msg_MoveRaidMember = 0;
 	DWORD n3_engine_client_anarchy_t__n3_msg_movement_changed = 0;
@@ -326,6 +328,8 @@ namespace isxao
 	std::vector<ao::acg_game_item_t> ***ppp_item_vector = nullptr;
 	DWORD static_item_manager_t__m_ppc_instance = 0;
 	std::vector<ao::static_item_t> ***ppp_static_item_vector = nullptr;
+	DWORD mouse_look_active = 0;
+	byte* p_mouse_look_active = nullptr;
 
 #pragma endregion
 
@@ -351,6 +355,7 @@ namespace isxao
 	DWORD command_list_t__m_pc_instance = 0;
 	ao::command_list_t* p_command_list = nullptr;
 
+	DWORD flow_control_module_t__slot_autorun = 0;
 	DWORD flow_control_module_t__slot_movement_back = 0;
 	DWORD flow_control_module_t__slot_movement_forward = 0;
 	DWORD flow_control_module_t__slot_movement_jump = 0;
@@ -671,6 +676,7 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_faction_title)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_gender_string)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_item_by_template)
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_last_speed_mode)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__get_title_str)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__is_first_login)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__is_fixture)
@@ -782,6 +788,8 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_perk)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_is_pet_tower)
 
+		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_mouse_movement)
+
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_movement_changed)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_name_to_id)
 		RESOLVE_FUNCTION_ADDRESS(gamecode, n3_engine_client_anarchy_t__n3_msg_perform_special_action_1)
@@ -819,6 +827,9 @@ namespace isxao
 
 		RESOLVE_STATIC_INSTANCE_ADDRESS(gamecode, static_item_manager_t__m_ppc_instance, static_item_manager_t__static_item_manager_t) // Depends on static_item_manager_t__static_item_manager_t
 		ppp_static_item_vector = reinterpret_cast<std::vector<ao::static_item_t>***>(static_item_manager_t__m_ppc_instance);
+
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gamecode, mouse_look_active, n3_engine_client_anarchy_t__n3_msg_mouse_movement)
+		p_mouse_look_active = reinterpret_cast<byte*>(mouse_look_active);
 		
 #pragma endregion
 
@@ -846,6 +857,7 @@ namespace isxao
 		RESOLVE_FUNCTION_ADDRESS(gui, command_interpreter_c__parse_text_command)
 		RESOLVE_FUNCTION_ADDRESS(gui, command_list_t__command_list_t)
 		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__get_instance)
+		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__slot_autorun)
 		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__slot_movement_back)
 		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__slot_movement_forward)
 		RESOLVE_FUNCTION_ADDRESS(gui, flow_control_module_t__slot_movement_jump)

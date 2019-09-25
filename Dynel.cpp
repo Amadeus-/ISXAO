@@ -84,12 +84,29 @@ namespace ao
 		return get_rotation().get_raw_heading();
 	}
 
-	float dynel::get_heading_to(vector3_t & position)
+	float dynel::get_raw_heading_to(vector3_t &position)
+	{
+		const auto dynel_position = this->get_position();
+		auto direction_vector = vector3_t::subtract(dynel_position, position);
+		direction_vector.normalize();
+		return direction_vector.get_raw_yaw();
+	}
+
+	float dynel::get_heading_to(vector3_t &position)
 	{
 		const auto dynel_position = this->get_position();
 		auto direction_vector = vector3_t::subtract(dynel_position, position);
 		direction_vector.normalize();
 		return direction_vector.get_yaw();
+	}
+
+	float dynel::get_raw_heading_to_loc(vector3_t &position, vector3_t &position_offset)
+	{
+		const auto dynel_position = this->get_position();
+		const auto new_position = vector3_t::add(dynel_position, position_offset);
+		auto direction_vector = vector3_t::subtract(position, new_position);
+		direction_vector.normalize();
+		return direction_vector.get_raw_yaw();
 	}
 
 	float dynel::get_heading_to_loc(vector3_t &position, vector3_t &position_offset)

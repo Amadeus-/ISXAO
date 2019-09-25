@@ -5,6 +5,7 @@ class flow_control
 {
 public:
 	ao::flow_control_t get_flow_control_data() const;
+	void slot_autorun(bool);
 	void slot_movement_back(bool);
 	void slot_movement_forward(bool);
 	void slot_movement_jump(bool);

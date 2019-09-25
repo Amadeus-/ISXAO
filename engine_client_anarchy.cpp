@@ -98,6 +98,14 @@ namespace ao
 	}
 
 #if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(int engine_client_anarchy::get_last_speed_mode(), n3_engine_client_anarchy_t__get_last_speed_mode)
+#else
+	static_assert(false, "engine_client_anarchy::get_last_speed_mode() requires a native function.");
+#endif
+
+#if true
 	FUNCTION_AT_ADDRESS(ao::p_nano_item_t engine_client_anarchy::get_nano_item(DWORD), f_get_nano_item)
 #else
 	static_assert(false, "engine_client_anarchy::get_nano_item(DWORD) requires a native function.");

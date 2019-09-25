@@ -111,13 +111,13 @@ namespace ao
 	{
 		if (heading > 180.0f)
 			heading -= 360.0f;
-		const auto q = quaternion_t::get_quaternion(heading);
+		const auto q = quaternion_t::get_quaternion_from_raw(heading);
 		this->set_rotation(q);
 	}
 
 	void character::face(vector3_t &location)
 	{
-		auto client_position = get_position();
+		const auto client_position = get_position();
 		const auto q = quaternion_t::get_quaternion_to_face(location, client_position);
 		this->set_rotation(q);
 	}
@@ -152,19 +152,10 @@ namespace ao
 
 #pragma region Movement
 
-	void character::move_to(const ao::vector3_t& location)
+	bool character::is_walking()
 	{
-		const auto p = this->get_position();
-		const auto d = vector3_t::distance(location, this->get_position());
-		if (d < 3.0f || !this->is_in_line_of_sight(location))
-			return;
-		g_move_to_location = location;
-		g_is_move_to_stuck = false;
-		g_distance_moved_since_last = FLT_MAX;
-		g_is_moving_to_location = true;
-		g_last_location = p;
+		return P_ENGINE_CLIENT_ANARCHY->get_last_speed_mode() == 2;
 	}
-
 
 	void character::move_forward_start()
 	{

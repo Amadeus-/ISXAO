@@ -1326,6 +1326,16 @@ namespace isxao_utilities
 		}
 	}
 
+	void get_arg(char current_arg[MAX_VARSTRING], const int argc, char *argv[], DWORD& arg_num)
+	{
+		if (arg_num > argc)
+		{
+			sprintf_s(current_arg, sizeof(current_arg), nullptr);
+			return;
+		}		
+		sprintf_s(current_arg, sizeof(current_arg), argv[arg_num]);
+	}
+
 #pragma endregion
 
 #pragma region MessageHandling

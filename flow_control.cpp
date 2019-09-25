@@ -9,6 +9,13 @@ namespace ao
 
 #if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	FUNCTION_AT_ADDRESS(void flow_control::slot_autorun(bool), flow_control_module_t__slot_autorun)
+#else
+	static_assert(false, "flow_control::slot_autorun(bool) requires a native function.");
+#endif
+
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
 	FUNCTION_AT_ADDRESS(void flow_control::slot_movement_back(bool), flow_control_module_t__slot_movement_back)
 #else
 	static_assert(false, "flow_control::slot_movement_back(bool) requires a native function.");

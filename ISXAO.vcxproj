@@ -165,7 +165,7 @@
     <ClCompile Include="LGUIAOFrame.cpp" />
     <ClCompile Include="look_at_iir.cpp" />
     <ClCompile Include="message.cpp" />
-    <ClCompile Include="move.cpp" />
+    <ClCompile Include="isxao_move.cpp" />
     <ClCompile Include="n3_message.cpp" />
     <ClCompile Include="nano_item.cpp" />
     <ClCompile Include="nano_spell_type.cpp" />
@@ -256,7 +256,7 @@
     <ClInclude Include="character_type.h" />
     <ClInclude Include="look_at_iir.h" />
     <ClInclude Include="message.h" />
-    <ClInclude Include="move.h" />
+    <ClInclude Include="isxao_move.h" />
     <ClInclude Include="n3_message.h" />
     <ClInclude Include="nano_item.h" />
     <ClInclude Include="nano_spell_type.h" />
