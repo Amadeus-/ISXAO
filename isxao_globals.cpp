@@ -375,6 +375,10 @@ namespace isxao
 
 	DWORD input_config_t__m_pc_instance = 0;
 	ao::input_config** pp_input_config = nullptr;
+	DWORD input_config_t__m_as_input_method_id_table = 0;
+	ao::input_method_id_table* p_input_method_id_table = nullptr;
+	DWORD input_config_t__m_as_input_modes_id_table = 0;
+	ao::input_mode_id_table* p_input_mode_id_table = nullptr;
 	DWORD input_config_t__get_instance = 0;
 	DWORD input_config_t__set_current_target = 0;
 	DWORD input_config_t__process_input = 0;
@@ -899,6 +903,12 @@ namespace isxao
 
 		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, input_config_t__m_pc_instance, input_config_t__get_instance)	// Depends on input_config_t__get_instance
 		pp_input_config = reinterpret_cast<ao::input_config**>(input_config_t__m_pc_instance);
+
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, input_config_t__m_as_input_method_id_table)
+		p_input_method_id_table = reinterpret_cast<ao::input_method_id_table*>(input_config_t__m_as_input_method_id_table);
+
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, input_config_t__m_as_input_modes_id_table)
+		p_input_mode_id_table = reinterpret_cast<ao::input_mode_id_table*>(input_config_t__m_as_input_modes_id_table);
 
 		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, targeting_module_t__m_pc_instance, targeting_module_t__set_target) // Depends on targeting_module_t__set_target
 		pp_targeting_module = reinterpret_cast<ao::targeting_module**>(targeting_module_t__m_pc_instance);

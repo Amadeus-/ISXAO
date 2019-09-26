@@ -1594,7 +1594,7 @@ namespace isxao
 			p_target = nullptr;
 		auto p_character = P_ENGINE_CLIENT_ANARCHY->get_client_char();
 
-		if (rand() & 100 > 50)
+		if ((rand() & 100) > 50)
 			p_stuck_logic->turn_size *= -1.0f;
 
 		if (cmd_used == command_move_to)
@@ -1673,6 +1673,36 @@ namespace isxao
 				break;
 			}
 			return;
+		}
+	}
+
+	void end_previous_cmd(bool stop_move, byte cmd_used, bool preserve_self)
+	{
+		p_pause_handler->paused_move = false;
+		p_pause_handler->paused_command = false;
+		p_pause_handler->time_stop();
+		p_pause_handler->reset();
+
+		if (cmd_used != command_circle || !preserve_self)
+		{
+			p_move_active->new_circle();
+		}
+		if (cmd_used != command_move_to || !preserve_self)
+		{
+			p_move_active->new_move_to();
+		}
+		if (cmd_used != command_stick || !preserve_self)
+		{
+			p_move_active->new_stick();
+		}
+
+		p_move_active->defaults();
+		p_movement->set_walk(false);
+		// TODO: SetupEvents
+		if (stop_move)
+		{
+			p_movement->stop_heading();
+			p_movement->stop_move(apply_to_all);
 		}
 	}
 

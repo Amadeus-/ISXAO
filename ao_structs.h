@@ -2997,5 +2997,119 @@ namespace ao
 
 #pragma endregion
 
+#pragma region InputConfig_t::PIC_ID_List_s
+
+	typedef struct ao_pic_id_list_item
+	{
+		PCSTR name;
+		DWORD id;		
+	} pic_id_list_item, *p_pic_id_list_item;
+
+	template <size_t Size>
+	struct ao_pic_id_list
+	{
+		BYTE unknown_0x00[0x8];
+		struct ao_pic_id_list_item list[Size];
+
+	};
+
+	typedef ao_pic_id_list<0x7E> input_method_id_table;
+	typedef ao_pic_id_list<0x3F> input_mode_id_table;
+
+#pragma endregion
+
+#pragma region KeyPressInfo_t
+
+	typedef union ao_keypress_info 
+	{
+		DWORD info{};
+		struct
+		{
+			WORD key;
+			WORD modifier;
+		};
+
+		explicit ao_keypress_info(const DWORD info)
+		{
+			this->info = info;
+		}
+
+		explicit ao_keypress_info(const WORD key, const WORD modifier = 0)
+		{
+			this->key = key;
+			this->modifier = modifier;
+		}
+
+		explicit ao_keypress_info(const ao::input_model_e key)
+		{
+			this->key = key;
+			this->modifier = 0;
+		}
+
+		explicit ao_keypress_info(const DWORD info, const bool key_down, const bool use_control = false, const bool use_alt = false, const bool use_shift = false)
+		{
+			this->info = info;
+			if (!key_down)
+			{
+				this->key_up();
+			}
+			if (use_control)
+			{
+				this->control_down();
+			}
+			if (use_alt)
+			{
+				this->alt_down();
+			}
+			if (use_shift)
+			{
+				this->shift_down();
+			}
+		}
+
+		void key_down()
+		{
+			this->modifier |= 1 << 4;
+		}
+
+		void key_up()
+		{
+			this->modifier &= 1 << 4;
+		}
+
+		void shift_down()
+		{
+			this->modifier |= 1 << 1;
+		}
+
+		void shift_up()
+		{
+			this->modifier &= 1 << 1;
+		}
+
+		void control_down()
+		{
+			this->modifier |= 1 << 2;
+		}
+
+		void control_up()
+		{
+			this->modifier &= 1 << 2;
+		}
+
+		void alt_down()
+		{
+			this->modifier |= 1 << 3;
+		}
+
+		void alt_up()
+		{
+			this->modifier &= 1 << 3;
+		}
+
+	} keypress_info_t, *p_keypress_info_t;
+
+#pragma endregion
+
 
 }

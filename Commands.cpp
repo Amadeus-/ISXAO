@@ -4,7 +4,9 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	printf("%" PRIX32, MOUSE_LOOK_ACTIVE);
+	// printf("%" PRIX32, sizeof(ao::keypress_info_t));
+	ao::keypress_info_t k(ao::IMD_A);
+	P_INPUT_CONFIG->process_input(k, ao::IME_ANY_MODE);
 	return 0;
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include "wincon.h"
 #include "Psapi.h"
 #include <algorithm>
 #include <functional>
@@ -50,7 +51,7 @@
 #include "isxao_globals.h"
 #include "isxao_inlines.h"
 #include "isxao_utilities.h"
-#include "isxao_detours.h"
+
 #include "isxao_commands.h"
 #include "isxao_move.h"
 

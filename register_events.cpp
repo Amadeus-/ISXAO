@@ -1,6 +1,6 @@
 #include "isxao_main.h"
 
-namespace isxao_events
+namespace isxao
 {
 
 	int GetEventId(PCSTR pszEvent)

@@ -2353,6 +2353,22 @@ constexpr DWORD input_config_t__m_pc_instance_offset = 0xC;
 
 #pragma endregion
 
+#pragma region input_config_t__m_as_input_method_id_table
+
+constexpr char* const input_config_t__m_as_input_method_id_table_mangled_name = static_cast<char*>(
+	"?m_asInputMethodIDTable@InputConfig_t@@0PAUPIC_ID_List_s@1@A");
+constexpr DWORD input_config_t__m_as_input_method_id_table_offset = 0x0;
+
+#pragma region input_config_t__m_as_input_modes_id_table
+
+constexpr char* const input_config_t__m_as_input_modes_id_table_mangled_name = static_cast<char*>(
+	"?m_asInputModesIDTable@InputConfig_t@@0PAUPIC_ID_List_s@1@A");
+constexpr DWORD input_config_t__m_as_input_modes_id_table_offset = 0x0;
+
+#pragma endregion
+
+#pragma endregion
+
 #pragma region targeting_module_t__m_pc_instance
 
 constexpr char* const targeting_module_t__m_pc_instance_mangled_name = static_cast<char*>(

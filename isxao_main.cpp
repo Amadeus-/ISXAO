@@ -67,7 +67,7 @@ namespace isxao
 		//InitializePlayfieldChildrenHook();
 		//InitializeAOMessageHook();
 		//InitializeSimpleCharHook();
-		ao_detours::initialize();
+		detours::initialize();
 
 		// Register events
 		gp_isxao_log->add_line("Registering events.");
@@ -91,7 +91,7 @@ namespace isxao
 		//ShutdownSetTeleportStatusHook();
 		//ShutdownSetMainDynelHook();
 		//ShutdownPlayfieldHook();
-		ao_detours::shutdown();
+		detours::shutdown();
 
 		printf("ISXAO unloaded.");
 		gp_isxao_log->add_line("Shutting down logging");

@@ -2,7 +2,7 @@
 
 namespace isxao
 {
-	class ao_detours
+	class detours
 	{
 	public:
 #pragma region gamestate_service
@@ -78,8 +78,8 @@ namespace isxao
 		void command_t__execute__trampoline(const ao::identity_t**, int, PVOID, ao::vector3_t*);
 		void command_t__execute__detour(const ao::identity_t**, int, PVOID, ao::vector3_t*);
 
-		bool input_config_t__process_input__trampoline(int, int);
-		bool input_config_t__process_input__detour(int, int);
+		bool input_config_t__process_input__trampoline(ao::keypress_info_t, int);
+		bool input_config_t__process_input__detour(ao::keypress_info_t, int);
 
 		void input_config_t__check_input__trampoline(PVOID);
 		void input_config_t__check_input__detour(PVOID);

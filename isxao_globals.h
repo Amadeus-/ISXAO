@@ -396,6 +396,12 @@ namespace isxao
 	AOLIB_VAR DWORD input_config_t__m_pc_instance;
 	AOLIB_VAR ao::input_config** pp_input_config;
 #define P_INPUT_CONFIG (*pp_input_config)  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD input_config_t__m_as_input_method_id_table;
+	AOLIB_VAR ao::input_method_id_table* p_input_method_id_table;
+#define P_INPUT_METHOD_ID_TABLE (p_input_method_id_table)  // NOLINT(cppcoreguidelines-macro-usage)
+	AOLIB_VAR DWORD input_config_t__m_as_input_modes_id_table;
+	AOLIB_VAR ao::input_mode_id_table* p_input_mode_id_table;
+#define P_INPUT_MODE_ID_TABLE (p_input_mode_id_table)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD input_config_t__get_instance;
 	AOLIB_VAR DWORD input_config_t__set_current_target;
 	AOLIB_VAR DWORD input_config_t__process_input;

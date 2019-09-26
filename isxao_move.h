@@ -124,7 +124,7 @@ namespace isxao
 		void spew_move_error(byte error_num);
 		void output_help(byte cmd_used, bool only_cmd_help = false);
 		void write_line(char output[MAX_VARSTRING], verbosity_level v_compare);
-		void handle_our_cmd(byte cmd_used, PCHAR* input);
+		void handle_our_cmd(byte cmd_used, int begin_inclusive, int argc, char *argv[]);
 		void end_previous_cmd(bool kill_movement, byte cmd_used = apply_to_all, bool preserve_self = false);
 
 #pragma endregion

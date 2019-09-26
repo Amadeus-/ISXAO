@@ -262,7 +262,6 @@ namespace ao
 	bool actor::is_fighting()
 	{
 		return this->get_simple_char_data()->p_weapon_holder->is_attacking != 1;
-
 	}
 
 	bool actor::is_fighting_me()

@@ -1,6 +1,10 @@
 #pragma once
 
-namespace isxao_classes
-{	
+namespace isxao
+{
+
 #include "parser.h"
+
+#include "isxao_detours.h"
+
 }

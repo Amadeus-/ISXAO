@@ -1293,7 +1293,7 @@ namespace isxao_utilities
 				return pCharacterType;
 			if (pObject->is_player())
 				return pActorType;	
-			if (pObject->is_pet() && isxao::is_client_id(pObject->to_actor()->get_master_id()))
+			if (pObject->is_pet() && is_client_id(pObject->to_actor()->get_master_id()))
 				return pPetType;
 			if (pObject->is_actor())
 				return pActorType;
@@ -1328,7 +1328,7 @@ namespace isxao_utilities
 
 	void get_arg(char current_arg[MAX_VARSTRING], const int argc, char *argv[], DWORD& arg_num)
 	{
-		if (arg_num > argc)
+		if (arg_num > DWORD(argc))
 		{
 			sprintf_s(current_arg, sizeof(current_arg), nullptr);
 			return;
@@ -1342,9 +1342,9 @@ namespace isxao_utilities
 
 	void HandleN3Message(PN3MESSAGEINFO message_info)
 	{
-		auto parser = isxao_classes::parser(PCHAR(message_info->message), message_info->size);
-		const auto n3_header = isxao_classes::n3_header(parser);
-		switch(ao::N3MessageType_e(n3_header.n3_type()))
+		auto p = parser(PCHAR(message_info->message), message_info->size);
+		const auto n3 = n3_header(p);
+		switch(ao::N3MessageType_e(n3.n3_type()))
 		{
 		case ao::N3T_KNUBOT_NPC_DESCRIPTION: break;
 		case ao::N3T_ADD_TEMPLATE: break;
@@ -1362,8 +1362,8 @@ namespace isxao_utilities
 		{
 			if(message_info->size == 0x15)
 			{
-				const auto add_pet_message = isxao_classes::add_pet_message(parser);
-				HandleAddPetMessage(add_pet_message);
+				const auto a_p_msg = add_pet_message(p);
+				HandleAddPetMessage(a_p_msg);
 			}			
 			break;
 		}
@@ -1390,10 +1390,10 @@ namespace isxao_utilities
 		{
 			if(message_info->size == 0x1D)
 			{
-				auto a1 = parser.pop_integer();
-				auto a2 = parser.pop_integer();
-				auto a3 = parser.pop_integer();
-				auto a4 = parser.pop_integer();
+				auto a1 = p.pop_integer();
+				auto a2 = p.pop_integer();
+				auto a3 = p.pop_integer();
+				auto a4 = p.pop_integer();
 				printf("%d %d %d %d", a1, a2, a3, a4);
 			}
 			//printf("0x%.8X", message_info->size);
@@ -1403,8 +1403,8 @@ namespace isxao_utilities
 		{			
 			if(message_info->size == 0x25)
 			{
-				auto cast_nano_spell_message = isxao_classes::cast_nano_spell_message(parser);
-				HandleCastNanoSpellMessage(cast_nano_spell_message);
+				auto c_n_s_msg = cast_nano_spell_message(p);
+				HandleCastNanoSpellMessage(c_n_s_msg);
 			}			
 			break;
 		}
@@ -1413,8 +1413,8 @@ namespace isxao_utilities
 		{
 			if(message_info->size == 0x28)
 			{
-				auto follow_target_message = isxao_classes::follow_target_message(parser);
-				HandleFollowTargetMessage(follow_target_message);
+				auto f_t_msg = follow_target_message(p);
+				HandleFollowTargetMessage(f_t_msg);
 			}			
 			break;
 		}
@@ -1428,8 +1428,8 @@ namespace isxao_utilities
 		{
 			if(message_info->size == 0x16)
 			{
-				auto attack_message = isxao_classes::attack_message(parser);
-				HandleAttackMessage(attack_message);
+				auto a_msg = attack_message(p);
+				HandleAttackMessage(a_msg);
 			}			
 			break;
 		}
@@ -1520,8 +1520,8 @@ namespace isxao_utilities
 		{
 			if (message_info->size == 0x15)
 			{
-				auto remove_pet_message = isxao_classes::remove_pet_message(parser);
-				HandleRemovePetMessage(remove_pet_message);
+				auto r_p_msg = remove_pet_message(p);
+				HandleRemovePetMessage(r_p_msg);
 			}			
 			break;
 		}
@@ -1539,8 +1539,8 @@ namespace isxao_utilities
 		{
 			if(message_info->size == 0x27)
 			{
-				auto character_action_message = isxao_classes::character_action_message(parser);
-				HandleCharacterActionMessage(character_action_message);
+				auto c_a_msg = character_action_message(p);
+				HandleCharacterActionMessage(c_a_msg);
 			}			
 			break;
 		}
@@ -1569,7 +1569,7 @@ namespace isxao_utilities
 		delete message_info;
 	}
 
-	void HandleAddPetMessage(isxao_classes::add_pet_message pet_message)
+	void HandleAddPetMessage(add_pet_message pet_message)
 	{
 		char pet[MAX_VARSTRING];
 		sprintf_s(pet, sizeof(pet), "%I64u",pet_message.identity().combined_identity());
@@ -1578,16 +1578,15 @@ namespace isxao_utilities
 		//delete argv;
 	}
 
-	void HandleAttackMessage(isxao_classes::attack_message attack_message)
+	void HandleAttackMessage(attack_message attack_message)
 	{
 		char target[MAX_VARSTRING];
 		sprintf_s(target, sizeof(target), "%I64u", attack_message.target().combined_identity());
 		char *argv[] = { target };
 		pISInterface->ExecuteEvent(GetEventId("AO_onAttack"), 0, 1, argv);
-		//delete argv;
 	}
 
-	void HandleCastNanoSpellMessage(isxao_classes::cast_nano_spell_message cast_nano_spell_message)
+	void HandleCastNanoSpellMessage(cast_nano_spell_message cast_nano_spell_message)
 	{
 		char nano_id[MAX_VARSTRING];
 		char target[MAX_VARSTRING];
@@ -1607,7 +1606,7 @@ namespace isxao_utilities
 			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_CasterOther"), 0, 3, argv);
 	}
 
-	void HandleCharacterActionMessage(isxao_classes::character_action_message character_action_message)
+	void HandleCharacterActionMessage(character_action_message character_action_message)
 	{
 		switch (ao::TypeCharacterAction_e(character_action_message.character_action_type()))
 		{
@@ -1671,7 +1670,7 @@ namespace isxao_utilities
 		}
 	}
 
-	void HandleFollowTargetMessage(isxao_classes::follow_target_message follow_message)
+	void HandleFollowTargetMessage(follow_target_message follow_message)
 	{
 		char target[MAX_VARSTRING];
 		sprintf_s(target, sizeof(target), "%I64u", follow_message.target().combined_identity());
@@ -1680,7 +1679,7 @@ namespace isxao_utilities
 		//delete argv;
 	}
 	
-	void HandleRemovePetMessage(isxao_classes::remove_pet_message remove_pet_message)
+	void HandleRemovePetMessage(remove_pet_message remove_pet_message)
 	{
 		char pet[MAX_VARSTRING];
 		sprintf_s(pet, sizeof(pet), "%I64u", remove_pet_message.identity().combined_identity());
@@ -1689,7 +1688,7 @@ namespace isxao_utilities
 		//delete argv;
 	}
 
-	void HandleShieldAttackMessage(isxao_classes::shield_attack_message shield_attack_message)
+	void HandleShieldAttackMessage(shield_attack_message shield_attack_message)
 	{
 		char damage[MAX_VARSTRING];
 		char shieldee[MAX_VARSTRING];

@@ -6,12 +6,11 @@ namespace ao {
 
 	class actor;
 	class character;
-	class chat_window_node;
+	//class chat_window_node;
 	class info_item_remote;
-	// class inventory_item;
 	class pet;
 	class player;
-	class resource_database;
+	//class resource_database;
 	class special_action_template;
 	class team_member;
 	class team_raid;
