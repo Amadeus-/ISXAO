@@ -1,7 +1,7 @@
 #include "isxao_main.h"
 
 
-namespace isxao_find_pattern
+namespace isxao::patterns
 {
 	struct pattern_byte
 	{

@@ -94,7 +94,7 @@ namespace ao
 
 	PCSTR engine_client_anarchy::get_item_rarity_str(const DWORD rarity_id)
 	{
-		return isxao_utilities::get_item_rarity_str(rarity_id);
+		return isxao::get_item_rarity_str(rarity_id);
 	}
 
 #if true
@@ -113,12 +113,12 @@ namespace ao
 
 	PCSTR engine_client_anarchy::get_nano_school_str(const DWORD school_id)
 	{
-		return isxao_utilities::get_nano_school_str(school_id);
+		return isxao::get_nano_school_str(school_id);
 	}
 
 	PCSTR engine_client_anarchy::get_profession_str(const ao::profession_e prof_id)
 	{
-		return isxao_utilities::get_profession_str(prof_id);
+		return isxao::get_profession_str(prof_id);
 	}
 
 
@@ -134,7 +134,7 @@ namespace ao
 
 	PCSTR engine_client_anarchy::get_side_str(const ao::side_e side_id)
 	{
-		return isxao_utilities::get_side_str(side_id);
+		return isxao::get_side_str(side_id);
 	}
 
 #if true

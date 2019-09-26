@@ -2,7 +2,7 @@
 #include "atlbase.h"
 #include "iostream"
 
-namespace isxao_utilities
+namespace isxao
 {
 
 #pragma region Strings
@@ -217,7 +217,7 @@ namespace isxao_utilities
 
 #pragma region SearchActor
 
-	DWORD ParseSearchActorArg(int arg, int argc, char *argv[], SEARCHACTOR &search_actor)
+	DWORD ParseSearchActorArg(int arg, int argc, char *argv[], internal::SEARCHACTOR &search_actor)
 	{
 		if (arg >= argc)
 			return 0;
@@ -225,19 +225,19 @@ namespace isxao_utilities
 		{
 			if (!_stricmp(argv[arg], "pc"))
 			{
-				search_actor.actor_type = MOB_PC;
+				search_actor.actor_type = internal::MOB_PC;
 			}
 			else if (!_stricmp(argv[arg], "npc"))
 			{
-				search_actor.actor_type = MOB_NPC;
+				search_actor.actor_type = internal::MOB_NPC;
 			}
 			else if (!_stricmp(argv[arg], "pet"))
 			{
-				search_actor.actor_type = MOB_PET;
+				search_actor.actor_type = internal::MOB_PET;
 			}
 			else if (!_stricmp(argv[arg], "mypet"))
 			{
-				search_actor.actor_type = MOB_MYPET;
+				search_actor.actor_type = internal::MOB_MYPET;
 			}
 			else if (!_stricmp(argv[arg], "nopet"))
 			{
@@ -328,40 +328,40 @@ namespace isxao_utilities
 		return ExtraUsed;
 	}
 
-	void ClearSearchActor(PSEARCHACTOR p_search_actor)
+	void ClearSearchActor(internal::PSEARCHACTOR p_search_actor)
 	{
 		if (!p_search_actor) return;
-		ZeroMemory(p_search_actor, sizeof(SEARCHACTOR));
+		ZeroMemory(p_search_actor, sizeof(internal::SEARCHACTOR));
 		p_search_actor->max_level = MAX_LEVEL;
 		p_search_actor->y_radius = 10000.0f;
 		p_search_actor->f_radius = 10000.0f;
 	}
 
-	void ParseSearchActor(int begin_inclusive, int end_exclusive, char *argv[], SEARCHACTOR &search_actor)
+	void ParseSearchActor(int begin_inclusive, int end_exclusive, char *argv[], internal::SEARCHACTOR &search_actor)
 	{
 		for (int arg = begin_inclusive; arg < end_exclusive; arg++)
 			arg += ParseSearchActorArg(arg, end_exclusive, argv, search_actor);
 	}
 
-	bool ActorMatchesSearch(PSEARCHACTOR p_search_actor, ao::actor* p_character, ao::actor* p_actor)
+	bool ActorMatchesSearch(internal::PSEARCHACTOR p_search_actor, ao::actor* p_character, ao::actor* p_actor)
 	{
 		char szName[MAX_VARSTRING] = { 0 };
 		char szSearchName[MAX_VARSTRING] = { 0 };
 		DWORD actor_type;
 		if (p_actor->get_identity().type != 50000)
-			actor_type = MOB_OTHER;
+			actor_type = internal::MOB_OTHER;
 		else if (p_actor->is_actor())
 		{
 			if (p_actor->is_pet() && is_client_id(p_actor->get_master_id()))
-				actor_type = MOB_MYPET;
+				actor_type = internal::MOB_MYPET;
 			else if (p_actor->is_pet())
-				actor_type = MOB_PET;
+				actor_type = internal::MOB_PET;
 			else
-				actor_type = MOB_NPC;
+				actor_type = internal::MOB_NPC;
 		}
 		else
-			actor_type = MOB_PC;
-		if (p_search_actor->actor_type != actor_type && p_search_actor->actor_type != MOB_NONE)
+			actor_type = internal::MOB_PC;
+		if (p_search_actor->actor_type != actor_type && p_search_actor->actor_type != internal::MOB_NONE)
 			return false;
 		strcpy_s(szName, MAX_VARSTRING, p_actor->get_name());
 		_strlwr_s(szName);
@@ -429,7 +429,7 @@ namespace isxao_utilities
 		return false;
 	}
 
-	DWORD CountMatchingActors(PSEARCHACTOR p_search_actor, ao::actor* p_character, bool include_char)
+	DWORD CountMatchingActors(internal::PSEARCHACTOR p_search_actor, ao::actor* p_character, bool include_char)
 	{
 		if (!p_search_actor || !p_character)
 			return 0;
@@ -456,11 +456,11 @@ namespace isxao_utilities
 		return total_matching;
 	}
 
-	ao::actor* NthNearestActor(PSEARCHACTOR p_search_actor, DWORD nth, ao::actor* p_origin, bool include_char)
+	ao::actor* NthNearestActor(internal::PSEARCHACTOR p_search_actor, DWORD nth, ao::actor* p_origin, bool include_char)
 	{
 		if (!p_search_actor || !nth || !p_origin)
 			return nullptr;
-		CIndex<PAORANK> actor_set;
+		CIndex<internal::PAORANK> actor_set;
 		ao::vector3_t pos = p_origin->get_position();
 		std::vector<ao::actor*> v;
 		P_PLAYFIELD_DIR->get_playfield()->get_playfield_actors(v);
@@ -472,7 +472,7 @@ namespace isxao_utilities
 				if (ActorMatchesSearch(p_search_actor, p_origin, *it))
 				{
 					TotalMatching++;
-					PAORANK pNewRank = new AORANK;
+					internal::PAORANK pNewRank = new internal::AORANK;
 					pNewRank->VarPtr.Ptr = *it;
 					pNewRank->Value.Float = (*it)->get_distance_to(pos);
 					actor_set += pNewRank;
@@ -486,7 +486,7 @@ namespace isxao_utilities
 				if (*it != p_origin && ActorMatchesSearch(p_search_actor, p_origin, *it))
 				{
 					TotalMatching++;
-					PAORANK pNewRank = new AORANK;
+					internal::PAORANK pNewRank = new internal::AORANK;
 					pNewRank->VarPtr.Ptr = *it;
 					pNewRank->Value.Float = (*it)->get_distance_to(pos);
 					actor_set += pNewRank;
@@ -498,7 +498,7 @@ namespace isxao_utilities
 			actor_set.Cleanup();
 			return nullptr;
 		}
-		std::sort(&actor_set.List[0], &actor_set[0] + TotalMatching, pAORankFloatCompare);
+		std::sort(&actor_set.List[0], &actor_set[0] + TotalMatching, internal::pAORankFloatCompare);
 		auto p_actor = static_cast<ao::actor*>(actor_set[nth - 1]->VarPtr.Ptr);
 		actor_set.Cleanup();
 		return p_actor;
@@ -1340,7 +1340,7 @@ namespace isxao_utilities
 
 #pragma region MessageHandling
 
-	void HandleN3Message(PN3MESSAGEINFO message_info)
+	void HandleN3Message(internal::PN3MESSAGEINFO message_info)
 	{
 		auto p = parser(PCHAR(message_info->message), message_info->size);
 		const auto n3 = n3_header(p);
@@ -1699,7 +1699,7 @@ namespace isxao_utilities
 		//delete argv;
 	}
 
-	void HandleGroupMessage(PGROUPMESSAGEINFO group_message_info)
+	void HandleGroupMessage(internal::PGROUPMESSAGEINFO group_message_info)
 	{
 		char* sender = _strdup(group_message_info->SenderName.c_str());
 		char* channel = _strdup(group_message_info->ChatChannel.c_str());
@@ -1711,7 +1711,7 @@ namespace isxao_utilities
 		delete group_message_info;
 	}
 
-	void HandlePrivateMessage(PPRIVATEMESSAGEINFO private_message_info)
+	void HandlePrivateMessage(internal::PPRIVATEMESSAGEINFO private_message_info)
 	{
 		char* sender = _strdup(private_message_info->SenderName.c_str());
 		char* message = _strdup(private_message_info->Message.c_str());
@@ -1722,7 +1722,7 @@ namespace isxao_utilities
 		delete private_message_info;
 	}
 
-	void HandleVicinityMessage(PPRIVATEMESSAGEINFO vicinity_message_info)
+	void HandleVicinityMessage(internal::PPRIVATEMESSAGEINFO vicinity_message_info)
 	{
 		char* sender = _strdup(vicinity_message_info->SenderName.c_str());
 		char* message = _strdup(vicinity_message_info->Message.c_str());
@@ -1733,7 +1733,7 @@ namespace isxao_utilities
 		delete vicinity_message_info;
 	}
 
-	void HandleSystemChat(PSYSTEMCHATINFO system_chat_info)
+	void HandleSystemChat(internal::PSYSTEMCHATINFO system_chat_info)
 	{
 		char chat_type[MAX_VARSTRING];
 		char* text = _strdup(system_chat_info->Text.c_str());
@@ -1891,5 +1891,3 @@ namespace isxao_utilities
 #pragma endregion
 
 }
-
-using namespace isxao_utilities;

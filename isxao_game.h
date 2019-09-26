@@ -1,8 +1,5 @@
 #pragma once
 
-namespace isxao
-{
-
 #pragma region N3
 
 // Module
@@ -3024,5 +3021,3 @@ constexpr DWORD resource_database_t__get_db_object_1_bytes_to_next = 0x0;
 #define GraphPathFinder_t__SetSurface_x					0x1EA4
 
 #pragma endregion
-
-}

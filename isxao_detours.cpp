@@ -142,7 +142,7 @@ namespace isxao
 				PCHAR message = static_cast<ao::n3_message*>(p1)->message_body_get();
 				PVOID export_message = malloc(length);
 				memcpy_s(export_message, length, message, length);
-				PN3MESSAGEINFO message_info = new N3MESSAGEINFO(export_message, length);
+				internal::PN3MESSAGEINFO message_info = new internal::N3MESSAGEINFO(export_message, length);
 				g_n3message_queue.push(message_info);
 				//auto p = isxao_classes::Parser(ao_message, length);
 				//N3Header header = N3Header(p);
@@ -430,7 +430,7 @@ namespace isxao
 	{
 		if(get_game_state() == GAMESTATE_IN_GAME)
 		{
-			PGROUPMESSAGEINFO group_message_info = new GROUPMESSAGEINFO(m->sender_id, m->sender, m->channel_name, m->message);
+			internal::PGROUPMESSAGEINFO group_message_info = new internal::GROUPMESSAGEINFO(m->sender_id, m->sender, m->channel_name, m->message);
 			g_group_message_queue.push(group_message_info);
 		}
 		ChatGUIModule_c__HandleGroupMessage_Trampoline(m);
@@ -465,7 +465,7 @@ namespace isxao
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);
 
-			PPRIVATEMESSAGEINFO private_message_info = new PRIVATEMESSAGEINFO(m->sender_id, m->sender, m->message);
+			internal::PPRIVATEMESSAGEINFO private_message_info = new internal::PRIVATEMESSAGEINFO(m->sender_id, m->sender, m->message);
 			g_private_message_queue.push(private_message_info);
 		}
 		ChatGUIModule_c__HandlePrivateMessage_Trampoline(m);
@@ -511,7 +511,7 @@ namespace isxao
 			//char *argv[] = { sender, ao_message, id };
 			//pISInterface->ExecuteEvent(GetEventId("AO_onVicinityMessageReceived"), 0, 3, argv);
 			//delete argv;
-			PPRIVATEMESSAGEINFO vicintity_message_info = new PRIVATEMESSAGEINFO(m->sender_id, m->sender, m->message);
+			internal::PPRIVATEMESSAGEINFO vicintity_message_info = new internal::PRIVATEMESSAGEINFO(m->sender_id, m->sender, m->message);
 			g_vicinity_message_queue.push(vicintity_message_info);
 		}
 		ChatGUIModule_c__HandleVicinityMessage_Trampoline(m);
@@ -679,7 +679,7 @@ namespace isxao
 			//char *argv[] = { chat_type, text };
 			//pISInterface->ExecuteEvent(GetEventId("AO_onIncomingSystemText"), 0, 2, argv);
 			//delete argv;
-			PSYSTEMCHATINFO system_chat_info = new SYSTEMCHATINFO(group_id, chat_text);
+			internal::PSYSTEMCHATINFO system_chat_info = new internal::SYSTEMCHATINFO(group_id, chat_text);
 			g_system_chat_queue.push(system_chat_info);
 		}
 		ChatGroupController_c__sub_10083D9C_Trampoline(group_id, chat_text, unknown);

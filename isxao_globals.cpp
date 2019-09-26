@@ -7,9 +7,6 @@
 #define RESOLVE_FUNCTION_ADDRESS(module, function_address, ...) resolve_function_address(module##_data, module##_module_handle, (function_address), #function_address, function_address##_mangled_name, function_address##_pattern, function_address##_offset, function_address##_bytes_to_next, __VA_ARGS__);  // NOLINT(cppcoreguidelines-macro-usage)
 #define RESOLVE_STATIC_INSTANCE_ADDRESS(module, static_address, ...) resolve_static_instance_address(module##_module_handle, (static_address), #static_address, static_address##_mangled_name, static_address##_offset, __VA_ARGS__);	// NOLINT(cppcoreguidelines-macro-usage)
 
-namespace isxao
-{
-
 #pragma region Modules
 	
 	HMODULE n3_module_handle = GetModuleHandle(n3_module_name);
@@ -506,11 +503,11 @@ namespace isxao
 	float g_distance_moved_since_last = 0.0f;
 	ao::vector3_t g_move_to_location;
 	ao::vector3_t g_last_location;
-	Concurrency::concurrent_queue<PN3MESSAGEINFO> g_n3message_queue;
-	Concurrency::concurrent_queue<PGROUPMESSAGEINFO> g_group_message_queue;
-	Concurrency::concurrent_queue<PPRIVATEMESSAGEINFO> g_private_message_queue;
-	Concurrency::concurrent_queue<PPRIVATEMESSAGEINFO> g_vicinity_message_queue;
-	Concurrency::concurrent_queue<PSYSTEMCHATINFO> g_system_chat_queue;
+	Concurrency::concurrent_queue<isxao::internal::PN3MESSAGEINFO> g_n3message_queue;
+	Concurrency::concurrent_queue<isxao::internal::PGROUPMESSAGEINFO> g_group_message_queue;
+	Concurrency::concurrent_queue<isxao::internal::PPRIVATEMESSAGEINFO> g_private_message_queue;
+	Concurrency::concurrent_queue<isxao::internal::PPRIVATEMESSAGEINFO> g_vicinity_message_queue;
+	Concurrency::concurrent_queue<isxao::internal::PSYSTEMCHATINFO> g_system_chat_queue;
 
 #pragma endregion
 
@@ -1147,7 +1144,7 @@ namespace isxao
 
 	bool get_function_address(const std::vector<unsigned char>& data, const char* function_pattern, DWORD& module_base_address, DWORD& function_address, const char* function_offset_name)
 	{
-		function_address = find_pattern(data, function_pattern, module_base_address);
+		function_address = isxao::patterns::find_pattern(data, function_pattern, module_base_address);
 		if (function_address == DWORD(-1))
 		{
 			printf("[ERROR]\t%s could not be found using pattern matching.", function_offset_name);
@@ -1265,5 +1262,3 @@ namespace isxao
 		printf("[ERROR]\t%s not found!", static_instance_name);
 		return false;
 	}
-
-}

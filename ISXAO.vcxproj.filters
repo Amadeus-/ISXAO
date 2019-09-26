@@ -191,9 +191,6 @@
     <ClCompile Include="isxao_detours.cpp">
       <Filter>Source Files\Base\Internal</Filter>
     </ClCompile>
-    <ClCompile Include="isxao_dynels.cpp">
-      <Filter>Source Files\Base\Internal</Filter>
-    </ClCompile>
     <ClCompile Include="isxao_globals.cpp">
       <Filter>Source Files\Base\Internal</Filter>
     </ClCompile>

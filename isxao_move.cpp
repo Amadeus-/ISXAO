@@ -365,8 +365,8 @@ namespace isxao
 	{
 		const auto p = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_position();
 		const auto h = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_rotation().get_raw_heading();
-		const auto z = float(p.z + this->radius * sin(h * M_PI / heading_half));
-		const auto x = float(p.x + this->radius * cos(h * M_PI / heading_half));
+		const auto z = float(p.z + this->radius * cos(h));
+		const auto x = float(p.x + this->radius * sin(h));
 		this->location.x = x;
 		this->location.z = z;
 		this->on = true;
@@ -441,7 +441,7 @@ namespace isxao
 		if (p_camp_command->on && this->on && p_character->in_combat())
 		{
 			p_move_active->move_to_broke = true;
-			// TODO: EndPreviousCmd
+			end_previous_cmd(true);
 			sprintf_s(message, sizeof(message), "Aggro gained during /move_to, Halting command...");
 			write_line(message, V_BREAK_ON_AGGRO);
 			return true;
@@ -551,7 +551,7 @@ namespace isxao
 	{
 		if (g_game_state == GAMESTATE_IN_GAME && p_move_to_command->on && this->returning)
 		{
-			// TODO: EndPreviousCmd
+			end_previous_cmd(true);
 		}
 		delete p_camp_command;
 		p_camp_command = new camp_command();
@@ -629,7 +629,7 @@ namespace isxao
 
 	stick_command::stick_command()
 	{
-		this->snap = new isxao::move::snap_roll();
+		this->snap = new move::snap_roll();
 		this->set_dist = false;
 		this->dist = 0.0f;
 		this->rand_min = 0.0f;
@@ -688,7 +688,7 @@ namespace isxao
 	void stick_command::new_snap_roll()
 	{
 		delete this->snap;
-		this->snap = new isxao::move::snap_roll();
+		this->snap = new move::snap_roll();
 	}
 
 	void stick_command::reset_loc()
@@ -814,7 +814,7 @@ namespace isxao
 
 		if (!this->always_ready_)
 		{
-			// TODO: EndPreviousCmd
+			end_previous_cmd(true, command_stick, true);
 			p_pause_handler->reset();
 			p_movement->do_stand();
 			p_movement->stop_heading();
@@ -870,7 +870,7 @@ namespace isxao
 				if (!p_target || (p_stick_command->hold && p_stick_command->hold_id != p_target->get_identity()))
 				{
 					this->reset();
-					// TODO: EndPreviousCmd
+					end_previous_cmd(true);
 					sprintf_s(message, sizeof(message), "You are no longer sticking to anything.");
 					write_line(message, V_STICK_V);
 					return;
@@ -923,7 +923,7 @@ namespace isxao
 					this->reset();
 					if (!this->user_kb)
 						this->paused_move = false;
-					// TODO:: EndPreviousCmd
+					end_previous_cmd(true);
 					sprintf_s(message, sizeof(message), "You are no longer sticking to anything.");
 					write_line(message, V_STICK_V);
 					return false;
@@ -946,7 +946,7 @@ namespace isxao
 				p_movement->stop_heading();
 				if(p_move_settings->break_mouse)
 				{
-					// TODO: EndPreviousCmd
+					end_previous_cmd(true);
 					if(!p_camp_handler->is_auto)
 					{
 						sprintf_s(message, sizeof(message), "Current command ended from mouse movement.");

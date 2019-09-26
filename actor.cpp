@@ -266,7 +266,7 @@ namespace ao
 
 	bool actor::is_fighting_me()
 	{
-		return is_client_id(this->get_simple_char_data()->p_weapon_holder->weapon_target_identity.id);
+		return isxao::is_client_id(this->get_simple_char_data()->p_weapon_holder->weapon_target_identity.id);
 	}
 
 	bool actor::is_idle()
@@ -429,7 +429,7 @@ namespace ao
 
 	DWORD actor::get_pet_ids(std::map<identity_t, DWORD>& m)
 	{
-		if (!is_client_id(this->get_identity().id))
+		if (!isxao::is_client_id(this->get_identity().id))
 		{
 			std::map<identity_t, p_n3_dynel_t> dynel_map;
 			P_DYNEL_DIR->copy_map(dynel_map);

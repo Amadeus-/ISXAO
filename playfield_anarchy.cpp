@@ -5,6 +5,7 @@ namespace ao
 
 #if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void playfield_anarchy::debug_draw_pathfinder(), n3_playfield_t__debug_draw_pathfinder)
 #else
 	static_assert(false, "playfield_anarchy::debug_draw_pathfinder() requires a native function.");
@@ -62,6 +63,7 @@ namespace ao
 	}
 
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool playfield_anarchy::line_of_sight(const vector3_t &, const vector3_t &, int, bool), n3_playfield_t__line_of_sight);
 
 	p_grid_space_t playfield_anarchy::get_grid_space() const

@@ -15,6 +15,7 @@ namespace ao
 
 #if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool command_interpreter::parse_text(chat_window_node*, string&), command_interpreter_c__parse_text_command)
 #else
 	static_assert(false, "engine_client_anarchy::get_faction_str(DWORD, bool) requires a native function.");

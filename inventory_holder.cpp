@@ -10,11 +10,11 @@ namespace ao
 		for (DWORD i = 0; i < count; i++)
 		{
 			identity_t slot;
-			GetInvSlotIdentity(i, slot);
+			isxao::GetInvSlotIdentity(i, slot);
 			auto p_item = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(slot, d);
 			if (p_item)
 			{
-				p_map->SetItem(GetInvSlotName(slot), reinterpret_cast<LSOBJECTDATA&>(p_item));
+				p_map->SetItem(isxao::GetInvSlotName(slot), reinterpret_cast<LSOBJECTDATA&>(p_item));
 			}
 		}
 		return p_map->GetContainerUsed();
@@ -27,7 +27,7 @@ namespace ao
 		for (DWORD i = 0; i < count; i++)
 		{
 			identity_t slot;
-			GetInvSlotIdentity(i, slot);
+			isxao::GetInvSlotIdentity(i, slot);
 			const auto p_item = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(slot, d);
 			if (p_item)
 			{
@@ -129,91 +129,91 @@ namespace ao
 		strcpy_s(sz_search_name, MAX_VARSTRING, sz_arg);
 		_strlwr_s(sz_search_name);
 		if (!strcmp(sz_search_name, "ws_hud1"))
-			GetInvSlotIdentity(WS_HUD_1, id);
+			isxao::GetInvSlotIdentity(WS_HUD_1, id);
 		else if (!strcmp(sz_search_name, "ws_hud2"))
-			GetInvSlotIdentity(WS_HUD_2, id);
+			isxao::GetInvSlotIdentity(WS_HUD_2, id);
 		else if (!strcmp(sz_search_name, "ws_hud3"))
-			GetInvSlotIdentity(WS_HUD_3, id);
+			isxao::GetInvSlotIdentity(WS_HUD_3, id);
 		else if (!strcmp(sz_search_name, "ws_util1"))
-			GetInvSlotIdentity(WS_UTIL_1, id);
+			isxao::GetInvSlotIdentity(WS_UTIL_1, id);
 		else if (!strcmp(sz_search_name, "ws_util2"))
-			GetInvSlotIdentity(WS_UTIL_2, id);
+			isxao::GetInvSlotIdentity(WS_UTIL_2, id);
 		else if (!strcmp(sz_search_name, "ws_util3"))
-			GetInvSlotIdentity(WS_UTIL_3, id);
+			isxao::GetInvSlotIdentity(WS_UTIL_3, id);
 		else if (!strcmp(sz_search_name, "ws_rhand"))
-			GetInvSlotIdentity(WS_R_HAND, id);
+			isxao::GetInvSlotIdentity(WS_R_HAND, id);
 		else if (!strcmp(sz_search_name, "ws_belt"))
-			GetInvSlotIdentity(WS_BELT, id);
+			isxao::GetInvSlotIdentity(WS_BELT, id);
 		else if (!strcmp(sz_search_name, "ws_lhand"))
-			GetInvSlotIdentity(WS_L_HAND, id);
+			isxao::GetInvSlotIdentity(WS_L_HAND, id);
 		else if (!strcmp(sz_search_name, "ws_ncu1"))
-			GetInvSlotIdentity(WS_NCU_1, id);
+			isxao::GetInvSlotIdentity(WS_NCU_1, id);
 		else if (!strcmp(sz_search_name, "ws_ncu2"))
-			GetInvSlotIdentity(WS_NCU_2, id);
+			isxao::GetInvSlotIdentity(WS_NCU_2, id);
 		else if (!strcmp(sz_search_name, "ws_ncu3"))
-			GetInvSlotIdentity(WS_NCU_3, id);
+			isxao::GetInvSlotIdentity(WS_NCU_3, id);
 		else if (!strcmp(sz_search_name, "ws_ncu4"))
-			GetInvSlotIdentity(WS_NCU_4, id);
+			isxao::GetInvSlotIdentity(WS_NCU_4, id);
 		else if (!strcmp(sz_search_name, "ws_ncu5"))
-			GetInvSlotIdentity(WS_NCU_5, id);
+			isxao::GetInvSlotIdentity(WS_NCU_5, id);
 		else if (!strcmp(sz_search_name, "ws_ncu6"))
-			GetInvSlotIdentity(WS_NCU_6, id);
+			isxao::GetInvSlotIdentity(WS_NCU_6, id);
 		else if (!strcmp(sz_search_name, "as_neck"))
-			GetInvSlotIdentity(AS_NECK, id);
+			isxao::GetInvSlotIdentity(AS_NECK, id);
 		else if (!strcmp(sz_search_name, "as_head"))
-			GetInvSlotIdentity(AS_HEAD, id);
+			isxao::GetInvSlotIdentity(AS_HEAD, id);
 		else if (!strcmp(sz_search_name, "as_back"))
-			GetInvSlotIdentity(AS_BACK, id);
+			isxao::GetInvSlotIdentity(AS_BACK, id);
 		else if (!strcmp(sz_search_name, "as_rshoulder"))
-			GetInvSlotIdentity(AS_R_SHOULDER, id);
+			isxao::GetInvSlotIdentity(AS_R_SHOULDER, id);
 		else if (!strcmp(sz_search_name, "as_chest"))
-			GetInvSlotIdentity(AS_CHEST, id);
+			isxao::GetInvSlotIdentity(AS_CHEST, id);
 		else if (!strcmp(sz_search_name, "as_lshoulder"))
-			GetInvSlotIdentity(AS_L_SHOULDER, id);
+			isxao::GetInvSlotIdentity(AS_L_SHOULDER, id);
 		else if (!strcmp(sz_search_name, "as_rarm"))
-			GetInvSlotIdentity(AS_R_ARM, id);
+			isxao::GetInvSlotIdentity(AS_R_ARM, id);
 		else if (!strcmp(sz_search_name, "as_hands"))
-			GetInvSlotIdentity(AS_HANDS, id);
+			isxao::GetInvSlotIdentity(AS_HANDS, id);
 		else if (!strcmp(sz_search_name, "as_larm"))
-			GetInvSlotIdentity(AS_L_ARM, id);
+			isxao::GetInvSlotIdentity(AS_L_ARM, id);
 		else if (!strcmp(sz_search_name, "as_rwrist"))
-			GetInvSlotIdentity(AS_R_WRIST, id);
+			isxao::GetInvSlotIdentity(AS_R_WRIST, id);
 		else if (!strcmp(sz_search_name, "as_legs"))
-			GetInvSlotIdentity(AS_LEGS, id);
+			isxao::GetInvSlotIdentity(AS_LEGS, id);
 		else if (!strcmp(sz_search_name, "as_lwrist"))
-			GetInvSlotIdentity(AS_L_WRIST, id);
+			isxao::GetInvSlotIdentity(AS_L_WRIST, id);
 		else if (!strcmp(sz_search_name, "as_rfinger"))
-			GetInvSlotIdentity(AS_R_FINGER, id);
+			isxao::GetInvSlotIdentity(AS_R_FINGER, id);
 		else if (!strcmp(sz_search_name, "as_feet"))
-			GetInvSlotIdentity(AS_FEET, id);
+			isxao::GetInvSlotIdentity(AS_FEET, id);
 		else if (!strcmp(sz_search_name, "as_lfinger"))
-			GetInvSlotIdentity(AS_L_FINGER, id);
+			isxao::GetInvSlotIdentity(AS_L_FINGER, id);
 		else if (!strcmp(sz_search_name, "is_eyes"))
-			GetInvSlotIdentity(IS_EYES, id);
+			isxao::GetInvSlotIdentity(IS_EYES, id);
 		else if (!strcmp(sz_search_name, "is_head"))
-			GetInvSlotIdentity(IS_HEAD, id);
+			isxao::GetInvSlotIdentity(IS_HEAD, id);
 		else if (!strcmp(sz_search_name, "is_ears"))
-			GetInvSlotIdentity(IS_EARS, id);
+			isxao::GetInvSlotIdentity(IS_EARS, id);
 		else if (!strcmp(sz_search_name, "is_rarm"))
-			GetInvSlotIdentity(IS_R_ARM, id);
+			isxao::GetInvSlotIdentity(IS_R_ARM, id);
 		else if (!strcmp(sz_search_name, "is_chest"))
-			GetInvSlotIdentity(IS_CHEST, id);
+			isxao::GetInvSlotIdentity(IS_CHEST, id);
 		else if (!strcmp(sz_search_name, "is_larm"))
-			GetInvSlotIdentity(IS_L_ARM, id);
+			isxao::GetInvSlotIdentity(IS_L_ARM, id);
 		else if (!strcmp(sz_search_name, "is_rwrist"))
-			GetInvSlotIdentity(IS_R_WRIST, id);
+			isxao::GetInvSlotIdentity(IS_R_WRIST, id);
 		else if (!strcmp(sz_search_name, "is_waist"))
-			GetInvSlotIdentity(IS_WAIST, id);
+			isxao::GetInvSlotIdentity(IS_WAIST, id);
 		else if (!strcmp(sz_search_name, "is_lwrist"))
-			GetInvSlotIdentity(IS_L_WRIST, id);
+			isxao::GetInvSlotIdentity(IS_L_WRIST, id);
 		else if (!strcmp(sz_search_name, "is_rhand"))
-			GetInvSlotIdentity(IS_R_HAND, id);
+			isxao::GetInvSlotIdentity(IS_R_HAND, id);
 		else if (!strcmp(sz_search_name, "is_legs"))
-			GetInvSlotIdentity(IS_LEGS, id);
+			isxao::GetInvSlotIdentity(IS_LEGS, id);
 		else if (!strcmp(sz_search_name, "is_lhand"))
-			GetInvSlotIdentity(IS_L_HAND, id);
+			isxao::GetInvSlotIdentity(IS_L_HAND, id);
 		else if (!strcmp(sz_search_name, "is_feet"))
-			GetInvSlotIdentity(IS_FEET, id);
+			isxao::GetInvSlotIdentity(IS_FEET, id);
 		if (id.type != 0)
 			return reinterpret_cast<inventory_item*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d));
 		std::map<identity_t, inventory_item*> m;
@@ -266,91 +266,91 @@ namespace ao
 			strcpy_s(sz_search_name, MAX_VARSTRING, sz_arg);
 			_strlwr_s(sz_search_name);
 			if (!strcmp(sz_search_name, "ws_hud1"))
-				GetInvSlotIdentity(ao::WS_HUD_1, id);
+				isxao::GetInvSlotIdentity(ao::WS_HUD_1, id);
 			else if (!strcmp(sz_search_name, "ws_hud2"))
-				GetInvSlotIdentity(ao::WS_HUD_2, id);
+				isxao::GetInvSlotIdentity(ao::WS_HUD_2, id);
 			else if (!strcmp(sz_search_name, "ws_hud3"))
-				GetInvSlotIdentity(ao::WS_HUD_3, id);
+				isxao::GetInvSlotIdentity(ao::WS_HUD_3, id);
 			else if (!strcmp(sz_search_name, "ws_util1"))
-				GetInvSlotIdentity(ao::WS_UTIL_1, id);
+				isxao::GetInvSlotIdentity(ao::WS_UTIL_1, id);
 			else if (!strcmp(sz_search_name, "ws_util2"))
-				GetInvSlotIdentity(ao::WS_UTIL_2, id);
+				isxao::GetInvSlotIdentity(ao::WS_UTIL_2, id);
 			else if (!strcmp(sz_search_name, "ws_util3"))
-				GetInvSlotIdentity(ao::WS_UTIL_3, id);
+				isxao::GetInvSlotIdentity(ao::WS_UTIL_3, id);
 			else if (!strcmp(sz_search_name, "ws_rhand"))
-				GetInvSlotIdentity(ao::WS_R_HAND, id);
+				isxao::GetInvSlotIdentity(ao::WS_R_HAND, id);
 			else if (!strcmp(sz_search_name, "ws_belt"))
-				GetInvSlotIdentity(ao::WS_BELT, id);
+				isxao::GetInvSlotIdentity(ao::WS_BELT, id);
 			else if (!strcmp(sz_search_name, "ws_lhand"))
-				GetInvSlotIdentity(ao::WS_L_HAND, id);
+				isxao::GetInvSlotIdentity(ao::WS_L_HAND, id);
 			else if (!strcmp(sz_search_name, "ws_ncu1"))
-				GetInvSlotIdentity(ao::WS_NCU_1, id);
+				isxao::GetInvSlotIdentity(ao::WS_NCU_1, id);
 			else if (!strcmp(sz_search_name, "ws_ncu2"))
-				GetInvSlotIdentity(ao::WS_NCU_2, id);
+				isxao::GetInvSlotIdentity(ao::WS_NCU_2, id);
 			else if (!strcmp(sz_search_name, "ws_ncu3"))
-				GetInvSlotIdentity(ao::WS_NCU_3, id);
+				isxao::GetInvSlotIdentity(ao::WS_NCU_3, id);
 			else if (!strcmp(sz_search_name, "ws_ncu4"))
-				GetInvSlotIdentity(ao::WS_NCU_4, id);
+				isxao::GetInvSlotIdentity(ao::WS_NCU_4, id);
 			else if (!strcmp(sz_search_name, "ws_ncu5"))
-				GetInvSlotIdentity(ao::WS_NCU_5, id);
+				isxao::GetInvSlotIdentity(ao::WS_NCU_5, id);
 			else if (!strcmp(sz_search_name, "ws_ncu6"))
-				GetInvSlotIdentity(ao::WS_NCU_6, id);
+				isxao::GetInvSlotIdentity(ao::WS_NCU_6, id);
 			else if (!strcmp(sz_search_name, "as_neck"))
-				GetInvSlotIdentity(ao::AS_NECK, id);
+				isxao::GetInvSlotIdentity(ao::AS_NECK, id);
 			else if (!strcmp(sz_search_name, "as_head"))
-				GetInvSlotIdentity(ao::AS_HEAD, id);
+				isxao::GetInvSlotIdentity(ao::AS_HEAD, id);
 			else if (!strcmp(sz_search_name, "as_back"))
-				GetInvSlotIdentity(ao::AS_BACK, id);
+				isxao::GetInvSlotIdentity(ao::AS_BACK, id);
 			else if (!strcmp(sz_search_name, "as_rshoulder"))
-				GetInvSlotIdentity(ao::AS_R_SHOULDER, id);
+				isxao::GetInvSlotIdentity(ao::AS_R_SHOULDER, id);
 			else if (!strcmp(sz_search_name, "as_chest"))
-				GetInvSlotIdentity(ao::AS_CHEST, id);
+				isxao::GetInvSlotIdentity(ao::AS_CHEST, id);
 			else if (!strcmp(sz_search_name, "as_lshoulder"))
-				GetInvSlotIdentity(ao::AS_L_SHOULDER, id);
+				isxao::GetInvSlotIdentity(ao::AS_L_SHOULDER, id);
 			else if (!strcmp(sz_search_name, "as_rarm"))
-				GetInvSlotIdentity(ao::AS_R_ARM, id);
+				isxao::GetInvSlotIdentity(ao::AS_R_ARM, id);
 			else if (!strcmp(sz_search_name, "as_hands"))
-				GetInvSlotIdentity(ao::AS_HANDS, id);
+				isxao::GetInvSlotIdentity(ao::AS_HANDS, id);
 			else if (!strcmp(sz_search_name, "as_larm"))
-				GetInvSlotIdentity(ao::AS_L_ARM, id);
+				isxao::GetInvSlotIdentity(ao::AS_L_ARM, id);
 			else if (!strcmp(sz_search_name, "as_rwrist"))
-				GetInvSlotIdentity(ao::AS_R_WRIST, id);
+				isxao::GetInvSlotIdentity(ao::AS_R_WRIST, id);
 			else if (!strcmp(sz_search_name, "as_legs"))
-				GetInvSlotIdentity(ao::AS_LEGS, id);
+				isxao::GetInvSlotIdentity(ao::AS_LEGS, id);
 			else if (!strcmp(sz_search_name, "as_lwrist"))
-				GetInvSlotIdentity(ao::AS_L_WRIST, id);
+				isxao::GetInvSlotIdentity(ao::AS_L_WRIST, id);
 			else if (!strcmp(sz_search_name, "as_rfinger"))
-				GetInvSlotIdentity(ao::AS_R_FINGER, id);
+				isxao::GetInvSlotIdentity(ao::AS_R_FINGER, id);
 			else if (!strcmp(sz_search_name, "as_feet"))
-				GetInvSlotIdentity(ao::AS_FEET, id);
+				isxao::GetInvSlotIdentity(ao::AS_FEET, id);
 			else if (!strcmp(sz_search_name, "as_lfinger"))
-				GetInvSlotIdentity(ao::AS_L_FINGER, id);
+				isxao::GetInvSlotIdentity(ao::AS_L_FINGER, id);
 			else if (!strcmp(sz_search_name, "is_eyes"))
-				GetInvSlotIdentity(ao::IS_EYES, id);
+				isxao::GetInvSlotIdentity(ao::IS_EYES, id);
 			else if (!strcmp(sz_search_name, "is_head"))
-				GetInvSlotIdentity(ao::IS_HEAD, id);
+				isxao::GetInvSlotIdentity(ao::IS_HEAD, id);
 			else if (!strcmp(sz_search_name, "is_ears"))
-				GetInvSlotIdentity(ao::IS_EARS, id);
+				isxao::GetInvSlotIdentity(ao::IS_EARS, id);
 			else if (!strcmp(sz_search_name, "is_rarm"))
-				GetInvSlotIdentity(ao::IS_R_ARM, id);
+				isxao::GetInvSlotIdentity(ao::IS_R_ARM, id);
 			else if (!strcmp(sz_search_name, "is_chest"))
-				GetInvSlotIdentity(ao::IS_CHEST, id);
+				isxao::GetInvSlotIdentity(ao::IS_CHEST, id);
 			else if (!strcmp(sz_search_name, "is_larm"))
-				GetInvSlotIdentity(ao::IS_L_ARM, id);
+				isxao::GetInvSlotIdentity(ao::IS_L_ARM, id);
 			else if (!strcmp(sz_search_name, "is_rwrist"))
-				GetInvSlotIdentity(ao::IS_R_WRIST, id);
+				isxao::GetInvSlotIdentity(ao::IS_R_WRIST, id);
 			else if (!strcmp(sz_search_name, "is_waist"))
-				GetInvSlotIdentity(ao::IS_WAIST, id);
+				isxao::GetInvSlotIdentity(ao::IS_WAIST, id);
 			else if (!strcmp(sz_search_name, "is_lwrist"))
-				GetInvSlotIdentity(ao::IS_L_WRIST, id);
+				isxao::GetInvSlotIdentity(ao::IS_L_WRIST, id);
 			else if (!strcmp(sz_search_name, "is_rhand"))
-				GetInvSlotIdentity(ao::IS_R_HAND, id);
+				isxao::GetInvSlotIdentity(ao::IS_R_HAND, id);
 			else if (!strcmp(sz_search_name, "is_legs"))
-				GetInvSlotIdentity(ao::IS_LEGS, id);
+				isxao::GetInvSlotIdentity(ao::IS_LEGS, id);
 			else if (!strcmp(sz_search_name, "is_lhand"))
-				GetInvSlotIdentity(ao::IS_L_HAND, id);
+				isxao::GetInvSlotIdentity(ao::IS_L_HAND, id);
 			else if (!strcmp(sz_search_name, "is_feet"))
-				GetInvSlotIdentity(ao::IS_FEET, id);
+				isxao::GetInvSlotIdentity(ao::IS_FEET, id);
 			if (id.type != 0)
 			{
 				s.slot_id = id;
@@ -382,7 +382,7 @@ namespace ao
 		for (DWORD i = 0; i < count; i++)
 		{
 			identity_t id;
-			GetInvSlotIdentity(i, id);
+			isxao::GetInvSlotIdentity(i, id);
 			const auto p_item = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d);
 			if (p_item)
 				m.insert_or_assign(id, reinterpret_cast<inventory_item*>(P_ENGINE_CLIENT_ANARCHY->get_item_by_template(id, d)));

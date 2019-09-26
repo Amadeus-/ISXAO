@@ -1,7 +1,5 @@
 #pragma once
 
-namespace isxao
-{
 	class detours
 	{
 	public:
@@ -87,5 +85,3 @@ namespace isxao
 		static void initialize();
 		static void shutdown();
 	};
-
-}

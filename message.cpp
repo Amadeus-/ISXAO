@@ -3,15 +3,17 @@
 namespace ao
 {
 	
-#ifdef MESSAGE_T__DATA_BLOCK_SIZE_GET_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD message::data_block_size_get(), message_t__data_block_size_get)
 #else
 	static_assert(false, "message::data_block_size_get() requires a native function.");
 #endif
 
-#ifdef MESSAGE_T__DEST_ID_GET_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD message::dest_id_get(), message_t__dest_id_get)
 #else
 	// ReSharper disable once CppMemberFunctionMayBeConst
@@ -21,7 +23,7 @@ namespace ao
 	}
 #endif
 
-#ifdef MESSAGE_T__HEADER_SIZE_USE_NATIVE
+#if true
 	FUNCTION_AT_ADDRESS(DWORD message::header_size(const DWORD), message_t__header_size)
 #else
 	DWORD message::header_size(const DWORD type)
@@ -40,8 +42,9 @@ namespace ao
 	}
 #endif
 
-#ifdef MESSAGE_T__MESSAGE_SIZE_GET_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD message::message_size_get(), message_t__message_size_get)
 #else
 	static_assert(false, "message::message_size_get() requires a native function.");
@@ -57,8 +60,9 @@ namespace ao
 		return message_;
 	}
 
-#ifdef MESSAGE_T__MESSAGE_TYPE_GET_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD message::message_type_get(), message_t__message_type_get)
 #else
 	// ReSharper disable once CppMemberFunctionMayBeConst
@@ -68,8 +72,9 @@ namespace ao
 	}
 #endif
 
-#ifdef MESSAGE_T__PRIORITY_GET_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD message::priority_get(), message_t__priority_get)
 #else
 	DWORD message::priority_get()
@@ -78,8 +83,9 @@ namespace ao
 	}
 #endif
 
-#ifdef MESSAGE_T__SOURCE_ID_GET_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(DWORD message::source_id_get(), message_t__source_id_get)
 #else
 	// ReSharper disable once CppMemberFunctionMayBeConst

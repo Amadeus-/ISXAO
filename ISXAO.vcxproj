@@ -140,7 +140,6 @@
     <ClCompile Include="isxao_globals.cpp" />
     <ClCompile Include="isxao_log.cpp" />
     <ClCompile Include="isxao_message.cpp" />
-    <ClCompile Include="isxao_dynels.cpp" />
     <ClCompile Include="isxao_main.cpp" />
     <ClCompile Include="isxao_type.cpp" />
     <ClCompile Include="isxao_utilities.cpp" />

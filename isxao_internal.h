@@ -3,7 +3,7 @@
 #ifndef ISXAO_INTERNAL_H
 #define ISXAO_INTERNAL_H
 
-namespace isxao_internal
+namespace isxao::internal
 {
 #pragma region SearchDynel
 
@@ -218,5 +218,5 @@ namespace isxao_internal
 #pragma endregion
 
 }
-using namespace isxao_internal;
+
 #endif // ISXAO_INTERNAL_H

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace isxao_commands
+namespace isxao::commands
 {
 	
 	AOLIB_API bool IsISXAOCommand(PCHAR);
@@ -14,4 +14,4 @@ namespace isxao_commands
 	AOLIB_API DWORD Target(int argc, char *argv[]);
 
 }
-using namespace isxao_commands;
+using namespace isxao::commands;

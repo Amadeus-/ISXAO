@@ -2,9 +2,6 @@
 #ifndef ISXAO_GLOBALS_H
 #define ISXAO_GLOBALS_H
 
-namespace isxao
-{	
-
 #pragma region Process
 
 	AOLIB_VAR HANDLE process_handle;
@@ -538,11 +535,11 @@ namespace isxao
 	AOLIB_VAR ao::vector3_t g_move_to_location;
 	AOLIB_VAR ao::vector3_t g_last_location;
 
-	AOLIB_VAR Concurrency::concurrent_queue<PN3MESSAGEINFO> g_n3message_queue;
-	AOLIB_VAR Concurrency::concurrent_queue<PGROUPMESSAGEINFO> g_group_message_queue;
-	AOLIB_VAR Concurrency::concurrent_queue<PPRIVATEMESSAGEINFO> g_private_message_queue;
-	AOLIB_VAR Concurrency::concurrent_queue<PPRIVATEMESSAGEINFO> g_vicinity_message_queue;
-	AOLIB_VAR Concurrency::concurrent_queue<PSYSTEMCHATINFO> g_system_chat_queue;
+	AOLIB_VAR Concurrency::concurrent_queue<isxao::internal::PN3MESSAGEINFO> g_n3message_queue;
+	AOLIB_VAR Concurrency::concurrent_queue<isxao::internal::PGROUPMESSAGEINFO> g_group_message_queue;
+	AOLIB_VAR Concurrency::concurrent_queue<isxao::internal::PPRIVATEMESSAGEINFO> g_private_message_queue;
+	AOLIB_VAR Concurrency::concurrent_queue<isxao::internal::PPRIVATEMESSAGEINFO> g_vicinity_message_queue;
+	AOLIB_VAR Concurrency::concurrent_queue<isxao::internal::PSYSTEMCHATINFO> g_system_chat_queue;
 
 #pragma endregion
 
@@ -596,7 +593,5 @@ namespace isxao
 	bool get_proc_address(const HMODULE& module_handle, DWORD& function_address, const char* function_name, const char* mangled_function_name);
 	bool resolve_function_address(const std::vector<BYTE>& data, HMODULE& module_handle, DWORD& function_address, const char* function_address_name, const char* mangled_function_name, const char* function_pattern, DWORD offset = 0x0, DWORD bytes_to_next_line = 0x0, DWORD relative_function_base_address = 0x0);
 	bool resolve_static_instance_address(HMODULE& module_handle, DWORD& static_instance_address, const char* static_instance_name, const char* mangled_name, DWORD offset = 0, DWORD relative_function_base_address = 0);
-
-}
 
 #endif // ISXAO_GLOBALS_H

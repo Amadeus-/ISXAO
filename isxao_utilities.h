@@ -1,6 +1,6 @@
 #pragma once
 
-namespace isxao_utilities
+namespace isxao
 {
 	
 #pragma region Strings
@@ -22,12 +22,12 @@ namespace isxao_utilities
 
 #pragma region SearchDynel
 
-	AOLIB_API void ClearSearchActor(PSEARCHACTOR);
-	AOLIB_API ao::actor* NthNearestActor(PSEARCHACTOR p_search_actor, DWORD nth, ao::actor* p_origin, bool include_origin = false);
-	AOLIB_API DWORD CountMatchingActors(PSEARCHACTOR p_search_actor, ao::actor* p_character, bool include_char = false);
-	AOLIB_API bool ActorMatchesSearch(PSEARCHACTOR p_search_actor, ao::actor* p_character, ao::actor* p_actor);
-	AOLIB_API DWORD ParseSearchActorArg(int arg, int argc, char *argv[], SEARCHACTOR &search_actor);
-	AOLIB_API void ParseSearchActor(int begin_inclusive, int end_exclusive, char *argv[], SEARCHACTOR &search_actor);
+	AOLIB_API void ClearSearchActor(internal::PSEARCHACTOR);
+	AOLIB_API ao::actor* NthNearestActor(internal::PSEARCHACTOR p_search_actor, DWORD nth, ao::actor* p_origin, bool include_origin = false);
+	AOLIB_API DWORD CountMatchingActors(internal::PSEARCHACTOR p_search_actor, ao::actor* p_character, bool include_char = false);
+	AOLIB_API bool ActorMatchesSearch(internal::PSEARCHACTOR p_search_actor, ao::actor* p_character, ao::actor* p_actor);
+	AOLIB_API DWORD ParseSearchActorArg(int arg, int argc, char *argv[], internal::SEARCHACTOR &search_actor);
+	AOLIB_API void ParseSearchActor(int begin_inclusive, int end_exclusive, char *argv[], internal::SEARCHACTOR &search_actor);
 	AOLIB_API bool IsPCNear(ao::actor* p_actor, float radius);
 
 #pragma endregion
@@ -80,26 +80,24 @@ namespace isxao_utilities
 
 #pragma region Message Handling
 
-	void HandleN3Message(PN3MESSAGEINFO message_info);
-	void HandleAddPetMessage(isxao_classes::add_pet_message);
-	void HandleAttackMessage(isxao_classes::attack_message);
-	void HandleCastNanoSpellMessage(isxao_classes::cast_nano_spell_message);
-	void HandleCharacterActionMessage(isxao_classes::character_action_message);
-	void HandleFollowTargetMessage(isxao_classes::follow_target_message);
-	void HandleRemovePetMessage(isxao_classes::remove_pet_message);
-	void HandleShieldAttackMessage(isxao_classes::shield_attack_message);
+	void HandleN3Message(internal::PN3MESSAGEINFO message_info);
+	void HandleAddPetMessage(add_pet_message);
+	void HandleAttackMessage(attack_message);
+	void HandleCastNanoSpellMessage(cast_nano_spell_message);
+	void HandleCharacterActionMessage(character_action_message);
+	void HandleFollowTargetMessage(follow_target_message);
+	void HandleRemovePetMessage(remove_pet_message);
+	void HandleShieldAttackMessage(shield_attack_message);
 
-	void HandleGroupMessage(PGROUPMESSAGEINFO);
+	void HandleGroupMessage(internal::PGROUPMESSAGEINFO);
 
-	void HandlePrivateMessage(PPRIVATEMESSAGEINFO);
+	void HandlePrivateMessage(internal::PPRIVATEMESSAGEINFO);
 
-	void HandleVicinityMessage(PPRIVATEMESSAGEINFO);
+	void HandleVicinityMessage(internal::PPRIVATEMESSAGEINFO);
 
-	void HandleSystemChat(PSYSTEMCHATINFO);
+	void HandleSystemChat(internal::PSYSTEMCHATINFO);
 
 #pragma endregion
 
 
 }
-
-using namespace isxao_utilities;

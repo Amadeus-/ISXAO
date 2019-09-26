@@ -4,6 +4,7 @@ namespace ao
 {
 #ifdef INPUT_CONFIG_T__SET_CURRENT_TARGET_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void input_config::set_current_target(const identity_t&), input_config_t__set_current_target)
 #else
 	static_assert(false, "input_config::set_current_target(const identity_t&) requires a native function.");
@@ -39,6 +40,7 @@ namespace ao
 
 #if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(char input_config::process_input(ao::keypress_info_t, DWORD), input_config_t__process_input)
 #else
 	static_assert(false, "input_config::process_input(ao::keypress_info_t) requires a native function.");
