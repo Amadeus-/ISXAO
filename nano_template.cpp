@@ -1,4 +1,6 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
+#include "game_time.h"
 
 namespace ao
 {

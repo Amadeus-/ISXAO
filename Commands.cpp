@@ -1,14 +1,15 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
 
 #pragma region Testing and Debugging
 
 int CMD_AO(int argc, char *argv[])
 {
-	std::map<std::string, ao::chat_window_node*> m;
+	printf("%" PRIX32, P_ENGINE_CLIENT_ANARCHY->get_client_char());
+	/*std::map<std::string, ao::chat_window_node*> m;
 	P_CHAT_WINDOW_CONTROLLER->get_chat_window_nodes(m);
 	for (auto it = m.begin(); it != m.end(); ++it)
-		printf("%s", it->first.c_str());
-	// printf("%" PRIX32, P_CHAT_WINDOW_CONTROLLER->get_chat_window_controller_data());
+		printf("%s", it->first.c_str());*/
 	return 0;
 }
 
@@ -294,42 +295,42 @@ int CMD_TESTSTRUCTS(int argc, char *argv[])
 
 int CMD_ACTIVATE(int argc, char *argv[])
 {
-	if(g_game_state == GAMESTATE_IN_GAME)
+	if(ao::g_game_state == GAMESTATE_IN_GAME)
 		return Activate(1, argc, argv);
 	return 0;
 }
 
 int CMD_AOECHO(int argc, char *argv[])
 {
-	if (g_game_state == GAMESTATE_IN_GAME)
+	if (ao::g_game_state == GAMESTATE_IN_GAME)
 		return AOEcho(argc, argv);
 	return 0;
 }
 
 int CMD_AOEXECUTE(int argc, char *argv[])
 {
-	if (g_game_state == GAMESTATE_IN_GAME)
+	if (ao::g_game_state == GAMESTATE_IN_GAME)
 		return AOExecute(argc, argv);
 	return 0;
 }
 
 int CMD_CAST(int argc, char *argv[])
 {
-	if (g_game_state == GAMESTATE_IN_GAME)
+	if (ao::g_game_state == GAMESTATE_IN_GAME)
 		return Cast(1, argc, argv);
 	return 0;
 }
 
 int CMD_FACE(int argc, char *argv[])
 { 
-	if (g_game_state == GAMESTATE_IN_GAME)
+	if (ao::g_game_state == GAMESTATE_IN_GAME)
 		return Face(argc, argv);
 	return 0;
 }
 
 int CMD_TARGET(int argc, char *argv[])
 {
-	if (g_game_state == GAMESTATE_IN_GAME)
+	if (ao::g_game_state == GAMESTATE_IN_GAME)
 		return Target(argc, argv);
 	return 0;
 }

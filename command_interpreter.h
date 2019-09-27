@@ -1,13 +1,23 @@
 #pragma once
+#include "game_object.h"
 
-// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
-class command_interpreter
+namespace std
 {
-public:
-	ao::command_interpreter_t get_command_interpreter_data() const;
-	bool parse_text(string&);
-private:
-	bool parse_text(ao::chat_window_node*, string&);
-	// ReSharper disable once CppUninitializedNonStaticDataMember
-	ao::command_interpreter_t command_interpreter_;
-};
+	//class string;
+}
+
+namespace ao
+{
+	class chat_window_node;
+	struct ao_command_interpreter;
+	typedef ao_command_interpreter command_interpreter_t, *p_command_interpreter_t;
+
+	class command_interpreter : public game_object<command_interpreter_t>
+	{
+	public:
+		bool parse_text(std::string&);
+	private:
+		bool parse_text(chat_window_node*, std::string&);
+	};
+
+}

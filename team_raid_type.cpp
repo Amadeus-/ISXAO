@@ -2,7 +2,7 @@
 
 bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {
-	if (g_game_state != GAMESTATE_IN_GAME)
+	if (ao::g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -120,7 +120,7 @@ bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int 
 
 bool TeamRaidType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int argc, char* argv[])
 {
-	if (g_game_state != GAMESTATE_IN_GAME)
+	if (ao::g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -147,7 +147,7 @@ bool TeamRaidType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, in
 
 bool TeamRaidType::ToText(LSOBJECTDATA ObjectData, char* buf, unsigned buflen)
 {
-	if (g_game_state != GAMESTATE_IN_GAME)
+	if (ao::g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;

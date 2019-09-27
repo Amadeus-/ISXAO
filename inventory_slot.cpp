@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
 
 namespace ao
 {
@@ -193,7 +194,7 @@ namespace ao
 
 	p_inventory_data_t inventory_slot::get_inv_slot_data()
 	{
-		return isxao::GetInvSlotData(this);
+		return ao::inventory_holder::get_inv_slot_data(this);
 	}
 
 	double inventory_slot::get_item_progress(DWORD& a, DWORD& b) const

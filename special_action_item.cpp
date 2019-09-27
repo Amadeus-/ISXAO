@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
 
 namespace ao
 {

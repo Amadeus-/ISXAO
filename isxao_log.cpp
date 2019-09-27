@@ -67,7 +67,7 @@ void isxao_log::add_line(const char * format, ...) const
 	add_line_internal(buffer);
 }
 
-void isxao_log::set_base_dir(const std::string path)
+void isxao_log::set_base_dir(std::string path)
 {
 	base_directory_ = std::move(path);
 }

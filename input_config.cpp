@@ -1,8 +1,9 @@
 #include "isxao_main.h"
+#include "input_config.h"
 
 namespace ao
 {
-#ifdef INPUT_CONFIG_T__SET_CURRENT_TARGET_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void input_config::set_current_target(const identity_t&), input_config_t__set_current_target)
@@ -13,7 +14,8 @@ namespace ao
 #ifdef false
 	static_assert(false, "input_config::get_method_id_name(const DWORD id) does not have a native function.");
 #else
-	PCSTR input_config::get_method_id_name(const DWORD id)
+
+	const char* input_config::get_method_id_name(const unsigned long id)
 	{
 		for (auto i = 0; i < 0x7E ; i++)
 		{
@@ -27,7 +29,7 @@ namespace ao
 #if false
 	static_assert(false, "input_config::get_mode_id_name(const DWORD id) does not have a native function.");
 #else
-	PCSTR input_config::get_mode_id_name(const DWORD id)
+	const char* input_config::get_mode_id_name(const unsigned long id)
 	{
 		for (auto i = 0; i < 0x3F; i++)
 		{
@@ -41,7 +43,7 @@ namespace ao
 #if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(char input_config::process_input(ao::keypress_info_t, DWORD), input_config_t__process_input)
+	FUNCTION_AT_ADDRESS(char input_config::process_input(keypress_info_t, unsigned long), input_config_t__process_input)
 #else
 	static_assert(false, "input_config::process_input(ao::keypress_info_t) requires a native function.");
 #endif

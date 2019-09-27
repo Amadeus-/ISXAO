@@ -1,22 +1,103 @@
 #include "isxao_main.h"
+#include "text_message.h"
 
 namespace ao
 {
-
-#ifdef TEXT_MESSAGE_T__MESSAGE_BODY_GET_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(PCSTR text_message::message_body_get(), text_message_t__message_body_get)
+	FUNCTION_AT_ADDRESS(const char* text_message::message_body_get(), text_message_t__message_body_get)
 #else
 	static_assert(false, "text_message::message_body_get() requires a native function.");
 #endif
 
-#ifdef TEXT_MESSAGE_T__MESSAGE_BODY_LEN_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(DWORD text_message::message_body_len(), text_message_t__message_body_len)
+	FUNCTION_AT_ADDRESS(unsigned long text_message::message_body_len(), text_message_t__message_body_len)
 #else
 	static_assert(false, "text_message::message_body_len() requires a native function.");
 #endif
 
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(unsigned long text_message::data_block_size_get(), message_t__data_block_size_get)
+#else
+	static_assert(false, "message::data_block_size_get() requires a native function.");
+#endif
+
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(unsigned long text_message::dest_id_get(), message_t__dest_id_get)
+#else
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	unsigned long text_message::dest_id_get()
+	{
+		return get_data()->dest_id;
+	}
+#endif
+
+#if true
+	FUNCTION_AT_ADDRESS(unsigned long text_message::header_size(const unsigned long), message_t__header_size)
+#else
+	unsigned long text_message::header_size(const unsigned long type)
+	{
+		const unsigned long result = 0;
+		if (type != 1 && type != 5)
+		{
+			if (type == 10)
+				return 16;
+			if (type == 11)
+				return 40;
+			if (type != 14)
+				return result;
+		}
+		return 20;
+	}
+#endif
+
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(unsigned long text_message::message_size_get(), message_t__message_size_get)
+#else
+	static_assert(false, "message::message_size_get() requires a native function.");
+#endif
+
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(unsigned long text_message::message_type_get(), message_t__message_type_get)
+#else
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	unsigned long text_message::message_type_get()
+	{
+		return get_data()->message_type;
+	}
+#endif
+
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(unsigned long text_message::priority_get(), message_t__priority_get)
+#else
+	unsigned long text_message::priority_get()
+	{
+		return get_data()->priority;
+	}
+#endif
+
+#if true
+	// ReSharper disable once CppMemberFunctionMayBeStatic
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	FUNCTION_AT_ADDRESS(unsigned long text_message::source_id_get(), message_t__source_id_get)
+#else
+	// ReSharper disable once CppMemberFunctionMayBeConst
+	unsigned long text_message::source_id_get()
+	{
+		return get_data()->source_id;
+	}
+#endif
 }

@@ -55,9 +55,8 @@ namespace ao
 
 	PCSTR inventory_item::get_rarity()
 	{
-		return isxao::get_item_rarity_str(get_skill(ST_RARITY));
+		return ao::engine_client_anarchy::get_item_rarity_str(get_skill(ST_RARITY));
 	}
-
 
 	DWORD inventory_item::get_value()
 	{

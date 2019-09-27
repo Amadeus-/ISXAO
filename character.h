@@ -47,6 +47,6 @@ public:
 	void stop();
 
 private:
-	void get_stat_map(std::map<DWORD, LONG>&);
+	DWORD get_stat_map(std::map<DWORD, LONG>&);
 	
 };

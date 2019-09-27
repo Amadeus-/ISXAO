@@ -1,4 +1,6 @@
 #include "isxao_main.h"
+#include "command_interpreter.h"
+#include "engine_client_anarchy.h"
 
 namespace isxao
 {
@@ -33,7 +35,7 @@ namespace isxao
 				if (IsNumber(argv[(0 + begin_inclusive)]))
 					return 0;
 				ao::identity_t inv_slot_identity;
-				if (GetInvSlotIdentity(argv[(0 + begin_inclusive)], inv_slot_identity))
+				if (ao::inventory_holder::get_inv_slot_identity(argv[(0 + begin_inclusive)], inv_slot_identity))
 				{
 					P_ENGINE_CLIENT_ANARCHY->n3_msg_use_item(inv_slot_identity, false);
 					return 1;
@@ -45,7 +47,7 @@ namespace isxao
 				if (IsNumber(argv[(0 + begin_inclusive)])) // Make sure the first argument is a string, not a number
 					return 0;
 				ao::identity_t inv_slot_identity;
-				const auto valid_slot = GetInvSlotIdentity(argv[(0 + begin_inclusive)], inv_slot_identity);
+				const auto valid_slot = ao::inventory_holder::get_inv_slot_identity(argv[(0 + begin_inclusive)], inv_slot_identity);
 				if (!valid_slot)
 					return 0;
 				if(IsNumber(argv[(1 + begin_inclusive)])) // Second argument is an identity

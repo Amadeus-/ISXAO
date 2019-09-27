@@ -2,7 +2,7 @@
 
 bool InventoryItemType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {
-	if (g_game_state != GAMESTATE_IN_GAME)
+	if (ao::g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -144,7 +144,7 @@ bool InventoryItemType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member,
 
 bool InventoryItemType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int argc, char* argv[])
 {
-	if (g_game_state != GAMESTATE_IN_GAME)
+	if (ao::g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -167,7 +167,7 @@ bool InventoryItemType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMetho
 
 bool InventoryItemType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 {
-	if (g_game_state != GAMESTATE_IN_GAME)
+	if (ao::g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;

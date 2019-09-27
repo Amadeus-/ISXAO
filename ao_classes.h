@@ -2,24 +2,13 @@
 
 namespace ao {
 
-#pragma region Forward Declarations
 
-	class actor;
-	class character;
-	//class chat_window_node;
-	class info_item_remote;
-	class pet;
-	class player;
-	//class resource_database;
-	class special_action_template;
-	class team_member;
-	class team_raid;
 
-#pragma endregion
+	
 
-#include "engine_client_anarchy.h"
+// #include "engine_client_anarchy.h"
 
-#include "game_time.h"
+// #include "game_time.h"
 
 #include "inventory_data.h"
 
@@ -79,38 +68,36 @@ namespace ao {
 
 #include "character.h"
 
-#include "input_config.h"
+// #include "input_config.h"
 
 #include "targeting_module.h"
 
 #include "playfield_anarchy.h"
 
-#include "message.h"
+// #include "message.h"
 
-#include "n3_message.h"
+// #include "n3_message.h"
 
-#include "text_message.h"
+// #include "text_message.h"
 
-#include "chat_window_node.h"
+// #include "chat_window_node.h"
 
-#include "command_interpreter.h"
+// #include "command_interpreter.h"
 
-#include "chat_window_controller.h"
+// #include "chat_window_controller.h"
 
-#include "html_parser.h"
+// #include "html_parser.h"
 
-#include "chat_gui_module.h"
+// #include "chat_gui_module.h"
 
-#include "info_item_remote.h"
+// #include "look_at_iir.h"
 
-#include "look_at_iir.h"
+// #include "resource_database.h"
 
-#include "resource_database.h"
+// #include "database_handler.h"
 
-#include "database_handler.h"
+// #include "graph_path_finder.h"
 
-#include "graph_path_finder.h"
-
-#include "flow_control.h"
+// #include "flow_control.h"
 
 }

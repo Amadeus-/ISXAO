@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
 
 namespace ao
 {
@@ -6,9 +7,11 @@ namespace ao
 	DWORD special_action_holder::build_ls_special_actions(LSIndex* p_index) const
 	{
 		std::vector<special_action_template*> v;
-		this->get_special_actions(v);
-		for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
-			p_index->AddItem(reinterpret_cast<LSOBJECTDATA&>((*it)));
+		if (this->get_special_actions(v))
+		{
+			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+				p_index->AddItem(reinterpret_cast<LSOBJECTDATA&>((*it)));
+		}		
 		return p_index->GetContainerUsed();
 	}
 
@@ -56,26 +59,30 @@ namespace ao
 		strcpy_s(search_name, sizeof(search_name), special_action_name);
 		_strlwr_s(search_name);
 		std::vector<special_action_template> v;
-		this->get_special_actions(v);
-		for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+		if (this->get_special_actions(v))
 		{
-			strcpy_s(name, sizeof(name), it->get_name());
-			_strlwr_s(name);
-			if (strstr(name, search_name))
-				return &(*it);
-		}
+			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+			{
+				strcpy_s(name, sizeof(name), it->get_name());
+				_strlwr_s(name);
+				if (strstr(name, search_name))
+					return &(*it);
+			}
+		}		
 		return nullptr;
 	}
 
 	special_action_template* special_action_holder::get_special_action(const identity_t& id) const
 	{
 		std::vector<special_action_template> v;
-		this->get_special_actions(v);
-		for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+		if(this->get_special_actions(v))
 		{
-			if (it->get_identity() == id)
-				return &(*it);
-		}
+			for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+			{
+				if (it->get_identity() == id)
+					return &(*it);
+			}
+		}		
 		return nullptr;
 	}
 
@@ -93,26 +100,30 @@ namespace ao
 	action_lock* special_action_holder::get_action_lock(special_action_template* p_special_action) const
 	{
 		std::map<DWORD, DWORD> m;
-		get_lock_id_map(m);
-		DWORD lock_id = 0;
-		const auto action_id = p_special_action->get_identity().id;
-		for (auto it = m.begin(); it != m.end(); ++it)  // NOLINT(modernize-loop-convert)
+		if (this->get_lock_id_map(m))
 		{
-			if(it->second == action_id)
+			DWORD lock_id = 0;
+			const auto action_id = p_special_action->get_identity().id;
+			for (auto it = m.begin(); it != m.end(); ++it)  // NOLINT(modernize-loop-convert)
 			{
-				lock_id = it->first;
-				break;
+				if (it->second == action_id)
+				{
+					lock_id = it->first;
+					break;
+				}
 			}
-		}
-		if (lock_id)
-			return nullptr;
-		std::vector<action_lock*> v;
-		P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_stat_holder()->get_skill_locks(v);
-		for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
-		{
-			if ((*it)->get_action_identity() == p_special_action->get_identity())
-				return *it;
-		}
+			if (lock_id)
+				return nullptr;
+			std::vector<action_lock*> v;
+			if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_stat_holder()->get_skill_locks(v))
+			{
+				for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
+				{
+					if ((*it)->get_action_identity() == p_special_action->get_identity())
+						return *it;
+				}
+			}			
+		}		
 		return nullptr;
 	}
 

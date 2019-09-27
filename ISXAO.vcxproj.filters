@@ -568,9 +568,6 @@
     <ClInclude Include="html_parser.h">
       <Filter>Header Files\Base\AO\Client</Filter>
     </ClInclude>
-    <ClInclude Include="info_item_remote.h">
-      <Filter>Header Files\Base\AO\Client</Filter>
-    </ClInclude>
     <ClInclude Include="input_config.h">
       <Filter>Header Files\Base\AO\Client</Filter>
     </ClInclude>
@@ -595,5 +592,16 @@
     <ClInclude Include="text_message.h">
       <Filter>Header Files\Base\AO\Client</Filter>
     </ClInclude>
+    <ClInclude Include="isxao_messaging.h">
+      <Filter>Header Files\Base\ISXAO</Filter>
+    </ClInclude>
+    <ClInclude Include="game_object.h">
+      <Filter>Header Files\Base\AO\Client</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="game_object.cpp">
+      <Filter>Source Files\Base\AO\Client</Filter>
+    </None>
   </ItemGroup>
 </Project>

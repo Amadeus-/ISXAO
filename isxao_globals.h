@@ -2,6 +2,9 @@
 #ifndef ISXAO_GLOBALS_H
 #define ISXAO_GLOBALS_H
 
+namespace ao
+{
+
 #pragma region Process
 
 	AOLIB_VAR HANDLE process_handle;
@@ -17,7 +20,7 @@
 	AOLIB_VAR HMODULE gui_module_handle;
 	AOLIB_VAR MODULEINFO gui_module_info;
 	AOLIB_VAR HMODULE vehicle_module_handle;
-	AOLIB_VAR MODULEINFO vehicle_module_info;	
+	AOLIB_VAR MODULEINFO vehicle_module_info;
 	AOLIB_VAR HMODULE interfaces_module_handle;
 	AOLIB_VAR MODULEINFO interfaces_module_info;
 	AOLIB_VAR HMODULE pathfinder_module_handle;
@@ -33,7 +36,7 @@
 
 	// Functions
 	AOLIB_VAR DWORD n3_camera_t__set_secondary_target;
-	AOLIB_VAR DWORD n3_camera_t__set_selected_target;	
+	AOLIB_VAR DWORD n3_camera_t__set_selected_target;
 
 	//Functions	
 	AOLIB_VAR DWORD n3_database_handler_t__initialize;
@@ -81,8 +84,8 @@
 	// Instances
 	AOLIB_VAR DWORD n3_playfield_t__m_pc_playfield_dir_instance;
 	AOLIB_VAR ao::playfield_dir** pp_playfield_dir;
-#define P_PLAYFIELD_DIR (*pp_playfield_dir)  // NOLINT(cppcoreguidelines-macro-usage)
-	
+#define P_PLAYFIELD_DIR (*ao::pp_playfield_dir)  // NOLINT(cppcoreguidelines-macro-usage)
+
 
 #pragma endregion
 
@@ -302,8 +305,8 @@
 	AOLIB_VAR DWORD n3EngineClientAnarchy_t__N3Msg_UseSkill;
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__on_closed;
 
-	
-	
+
+
 
 	AOLIB_VAR DWORD playfield_anarchy_t__playfield_anarchy_t;
 	AOLIB_VAR DWORD playfield_anarchy_t__d_playfield_anarchy_t;
@@ -315,31 +318,31 @@
 	// Instances
 	AOLIB_VAR DWORD n3_engine_client_anarchy_t__m_pc_instance;
 	AOLIB_VAR ao::engine_client_anarchy **pp_engine_client_anarchy;
-#define P_ENGINE_CLIENT_ANARCHY (*pp_engine_client_anarchy)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_ENGINE_CLIENT_ANARCHY (*ao::pp_engine_client_anarchy)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD m_c_stat_name_dir;
 	AOLIB_VAR ao::p_stat_name_map_t p_stat_name_dir;
-#define P_STAT_NAME_MAP p_stat_name_dir  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_STAT_NAME_MAP ao::p_stat_name_dir  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD m_c_nano_item_dir;
 	AOLIB_VAR ao::p_nano_item_map_t p_nano_item_dir;
-#define P_NANO_ITEM_MAP p_nano_item_dir  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_NANO_ITEM_MAP ao::p_nano_item_dir  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD item_manager_t__m_ppc_instance;
 	AOLIB_VAR std::vector<ao::acg_game_item_t> ***ppp_item_vector;
-#define P_ITEM_VECTOR (**ppp_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_ITEM_VECTOR (**ao::ppp_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD static_item_manager_t__m_ppc_instance;
 	AOLIB_VAR std::vector<ao::static_item_t> ***ppp_static_item_vector;
-#define P_STATIC_ITEM_VECTOR (**ppp_static_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_STATIC_ITEM_VECTOR (**ao::ppp_static_item_vector)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD game_time_t__m_pc_instance;
 	AOLIB_VAR ao::game_time** pp_game_time;
-#define P_GAME_TIME (*pp_game_time)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_GAME_TIME (*ao::pp_game_time)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD mouse_look_active;
 	AOLIB_VAR byte* p_mouse_look_active;
-#define MOUSE_LOOK_ACTIVE (*p_mouse_look_active == 1)  // NOLINT(cppcoreguidelines-macro-usage)
+#define MOUSE_LOOK_ACTIVE (*ao::p_mouse_look_active == 1)  // NOLINT(cppcoreguidelines-macro-usage)
 
 #pragma endregion
 
@@ -354,12 +357,12 @@
 	AOLIB_VAR DWORD chat_gui_module_c__handle_vicinity_message;
 	AOLIB_VAR DWORD chat_gui_module_c__s_pc_instance;
 	AOLIB_VAR ao::chat_gui_module** pp_chat_gui_module;
-#define P_CHAT_GUI_MODULE (*pp_chat_gui_module)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_CHAT_GUI_MODULE (*ao::pp_chat_gui_module)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD chat_window_controller_t__d_chat_window_controller_t;
 	AOLIB_VAR DWORD chat_window_controller_c__m_pc_instance;
 	AOLIB_VAR ao::chat_window_controller** pp_chat_window_controller;
-#define P_CHAT_WINDOW_CONTROLLER (*pp_chat_window_controller)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_CHAT_WINDOW_CONTROLLER (*ao::pp_chat_window_controller)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD chat_window_node_c__parse_text_command;
 
@@ -367,14 +370,14 @@
 	AOLIB_VAR DWORD command_interpreter_c__parse_text_command;
 	AOLIB_VAR DWORD command_interpreter_c__m_pc_instance;
 	AOLIB_VAR ao::command_interpreter** pp_command_interpreter;
-#define P_COMMAND_INTERPRETER (*pp_command_interpreter)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_COMMAND_INTERPRETER (*ao::pp_command_interpreter)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD command_t__execute_1;
 
 	AOLIB_VAR DWORD command_list_t__command_list_t;
 	AOLIB_VAR DWORD command_list_t__m_pc_instance;
 	AOLIB_VAR ao::command_list_t* p_command_list;
-#define P_COMMAND_LIST (p_command_list)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_COMMAND_LIST (ao::p_command_list)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD flow_control_module_t__slot_autorun;
 	AOLIB_VAR DWORD flow_control_module_t__slot_movement_back;
@@ -388,22 +391,22 @@
 	AOLIB_VAR DWORD flow_control_module_t__get_instance;
 	AOLIB_VAR DWORD flow_control_module_t__m_pc_instance;
 	AOLIB_VAR ao::flow_control** pp_flow_control;
-#define P_FLOW_CONTROL (*pp_flow_control)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_FLOW_CONTROL (*ao::pp_flow_control)  // NOLINT(cppcoreguidelines-macro-usage)
 
 	AOLIB_VAR DWORD html_parser_c__html_parser_c_1;
 	AOLIB_VAR DWORD html_parser_c__html_parser_c_2;
-	AOLIB_VAR DWORD html_parser_c__d_html_parser_c;	
+	AOLIB_VAR DWORD html_parser_c__d_html_parser_c;
 	AOLIB_VAR DWORD html_parser_c__extract_text;
 
 	AOLIB_VAR DWORD input_config_t__m_pc_instance;
 	AOLIB_VAR ao::input_config** pp_input_config;
-#define P_INPUT_CONFIG (*pp_input_config)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_INPUT_CONFIG (*ao::pp_input_config)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD input_config_t__m_as_input_method_id_table;
 	AOLIB_VAR ao::input_method_id_table* p_input_method_id_table;
-#define P_INPUT_METHOD_ID_TABLE (p_input_method_id_table)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_INPUT_METHOD_ID_TABLE (ao::p_input_method_id_table)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD input_config_t__m_as_input_modes_id_table;
 	AOLIB_VAR ao::input_mode_id_table* p_input_mode_id_table;
-#define P_INPUT_MODE_ID_TABLE (p_input_mode_id_table)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_INPUT_MODE_ID_TABLE (ao::p_input_mode_id_table)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD input_config_t__get_instance;
 	AOLIB_VAR DWORD input_config_t__set_current_target;
 	AOLIB_VAR DWORD input_config_t__process_input;
@@ -411,16 +414,16 @@
 
 	AOLIB_VAR DWORD targeting_module_t__m_pc_instance;
 	AOLIB_VAR ao::targeting_module** pp_targeting_module;
-#define P_TARGETING_MODULE (*pp_targeting_module)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_TARGETING_MODULE (*ao::pp_targeting_module)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD targeting_module_t__m_pc_selection_indicator;
 	AOLIB_VAR ao::indicator_t** pp_selection_indicator;
-#define P_SELECTION_INDICATOR (*pp_selection_indicator)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_SELECTION_INDICATOR (*ao::pp_selection_indicator)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD targeting_module_t__m_pc_attacking_indicator;
 	AOLIB_VAR ao::indicator_t** pp_attacking_indicator;
-#define P_ATTACKING_INDICATOR (*pp_attacking_indicator)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_ATTACKING_INDICATOR (*ao::pp_attacking_indicator)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD targeting_module_t__m_c_last_target;
 	AOLIB_VAR ao::identity_t* p_last_target;
-#define P_LAST_TARGET (p_last_target)  // NOLINT(cppcoreguidelines-macro-usage)
+#define P_LAST_TARGET (ao::p_last_target)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD targeting_module_t__targeting_module_t;
 	AOLIB_VAR DWORD targeting_module_t__initialise_message;
 	AOLIB_VAR DWORD targeting_module_t__remove_target;
@@ -432,8 +435,8 @@
 	AOLIB_VAR DWORD window_controller_t__handle_key_down;
 	AOLIB_VAR DWORD window_controller_t__handle_key_up;
 	AOLIB_VAR DWORD window_controller_c__s_pc_instance;
-	
-	
+
+
 
 #pragma endregion
 
@@ -441,7 +444,7 @@
 
 	AOLIB_VAR DWORD client_t__s_n_char_id;
 	AOLIB_VAR DWORD* gp_character_id;
-#define G_CHARACTER_ID (*gp_character_id)  // NOLINT(cppcoreguidelines-macro-usage)
+#define G_CHARACTER_ID (*ao::gp_character_id)  // NOLINT(cppcoreguidelines-macro-usage)
 	AOLIB_VAR DWORD client_t__process_message;
 
 #pragma endregion
@@ -479,7 +482,7 @@
 	AOLIB_VAR DWORD message_t__message_type_get;
 	AOLIB_VAR DWORD message_t__priority_get;
 	AOLIB_VAR DWORD message_t__source_id_get;
-	
+
 	AOLIB_VAR DWORD n3_message_t__duplicate_body;
 	AOLIB_VAR DWORD n3_message_t__message_body_get;
 
@@ -519,7 +522,7 @@
 #pragma region SimpleChar
 
 	AOLIB_VAR DWORD SimpleChar_t__SimpleChar_t;
-	AOLIB_VAR DWORD SimpleChar_t__dSimpleChar_t;	
+	AOLIB_VAR DWORD SimpleChar_t__dSimpleChar_t;
 
 #pragma endregion
 
@@ -564,7 +567,7 @@
 
 #pragma region ChatWindowController
 
-	
+
 
 	AOLIB_VAR DWORD ChatGroupController_c__sub_10083D9C;
 
@@ -596,4 +599,5 @@
 	bool resolve_function_address(const std::vector<BYTE>& data, HMODULE& module_handle, DWORD& function_address, const char* function_address_name, const char* mangled_function_name, const char* function_pattern, DWORD offset = 0x0, DWORD bytes_to_next_line = 0x0, DWORD relative_function_base_address = 0x0);
 	bool resolve_static_instance_address(HMODULE& module_handle, DWORD& static_instance_address, const char* static_instance_name, const char* mangled_name, DWORD offset = 0, DWORD relative_function_base_address = 0);
 
+}
 #endif // ISXAO_GLOBALS_H

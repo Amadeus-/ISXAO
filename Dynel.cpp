@@ -54,7 +54,7 @@ namespace ao
 		return vector3_t::distance_z(dynel_position, position);
 	}
 
-#ifdef N3_DYNEL_T__GET_DYNEL_USE_NATIVE
+#if true
 	FUNCTION_AT_ADDRESS(dynel* dynel::get_dynel(const identity_t&), n3_dynel_t__get_dynel)
 #else
 	dynel* dynel::get_dynel(const identity_t &id)

@@ -1049,7 +1049,7 @@ enum SpecialAction_e : DWORD
 
 #pragma region Professions
 
-enum profession_e
+enum profession_e : DWORD
 {
 	PT_NONE = 0,
 	PT_SOLDIER = 1,
@@ -1073,7 +1073,7 @@ enum profession_e
 
 #pragma region SocialActions
 
-enum social_action_e
+enum social_action_e : DWORD
 {
 	SA_GREETING_BOW = 9,
 	SA_GREETING_CURT = 15,

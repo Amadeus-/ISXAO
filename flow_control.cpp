@@ -1,11 +1,12 @@
 #include "isxao_main.h"
+#include "flow_control.h"
 
 namespace ao
 {
-	ao::flow_control_t flow_control::get_flow_control_data() const
-	{
-		return this->flow_control_;
-	}
+	//ao::flow_control_t flow_control::get_flow_control_data() const
+	//{
+	//	return this->flow_control_;
+	//}
 
 #if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic

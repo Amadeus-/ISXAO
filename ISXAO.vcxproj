@@ -213,8 +213,8 @@
     <ClInclude Include="database_handler.h" />
     <ClInclude Include="door.h" />
     <ClInclude Include="flow_control.h" />
+    <ClInclude Include="game_object.h" />
     <ClInclude Include="html_parser.h" />
-    <ClInclude Include="info_item_remote.h" />
     <ClInclude Include="input_config.h" />
     <ClInclude Include="isxao_classes.h" />
     <ClInclude Include="isxao_commands.h" />
@@ -248,6 +248,7 @@
     <ClInclude Include="inventory_slot_type.h" />
     <ClInclude Include="ISXAO.h" />
     <ClInclude Include="ISXAOServices.h" />
+    <ClInclude Include="isxao_messaging.h" />
     <ClInclude Include="isxao_native_defines.h" />
     <ClInclude Include="isxao_type.h" />
     <ClInclude Include="isxao_utilities.h" />
@@ -291,6 +292,9 @@
     <ClInclude Include="TopLevelObjects.h" />
     <ClInclude Include="vehicle.h" />
     <ClInclude Include="weapon_holder.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="game_object.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

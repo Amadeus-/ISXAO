@@ -1,4 +1,6 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
+#include "flow_control.h"
 
 namespace isxao
 {
@@ -152,7 +154,7 @@ namespace isxao
 
 	bool character::in_combat()
 	{
-		return g_game_state == GAMESTATE_IN_GAME && P_ENGINE_CLIENT_ANARCHY->get_client_char()->is_fighting();
+		return ao::g_game_state == GAMESTATE_IN_GAME && P_ENGINE_CLIENT_ANARCHY->get_client_char()->is_fighting();
 	}
 
 	bool character::is_me(ao::dynel* p_dynel)
@@ -549,7 +551,7 @@ namespace isxao
 
 	void camp_handler::new_camp(const bool output)
 	{
-		if (g_game_state == GAMESTATE_IN_GAME && p_move_to_command->on && this->returning)
+		if (ao::g_game_state == GAMESTATE_IN_GAME && p_move_to_command->on && this->returning)
 		{
 			end_previous_cmd(true);
 		}
@@ -1112,7 +1114,7 @@ namespace isxao
 
 	void movement::new_head(const float new_heading)
 	{
-		if (g_game_state != GAMESTATE_IN_GAME)
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return;
 		switch(p_move_active->head)
 		{
@@ -1129,7 +1131,7 @@ namespace isxao
 
 	void movement::new_face(const float new_face)
 	{
-		if (g_game_state != GAMESTATE_IN_GAME)
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return;
 		switch(p_move_active->head)
 		{
@@ -1161,7 +1163,7 @@ namespace isxao
 
 	void movement::do_root()
 	{
-		if (!p_move_active->rooted || g_game_state != GAMESTATE_IN_GAME)
+		if (!p_move_active->rooted || ao::g_game_state != GAMESTATE_IN_GAME)
 			return;
 		if (offset_override)
 		{
@@ -1202,7 +1204,7 @@ namespace isxao
 
 	bool movement::can_move(const float heading, const float x, const float z) const
 	{
-		if (g_game_state != GAMESTATE_IN_GAME)
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return false;
 		ao::vector3_t loc(x, 0.0f, z);
 		const auto head_diff = fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading() - heading);
@@ -1229,7 +1231,7 @@ namespace isxao
 
 	void movement::set_walk(const bool on)
 	{
-		if (g_game_state != GAMESTATE_IN_GAME)
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return;
 		if ((on && !P_ENGINE_CLIENT_ANARCHY->get_client_char()->is_walking()) || (!on && P_ENGINE_CLIENT_ANARCHY->get_client_char()->is_walking()))
 		{
@@ -1240,7 +1242,7 @@ namespace isxao
 
 	void movement::do_stand()
 	{
-		if (g_game_state != GAMESTATE_IN_GAME)
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return;
 		P_ENGINE_CLIENT_ANARCHY->get_client_char()->stand();
 	}
@@ -1309,7 +1311,7 @@ namespace isxao
 
 	void movement::turn_head(const float heading) const
 	{
-		if (g_game_state != GAMESTATE_IN_GAME)
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return;
 		switch (p_move_active->head)
 		{
@@ -1326,7 +1328,7 @@ namespace isxao
 
 	void movement::fast_turn(const float heading)
 	{
-		if (g_game_state != GAMESTATE_IN_GAME)
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return;
 		P_ENGINE_CLIENT_ANARCHY->get_client_char()->face(heading);
 		
@@ -1334,7 +1336,7 @@ namespace isxao
 
 	void movement::loose_turn(const float new_heading) const
 	{
-		if (g_game_state != GAMESTATE_IN_GAME)
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
 		{
 			if (fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading() - new_heading) < p_move_settings->turn_rate)
 			{
@@ -1357,7 +1359,7 @@ namespace isxao
 
 	void movement::true_turn(float new_heading)
 	{
-		if (g_game_state != GAMESTATE_IN_GAME)
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return;
 		if (fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading()) - new_heading < 14.0f)
 		{
@@ -1499,7 +1501,7 @@ namespace isxao
 
 	void output_help(const byte cmd_used, bool only_cmd_help)
 	{
-		if (g_game_state != GAMESTATE_IN_GAME)
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return;
 		char command[20] = { 0 };
 		bool display_settings = false;
@@ -1570,13 +1572,13 @@ namespace isxao
 		if ((v_compare == V_SILENCE) || (verb_level & V_EVERYTHING) == V_EVERYTHING || (verb_level & v_compare) == v_compare)
 		{
 			printf("%s", output);
-			gp_isxao_log->add_line("%s", output);
+			ao::gp_isxao_log->add_line("%s", output);
 		}
 	}
 
 	void handle_our_cmd(const byte cmd_used, int begin_inclusive, int argc, char *argv[])
 	{
-		if (g_game_state != GAMESTATE_IN_GAME)
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return;
 		char current_arg[MAX_VARSTRING] = { 0 };
 		char temp_id[MAX_VARSTRING] = { 0 };

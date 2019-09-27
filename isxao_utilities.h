@@ -1,18 +1,7 @@
 #pragma once
 
 namespace isxao
-{
-	
-#pragma region Strings
-	//AOLIB_API PCSTR stat_to_string(ao::stat_e stat_id);
-	AOLIB_API PCSTR get_breed_str_local(ao::breed_e);
-	AOLIB_API PCSTR get_sex_str_local(ao::gender_e);
-	AOLIB_API PCSTR get_profession_str(DWORD);
-	AOLIB_API PCSTR get_side_str(DWORD);
-	AOLIB_API PCSTR get_nano_school_str(DWORD);
-	AOLIB_API PCSTR get_item_rarity_str(DWORD);
-
-#pragma endregion
+{	
 
 #pragma region Objects
 
@@ -32,24 +21,6 @@ namespace isxao
 
 #pragma endregion
 
-#pragma region Collections
-
-	//AOLIB_API void get_stat_name_map(std::map<ao::stat_e, PCSTR>& m);
-	AOLIB_API void get_static_item_map(std::map<ao::identity_t, ao::p_dummy_item_base_t>& m);
-
-#pragma endregion
-
-#pragma region Inventory
-
-	bool GetInvSlotIdentity(ao::ArmorSlot_e slot, ao::identity_t& id);
-	bool GetInvSlotIdentity(ao::ImplantSlot_e slot, ao::identity_t& id);
-	bool GetInvSlotIdentity(ao::WeaponSlot_e slot, ao::identity_t& id);
-	bool GetInvSlotIdentity(DWORD slot, ao::identity_t& id);
-	PCSTR GetInvSlotName(const ao::identity_t& slot);
-	bool GetInvSlotIdentity(PCSTR slot_name, ao::identity_t &id);
-	ao::p_inventory_data_t GetInvSlotData(ao::inventory_slot_t *slot);
-
-#pragma endregion
 
 #pragma region Lavishscript
 
@@ -60,7 +31,7 @@ namespace isxao
 #pragma region Utility
 
 	AOLIB_API DWORD get_game_state();
-	AOLIB_API void PrintToChat(string message, PCSTR chat_type);
+	AOLIB_API void print_to_chat(string message, PCSTR chat_type);
 	AOLIB_API void get_arg(char current_arg[MAX_VARSTRING], int argc, char *argv[], DWORD& arg_num);
 
 #pragma endregion

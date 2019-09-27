@@ -124,9 +124,9 @@ void __cdecl TeleportService(ISXInterface *pClient, unsigned int MSG, void *lpDa
 	{
 	case StartTeleport:
 	{
-		if(!g_zoning)
+		if(!ao::g_zoning)
 		{
-			g_zoning = true;
+			ao::g_zoning = true;
 			pISInterface->ExecuteEvent(isxao::events::GetEventId("AO_onZoneBegin"), 0, 0);
 			pISInterface->ServiceBroadcast(pExtension, hTeleportService, StartTeleport, nullptr);
 		}		
@@ -134,9 +134,9 @@ void __cdecl TeleportService(ISXInterface *pClient, unsigned int MSG, void *lpDa
 	}
 	case StopTeleport:
 	{
-		if(g_zoning)
+		if(ao::g_zoning)
 		{
-			g_zoning = false;
+			ao::g_zoning = false;
 			pISInterface->ExecuteEvent(isxao::events::GetEventId("AO_onZoneEnd"), 0, 0);
 			pISInterface->ServiceBroadcast(pExtension, hTeleportService, StopTeleport, nullptr);
 		}		
@@ -168,10 +168,10 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 	{
 	case GamestateNotInGame:
 	{
-		if(g_game_state != GAMESTATE_NOT_IN_GAME)
+		if(ao::g_game_state != GAMESTATE_NOT_IN_GAME)
 		{
-			g_game_state = GAMESTATE_NOT_IN_GAME;
-			gp_isxao_log->add_line("Gamestate changed to GAMESTATE_NOT_IN_GAME");
+			ao::g_game_state = GAMESTATE_NOT_IN_GAME;
+			ao::gp_isxao_log->add_line("Gamestate changed to GAMESTATE_NOT_IN_GAME");
 			char new_state[MAX_VARSTRING];
 			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_NOT_IN_GAME");
 			char *argv[] = { new_state };
@@ -182,10 +182,10 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 	}
 	case GamestateWaitingForPlayfield:
 	{
-		if(g_game_state != GAMESTATE_WAITING_FOR_PLAYFIELD)
+		if(ao::g_game_state != GAMESTATE_WAITING_FOR_PLAYFIELD)
 		{
-			g_game_state = GAMESTATE_WAITING_FOR_PLAYFIELD;
-			gp_isxao_log->add_line("Gamestate changed to GAMESTATE_WAITING_FOR_PLAYFIELD");
+			ao::g_game_state = GAMESTATE_WAITING_FOR_PLAYFIELD;
+			ao::gp_isxao_log->add_line("Gamestate changed to GAMESTATE_WAITING_FOR_PLAYFIELD");
 			char new_state[MAX_VARSTRING];
 			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_WAITING_FOR_PLAYFIELD");
 			char *argv[] = { new_state };
@@ -196,10 +196,10 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 	}
 	case GamestateWaitingForCharacter:
 	{
-		if (g_game_state != GAMESTATE_WAITING_FOR_CLIENT_CHAR)
+		if (ao::g_game_state != GAMESTATE_WAITING_FOR_CLIENT_CHAR)
 		{
-			g_game_state = GAMESTATE_WAITING_FOR_CLIENT_CHAR;
-			gp_isxao_log->add_line("Gamestate changed to GAMESTATE_WAITING_FOR_CLIENT_CHAR");
+			ao::g_game_state = GAMESTATE_WAITING_FOR_CLIENT_CHAR;
+			ao::gp_isxao_log->add_line("Gamestate changed to GAMESTATE_WAITING_FOR_CLIENT_CHAR");
 			char new_state[MAX_VARSTRING];
 			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_WAITING_FOR_CLIENT_CHAR");
 			char *argv[] = { new_state };
@@ -210,10 +210,10 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 	}
 	case GamestateInGame:
 	{
-		if (g_game_state != GAMESTATE_IN_GAME)
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
 		{
-			g_game_state = GAMESTATE_IN_GAME;
-			gp_isxao_log->add_line("Gamestate changed to GAMESTATE_IN_GAME");
+			ao::g_game_state = GAMESTATE_IN_GAME;
+			ao::gp_isxao_log->add_line("Gamestate changed to GAMESTATE_IN_GAME");
 			char new_state[MAX_VARSTRING];
 			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_IN_GAME");
 			char *argv[] = { new_state };

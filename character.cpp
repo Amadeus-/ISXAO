@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
 
 namespace ao
 {
@@ -30,9 +31,9 @@ namespace ao
 		return reinterpret_cast<stat_holder*>(this->get_simple_char_data()->p_map_holder);
 	}
 
-	void character::get_stat_map(std::map<DWORD, LONG> &m)
+	DWORD character::get_stat_map(std::map<DWORD, LONG> &m)
 	{
-		get_stat_holder()->get_stat_map(m);
+		return get_stat_holder()->get_stat_map(m);
 	}
 
 #pragma endregion

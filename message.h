@@ -1,19 +1,21 @@
 #pragma once
+#include "game_object.h"
 
-// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
-class message
+namespace ao
 {
-public:
-	DWORD data_block_size_get();
-	DWORD dest_id_get();
-	PVOID get_data();
-	ao::message_t get_message_data() const;
-	static DWORD header_size(DWORD);
-	DWORD message_size_get();
-	DWORD message_type_get();
-	DWORD priority_get();
-	DWORD source_id_get();
-private:
-	// ReSharper disable once CppUninitializedNonStaticDataMember
-	ao::message_t message_;
-};
+	struct ao_message;
+
+	typedef ao_message message_t, *p_message_t;
+
+	class message : public game_object<message_t>
+	{
+	public:
+		unsigned long data_block_size_get();
+		unsigned long dest_id_get();
+		static unsigned long header_size(unsigned long);
+		unsigned long message_size_get();
+		unsigned long message_type_get();
+		unsigned long priority_get();
+		unsigned long source_id_get();
+	};
+}

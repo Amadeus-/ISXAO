@@ -24,7 +24,7 @@ bool ISXAOType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER pMember, int ar
 	}
 	case IsReady:
 	{
-		Object.DWord = g_isxao_initialized;
+		Object.DWord = ao::g_isxao_initialized;
 		Object.Type = pBoolType;
 		break;
 	}

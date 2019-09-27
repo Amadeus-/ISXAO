@@ -1,9 +1,17 @@
 #pragma once
+#include "game_object.h"
 
-class look_at_iir : public ao::info_item_remote
+namespace ao
 {
-public:
-	look_at_iir(const ao::identity_t*, const ao::identity_t*, int);
-private:
-	ao::look_at_iir_t look_at_iir_;
-};
+	struct ao_identity;
+	struct ao_look_at_iir;
+
+	typedef ao_identity identity_t, *p_identity_t;
+	typedef ao_look_at_iir look_at_iir_t, *p_look_at_iir_t;
+
+	class look_at_iir : public game_object<look_at_iir_t>
+	{
+	public:
+		look_at_iir(const identity_t*, const identity_t*, int);
+	};
+}

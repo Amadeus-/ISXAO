@@ -364,35 +364,35 @@ void __cdecl PulseService(bool Broadcast, unsigned int MSG, void *lpData)
 		 * tasks.
 		 */
 
-		g_pulse_count++;
-		while (!g_n3message_queue.empty())
+		ao::g_pulse_count++;
+		while (!ao::g_n3message_queue.empty())
 		{
 			isxao::internal::PN3MESSAGEINFO message_info;
-			if (g_n3message_queue.try_pop(message_info))
+			if (ao::g_n3message_queue.try_pop(message_info))
 				isxao::HandleN3Message(message_info);
 		}
-		while (!g_group_message_queue.empty())
+		while (!ao::g_group_message_queue.empty())
 		{
 			isxao::internal::PGROUPMESSAGEINFO group_message_info;
-			if (g_group_message_queue.try_pop(group_message_info))
+			if (ao::g_group_message_queue.try_pop(group_message_info))
 				isxao::HandleGroupMessage(group_message_info);
 		}
-		while (!g_private_message_queue.empty())
+		while (!ao::g_private_message_queue.empty())
 		{
 			isxao::internal::PPRIVATEMESSAGEINFO private_message_info;
-			if (g_private_message_queue.try_pop(private_message_info))
+			if (ao::g_private_message_queue.try_pop(private_message_info))
 				isxao::HandlePrivateMessage(private_message_info);
 		}
-		while (!g_vicinity_message_queue.empty())
+		while (!ao::g_vicinity_message_queue.empty())
 		{
 			isxao::internal::PPRIVATEMESSAGEINFO vicinity_message_info;
-			if (g_vicinity_message_queue.try_pop(vicinity_message_info))
+			if (ao::g_vicinity_message_queue.try_pop(vicinity_message_info))
 				isxao::HandleVicinityMessage(vicinity_message_info);
 		}
-		while (!g_system_chat_queue.empty())
+		while (!ao::g_system_chat_queue.empty())
 		{
 			isxao::internal::PSYSTEMCHATINFO system_chat_info;
-			if (g_system_chat_queue.try_pop(system_chat_info))
+			if (ao::g_system_chat_queue.try_pop(system_chat_info))
 				isxao::HandleSystemChat(system_chat_info);
 		}
 
@@ -481,7 +481,7 @@ void ISXAO::ExceptionMessage(const char * pszFormatString, ...)
 	va_end(args);
 
 	FILE * pFile = 0;
-	if (fopen_s(&pFile, gp_isxao_log->get_base_dir_file("ISXAO_Crashlog.txt").c_str(), "a+") == 0)
+	if (fopen_s(&pFile, ao::gp_isxao_log->get_base_dir_file("ISXAO_Crashlog.txt").c_str(), "a+") == 0)
 	{
 		if (!pFile)
 			return;

@@ -1,12 +1,14 @@
 #pragma once
+#include "game_object.h"
 
-// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
-class chat_window_node
+struct ao_chat_window_node;
+typedef ao_chat_window_node chat_window_node_t, *p_chat_window_node_t;
+
+namespace ao
 {
-public:
-	ao::chat_window_node_t get_data() const;
-	bool parse_text_command(string&);
-private:
-	// ReSharper disable once CppUninitializedNonStaticDataMember
-	ao::chat_window_node_t chat_window_node_;
-};
+	class chat_window_node : game_object<chat_window_node_t>
+	{
+	public:
+		bool parse_text_command(std::string&);
+	};
+}

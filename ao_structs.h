@@ -2,6 +2,35 @@
 
 namespace ao
 {
+#pragma region Forward Declarations
+
+	class actor;
+	class character;
+	class chat_gui_module;
+	class chat_window_controller;
+	class chat_window_node;
+	class command_interpreter;
+	class database_handler;
+	class engine_client_anarchy;
+	class flow_control;
+	class game_time;
+	class graph_path_finder;
+	class html_parser;
+	class info_item_remote;
+	class input_config;
+	class message;
+	class n3_message;
+	class pet;
+	class player;
+	class resource_database;
+	class special_action_template;
+	class team_member;
+	class team_raid;
+	class text_message;
+
+#pragma endregion
+
+
 #include "ao_enums.h"
 
 #pragma region Struct Definitions and Typedefines

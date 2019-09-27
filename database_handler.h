@@ -1,11 +1,13 @@
 #pragma once
+#include "game_object.h"
 
-// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
-class database_handler
+namespace ao
 {
-public:
-	ao::resource_database* get_resource_database() const;
-private:
-	// ReSharper disable once CppUninitializedNonStaticDataMember
-	ao::n3_database_handler_t n3_database_handler_;
-};
+	class resource_database;
+	
+	class database_handler : public game_object<ao::n3_database_handler_t>
+	{
+	public:
+		ao::resource_database* get_resource_database();
+	};
+}

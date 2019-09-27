@@ -21,6 +21,13 @@ public:
 	ao::inventory_slot_t get_inventory_slot(DWORD) const;
 	ao::inventory_slot_t get_inventory_slot(PCSTR) const;
 	static DWORD get_weapon_inventory(std::vector<ao::inventory_data_t*> &v);
+	static bool get_inv_slot_identity(ao::ArmorSlot_e slot, ao::identity_t& id);
+	static bool get_inv_slot_identity(ao::ImplantSlot_e slot, ao::identity_t& id);
+	static bool get_inv_slot_identity(ao::WeaponSlot_e slot, ao::identity_t& id);
+	static bool get_inv_slot_identity(DWORD slot, ao::identity_t& id);
+	static PCSTR get_inv_slot_name(const ao::identity_t& slot);
+	static bool get_inv_slot_identity(PCSTR slot_name, ao::identity_t &id);
+	static ao::p_inventory_data_t get_inv_slot_data(ao::inventory_slot_t *slot);
 private:
 	// ReSharper disable once CppUninitializedNonStaticDataMember
 	ao::inventory_holder_t inventory_holder_;

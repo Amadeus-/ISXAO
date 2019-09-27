@@ -1,8 +1,12 @@
 #include "isxao_main.h"
+#include "input_config.h"
+#include "message.h"
+#include "n3_message.h"
+#include "text_message.h"
 
 namespace isxao
 {
-
+	using namespace ao;
 #pragma region n3_engine_client_anarchy_t__set_main_dynel
 
 	// ReSharper disable once CppMemberFunctionMayBeStatic
@@ -112,7 +116,7 @@ namespace isxao
 	{
 		char move_data[MAX_VARSTRING];
 		sprintf_s(move_data, sizeof(move_data), "[Move Data] Movement Mode: %d, Unknown_1: %.4f, Unknown_2: %.4f, Unknown_3: %d", movement_mode, unknown_1, unknown_2, unknown_3);
-		gp_isxao_log->add_line(move_data);
+		ao::gp_isxao_log->add_line(move_data);
 		n3_engine_client_anarchy_t__n3_msg_movement_changed__trampoline(movement_mode, unknown_1, unknown_2, unknown_3);
 	}
 
@@ -138,8 +142,8 @@ namespace isxao
 			}
 			case ao::PT_N3_MESSAGE:
 			{
-				size_t length = static_cast<ao::n3_message*>(p1)->message_body_len();
-				PCHAR message = static_cast<ao::n3_message*>(p1)->message_body_get();
+				size_t length = reinterpret_cast<ao::n3_message*>(p1)->message_body_len();
+				const char* message = reinterpret_cast<ao::n3_message*>(p1)->message_body_get();
 				PVOID export_message = malloc(length);
 				memcpy_s(export_message, length, message, length);
 				internal::PN3MESSAGEINFO message_info = new internal::N3MESSAGEINFO(export_message, length);

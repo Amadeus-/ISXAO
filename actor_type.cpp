@@ -1,8 +1,9 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
 
 bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {
-	if (g_game_state != GAMESTATE_IN_GAME)
+	if (ao::g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -627,7 +628,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Side:
 		{
-			Object.ConstCharPtr = isxao::get_side_str(P_ACTOR->get_skill(ao::ST_SIDE));
+			Object.ConstCharPtr = ao::engine_client_anarchy::get_side_str(ao::side_e(P_ACTOR->get_skill(ao::ST_SIDE)));
 			Object.Type = pStringType;
 			break;
 		}
@@ -692,7 +693,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 
 bool ActorType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int argc, char* argv[])
 {
-	if (g_game_state != GAMESTATE_IN_GAME)
+	if (ao::g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -749,7 +750,7 @@ bool ActorType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int a
 
 bool ActorType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 {
-	if (g_game_state != GAMESTATE_IN_GAME)
+	if (ao::g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;

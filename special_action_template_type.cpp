@@ -1,8 +1,9 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
 
 bool SpecialActionTemplateType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {
-	if (g_game_state != GAMESTATE_IN_GAME)
+	if (ao::g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -51,7 +52,7 @@ bool SpecialActionTemplateType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER
 
 bool SpecialActionTemplateType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int argc, char* argv[])
 {
-	if (g_game_state != GAMESTATE_IN_GAME)
+	if (ao::g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -78,7 +79,7 @@ bool SpecialActionTemplateType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHO
 
 bool SpecialActionTemplateType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 {
-	if (g_game_state != GAMESTATE_IN_GAME)
+	if (ao::g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;

@@ -1,7 +1,7 @@
 #include "isxao_main.h"
+#include "resource_database.h"
 
-namespace ao
-{
+namespace ao{
 
 #if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
@@ -10,5 +10,4 @@ namespace ao
 #else
 	static_assert(false, "resource_database::get_db_object(const identity_t&) requires a native function.");
 #endif
-
 }

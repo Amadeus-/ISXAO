@@ -1,17 +1,17 @@
 #include "isxao_main.h"
+#include "command_interpreter.h"
 
 namespace ao
 {
 
-	command_interpreter_t command_interpreter::get_command_interpreter_data() const
-	{
-		return command_interpreter_;
-	}
-
+#if false
+	static_assert(false, "command_interpreter::parse_text(string& text) does not have a native function.");
+#else
 	bool command_interpreter::parse_text(string& text)
 	{
 		return parse_text(nullptr, text);
-	}
+}
+#endif
 
 #if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic

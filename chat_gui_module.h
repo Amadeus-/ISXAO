@@ -1,12 +1,18 @@
 #pragma once
-#include "door.h"
+#include "game_object.h"
 
-// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
-class chat_gui_module
+namespace ao
 {
-public:
-	static void handle_system_message(ao::p_ppj_client_system_message_t);
-private:
-	// ReSharper disable once CppUninitializedNonStaticDataMember
-	ao::chat_gui_module_t chat_gui_module_;
-};
+	struct ao_chat_gui_module;
+	struct ppj_client_system_message;
+
+	typedef ao_chat_gui_module chat_gui_module_t, *p_chat_gui_module_t;
+	typedef ppj_client_system_message ppj_client_system_message_t, *p_ppj_client_system_message_t;
+
+	// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
+	class chat_gui_module : public game_object<chat_gui_module_t>
+	{
+	public:
+		static void handle_system_message(p_ppj_client_system_message_t);
+	};
+}

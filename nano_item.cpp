@@ -1,26 +1,27 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
 
 namespace ao
 {
 	
 	bool nano_item::can_apply_on_fighting_target()
 	{
-		return (get_nano_can_flags() & ICF_APPLY_ON_FIGHTING_TARGET) == 1;
+		return (get_nano_can_flags() & ICF_APPLY_ON_FIGHTING_TARGET) != 0;
 	}
 
 	bool nano_item::can_apply_on_friendly()
 	{
-		return (get_nano_can_flags() & ICF_APPLY_ON_FRIENDLY) == 1;
+		return (get_nano_can_flags() & ICF_APPLY_ON_FRIENDLY) != 0;
 	}
 
 	bool nano_item::can_apply_on_hostile()
 	{
-		return (get_nano_can_flags() & ICF_APPLY_ON_HOSTILE) == 1;
+		return (get_nano_can_flags() & ICF_APPLY_ON_HOSTILE) != 0;
 	}
 
 	bool nano_item::can_apply_on_self()
 	{
-		return (get_nano_can_flags() & ICF_APPLY_ON_SELF) == 1;
+		return (get_nano_can_flags() & ICF_APPLY_ON_SELF) != 0;
 	}
 
 	void nano_item::cast()
@@ -121,12 +122,12 @@ namespace ao
 
 	bool nano_item::is_buff()
 	{
-		return (get_nano_none_flags() & NNF_IS_BUFF) == 1;
+		return (get_nano_none_flags() & NNF_IS_BUFF) != 0;
 	}
 
 	bool nano_item::is_hostile()
 	{
-		return (get_nano_none_flags() & NNF_IS_HOSTILE) == 1;
+		return (get_nano_none_flags() & NNF_IS_HOSTILE) != 0;
 	}
 
 	bool nano_item::is_nano_self_only()
@@ -136,12 +137,12 @@ namespace ao
 
 	bool nano_item::is_no_resist_cannot_fumble()
 	{
-		return (get_nano_none_flags() & NNF_NO_RESIST_CANNOT_FUMBLE) == 1;
+		return (get_nano_none_flags() & NNF_NO_RESIST_CANNOT_FUMBLE) != 0;
 	}
 
 	bool nano_item::is_shape_change_nano()
 	{
-		return (get_nano_none_flags() & NNF_IS_SHAPE_CHANGE_NANO) == 1;
+		return (get_nano_none_flags() & NNF_IS_SHAPE_CHANGE_NANO) != 0;
 	}
 
 	bool nano_item::is_team_nano()
@@ -151,17 +152,17 @@ namespace ao
 
 	bool nano_item::will_break_on_attack()
 	{
-		return (get_nano_none_flags() & NNF_BREAK_ON_ATTACK) == 1;
+		return (get_nano_none_flags() & NNF_BREAK_ON_ATTACK) != 0;
 	}
 
 	bool nano_item::will_break_on_debuff()
 	{
-		return (get_nano_none_flags() & NNF_BREAK_ON_DEBUFF) == 1;
+		return (get_nano_none_flags() & NNF_BREAK_ON_DEBUFF) != 0;
 	}
 
 	bool nano_item::will_break_on_spell_attack()
 	{
-		return (get_nano_none_flags() * NNF_BREAK_ON_SPELL_ATTACK) == 1;
+		return (get_nano_none_flags() & NNF_BREAK_ON_SPELL_ATTACK) != 0;
 	}
 
 }
