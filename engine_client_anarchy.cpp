@@ -1424,5 +1424,19 @@ namespace ao
 	FUNCTION_AT_ADDRESS(void engine_client_anarchy::N3Msg_UseItemOnItem(const identity_t &, const identity_t &), n3EngineClientAnarchy_t__N3Msg_UseItemOnItem);
 #endif
 
+#if true
+	FUNCTION_AT_ADDRESS(PCSTR engine_client_anarchy::stat_to_string(ao::stat_e stat_id), f_stat_to_string)
+#else
+	// ReSharper disable once CppParameterMayBeConst
+	PCSTR engine_client_anarchy::stat_to_string(ao::stat_e stat_id)
+	{
+		auto result = "NoName";
+		std::map<ao::stat_e, PCSTR> m;
+		P_STAT_NAME_MAP->copy_map(m);
+		if (m.count(stat_id))
+			result = m.find(stat_id)->second;
+		return result;
+	}
+#endif
 
 }

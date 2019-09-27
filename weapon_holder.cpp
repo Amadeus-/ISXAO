@@ -2,15 +2,19 @@
 
 namespace ao
 {
+	PVOID weapon_holder::get_data()
+	{
+		return &weapon_holder_;
+	}
 
 	weapon_holder_t weapon_holder::get_weapon_holder_data() const
 	{
 		return weapon_holder_;
 	}
 
-	DWORD weapon_holder::get_weapon_items(std::map<DWORD, p_weapon_item_t> &m) const
+	DWORD weapon_holder::get_weapon_items(std::map<DWORD, p_dummy_item_base_t> &m)
 	{
-		return get_weapon_holder_data().weapon_item_dir.copy_map(m);
+		return weapon_holder_.weapon_item_dir.copy_map(m);
 	}
 
 	identity_t weapon_holder::get_weapon_target() const

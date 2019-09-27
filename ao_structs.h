@@ -454,9 +454,9 @@ namespace ao
 	typedef ao_map<identity_t, struct ao_n3_dynel*> dynel_map_t, *p_dynel_map_t;
 	typedef ao_map<DWORD, struct ao_nano_item*> nano_item_map_t, *p_nano_item_map_t;	
 	typedef ao_map<identity_t, struct ao_playfield_anarchy*> playfield_map, *p_playfield_map;
-	typedef ao_map<string, struct ao_chat_window_node*> chat_window_node_map_t, *p_chat_window_node_map_t;
+	typedef ao_map<string, class chat_window_node*> chat_window_node_map_t, *p_chat_window_node_map_t;
 	typedef ao_map<DWORD, struct ao_playfield_anarchy*> playfield_dir_t, *p_playfield_dir_t;
-	typedef ao_map<DWORD, struct ao_weapon_item*> weapon_item_dir_t, *p_weapon_item_dir_t;
+	typedef ao_map<DWORD, struct ao_dummy_item_base*> weapon_item_dir_t, *p_weapon_item_dir_t;
 
 	typedef ao_map<DWORD, PVOID> command_map_t, *p_command_map_t;
 
@@ -866,7 +866,7 @@ namespace ao
 		PVOID p_v_table;										// 0x00
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x04[0x10];								// 0x04
-		chat_window_node_map_t chat_window_node_dir;			// 0x18
+		chat_window_node_map_t chat_window_node_dir;			// 0x14
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x20[0x1C];								// 0x20
 	} chat_window_controller_t, *p_chat_window_controller;
@@ -2867,7 +2867,7 @@ namespace ao
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x04[0x4];					// 0x04
 		p_simple_char_t p_client_control_char;	// 0x08
-		weapon_item_dir_t weapon_item_dir;		// 0x0C
+		weapon_item_dir_t weapon_item_dir;		// 0x10
 		// ReSharper disable once CppInconsistentNaming
 		BYTE unknown_0x18[0x2C];				// 0x18
 		DWORD is_attacking;						// 0x44

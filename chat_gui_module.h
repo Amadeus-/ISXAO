@@ -1,4 +1,5 @@
 #pragma once
+#include "door.h"
 
 // ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
 class chat_gui_module

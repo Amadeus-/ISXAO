@@ -356,6 +356,11 @@
 	AOLIB_VAR ao::chat_gui_module** pp_chat_gui_module;
 #define P_CHAT_GUI_MODULE (*pp_chat_gui_module)  // NOLINT(cppcoreguidelines-macro-usage)
 
+	AOLIB_VAR DWORD chat_window_controller_t__d_chat_window_controller_t;
+	AOLIB_VAR DWORD chat_window_controller_c__m_pc_instance;
+	AOLIB_VAR ao::chat_window_controller** pp_chat_window_controller;
+#define P_CHAT_WINDOW_CONTROLLER (*pp_chat_window_controller)  // NOLINT(cppcoreguidelines-macro-usage)
+
 	AOLIB_VAR DWORD chat_window_node_c__parse_text_command;
 
 	AOLIB_VAR DWORD command_interpreter_c__command_interpreter_c;
@@ -559,9 +564,7 @@
 
 #pragma region ChatWindowController
 
-	AOLIB_VAR DWORD ChatWindowController_c__m_pcInstance;
-	AOLIB_VAR ao::chat_window_controller** ppChatWindowController;
-#define pChatWindowController (*ppChatWindowController)
+	
 
 	AOLIB_VAR DWORD ChatGroupController_c__sub_10083D9C;
 
@@ -584,7 +587,6 @@
 	AOLIB_VAR DWORD LookAtIIR_t__sub_10073E4D;
 
 #pragma endregion
-
 
 	bool initialize_offsets();
 	bool get_function_address(const std::vector<unsigned char>& data, const char* function_pattern, DWORD& module_base_address, DWORD& function_address, const char* function_offset_name);

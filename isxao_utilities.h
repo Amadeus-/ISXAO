@@ -4,7 +4,7 @@ namespace isxao
 {
 	
 #pragma region Strings
-	AOLIB_API PCSTR stat_to_string(ao::stat_e stat_id);
+	//AOLIB_API PCSTR stat_to_string(ao::stat_e stat_id);
 	AOLIB_API PCSTR get_breed_str_local(ao::breed_e);
 	AOLIB_API PCSTR get_sex_str_local(ao::gender_e);
 	AOLIB_API PCSTR get_profession_str(DWORD);
@@ -34,15 +34,8 @@ namespace isxao
 
 #pragma region Collections
 
-	AOLIB_API void get_nano_map(std::map<DWORD, ao::p_nano_item_t>& m);
-	AOLIB_API void get_stat_name_map(std::map<ao::stat_e, PCSTR>& m);
+	//AOLIB_API void get_stat_name_map(std::map<ao::stat_e, PCSTR>& m);
 	AOLIB_API void get_static_item_map(std::map<ao::identity_t, ao::p_dummy_item_base_t>& m);
-	//AOLIB_API void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, ao::p_stat_node_t pNode, ao::p_stat_root_t pRoot, DWORD& count);
-	//AOLIB_API void GetStatMap(std::map<DWORD, LONG>& m, ao::p_stat_dir_t pDir);
-	AOLIB_API void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ao::chat_window_node*>& m, ao::p_chat_window_node_node_t pNode, ao::p_chat_window_node_root_t pRoot, DWORD& count);
-	AOLIB_API void GetChatWindowNodeMap(std::map<string, ao::chat_window_node*>& m, ao::chat_window_node_dir_t &dir);
-	AOLIB_API void RecursiveAddLockIdToLockIdMap(std::map<DWORD, DWORD>& m, ao::p_lock_id_node_t pNode, ao::p_lock_id_root_t pRoot, DWORD& count);
-	AOLIB_API void GetLockIdMap(std::map<DWORD, DWORD>& m, ao::p_lock_id_dir_t pDir);
 
 #pragma endregion
 

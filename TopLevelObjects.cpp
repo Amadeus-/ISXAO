@@ -179,7 +179,7 @@ bool __cdecl TLO_NANOSPELL(int argc, char *argv[], LSTYPEVAR&Dest)
 		{
 			if (IS_NUMBER())
 			{
-				const ao::identity_t i(53019, GET_NUMBER());
+				const ao::identity_t i(53019, GET_NUMBER());  // NOLINT(cert-err34-c)
 				const ao::identity_t d(0, 0);
 				if ((Dest.Ptr = P_ENGINE_CLIENT_ANARCHY->get_item_by_template(i, d)))
 				{
@@ -193,7 +193,7 @@ bool __cdecl TLO_NANOSPELL(int argc, char *argv[], LSTYPEVAR&Dest)
 			strcpy_s(szSearchName, MAX_VARSTRING, argv[0]);
 			_strlwr_s(szSearchName);
 			std::map<DWORD, ao::p_nano_item_t> m;
-			isxao::get_nano_map(m);
+			P_NANO_ITEM_MAP->copy_map(m);
 			for (auto it = m.begin(); it != m.end(); ++it)
 			{
 				strcpy_s(szName, MAX_VARSTRING, reinterpret_cast<ao::nano_item*>(it->second)->get_name());

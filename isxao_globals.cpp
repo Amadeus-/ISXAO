@@ -344,6 +344,10 @@
 
 	DWORD chat_window_node_c__parse_text_command = 0;
 
+	DWORD chat_window_controller_t__d_chat_window_controller_t = 0;
+	DWORD chat_window_controller_c__m_pc_instance = 0;
+	ao::chat_window_controller** pp_chat_window_controller = nullptr;
+
 	DWORD command_interpreter_c__command_interpreter_c = 0;
 
 	DWORD command_t__execute_1 = 0;
@@ -526,8 +530,8 @@
 
 #pragma region ChatWindowController
 
-	DWORD ChatWindowController_c__m_pcInstance = 0;
-	ao::chat_window_controller** ppChatWindowController = nullptr;
+
+	
 
 	DWORD ChatGroupController_c__sub_10083D9C = 0;
 
@@ -852,6 +856,7 @@
 		RESOLVE_FUNCTION_ADDRESS(gui, chat_gui_module_c__handle_private_message)
 		RESOLVE_FUNCTION_ADDRESS(gui, chat_gui_module_c__handle_system_message)
 		RESOLVE_FUNCTION_ADDRESS(gui, chat_gui_module_c__handle_vicinity_message)
+		RESOLVE_FUNCTION_ADDRESS(gui, chat_window_controller_t__d_chat_window_controller_t)
 		RESOLVE_FUNCTION_ADDRESS(gui, chat_window_node_c__parse_text_command)
 		RESOLVE_FUNCTION_ADDRESS(gui, command_t__execute_1)
 		RESOLVE_FUNCTION_ADDRESS(gui, command_interpreter_c__command_interpreter_c)
@@ -888,6 +893,9 @@
 		// Instances
 		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, chat_gui_module_c__s_pc_instance, chat_gui_module_c__chat_gui_module_c)	// Depends on chat_gui_module_c__chat_gui_module_c
 		pp_chat_gui_module = reinterpret_cast<ao::chat_gui_module**>(chat_gui_module_c__s_pc_instance);
+
+		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, chat_window_controller_c__m_pc_instance, chat_window_controller_t__d_chat_window_controller_t)
+		pp_chat_window_controller = reinterpret_cast<ao::chat_window_controller**>(chat_window_controller_c__m_pc_instance);
 
 		RESOLVE_STATIC_INSTANCE_ADDRESS(gui, command_interpreter_c__m_pc_instance, command_interpreter_c__command_interpreter_c)	// Depends on command_interpreter_c__command_interpreter_c
 		pp_command_interpreter = reinterpret_cast<ao::command_interpreter**>(command_interpreter_c__m_pc_instance);

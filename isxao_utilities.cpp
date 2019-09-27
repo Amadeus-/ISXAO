@@ -7,21 +7,6 @@ namespace isxao
 
 #pragma region Strings
 
-#ifdef F_STAT_TO_STRING_USE_NATIVE
-	FUNCTION_AT_ADDRESS(PCSTR stat_to_string(ao::stat_e stat_id), f_stat_to_string)
-#else
-	// ReSharper disable once CppParameterMayBeConst
-	PCSTR stat_to_string(ao_data::stat_e stat_id)
-	{
-		auto result = "NoName";
-		std::map<stat_e, PCSTR> m;
-		get_stat_name_map(m);
-		if (m.count(stat_id))
-			result = m.find(stat_id)->second;
-		return result;
-	}
-#endif
-
 	// ReSharper disable once CppParameterMayBeConst
 	PCSTR get_breed_str_local(ao::breed_e breed_id)
 	{
@@ -613,22 +598,6 @@ namespace isxao
 
 #pragma region Collections
 
-	void get_nano_map(std::map<DWORD, ao::p_nano_item_t>& m)
-	{
-		if (P_NANO_ITEM_MAP)
-		{
-			P_NANO_ITEM_MAP->copy_map(m);
-		}
-	}
-
-	void get_stat_name_map(std::map<ao::stat_e, PCSTR>& m)
-	{
-		if (P_STAT_NAME_MAP)
-		{
-			P_STAT_NAME_MAP->copy_map(m);
-		}
-	}
-
 	void get_static_item_map(std::map<ao::identity_t, ao::p_dummy_item_base_t>& m)
 	{
 		const auto count = P_STATIC_ITEM_VECTOR->size();
@@ -637,63 +606,6 @@ namespace isxao
 			if (P_STATIC_ITEM_VECTOR->at(i).p_dummy_item)
 				m.insert_or_assign(P_STATIC_ITEM_VECTOR->at(i).p_dummy_item->identity, P_STATIC_ITEM_VECTOR->at(i).p_dummy_item);
 		}
-	}
-
-	//void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, ao::p_stat_node_t pNode, ao::p_stat_root_t pRoot, DWORD& count)
-	//{
-	//	m.insert_or_assign(pNode->stat, pNode->modifier);
-	//	count--;
-	//	if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-	//		RecursiveAddStatToStatMap(m, pNode->p_lower, pRoot, count);
-	//	if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-	//		RecursiveAddStatToStatMap(m, pNode->p_higher, pRoot, count);
-	//}
-
-	//void GetStatMap(std::map<DWORD, LONG>& m, ao::p_stat_dir_t pDir)
-	//{
-	//	auto count = pDir->count;
-	//	auto pRoot = pDir->p_root;
-	//	auto pNode = pRoot->p_node;
-	//	if (count > 0)
-	//		RecursiveAddStatToStatMap(m, pNode, pRoot, count);
-	//}
-
-	void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ao::chat_window_node*>& m, ao::p_chat_window_node_node_t pNode, ao::p_chat_window_node_root_t pRoot, DWORD& count)
-	{
-		m.insert_or_assign(pNode->window_name, reinterpret_cast<ao::chat_window_node*>(pNode->p_chat_window));
-		count--;
-		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode->p_lower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode->p_higher, pRoot, count);
-	}
-
-	void GetChatWindowNodeMap(std::map<string, ao::chat_window_node*>& m, ao::chat_window_node_dir_t &dir)
-	{
-		auto count = dir.count;
-		auto pRoot = dir.p_root;
-		auto pNode = pRoot->p_node;
-		if (count > 0)
-			RecursiveAddChatWindowNodeToChatWindowNodeMap(m, pNode, pRoot, count);
-	}
-
-	void RecursiveAddLockIdToLockIdMap(std::map<DWORD, DWORD>& m, ao::p_lock_id_node_t pNode, ao::p_lock_id_root_t pRoot, DWORD& count)
-	{
-		m.insert_or_assign(pNode->lock_id, pNode->action_id);
-		count--;
-		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddLockIdToLockIdMap(m, pNode->p_lower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddLockIdToLockIdMap(m, pNode->p_higher, pRoot, count);
-	}
-
-	void GetLockIdMap(std::map<DWORD, DWORD>& m, ao::p_lock_id_dir_t pDir)
-	{
-		auto count = pDir->count;
-		auto pRoot = pDir->p_root;
-		auto pNode = pRoot->p_node;
-		if (count > 0)
-			RecursiveAddLockIdToLockIdMap(m, pNode, pRoot, count);
 	}
 
 #pragma endregion

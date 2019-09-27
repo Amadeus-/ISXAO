@@ -4,11 +4,11 @@
 
 int CMD_AO(int argc, char *argv[])
 {
-	// printf("%" PRIX32, sizeof(ao::keypress_info_t));
-	std::map<DWORD, ao::p_weapon_item_t> m;
-	P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_weapon_holder()->get_weapon_items(m);
-	for (const auto& it : m)
-		printf("%s", it.second->name);
+	std::map<std::string, ao::chat_window_node*> m;
+	P_CHAT_WINDOW_CONTROLLER->get_chat_window_nodes(m);
+	for (auto it = m.begin(); it != m.end(); ++it)
+		printf("%s", it->first.c_str());
+	// printf("%" PRIX32, P_CHAT_WINDOW_CONTROLLER->get_chat_window_controller_data());
 	return 0;
 }
 
@@ -33,7 +33,7 @@ int CMD_DUMPSTATS(int argc, char *argv[])
 		FILE * pFILE;
 		fopen_s(&pFILE, "stats.txt", "a");
 		std::map<ao::stat_e, const char *> m;
-		isxao::get_stat_name_map(m);
+		P_STAT_NAME_MAP->copy_map(m);
 		for (auto it = m.begin(); it != m.end(); ++it)
 		{
 			char buffer[MAX_VARSTRING];

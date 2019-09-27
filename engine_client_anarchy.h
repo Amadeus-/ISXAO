@@ -207,6 +207,7 @@ public:
 	bool N3Msg_UntrainPerk(DWORD);
 	void n3_msg_use_item(const ao::identity_t &, bool);
 	void N3Msg_UseItemOnItem(const ao::identity_t &, const ao::identity_t &);
+	static PCSTR stat_to_string(ao::stat_e stat_id);
 
 	private:
 	// ReSharper disable once CppUninitializedNonStaticDataMember

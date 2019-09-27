@@ -1877,6 +1877,8 @@ constexpr DWORD mouse_look_active_offset = 0x2D;
 
 #pragma endregion
 
+#pragma endregion
+
 #pragma region GUI
 
 // Module
@@ -1958,6 +1960,16 @@ constexpr char* const chat_gui_module_c__handle_vicinity_message_pattern = stati
 	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 81 EC 44 02 00 00");
 constexpr DWORD chat_gui_module_c__handle_vicinity_message_offset = 0x0;
 constexpr DWORD chat_gui_module_c__handle_vicinity_message_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region chat_window_controller_t__d_chat_window_controller_t
+
+constexpr char* const chat_window_controller_t__d_chat_window_controller_t_mangled_name = static_cast<char*>(nullptr);
+constexpr char* const chat_window_controller_t__d_chat_window_controller_t_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 51 56 8B F1 57 89 75 F0 C7 06 ?? ?? ?? ?? 83 25 ?? ?? ?? ?? 00 8D 4E 24");
+constexpr DWORD chat_window_controller_t__d_chat_window_controller_t_offset = 0;
+constexpr DWORD chat_window_controller_t__d_chat_window_controller_t_bytes_to_next = 0;
 
 #pragma endregion
 
@@ -2316,6 +2328,13 @@ constexpr DWORD window_controller_t__handle_key_up_bytes_to_next = 0x0;
 constexpr char* const chat_gui_module_c__s_pc_instance_mangled_name = static_cast<char*>(
 	"?s_pcInstance@ChatGUIModule_c@@0PAV1@A");
 constexpr DWORD chat_gui_module_c__s_pc_instance_offset = 0x169;
+
+#pragma endregion
+
+#pragma region chat_window_controller_c__m_pc_instance
+
+constexpr char* const chat_window_controller_c__m_pc_instance_mangled_name = static_cast<char*>(nullptr);
+constexpr DWORD chat_window_controller_c__m_pc_instance_offset = 0x1A;
 
 #pragma endregion
 

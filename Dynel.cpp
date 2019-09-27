@@ -134,7 +134,6 @@ namespace ao
 	static_assert(false, "dynel::is_dynel_in_engine(const ao::identity_t&) requires a native function.");
 #endif
 
-
 	bool dynel::is_in_line_of_sight()
 	{
 		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->check_los(this);
