@@ -206,12 +206,12 @@ bool CharacterType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 		{
 		case Activate:
 		{
-			isxao_commands::Activate(0, argc, argv);
+			isxao::commands::Activate(0, argc, argv);
 			break;
 		}
 		case Cast:
 		{
-			isxao_commands::Cast(0, argc, argv);
+			isxao::commands::Cast(0, argc, argv);
 			break;
 		}
 		case Attack:

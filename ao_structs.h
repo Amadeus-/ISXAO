@@ -456,6 +456,7 @@ namespace ao
 	typedef ao_map<identity_t, struct ao_playfield_anarchy*> playfield_map, *p_playfield_map;
 	typedef ao_map<string, struct ao_chat_window_node*> chat_window_node_map_t, *p_chat_window_node_map_t;
 	typedef ao_map<DWORD, struct ao_playfield_anarchy*> playfield_dir_t, *p_playfield_dir_t;
+	typedef ao_map<DWORD, struct ao_weapon_item*> weapon_item_dir_t, *p_weapon_item_dir_t;
 
 	typedef ao_map<DWORD, PVOID> command_map_t, *p_command_map_t;
 
@@ -2833,34 +2834,34 @@ namespace ao
 
 #pragma region WeaponHolder
 
-	typedef struct weapon_item_node
-	{
-		struct weapon_item_node* p_lower;			// 0x00
-		struct weapon_item_node* p_node;			// 0x04
-		struct weapon_item_node* p_higher;			// 0x08
-		DWORD action_id;							// 0x0C
-		struct ao_weapon_item* p_weapon_item;			// 0x10
-	} weapon_item_node_t, *p_weapon_item_node_t;
+	//typedef struct weapon_item_node
+	//{
+	//	struct weapon_item_node* p_lower;			// 0x00
+	//	struct weapon_item_node* p_node;			// 0x04
+	//	struct weapon_item_node* p_higher;			// 0x08
+	//	DWORD action_id;							// 0x0C
+	//	struct ao_weapon_item* p_weapon_item;			// 0x10
+	//} weapon_item_node_t, *p_weapon_item_node_t;
 
-	// Size = 0x0C
-	typedef struct weapon_item_root
-	{
-		p_weapon_item_node_t p_begin;			// 0x00
-		p_weapon_item_node_t p_node;			// 0x04
-		p_weapon_item_node_t p_end;				// 0x08
-	} weapon_item_root_t, *p_weapon_item_root_t;
+	//// Size = 0x0C
+	//typedef struct weapon_item_root
+	//{
+	//	p_weapon_item_node_t p_begin;			// 0x00
+	//	p_weapon_item_node_t p_node;			// 0x04
+	//	p_weapon_item_node_t p_end;				// 0x08
+	//} weapon_item_root_t, *p_weapon_item_root_t;
 
-	typedef struct weapon_item_dir
-	{
-		// ReSharper disable once CppInconsistentNaming
-		BYTE unknown_0x00[0x4];					// 0x00
-		p_weapon_item_root_t p_root;			// 0x04
-		DWORD count;							// 0x08
-	} weapon_item_dir_t, *p_weapon_item_dir_t;
+	//typedef struct weapon_item_dir
+	//{
+	//	// ReSharper disable once CppInconsistentNaming
+	//	BYTE unknown_0x00[0x4];					// 0x00
+	//	p_weapon_item_root_t p_root;			// 0x04
+	//	DWORD count;							// 0x08
+	//} weapon_item_dir_t, *p_weapon_item_dir_t;
 
 	// Size = 0xA4
 	// From Gamecode.dll
-	typedef struct ao_weapon_holder
+	typedef struct ao_weapon_holder  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
 		PVOID p_v_table;						// 0x00
 		// ReSharper disable once CppInconsistentNaming

@@ -34,17 +34,11 @@ namespace isxao
 
 #pragma region Collections
 
-	AOLIB_API void RecursiveAddPerkToPerkMap(std::map<ao::identity_t, DWORD>& m, ao::p_perk_node_t pNode, ao::p_perk_root_t pRoot, DWORD& count);
-	AOLIB_API void GetPerkMap(std::map<ao::identity_t, DWORD>& m, ao::p_perk_dir_t pDir);
-	AOLIB_API void RecursiveAddPetToPetMap(std::map<ao::identity_t, DWORD>& m, ao::p_pet_node_t pNode, ao::p_pet_root_t pRoot, DWORD& count);
-	AOLIB_API void GetPetMap(std::map<ao::identity_t, DWORD>& m, ao::p_pet_dir_t pPetDir);
 	AOLIB_API void get_nano_map(std::map<DWORD, ao::p_nano_item_t>& m);
 	AOLIB_API void get_stat_name_map(std::map<ao::stat_e, PCSTR>& m);
-	AOLIB_API void GetStaticItemMap(std::map<ao::identity_t, ao::p_dummy_item_base_t>& m);
-	AOLIB_API void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, ao::p_stat_node_t pNode, ao::p_stat_root_t pRoot, DWORD& count);
-	AOLIB_API void GetStatMap(std::map<DWORD, LONG>& m, ao::p_stat_dir_t pDir);
-	AOLIB_API void RecursiveAddWeaponItemToWeaponItemMap(std::map<DWORD, ao::p_weapon_item_t>& m, ao::p_weapon_item_node_t pNode, ao::p_weapon_item_root_t pRoot, DWORD& count);
-	AOLIB_API void GetWeaponItemMap(std::map<DWORD, ao::p_weapon_item_t>& m, ao::weapon_item_dir_t& dir);
+	AOLIB_API void get_static_item_map(std::map<ao::identity_t, ao::p_dummy_item_base_t>& m);
+	//AOLIB_API void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, ao::p_stat_node_t pNode, ao::p_stat_root_t pRoot, DWORD& count);
+	//AOLIB_API void GetStatMap(std::map<DWORD, LONG>& m, ao::p_stat_dir_t pDir);
 	AOLIB_API void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ao::chat_window_node*>& m, ao::p_chat_window_node_node_t pNode, ao::p_chat_window_node_root_t pRoot, DWORD& count);
 	AOLIB_API void GetChatWindowNodeMap(std::map<string, ao::chat_window_node*>& m, ao::chat_window_node_dir_t &dir);
 	AOLIB_API void RecursiveAddLockIdToLockIdMap(std::map<DWORD, DWORD>& m, ao::p_lock_id_node_t pNode, ao::p_lock_id_root_t pRoot, DWORD& count);

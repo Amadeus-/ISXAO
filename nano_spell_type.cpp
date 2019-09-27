@@ -2,7 +2,7 @@
 
 bool NanoSpellType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {
-	if (isxao::g_game_state != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -178,7 +178,7 @@ bool NanoSpellType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int
 
 bool NanoSpellType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int argc, char* argv[])
 {
-	if (isxao::g_game_state != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;
@@ -204,7 +204,7 @@ bool NanoSpellType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, i
 
 bool NanoSpellType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 {
-	if (isxao::g_game_state != GAMESTATE_IN_GAME)
+	if (g_game_state != GAMESTATE_IN_GAME)
 		return false;
 	if (!ObjectData.Ptr)
 		return false;

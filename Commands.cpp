@@ -5,8 +5,10 @@
 int CMD_AO(int argc, char *argv[])
 {
 	// printf("%" PRIX32, sizeof(ao::keypress_info_t));
-	ao::keypress_info_t k(ao::IMD_A);
-	P_INPUT_CONFIG->process_input(k, ao::IME_ANY_MODE);
+	std::map<DWORD, ao::p_weapon_item_t> m;
+	P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_weapon_holder()->get_weapon_items(m);
+	for (const auto& it : m)
+		printf("%s", it.second->name);
 	return 0;
 }
 
@@ -31,7 +33,7 @@ int CMD_DUMPSTATS(int argc, char *argv[])
 		FILE * pFILE;
 		fopen_s(&pFILE, "stats.txt", "a");
 		std::map<ao::stat_e, const char *> m;
-		get_stat_name_map(m);
+		isxao::get_stat_name_map(m);
 		for (auto it = m.begin(); it != m.end(); ++it)
 		{
 			char buffer[MAX_VARSTRING];

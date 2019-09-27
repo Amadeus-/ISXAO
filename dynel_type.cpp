@@ -28,7 +28,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case Loc:
 		{
 			auto v = P_DYNEL->get_position();
-			auto p = point3f_from_vector3(v);
+			auto p = isxao::point3f_from_vector3(v);
 			const auto p_p = PPOINT3F(pISInterface->GetTempBuffer(sizeof(p), &p));
 			Object.Ptr = p_p;
 			Object.Type = pPoint3fType;
@@ -193,7 +193,7 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 					return false;
 				}
 				const auto p = PPOINT3F(object.Ptr);
-				auto v = vector3_from_p_point3f(p);
+				auto v = isxao::vector3_from_p_point3f(p);
 				Object.DWord = P_DYNEL->is_in_line_of_sight(v);
 				Object.Type = pBoolType;
 				return true;
@@ -212,28 +212,28 @@ bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case NearestDynel:
 		{
-			if (is_client_id(P_DYNEL->get_identity().id))
+			if (isxao::is_client_id(P_DYNEL->get_identity().id))
 			{
 				return (TLO_ACTORSEARCH(argc, argv, Object) != 0);
 			}
 			if (argc)
 			{
 				DWORD nth;
-				SEARCHACTOR sd_dynel;
-				ClearSearchActor(&sd_dynel);
+				isxao::internal::SEARCHACTOR sd_dynel;
+				isxao::ClearSearchActor(&sd_dynel);
 				sd_dynel.f_radius = 999999.0f;
 				if (argc >= 2 || !IsNumber(argv[0]))
 				{
-					ParseSearchActor(1, argc, argv, sd_dynel);
+					isxao::ParseSearchActor(1, argc, argv, sd_dynel);
 					nth = atoi(argv[0]);  // NOLINT(cert-err34-c)
 				}
 				else
 					nth = atoi(argv[0]);  // NOLINT(cert-err34-c)
-				const auto result = NthNearestActor(&sd_dynel, nth, P_ENGINE_CLIENT_ANARCHY->get_client_char());
+				const auto result = isxao::NthNearestActor(&sd_dynel, nth, P_ENGINE_CLIENT_ANARCHY->get_client_char());
 				if (result)
 				{
 					Object.Ptr = result;
-					Object.Type = ::get_real_type(reinterpret_cast<ao::dynel*>(result));
+					Object.Type = isxao::get_real_type(reinterpret_cast<ao::dynel*>(result));
 					return true;
 				}
 			}

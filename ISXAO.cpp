@@ -127,7 +127,7 @@ bool ISXAO::Initialize(ISInterface *p_ISInterface)
 		// Register any text triggers built into ISXAO
 		RegisterTriggers();
 
-		InitializeISXAO();
+		isxao::InitializeISXAO();
 
 		printf("ISXAO version %s Loaded",AO_Version);
 		return true;
@@ -165,7 +165,7 @@ bool ISXAO::Initialize(ISInterface *p_ISInterface)
 // shutdown sequence
 void ISXAO::Shutdown()
 {
-	ShutdownLogging();
+	isxao::ShutdownLogging();
 
 	// Disconnect from services we connected to
 	DisconnectServices();
@@ -367,33 +367,33 @@ void __cdecl PulseService(bool Broadcast, unsigned int MSG, void *lpData)
 		g_pulse_count++;
 		while (!g_n3message_queue.empty())
 		{
-			PN3MESSAGEINFO message_info;
+			isxao::internal::PN3MESSAGEINFO message_info;
 			if (g_n3message_queue.try_pop(message_info))
-				HandleN3Message(message_info);
+				isxao::HandleN3Message(message_info);
 		}
 		while (!g_group_message_queue.empty())
 		{
-			PGROUPMESSAGEINFO group_message_info;
+			isxao::internal::PGROUPMESSAGEINFO group_message_info;
 			if (g_group_message_queue.try_pop(group_message_info))
-				HandleGroupMessage(group_message_info);
+				isxao::HandleGroupMessage(group_message_info);
 		}
 		while (!g_private_message_queue.empty())
 		{
-			PPRIVATEMESSAGEINFO private_message_info;
+			isxao::internal::PPRIVATEMESSAGEINFO private_message_info;
 			if (g_private_message_queue.try_pop(private_message_info))
-				HandlePrivateMessage(private_message_info);
+				isxao::HandlePrivateMessage(private_message_info);
 		}
 		while (!g_vicinity_message_queue.empty())
 		{
-			PPRIVATEMESSAGEINFO vicinity_message_info;
+			isxao::internal::PPRIVATEMESSAGEINFO vicinity_message_info;
 			if (g_vicinity_message_queue.try_pop(vicinity_message_info))
-				HandleVicinityMessage(vicinity_message_info);
+				isxao::HandleVicinityMessage(vicinity_message_info);
 		}
 		while (!g_system_chat_queue.empty())
 		{
-			PSYSTEMCHATINFO system_chat_info;
+			isxao::internal::PSYSTEMCHATINFO system_chat_info;
 			if (g_system_chat_queue.try_pop(system_chat_info))
-				HandleSystemChat(system_chat_info);
+				isxao::HandleSystemChat(system_chat_info);
 		}
 
 		//if (g_is_moving_to_location && g_game_state == GAMESTATE_IN_GAME && g_pulse_count % 20 == 0)

@@ -1,13 +1,12 @@
 #pragma once
 #include "isxao_main.h"
 
-namespace isxao_events
+namespace isxao
 {
+	namespace events
+	{
+		bool RegisterEvents();
 
-	bool RegisterEvents();
-
-	int GetEventId(PCSTR pszEvent);
-
+		int GetEventId(PCSTR pszEvent);
+	}
 }
-
-using namespace isxao_events;

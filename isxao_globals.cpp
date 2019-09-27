@@ -1144,7 +1144,7 @@
 
 	bool get_function_address(const std::vector<unsigned char>& data, const char* function_pattern, DWORD& module_base_address, DWORD& function_address, const char* function_offset_name)
 	{
-		function_address = isxao::patterns::find_pattern(data, function_pattern, module_base_address);
+		function_address = isxao::pattern::find_pattern(data, function_pattern, module_base_address);
 		if (function_address == DWORD(-1))
 		{
 			printf("[ERROR]\t%s could not be found using pattern matching.", function_offset_name);

@@ -52,7 +52,7 @@ bool AOType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER pMember, int argc,
 			LSIndex *pIndex = (LSIndex*)IndexObject.Ptr;
 			if (pIndex->GetType() != pActorType)
 				return false;
-			Object.DWord = GetActorIndexFromActorVector(pIndex);
+			Object.DWord = isxao::GetActorIndexFromActorVector(pIndex);
 			Object.Type = pUintType;
 			return true;
 		}

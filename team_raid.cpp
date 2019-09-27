@@ -57,7 +57,7 @@ namespace ao
 			{
 				for (auto it = team_entry_vector.begin(); it != team_entry_vector.end(); ++it)// NOLINT(modernize-loop-convert)
 				{
-					if (!is_client_id((*it)->get_identity().id))
+					if (!isxao::is_client_id((*it)->get_identity().id))
 						v.push_back(*it);
 				}
 			}							
@@ -117,7 +117,7 @@ namespace ao
 		for (auto it = team_entry_vector->begin(); it != team_entry_vector->end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
 			auto entry = reinterpret_cast<team_entry*>(*it);
-			if (!is_client_id(entry->get_identity().id))
+			if (!isxao::is_client_id(entry->get_identity().id))
 				v.push_back(entry);
 		}
 		return v.size();

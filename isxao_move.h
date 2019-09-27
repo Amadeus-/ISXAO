@@ -499,8 +499,8 @@ namespace isxao
 		{
 			const auto rand_heading = rand() / RAND_MAX * circle_max;
 			const auto rand_distance = rand() / RAND_MAX * use_radius;
-			*use_x = x + float(rand_distance * sinf(rand_heading * M_PI / circle_half));
-			*use_z = z + float(rand_distance * cosf(rand_heading * M_PI / circle_half));
+			*use_x = x + float(rand_distance * sinf(float(rand_heading * M_PI) / circle_half));
+			*use_z = z + float(rand_distance * cosf(float(rand_heading * M_PI) / circle_half));
 		}
 
 		inline void polar_spot(float x, float z, float heading, float bearing, float distance, float scatter, float* use_x, float* use_z)

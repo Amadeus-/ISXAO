@@ -612,44 +612,6 @@ namespace isxao
 #pragma endregion
 
 #pragma region Collections
-	
-	void RecursiveAddPerkToPerkMap(std::map<ao::identity_t, DWORD>& m, ao::p_perk_node_t pNode, ao::p_perk_root_t pRoot, DWORD& count)
-	{
-		m.insert_or_assign(pNode->perk_identity, pNode->perk_id);
-		count--;
-		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddPerkToPerkMap(m, pNode->p_lower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddPerkToPerkMap(m, pNode->p_higher, pRoot, count);
-	}
-
-	void GetPerkMap(std::map<ao::identity_t, DWORD>& m, ao::p_perk_dir_t pDir)
-	{
-		auto count = pDir->count;
-		auto pRoot = pDir->p_root;
-		auto pNode = pRoot->p_node;
-		if (count > 0)
-			RecursiveAddPerkToPerkMap(m, pNode, pRoot, count);
-	}
-
-	void RecursiveAddPetToPetMap(std::map<ao::identity_t, DWORD>& m, ao::p_pet_node_t pNode, ao::p_pet_root_t pRoot, DWORD& count)
-	{
-		m.insert_or_assign(pNode->identity, pNode->index);
-		count--;
-		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddPetToPetMap(m, pNode->p_lower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddPetToPetMap(m, pNode->p_higher, pRoot, count);
-	}
-
-	void GetPetMap(std::map<ao::identity_t, DWORD>& m, ao::p_pet_dir_t pPetDir)
-	{
-		auto count = pPetDir->count;
-		auto pRoot = pPetDir->p_root;
-		auto pNode = pRoot->p_node;
-		if (count > 0)
-			RecursiveAddPetToPetMap(m, pNode, pRoot, count);
-	}
 
 	void get_nano_map(std::map<DWORD, ao::p_nano_item_t>& m)
 	{
@@ -667,9 +629,9 @@ namespace isxao
 		}
 	}
 
-	void GetStaticItemMap(std::map<ao::identity_t, ao::p_dummy_item_base_t>& m)
+	void get_static_item_map(std::map<ao::identity_t, ao::p_dummy_item_base_t>& m)
 	{
-		auto count = P_STATIC_ITEM_VECTOR->size();
+		const auto count = P_STATIC_ITEM_VECTOR->size();
 		for (DWORD i = 0; i < count; i++)
 		{
 			if (P_STATIC_ITEM_VECTOR->at(i).p_dummy_item)
@@ -677,43 +639,24 @@ namespace isxao
 		}
 	}
 
-	void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, ao::p_stat_node_t pNode, ao::p_stat_root_t pRoot, DWORD& count)
-	{
-		m.insert_or_assign(pNode->stat, pNode->modifier);
-		count--;
-		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddStatToStatMap(m, pNode->p_lower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddStatToStatMap(m, pNode->p_higher, pRoot, count);
-	}
+	//void RecursiveAddStatToStatMap(std::map<DWORD, LONG>& m, ao::p_stat_node_t pNode, ao::p_stat_root_t pRoot, DWORD& count)
+	//{
+	//	m.insert_or_assign(pNode->stat, pNode->modifier);
+	//	count--;
+	//	if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+	//		RecursiveAddStatToStatMap(m, pNode->p_lower, pRoot, count);
+	//	if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
+	//		RecursiveAddStatToStatMap(m, pNode->p_higher, pRoot, count);
+	//}
 
-	void GetStatMap(std::map<DWORD, LONG>& m, ao::p_stat_dir_t pDir)
-	{
-		auto count = pDir->count;
-		auto pRoot = pDir->p_root;
-		auto pNode = pRoot->p_node;
-		if (count > 0)
-			RecursiveAddStatToStatMap(m, pNode, pRoot, count);
-	}
-
-	void RecursiveAddWeaponItemToWeaponItemMap(std::map<DWORD, ao::p_weapon_item_t>& m, ao::p_weapon_item_node_t pNode, ao::p_weapon_item_root_t pRoot, DWORD& count)
-	{
-		m.insert_or_assign(pNode->action_id, pNode->p_weapon_item);
-		count--;
-		if (reinterpret_cast<PVOID>(pNode->p_lower) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddWeaponItemToWeaponItemMap(m, pNode->p_lower, pRoot, count);
-		if (reinterpret_cast<PVOID>(pNode->p_higher) != reinterpret_cast<PVOID>(pRoot) && count > 0)
-			RecursiveAddWeaponItemToWeaponItemMap(m, pNode->p_higher, pRoot, count);
-	}
-
-	void GetWeaponItemMap(std::map<DWORD, ao::p_weapon_item_t>& m, ao::weapon_item_dir_t& dir)
-	{
-		auto count = dir.count;
-		auto pRoot = dir.p_root;
-		auto pNode = pRoot->p_node;
-		if (count > 0)
-			RecursiveAddWeaponItemToWeaponItemMap(m, pNode, pRoot, count);
-	}
+	//void GetStatMap(std::map<DWORD, LONG>& m, ao::p_stat_dir_t pDir)
+	//{
+	//	auto count = pDir->count;
+	//	auto pRoot = pDir->p_root;
+	//	auto pNode = pRoot->p_node;
+	//	if (count > 0)
+	//		RecursiveAddStatToStatMap(m, pNode, pRoot, count);
+	//}
 
 	void RecursiveAddChatWindowNodeToChatWindowNodeMap(std::map<string, ao::chat_window_node*>& m, ao::p_chat_window_node_node_t pNode, ao::p_chat_window_node_root_t pRoot, DWORD& count)
 	{
@@ -1574,7 +1517,7 @@ namespace isxao
 		char pet[MAX_VARSTRING];
 		sprintf_s(pet, sizeof(pet), "%I64u",pet_message.identity().combined_identity());
 		char *argv[] = { pet };
-		pISInterface->ExecuteEvent(GetEventId("AO_onAddPet"), 0, 1, argv);
+		pISInterface->ExecuteEvent(events::GetEventId("AO_onAddPet"), 0, 1, argv);
 		//delete argv;
 	}
 
@@ -1583,7 +1526,7 @@ namespace isxao
 		char target[MAX_VARSTRING];
 		sprintf_s(target, sizeof(target), "%I64u", attack_message.target().combined_identity());
 		char *argv[] = { target };
-		pISInterface->ExecuteEvent(GetEventId("AO_onAttack"), 0, 1, argv);
+		pISInterface->ExecuteEvent(events::GetEventId("AO_onAttack"), 0, 1, argv);
 	}
 
 	void HandleCastNanoSpellMessage(cast_nano_spell_message cast_nano_spell_message)
@@ -1595,15 +1538,15 @@ namespace isxao
 		sprintf_s(target, sizeof(target), "%I64u", cast_nano_spell_message.target().combined_identity());
 		sprintf_s(caster, sizeof(caster), "%I64u", cast_nano_spell_message.caster().combined_identity());
 		char *argv[] = { nano_id, target, caster };
-		pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell"), 0, 3, argv);
+		pISInterface->ExecuteEvent(events::GetEventId("AO_onCastNanoSpell"), 0, 3, argv);
 		if (is_client_id(cast_nano_spell_message.target().id()))
-			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_TargetSelf"), 0, 3, argv);
+			pISInterface->ExecuteEvent(events::GetEventId("AO_onCastNanoSpell_TargetSelf"), 0, 3, argv);
 		else
-			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_TargetOther"), 0, 3, argv);
+			pISInterface->ExecuteEvent(events::GetEventId("AO_onCastNanoSpell_TargetOther"), 0, 3, argv);
 		if (is_client_id(cast_nano_spell_message.caster().id()))
-			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_CasterSelf"), 0, 3, argv);
+			pISInterface->ExecuteEvent(events::GetEventId("AO_onCastNanoSpell_CasterSelf"), 0, 3, argv);
 		else
-			pISInterface->ExecuteEvent(GetEventId("AO_onCastNanoSpell_CasterOther"), 0, 3, argv);
+			pISInterface->ExecuteEvent(events::GetEventId("AO_onCastNanoSpell_CasterOther"), 0, 3, argv);
 	}
 
 	void HandleCharacterActionMessage(character_action_message character_action_message)
@@ -1615,7 +1558,7 @@ namespace isxao
 			char nano_id[MAX_VARSTRING];
 			sprintf_s(nano_id, sizeof(nano_id), "%d", character_action_message.param_2());
 			char * argv[] = { nano_id };
-			pISInterface->ExecuteEvent(GetEventId("AO_onFinishedCastingNano"), 0, 1, argv);
+			pISInterface->ExecuteEvent(events::GetEventId("AO_onFinishedCastingNano"), 0, 1, argv);
 			break;
 		}
 		case ao::CAT_SET_NANO_DURATION:
@@ -1630,12 +1573,12 @@ namespace isxao
 			char duration[MAX_VARSTRING];
 			sprintf_s(duration, sizeof(duration), "%d", character_action_message.param_2());
 			char * argv[] = { nano_id, caster_id, duration };
-			pISInterface->ExecuteEvent(GetEventId("AO_onNanoApplied"), 0, 3, argv);
+			pISInterface->ExecuteEvent(events::GetEventId("AO_onNanoApplied"), 0, 3, argv);
 			break;
 		}
 		case ao::CAT_STAND_UP:
 		{
-			pISInterface->ExecuteEvent(GetEventId("AO_onStand"));
+			pISInterface->ExecuteEvent(events::GetEventId("AO_onStand"));
 			break;
 		}
 		case ao::CAT_TEAM_REQUEST: break;
@@ -1675,7 +1618,7 @@ namespace isxao
 		char target[MAX_VARSTRING];
 		sprintf_s(target, sizeof(target), "%I64u", follow_message.target().combined_identity());
 		char *argv[] = { target };
-		pISInterface->ExecuteEvent(GetEventId("AO_onFollowTarget"), 0, 1, argv);
+		pISInterface->ExecuteEvent(events::GetEventId("AO_onFollowTarget"), 0, 1, argv);
 		//delete argv;
 	}
 	
@@ -1684,7 +1627,7 @@ namespace isxao
 		char pet[MAX_VARSTRING];
 		sprintf_s(pet, sizeof(pet), "%I64u", remove_pet_message.identity().combined_identity());
 		char *argv[] = { pet };
-		pISInterface->ExecuteEvent(GetEventId("AO_onRemovePet"), 0, 1, argv);
+		pISInterface->ExecuteEvent(events::GetEventId("AO_onRemovePet"), 0, 1, argv);
 		//delete argv;
 	}
 
@@ -1695,7 +1638,7 @@ namespace isxao
 		sprintf_s(damage, sizeof(damage), "%d", shield_attack_message.damage_shielded());
 		sprintf_s(shieldee, sizeof(shieldee), "%I64u", shield_attack_message.shieldee().combined_identity());
 		char *argv[] = { damage, shieldee };
-		pISInterface->ExecuteEvent(GetEventId("AO_onAttackShielded"), 0, 2, argv);
+		pISInterface->ExecuteEvent(events::GetEventId("AO_onAttackShielded"), 0, 2, argv);
 		//delete argv;
 	}
 
@@ -1707,7 +1650,7 @@ namespace isxao
 		char id[MAX_VARSTRING];
 		sprintf_s(id, sizeof(id), "%I64u", group_message_info->SenderIdentity.get_combined_identity());
 		char *argv[] = { sender, channel, message, id };
-		pISInterface->ExecuteEvent(GetEventId("AO_onGroupMessageReceived"), 0, 4, argv);
+		pISInterface->ExecuteEvent(events::GetEventId("AO_onGroupMessageReceived"), 0, 4, argv);
 		delete group_message_info;
 	}
 
@@ -1718,7 +1661,7 @@ namespace isxao
 		char id[MAX_VARSTRING];
 		sprintf_s(id, sizeof(id), "%I64u", private_message_info->SenderIdentity.get_combined_identity());
 		char *argv[] = { sender, message, id };
-		pISInterface->ExecuteEvent(GetEventId("AO_onTellReceived"), 0, 3, argv);
+		pISInterface->ExecuteEvent(events::GetEventId("AO_onTellReceived"), 0, 3, argv);
 		delete private_message_info;
 	}
 
@@ -1729,7 +1672,7 @@ namespace isxao
 		char id[MAX_VARSTRING];
 		sprintf_s(id, sizeof(id), "%I64u", vicinity_message_info->SenderIdentity.get_combined_identity());
 		char *argv[] = { sender, message, id };
-		pISInterface->ExecuteEvent(GetEventId("AO_onVicinityMessageReceived"), 0, 3, argv);
+		pISInterface->ExecuteEvent(events::GetEventId("AO_onVicinityMessageReceived"), 0, 3, argv);
 		delete vicinity_message_info;
 	}
 
@@ -1884,7 +1827,7 @@ namespace isxao
 			break;
 		}
 		char *argv[] = { chat_type, text };
-		pISInterface->ExecuteEvent(GetEventId("AO_onIncomingSystemText"), 0, 2, argv);
+		pISInterface->ExecuteEvent(events::GetEventId("AO_onIncomingSystemText"), 0, 2, argv);
 		delete system_chat_info;
 	}
 

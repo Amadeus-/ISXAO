@@ -193,7 +193,7 @@ namespace ao
 
 	p_inventory_data_t inventory_slot::get_inv_slot_data()
 	{
-		return GetInvSlotData(this);
+		return isxao::GetInvSlotData(this);
 	}
 
 	double inventory_slot::get_item_progress(DWORD& a, DWORD& b) const

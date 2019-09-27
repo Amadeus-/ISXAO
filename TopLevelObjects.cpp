@@ -63,7 +63,7 @@ bool __cdecl TLO_SELECTION_TARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 			const auto identity = P_SELECTION_INDICATOR->identity;
 			const auto d = ao::dynel::get_dynel(identity);
 			Dest.Ptr = d;
-			Dest.Type = isxao_utilities::get_real_type(d);
+			Dest.Type = isxao::get_real_type(d);
 			return true;
 		}
 	}
@@ -83,7 +83,7 @@ bool __cdecl TLO_ATTACK_TARGET(int argc, char *argv[], LSTYPEVAR &Dest)
 		{
 			const auto d = reinterpret_cast<ao::dynel*>(ao::dynel::get_dynel(P_ATTACKING_INDICATOR->identity));
 			Dest.Ptr = d;
-			Dest.Type = isxao_utilities::get_real_type(d);
+			Dest.Type = isxao::get_real_type(d);
 			return true;
 		}
 	}
@@ -101,8 +101,8 @@ bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 		if (IS_INDEX())
 		{
 			DWORD nth;
-			SEARCHACTOR search_actor;
-			ClearSearchActor(&search_actor);
+			isxao::internal::SEARCHACTOR search_actor;
+			isxao::ClearSearchActor(&search_actor);
 			search_actor.f_radius = 999999.0f;
 			ao::identity_t identity;
 			std::vector<ao::actor*> v;
@@ -119,23 +119,23 @@ bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 					return true;
 				}
 				nth = 1;
-				ParseSearchActor(0, argc, argv, search_actor);
+				isxao::ParseSearchActor(0, argc, argv, search_actor);
 			}
 			else
 			{
 				nth = GET_NUMBER();
-				ParseSearchActor(1, argc, argv, search_actor);
+				isxao::ParseSearchActor(1, argc, argv, search_actor);
 			}
 			for (DWORD N = 0; N < actor_count; N++)
 			{
 				if (v[N]->get_distance_to_client() > search_actor.f_radius && !search_actor.is_known_location)
 					return false;
-				if (ActorMatchesSearch(&search_actor, P_ENGINE_CLIENT_ANARCHY->get_client_char(), v[N]))
+				if (isxao::ActorMatchesSearch(&search_actor, P_ENGINE_CLIENT_ANARCHY->get_client_char(), v[N]))
 				{
 					if (--nth == 0)
 					{
 						Dest.Ptr = v[N];
-						Dest.Type = get_real_type(v[N]);
+						Dest.Type = isxao::get_real_type(v[N]);
 						return true;
 					}
 				}
@@ -151,10 +151,10 @@ bool __cdecl TLO_ACTORSEARCHCOUNT(int argc, char *argv[], LSTYPEVAR&Dest)
 	{
 		if (IS_INDEX())
 		{
-			SEARCHACTOR search_actor;
-			ClearSearchActor(&search_actor);
-			ParseSearchActor(0, argc, argv, search_actor);
-			Dest.DWord = CountMatchingActors(&search_actor, P_ENGINE_CLIENT_ANARCHY->get_client_char(), true);
+			isxao::internal::SEARCHACTOR search_actor;
+			isxao::ClearSearchActor(&search_actor);
+			isxao::ParseSearchActor(0, argc, argv, search_actor);
+			Dest.DWord = isxao::CountMatchingActors(&search_actor, P_ENGINE_CLIENT_ANARCHY->get_client_char(), true);
 			Dest.Type = pUintType;
 			return true;
 		}
@@ -193,7 +193,7 @@ bool __cdecl TLO_NANOSPELL(int argc, char *argv[], LSTYPEVAR&Dest)
 			strcpy_s(szSearchName, MAX_VARSTRING, argv[0]);
 			_strlwr_s(szSearchName);
 			std::map<DWORD, ao::p_nano_item_t> m;
-			::get_nano_map(m);
+			isxao::get_nano_map(m);
 			for (auto it = m.begin(); it != m.end(); ++it)
 			{
 				strcpy_s(szName, MAX_VARSTRING, reinterpret_cast<ao::nano_item*>(it->second)->get_name());

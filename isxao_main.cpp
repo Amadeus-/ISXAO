@@ -71,7 +71,7 @@ namespace isxao
 
 		// Register events
 		gp_isxao_log->add_line("Registering events.");
-		g_events_registered = RegisterEvents();
+		g_events_registered = events::RegisterEvents();
 		if (g_events_registered)
 			gp_isxao_log->add_line("Events registered.");
 		else

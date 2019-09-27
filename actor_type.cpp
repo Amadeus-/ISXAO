@@ -46,7 +46,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 					return false;
 				}
 				const auto p = PPOINT3F(object.Ptr);
-				auto v = vector3_from_p_point3f(p);
+				auto v = isxao::vector3_from_p_point3f(p);
 				Object.DWord = P_ACTOR->is_in_line_of_sight(v);
 				Object.Type = pBoolType;
 				return true;
@@ -457,7 +457,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case Loc:
 		{
 			auto v = P_ACTOR->get_position();
-			auto p = point3f_from_vector3(v);
+			auto p = isxao::point3f_from_vector3(v);
 			const auto p_p = PPOINT3F(pISInterface->GetTempBuffer(sizeof(p), &p));
 			Object.Ptr = p_p;
 			Object.Type = pPoint3fType;
@@ -467,7 +467,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		{
 			if((Object.Ptr = P_ACTOR->get_master()))
 			{
-				Object.Type = get_real_type(static_cast<ao::dynel*>(Object.Ptr));
+				Object.Type = isxao::get_real_type(static_cast<ao::dynel*>(Object.Ptr));
 				return true;
 			}
 			return false;
@@ -524,28 +524,28 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case NearestActor:
 		{
-			if (is_client_id(P_ACTOR->get_identity().id))
+			if (isxao::is_client_id(P_ACTOR->get_identity().id))
 			{
 				return (TLO_ACTORSEARCH(argc, argv, Object) != 0);
 			}
 			if (argc)
 			{
 				DWORD nth;
-				SEARCHACTOR sd_dynel;
-				ClearSearchActor(&sd_dynel);
+				isxao::internal::SEARCHACTOR sd_dynel;
+				isxao::ClearSearchActor(&sd_dynel);
 				sd_dynel.f_radius = 999999.0f;
 				if (argc >= 2 || !IsNumber(argv[0]))
 				{
-					ParseSearchActor(1, argc, argv, sd_dynel);
+					isxao::ParseSearchActor(1, argc, argv, sd_dynel);
 					nth = atoi(argv[0]);  // NOLINT(cert-err34-c)
 				}
 				else
 					nth = atoi(argv[0]);  // NOLINT(cert-err34-c)
-				const auto result = NthNearestActor(&sd_dynel, nth, P_ENGINE_CLIENT_ANARCHY->get_client_char());
+				const auto result = isxao::NthNearestActor(&sd_dynel, nth, P_ENGINE_CLIENT_ANARCHY->get_client_char());
 				if (result)
 				{
 					Object.Ptr = result;
-					Object.Type = ::get_real_type(reinterpret_cast<ao::dynel*>(result));
+					Object.Type = isxao::get_real_type(reinterpret_cast<ao::dynel*>(result));
 					return true;
 				}
 			}
@@ -571,7 +571,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				{
 					if ((Object.Ptr = P_ACTOR->get_pet(GET_NUMBER() - 1)))  // NOLINT(cert-err34-c)
 					{
-						if (is_client_id(P_ACTOR->get_identity().id))
+						if (isxao::is_client_id(P_ACTOR->get_identity().id))
 							Object.Type = pPetType;
 						else
 							Object.Type = pActorType;
@@ -580,7 +580,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				}
 				if ((Object.Ptr = P_ACTOR->get_pet(argv[0])))
 				{
-					if (is_client_id(P_ACTOR->get_identity().id))
+					if (isxao::is_client_id(P_ACTOR->get_identity().id))
 						Object.Type = pPetType;
 					else
 						Object.Type = pActorType;
@@ -627,7 +627,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Side:
 		{
-			Object.ConstCharPtr = get_side_str(P_ACTOR->get_skill(ao::ST_SIDE));
+			Object.ConstCharPtr = isxao::get_side_str(P_ACTOR->get_skill(ao::ST_SIDE));
 			Object.Type = pStringType;
 			break;
 		}
@@ -653,7 +653,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		{
 			auto velocity_vector3 = P_ACTOR->get_vehicle()->get_velocity();
 			// ReSharper disable once CppInconsistentNaming
-			auto velocity_point3f = point3f_from_vector3(velocity_vector3);
+			auto velocity_point3f = isxao::point3f_from_vector3(velocity_vector3);
 			// ReSharper disable once CppInconsistentNaming
 			const auto p_velocity_point3f = PPOINT3F(pISInterface->GetTempBuffer(sizeof(POINT3F), &velocity_point3f));
 			Object.Ptr = p_velocity_point3f;

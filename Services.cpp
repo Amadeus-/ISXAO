@@ -91,7 +91,7 @@ void __cdecl ActorService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 				strcpy_s(name, MAX_VARSTRING, reinterpret_cast<ao::actor*>(p_actor)->get_name());
 				sprintf_s(identity, MAX_VARSTRING, "%I64d", reinterpret_cast<ao::actor*>(p_actor)->get_identity().get_combined_identity());
 				char *argv[] = { name, identity };
-				pISInterface->ExecuteEvent(GetEventId("AO_onActorSpawned"), 0, 2, argv);
+				pISInterface->ExecuteEvent(isxao::events::GetEventId("AO_onActorSpawned"), 0, 2, argv);
 				pISInterface->ServiceBroadcast(pExtension, hActorService, AddActor, p_actor);
 			}
 		}
@@ -109,7 +109,7 @@ void __cdecl ActorService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 				strcpy_s(name, MAX_VARSTRING, reinterpret_cast<ao::actor*>(p_actor)->get_name());
 				sprintf_s(identity, MAX_VARSTRING, "%I64d", reinterpret_cast<ao::actor*>(p_actor)->get_identity().get_combined_identity());
 				char *argv[] = { name, identity };
-				pISInterface->ExecuteEvent(GetEventId("AO_onActorDespawned"), 0, 2, argv);
+				pISInterface->ExecuteEvent(isxao::events::GetEventId("AO_onActorDespawned"), 0, 2, argv);
 				pISInterface->ServiceBroadcast(pExtension, hActorService, RemoveActor, p_actor);
 			}
 		}
@@ -127,7 +127,7 @@ void __cdecl TeleportService(ISXInterface *pClient, unsigned int MSG, void *lpDa
 		if(!g_zoning)
 		{
 			g_zoning = true;
-			pISInterface->ExecuteEvent(GetEventId("AO_onZoneBegin"), 0, 0);
+			pISInterface->ExecuteEvent(isxao::events::GetEventId("AO_onZoneBegin"), 0, 0);
 			pISInterface->ServiceBroadcast(pExtension, hTeleportService, StartTeleport, nullptr);
 		}		
 		break;
@@ -137,7 +137,7 @@ void __cdecl TeleportService(ISXInterface *pClient, unsigned int MSG, void *lpDa
 		if(g_zoning)
 		{
 			g_zoning = false;
-			pISInterface->ExecuteEvent(GetEventId("AO_onZoneEnd"), 0, 0);
+			pISInterface->ExecuteEvent(isxao::events::GetEventId("AO_onZoneEnd"), 0, 0);
 			pISInterface->ServiceBroadcast(pExtension, hTeleportService, StopTeleport, nullptr);
 		}		
 		break;
@@ -175,7 +175,7 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 			char new_state[MAX_VARSTRING];
 			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_NOT_IN_GAME");
 			char *argv[] = { new_state };
-			pISInterface->ExecuteEvent(GetEventId("AO_onGamestateChanged"), 0, 1, argv);
+			pISInterface->ExecuteEvent(isxao::events::GetEventId("AO_onGamestateChanged"), 0, 1, argv);
 			pISInterface->ServiceBroadcast(pExtension, hGamestateService, GamestateNotInGame, nullptr);
 		}
 		break;
@@ -189,7 +189,7 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 			char new_state[MAX_VARSTRING];
 			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_WAITING_FOR_PLAYFIELD");
 			char *argv[] = { new_state };
-			pISInterface->ExecuteEvent(GetEventId("AO_onGamestateChanged"), 0, 1, argv);
+			pISInterface->ExecuteEvent(isxao::events::GetEventId("AO_onGamestateChanged"), 0, 1, argv);
 			pISInterface->ServiceBroadcast(pExtension, hGamestateService, GamestateWaitingForPlayfield, nullptr);
 		}
 		break;
@@ -203,7 +203,7 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 			char new_state[MAX_VARSTRING];
 			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_WAITING_FOR_CLIENT_CHAR");
 			char *argv[] = { new_state };
-			pISInterface->ExecuteEvent(GetEventId("AO_onGamestateChanged"), 0, 1, argv);
+			pISInterface->ExecuteEvent(isxao::events::GetEventId("AO_onGamestateChanged"), 0, 1, argv);
 			pISInterface->ServiceBroadcast(pExtension, hGamestateService, GamestateWaitingForCharacter, nullptr);
 		}
 		break;
@@ -217,7 +217,7 @@ void __cdecl GamestateService(ISXInterface *pClient, unsigned int MSG, void *lpD
 			char new_state[MAX_VARSTRING];
 			sprintf_s(new_state, MAX_VARSTRING, "GAMESTATE_IN_GAME");
 			char *argv[] = { new_state };
-			pISInterface->ExecuteEvent(GetEventId("AO_onGamestateChanged"), 0, 1, argv);
+			pISInterface->ExecuteEvent(isxao::events::GetEventId("AO_onGamestateChanged"), 0, 1, argv);
 			pISInterface->ServiceBroadcast(pExtension, hGamestateService, GamestateInGame, nullptr);
 		}
 		break;

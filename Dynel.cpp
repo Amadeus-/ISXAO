@@ -175,7 +175,7 @@ namespace ao
 	{
 		const auto dynel_identity = this->get_identity();
 		const identity_t container_identity(0, 0);
-		if (!is_client_id(dynel_identity.id))
+		if (!isxao::is_client_id(dynel_identity.id))
 		{
 			return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(dynel_identity, stat, 2, container_identity);
 		}			
@@ -211,7 +211,7 @@ namespace ao
 	bool dynel::is_info_request_completed()
 	{
 		const auto dynel_identity = this->get_identity();
-		if(!is_client_id(dynel_identity.id))
+		if(!isxao::is_client_id(dynel_identity.id))
 		{
 			const identity_t container_identity(0, 0);
 			const auto profession = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(dynel_identity, ST_PROFESSION, 2, container_identity);

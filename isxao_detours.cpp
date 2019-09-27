@@ -394,12 +394,12 @@ namespace isxao
 		if (status)
 		{
 			TeleportService(pExtension, StartTeleport, nullptr);
-			pISInterface->ExecuteEvent(GetEventId("AO_onZoneBegin"), 0, 0);
+			pISInterface->ExecuteEvent(events::GetEventId("AO_onZoneBegin"), 0, 0);
 		}
 		else
 		{
 			TeleportService(pExtension, StopTeleport, nullptr);
-			pISInterface->ExecuteEvent(GetEventId("AO_onZoneEnd"), 0, 0);
+			pISInterface->ExecuteEvent(events::GetEventId("AO_onZoneEnd"), 0, 0);
 		}
 		n3Engine_t__SetTeleportStatus_Trampoline(status);
 	}
