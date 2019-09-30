@@ -1,4 +1,6 @@
 #include "isxao_main.h"
+#include "character.h"
+#include "dynel.h"
 #include "engine_client_anarchy.h"
 #include "inventory_holder.h"
 #include "inventory_slot.h"
@@ -253,7 +255,7 @@ bool CharacterType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int bufl
 	if (!ObjectData.Ptr)
 		return false;
 #define P_CHARACTER ((ao::character*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
-	sprintf_s(buf, buflen, "%I64u", P_CHARACTER->get_identity().get_combined_identity());
+	sprintf_s(buf, buflen, "%I64u", P_CHARACTER->to_dynel()->get_identity().get_combined_identity());
 #undef P_CHARACTER
 
 	return true;

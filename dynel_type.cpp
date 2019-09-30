@@ -1,4 +1,6 @@
 #include "isxao_main.h"
+#include "character.h"
+#include "dynel.h"
 #include "engine_client_anarchy.h"
 
 bool DynelType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char *argv[], LSOBJECT &Object)

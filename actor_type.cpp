@@ -1,5 +1,9 @@
 #include "isxao_main.h"
+#include "actor.h"
+#include "character.h"
+#include "dynel.h"
 #include "engine_client_anarchy.h"
+#include "vehicle.h"
 
 bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {
@@ -14,7 +18,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		{
 		case Breed:
 		{
-			Object.ConstCharPtr = P_ENGINE_CLIENT_ANARCHY->get_breed_str(ao::breed_e(P_ACTOR->get_skill(ao::ST_BREED)));
+			Object.ConstCharPtr = P_ENGINE_CLIENT_ANARCHY->get_breed_str(ao::breed_e(P_ACTOR->to_dynel()->get_skill(ao::ST_BREED)));
 			Object.Type = pStringType;
 			break;
 		}
@@ -30,7 +34,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			{
 				if (P_ENGINE_CLIENT_ANARCHY && P_ENGINE_CLIENT_ANARCHY->get_client_char())
 				{
-					Object.DWord = P_ENGINE_CLIENT_ANARCHY->get_client_char()->check_los(P_ACTOR);
+					Object.DWord = P_ENGINE_CLIENT_ANARCHY->get_client_char()->check_los(P_ACTOR->to_dynel());
 					Object.Type = pBoolType;
 					return true;
 				}
@@ -48,7 +52,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				}
 				const auto p = PPOINT3F(object.Ptr);
 				auto v = isxao::vector3_from_p_point3f(p);
-				Object.DWord = P_ACTOR->is_in_line_of_sight(v);
+				Object.DWord = P_ACTOR->to_dynel()->is_in_line_of_sight(v);
 				Object.Type = pBoolType;
 				return true;
 			}
@@ -58,7 +62,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				v.x = float(atof(argv[0]));  // NOLINT(cert-err34-c)
 				v.y = float(atof(argv[1]));  // NOLINT(cert-err34-c)
 				v.z = float(atof(argv[2]));  // NOLINT(cert-err34-c)
-				Object.DWord = P_ACTOR->is_in_line_of_sight(v);
+				Object.DWord = P_ACTOR->to_dynel()->is_in_line_of_sight(v);
 				Object.Type = pBoolType;
 				return true;
 			}
@@ -78,19 +82,19 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case CurrentHealth:
 		{
-			Object.Int = P_ACTOR->get_skill(ao::ST_HEALTH);
+			Object.Int = P_ACTOR->to_dynel()->get_skill(ao::ST_HEALTH);
 			Object.Type = pIntType;
 			break;
 		}
 		case CurrentNano:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_CURRENTNANO);
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_CURRENTNANO);
 			Object.Type = pUintType;
 			break;
 		}
 		case CurrentNCU:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_CURRENTNCU);
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_CURRENTNCU);
 			Object.Type = pUintType;
 			break;
 		}
@@ -98,7 +102,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		{
 			ao::vector3_t v;
 			P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
-			Object.Float = P_ACTOR->get_distance_3d_to(v);
+			Object.Float = P_ACTOR->to_dynel()->get_distance_3d_to(v);
 			Object.Type = pfloatType;
 			break;
 		}
@@ -106,20 +110,20 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		{
 			ao::vector3_t v;
 			P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
-			Object.Float = P_ACTOR->get_distance_to(v);
+			Object.Float = P_ACTOR->to_dynel()->get_distance_to(v);
 			Object.Type = pfloatType;
 			break;
 		}
 		case DistancePredict:
 		{
-			ao::vector3_t client = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_position();
+			ao::vector3_t client = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_position();
 			Object.Float = P_ACTOR->estimated_distance_to(client);
 			Object.Type = pfloatType;
 			break;
 		}
 		case Gender:
 		{
-			Object.ConstCharPtr = P_ENGINE_CLIENT_ANARCHY->get_gender_string(P_ACTOR->get_identity());
+			Object.ConstCharPtr = P_ENGINE_CLIENT_ANARCHY->get_gender_string(P_ACTOR->to_dynel()->get_identity());
 			Object.Type = pStringType;
 			break;
 		}
@@ -161,7 +165,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case GM:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_GMLEVEL);
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_GMLEVEL);
 			Object.Type = pBoolType;
 			break;
 		}
@@ -174,7 +178,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		case Heading:
 		{
 			float heading;
-			const auto raw_heading = P_ACTOR->get_raw_heading();
+			const auto raw_heading = P_ACTOR->to_dynel()->get_raw_heading();
 			if (raw_heading > 0.0f)
 				heading = float(raw_heading * 180.0f / M_PI);
 			else
@@ -190,7 +194,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 			{
 				ao::vector3_t v;
 				P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
-				const auto raw_heading = P_ACTOR->get_raw_heading_to(v);
+				const auto raw_heading = P_ACTOR->to_dynel()->get_raw_heading_to(v);
 				if (raw_heading > 0.0f)
 					heading = float(raw_heading * 180.0f / M_PI);
 				else
@@ -260,7 +264,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				offset.z = z;
 				ao::vector3_t v;
 				P_ENGINE_CLIENT_ANARCHY->n3_msg_get_global_character_position(v);
-				const auto raw_heading = P_ACTOR->get_raw_heading_to_loc(v, offset);
+				const auto raw_heading = P_ACTOR->to_dynel()->get_raw_heading_to_loc(v, offset);
 				if (raw_heading > 0.0f)
 					heading = float(raw_heading * 180.0 / M_PI);
 				else
@@ -275,7 +279,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Identity:
 		{
-			auto id = P_ACTOR->get_identity();
+			auto id = P_ACTOR->to_dynel()->get_identity();
 			const auto p_id = static_cast<ao::p_identity_t>(pISInterface->GetTempBuffer(sizeof(ao::identity_t), &id));
 			Object.Ptr = p_id;
 			Object.Type = pIdentityType;
@@ -283,7 +287,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case IsAPet:
 		{
-			Object.DWord = P_ACTOR->is_pet();
+			Object.DWord = P_ACTOR->to_dynel()->is_pet();
 			Object.Type = pBoolType;
 			break;
 		}
@@ -301,13 +305,13 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case IsCharacter:
 		{
-			Object.DWord = isxao::is_client_id(P_ACTOR->get_identity().id);
+			Object.DWord = isxao::is_client_id(P_ACTOR->to_dynel()->get_identity().id);
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsCrawling:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 5;
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 5;
 			Object.Type = pBoolType;
 			break;
 		}
@@ -325,7 +329,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case IsFlying:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 7;
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 7;
 			Object.Type = pBoolType;
 			break;
 		}
@@ -337,7 +341,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case IsInfoRequestComplete:
 		{
-			Object.DWord = P_ACTOR->is_info_request_completed();
+			Object.DWord = P_ACTOR->to_dynel()->is_info_request_completed();
 			Object.Type = pBoolType;
 			break;
 		}
@@ -385,37 +389,37 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case IsMyPet:
 		{
-			Object.DWord = P_ACTOR->is_pet() && isxao::is_client_id(P_ACTOR->get_master_id());
+			Object.DWord = P_ACTOR->to_dynel()->is_pet() && isxao::is_client_id(P_ACTOR->get_master_id());
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsPlayer:
 		{
-			Object.DWord = P_ACTOR->is_player();
+			Object.DWord = P_ACTOR->to_dynel()->is_player();
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsRooted:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 1;
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 1;
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsRunning:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 3;
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 3;
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsSitting:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 8;
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 8;
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsSneaking:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 6;
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 6;
 			Object.Type = pBoolType;
 			break;
 		}
@@ -439,25 +443,25 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case IsSwimming:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 4;
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 4;
 			Object.Type = pBoolType;
 			break;
 		}
 		case IsWalking:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 2;
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_CURRENTMOVEMENTMODE) == 2;
 			Object.Type = pBoolType;
 			break;
 		}
 		case Level:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_LEVEL);
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_LEVEL);
 			Object.Type = pUintType;
 			break;
 		}
 		case Loc:
 		{
-			auto v = P_ACTOR->get_position();
+			auto v = P_ACTOR->to_dynel()->get_position();
 			auto p = isxao::point3f_from_vector3(v);
 			const auto p_p = PPOINT3F(pISInterface->GetTempBuffer(sizeof(p), &p));
 			Object.Ptr = p_p;
@@ -475,19 +479,19 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case MaxHealth:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_LIFE);
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_LIFE);
 			Object.Type = pUintType;
 			break;
 		}
 		case MaxNano:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_MAXNANOENERGY);
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_MAXNANOENERGY);
 			Object.Type = pUintType;
 			break;
 		}
 		case Name:
 		{
-			Object.ConstCharPtr = P_ACTOR->get_name();
+			Object.ConstCharPtr = P_ACTOR->to_dynel()->get_name();
 			Object.Type = pStringType;
 			break;
 		}
@@ -519,13 +523,13 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case NPCFamily:
 		{
-			Object.Int = P_ACTOR->get_skill(ao::ST_NPCFAMILY);
+			Object.Int = P_ACTOR->to_dynel()->get_skill(ao::ST_NPCFAMILY);
 			Object.Type = pIntType;
 			break;
 		}
 		case NearestActor:
 		{
-			if (isxao::is_client_id(P_ACTOR->get_identity().id))
+			if (isxao::is_client_id(P_ACTOR->to_dynel()->get_identity().id))
 			{
 				return (TLO_ACTORSEARCH(argc, argv, Object) != 0);
 			}
@@ -554,13 +558,13 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case PctHealth:
 		{
-			Object.Int = P_ACTOR->get_skill(ao::ST_PERCENTREMAININGHEALTH);
+			Object.Int = P_ACTOR->to_dynel()->get_skill(ao::ST_PERCENTREMAININGHEALTH);
 			Object.Type = pIntType;
 			break;
 		}
 		case PctNano:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_PERCENTREMAININGNANO);
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_PERCENTREMAININGNANO);
 			Object.Type = pUintType;
 			break;
 		}
@@ -572,7 +576,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				{
 					if ((Object.Ptr = P_ACTOR->get_pet(GET_NUMBER() - 1)))  // NOLINT(cert-err34-c)
 					{
-						if (isxao::is_client_id(P_ACTOR->get_identity().id))
+						if (isxao::is_client_id(P_ACTOR->to_dynel()->get_identity().id))
 							Object.Type = pPetType;
 						else
 							Object.Type = pActorType;
@@ -581,7 +585,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 				}
 				if ((Object.Ptr = P_ACTOR->get_pet(argv[0])))
 				{
-					if (isxao::is_client_id(P_ACTOR->get_identity().id))
+					if (isxao::is_client_id(P_ACTOR->to_dynel()->get_identity().id))
 						Object.Type = pPetType;
 					else
 						Object.Type = pActorType;
@@ -598,25 +602,25 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Profession:
 		{
-			Object.ConstCharPtr = ao::engine_client_anarchy::get_profession_str(ao::profession_e(P_ACTOR->get_skill(ao::ST_PROFESSION)));
+			Object.ConstCharPtr = ao::engine_client_anarchy::get_profession_str(ao::profession_e(P_ACTOR->to_dynel()->get_skill(ao::ST_PROFESSION)));
 			Object.Type = pStringType;
 			break;
 		}
 		case ProfessionLevel:
 		{
-			Object.DWord = P_ACTOR->get_skill(ao::ST_PROFESSIONLEVEL);
+			Object.DWord = P_ACTOR->to_dynel()->get_skill(ao::ST_PROFESSIONLEVEL);
 			Object.Type = pUintType;
 			break;
 		}
 		case Radius:
 		{
-			Object.Int = P_ACTOR->get_skill(ao::ST_CHARRADIUS);
+			Object.Int = P_ACTOR->to_dynel()->get_skill(ao::ST_CHARRADIUS);
 			Object.Type = pIntType;
 			break;
 		}
 		case Runspeed:
 		{
-			Object.Int = P_ACTOR->get_skill(ao::ST_RUNSPEED);
+			Object.Int = P_ACTOR->to_dynel()->get_skill(ao::ST_RUNSPEED);
 			Object.Type = pIntType;
 			break;
 		}
@@ -628,7 +632,7 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case Side:
 		{
-			Object.ConstCharPtr = ao::engine_client_anarchy::get_side_str(ao::side_e(P_ACTOR->get_skill(ao::ST_SIDE)));
+			Object.ConstCharPtr = ao::engine_client_anarchy::get_side_str(ao::side_e(P_ACTOR->to_dynel()->get_skill(ao::ST_SIDE)));
 			Object.Type = pStringType;
 			break;
 		}
@@ -663,19 +667,19 @@ bool ActorType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int arg
 		}
 		case X:
 		{
-			Object.Float = P_ACTOR->get_position().x;
+			Object.Float = P_ACTOR->to_dynel()->get_position().x;
 			Object.Type = pfloatType;
 			break;
 		}
 		case Y:
 		{
-			Object.Float = P_ACTOR->get_position().y;
+			Object.Float = P_ACTOR->to_dynel()->get_position().y;
 			Object.Type = pfloatType;
 			break;
 		}
 		case Z:
 		{
-			Object.Float = P_ACTOR->get_position().z;
+			Object.Float = P_ACTOR->to_dynel()->get_position().z;
 			Object.Type = pfloatType;
 			break;
 		}
@@ -714,7 +718,7 @@ bool ActorType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int a
 		}
 		case Interact:
 		{
-			P_ACTOR->interact();
+			P_ACTOR->to_dynel()->interact();
 			break;
 		}
 		case Invite:
@@ -734,7 +738,7 @@ bool ActorType::GetMethod(LSOBJECTDATA& ObjectData, PLSTYPEMETHOD pMethod, int a
 		}
 		case RequestInfo:
 		{
-			P_ENGINE_CLIENT_ANARCHY->n3_msg_request_info_packet(P_ACTOR->get_identity());
+			P_ENGINE_CLIENT_ANARCHY->n3_msg_request_info_packet(P_ACTOR->to_dynel()->get_identity());
 			break;
 		}
 		default: break;
@@ -755,7 +759,7 @@ bool ActorType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 	if (!ObjectData.Ptr)
 		return false;
 #define P_ACTOR ((ao::actor*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
-	sprintf_s(buf, buflen, "%I64u", P_ACTOR->get_identity().get_combined_identity());
+	sprintf_s(buf, buflen, "%I64u", P_ACTOR->to_dynel()->get_identity().get_combined_identity());
 #undef P_ACTOR
 
 	return true;

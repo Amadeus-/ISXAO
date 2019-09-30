@@ -1,6 +1,9 @@
 #pragma once
+#include "actor.h"
 
-class player : public ao::actor
+namespace ao
 {
-public:
-};
+	class player : public actor
+	{
+	};
+}

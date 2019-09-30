@@ -1,4 +1,7 @@
 #include "isxao_main.h"
+#include "actor.h"
+#include "character.h"
+#include "dynel.h"
 #include "engine_client_anarchy.h"
 #include "nano_template.h"
 #include "npc_holder.h"
@@ -6,11 +9,17 @@
 #include "targeting_module.h"
 #include "team_entry.h"
 #include "team_raid.h"
+#include "vehicle.h"
 
 namespace ao
 {
 
-	DWORD actor::build_ls_ncu(LSIndex* p_index)
+	dynel* actor::to_dynel()
+	{
+		return reinterpret_cast<dynel*>(get_data());
+	}
+
+	unsigned long actor::build_ls_ncu(LSIndex* p_index)
 	{
 		std::vector<nano_template> v;
 		this->get_spell_template_data()->get_nano_template_list(v);
@@ -23,7 +32,7 @@ namespace ao
 		return p_index->GetContainerUsed();
 	}
 
-	DWORD actor::build_ls_pets(LSIndex* p_index)
+	unsigned long actor::build_ls_pets(LSIndex* p_index)
 	{
 		std::map<identity_t, DWORD> pet_map;
 		if (get_pet_ids(pet_map) == 0)
@@ -36,15 +45,15 @@ namespace ao
 		return p_index->GetContainerUsed();
 	}
 
-	DWORD actor::casting()
+	unsigned long actor::casting()
 	{
 		return this->get_spell_template_data()->get_nano_being_cast();
 	}
 
-	PCSTR actor::consider()
+	const char* actor::consider()
 	{
 		float consider;
-		P_ENGINE_CLIENT_ANARCHY->n3_msg_consider(this->get_identity(), consider);
+		P_ENGINE_CLIENT_ANARCHY->n3_msg_consider(this->to_dynel()->get_identity(), consider);
 		if (consider >= 0.0f && consider < 0.2000000029802322)
 			return "Easy";
 		if (consider >= 0.2000000029802322 && consider < 0.4900000095367432)
@@ -60,7 +69,7 @@ namespace ao
 		return "VeryEasy";
 	}
 
-	PCSTR actor::con_color()
+	const char* actor::con_color()
 	{
 		const auto argb = con_color_argb();
 		if (argb.ARGB == 0xFFFFFF)
@@ -131,7 +140,7 @@ namespace ao
 		RGBCOLOR argb;
 		argb.ARGB = 0xFFFFFF;
 		float consider;
-		const auto con_type = P_ENGINE_CLIENT_ANARCHY->n3_msg_consider(this->get_identity(), consider);
+		const auto con_type = P_ENGINE_CLIENT_ANARCHY->n3_msg_consider(this->to_dynel()->get_identity(), consider);
 		if (consider > 1.0f)
 			consider = 1.0f;
 		if(con_type == 3)
@@ -158,7 +167,7 @@ namespace ao
 
 	void actor::do_face(const bool uw)
 	{
-		const auto position = this->get_position();
+		const auto position = this->to_dynel()->get_position();
 		vector3_t steering_result;
 		P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_vehicle()->steering_direction_arrive(position, steering_result);
 		ao::quaternion_t new_rotation(steering_result);
@@ -172,13 +181,13 @@ namespace ao
 
 	void actor::do_target()
 	{
-		P_TARGETING_MODULE->set_target(this->get_identity(), false);
+		P_TARGETING_MODULE->set_target(this->to_dynel()->get_identity(), false);
 	}
 
 	float actor::estimated_distance_to(vector3_t &position)
 	{
-		const auto dynel_position = get_position();
-		const auto uncompensated_distance = get_distance_to(position);
+		const auto dynel_position = this->to_dynel()->get_position();
+		const auto uncompensated_distance = this->to_dynel()->get_distance_to(position);
 		const auto x = position.x - (dynel_position.x + get_vehicle()->get_velocity().x*uncompensated_distance);
 		const auto z = position.z - (dynel_position.z + get_vehicle()->get_velocity().z*uncompensated_distance);
 		vector3_t estimated_position;
@@ -188,7 +197,7 @@ namespace ao
 		return estimated_position.length();
 	}
 
-	nano_template* actor::get_ncu(const DWORD index)
+	nano_template* actor::get_ncu(const unsigned long index)
 	{
 		std::vector<nano_template> nano_template_vector;
 		// ReSharper disable once CppExpressionWithoutSideEffects
@@ -201,7 +210,7 @@ namespace ao
 		return nullptr;		
 	}
 
-	nano_template* actor::get_ncu(const PCSTR effect_name)
+	nano_template* actor::get_ncu(const char* effect_name)
 	{
 		const identity_t container_identity(0, 0);
 		char name[MAX_VARSTRING] = { 0 };
@@ -223,7 +232,7 @@ namespace ao
 		return nullptr;
 	}
 
-	DWORD actor::get_ncu_count()
+	unsigned long actor::get_ncu_count()
 	{
 		std::vector<nano_template> nano_template_vector;
 		if (this->get_spell_template_data()->get_nano_template_list(nano_template_vector))
@@ -235,22 +244,17 @@ namespace ao
 
 	spell_template_data* actor::get_spell_template_data()
 	{
-		return reinterpret_cast<spell_template_data*>(this->get_simple_char_data()->p_spell_template_data);
+		return reinterpret_cast<spell_template_data*>(this->get_data()->p_spell_template_data);
 	}
 
 	float actor::get_scale()
 	{
-		return this->get_simple_char_data()->body_scale;
-	}
-
-	p_simple_char_t actor::get_simple_char_data()
-	{
-		return p_simple_char_t(this->get_data());
+		return this->get_data()->body_scale;
 	}
 
 	vehicle* actor::get_vehicle()
 	{
-		return reinterpret_cast<vehicle*>(this->get_simple_char_data()->p_vehicle);
+		return reinterpret_cast<vehicle*>(this->get_data()->p_vehicle);
 	}
 
 	bool actor::is_backing_up()
@@ -270,12 +274,12 @@ namespace ao
 
 	bool actor::is_fighting()
 	{
-		return this->get_simple_char_data()->p_weapon_holder->is_attacking != 1;
+		return this->get_data()->p_weapon_holder->is_attacking != 1;
 	}
 
 	bool actor::is_fighting_me()
 	{
-		return isxao::is_client_id(this->get_simple_char_data()->p_weapon_holder->weapon_target_identity.id);
+		return isxao::is_client_id(this->get_data()->p_weapon_holder->weapon_target_identity.id);
 	}
 
 	bool actor::is_idle()
@@ -285,31 +289,31 @@ namespace ao
 
 	bool actor::is_in_my_team()
 	{
-		return this->is_player() && this->is_in_team() && (this->get_team_raid()->get_team_identity() == P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_team_raid()->get_team_identity());
+		return this->to_dynel()->is_player() && this->is_in_team() && (this->get_team_raid()->get_team_identity() == P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_team_raid()->get_team_identity());
 	}
 
 	bool actor::is_in_team()
 	{
-		if(this->is_player())
+		if(this->to_dynel()->is_player())
 			return this->get_team_raid()->get_team_identity().type != 0;
 		return false;
 	}
 
 	bool actor::is_in_raid()
 	{
-		return this->is_player() && this->is_in_team() && this->get_team_raid()->get_team_raid_index() != DWORD(-1);
+		return this->to_dynel()->is_player() && this->is_in_team() && this->get_team_raid()->get_team_raid_index() != DWORD(-1);
 	}
 
 	bool actor::is_in_my_raid_team()
 	{
-		if(this->is_team_member() && this->is_in_raid())
+		if(this->to_dynel()->is_team_member() && this->is_in_raid())
 		{
 			std::vector<team_entry*> v;
 			if (P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_team_raid()->get_team(v))
 			{
 				for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 				{
-					if ((*it)->get_identity() == this->get_identity())
+					if ((*it)->get_identity() == this->to_dynel()->get_identity())
 						return true;
 				}
 			}			
@@ -319,12 +323,12 @@ namespace ao
 
 	bool actor::is_invis()
 	{
-		return !(this->get_simple_char_data()->is_visible);
+		return !(this->get_data()->is_visible);
 	}
 
 	bool actor::is_kos()
 	{
-		return this->get_skill(ST_BREEDHOSTILITY) > 30;
+		return this->to_dynel()->get_skill(ST_BREEDHOSTILITY) > 30;
 	}
 
 	bool actor::is_moving_forward()
@@ -334,7 +338,7 @@ namespace ao
 
 	bool actor::is_npc()
 	{
-		return this->get_simple_char_data()->is_npc == 1;
+		return this->get_data()->is_npc == 1;
 	}
 
 	bool actor::is_rotating_left()
@@ -369,33 +373,33 @@ namespace ao
 
 	bool actor::is_team_leader()
 	{
-		if(this->is_player())
+		if(this->to_dynel()->is_player())
 		{
 			auto result = false;
 			if (this->is_in_team() && this->is_in_my_team())
-				result = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsTeamLeader(this->get_identity());
+				result = P_ENGINE_CLIENT_ANARCHY->N3Msg_IsTeamLeader(this->to_dynel()->get_identity());
 			return result;
 		}
 		return false;
 	}
 	
-	DWORD actor::get_master_id()
+	unsigned long actor::get_master_id()
 	{
-		return this->get_skill(ST_PETMASTER);
+		return this->to_dynel()->get_skill(ST_PETMASTER);
 	}
 
 	actor* actor::get_master()
 	{
-		if (!this->is_pet())
+		if (!this->to_dynel()->is_pet())
 			return nullptr;
 		identity_t master;
 		master.type = 50000;
-		const auto id = DWORD(this->get_skill(ST_PETMASTER));
+		const auto id = DWORD(this->to_dynel()->get_skill(ST_PETMASTER));
 		master.id = id;
 		return dynel::get_dynel(master)->to_actor();
 	}
 
-	actor* actor::get_pet(const DWORD index)
+	actor* actor::get_pet(const unsigned long index)
 	{
 		std::map<identity_t, DWORD> pet_map;
 		if (this->get_pet_ids(pet_map) == 0)
@@ -410,7 +414,7 @@ namespace ao
 		return nullptr;
 	}
 
-	actor* actor::get_pet(const PCSTR pet_name)
+	actor* actor::get_pet(const char* pet_name)
 	{
 		const identity_t container_identity(0, 0);
 		std::map<identity_t, DWORD> pet_map;
@@ -438,7 +442,7 @@ namespace ao
 
 	DWORD actor::get_pet_ids(std::map<identity_t, unsigned long>& m)
 	{
-		if (!isxao::is_client_id(this->get_identity().id))
+		if (!isxao::is_client_id(this->to_dynel()->get_identity().id))
 		{
 			std::map<identity_t, p_n3_dynel_t> dynel_map;
 			P_DYNEL_DIR->copy_map(dynel_map);
@@ -451,7 +455,7 @@ namespace ao
 					if (is_npc)
 					{
 						auto instance = reinterpret_cast<dynel*>(it->second);
-						if (DWORD(instance->get_skill(ST_PETMASTER)) == this->get_identity().id)
+						if (DWORD(instance->get_skill(ST_PETMASTER)) == this->to_dynel()->get_identity().id)
 						{
 							m.insert_or_assign(it->first, pet_count);
 							pet_count++;
@@ -466,7 +470,7 @@ namespace ao
 
 	bool actor::has_pet()
 	{
-		if(this->is_character())
+		if(this->to_dynel()->is_character())
 		{
 			map <identity_t, unsigned long> pet_map;
 			return P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_npc_holder()->get_raw_pet_map(pet_map) != 0;
@@ -481,7 +485,7 @@ namespace ao
 				if (is_npc)
 				{
 					auto instance = reinterpret_cast<dynel*>(it->second);
-					if (DWORD(instance->get_skill(ST_PETMASTER)) == get_identity().id)
+					if (DWORD(instance->get_skill(ST_PETMASTER)) == to_dynel()->get_identity().id)
 						return true;
 				}
 			}
@@ -491,32 +495,32 @@ namespace ao
 
 	team_raid* actor::get_team_raid()
 	{
-		if(this->is_player())
-			return reinterpret_cast<team_raid*>(this->get_simple_char_data()->p_team_raid_info);
+		if(this->to_dynel()->is_player())
+			return reinterpret_cast<team_raid*>(this->get_data()->p_team_raid_info);
 		return nullptr;
 	}
 
 	weapon_holder* actor::get_weapon_holder()
 	{
-		return reinterpret_cast<weapon_holder*>(this->get_simple_char_data()->p_weapon_holder);
+		return reinterpret_cast<weapon_holder*>(this->get_data()->p_weapon_holder);
 	}
 
 	void actor::kick()
 	{
-		if(this->is_team_member())
-			P_ENGINE_CLIENT_ANARCHY->N3Msg_KickTeamMember(get_identity());
+		if(this->to_dynel()->is_team_member())
+			P_ENGINE_CLIENT_ANARCHY->N3Msg_KickTeamMember(this->to_dynel()->get_identity());
 	}
 
 	void actor::make_leader()
 	{
-		if(this->is_team_member())
-			P_ENGINE_CLIENT_ANARCHY->get_client_char()->make_team_leader(get_identity());
+		if(this->to_dynel()->is_team_member())
+			P_ENGINE_CLIENT_ANARCHY->get_client_char()->make_team_leader(this->to_dynel()->get_identity());
 	}
 
 	bool actor::send_team_invite()
 	{
-		if(this->is_player())
-			return P_ENGINE_CLIENT_ANARCHY->N3Msg_TeamJoinRequest(get_identity(), true);
+		if(this->to_dynel()->is_player())
+			return P_ENGINE_CLIENT_ANARCHY->N3Msg_TeamJoinRequest(this->to_dynel()->get_identity(), true);
 		return false;
 	}	
 

@@ -1,6 +1,9 @@
 #include "isxao_main.h"
+#include "character.h"
+#include "dynel.h"
 #include "engine_client_anarchy.h"
 #include "stat_holder.h"
+#include "vehicle.h"
 
 namespace ao
 {
@@ -9,30 +12,30 @@ namespace ao
 
 	inventory_holder* character::get_inventory_holder()
 	{
-		return reinterpret_cast<inventory_holder*>(this->get_simple_char_data()->p_container_inventory);
+		return reinterpret_cast<inventory_holder*>(this->get_data()->p_container_inventory);
 	}
 
 	npc_holder* character::get_npc_holder()
 	{
-		return reinterpret_cast<npc_holder*>(this->get_simple_char_data()->p_npc_holder);
+		return reinterpret_cast<npc_holder*>(this->get_data()->p_npc_holder);
 	}
 
 	perk_holder* character::get_perk_holder()
 	{
-		return reinterpret_cast<perk_holder*>(this->get_simple_char_data()->p_perk_holder);
+		return reinterpret_cast<perk_holder*>(this->get_data()->p_perk_holder);
 	}
 
 	special_action_holder* character::get_special_action_holder()
 	{
-		return reinterpret_cast<special_action_holder*>(this->get_simple_char_data()->p_special_action_holder);
+		return reinterpret_cast<special_action_holder*>(this->get_data()->p_special_action_holder);
 	}
 
 	stat_holder* character::get_stat_holder()
 	{
-		return reinterpret_cast<stat_holder*>(this->get_simple_char_data()->p_map_holder);
+		return reinterpret_cast<stat_holder*>(this->get_data()->p_map_holder);
 	}
 
-	DWORD character::get_stat_map(std::map<DWORD, LONG> &m)
+	unsigned long character::get_stat_map(std::map<unsigned long, long> &m)
 	{
 		return get_stat_holder()->get_stat_map(m);
 	}
@@ -119,7 +122,7 @@ namespace ao
 
 	void character::face(vector3_t &location)
 	{
-		const auto client_position = get_position();
+		const auto client_position = this->to_dynel()->get_position();
 		const auto q = quaternion_t::get_quaternion_to_face(location, client_position);
 		this->set_rotation(q);
 	}

@@ -1,6 +1,9 @@
 #include "isxao_main.h"
+#include "character.h"
+#include "dynel.h"
 #include "engine_client_anarchy.h"
 #include "playfield_anarchy.h"
+#include "player.h"
 
 namespace ao
 {
@@ -122,7 +125,7 @@ namespace ao
 
 	identity_t dynel::get_identity()
 	{
-		return this->get_dynel_data()->identity;
+		return this->get_data()->identity;
 	}	
 
 	void dynel::interact()
@@ -149,10 +152,10 @@ namespace ao
 		height_offset.z = 0.0f;
 		const auto dynel_position = this->get_position();
 		const auto offset_dynel_position = vector3_t::add(dynel_position, height_offset);
-		return P_PLAYFIELD_DIR->get_playfield()->line_of_sight(position, offset_dynel_position, get_dynel_data()->p_vehicle->zone_instance_id, false);
+		return P_PLAYFIELD_DIR->get_playfield()->line_of_sight(position, offset_dynel_position, get_data()->p_vehicle->zone_instance_id, false);
 	}
 	
-	PCSTR dynel::get_name()
+	const char* dynel::get_name()
 	{
 		const identity_t container_identity(0, 0);
 		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_name(this->get_identity(), container_identity);
@@ -160,19 +163,19 @@ namespace ao
 
 	vector3_t dynel::get_position()
 	{
-		if (get_dynel_data()->p_vehicle->p_parent_vehicle == nullptr)
-			return get_dynel_data()->p_vehicle->global_pos;
-		return get_dynel_data()->p_vehicle->parent_global_pos;
+		if (get_data()->p_vehicle->p_parent_vehicle == nullptr)
+			return get_data()->p_vehicle->global_pos;
+		return get_data()->p_vehicle->parent_global_pos;
 	}
 
 	quaternion_t dynel::get_rotation()
 	{
-		if (get_dynel_data()->p_vehicle->p_parent_vehicle == nullptr)
-			return get_dynel_data()->p_vehicle->body_rot;
-		return get_dynel_data()->p_vehicle->parent_body_rot;
+		if (get_data()->p_vehicle->p_parent_vehicle == nullptr)
+			return get_data()->p_vehicle->body_rot;
+		return get_data()->p_vehicle->parent_body_rot;
 	}
 
-	LONG dynel::get_skill(DWORD stat)
+	long dynel::get_skill(unsigned long stat)
 	{
 		const auto dynel_identity = this->get_identity();
 		const identity_t container_identity(0, 0);
@@ -272,16 +275,6 @@ namespace ao
 		return get_identity().type == 51018;
 	}
 
-	PVOID dynel::get_data()
-	{
-		return &n3_dynel_;
-	}
-
-	p_n3_dynel_t dynel::get_dynel_data()
-	{
-		return p_n3_dynel_t(get_data());
-	}
-
 #ifdef N3_DYNEL_T__SEND_IIR_TO_OBSERVERS_USE_NATIVE
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
@@ -292,30 +285,30 @@ namespace ao
 
 	actor* dynel::to_actor()
 	{
-		return static_cast<actor*>(get_data());
+		return reinterpret_cast<actor*>(get_data());
 	}
 
 	character* dynel::to_character()
 	{
-		return static_cast<character*>(get_data());
+		return reinterpret_cast<character*>(get_data());
 	}
 
 	pet* dynel::to_pet()
 	{
-		return static_cast<pet*>(get_data());
+		return reinterpret_cast<pet*>(get_data());
 	}
 
 	player* dynel::to_player()
 	{
-		return static_cast<player*>(get_data());
+		return reinterpret_cast<player*>(get_data());
 	}
 
 	team_member* dynel::to_team_member()
 	{
-		return static_cast<team_member*>(get_data());
+		return reinterpret_cast<team_member*>(get_data());
 	}
 
-#ifdef N3_DYNEL_T__UPDATE_LOCALITY_LISTENERS_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(void dynel::update_locality_listeners(), n3_dynel_t__update_locality_listeners)

@@ -1,4 +1,6 @@
 #include "isxao_main.h"
+#include "dynel.h"
+#include "pet.h"
 
 bool PetType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char *argv[], LSOBJECT &Object)
 {
@@ -98,7 +100,7 @@ bool PetType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 	if (!ObjectData.Ptr)
 		return false;
 #define P_PET ((ao::pet*)ObjectData.Ptr)  // NOLINT(cppcoreguidelines-macro-usage)
-	sprintf_s(buf, buflen, "%I64u", P_PET->get_identity().get_combined_identity());
+	sprintf_s(buf, buflen, "%I64u", P_PET->to_dynel()->get_identity().get_combined_identity());
 #undef P_PET
 
 	return true;

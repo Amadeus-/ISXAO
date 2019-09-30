@@ -1,6 +1,9 @@
 #pragma once
+#include "player.h"
 
-class team_member : public ao::player
+namespace ao
 {
-public:
-};
+	class team_member : public player
+	{
+	};
+}

@@ -32,11 +32,11 @@ namespace ao {
 
 // #include "perk_holder.h"
 
-#include "weapon_holder.h"
+// #include "weapon_holder.h"
 
 // #include "npc_holder.h"
 
-#include "dynel.h"
+// #include "dynel.h"
 
 #include "door.h"
 
@@ -48,21 +48,21 @@ namespace ao {
 
 // #include "spell_template_data.h"
 
-#include "vehicle.h"
+// #include "vehicle.h"
 
-#include "actor.h"
+// #include "actor.h"
 
 // #include "team_entry.h"
 
 // #include "team_raid.h"
 
-#include "player.h"
+// #include "player.h"
 
-#include "pet.h"
+// #include "pet.h"
 
-#include "team_member.h"
+// #include "team_member.h"
 
-#include "character.h"
+// #include "character.h"
 
 // #include "input_config.h"
 

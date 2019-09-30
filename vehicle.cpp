@@ -1,11 +1,11 @@
 #include "isxao_main.h"
+#include "vehicle.h"
 
 namespace ao
 {
-
 	p_char_movement_status_t vehicle::get_char_movement_status()
 	{
-		return get_char_vehicle_data()->p_char_movement_status;
+		return get_data()->p_char_movement_status;
 	}
 
 #if true
@@ -16,29 +16,19 @@ namespace ao
 	static_assert(false, "vehicle::set_rotation(const quaternion_t &) requires a native function.");
 #endif
 
-	PVOID vehicle::get_data()
-	{
-		return &char_vehicle_;
-	}
-
 	vector3_t vehicle::get_velocity()
 	{
-		return get_char_vehicle_data()->velocity;
+		return get_data()->velocity;
 	}
 
 	DWORD vehicle::get_zone_instance_id()
 	{
-		return get_char_vehicle_data()->zone_instance_id;
-	}
-
-	p_char_vehicle_t vehicle::get_char_vehicle_data()
-	{
-		return p_char_vehicle_t(get_data());
+		return get_data()->zone_instance_id;
 	}
 
 	float vehicle::get_max_speed()
 	{
-		return get_char_vehicle_data()->max_speed;
+		return get_data()->max_speed;
 	}
 
 #if true

@@ -2,6 +2,7 @@
 #include "atlbase.h"
 #include "iostream"
 #include "command_interpreter.h"
+#include "dynel.h"
 #include "engine_client_anarchy.h"
 #include "playfield_anarchy.h"
 

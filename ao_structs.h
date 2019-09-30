@@ -15,6 +15,7 @@ namespace ao
 	class command_interpreter;
 	class database_handler;
 	class dummy_item_base;
+	class dynel;
 	class engine_client_anarchy;
 	class flow_control;
 	class game_time;
@@ -48,6 +49,8 @@ namespace ao
 	class team_member;
 	class team_raid;
 	class text_message;
+	class weapon_holder;
+	class vehicle;
 
 #pragma endregion
 
