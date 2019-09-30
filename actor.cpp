@@ -1,13 +1,22 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
+#include "nano_template.h"
+#include "npc_holder.h"
+#include "spell_template_data.h"
+#include "targeting_module.h"
+#include "team_entry.h"
+#include "team_raid.h"
 
 namespace ao
 {
 
 	DWORD actor::build_ls_ncu(LSIndex* p_index)
 	{
-		auto l = this->get_spell_template_data()->get_spell_template_data_data().nano_template_list;
-		for (auto it = l.begin(); it != l.end(); ++it)  // NOLINT(modernize-loop-convert)
+		std::vector<nano_template> v;
+		this->get_spell_template_data()->get_nano_template_list(v);
+		for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
+			auto p = *it;
 			auto p_nano_template = reinterpret_cast<nano_template*>(&(*it));
 			p_index->AddItem(reinterpret_cast<LSOBJECTDATA&>(p_nano_template));
 		}
@@ -427,7 +436,7 @@ namespace ao
 		return get_pet_ids(pet_map);
 	}
 
-	DWORD actor::get_pet_ids(std::map<identity_t, DWORD>& m)
+	DWORD actor::get_pet_ids(std::map<identity_t, unsigned long>& m)
 	{
 		if (!isxao::is_client_id(this->get_identity().id))
 		{
@@ -452,15 +461,15 @@ namespace ao
 			}
 			return m.size();
 		}
-		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_npc_holder()->get_npc_holder_data().p_pet_dir->copy_map(m);
+		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_npc_holder()->get_raw_pet_map(m);
 	}
 
 	bool actor::has_pet()
 	{
 		if(this->is_character())
 		{
-			map <identity_t, DWORD> pet_map;
-			return P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_npc_holder()->get_npc_holder_data().p_pet_dir->copy_map(pet_map) != 0;
+			map <identity_t, unsigned long> pet_map;
+			return P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_npc_holder()->get_raw_pet_map(pet_map) != 0;
 		}
 		std::map<identity_t, p_n3_dynel_t> dynel_map;
 		P_DYNEL_DIR->copy_map(dynel_map);

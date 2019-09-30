@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "targeting_module.h"
 
 namespace ao
 {
@@ -26,7 +27,7 @@ namespace ao
 #if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(void targeting_module::set_target_pet(DWORD), targeting_module_t__set_target_pet)
+	FUNCTION_AT_ADDRESS(void targeting_module::set_target_pet(unsigned long), targeting_module_t__set_target_pet)
 #else
 	static_assert(false, "targeting_module::set_target_pet(DWORD) requires a native function.");
 #endif

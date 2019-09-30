@@ -1,8 +1,16 @@
 #include "isxao_main.h"
 #include "engine_client_anarchy.h"
+#include "inventory_holder.h"
+#include "inventory_slot.h"
 
 namespace ao
 {
+
+	inventory_slot::inventory_slot()
+	{
+		this->slot_id = identity_t(0, 0);
+		this->p_item = nullptr;
+	}
 
 	PCSTR inventory_slot::get_slot_name() const
 	{
@@ -197,7 +205,7 @@ namespace ao
 		return ao::inventory_holder::get_inv_slot_data(this);
 	}
 
-	double inventory_slot::get_item_progress(DWORD& a, DWORD& b) const
+	double inventory_slot::get_item_progress(unsigned long& a, unsigned long& b) const
 	{
 		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_item_progress(slot_id, a, b);
 	}

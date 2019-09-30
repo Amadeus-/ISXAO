@@ -1,31 +1,27 @@
 #include "isxao_main.h"
+#include "casting_data.h"
 
 namespace ao
 {
 
-	identity_t casting_data::get_caster() const
+	identity_t casting_data::get_caster()
 	{
-		return get_casting_data().caster;
+		return get_data()->caster;
 	}
 
-	DWORD casting_data::get_nano_id() const
+	DWORD casting_data::get_nano_id()
 	{
-		return get_casting_data().nano_id;
+		return get_data()->nano_id;
 	}
 
-	casting_data_t casting_data::get_casting_data() const
+	nano_item* casting_data::get_nano_item()
 	{
-		return casting_data_;
+		return reinterpret_cast<nano_item*>(get_data()->p_nano_item);
 	}
 
-	nano_item* casting_data::get_nano_item() const
+	identity_t casting_data::get_target()
 	{
-		return reinterpret_cast<nano_item*>(get_casting_data().p_nano_item);
-	}
-
-	identity_t casting_data::get_target() const
-	{
-		return get_casting_data().target;
+		return get_data()->target;
 	}
 
 }

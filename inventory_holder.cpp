@@ -1,13 +1,18 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
+#include "inventory_holder.h"
+#include "inventory_item.h"
+#include "inventory_slot.h"
+#include "new_inventory.h"
 
 namespace ao
 {
 
-	DWORD inventory_holder::build_ls_inventory(LSObjectCollection *p_map) const
+	unsigned long inventory_holder::build_ls_inventory(LSObjectCollection *p_map)
 	{
 		const identity_t d(0, 0);
 		const auto count = get_new_inventory()->get_inventory_size();
-		for (DWORD i = 0; i < count; i++)
+		for (unsigned long i = 0; i < count; i++)
 		{
 			identity_t slot;
 			get_inv_slot_identity(i, slot);
@@ -20,11 +25,11 @@ namespace ao
 		return p_map->GetContainerUsed();
 	}
 
-	DWORD inventory_holder::build_ls_inventory(LSIndex* p_index) const
+	unsigned long inventory_holder::build_ls_inventory(LSIndex* p_index)
 	{
 		const identity_t d(0, 0);
 		const auto count = get_new_inventory()->get_inventory_size();
-		for (DWORD i = 0; i < count; i++)
+		for (unsigned long i = 0; i < count; i++)
 		{
 			identity_t slot;
 			get_inv_slot_identity(i, slot);
@@ -41,71 +46,66 @@ namespace ao
 		return p_index->GetContainerUsed();
 	}
 
-	DWORD inventory_holder::get_armor_inventory(std::vector<inventory_data_t*> &v)
+	unsigned long inventory_holder::get_armor_inventory(std::vector<inventory_data_t*> &v)
 	{
 		for (auto i = 17; i < 32; i++)
 		{
-			auto p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_inventory_holder_data().p_regular_inventory->p_inventory_data[i];
+			auto p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_data()->p_regular_inventory->p_inventory_data[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
 		return v.size();
 	}
 	
-	bank_entry* inventory_holder::get_bank_inventory() const
+	bank_entry* inventory_holder::get_bank_inventory()
 	{
-		return reinterpret_cast<bank_entry*>(get_inventory_holder_data().p_bank_entry);
+		return reinterpret_cast<bank_entry*>(get_data()->p_bank_entry);
 	}
 
-	DWORD inventory_holder::get_character_inventory(std::vector<inventory_data_t*> &v)
+	unsigned long inventory_holder::get_character_inventory(std::vector<inventory_data_t*> &v)
 	{
 		for (auto i = 64; i < 94; i++)
 		{
-			auto p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_inventory_holder_data().p_regular_inventory->p_inventory_data[i];
+			auto p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_data()->p_regular_inventory->p_inventory_data[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
 		return v.size();
 	}
 
-	DWORD inventory_holder::get_implant_inventory(std::vector<inventory_data_t*> &v)
+	unsigned long inventory_holder::get_implant_inventory(std::vector<inventory_data_t*> &v)
 	{
 		for (auto i = 33; i < 46; i++)
 		{
-			auto p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_inventory_holder_data().p_regular_inventory->p_inventory_data[i];
+			auto p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_data()->p_regular_inventory->p_inventory_data[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
 		return v.size();
 	}
 
-	DWORD inventory_holder::get_inventory_count() const
+	unsigned long inventory_holder::get_inventory_count()
 	{
 		std::map<identity_t, inventory_item*> m;
 		return get_inventory(m);
 	}
 	
-	new_inventory* inventory_holder::get_new_inventory() const
+	new_inventory* inventory_holder::get_new_inventory()
 	{
-		return reinterpret_cast<new_inventory*>(get_inventory_holder_data().p_regular_inventory);
+		return reinterpret_cast<new_inventory*>(get_data()->p_regular_inventory);
 	}
 
-	inventory_holder_t inventory_holder::get_inventory_holder_data() const
+	p_identity_t inventory_holder::get_inventory_holder_identity()
 	{
-		return inventory_holder_;
+		return get_data()->p_client_identity;
 	}
 
-	p_identity_t inventory_holder::get_inventory_holder_identity() const
+	new_inventory* inventory_holder::get_overflow_inventory()
 	{
-		return get_inventory_holder_data().p_client_identity;
+		return reinterpret_cast<new_inventory*>(get_data()->p_overflow_inventory);
 	}
 
-	new_inventory* inventory_holder::get_overflow_inventory() const
-	{
-		return reinterpret_cast<new_inventory*>(get_inventory_holder_data().p_overflow_inventory);
-	}
-
-	inventory_item* inventory_holder::get_inventory_item(DWORD index) const
+	inventory_item* inventory_holder::get_inventory_item(unsigned long index)
 	{
 		std::map<identity_t, inventory_item*> m;
 		if(this->get_inventory(m))
@@ -122,7 +122,7 @@ namespace ao
 		return nullptr;
 	}
 
-	inventory_item* inventory_holder::get_inventory_item(const PCSTR sz_arg) const
+	inventory_item* inventory_holder::get_inventory_item(const char* sz_arg)
 	{
 		identity_t id(0, 0);
 		const identity_t d(0,0);
@@ -235,7 +235,7 @@ namespace ao
 		return nullptr;
 	}
 
-	inventory_slot_t inventory_holder::get_inventory_slot(DWORD index) const
+	inventory_slot_t inventory_holder::get_inventory_slot(unsigned long index)
 	{
 		inventory_slot_t s;
 		std::map<identity_t, inventory_item*> m;
@@ -257,7 +257,7 @@ namespace ao
 		return s;
 	}
 
-	inventory_slot_t inventory_holder::get_inventory_slot(const PCSTR sz_arg) const
+	inventory_slot_t inventory_holder::get_inventory_slot(const char* sz_arg)
 	{
 		inventory_slot_t s;
 		identity_t id(0, 0);
@@ -377,11 +377,11 @@ namespace ao
 		return s;
 	}
 
-	DWORD inventory_holder::get_inventory(std::map<identity_t, inventory_item*>& m) const
+	unsigned long inventory_holder::get_inventory(std::map<identity_t, inventory_item*>& m)
 	{
 		const identity_t d(0, 0);
 		const auto count = get_new_inventory()->get_inventory_size();
-		for (DWORD i = 0; i < count; i++)
+		for (unsigned long i = 0; i < count; i++)
 		{
 			identity_t id;
 			get_inv_slot_identity(i, id);
@@ -392,18 +392,18 @@ namespace ao
 		return m.size();
 	}
 
-	DWORD inventory_holder::get_weapon_inventory(std::vector<inventory_data_t*>& v)
+	unsigned long inventory_holder::get_weapon_inventory(std::vector<inventory_data_t*>& v)
 	{
 		for (auto i = 1; i < 16; i++)
 		{
-			auto p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_inventory_holder_data().p_regular_inventory->p_inventory_data[i];
+			auto p_inventory_data = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_data()->p_regular_inventory->p_inventory_data[i];
 			if (p_inventory_data)
 				v.push_back(p_inventory_data);
 		}
 		return v.size();
 	}
 
-	bool inventory_holder::get_inv_slot_identity(ao::ArmorSlot_e slot, ao::identity_t& id)
+	bool inventory_holder::get_inv_slot_identity(ao::armor_slot_e slot, ao::identity_t& id)
 	{
 		id.type = 102;
 		switch (slot)
@@ -423,7 +423,7 @@ namespace ao
 		case ao::AS_R_FINGER:
 		case ao::AS_FEET:
 		case ao::AS_L_FINGER:
-			id.id = DWORD(slot) + 16;
+			id.id = unsigned long(slot) + 16;
 			break;
 		default:
 			return false;;
@@ -431,7 +431,7 @@ namespace ao
 		return true;
 	}
 
-	bool inventory_holder::get_inv_slot_identity(ao::ImplantSlot_e slot, ao::identity_t& id)
+	bool inventory_holder::get_inv_slot_identity(ao::implant_slot_e slot, ao::identity_t& id)
 	{
 		id.type = 103;
 		switch (slot)
@@ -449,7 +449,7 @@ namespace ao
 		case ao::IS_LEGS:
 		case ao::IS_L_HAND:
 		case ao::IS_FEET:
-			id.id = DWORD(slot) + 32;
+			id.id = unsigned long(slot) + 32;
 			break;
 		default:
 			return false;
@@ -457,7 +457,7 @@ namespace ao
 		return true;
 	}
 
-	bool inventory_holder::get_inv_slot_identity(ao::WeaponSlot_e slot, ao::identity_t& id)
+	bool inventory_holder::get_inv_slot_identity(ao::weapon_slot_e slot, ao::identity_t& id)
 	{
 		id.type = 101;
 		switch (slot)
@@ -477,7 +477,7 @@ namespace ao
 		case ao::WS_NCU_5:
 		case ao::WS_NCU_6:
 		case ao::WS_HUD_2:
-			id.id = DWORD(slot);
+			id.id = unsigned long(slot);
 			break;
 		default:
 			return false;
@@ -485,7 +485,7 @@ namespace ao
 		return true;
 	}
 
-	bool inventory_holder::get_inv_slot_identity(DWORD slot, ao::identity_t& id)
+	bool inventory_holder::get_inv_slot_identity(unsigned long slot, ao::identity_t& id)
 	{
 		id.id = slot;
 		switch (slot)
@@ -766,7 +766,7 @@ namespace ao
 		return "Unknown";
 	}
 
-	bool inventory_holder::get_inv_slot_identity(PCSTR slot_name, ao::identity_t &id)
+	bool inventory_holder::get_inv_slot_identity(const char* slot_name, ao::identity_t &id)
 	{
 		char search_name[MAX_VARSTRING];
 		strcpy_s(search_name, MAX_VARSTRING, slot_name);
@@ -924,6 +924,6 @@ namespace ao
 
 	ao::p_inventory_data_t inventory_holder::get_inv_slot_data(ao::inventory_slot_t *slot)
 	{
-		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_inventory_holder_data().p_regular_inventory->p_inventory_data[slot->slot_id.id];
+		return P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_inventory_holder()->get_data()->p_regular_inventory->p_inventory_data[slot->slot_id.id];
 	}
 }

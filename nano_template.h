@@ -1,18 +1,23 @@
 #pragma once
+#include "game_object.h"
 
-// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
-class nano_template
+namespace ao
 {
-public:
-	DWORD get_duration() const;
-	ao::identity_t get_caster_identity() const;
-	ao::identity_t get_nano_identity() const;
-	ao::nano_template_t get_nano_template_data() const;
-	DWORD get_start_time() const;
-	float get_time_remaining() const;
-	static bool nano_template_compare(nano_template &, nano_template &);
-	bool remove() const;
-private:
-	// ReSharper disable once CppUninitializedNonStaticDataMember
-	ao::nano_template_t nano_template_;
-};
+	struct ao_identity;
+	struct ao_nano_template;
+
+	typedef ao_identity identity_t, *p_identity_t;
+	typedef ao_nano_template nano_template_t, *p_nano_template_t;
+
+	class nano_template : public game_object<nano_template_t>
+	{
+	public:
+		unsigned long get_duration();
+		identity_t get_caster_identity();
+		identity_t get_nano_identity();
+		unsigned long get_start_time();
+		float get_time_remaining();
+		static bool nano_template_compare(nano_template &, nano_template &);
+		bool remove();
+	};
+}

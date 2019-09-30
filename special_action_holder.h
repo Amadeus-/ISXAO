@@ -1,21 +1,41 @@
 #pragma once
+#include "game_object.h"
 
-// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
-class special_action_holder
+class LSIndex;
+
+namespace std
 {
-public:
-	DWORD build_ls_special_actions(LSIndex*) const;
-	DWORD get_lock_id_map(std::map<DWORD, DWORD> &m) const;
-	ao::special_action_holder_t get_special_action_holder_data() const;
-	DWORD get_special_actions(std::vector<ao::special_action_template>&) const;
-	DWORD get_special_actions(std::vector<ao::special_action_template*>&) const;
-	ao::special_action_template* get_special_action(PCSTR) const;
-	ao::special_action_template* get_special_action(DWORD) const;
-	ao::special_action_template* get_special_action(const ao::identity_t&) const;
-	DWORD get_special_action_count() const;
-	ao::identity_t get_special_action_target() const;
-	ao::action_lock* get_action_lock(ao::special_action_template*) const;
-private:
-	// ReSharper disable once CppUninitializedNonStaticDataMember
-	ao::special_action_holder_t special_action_holder_;
-};
+	template <typename _Tp, typename _Alloc>
+	class list;
+	template <typename _Key, typename _Tp, typename _Compare, typename _Alloc>
+	class map;
+	template <typename _Tp, typename _Alloc>
+	class vector;
+}
+
+namespace ao
+{
+	class action_lock;
+	class special_action_template;
+
+	struct ao_identity;
+	struct ao_special_action_holder;
+
+	typedef ao_identity identity_t, *p_identity_t;
+	typedef ao_special_action_holder special_action_holder_t, *p_special_action_holder_t;
+
+	class special_action_holder : public game_object<special_action_holder_t>
+	{
+	public:
+		unsigned long build_ls_special_actions(LSIndex*);
+		unsigned long get_lock_id_map(std::map<unsigned long, unsigned long> &m);
+		unsigned long get_special_actions(std::vector<special_action_template>&);
+		unsigned long get_special_actions(std::vector<special_action_template*>&);
+		special_action_template* get_special_action(const char*);
+		special_action_template* get_special_action(unsigned long);
+		special_action_template* get_special_action(const identity_t&);
+		unsigned long get_special_action_count();
+		identity_t get_special_action_target();
+		action_lock* get_action_lock(special_action_template*);
+	};
+}

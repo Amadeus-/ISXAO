@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "nano_template.h"
 
 bool NanoTemplateType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {

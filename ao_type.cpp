@@ -1,5 +1,6 @@
 #include "isxao_main.h"
 #include "engine_client_anarchy.h"
+#include "playfield_anarchy.h"
 
 bool AOType::ToText(LSOBJECTDATA ObjectData, char *buf, unsigned int buflen)
 {

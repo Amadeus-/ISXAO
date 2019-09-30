@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "playfield_anarchy.h"
 
 bool PlayfieldType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {

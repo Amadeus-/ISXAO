@@ -1,5 +1,6 @@
 #include "isxao_main.h"
 #include "engine_client_anarchy.h"
+#include "nano_item.h"
 
 namespace ao
 {
@@ -35,30 +36,30 @@ namespace ao
 		return get_skill(ST_ITEMDELAY) / 100.0f;
 	}
 
-	DWORD nano_item::get_attack_range()
+	unsigned long nano_item::get_attack_range()
 	{
 		return get_skill(ST_ATTACKRANGE);
 	}
 
 	float nano_item::get_cooldown_remaining()
 	{
-		DWORD a;
-		DWORD b;
+		unsigned long a;
+		unsigned long b;
 		auto c = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_formula_progress(get_nano_identity(), a, b);
 		return float((1.0 - c)*b);
 	}
 
-	double nano_item::get_formula_progress(DWORD &a, DWORD &b)
+	double nano_item::get_formula_progress(unsigned long &a, unsigned long &b)
 	{
 		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_formula_progress(get_nano_identity(), a, b);
 	}
 
-	DWORD nano_item::get_formula_radius()
+	unsigned long nano_item::get_formula_radius()
 	{
 		return get_nano_item_data()->radius;
 	}
 
-	DWORD nano_item::get_nano_can_flags()
+	unsigned long nano_item::get_nano_can_flags()
 	{
 		return get_skill(ST_CAN);
 	}
@@ -73,27 +74,27 @@ namespace ao
 		return p_nano_item_t(get_data());
 	}
 
-	DWORD nano_item::get_ncu_cost()
+	unsigned long nano_item::get_ncu_cost()
 	{
 		return get_skill(ST_LEVEL);
 	}
 
-	DWORD nano_item::get_nano_none_flags()
+	unsigned long nano_item::get_nano_none_flags()
 	{
 		return get_skill(ST_FLAGS);
 	}
 
-	DWORD nano_item::get_nano_points()
+	unsigned long nano_item::get_nano_points()
 	{
 		return get_skill(ST_NANOPOINTS);
 	}
 
-	DWORD nano_item::get_nano_school()
+	unsigned long nano_item::get_nano_school()
 	{
 		return get_skill(ST_SCHOOL);
 	}
 
-	DWORD nano_item::get_nano_strain()
+	unsigned long nano_item::get_nano_strain()
 	{
 		return get_skill(ST_METATYPE);
 	}
@@ -103,14 +104,14 @@ namespace ao
 		return get_skill(ST_RECHARGEDELAY) / 100.0f;
 	}
 
-	LONG nano_item::get_skill(DWORD stat)
+	long nano_item::get_skill(unsigned long stat)
 	{
 		identity_t dummy_identity;
 		ZeroMemory(&dummy_identity, sizeof(identity_t));
 		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(get_nano_identity(), stat, 2, dummy_identity);
 	}
 
-	DWORD nano_item::get_stacking_order()
+	unsigned long nano_item::get_stacking_order()
 	{
 		return get_skill(ST_STACKINGORDER);
 	}
@@ -166,5 +167,3 @@ namespace ao
 	}
 
 }
-
-

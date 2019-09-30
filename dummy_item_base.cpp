@@ -1,36 +1,27 @@
 #include "isxao_main.h"
+#include "dummy_item_base.h"
 
 namespace ao
 {
 
-	PVOID dummy_item_base::get_data()
+	const char* dummy_item_base::get_description()
 	{
-		return &dummy_item_base_;
-	}
-
-	p_dummy_item_base_t dummy_item_base::get_dummy_item_base_data()
-	{
-		return p_dummy_item_base_t(get_data());
-	}
-
-	PCSTR dummy_item_base::get_description()
-	{
-		return get_dummy_item_base_data()->description;
+		return get_data()->description;
 	}
 
 	identity_t dummy_item_base::get_identity()
 	{
-		return get_dummy_item_base_data()->identity;
+		return get_data()->identity;
 	}
 
 	identity_t dummy_item_base::get_parent_identity()
 	{
-		return get_dummy_item_base_data()->parent_identity;
+		return get_data()->parent_identity;
 	}
 
 	PCSTR dummy_item_base::get_name()
 	{
-		return get_dummy_item_base_data()->name;
+		return get_data()->name;
 	}
 
 }

@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "special_action_item.h"
 
 bool SpecialActionType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {

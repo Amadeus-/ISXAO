@@ -20,7 +20,7 @@ public:
 	actor* get_pet(DWORD);
 	actor* get_pet(PCSTR);
 	DWORD get_pet_count();
-	DWORD get_pet_ids(std::map<ao::identity_t, DWORD>&);
+	DWORD get_pet_ids(std::map<ao::identity_t, unsigned long>&);
 	float get_scale();
 	ao::p_simple_char_t get_simple_char_data();
 	ao::spell_template_data* get_spell_template_data();

@@ -1,64 +1,60 @@
 #pragma once
 
 namespace ao {
-
-
-
 	
-
 // #include "engine_client_anarchy.h"
 
 // #include "game_time.h"
 
-#include "inventory_data.h"
+// #include "inventory_data.h"
 
-#include "new_inventory.h"
+// #include "new_inventory.h"
 
-#include "bank_entry.h"
+// #include "bank_entry.h"
 
-#include "dummy_item_base.h"
+// #include "dummy_item_base.h"
 
-#include "inventory_item.h"
+// #include "inventory_item.h"
 
-#include "inventory_slot.h"
+// #include "inventory_slot.h"
 
-#include "inventory_holder.h"
+// #include "inventory_holder.h"
 
-#include "action_lock.h"
+// #include "action_lock.h"
 
-#include "stat_holder.h"
+// #include "stat_holder.h"
 
-#include "special_action_item.h"
+// #include "special_action_item.h"
 
-#include "special_action_template.h"
+// #include "special_action_template.h"
 
-#include "special_action_holder.h"
+// #include "special_action_holder.h"
 
-#include "perk_holder.h"
+// #include "perk_holder.h"
 
 #include "weapon_holder.h"
 
-#include "npc_holder.h"
+// #include "npc_holder.h"
 
 #include "dynel.h"
 
 #include "door.h"
 
-#include "nano_template.h"
+// #include "nano_template.h"
 
-#include "nano_item.h"
+// #include "nano_item.h"
 
-#include "casting_data.h"
+// #include "casting_data.h"
 
-#include "spell_template_data.h"
+// #include "spell_template_data.h"
 
 #include "vehicle.h"
 
 #include "actor.h"
 
-#include "team_entry.h"
+// #include "team_entry.h"
 
-#include "team_raid.h"
+// #include "team_raid.h"
 
 #include "player.h"
 
@@ -70,9 +66,9 @@ namespace ao {
 
 // #include "input_config.h"
 
-#include "targeting_module.h"
+// #include "targeting_module.h"
 
-#include "playfield_anarchy.h"
+// #include "playfield_anarchy.h"
 
 // #include "message.h"
 

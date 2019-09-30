@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "inventory_item.h"
 
 bool InventoryItemType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {

@@ -1,5 +1,6 @@
 #include "isxao_main.h"
 #include "engine_client_anarchy.h"
+#include "special_action_item.h"
 
 namespace ao
 {
@@ -34,16 +35,15 @@ namespace ao
 		return float(get_skill(ST_ITEMDELAY) / 100.0f);
 	}
 
-	DWORD special_action_item::get_range()
+	unsigned long special_action_item::get_range()
 	{
 		return get_skill(ST_ATTACKRANGE);
 	}
 
-	LONG special_action_item::get_skill(DWORD stat)
+	long special_action_item::get_skill(unsigned long stat)
 	{
-		identity_t dummy_identity;
-		ZeroMemory(&dummy_identity, sizeof(identity_t));
-		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(get_identity(), stat, 2, dummy_identity);
+		const identity_t i(0, 0);
+		return P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(get_identity(), stat, 2, i);
 	}
 
 	bool special_action_item::is_buff()

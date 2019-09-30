@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "team_raid.h"
 
 bool TeamRaidType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {

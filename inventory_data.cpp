@@ -1,32 +1,27 @@
 #include "isxao_main.h"
+#include "inventory_data.h"
 
 namespace ao
 {
 
-	identity_t inventory_data::get_dynel_id() const
+	identity_t inventory_data::get_dynel_id()
 	{
-		return get_inventory_data_data().dynel_identity;
+		return get_data()->dynel_identity;
 	}
 
-	inventory_data_t inventory_data::get_inventory_data_data() const
+	unsigned long inventory_data::get_item_count()
 	{
-		return inventory_data_;
+		return get_data()->count;
 	}
 
-	DWORD inventory_data::get_item_count() const
+	rdb_identity_t inventory_data::get_rdb_identity()
 	{
-		return get_inventory_data_data().count;
+		return get_data()->rdb_identity;
 	}
 
-	rdb_identity_t inventory_data::get_rdb_identity() const
+	DWORD inventory_data::get_quality_level()
 	{
-		return get_inventory_data_data().rdb_identity;
+		return get_data()->quality_level;
 	}
-
-	DWORD inventory_data::get_quality_level() const
-	{
-		return get_inventory_data_data().quality_level;
-	}
-
 
 }

@@ -942,7 +942,7 @@ enum AmmoType_e : DWORD
 #pragma region Equipment Slots
 
 // 101
-enum WeaponSlot_e : DWORD
+enum weapon_slot_e : unsigned long
 {
 	WS_HUD_1 = 1,
 	WS_HUD_3 = 2,
@@ -962,7 +962,7 @@ enum WeaponSlot_e : DWORD
 };
 
 // 102
-enum ArmorSlot_e
+enum armor_slot_e : unsigned long
 {
 	AS_NECK = 1,
 	AS_HEAD = 2,
@@ -982,7 +982,7 @@ enum ArmorSlot_e
 };
 
 // 103
-enum ImplantSlot_e
+enum implant_slot_e : unsigned long
 {
 	IS_EYES = 1,
 	IS_HEAD = 2,

@@ -1,4 +1,9 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
+#include "playfield_anarchy.h"
+#include "nano_item.h"
+#include "special_action_holder.h"
+#include "special_action_template.h"
 
 // A LavishScript Top-Level Object is similar to a global C++ object.  The main difference is that
 // a TLO can give ANY data type it wants; it is not limited to a single type.  You may wish to give

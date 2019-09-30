@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "playfield_anarchy.h"
 
 namespace isxao
 {

@@ -1,8 +1,8 @@
 #include "isxao_main.h"
+#include "playfield_anarchy.h"
 
 namespace ao
 {
-
 #if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
@@ -11,19 +11,19 @@ namespace ao
 	static_assert(false, "playfield_anarchy::debug_draw_pathfinder() requires a native function.");
 #endif
 
-	LONG playfield_anarchy::get_pf_world_x_pos() const
+	long playfield_anarchy::get_pf_world_x_pos()
 	{
-		return playfield_anarchy_.pf_world_x_pos;
+		return get_data()->pf_world_x_pos;
 	}
 
-	LONG playfield_anarchy::get_pf_world_z_pos() const
+	long playfield_anarchy::get_pf_world_z_pos()
 	{
-		return playfield_anarchy_.pf_world_z_pos;
+		return get_data()->pf_world_z_pos;
 	}
 
-	DWORD playfield_anarchy::get_playfield_actors(std::vector<actor*> &v)
+	unsigned long playfield_anarchy::get_playfield_actors(std::vector<actor*> &v)
 	{
-		for (auto it = playfield_anarchy_.p_dynel_children.begin(); it != playfield_anarchy_.p_dynel_children.end(); ++it)  // NOLINT(modernize-loop-convert)
+		for (auto it = get_data()->p_dynel_children.begin(); it != get_data()->p_dynel_children.end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
 			if ((*it)->identity.type == 50000)
 				v.push_back(reinterpret_cast<actor*>(*it));
@@ -32,60 +32,58 @@ namespace ao
 		return v.size();
 	}
 
-	playfield_anarchy_t playfield_anarchy::get_playfield_data() const
+	unsigned long playfield_anarchy::get_playfield_instance()
 	{
-		return playfield_anarchy_;
+		return get_data()->instance_id.id;
 	}
 
-	DWORD playfield_anarchy::get_playfield_instance() const
+	const char* playfield_anarchy::get_playfield_name()
 	{
-		return playfield_anarchy_.instance_id.id;
+		return get_data()->p_rdb_playfield->name;
 	}
 
-	PCSTR playfield_anarchy::get_playfield_name() const
+	float playfield_anarchy::get_size_x()
 	{
-		return playfield_anarchy_.p_rdb_playfield->name;
+		return get_data()->p_n3_tile_map->p_rdb_tile_map->map_size_multiplier * get_data()->p_n3_tile_map->p_rdb_tile_map->width;
 	}
 
-	float playfield_anarchy::get_size_x() const
+	float playfield_anarchy::get_size_z()
 	{
-		return playfield_anarchy_.p_n3_tile_map->p_rdb_tile_map->map_size_multiplier * playfield_anarchy_.p_n3_tile_map->p_rdb_tile_map->width;
+		return get_data()->p_n3_tile_map->p_rdb_tile_map->map_size_multiplier * get_data()->p_n3_tile_map->p_rdb_tile_map->height;
 	}
 
-	float playfield_anarchy::get_size_z() const
+	bool playfield_anarchy::is_dungeon()
 	{
-		return playfield_anarchy_.p_n3_tile_map->p_rdb_tile_map->map_size_multiplier * playfield_anarchy_.p_n3_tile_map->p_rdb_tile_map->height;
+		return get_data()->p_n3_tile_map->p_rdb_tile_map->is_dungeon == 1;
 	}
 
-	bool playfield_anarchy::is_dungeon() const
-	{
-		return playfield_anarchy_.p_n3_tile_map->p_rdb_tile_map->is_dungeon == 1;
-	}
-
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
-	FUNCTION_AT_ADDRESS(bool playfield_anarchy::line_of_sight(const vector3_t &, const vector3_t &, int, bool), n3_playfield_t__line_of_sight);
+	FUNCTION_AT_ADDRESS(bool playfield_anarchy::line_of_sight(const vector3_t &, const vector3_t &, int, bool), n3_playfield_t__line_of_sight)
+#else
+	static_assert(false, "playfield_anarchy::line_of_sight(const vector3_t &, const vector3_t &, int, bool) requires a native function.");
+#endif
 
-	p_grid_space_t playfield_anarchy::get_grid_space() const
+	p_grid_space_t playfield_anarchy::get_grid_space()
 	{
-		return playfield_anarchy_.p_space_i;
+		return get_data()->p_space_i;
 	}
 
-	p_n3_tile_map_surface_t playfield_anarchy::get_tile_map_surface() const
+	p_n3_tile_map_surface_t playfield_anarchy::get_tile_map_surface()
 	{
-		return playfield_anarchy_.p_surface_i;
+		return get_data()->p_surface_i;
 	}
 
 #pragma endregion
 
 #pragma region playfield_dir
 
-	playfield_anarchy* playfield_dir::get_playfield() const
+	playfield_anarchy* playfield_dir::get_playfield()
 	{
-		return reinterpret_cast<playfield_anarchy*>(playfield_dir_.p_root->p_node->value);
+		return reinterpret_cast<playfield_anarchy*>(get_data()->p_root->p_node->value);
 	}
 
 #pragma endregion
 
 }
-

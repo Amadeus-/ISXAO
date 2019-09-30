@@ -1,14 +1,30 @@
 #pragma once
+#include "game_object.h"
 
-// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
-class stat_holder
+namespace std
 {
-public:
-	DWORD get_skill_locks(std::vector<ao::action_lock*>&) const;
-	ao::action_lock* get_skill_lock(ao::special_action_template*) const;
-	ao::stat_holder_t get_stat_holder_data() const;
-	DWORD get_stat_map(std::map<DWORD, LONG>&) const;
-private:
-	// ReSharper disable once CppUninitializedNonStaticDataMember
-	ao::stat_holder_t stat_holder_;
-};
+	template <typename _Tp, typename _Alloc>
+	class list;
+	template <typename _Key, typename _Tp, typename _Compare, typename _Alloc>
+	class map;
+	template <typename _Tp, typename _Alloc>
+	class vector;
+}
+
+namespace ao
+{
+	class action_lock;
+	class special_action_template;
+
+	struct ao_stat_holder;
+
+	typedef ao_stat_holder stat_holder_t, *p_stat_holder_t;
+
+	class stat_holder : public game_object<stat_holder_t>
+	{
+	public:
+		unsigned long get_skill_locks(std::vector<action_lock*>&);
+		action_lock* get_skill_lock(special_action_template*);
+		unsigned long get_stat_map(std::map<unsigned long, long>&);
+	};
+}

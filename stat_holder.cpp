@@ -1,18 +1,21 @@
 #include "isxao_main.h"
+#include "action_lock.h"
+#include "special_action_template.h"
+#include "stat_holder.h"
 
 namespace ao
 {
 
-	DWORD stat_holder::get_skill_locks(std::vector<action_lock*> &v) const
+	unsigned long stat_holder::get_skill_locks(std::vector<action_lock*> &v)
 	{
-		auto p_skill_lock_vector = this->get_stat_holder_data().p_skill_locks;
+		auto p_skill_lock_vector = this->get_data()->p_skill_locks;
 		for (auto it = p_skill_lock_vector->begin(); it != p_skill_lock_vector->end(); ++it)  // NOLINT(modernize-loop-convert)
 			v.push_back(reinterpret_cast<action_lock*>(&(*it)));
 		std::sort(v.begin(), v.end(), action_lock::p_action_lock_compare);
 		return v.size();
 	}
 
-	action_lock* stat_holder::get_skill_lock(special_action_template* special_action) const
+	action_lock* stat_holder::get_skill_lock(special_action_template* special_action)
 	{
 		std::vector<action_lock*> v;
 		if (this->get_skill_locks(v))
@@ -29,14 +32,9 @@ namespace ao
 		return nullptr;
 	}
 
-	stat_holder_t stat_holder::get_stat_holder_data() const
+	unsigned long stat_holder::get_stat_map(std::map<unsigned long, long> &m)
 	{
-		return stat_holder_;
-	}
-
-	DWORD stat_holder::get_stat_map(std::map<DWORD, LONG> &m) const
-	{
-		return this->get_stat_holder_data().p_stat_map_dir->copy_map(m);
+		return this->get_data()->p_stat_map_dir->copy_map(m);
 	}
 
 }

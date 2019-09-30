@@ -1,5 +1,6 @@
 #include "isxao_main.h"
 #include "engine_client_anarchy.h"
+#include "team_entry.h"
 
 bool TeamEntryType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char* argv[], LSOBJECT& Object)
 {

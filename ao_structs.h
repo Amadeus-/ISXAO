@@ -4,13 +4,17 @@ namespace ao
 {
 #pragma region Forward Declarations
 
+	class action_lock;
 	class actor;
+	class bank_entry;
+	class casting_data;
 	class character;
 	class chat_gui_module;
 	class chat_window_controller;
 	class chat_window_node;
 	class command_interpreter;
 	class database_handler;
+	class dummy_item_base;
 	class engine_client_anarchy;
 	class flow_control;
 	class game_time;
@@ -18,12 +22,29 @@ namespace ao
 	class html_parser;
 	class info_item_remote;
 	class input_config;
+	class inventory_data;
+	class inventory_holder;
+	class inventory_item;
+	struct inventory_slot;
 	class message;
 	class n3_message;
+	class nano_item;
+	class nano_template;
+	class new_inventory;
+	class npc_holder;
+	class perk_holder;
 	class pet;
 	class player;
+	class playfield_anarchy;
+	class playfield_dir;
 	class resource_database;
+	class special_action_holder;
+	class special_action_item;
 	class special_action_template;
+	class spell_template_data;
+	class stat_holder;
+	class targeting_module;
+	class team_entry;
 	class team_member;
 	class team_raid;
 	class text_message;
@@ -2820,6 +2841,18 @@ namespace ao
 		DWORD count;					// 0x08
 	} stat_name_dir_t, *p_stat_name_dir_t;
 
+
+#pragma endregion
+
+#pragma region TargetingModule
+
+	// Size 0x10
+	typedef struct ao_targeting_module
+	{
+		void* p_v_table;					// 0x00
+		unsigned char unknown_0x04[0xC];	// 0x04
+
+	} targeting_module_t, *p_targeting_module_t;
 
 #pragma endregion
 

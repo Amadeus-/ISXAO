@@ -1,5 +1,10 @@
 #include "isxao_main.h"
 #include "engine_client_anarchy.h"
+#include "inventory_holder.h"
+#include "inventory_slot.h"
+#include "nano_item.h"
+#include "special_action_holder.h"
+#include "spell_template_data.h"
 
 bool CharacterType::GetMember(LSOBJECTDATA ObjectData, PLSTYPEMEMBER Member, int argc, char *argv[], LSOBJECT &Object)
 {

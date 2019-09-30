@@ -1,4 +1,6 @@
 #include "isxao_main.h"
+#include "engine_client_anarchy.h"
+#include "inventory_item.h"
 
 namespace ao
 {
@@ -65,11 +67,10 @@ namespace ao
 
 	LONG inventory_item::get_skill(DWORD stat)
 	{
-		identity_t dummy_identity;
-		ZeroMemory(&dummy_identity, sizeof(identity_t));
+		const identity_t i(0, 0);
 		auto result = 1234567890;
 		if (P_ENGINE_CLIENT_ANARCHY)
-			result = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(get_identity(), stat, 2, dummy_identity);
+			result = P_ENGINE_CLIENT_ANARCHY->n3_msg_get_skill(get_identity(), stat, 2, i);
 		return result;
 	}
 

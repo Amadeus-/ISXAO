@@ -1,10 +1,12 @@
 #include "isxao_main.h"
 #include "engine_client_anarchy.h"
+#include "team_entry.h"
+#include "team_raid.h"
 
 namespace ao
 {
 
-	DWORD team_raid::build_ls_team(LSIndex *p_index) const
+	unsigned long team_raid::build_ls_team(LSIndex *p_index)
 	{
 		std::vector<team_entry*> v;
 		if (this->get_team(v))
@@ -15,7 +17,7 @@ namespace ao
 		return p_index->GetContainerUsed();
 	}
 
-	DWORD team_raid::build_ls_raid(LSIndex *p_index) const
+	unsigned long team_raid::build_ls_raid(LSIndex *p_index)
 	{
 		std::vector<team_entry*> v;
 		if (this->get_raid(v))
@@ -31,7 +33,7 @@ namespace ao
 		P_ENGINE_CLIENT_ANARCHY->n3_msg_create_raid();
 	}
 
-	team_entry* team_raid::get_team_leader() const
+	team_entry* team_raid::get_team_leader()
 	{
 		std::vector<team_entry*> v;
 		if (this->get_raid(v))
@@ -45,7 +47,7 @@ namespace ao
 		return nullptr;
 	}
 
-	DWORD team_raid::get_raid(std::vector<team_entry*> &v) const
+	unsigned long team_raid::get_raid(std::vector<team_entry*> &v)
 	{
 		if (!this->is_raid())
 		{
@@ -66,13 +68,13 @@ namespace ao
 		return v.size();
 	}
 
-	DWORD team_raid::get_raid_count() const
+	unsigned long team_raid::get_raid_count()
 	{
 		std::vector<team_entry*> raid_vector;
 		return this->get_raid(raid_vector);
 	}
 
-	team_entry* team_raid::get_raid_member(const DWORD index) const
+	team_entry* team_raid::get_raid_member(const unsigned long index)
 	{
 		std::vector<team_entry*> v;
 		if (this->get_raid(v))
@@ -83,7 +85,7 @@ namespace ao
 		return nullptr;
 	}
 
-	team_entry* team_raid::get_raid_member(const PCSTR raid_member_name) const
+	team_entry* team_raid::get_raid_member(const char* raid_member_name)
 	{
 		char name[MAX_VARSTRING] = { 0 };
 		char search_name[MAX_VARSTRING];
@@ -103,18 +105,18 @@ namespace ao
 		return nullptr;
 	}
 
-	DWORD team_raid::get_team(std::vector<team_entry*> &v) const
+	unsigned long team_raid::get_team(std::vector<team_entry*> &v)
 	{
 		if (!is_raid())
 			return get_team(v, 0);
 		return this->get_team(v, get_team_raid_index());
 	}
 
-	DWORD team_raid::get_team(std::vector<team_entry*> &v, const DWORD index) const
+	unsigned long team_raid::get_team(std::vector<team_entry*> &v, const unsigned long index)
 	{
 		if (index < 0 || index > 5)
 			return 0;
-		auto team_entry_vector = get_team_raid_data().p_team_list[index];
+		auto team_entry_vector = get_data()->p_team_list[index];
 		for (auto it = team_entry_vector->begin(); it != team_entry_vector->end(); ++it)  // NOLINT(modernize-loop-convert)
 		{
 			auto entry = reinterpret_cast<team_entry*>(*it);
@@ -124,13 +126,13 @@ namespace ao
 		return v.size();
 	}
 
-	DWORD team_raid::get_team_count() const
+	unsigned long team_raid::get_team_count()
 	{
 		std::vector<team_entry*> v;
 		return get_team(v);;
 	}
 
-	team_entry* team_raid::get_team_member(const DWORD index) const
+	team_entry* team_raid::get_team_member(const unsigned long index)
 	{
 		std::vector<team_entry*> v;
 		if (this->get_team(v))
@@ -141,7 +143,7 @@ namespace ao
 		return nullptr;
 	}
 
-	team_entry* team_raid::get_team_member(const PCSTR team_member_name) const
+	team_entry* team_raid::get_team_member(const char* team_member_name)
 	{
 		char name[MAX_VARSTRING] = { 0 };
 		char search_name[MAX_VARSTRING];
@@ -161,29 +163,24 @@ namespace ao
 		return nullptr;
 	}
 
-	identity_t team_raid::get_team_identity() const
+	identity_t team_raid::get_team_identity()
 	{
-		return get_team_raid_data().team_identity;
+		return get_data()->team_identity;
 	}
 
-	identity_t team_raid::get_team_leader_id() const
+	identity_t team_raid::get_team_leader_id()
 	{
-		return get_team_raid_data().team_leader_identity;
+		return get_data()->team_leader_identity;
 	}
 
-	team_raid_holder_t team_raid::get_team_raid_data() const
+	unsigned long team_raid::get_team_raid_index()
 	{
-		return team_raid_holder_;
+		return get_data()->raid_team_index;
 	}
 
-	DWORD team_raid::get_team_raid_index() const
+	bool team_raid::is_raid()
 	{
-		return get_team_raid_data().raid_team_index;
-	}
-
-	bool team_raid::is_raid() const
-	{
-		return get_team_raid_data().raid_team_index != -1;
+		return get_data()->raid_team_index != -1;
 	}
 
 }

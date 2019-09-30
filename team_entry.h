@@ -1,13 +1,18 @@
 #pragma once
+#include "game_object.h"
 
-// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
-class team_entry
+namespace ao
 {
-public:
-	PCSTR get_name() const;
-	ao::identity_t get_identity() const;
-	ao::team_entry_t get_team_entry_data() const;
-private:
-	// ReSharper disable once CppUninitializedNonStaticDataMember
-	ao::team_entry_t team_entry_;
-};
+	struct ao_identity;
+	struct ao_team_entry;
+
+	typedef ao_identity identity_t, *p_identity_t;
+	typedef ao_team_entry team_entry_t, *p_team_entry_t;
+
+	class team_entry : public game_object<team_entry_t>
+	{
+	public:
+		const char* get_name();
+		identity_t get_identity();
+	};
+}

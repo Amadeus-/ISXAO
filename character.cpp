@@ -1,5 +1,6 @@
 #include "isxao_main.h"
 #include "engine_client_anarchy.h"
+#include "stat_holder.h"
 
 namespace ao
 {
@@ -40,7 +41,7 @@ namespace ao
 
 #pragma region Info
 
-#ifdef SIMPLE_CHAR_T__CHECK_LOS_USE_NATIVE
+#if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
 	FUNCTION_AT_ADDRESS(bool character::check_los(dynel* p_dynel), simple_char_t__check_los);

@@ -3,6 +3,7 @@
 #include "iostream"
 #include "command_interpreter.h"
 #include "engine_client_anarchy.h"
+#include "playfield_anarchy.h"
 
 namespace isxao
 {

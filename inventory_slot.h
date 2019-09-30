@@ -1,20 +1,25 @@
 #pragma once
 
-typedef struct inventory_slot  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
+namespace ao
 {
-	ao::identity_t slot_id;
-	ao::inventory_item* p_item;
+	class inventory_item;
 
-	PCSTR get_slot_name() const;
-	ao::p_inventory_data_t get_inv_slot_data();
-	double get_item_progress(DWORD&, DWORD&) const;
-	bool is_item_locked() const;
+	struct ao_identity;
+	struct ao_inventory_data;
 
-	inventory_slot()
+	typedef ao_identity identity_t, *p_identity_t;
+	typedef ao_inventory_data inventory_data_t, *p_inventory_data_t;
+
+	typedef struct inventory_slot  // NOLINT(hicpp-member-init, cppcoreguidelines-pro-type-member-init)
 	{
-		this->slot_id = ao::identity_t(0, 0);
-		this->p_item = nullptr;
-	}
+		identity_t slot_id;
+		inventory_item* p_item;
 
-} inventory_slot_t, *p_inventory_slot_t;
+		const char* get_slot_name() const;
+		ao::p_inventory_data_t get_inv_slot_data();
+		double get_item_progress(unsigned long&, unsigned long&) const;
+		bool is_item_locked() const;
 
+		inventory_slot();
+	} inventory_slot_t, *p_inventory_slot_t;
+}

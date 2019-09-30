@@ -1,6 +1,13 @@
 #include "isxao_main.h"
 #include "command_interpreter.h"
 #include "engine_client_anarchy.h"
+#include "inventory_holder.h"
+#include "nano_item.h"
+#include "playfield_anarchy.h"
+#include "special_action_holder.h"
+#include "special_action_template.h"
+#include "spell_template_data.h"
+#include "targeting_module.h"
 
 namespace isxao
 {
