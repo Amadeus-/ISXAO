@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #ifndef _DYNEL_H
 #define _DYNEL_H
 
@@ -37,6 +36,8 @@ namespace ao
 	class dynel : public game_object<n3_dynel_t>
 	{
 	public:
+		dynel(const actor&);
+		dynel& operator=(const actor&);
 		float get_distance_to_client();
 		float get_distance_to(vector3_t&);
 		float get_distance_3d_to(vector3_t&);

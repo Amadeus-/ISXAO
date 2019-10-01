@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "character.h"
 #include "engine_client_anarchy.h"
 #include "nano_item.h"
 

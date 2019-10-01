@@ -1,4 +1,6 @@
 #include "isxao_main.h"
+#include "character.h"
+#include "dynel.h"
 #include "engine_client_anarchy.h"
 
 namespace ao
@@ -758,7 +760,7 @@ namespace ao
 	{
 		if (g_game_state == GAMESTATE_IN_GAME)
 		{
-			const auto client_rot = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_rotation();
+			const auto client_rot = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_rotation();
 			rot.copy(client_rot);
 		}
 	}

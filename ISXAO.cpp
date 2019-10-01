@@ -128,6 +128,7 @@ bool ISXAO::Initialize(ISInterface *p_ISInterface)
 		RegisterTriggers();
 
 		isxao::InitializeISXAO();
+		isxao::move::initialize();
 
 		printf("ISXAO version %s Loaded",AO_Version);
 		return true;
@@ -165,7 +166,9 @@ bool ISXAO::Initialize(ISInterface *p_ISInterface)
 // shutdown sequence
 void ISXAO::Shutdown()
 {
+	isxao::move::shutdown();
 	isxao::ShutdownLogging();
+	
 
 	// Disconnect from services we connected to
 	DisconnectServices();

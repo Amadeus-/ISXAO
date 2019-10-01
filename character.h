@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _CHARACTER_H
+#define _CHARACTER_H
+
 #include "team_member.h"
 
 namespace ao
@@ -65,3 +68,4 @@ namespace ao
 
 	};
 }
+#endif

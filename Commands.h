@@ -19,6 +19,7 @@ COMMAND("AOExecute", CMD_AOEXECUTE, true, false);
 COMMAND("Cast", CMD_CAST, true, false);
 COMMAND("Face", CMD_FACE, true, false);
 COMMAND("Target", CMD_TARGET, true, false);
+COMMAND("move_to", CMD_MOVE_TO, true, false);
 
 // ----------------------------------------------------
 #ifdef COMMAND_SELF

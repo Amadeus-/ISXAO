@@ -308,9 +308,6 @@
     <ClCompile Include="n3_message.cpp">
       <Filter>Source Files\Base\AO\Client</Filter>
     </ClCompile>
-    <ClCompile Include="parser.cpp">
-      <Filter>Source Files\Base\AO\Client</Filter>
-    </ClCompile>
     <ClCompile Include="playfield_anarchy.cpp">
       <Filter>Source Files\Base\AO\Client</Filter>
     </ClCompile>
@@ -322,6 +319,9 @@
     </ClCompile>
     <ClCompile Include="text_message.cpp">
       <Filter>Source Files\Base\AO\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="isxao_message_parser.cpp">
+      <Filter>Source Files\Base\ISXAO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -526,9 +526,6 @@
     <ClInclude Include="isxao_move.h">
       <Filter>Header Files\Base\ISXAO</Filter>
     </ClInclude>
-    <ClInclude Include="parser.h">
-      <Filter>Header Files\Base\ISXAO</Filter>
-    </ClInclude>
     <ClInclude Include="ao_classes.h">
       <Filter>Header Files\Base\AO\Client</Filter>
     </ClInclude>
@@ -597,6 +594,9 @@
     </ClInclude>
     <ClInclude Include="game_object.h">
       <Filter>Header Files\Base\AO\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="isxao_message_parser.h">
+      <Filter>Header Files\Base\ISXAO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

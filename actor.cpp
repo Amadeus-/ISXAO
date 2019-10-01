@@ -13,6 +13,14 @@
 
 namespace ao
 {
+	actor::actor(const dynel&)
+	{		
+	}
+
+	actor& actor::operator=(const dynel&)
+	{
+		return *this;
+	}
 
 	dynel* actor::to_dynel()
 	{
@@ -523,5 +531,10 @@ namespace ao
 			return P_ENGINE_CLIENT_ANARCHY->N3Msg_TeamJoinRequest(this->to_dynel()->get_identity(), true);
 		return false;
 	}	
+
+	bool actor::p_actor_compare(actor *p_a, actor *p_b)
+	{
+		return dynel::p_dynel_compare(p_a->to_dynel(), p_b->to_dynel());
+	}
 
 }

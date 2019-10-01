@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "character.h"
 #include "special_action_holder.h"
 #include "engine_client_anarchy.h"
 #include "action_lock.h"

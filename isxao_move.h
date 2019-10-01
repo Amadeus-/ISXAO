@@ -4,6 +4,10 @@ namespace isxao
 {
 	namespace move
 	{
+		class active;
+		class movement;
+		class move_character;
+		class settings;
 #pragma region constants
 
 		constexpr byte command_stick = 1;
@@ -116,6 +120,10 @@ namespace isxao
 
 		AOLIB_API bool g_stick_on;
 		// AOLIB_API int stick_cmd(int argc, char* argv[]);
+		AOLIB_API movement* p_movement;
+		AOLIB_API settings* p_move_settings;
+		AOLIB_API active* p_move_active;
+		AOLIB_API move_character* p_move_character;
 
 #pragma endregion
 
@@ -126,6 +134,9 @@ namespace isxao
 		void write_line(char output[MAX_VARSTRING], verbosity_level v_compare);
 		void handle_our_cmd(byte cmd_used, int begin_inclusive, int argc, char *argv[]);
 		void end_previous_cmd(bool kill_movement, byte cmd_used = apply_to_all, bool preserve_self = false);
+		float moving_average(float new_value, int num_entries);
+		void initialize();
+		void shutdown();
 
 #pragma endregion
 
@@ -159,7 +170,7 @@ namespace isxao
 			int elapsed_ms() const;
 		};
 
-		class character
+		class move_character
 		{
 		public:
 			static bool in_combat();
@@ -503,12 +514,27 @@ namespace isxao
 			*use_z = z + float(rand_distance * cosf(float(rand_heading * M_PI) / circle_half));
 		}
 
-		inline void polar_spot(float x, float z, float heading, float bearing, float distance, float scatter, float* use_x, float* use_z)
+		inline void polar_spot(const float x, const float z, const float heading, const float bearing, const float distance, const float scatter, float* use_x, float* use_z)
 		{
 			if (scatter != 0.0f)
 			{
-				// float rand_heading = 
+				const auto rand_heading = p_movement->sane_head(rand() / RAND_MAX * heading_max);
+				const auto rand_distance = rand() / RAND_MAX * scatter;
+				*use_x = x + (rand_distance * sinf(float(rand_heading * M_PI) / circle_half));
+				*use_z = z + (rand_distance * cosf(float(rand_heading * M_PI) / circle_half));
+				return;
 			}
+			auto relative_heading = p_movement->sane_head(heading - bearing);
+			relative_heading = ((relative_heading / heading_max) * circle_max);
+			*use_x = x + (distance * sinf(float(relative_heading * M_PI) / circle_half));
+			*use_z = z + (distance * cosf(float(relative_heading * M_PI) / circle_half));
+		}
+
+		// ReSharper disable once IdentifierTypo
+		template <unsigned long _Size>char* ftoa_s(float number, char(&text)[_Size])
+		{
+			sprintf_s(text, "%.2f", number);
+			return text;
 		}
 
 #pragma endregion

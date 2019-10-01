@@ -7,6 +7,14 @@
 
 namespace ao
 {
+	dynel::dynel(const actor&)
+	{		
+	}
+
+	dynel& dynel::operator=(const actor&)
+	{
+		return *this;
+	}
 
 	float dynel::get_distance_to_client()
 	{

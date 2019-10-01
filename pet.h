@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _PET_H
+#define _PET_H
+
 #include "actor.h"
 
 namespace ao
@@ -17,3 +20,4 @@ namespace ao
 		void wait();
 	};
 }
+#endif

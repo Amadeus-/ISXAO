@@ -1,6 +1,7 @@
 #include "isxao_main.h"
 #include "atlbase.h"
 #include "iostream"
+#include "character.h"
 #include "command_interpreter.h"
 #include "dynel.h"
 #include "engine_client_anarchy.h"
@@ -172,13 +173,13 @@ namespace isxao
 		char szName[MAX_VARSTRING] = { 0 };
 		char szSearchName[MAX_VARSTRING] = { 0 };
 		DWORD actor_type;
-		if (p_actor->get_identity().type != 50000)
+		if (p_actor->to_dynel()->get_identity().type != 50000)
 			actor_type = internal::MOB_OTHER;
-		else if (p_actor->is_actor())
+		else if (p_actor->to_dynel()->is_actor())
 		{
-			if (p_actor->is_pet() && is_client_id(p_actor->get_master_id()))
+			if (p_actor->to_dynel()->is_pet() && is_client_id(p_actor->get_master_id()))
 				actor_type = internal::MOB_MYPET;
-			else if (p_actor->is_pet())
+			else if (p_actor->to_dynel()->is_pet())
 				actor_type = internal::MOB_PET;
 			else
 				actor_type = internal::MOB_NPC;
@@ -187,29 +188,29 @@ namespace isxao
 			actor_type = internal::MOB_PC;
 		if (p_search_actor->actor_type != actor_type && p_search_actor->actor_type != internal::MOB_NONE)
 			return false;
-		strcpy_s(szName, MAX_VARSTRING, p_actor->get_name());
+		strcpy_s(szName, MAX_VARSTRING, p_actor->to_dynel()->get_name());
 		_strlwr_s(szName);
 		strcpy_s(szSearchName, MAX_VARSTRING, p_search_actor->name);
 		_strlwr_s(szSearchName);
 		if (!strstr(szName, szSearchName))
 			return false;
-		if (p_search_actor->min_level && DWORD(p_actor->get_skill(ao::ST_LEVEL)) < p_search_actor->min_level)
+		if (p_search_actor->min_level && DWORD(p_actor->to_dynel()->get_skill(ao::ST_LEVEL)) < p_search_actor->min_level)
 			return false;
-		if (p_search_actor->max_level && DWORD(p_actor->get_skill(ao::ST_LEVEL)) > p_search_actor->max_level)
+		if (p_search_actor->max_level && DWORD(p_actor->to_dynel()->get_skill(ao::ST_LEVEL)) > p_search_actor->max_level)
 			return false;
-		if (p_search_actor->not_id == p_actor->get_identity().get_combined_identity())
+		if (p_search_actor->not_id == p_actor->to_dynel()->get_identity().get_combined_identity())
 			return false;
-		if (p_search_actor->is_dynel_id && p_search_actor->actor_id != p_actor->get_identity().get_combined_identity())
+		if (p_search_actor->is_dynel_id && p_search_actor->actor_id != p_actor->to_dynel()->get_identity().get_combined_identity())
 			return false;
 		if (p_search_actor->is_known_location)
 		{
-			if (p_search_actor->x_loc != p_actor->get_position().x || p_search_actor->z_loc != p_actor->get_position().z)
+			if (p_search_actor->x_loc != p_actor->to_dynel()->get_position().x || p_search_actor->z_loc != p_actor->to_dynel()->get_position().z)
 			{
 				ao::vector3_t knownLoc;
 				knownLoc.x = p_search_actor->x_loc;
 				knownLoc.y = 0.0f;
 				knownLoc.z = p_search_actor->z_loc;
-				if (p_search_actor->f_radius < 10000.0f && p_actor->get_distance_to(knownLoc) > p_search_actor->f_radius)
+				if (p_search_actor->f_radius < 10000.0f && p_actor->to_dynel()->get_distance_to(knownLoc) > p_search_actor->f_radius)
 					return false;
 			}
 		}
@@ -217,14 +218,14 @@ namespace isxao
 			return false;
 		if (ao::g_y_filter < 10000.0f)
 		{
-			ao::vector3_t client = p_character->get_position();
-			if (p_actor->get_position().y > client.y + ao::g_y_filter || p_actor->get_position().y < client.y - ao::g_y_filter)
+			ao::vector3_t client = p_character->to_dynel()->get_position();
+			if (p_actor->to_dynel()->get_position().y > client.y + ao::g_y_filter || p_actor->to_dynel()->get_position().y < client.y - ao::g_y_filter)
 				return false;
 		}
 		if (p_search_actor->y_radius < 10000.0f)
 		{
-			ao::vector3_t client = p_character->get_position();
-			if (p_actor->get_position().y > client.y + p_search_actor->y_radius || p_actor->get_position().y < client.y - p_search_actor->y_radius)
+			ao::vector3_t client = p_character->to_dynel()->get_position();
+			if (p_actor->to_dynel()->get_position().y > client.y + p_search_actor->y_radius || p_actor->to_dynel()->get_position().y < client.y - p_search_actor->y_radius)
 				return false;
 		}
 		return true;
@@ -239,12 +240,12 @@ namespace isxao
 			P_PLAYFIELD_DIR->get_playfield()->get_playfield_actors(v);
 			for (auto it = v.begin(); it != v.end(); ++it)
 			{
-				if ((*it)->get_identity().type == 50000 && !P_ENGINE_CLIENT_ANARCHY->n3_msg_is_npc((*it)->get_identity()))
+				if ((*it)->to_dynel()->get_identity().type == 50000 && !P_ENGINE_CLIENT_ANARCHY->n3_msg_is_npc((*it)->to_dynel()->get_identity()))
 				{
 					if ((*it) != p_actor)
 					{
-						ao::vector3_t c = (*it)->get_position();
-						if (p_actor->get_distance_to(c) < radius)
+						ao::vector3_t c = (*it)->to_dynel()->get_position();
+						if (p_actor->to_dynel()->get_distance_to(c) < radius)
 							return true;
 					}
 				}
@@ -285,7 +286,7 @@ namespace isxao
 		if (!p_search_actor || !nth || !p_origin)
 			return nullptr;
 		CIndex<internal::PAORANK> actor_set;
-		ao::vector3_t pos = p_origin->get_position();
+		ao::vector3_t pos = p_origin->to_dynel()->get_position();
 		std::vector<ao::actor*> v;
 		P_PLAYFIELD_DIR->get_playfield()->get_playfield_actors(v);
 		DWORD TotalMatching = 0;
@@ -298,7 +299,7 @@ namespace isxao
 					TotalMatching++;
 					internal::PAORANK pNewRank = new internal::AORANK;
 					pNewRank->VarPtr.Ptr = *it;
-					pNewRank->Value.Float = (*it)->get_distance_to(pos);
+					pNewRank->Value.Float = (*it)->to_dynel()->get_distance_to(pos);
 					actor_set += pNewRank;
 				}
 			}
@@ -312,7 +313,7 @@ namespace isxao
 					TotalMatching++;
 					internal::PAORANK pNewRank = new internal::AORANK;
 					pNewRank->VarPtr.Ptr = *it;
-					pNewRank->Value.Float = (*it)->get_distance_to(pos);
+					pNewRank->Value.Float = (*it)->to_dynel()->get_distance_to(pos);
 					actor_set += pNewRank;
 				}
 			}
@@ -480,14 +481,14 @@ namespace isxao
 		}
 	}
 
-	void get_arg(char current_arg[MAX_VARSTRING], const int argc, char *argv[], DWORD& arg_num)
+	void get_arg(char* current_arg, const int argc, char *argv[], DWORD& arg_num)
 	{
 		if (arg_num > DWORD(argc))
 		{
-			sprintf_s(current_arg, sizeof(current_arg), nullptr);
+			sprintf_s(current_arg, MAX_VARSTRING, nullptr);
 			return;
 		}		
-		sprintf_s(current_arg, sizeof(current_arg), argv[arg_num]);
+		sprintf_s(current_arg, MAX_VARSTRING, argv[arg_num]);
 	}
 
 #pragma endregion
@@ -496,7 +497,7 @@ namespace isxao
 
 	void HandleN3Message(internal::PN3MESSAGEINFO message_info)
 	{
-		auto p = parser(PCHAR(message_info->message), message_info->size);
+		auto p = isxao_message_parser(PCHAR(message_info->message), message_info->size);
 		const auto n3 = n3_header(p);
 		switch(ao::N3MessageType_e(n3.n3_type()))
 		{

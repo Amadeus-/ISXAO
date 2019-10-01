@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "actor.h"
 #include "playfield_anarchy.h"
 
 namespace ao
@@ -28,7 +29,7 @@ namespace ao
 			if ((*it)->identity.type == 50000)
 				v.push_back(reinterpret_cast<actor*>(*it));
 		}
-		std::sort(v.begin(), v.end(), dynel::p_dynel_compare);
+		std::sort(v.begin(), v.end(), actor::p_actor_compare);
 		return v.size();
 	}
 

@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _ACTOR_H
+#define _ACTOR_H
+
 #include "game_object.h"
 
 class LSIndex;
@@ -35,6 +38,8 @@ namespace ao
 	class actor : public game_object<simple_char_t>
 	{
 	public:
+		actor(const dynel&);
+		actor& operator= (const dynel&);
 		unsigned long build_ls_ncu(LSIndex*);
 		unsigned long build_ls_pets(LSIndex*);
 		unsigned long casting();
@@ -84,5 +89,7 @@ namespace ao
 		void make_leader();
 		bool send_team_invite();
 		dynel* to_dynel();
+		static bool p_actor_compare(actor *p_a, actor *p_b);
 	};
 }
+#endif

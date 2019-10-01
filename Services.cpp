@@ -1,5 +1,7 @@
 #include "isxao_main.h"
 #include "ISXAOServices.h"
+#include "actor.h"
+#include "dynel.h"
 
 #define SERVICE(_name_,_callback_,_variable_) HISXSERVICE _variable_=0;
 #include "Services.h"
@@ -84,12 +86,12 @@ void __cdecl ActorService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 		if (lpData)
 		{
 			ao::actor* p_actor = static_cast<ao::actor*>(lpData);
-			if (p_actor->get_identity().type == 50000)
+			if (p_actor->to_dynel()->get_identity().type == 50000)
 			{
 				char name[MAX_VARSTRING];
 				char identity[MAX_VARSTRING];
-				strcpy_s(name, MAX_VARSTRING, reinterpret_cast<ao::actor*>(p_actor)->get_name());
-				sprintf_s(identity, MAX_VARSTRING, "%I64d", reinterpret_cast<ao::actor*>(p_actor)->get_identity().get_combined_identity());
+				strcpy_s(name, MAX_VARSTRING, reinterpret_cast<ao::actor*>(p_actor)->to_dynel()->get_name());
+				sprintf_s(identity, MAX_VARSTRING, "%I64d", reinterpret_cast<ao::actor*>(p_actor)->to_dynel()->get_identity().get_combined_identity());
 				char *argv[] = { name, identity };
 				pISInterface->ExecuteEvent(isxao::events::GetEventId("AO_onActorSpawned"), 0, 2, argv);
 				pISInterface->ServiceBroadcast(pExtension, hActorService, AddActor, p_actor);
@@ -102,12 +104,12 @@ void __cdecl ActorService(ISXInterface *pClient, unsigned int MSG, void *lpData)
 		if(lpData)
 		{
 			ao::actor* p_actor = static_cast<ao::actor*>(lpData);
-			if (p_actor->get_identity().type == 50000)
+			if (p_actor->to_dynel()->get_identity().type == 50000)
 			{
 				char name[MAX_VARSTRING];
 				char identity[MAX_VARSTRING];
-				strcpy_s(name, MAX_VARSTRING, reinterpret_cast<ao::actor*>(p_actor)->get_name());
-				sprintf_s(identity, MAX_VARSTRING, "%I64d", reinterpret_cast<ao::actor*>(p_actor)->get_identity().get_combined_identity());
+				strcpy_s(name, MAX_VARSTRING, reinterpret_cast<ao::actor*>(p_actor)->to_dynel()->get_name());
+				sprintf_s(identity, MAX_VARSTRING, "%I64d", reinterpret_cast<ao::actor*>(p_actor)->to_dynel()->get_identity().get_combined_identity());
 				char *argv[] = { name, identity };
 				pISInterface->ExecuteEvent(isxao::events::GetEventId("AO_onActorDespawned"), 0, 2, argv);
 				pISInterface->ServiceBroadcast(pExtension, hActorService, RemoveActor, p_actor);

@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "character.h"
 #include "command_interpreter.h"
 #include "dynel.h"
 #include "engine_client_anarchy.h"
@@ -10,6 +11,7 @@
 #include "spell_template_data.h"
 #include "targeting_module.h"
 #include "weapon_holder.h"
+#include "isxao_move.h"
 
 namespace isxao
 {
@@ -31,6 +33,8 @@ namespace isxao
 			if (!strcmp(command, "/face"))
 				return true;
 			if (!strcmp(command, "/target"))
+				return true;
+			if (!strcmp(command, "/move_to"))
 				return true;
 			return false;
 		}
@@ -95,19 +99,19 @@ namespace isxao
 				{
 					if(!P_SELECTION_INDICATOR) // No current target
 					{
-						P_TARGETING_MODULE->set_target(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_identity(), false);
+						P_TARGETING_MODULE->set_target(P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_identity(), false);
 						P_ENGINE_CLIENT_ANARCHY->n3_msg_use_item(inv_slot_identity, false);
 						P_TARGETING_MODULE->remove_target(P_SELECTION_INDICATOR->identity);
 						return 1;
 					}
-					if(P_SELECTION_INDICATOR->identity == P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_identity()) // Current target is desired target
+					if(P_SELECTION_INDICATOR->identity == P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_identity()) // Current target is desired target
 					{
 						P_ENGINE_CLIENT_ANARCHY->n3_msg_use_item(inv_slot_identity, false);
 						return 1;
 					}
 					// Current target is NOT the desired target
 					P_TARGETING_MODULE->remove_target(P_SELECTION_INDICATOR->identity);
-					P_TARGETING_MODULE->set_target(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_identity(), false);
+					P_TARGETING_MODULE->set_target(P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_identity(), false);
 					P_ENGINE_CLIENT_ANARCHY->n3_msg_use_item(inv_slot_identity, false);
 					P_TARGETING_MODULE->set_target(*P_LAST_TARGET, false);
 					return 1;
@@ -999,7 +1003,7 @@ namespace isxao
 					for (auto it = v.begin(); it != v.end(); ++it)  // NOLINT(modernize-loop-convert)
 					{
 						char name[MAX_VARSTRING];
-						strcpy_s(name, MAX_VARSTRING, (*it)->get_name());
+						strcpy_s(name, MAX_VARSTRING, (*it)->to_dynel()->get_name());
 						_strlwr_s(name);
 						if (strstr(name, search_name))
 						{
@@ -1079,9 +1083,9 @@ namespace isxao
 			{  
 				for (auto it = v.begin(); it != v.end(); ++it)	// NOLINT(modernize-loop-convert)
 				{
-					if ((*it)->is_player() && !is_client_id((*it)->get_identity().id))
+					if ((*it)->to_dynel()->is_player() && !is_client_id((*it)->to_dynel()->get_identity().id))
 					{
-						P_TARGETING_MODULE->set_target((*it)->get_identity(), false);
+						P_TARGETING_MODULE->set_target((*it)->to_dynel()->get_identity(), false);
 						return 1;
 					}
 				}
@@ -1090,9 +1094,9 @@ namespace isxao
 			{
 				for (auto it = v.begin(); it != v.end(); ++it)	// NOLINT(modernize-loop-convert)
 				{
-					if ((*it)->is_npc() && !(*it)->is_pet())
+					if ((*it)->is_npc() && !(*it)->to_dynel()->is_pet())
 					{
-						P_TARGETING_MODULE->set_target((*it)->get_identity(), false);
+						P_TARGETING_MODULE->set_target((*it)->to_dynel()->get_identity(), false);
 						return 1;
 					}
 				}
@@ -1101,9 +1105,9 @@ namespace isxao
 			{
 				for (auto it = v.begin(); it != v.end(); ++it)	// NOLINT(modernize-loop-convert)
 				{
-					if ((*it)->is_pet())
+					if ((*it)->to_dynel()->is_pet())
 					{
-						P_TARGETING_MODULE->set_target((*it)->get_identity(), false);
+						P_TARGETING_MODULE->set_target((*it)->to_dynel()->get_identity(), false);
 						return 1;
 					}
 				}
@@ -1111,14 +1115,20 @@ namespace isxao
 			for (auto it = v.begin(); it != v.end(); ++it) // Assume it is a name	// NOLINT(modernize-loop-convert)
 			{
 				char name[MAX_VARSTRING];
-				strcpy_s(name, MAX_VARSTRING, (*it)->get_name());
+				strcpy_s(name, MAX_VARSTRING, (*it)->to_dynel()->get_name());
 				_strlwr_s(name);
 				if (strstr(name, arg))
 				{
-					P_TARGETING_MODULE->set_target((*it)->get_identity(), false);
+					P_TARGETING_MODULE->set_target((*it)->to_dynel()->get_identity(), false);
 					return 1;
 				}
 			}
+			return 0;
+		}
+
+		DWORD MoveTo(int argc, char* argv[])
+		{
+			isxao::move::handle_our_cmd(move::command_move_to, 0, argc, argv);
 			return 0;
 		}
 	}

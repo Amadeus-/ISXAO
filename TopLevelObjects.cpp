@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "character.h"
 #include "dynel.h"
 #include "engine_client_anarchy.h"
 #include "playfield_anarchy.h"
@@ -134,14 +135,14 @@ bool __cdecl TLO_ACTORSEARCH(int argc, char *argv[], LSTYPEVAR&Dest)
 			}
 			for (DWORD N = 0; N < actor_count; N++)
 			{
-				if (v[N]->get_distance_to_client() > search_actor.f_radius && !search_actor.is_known_location)
+				if (v[N]->to_dynel()->get_distance_to_client() > search_actor.f_radius && !search_actor.is_known_location)
 					return false;
 				if (isxao::ActorMatchesSearch(&search_actor, P_ENGINE_CLIENT_ANARCHY->get_client_char(), v[N]))
 				{
 					if (--nth == 0)
 					{
 						Dest.Ptr = v[N];
-						Dest.Type = isxao::get_real_type(v[N]);
+						Dest.Type = isxao::get_real_type(v[N]->to_dynel());
 						return true;
 					}
 				}

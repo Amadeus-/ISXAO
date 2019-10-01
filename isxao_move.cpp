@@ -1,4 +1,6 @@
 #include "isxao_main.h"
+#include "dynel.h"
+#include "character.h"
 #include "engine_client_anarchy.h"
 #include "flow_control.h"
 
@@ -9,6 +11,10 @@ namespace isxao
 #pragma region globals
 
 	bool g_stick_on = false;
+	class movement* p_movement = nullptr;
+	class settings* p_move_settings = nullptr;
+	class active* p_move_active = nullptr;
+	class move_character* p_move_character = nullptr;
 
 #pragma endregion
 
@@ -43,11 +49,7 @@ namespace isxao
 	DWORD* p_strafe_left = nullptr;
 	int strafe_right = 0;
 	DWORD* p_strafe_right = nullptr;
-
-	class settings* p_move_settings = nullptr;
-	class active* p_move_active = nullptr;
-	class character* p_character = nullptr;
-	class movement* p_movement = nullptr;
+	
 	class stick_command* p_stick_command = nullptr;
 	class move_to_command* p_move_to_command = nullptr;
 	class circle_command* p_circle_command = nullptr;
@@ -152,12 +154,12 @@ namespace isxao
 
 #pragma region move_character
 
-	bool character::in_combat()
+	bool move_character::in_combat()
 	{
 		return ao::g_game_state == GAMESTATE_IN_GAME && P_ENGINE_CLIENT_ANARCHY->get_client_char()->is_fighting();
 	}
 
-	bool character::is_me(ao::dynel* p_dynel)
+	bool move_character::is_me(ao::dynel* p_dynel)
 	{
 		return is_client_id(p_dynel->get_identity().id);
 	}
@@ -365,10 +367,10 @@ namespace isxao
 
 	void circle_command::at_me()
 	{
-		const auto p = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_position();
-		const auto h = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_rotation().get_raw_heading();
-		const auto z = float(p.z + this->radius * cos(h));
-		const auto x = float(p.x + this->radius * sin(h));
+		const auto p = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_position();
+		const auto h = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_rotation().get_raw_heading();
+		const auto z = float(p.z + this->radius * cosf(h));
+		const auto x = float(p.x + this->radius * sinf(h));
 		this->location.x = x;
 		this->location.z = z;
 		this->on = true;
@@ -440,7 +442,7 @@ namespace isxao
 
 	bool move_to_command::did_aggro() const
 	{
-		if (p_camp_command->on && this->on && p_character->in_combat())
+		if (p_camp_command->on && this->on && p_move_character->in_combat())
 		{
 			p_move_active->move_to_broke = true;
 			end_previous_cmd(true);
@@ -1086,7 +1088,18 @@ namespace isxao
 
 	void active::aggro_tlo()
 	{
-		// TODO: Resolve this
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
+			return;
+		if (P_SELECTION_INDICATOR)
+		{
+			auto const p_target = ao::dynel::get_dynel(P_SELECTION_INDICATOR->identity);
+			if (fabs(p_movement->ang_dist(p_target->get_heading(), P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_heading())) > 190.0f)
+			{
+				this->aggro = true;
+				return;
+			}
+		}
+		this->aggro = false;
 	}
 
 	bool active::broken() const
@@ -1148,7 +1161,7 @@ namespace isxao
 	{
 		if (this->change_head != h_inactive)
 		{
-			this->turn_head(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading());
+			this->turn_head(P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_heading());
 		}
 	}
 
@@ -1207,12 +1220,12 @@ namespace isxao
 		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return false;
 		ao::vector3_t loc(x, 0.0f, z);
-		const auto head_diff = fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading() - heading);
+		const auto head_diff = fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_heading() - heading);
 		if (head_diff > p_move_settings->allow_move)
 		{
 			return false;
 		}
-		if ((head_diff / 2.0f) > fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_distance_to(loc)))
+		if ((head_diff / 2.0f) > fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_distance_to(loc)))
 		{
 			return false;
 		}
@@ -1338,20 +1351,20 @@ namespace isxao
 	{
 		if (ao::g_game_state != GAMESTATE_IN_GAME)
 		{
-			if (fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading() - new_heading) < p_move_settings->turn_rate)
+			if (fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_heading() - new_heading) < p_move_settings->turn_rate)
 			{
 				movement::fast_turn(new_heading);
 			}
 			else
 			{
-				const auto comp_head = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading() + heading_half;
+				const auto comp_head = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_heading() + heading_half;
 				if (new_heading < comp_head)
 				{
-					movement::fast_turn(movement::sane_head(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading() + p_move_settings->turn_rate));
+					movement::fast_turn(movement::sane_head(P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_heading() + p_move_settings->turn_rate));
 				}
 				else
 				{
-					movement::fast_turn(movement::sane_head(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading() - p_move_settings->turn_rate));
+					movement::fast_turn(movement::sane_head(P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_heading() - p_move_settings->turn_rate));
 				}
 			}
 		}
@@ -1361,16 +1374,16 @@ namespace isxao
 	{
 		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return;
-		if (fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading()) - new_heading < 14.0f)
+		if (fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_heading()) - new_heading < 14.0f)
 		{
 			movement::fast_turn(new_heading);
 			this->change_head = h_inactive;
 		}
 		else
 		{
-			auto const comp_head = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading() + heading_half;
+			auto const comp_head = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_heading() + heading_half;
 
-			if (new_heading < P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_heading())
+			if (new_heading < P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_heading())
 				new_heading += heading_max;
 			if (new_heading < comp_head)
 			{
@@ -1548,8 +1561,8 @@ namespace isxao
 			write_line("[try_to_jump] - Try to jump as part of stuck logic getting over obstacles.", V_SILENCE);
 			write_line("[turn_half] - Reset heading and try the other way if halfway from destination in stuck logic.", V_SILENCE);
 			write_line("[no_hott_front] - Awareness for stick front to not spin if loose aggro.", V_SILENCE);
-			write_line("[save_by_char] - Save character-specific settings to [CharName] section of configuration file.", V_SILENCE);
-			write_line("[break_on_summon] - Halt plugin if character summoned beyond certain distance in a single pulse.", V_SILENCE);
+			write_line("[save_by_char] - Save move_character-specific settings to [CharName] section of configuration file.", V_SILENCE);
+			write_line("[break_on_summon] - Halt plugin if move_character summoned beyond certain distance in a single pulse.", V_SILENCE);
 			write_line("[use_walk] - Walk when closing in on move_to / camp return locations for precision.", V_SILENCE);
 			write_line("[always_true_head] - Use legit heading adjustments with right/left keys.", V_SILENCE);
 			write_line("The following settings use a numerical value:", V_SILENCE);
@@ -1580,132 +1593,266 @@ namespace isxao
 	{
 		if (ao::g_game_state != GAMESTATE_IN_GAME)
 			return;
-		char current_arg[MAX_VARSTRING] = { 0 };
+		printf("p_movement is at 0x%.8X", p_movement);
+		printf("p_move_settings is at 0x%.8X", p_move_settings);
+		printf("p_move_character is at 0x%.8X", p_move_character);
+		printf("p_move_active is at 0x%.8X", p_move_active);
+		printf("p_camp_settings is at 0x%.8X", p_camp_settings);
+		printf("p_stick_settings is at 0x%.8X", p_stick_settings);
+		printf("p_move_to_settings is at 0x%.8X", p_move_to_settings);
+		printf("p_circle_settings is at 0x%.8X", p_circle_settings);
+		printf("p_stick_command is at 0x%.8X", p_stick_command);
+		printf("p_move_to_command is at 0x%.8X", p_move_to_command);
+		printf("p_circle_command is at 0x%.8X", p_circle_command);
+		printf("p_camp_handler is at 0x%.8X", p_camp_handler);
+		printf("p_pause_handler is at 0x%.8X", p_pause_handler);
+		printf("p_stuck_logic is at 0x%.8X", p_stuck_logic);
+		printf("p_summon_loc is at 0x%.8X", p_summon_loc);
+
+		/*char current_arg[MAX_VARSTRING] = { 0 };
 		char temp_id[MAX_VARSTRING] = { 0 };
 		DWORD arg_num = begin_inclusive;
-		auto temp_z = 0.0f;
+		auto temp_z = 0.0f;*/
 
-		ao::actor* p_target_used = nullptr;
-		ao::actor* p_camp_player = nullptr;
-		ao::actor* p_target;
-		if (P_SELECTION_INDICATOR)
-		{
-			p_target = static_cast<ao::actor*>(ao::dynel::get_dynel(P_SELECTION_INDICATOR->identity));
-		}
-		else
-			p_target = nullptr;
-		auto p_character = P_ENGINE_CLIENT_ANARCHY->get_client_char();
+		//ao::actor* p_target_used = nullptr;
+		//ao::actor* p_camp_player = nullptr;
+		//ao::actor* p_target;
+		//if (P_SELECTION_INDICATOR)
+		//{
+		//	p_target = reinterpret_cast<ao::actor*>(ao::dynel::get_dynel(P_SELECTION_INDICATOR->identity));
+		//}
+		//else
+		//	p_target = nullptr;
+		//auto p_character = P_ENGINE_CLIENT_ANARCHY->get_client_char();
 
-		if ((rand() & 100) > 50)
-			p_stuck_logic->turn_size *= -1.0f;
+		//if ((rand() & 100) > 50)
+		//	p_stuck_logic->turn_size *= -1.0f;
 
-		if (cmd_used == command_move_to)
-		{
-			p_move_active->stopped_move_to = false;
-			p_move_active->move_to_broke = false;
-		}
+		//if (cmd_used == command_move_to)
+		//{
+		//	p_move_active->stopped_move_to = false;
+		//	p_move_active->move_to_broke = false;
+		//}
 
-		if (cmd_used == command_stick)
-		{
-			p_move_active->stick_broke = false;
-		}
+		//if (cmd_used == command_stick)
+		//{
+		//	p_move_active->stick_broke = false;
+		//}
 
-		get_arg(current_arg, argc, argv, arg_num);
-		arg_num++;
-		if (!*current_arg)
-		{
-			if (p_move_active->broke_gm || p_move_active->broke_summon)
-			{
-				sprintf_s(message, "Command failed due to %s triggering", p_move_active->broke_gm ? "break_on_gm" : "break_on_summon");
-				write_line(message, V_SILENCE);
-				return;
-			}
+		// get_arg(current_arg, argc, argv, arg_num);
+		// arg_num++;
+		// printf("%s", current_arg);
+		//if (!*current_arg)
+		//{
+		//	if (p_move_active->broke_gm || p_move_active->broke_summon)
+		//	{
+		//		sprintf_s(message, "Command failed due to %s triggering", p_move_active->broke_gm ? "break_on_gm" : "break_on_summon");
+		//		write_line(message, V_SILENCE);
+		//		return;
+		//	}
 
-			if (p_move_active->rooted)
-			{
-				sprintf_s(message, "Command failed due to /root_me active.");
-				write_line(message, V_SILENCE);
-				return;
-			}
+		//	if (p_move_active->rooted)
+		//	{
+		//		sprintf_s(message, "Command failed due to /root_me active.");
+		//		write_line(message, V_SILENCE);
+		//		return;
+		//	}
 
-			if (p_pause_handler->paused_command && p_move_active->lock_pause)
-			{
-				sprintf_s(message, "Command failed due to plugin paused with lock_pause.");
-				write_line(message, V_PAUSED);
-			}
+		//	if (p_pause_handler->paused_command && p_move_active->lock_pause)
+		//	{
+		//		sprintf_s(message, "Command failed due to plugin paused with lock_pause.");
+		//		write_line(message, V_PAUSED);
+		//	}
 
-			p_pause_handler->paused_move = false;
+		//	p_pause_handler->paused_move = false;
 
-			switch (cmd_used)
-			{
-			case command_make_camp:
-				if (!p_camp_command->on)
-				{
-					p_pause_handler->time_stop();
-					p_camp_handler->activate(p_character->get_position());
-					sprintf_s(message, "MakeCamp activated. X(%.2f) Z(%.2f) Radius(%.2f) Leash(%s) LeashLen(%.2f) Min(%d) Max(%d)", 
-						p_camp_command->location.x, p_camp_command->location.z, p_camp_command->radius, p_camp_command->leash ? "on" : "off", p_camp_command->length, p_camp_handler->min, p_camp_handler->max);
-					write_line(message, V_MAKE_CAMP_V);
-					break;
-				}
-				p_camp_handler->reset_camp(true);
-				break;
-			case command_stick:
-				end_previous_cmd(true);
-				if (p_target)
-				{
-					if(is_client_id(p_target->get_identity().id))
-					{
-						spew_move_error(error_stick_self);
-					}
-					p_stick_command->turn_on();
-					p_movement->do_stand();
-					sprintf_s(message, "You are now sticking to %s.", p_target->get_name());
-					write_line(message, V_STICK_V);
-					break;
-				}
-				spew_move_error(error_stick_none);
-				break;
-			case command_move_to:
-			case command_circle:
-			default:
-				end_previous_cmd(true);
-				sprintf_s(message, "[ERROR] /move_to or /circle command used with no parameter.");
-				write_line(message, V_ERRORS);
-				break;
-			}
-			return;
-		}
+		//	switch (cmd_used)
+		//	{
+		//	case command_make_camp:
+		//		if (!p_camp_command->on)
+		//		{
+		//			p_pause_handler->time_stop();
+		//			p_camp_handler->activate(p_character->to_dynel()->get_position());
+		//			sprintf_s(message, "MakeCamp activated. X(%.2f) Z(%.2f) Radius(%.2f) Leash(%s) LeashLen(%.2f) Min(%d) Max(%d)", 
+		//				p_camp_command->location.x, p_camp_command->location.z, p_camp_command->radius, p_camp_command->leash ? "on" : "off", p_camp_command->length, p_camp_handler->min, p_camp_handler->max);
+		//			write_line(message, V_MAKE_CAMP_V);
+		//			break;
+		//		}
+		//		p_camp_handler->reset_camp(true);
+		//		break;
+		//	case command_stick:
+		//		end_previous_cmd(true);
+		//		if (p_target)
+		//		{
+		//			if(is_client_id(p_target->to_dynel()->get_identity().id))
+		//			{
+		//				spew_move_error(error_stick_self);
+		//			}
+		//			p_stick_command->turn_on();
+		//			p_movement->do_stand();
+		//			sprintf_s(message, "You are now sticking to %s.", p_target->to_dynel()->get_name());
+		//			write_line(message, V_STICK_V);
+		//			break;
+		//		}
+		//		spew_move_error(error_stick_none);
+		//		break;
+		//	case command_move_to:
+		//	case command_circle:
+		//	default:
+		//		end_previous_cmd(true);
+		//		sprintf_s(message, "[ERROR] /move_to or /circle command used with no parameter.");
+		//		write_line(message, V_ERRORS);
+		//		break;
+		//	}
+		//	return;
+		//}
+
+		//if (*current_arg)			
+		//{
+		//	printf("%s", current_arg);
+		//	if (!_strnicmp(current_arg, "spew_data", 10))
+		//	{
+		//		printf("p_movement is at 0x%.8X", p_movement);
+		//	}
+		//	if (!_strnicmp(current_arg, "help", 5))
+			//{
+			//	auto caller = cmd_used;
+			//	get_arg(current_arg, argc, argv, arg_num);
+			//	if (!_strnicmp(current_arg, "settings", 9))
+			//	{
+			//		caller = help_settings;
+			//	}
+			//	output_help(caller);
+			//	return;
+			//}
+			//else if (!_strnicmp(current_arg, "debug", 6))
+			//{
+			//	// TODO: DebugToINI
+			//	sprintf_s(message, "Debug file created.");
+			//	write_line(message, V_SAVED);
+			//	return;
+			//}
+			//else if (!_strnicmp(current_arg, "pause", 6))
+			//{
+			//	bool display_lock = false;
+			//	get_arg(current_arg, argc, argv, arg_num);
+			//	if (!_strnicmp(current_arg, "lock", 5))
+			//	{
+			//		p_move_active->lock_pause = true;
+			//		display_lock = true;
+			//	}
+			//	if (!p_pause_handler->paused_command)
+			//	{
+			//		p_pause_handler->paused_command = true;
+			//		p_pause_handler->time_stop();
+			//		p_movement->stop_heading();
+			//		p_movement->stop_move(apply_to_all);
+			//		sprintf_s(message, "PAUSED %s", p_move_active->lock_pause ? " LOCKED" : "");
+			//		write_line(message, V_PAUSED);
+			//		return;
+			//	}
+			//	if (!display_lock)
+			//	{
+			//		sprintf_s(message, "isxao::move was already paused.");
+			//		write_line(message, V_ERRORS);
+			//	}
+			//	else
+			//	{
+			//		sprintf_s(message, "Pause LOCKED");
+			//		write_line(message, V_PAUSED);
+			//	}
+			//	return;
+			//}
+		//}
 	}
 
 	void end_previous_cmd(bool stop_move, byte cmd_used, bool preserve_self)
 	{
-		p_pause_handler->paused_move = false;
-		p_pause_handler->paused_command = false;
-		p_pause_handler->time_stop();
-		p_pause_handler->reset();
+		isxao::move::p_pause_handler->paused_move = false;
+		isxao::move::p_pause_handler->paused_command = false;
+		isxao::move::p_pause_handler->time_stop();
+		isxao::move::p_pause_handler->reset();
 
-		if (cmd_used != command_circle || !preserve_self)
+		if (cmd_used != isxao::move::command_circle || !preserve_self)
 		{
-			p_move_active->new_circle();
+			isxao::move::p_move_active->new_circle();
 		}
-		if (cmd_used != command_move_to || !preserve_self)
+		if (cmd_used != isxao::move::command_move_to || !preserve_self)
 		{
-			p_move_active->new_move_to();
+			isxao::move::p_move_active->new_move_to();
 		}
-		if (cmd_used != command_stick || !preserve_self)
+		if (cmd_used != isxao::move::command_stick || !preserve_self)
 		{
-			p_move_active->new_stick();
+			isxao::move::p_move_active->new_stick();
 		}
 
-		p_move_active->defaults();
-		p_movement->set_walk(false);
+		isxao::move::p_move_active->defaults();
+		isxao::move::p_movement->set_walk(false);
 		// TODO: SetupEvents
 		if (stop_move)
 		{
-			p_movement->stop_heading();
-			p_movement->stop_move(apply_to_all);
+			isxao::move::p_movement->stop_heading();
+			isxao::move::p_movement->stop_move(isxao::move::apply_to_all);
 		}
+	}
+
+	float moving_average(const float new_value, const int num_entries)
+	{
+		static float ring[isxao::move::max_ring_size] = { 0.0f };
+		static auto old_stuck = 0;
+		static auto ringer = 0;
+		static auto ring_full = 0;
+		auto i = 0;
+		auto average = 0.0f;
+
+		if (num_entries > isxao::move::max_ring_size || num_entries < 2)
+			return new_value;
+
+		if (old_stuck != num_entries)
+		{
+			for (i = 0; i < num_entries; i++)
+				ring[i] = new_value;
+
+			ringer = 0;
+			old_stuck = num_entries;
+			return new_value;
+		}
+		else
+		{
+			ring[i] = new_value;
+			ringer++;
+			if (ringer >= num_entries)
+			{
+				ringer = 0;
+				ring_full = 1;
+			}
+
+			for (i = 0; i < num_entries; i++)
+				average += ring[i];
+		}
+		return average / float(num_entries);
+	}
+
+	void initialize()
+	{
+		srand(static_cast<unsigned int>(time(nullptr)));
+
+		isxao::move::p_move_character = new isxao::move::move_character();
+		isxao::move::p_move_settings = new isxao::move::settings();
+		isxao::move::p_movement = new isxao::move::movement();
+		isxao::move::p_move_active = new isxao::move::active();
+
+		
+	}
+
+	void shutdown()
+	{
+		
+
+		delete isxao::move::p_move_character;
+		delete isxao::move::p_movement;
+		delete isxao::move::p_move_active;
+		delete isxao::move::p_move_settings;
 	}
 
 #pragma endregion

@@ -1,4 +1,5 @@
 #include "isxao_main.h"
+#include "character.h"
 #include "engine_client_anarchy.h"
 
 #pragma region Testing and Debugging
@@ -332,6 +333,13 @@ int CMD_TARGET(int argc, char *argv[])
 {
 	if (ao::g_game_state == GAMESTATE_IN_GAME)
 		return Target(argc, argv);
+	return 0;
+}
+
+int CMD_MOVE_TO(int argc, char *argv[])
+{
+	if (ao::g_game_state == GAMESTATE_IN_GAME)
+		return MoveTo(argc, argv);
 	return 0;
 }
 

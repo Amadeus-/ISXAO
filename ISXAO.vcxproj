@@ -172,7 +172,7 @@
     <ClCompile Include="nano_template_type.cpp" />
     <ClCompile Include="new_inventory.cpp" />
     <ClCompile Include="npc_holder.cpp" />
-    <ClCompile Include="parser.cpp" />
+    <ClCompile Include="isxao_message_parser.cpp" />
     <ClCompile Include="perk_holder.cpp" />
     <ClCompile Include="pet.cpp" />
     <ClCompile Include="pet_type.cpp" />
@@ -264,7 +264,7 @@
     <ClInclude Include="nano_template_type.h" />
     <ClInclude Include="new_inventory.h" />
     <ClInclude Include="npc_holder.h" />
-    <ClInclude Include="parser.h" />
+    <ClInclude Include="isxao_message_parser.h" />
     <ClInclude Include="graph_path_finder.h" />
     <ClInclude Include="perk_holder.h" />
     <ClInclude Include="pet.h" />

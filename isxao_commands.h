@@ -13,6 +13,7 @@ namespace isxao
 		AOLIB_API DWORD DoAction(int argc, char *argv[]);
 		AOLIB_API DWORD Face(int argc, char *argv[]);
 		AOLIB_API DWORD Target(int argc, char *argv[]);
+		AOLIB_API DWORD MoveTo(int argc, char *argv[]);
 	}
 }
 using namespace isxao::commands;
