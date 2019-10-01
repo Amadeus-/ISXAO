@@ -420,7 +420,7 @@ namespace isxao
 		{
 /*			FILE * pFILE;
 			char buffer[MAX_VARSTRING];
-			sprintf_s(buffer, "Group Action:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n", m->unknown_0x4, m->Unknown0x8, m->String1.c_str(), m->unknown_0x28, m->unknown_0x2C, m->unknown_0x30, m->Unknown0x34, m->Unknown0x38, m->Unknown0x3C, m->unknown_0x40, m->unknown_0x44);
+			sprintf_s(buffer, "Group Action:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n\t%d\n", m->unknown_0x4, m->Unknown0x8, m->String1.c_str(), m->cell_size_z, m->unknown_0x2C, m->unknown_0x30, m->Unknown0x34, m->Unknown0x38, m->Unknown0x3C, m->unknown_0x40, m->unknown_0x44);
 			fopen_s(&pFILE, "messages.txt", "a");
 			fputs(buffer, pFILE);
 			fclose(pFILE);	*/		
@@ -448,7 +448,7 @@ namespace isxao
 		{
 			//FILE * pFILE;
 			//char buffer[MAX_VARSTRING];
-			//sprintf_s(buffer, "PrivateGroupAction Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%s\n", m->unknown_0x04, m->unknown_0x08, m->String1.c_str(), m->unknown_0x28, m->unknown_0x2C, m->String2.c_str());
+			//sprintf_s(buffer, "PrivateGroupAction Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%d\n\t%s\n", m->unknown_0x04, m->unknown_0x08, m->String1.c_str(), m->cell_size_z, m->unknown_0x2C, m->String2.c_str());
 			//fopen_s(&pFILE, "messages.txt", "a");
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);
@@ -483,7 +483,7 @@ namespace isxao
 		{
 			//FILE * pFILE;
 			//char buffer[MAX_VARSTRING];
-			//sprintf_s(buffer, "System Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%s\n", m->unknown_0x4, m->Unknown0x8, m->String1.c_str(), m->unknown_0x28, m->String2.c_str());
+			//sprintf_s(buffer, "System Message:\n\t%d\n\t%d\n\t%s\n\t%d\n\t%s\n", m->unknown_0x4, m->Unknown0x8, m->String1.c_str(), m->cell_size_z, m->String2.c_str());
 			//fopen_s(&pFILE, "messages.txt", "a");
 			//fputs(buffer, pFILE);
 			//fclose(pFILE);

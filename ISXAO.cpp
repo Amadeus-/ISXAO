@@ -12,6 +12,7 @@
 #define EXTENSION_VERSION "20160602"
 
 #include "isxao_main.h"
+#include "isxao_move.h"
 #include <sstream>
 #pragma comment(lib,"isxdk.lib")
 // The mandatory pre-setup function.  Our name is "ISXAO", and the class is ISXAO.

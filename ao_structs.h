@@ -3177,5 +3177,56 @@ namespace ao
 
 #pragma endregion
 
+#pragma region KDTreeSurface
+
+	// Size = 0x14
+	typedef struct ao_kd_tree_surface
+	{
+		void* p_v_table;					// 0x00
+		unsigned char unknown_0x04[0x4];	// 0x04
+		unsigned char unknown_0x08[0x4];	// 0x08
+		unsigned char unknown_0x0C[0x4];	// 0x0C
+		unsigned char unknown_0x10[0x4];	// 0x10
+	} kd_tree_surface_t, *p_kd_tree_surface_t;
+	
+#pragma endregion
+
+#pragma region n3SurfaceResource
+
+	typedef struct ao_n3_surface_resource
+	{
+		db_object_t db_object;						// 0x00
+		kd_tree_surface_t kd_tree_surface;			// 0x18
+		p_kd_tree_surface_t p_invisible_surface;	// 0x2C
+		p_kd_tree_surface_t p_teleportal_surface;	// 0x30
+		void* p_portal_t_teleport_area;				// 0x34
+		void* p_teleport_destination_playfield;		// 0x38
+		unsigned long teleport_localizer_type;		// 0x3C
+		void* p_teleport_localizer_instance;		// 0x40
+	} n3_surface_resource_t, *p_n3_surface_resource_t;
+
+#pragma region
+
+#pragma region CellSurface_t
+
+	// Size = 0x30
+	typedef struct ao_cell_surface
+	{
+		void* p_v_table;
+		unsigned char unknown_0x04[0x4];	// 0x04
+		unsigned char unknown_0x08[0x4];	// 0x08
+		unsigned char unknown_0x0C[0x4];	// 0x0C
+		unsigned char unknown_0x10[0x4];	// 0x10
+		unsigned long width_of_cell_array;			// 0x14
+		unsigned long unknown_0x18;			// 0x18
+		float unknown_0x1C;					// 0x1C
+		float unknown_0x20;					// 0x20
+		float cell_size_x;					// 0x24
+		float cell_size_z;					// 0x28
+		unsigned char surface_ownership;	// 0x2C
+		unsigned char unknown_0x2D[0x3];	// 0x2D
+	} cell_surface_t, *p_cell_surface_t;
+
+#pragma endregion
 
 }

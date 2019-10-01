@@ -3,6 +3,7 @@
 #include "character.h"
 #include "engine_client_anarchy.h"
 #include "flow_control.h"
+#include "isxao_move.h"
 
 namespace isxao
 {
@@ -170,7 +171,7 @@ namespace isxao
 
 	stuck_logic::stuck_logic()
 	{
-		this->is_on = true;
+		this->on = true;
 		this->try_jump = false;
 		this->turn_half = true;
 		this->turn_size = 10.0f;
@@ -1853,6 +1854,553 @@ namespace isxao
 		delete isxao::move::p_movement;
 		delete isxao::move::p_move_active;
 		delete isxao::move::p_move_settings;
+	}
+
+	void process(unsigned char cmd_used)
+	{
+		ao::dynel* p_active_corpse = nullptr;
+		auto p_player = P_ENGINE_CLIENT_ANARCHY->get_client_char();
+		auto p_camp_player = ao::dynel::get_dynel(p_camp_command->pc_identity);
+		auto p_target = p_stick_command->hold ? ao::dynel::get_dynel(p_stick_command->hold_id) : (P_SELECTION_INDICATOR ? ao::dynel::get_dynel(P_SELECTION_INDICATOR->identity) : nullptr);
+
+		if (cmd_used == command_stick)
+		{
+			if (p_stick_command->on && (!p_target || (p_stick_command->hold && p_stick_command->hold_id.type != p_target->get_identity().type)))
+			{
+				end_previous_cmd(true);
+				sprintf_s(message, "You are no longer sticking to anything.");
+				write_line(message, V_STICK_V);
+				return;
+			}
+		}
+
+		if (p_camp_command->pc && (!p_camp_player || p_camp_command->pc_identity.type != p_camp_player->get_identity().type))
+		{
+			sprintf_s(message, "make_camp player ended due to player leaving/death.");
+			write_line(message, V_MAKE_CAMP_V);
+			p_camp_handler->reset_player(false);
+			return;
+		}
+
+		if (!p_player)
+		{
+			sprintf_s(message, "Null pointer, turning off current command.");
+			write_line(message, V_SILENCE);
+			end_previous_cmd(false);
+			return;
+		}
+
+		auto new_heading = 0.0f;
+		auto move_to_oor = true;
+		static auto jumping = false;
+
+		auto speed_multiplier = 1.0f;
+		auto swimming = p_player->is_swimming();
+		auto rooted = p_player->is_rooted();
+		auto flying = p_player->is_flying();
+		auto in_jump = p_player->is_jumping();
+
+		if (!in_jump)
+			jumping = false;
+
+		if (swimming && p_move_settings->auto_uw)
+		{
+			p_stick_command->uw = true;
+			p_move_to_command->uw = true;
+		}
+
+		auto use_stuck = !rooted;
+
+		if (p_move_settings->break_summon && cmd_used != command_make_camp)
+		{
+			if (p_summon_loc->cur_distance == 0.0f && p_summon_loc->location.z == 0.0f && p_summon_loc->location.x == 0.0f)
+			{
+				p_summon_loc->location.z = p_player->to_dynel()->get_position().z;
+				p_summon_loc->location.x = p_player->to_dynel()->get_position().x;
+			}
+
+			p_summon_loc->cur_distance = fabs(ao::vector3_t::distance_xz(p_summon_loc->location, p_player->to_dynel()->get_position()));
+			p_summon_loc->location.copy(p_player->to_dynel()->get_position());
+
+			if (p_summon_loc->cur_distance > p_move_settings->dist_summon)
+			{
+				sprintf_s(message, "[WARNING] Command ended from character summoned %.2f distance in a pulse.", p_summon_loc->cur_distance);
+				end_previous_cmd(true);
+				write_line(message, V_BREAK_ON_SUMMON);
+				sprintf_s(message, "[WARNING] Verify you are not being monitored and type /stick i_am_safe to allow command usage.");
+				write_line(message, V_BREAK_ON_SUMMON);
+				p_move_active->broke_summon = true;
+				p_pause_handler->paused_move = true;
+				return;
+			}
+		}
+
+		if (p_move_settings->auto_pause && cmd_used != command_make_camp)
+		{
+			static auto ap_output = false;
+			if (p_player->is_casting() || (!p_player->is_standing() && !p_player->is_crawling()) || rooted || (cmd_used == command_stick && p_move_character->is_me(p_target)))
+			{
+				if ((verb_level & V_AUTO_PAUSE) == V_AUTO_PAUSE && !ap_output)
+				{
+					sprintf_s(message, "Autopause halting movement...");
+					write_line(message, V_AUTO_PAUSE);
+					ap_output = true;
+					p_movement->stop_heading();
+				}
+				p_stick_command->time_stop();
+				p_camp_handler->time_stop();
+				p_movement->stop_move(apply_to_all);
+				return;
+			}
+			ap_output = false;
+		}
+
+		if (cmd_used == command_stick)
+		{
+			if (!p_stick_command->set_dist)
+			{
+				p_stick_command->dist = 15.0f * p_stick_command->dist_mod_p + p_stick_command->dist_mod;
+				p_stick_command->set_dist = true;
+			}
+
+			p_stick_command->dif_distance = p_stick_command->cur_distance;
+			p_stick_command->cur_distance = fabs(ao::vector3_t::distance_xz(p_target->get_position(), p_player->to_dynel()->get_position()));
+
+			static auto self_output = false;
+
+			if (p_stick_command->last_target_id != p_target->get_identity())
+			{
+				if (p_stick_command->last_target_id.get_combined_identity() && p_stick_command->break_target)
+				{
+					end_previous_cmd(true);
+					sprintf_s(message, "Stick broken from target change.");
+					write_line(message, V_BREAK_ON_WARP);
+					return;
+				}
+				use_stuck = false;
+				p_stick_command->dif_distance = 0.0f;
+				self_output = false;
+			}
+			p_stick_command->last_target_id = p_target->get_identity();
+
+			if (p_move_character->is_me(p_target))
+			{
+				if (!self_output)
+				{
+					p_movement->stop_move(apply_to_all);
+					sprintf_s(message, "Movement pausing due to self target...");
+					write_line(message, V_AUTO_PAUSE);
+					self_output = true;
+				}
+				return;
+			}
+			self_output = false;
+
+			if ((p_stick_command->pause_warp || p_stick_command->break_warp) && p_stick_command->dif_distance != 0.0f)
+			{
+				static auto bw_output = false;
+				if (bw_output)
+				{
+					if (p_stick_command->cur_distance - p_stick_command->dist > p_stick_command->dist_break)
+						return;
+				}
+				else if (p_stick_command->cur_distance - p_stick_command->dif_distance - p_stick_command->dist > p_stick_command->dist_break)
+				{
+					if (p_stick_command->pause_warp)
+					{
+						if (!bw_output)
+						{
+							p_movement->stop_move(apply_to_all);
+							sprintf_s(message, "Stick pausing until target back in break_dist range...");
+							write_line(message, V_BREAK_ON_WARP);
+							bw_output = true;
+							p_stick_command->time_stop();
+							p_camp_handler->time_stop();
+						}
+						return;
+					}
+					else
+					{
+						end_previous_cmd(true);
+						sprintf_s(message, "Stick ended from target warping out of break_dist range.");
+						write_line(message, V_BREAK_ON_WARP);
+					}
+				}
+				bw_output = false;
+			}
+		}
+
+		if (p_camp_handler->do_alt && !p_camp_handler->returning)
+		{
+			p_camp_handler->time_stop();
+			if (p_camp_command->scatter)
+			{
+				camp_return(p_alt_camp->location.x, p_alt_camp->location.z, p_alt_camp->radius, &p_camp_handler->location.x, &p_camp_handler->location.z);
+			}
+			else
+			{
+				polar_spot(p_alt_camp->location.x, p_alt_camp->location.z, 0.0f, p_camp_command->bearing, p_camp_command->scat_dist, p_camp_command->scat_size, &p_camp_handler->location.x, &p_camp_handler->location.z);
+			}
+			p_move_to_command->on = true;
+			p_camp_handler->returning = true;
+			p_move_to_command->precise_x = false;
+			p_move_to_command->precise_z = false;
+			p_camp_handler->do_return = false;
+			p_camp_handler->is_auto = false;
+			return;
+		}
+
+		if (!p_camp_handler->returning && p_camp_command->on)
+		{
+			p_camp_handler->cur_distance = ao::vector3_t::distance_xz(p_player->to_dynel()->get_position(), p_camp_command->pc ? p_camp_player->get_position() : p_camp_command->location);
+			p_camp_handler->dif_distance = ao::vector3_t::distance_xz(p_stick_command->on ? p_target->get_position() : p_move_to_command->location, p_camp_command->pc ? p_camp_player->get_position() : p_camp_command->location);
+
+			if (p_camp_command->leash && (p_stick_command->on || p_move_to_command->on))
+			{
+				if (p_camp_handler->cur_distance < p_camp_handler->dif_distance && p_camp_handler->dif_distance > p_camp_command->length)
+				{
+					end_previous_cmd(true);
+					sprintf_s(message, "Outside of leash length, breaking from current command.");
+					write_line(message, V_MAKE_CAMP_V);
+					return;
+				}
+			}
+
+			if (!p_pause_handler->user_kb && !p_pause_handler->user_mouse && !p_stick_command->on && !p_move_to_command->on && !p_circle_command->on)
+			{
+				if(p_camp_handler->cur_distance > p_camp_command->radius + 2.0f || p_camp_handler->do_return)
+				{
+					auto do_return = true;
+					if (!p_camp_handler->do_return)
+					{
+						if (p_camp_command->no_aggro && p_move_character->in_combat())
+							do_return = false;
+						if (!p_camp_command->have_target && p_target)
+							do_return = false;
+						if (p_camp_command->not_looting && p_active_corpse)
+							do_return = false;
+					}
+
+					if (do_return)
+					{
+						const char result = p_camp_handler->time_status();
+						if (p_camp_handler->do_return || result == t_ready)
+						{
+							p_camp_handler->time_stop();
+							if(!p_camp_command->scatter)
+							{
+								camp_return(p_camp_command->pc ? p_camp_player->get_position().x : p_camp_command->location.x, 
+									p_camp_command->pc ? p_camp_player->get_position().z : p_camp_command->location.z, 
+									p_camp_command->radius, 
+									&p_camp_handler->location.x, 
+									&p_camp_handler->location.z);
+							}
+							else
+							{
+								polar_spot(p_camp_command->pc ? p_camp_player->get_position().x : p_camp_command->location.x,
+									p_camp_command->pc ? p_camp_player->get_position().z : p_camp_command->location.z,
+									0.0f,
+									p_camp_command->bearing, p_camp_command->scat_dist, p_camp_command->scat_size,
+									&p_camp_handler->location.x, &p_camp_handler->location.z);
+							}
+							p_move_to_command->on = true;
+							p_camp_handler->returning = true;
+							p_move_to_command->precise_x = false;
+							p_move_to_command->precise_z = false;
+							p_camp_handler->do_alt = false;
+							if (!p_camp_handler->do_return)
+								p_camp_handler->is_auto;
+						}
+						else if (result == t_inactive)
+						{
+							p_camp_handler->is_auto = false;
+							p_camp_handler->time_start();
+							return;
+						}
+					}
+				}
+			}
+
+			if (!p_pause_handler->user_kb && !p_pause_handler->user_mouse && p_camp_command->leash && (p_stick_command->on || p_circle_command->on || p_camp_command->redo_stick || p_camp_command->redo_circle))
+			{
+				loc head_back;
+				head_back.location.x = p_camp_command->pc ? p_camp_player->get_position().x : p_camp_command->location.x;
+				head_back.location.z = p_camp_command->pc ? p_camp_player->get_position().z : p_camp_command->location.z;
+
+				if (p_camp_handler->cur_distance > p_camp_command->length + 2.0f)
+				{
+					if (p_stick_command->on || p_circle_command->on)
+					{
+						if (p_stick_command->on)
+						{
+							end_previous_cmd(true, command_stick, true);
+							p_stick_command->on = false;
+							g_stick_on = false;
+							p_stick_command->behind_once = false;
+							p_stick_command->snap_roll = false;
+							p_camp_command->redo_stick = true;
+						}
+						else
+						{
+							end_previous_cmd(true, command_circle, true);
+							p_circle_command->on = false;
+							p_camp_command->redo_circle = true;
+						}
+					}
+					if (p_target && (p_camp_command->redo_stick || p_camp_command->redo_circle))
+					{
+						new_heading = p_movement->sane_head((atan2(head_back.location.z - p_player->to_dynel()->get_position().z, head_back.location.x - p_player->to_dynel()->get_position().x) * circle_half / float(M_PI)));
+						p_movement->try_move(go_forward, move_walk_off, new_heading, head_back.location.z, head_back.location.x);
+					}
+				}
+				else if (p_camp_command->redo_stick || p_camp_command->redo_circle)
+				{
+					end_previous_cmd(false, (p_camp_command->redo_stick ? command_stick : command_circle), true);
+					p_camp_command->redo_stick ? p_stick_command->turn_on() : p_circle_command->on = true;
+					p_camp_command->redo_stick = false;
+					p_camp_command->redo_circle = false;
+					return;
+				}
+			}
+		}
+
+		if (cmd_used == command_make_camp)
+			return;
+
+		if (cmd_used == command_circle)
+		{
+			float use_cir_zx[2] = { (p_player->to_dynel()->get_position().z - p_circle_command->location.z), (p_player->to_dynel()->get_position().x - p_circle_command->location.x) };
+			p_circle_command->cur_distance = sqrt(use_cir_zx[0] * use_cir_zx[0] + use_cir_zx[1] * use_cir_zx[1]);
+			if (p_circle_command->cur_distance < p_circle_command->radius * (2.0f / 3.0f))
+				use_stuck = false;
+		}
+
+		if (cmd_used == command_move_to)
+		{
+			auto precise_z_me = p_player->to_dynel()->get_position();
+			precise_z_me.x = 0.0f;
+			auto precise_x_me = p_player->to_dynel()->get_position();
+			precise_x_me.z = 0.0f;
+			auto precise_z_camp = p_move_to_command->location;
+			precise_z_camp.x = 0.0f;
+			auto precise_x_camp = p_move_to_command->location;
+			precise_x_camp.z = 0.0f;
+
+			if (p_move_to_command->precise_z)
+			{				
+				p_move_to_command->cur_distance = fabs(ao::vector3_t::distance_xz(precise_z_me, precise_z_camp));
+				p_move_to_command->dif_distance = p_move_to_command->dist_z;
+			}
+			else if (p_move_to_command->precise_x)
+			{
+				p_move_to_command->cur_distance = fabs(ao::vector3_t::distance_xz(precise_x_me, precise_x_camp));
+				p_move_to_command->dif_distance = p_move_to_command->dist_x;
+			}
+			else
+			{
+				if (p_camp_handler->returning)
+				{
+					if (p_camp_command->pc && p_camp_command->real_time)
+					{
+						if (!p_camp_command->scatter)
+						{
+							camp_return(p_camp_player->get_position().x, p_camp_player->get_position().z, p_camp_command->radius, &p_camp_handler->location.x, &p_camp_handler->location.z);
+						}
+						else
+						{
+							polar_spot(p_camp_player->get_position().x, p_camp_player->get_position().z, 0.0f, p_camp_command->bearing, p_camp_command->scat_dist, p_camp_command->scat_size, &p_camp_handler->location.x, &p_camp_handler->location.z);
+						}
+					}
+					p_move_to_command->cur_distance = fabs(ao::vector3_t::distance_xz(p_player->to_dynel()->get_position(), p_camp_handler->location));
+				}
+				else if (p_move_to_command->location.y == 0.0f)
+				{
+					p_move_to_command->cur_distance = fabs(ao::vector3_t::distance_xz(p_player->to_dynel()->get_position(), p_move_to_command->location));
+				}
+				else
+				{
+					p_move_to_command->cur_distance = fabs(ao::vector3_t::distance(p_player->to_dynel()->get_position(), p_move_to_command->location));
+				}
+				p_move_to_command->dif_distance = p_move_to_command->dist;
+			}
+
+			if (p_move_to_command->cur_distance <= p_move_to_command->dif_distance)
+			{
+				move_to_oor = false;
+				use_stuck = false;
+			}
+			else
+			{
+				move_to_oor = true;
+				if (p_move_to_command->break_aggro && p_move_to_command->did_aggro())
+					return;
+			}
+		}
+
+		if (p_stuck_logic->on)
+		{
+			p_stuck_logic->dif_distance = (flying || (jumping && in_jump)) ?
+				ao::vector3_t::distance_xz(p_player->to_dynel()->get_position(), p_stuck_logic->location)
+				: ao::vector3_t::distance(p_player->to_dynel()->get_position(), p_stuck_logic->location);
+
+			if (p_stuck_logic->dif_distance < 5.0f)
+				p_stuck_logic->cur_distance = moving_average(p_stuck_logic->dif_distance, p_stuck_logic->check);
+
+			p_stuck_logic->location.copy(p_player->to_dynel()->get_position());
+
+			if (rooted)
+			{
+				use_stuck = false;
+				p_stuck_logic->stuck_inc = 0;
+				p_stuck_logic->stuck_dec = 0;
+			}
+
+			if (p_stuck_logic->stuck_inc && p_stuck_logic->cur_distance > p_stuck_logic->dist)
+			{
+				p_stuck_logic->stuck_inc--;
+				p_stuck_logic->stuck_dec++;
+				if (p_stuck_logic->stuck_dec > p_stuck_logic->unstuck)
+				{
+					p_stuck_logic->stuck_inc = 0;
+					p_stuck_logic->stuck_dec = 0;
+				}
+			}
+			if (p_movement->change_head != h_inactive)
+				use_stuck = false;
+
+			if ((p_move_active->command_forward || p_move_active->command_strafe) && use_stuck &&
+				(p_stuck_logic->cur_distance * speed_multiplier && !swimming) ||
+				(swimming && double(p_stuck_logic->cur_distance) < 0.0010))
+			{
+				if (p_stuck_logic->dif_distance < p_stuck_logic->dist * speed_multiplier)
+				{
+					p_stuck_logic->stuck_inc++;
+					p_stuck_logic->stuck_dec = 0;
+
+					if (p_stuck_logic->try_jump && !jumping && !flying && !swimming && ((p_stuck_logic->stuck_inc % 5) == 0))
+					{
+						P_FLOW_CONTROL->slot_movement_jump(false);
+						jumping = true;
+					}
+
+					auto original_heading = 0.0f;
+					auto half_heading = 0.0f;
+					auto comp_neg_heading = 0.0f;
+					auto comp_pos_heading = 0.0f;
+					if (p_stuck_logic->stuck_inc == 4)
+					{
+						// ReSharper disable once CppDefaultCaseNotHandledInSwitchStatement
+						switch (cmd_used)
+						{
+						case command_stick:
+							original_heading = p_movement->sane_head((atan2(p_target->get_position().x - p_player->to_dynel()->get_position().x, p_target->get_position().z - p_player->to_dynel()->get_position().z) * heading_half / float(M_PI)));
+							break;
+						case command_move_to:
+							if (p_camp_handler->returning)
+							{
+								original_heading = p_movement->sane_head((atan2(p_camp_handler->location.x - p_player->to_dynel()->get_position().x, p_camp_handler->location.z - p_player->to_dynel()->get_position().z) * heading_half / float(M_PI)));
+								break;
+							}
+							original_heading = p_movement->sane_head((atan2(p_move_to_command->location.x - p_player->to_dynel()->get_position().x, p_move_to_command->location.z - p_player->to_dynel()->get_position().z) * heading_half / float(M_PI)));
+							break;
+						case command_circle:
+							original_heading = p_movement->sane_head((atan2(p_player->to_dynel()->get_position().z - p_circle_command->location.z, p_player->to_dynel()->get_position().x - p_circle_command->location.x) * heading_half / float(M_PI)));
+							original_heading += circle_quarter * (p_circle_command->radius / p_circle_command->cur_distance);
+							original_heading = p_movement->sane_head(original_heading *= heading_max / circle_max);
+						}
+						half_heading = p_movement->sane_head(original_heading + heading_half);
+						comp_neg_heading = p_movement->sane_head(half_heading - fabs(p_stuck_logic->turn_size / 2.0f));
+						comp_pos_heading = p_movement->sane_head(half_heading + fabs(p_stuck_logic->turn_size / 2.0f));
+					}
+
+					if ((p_stuck_logic->stuck_inc & 3) == 0)
+					{
+						new_heading = p_movement->sane_head(p_player->to_dynel()->get_heading() + p_stuck_logic->turn_size);
+
+						if (p_stuck_logic->turn_half)
+						{
+							if (new_heading > comp_neg_heading && new_heading < comp_pos_heading)
+							{
+								new_heading = original_heading;
+								p_stuck_logic->turn_size *= -1.0f;
+							}
+						}
+						p_movement->new_head(new_heading);
+					}
+				}
+			}
+		}
+
+		if (p_stuck_logic->stuck_inc || rooted)
+		{
+			return;
+		}
+
+		switch (cmd_used)
+		{
+		case command_stick:
+			if (!p_stick_command->snap_roll)
+				new_heading = p_movement->sane_head(atan2f(p_target->get_position().x - p_player->to_dynel()->get_position().x, p_target->get_position().z - p_player->to_dynel()->get_position().z) * heading_half / float(M_PI));
+			break;
+		case command_circle:
+			new_heading = (!p_circle_command->ccw != p_circle_command->backward) ? (atan2f(p_player->to_dynel()->get_position().z - p_circle_command->location.z, p_player->to_dynel()->get_position().x - p_circle_command->location.x) * circle_half / float(M_PI)) :
+				(atan2f(p_circle_command->location.z = p_player->to_dynel()->get_position().z, p_circle_command->location.x = p_player->to_dynel()->get_position().x) * circle_half / float(M_PI));
+			p_circle_command->ccw ? new_heading -= circle_quarter + circle_quarter * (p_circle_command->radius / p_circle_command->cur_distance) : new_heading += circle_quarter + circle_quarter * (p_circle_command->radius / p_circle_command->cur_distance);
+			p_movement->new_head(p_movement->sane_head(new_heading *= heading_max / circle_max));
+			p_circle_command->backward ? p_movement->do_move(go_backward) : p_movement->do_move(go_forward);
+			return;
+		case command_move_to:
+			if (move_to_oor)
+			{
+				// double look_angle = double(atan2f(p_target))
+			}
+		}
+
+	}
+
+	void pulse()
+	{
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
+			return;
+		// TODO: Figure out how to tell if I have died
+		if (p_move_active->fix_walk)
+		{
+			p_movement->set_walk(false);
+			p_move_active->fix_walk = false;
+		}
+
+		p_movement->auto_head();
+		p_move_active->aggro_tlo();
+
+		if (p_move_active->broken())
+			return;
+
+		p_movement->do_root();
+		p_pause_handler->handle_pause();
+
+		if (p_pause_handler->waiting())
+			return;
+
+		if (p_stick_command->on)
+		{
+			if (!p_stick_command->ready())
+				return;
+			process(command_stick);
+		}
+		else if (p_move_to_command->on)
+		{
+			process(command_move_to);
+		}
+		else if (p_circle_command->on)
+		{
+			if (p_circle_command->drunk && p_circle_command->wait())
+				return;
+			process(command_circle);
+		}
+		else if (!p_pause_handler->user_mouse && (p_camp_command->on || p_camp_handler->do_alt))
+		{
+			process(command_make_camp);
+		}
 	}
 
 #pragma endregion

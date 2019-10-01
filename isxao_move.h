@@ -137,6 +137,8 @@ namespace isxao
 		float moving_average(float new_value, int num_entries);
 		void initialize();
 		void shutdown();
+		void process(unsigned char cmd_used);
+		void pulse();
 
 #pragma endregion
 
@@ -180,7 +182,7 @@ namespace isxao
 		class stuck_logic : public loc
 		{
 		public:
-			bool is_on;
+			bool on;
 			bool try_jump;
 			bool turn_half;
 			DWORD check;

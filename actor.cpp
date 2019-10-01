@@ -290,6 +290,11 @@ namespace ao
 		return isxao::is_client_id(this->get_data()->p_weapon_holder->weapon_target_identity.id);
 	}
 
+	bool actor::is_flying()
+	{
+		return this->get_vehicle()->get_char_movement_status()->movement_mode == 7;
+	}
+
 	bool actor::is_idle()
 	{
 		return this->get_vehicle()->get_char_movement_status()->is_moving_forward_back == 1 && this->get_vehicle()->get_char_movement_status()->is_moving_strafe == 1;
@@ -332,6 +337,11 @@ namespace ao
 	bool actor::is_invis()
 	{
 		return !(this->get_data()->is_visible);
+	}
+
+	bool actor::is_jumping()
+	{
+		return this->get_vehicle()->get_char_movement_status()->is_jumping == 3;
 	}
 
 	bool actor::is_kos()
@@ -377,6 +387,16 @@ namespace ao
 	bool actor::is_standing()
 	{
 		return this->get_vehicle()->get_char_movement_status()->movement_mode != 8;
+	}
+
+	bool actor::is_rooted()
+	{
+		return this->get_vehicle()->get_char_movement_status()->movement_mode == 1;
+	}
+
+	bool actor::is_swimming()
+	{
+		return this->get_vehicle()->get_char_movement_status()->movement_mode == 4;
 	}
 
 	bool actor::is_team_leader()

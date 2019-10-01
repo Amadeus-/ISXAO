@@ -69,12 +69,14 @@ namespace ao
 		bool is_crawling();
 		bool is_fighting_me();
 		bool is_fighting();
+		bool is_flying();
 		bool is_idle();
 		bool is_in_my_team();
 		bool is_in_my_raid_team();
 		bool is_in_team();
 		bool is_in_raid();
 		bool is_invis();
+		bool is_jumping();
 		bool is_kos();
 		bool is_moving_forward();
 		bool is_npc();
@@ -84,6 +86,8 @@ namespace ao
 		bool is_strafing_left();
 		bool is_strafing_right();
 		bool is_standing();
+		bool is_rooted();
+		bool is_swimming();
 		bool is_team_leader();
 		void kick();
 		void make_leader();
