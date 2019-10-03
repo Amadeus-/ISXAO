@@ -323,6 +323,9 @@
     <ClCompile Include="isxao_message_parser.cpp">
       <Filter>Source Files\Base\ISXAO</Filter>
     </ClCompile>
+    <ClCompile Include="cell_surface.cpp">
+      <Filter>Source Files\Base\AO\Client</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ISXAO.h">
@@ -597,6 +600,9 @@
     </ClInclude>
     <ClInclude Include="isxao_message_parser.h">
       <Filter>Header Files\Base\ISXAO</Filter>
+    </ClInclude>
+    <ClInclude Include="cell_surface.h">
+      <Filter>Header Files\Base\AO\Client</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

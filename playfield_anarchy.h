@@ -14,6 +14,7 @@ namespace std
 namespace ao
 {
 	class actor;
+	class cell_surface;
 
 	struct ao_grid_space;
 	struct ao_n3_tile_map_surface;
@@ -44,6 +45,7 @@ namespace ao
 		bool line_of_sight(const ao::vector3_t &, const ao::vector3_t &, int, bool);
 		ao::p_grid_space_t get_grid_space();
 		ao::p_n3_tile_map_surface_t get_tile_map_surface();
+		cell_surface* get_cell_surface();
 	};
 
 	class playfield_dir : public game_object<playfield_dir_t>

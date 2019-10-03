@@ -1976,7 +1976,8 @@ namespace ao
 		DWORD playfield_instance_id;		// 0x0008
 		struct ao_rdb_tile_map* p_rdb_tile_map;// 0x000C
 		// ReSharper disable once CppInconsistentNaming
-		BYTE unknown_0x10[0x410];			// 0x0010
+		BYTE unknown_0x10[0x40C];			// 0x0010
+		PVOID p_ground_data;				// 0x41C
 		PVOID p_rdb_height_map;				// 0x0420
 	} n3_tile_map_t, *p_n3_tile_map_t;
 
@@ -1988,9 +1989,12 @@ namespace ao
 	// From N3.dll
 	typedef struct ao_n3_tile_map_surface
 	{
-		PVOID p_v_table;				// 0x00
-		// ReSharper disable once CppInconsistentNaming
-		BYTE unknown_0x04[0x14];		// 0x04
+		/*0x00*/ void* p_v_table;
+		/*0x04*/ p_n3_tile_map_t p_n3_tile_map;
+		/*0x08*/ struct ao_playfield_anarchy* p_playfield_anarchy;
+		/*0x0C*/ struct ao_cell_surface* p_cell_surface;
+		/*0x10*/ float unknown_0x10;
+		/*0x14*/ float unknown_0x14;
 	} n3_tile_map_surface_t, *p_n3_tile_map_surface_t;
 
 #pragma endregion
@@ -3213,11 +3217,9 @@ namespace ao
 	typedef struct ao_cell_surface
 	{
 		void* p_v_table;
-		unsigned char unknown_0x04[0x4];	// 0x04
-		unsigned char unknown_0x08[0x4];	// 0x08
-		unsigned char unknown_0x0C[0x4];	// 0x0C
+		std::vector<std::vector<struct ao_kd_tree_surface*>*> kd_trees;
 		unsigned char unknown_0x10[0x4];	// 0x10
-		unsigned long width_of_cell_array;			// 0x14
+		unsigned long width_of_cell_array;	// 0x14
 		unsigned long unknown_0x18;			// 0x18
 		float unknown_0x1C;					// 0x1C
 		float unknown_0x20;					// 0x20
@@ -3226,6 +3228,75 @@ namespace ao
 		unsigned char surface_ownership;	// 0x2C
 		unsigned char unknown_0x2D[0x3];	// 0x2D
 	} cell_surface_t, *p_cell_surface_t;
+
+#pragma endregion
+
+//#pragma region Graphics_n::RRefFrame_t
+//
+//	typedef struct ao_r_ref_frame
+//	{
+//
+//	} r_ref_frame_t, *p_r_ref_frame_t;
+//
+//#pragma endregion
+//
+//#pragma region Graphics_n::Renderable_c
+//
+//	typedef struct ao_renderable
+//	{
+//
+//	} renderable_t, *p_renderable_t;
+//
+//#pragma endregion
+//		
+//
+//#pragma region Graphics_n::GroundChunk_c
+//
+//	typedef struct ao_ground_chunk
+//	{
+//
+//	} ground_chunk_t, *p_ground_chunk;
+//
+//#pragma endregion
+
+#pragma region Serializable_c
+
+	typedef struct ao_serializable
+	{
+		/*0x00*/ void* p_v_table;
+		/*0x04*/ unsigned long serializable_id;
+	} serializable_t, *p_serializable_t;
+
+#pragma endregion
+
+#pragma region RResource_t
+
+	// Size = 0x2C
+	typedef struct ao_r_resource_t  // NOLINT(cppcoreguidelines-pro-type-member-init, hicpp-member-init)
+	{
+		/*0x00*/ void* p_v_table;
+		/*0x04*/ std::string name;
+		/*0x20*/ unsigned char unknown_0x20;
+		/*0x21*/ unsigned char unknown_0x21[0x3];
+		/*0x24*/ unsigned long num_references;
+		/*0x28*/ unsigned long unknown_0x28;
+	} r_resource_t, *p_r_resource_t;
+
+#pragma endregion
+
+#pragma region AnarchyGroundDataDB_t
+
+	// Size = 0xF0
+	typedef struct ao_anarchy_ground_data_db
+	{
+		/*0x00*/ void* p_v_table;
+		/*0x04*/ std::string name;
+		/*0x20*/ unsigned char unknown_0x20;
+		/*0x21*/ unsigned char unknown_0x21[0x3];
+		/*0x24*/ unsigned long num_references;
+		/*0x28*/ unsigned long unknown_0x28;
+		/*0x2C*/ unsigned long unknown_0x2C;
+	} anarchy_ground_data_db, *p_anarchy_ground_Data_db_t;
 
 #pragma endregion
 

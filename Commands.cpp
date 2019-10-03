@@ -1,16 +1,32 @@
 #include "isxao_main.h"
+#include "cell_surface.h"
 #include "character.h"
+#include "dynel.h"
 #include "engine_client_anarchy.h"
+#include "playfield_anarchy.h"
+
 
 #pragma region Testing and Debugging
 
 int CMD_AO(int argc, char *argv[])
 {
-	printf("%" PRIX32, P_ENGINE_CLIENT_ANARCHY->get_client_char());
-	/*std::map<std::string, ao::chat_window_node*> m;
-	P_CHAT_WINDOW_CONTROLLER->get_chat_window_nodes(m);
-	for (auto it = m.begin(); it != m.end(); ++it)
-		printf("%s", it->first.c_str());*/
+	// printf("%" PRIX32, P_PLAYFIELD_DIR->get_playfield()->get_cell_surface());
+	//const auto func = reinterpret_cast<int(*)(void*, const ao::vector3_t&, const ao::vector3_t&, ao::vector3_t&, bool, void*)>(ao::cell_surface_t__get_line_intersection);
+	//auto this_ptr = P_PLAYFIELD_DIR->get_playfield()->get_tile_map_surface()->p_cell_surface;
+	//auto v_1 = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_position();
+	//ao::vector3_t east_offset(10.0f, 0.0f, 0.0f);
+	//auto v_2 = ao::vector3_t::add(v_1, east_offset);
+	//ao::vector3_t r_1;
+	//ao::vector3_t r_2;
+	//const auto locality_source = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_vehicle();
+	//auto result = P_PLAYFIELD_DIR->get_playfield()->get_cell_surface()->get_line_intersection(v_1, v_2, r_1, r_2, false, locality_source);
+	//printf("Player Position: x = %.2f, y = %.2f, z = %.2f", v_1.x, v_1.y, v_1.z);
+	//printf("Test Position: x = %.2f, y = %.2f, z = %.2f", v_2.x, v_2.y, v_2.z);
+	//printf("Intersection: x = %.2f, y = %.2f, z = %.2f", r_1.x, r_1.y, r_1.z);
+	//printf("Second Vector: x = %.2f, y = %.2f, z = %.2f", r_2.x, r_2.y, r_2.z);
+	//printf("%" PRIX32, result);
+	std::vector<ao::vector3_t> v;
+	P_PLAYFIELD_DIR->get_playfield()->get_cell_surface()->get_all_triangles(v);
 	return 0;
 }
 

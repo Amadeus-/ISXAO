@@ -860,7 +860,7 @@ namespace isxao
 		// EzDetour(window_controller_t__handle_key_down, &detours::window_controller_c__handle_key_down__detour, &detours::window_controller_c__handle_key_down__trampoline);
 		// EzDetour(window_controller_t__handle_key_up, &detours::window_controller_c__handle_key_up__detour, &detours::window_controller_c__handle_key_up__trampoline);
 		// EzDetour(command_t__execute_1, &detours::command_t__execute__detour, &detours::command_t__execute__trampoline);
-		EzDetour(input_config_t__process_input, &detours::input_config_t__process_input__detour, &detours::input_config_t__process_input__trampoline);
+		// EzDetour(input_config_t__process_input, &detours::input_config_t__process_input__detour, &detours::input_config_t__process_input__trampoline);
 		// EzDetour(input_config_t__check_input, &detours::input_config_t__check_input__detour, &detours::input_config_t__check_input__trampoline);
 	}
 
@@ -910,7 +910,7 @@ namespace isxao
 		// EzUnDetour(window_controller_t__handle_key_down);
 		// EzUnDetour(window_controller_t__handle_key_up);
 		// EzUnDetour(command_t__execute_1);
-		EzUnDetour(input_config_t__process_input);
+		// EzUnDetour(input_config_t__process_input);
 		// EzUnDetour(input_config_t__check_input);
 	}
 	

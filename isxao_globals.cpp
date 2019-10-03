@@ -27,7 +27,9 @@ namespace ao
 		HMODULE message_protocol_module_handle = GetModuleHandle(message_protocol_module_name);
 		MODULEINFO message_protocol_module_info;
 		HMODULE database_controller_module_handle = GetModuleHandle(database_controller_module_name);
-		MODULEINFO database_controller_module_info;	
+		MODULEINFO database_controller_module_info;
+		HMODULE collision_module_handle = GetModuleHandle(collision_module_name);
+		MODULEINFO collision_module_info;
 
 	#pragma endregion
 	
@@ -466,6 +468,14 @@ namespace ao
 
 	#pragma endregion
 
+#pragma region Collision
+
+		DWORD cell_surface_t__get_all_triangles = 0;
+		DWORD cell_surface_t__get_line_intersection_1 = 0;
+		DWORD cell_surface_t__get_line_intersection_2 = 0;
+
+#pragma endregion
+
 	#pragma region vTable
 
 		DWORD AccessCard_t__vTable = 0;
@@ -603,6 +613,11 @@ namespace ao
 			if (!database_controller_module_handle)
 			{
 				printf("Could not find handle to module \"DatabaseController.dll\". Aborting offset initialization.");
+				return false;
+			}
+			if (!collision_module_handle)
+			{
+				printf("Could not find handle to module \"Collision.dll\". Aborting offset initialization.");
 				return false;
 			}
 
@@ -1149,6 +1164,23 @@ namespace ao
 		
 
 	#pragma endregion
+
+#pragma region Collision
+
+			// Module
+			GetModuleInformation(process_handle, collision_module_handle, &collision_module_info, sizeof(collision_module_info));
+			// ReSharper disable once CppLocalVariableMayBeConst
+			auto collision_module_base = DWORD(collision_module_handle);
+			const auto collision_data_begin = reinterpret_cast<unsigned char*>(collision_module_base);
+			const auto collision_data_end = collision_data_begin + collision_module_info.SizeOfImage;
+			const std::vector<unsigned char> collision_data(database_controller_data_begin, database_controller_data_end);
+
+			// Function
+			RESOLVE_FUNCTION_ADDRESS(collision, cell_surface_t__get_all_triangles)
+			RESOLVE_FUNCTION_ADDRESS(collision, cell_surface_t__get_line_intersection_1)
+			RESOLVE_FUNCTION_ADDRESS(collision, cell_surface_t__get_line_intersection_2)
+
+#pragma endregion
 
 				return true;
 		}

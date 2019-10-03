@@ -29,6 +29,8 @@ namespace ao
 	AOLIB_VAR MODULEINFO message_protocol_module_info;
 	AOLIB_VAR HMODULE database_controller_module_handle;
 	AOLIB_VAR MODULEINFO database_controller_module_info;
+	AOLIB_VAR HMODULE collision_module_handle;
+	AOLIB_VAR MODULEINFO collision_module_info;
 
 #pragma endregion
 
@@ -494,6 +496,14 @@ namespace ao
 #pragma region DatabaseController
 
 	AOLIB_VAR DWORD resource_database_t__get_db_object_1;
+
+#pragma endregion
+
+#pragma region Collision
+
+	AOLIB_VAR DWORD cell_surface_t__get_all_triangles;
+	AOLIB_VAR DWORD cell_surface_t__get_line_intersection_1;
+	AOLIB_VAR DWORD cell_surface_t__get_line_intersection_2;
 
 #pragma endregion
 

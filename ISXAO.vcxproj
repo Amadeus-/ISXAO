@@ -123,6 +123,7 @@
     <ClCompile Include="actor.cpp" />
     <ClCompile Include="actor_type.cpp" />
     <ClCompile Include="ao_type.cpp" />
+    <ClCompile Include="cell_surface.cpp" />
     <ClCompile Include="chat_gui_module.cpp" />
     <ClCompile Include="chat_window_controller.cpp" />
     <ClCompile Include="chat_window_node.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="actor_type.h" />
     <ClInclude Include="ao_classes.h" />
     <ClInclude Include="ao_type.h" />
+    <ClInclude Include="cell_surface.h" />
     <ClInclude Include="chat_gui_module.h" />
     <ClInclude Include="chat_window_controller.h" />
     <ClInclude Include="chat_window_node.h" />

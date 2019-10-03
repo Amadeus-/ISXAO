@@ -2615,6 +2615,46 @@ constexpr DWORD resource_database_t__get_db_object_1_bytes_to_next = 0x0;
 
 #pragma endregion
 
+#pragma region Collision
+
+// Module
+constexpr char* const collision_module_name = static_cast<char*>("Collision.dll");
+
+// Functions
+
+#pragma region cell_surface_t__get_all_triangles
+
+constexpr char* const cell_surface_t__get_all_triangles_mangled_name = static_cast<char*>(
+	"?GetAllTriangles@CellSurface_t@@QAEXHAAV?$vector@VVector3_t@@V?$allocator@VVector3_t@@@std@@@std@@@Z");
+constexpr char* const cell_surface_t__get_all_triangles_pattern = static_cast<char*>(
+	"55 8B EC 53 56 57 8B 7D 0C 8B 47 04");
+constexpr DWORD cell_surface_t__get_all_triangles_offset = 0x0;
+constexpr DWORD cell_surface_t__get_all_triangles_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma region cell_surface_t__get_line_intersection_1
+
+constexpr char* const cell_surface_t__get_line_intersection_1_mangled_name = static_cast<char*>(
+	"?GetLineIntersection@CellSurface_t@@UBE_NABVVector3_t@@0AAV2@1_NPAVLocalitySource_t@@@Z");
+constexpr char* const cell_surface_t__get_line_intersection_1_pattern = static_cast<char*>(
+	"B8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 EC 24");
+constexpr DWORD cell_surface_t__get_line_intersection_1_offset = 0x0;
+constexpr DWORD cell_surface_t__get_line_intersection_1_bytes_to_next = 0x0;
+
+#pragma region cell_surface_t__get_line_intersection_1
+
+constexpr char* const cell_surface_t__get_line_intersection_2_mangled_name = static_cast<char*>(
+	"?GetLineIntersection@CellSurface_t@@UBE_NABVVector3_t@@0AAV2@_NPAVLocalitySource_t@@@Z");
+constexpr char* const cell_surface_t__get_line_intersection_2_pattern = static_cast<char*>(
+	"55 8B EC 83 EC 0C FF 75 18");
+constexpr DWORD cell_surface_t__get_line_intersection_2_offset = 0x0;
+constexpr DWORD cell_surface_t__get_line_intersection_2_bytes_to_next = 0x0;
+
+#pragma endregion
+
+#pragma endregion
+
 #pragma region EngineClientAnarchy
 
 // #define n3EngineClientAnarchy_t__GetFactionStr_x							0x16942
