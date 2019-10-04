@@ -15,6 +15,7 @@ namespace ao
 {
 	class actor;
 	class cell_surface;
+	class surface_i;
 
 	struct ao_grid_space;
 	struct ao_n3_tile_map_surface;
@@ -46,6 +47,7 @@ namespace ao
 		ao::p_grid_space_t get_grid_space();
 		ao::p_n3_tile_map_surface_t get_tile_map_surface();
 		cell_surface* get_cell_surface();
+		surface_i* get_surface();
 	};
 
 	class playfield_dir : public game_object<playfield_dir_t>

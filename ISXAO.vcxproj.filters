@@ -326,6 +326,12 @@
     <ClCompile Include="cell_surface.cpp">
       <Filter>Source Files\Base\AO\Client</Filter>
     </ClCompile>
+    <ClCompile Include="surface_i.cpp">
+      <Filter>Source Files\Base\AO\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="navigation.cpp">
+      <Filter>Source Files\Base\ISXAO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ISXAO.h">
@@ -603,6 +609,12 @@
     </ClInclude>
     <ClInclude Include="cell_surface.h">
       <Filter>Header Files\Base\AO\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="surface_i.h">
+      <Filter>Header Files\Base\AO\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="navigation.h">
+      <Filter>Header Files\Base\ISXAO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

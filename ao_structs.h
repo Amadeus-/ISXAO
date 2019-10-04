@@ -355,6 +355,16 @@ namespace ao
 			return q;
 		}
 
+		float get_raw_roll() const
+		{
+			return float(atan2f(2*y*w - 2*x*z, 1 - 2*y*y - 2*z*z));
+		}
+
+		float get_roll() const
+		{
+			return this->get_raw_roll() * 180.0f / float(M_PI);
+		}
+
 		static struct ao_quaternion get_quaternion_from_raw(const float& raw_yaw)
 		{
 			struct ao_quaternion q;
@@ -399,6 +409,16 @@ namespace ao
 			return q;
 		}
 
+		static struct ao_quaternion product(const struct ao_quaternion& a, const struct ao_quaternion& b)
+		{			
+			const auto w = a.w * b.w - a.x*b.x - a.y*b.y - a.z*b.z;
+			const auto x = a.w*b.x + b.w*a.x + a.y*b.z - a.z*b.y;
+			const auto y = a.w*b.y - a.x*b.z + a.y*b.w + a.z*b.x;
+			const auto z = a.w*b.z + a.x*b.y - a.y*b.x + a.z*b.w;
+			ao_quaternion q(w, x, y, z);
+			return q;
+		}
+
 		ao_quaternion()
 		{
 			x = 0;
@@ -431,6 +451,14 @@ namespace ao
 			x = x / m;
 			y = y / m;
 			z = z / m;
+		}
+
+		ao_quaternion(const float w, const float x, const float y, const float z)
+		{
+			this->w = w;
+			this->x = x;
+			this->y = y;
+			this->z = z;
 		}
 
 	} quaternion_t, *p_quaternion_t;	
@@ -3299,5 +3327,78 @@ namespace ao
 	} anarchy_ground_data_db, *p_anarchy_ground_Data_db_t;
 
 #pragma endregion
+
+#pragma region n3RoomSurface_t
+
+	typedef struct ao_n3_room_surface
+	{
+		/*0x00*/ void* p_v_table;
+		/*0x04*/ unsigned long unknown_0x04;
+		/*0x08*/ unsigned long unknown_0x08;
+		/*0x0C*/ float unknown_0x0C;
+		/*0x10*/ float unknown_0x10;
+		/*0x14*/ float unknown_0x14;
+		/*0x18*/ float unknown_0x18;
+	} n3_room_surface_t, *p_n3_room_surface_t;
+
+#pragma endregion
+
+#pragma region ACGBuildingPlayfield_t
+
+	// Size = 0x114
+	typedef struct ao_acg_building_playfield
+	{
+		/*0x0000*/ void* p_v_table;
+		/*0x0004*/ unsigned char unknown_0x04[0x4];
+		/*0x0008*/ identity_t model_id;
+		/*0x0010*/ unsigned char unknown_0x10[0x8];
+		/*0x0018*/ identity_t instance_id;
+		/*0x0020*/ unsigned char unknown_0x20[0xC];
+		PVOID p_room_links;						// 0x2C
+		std::vector<p_n3_dynel_t, std::allocator<p_n3_dynel_t>> p_dynel_children;	// 0x30
+																					// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x3C[0x10];				// 0x3C
+		DWORD last_entrance_door_number;		// 0x4C
+		DWORD zone_size;						// 0x50						
+		p_n3_tile_map_t p_n3_tile_map;			// 0x54
+		p_grid_space_t p_space_i;				// 0x58
+		PVOID p_pathfinder_i;					// 0x5C
+		p_n3_tile_map_surface_t p_surface_i;	// 0x60
+												// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x64[0x8];					// 0x64
+		PVOID p_shadow_list;					// 0x6C
+												// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x70[0x14];				// 0x70
+		PVOID p_org_zone_id_list;				// 0x84
+		DWORD num_org_zones;					// 0x88
+		struct ao_rdb_playfield* p_rdb_playfield;	// 0x8C
+													// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0x90[0x8];					// 0x90
+		DWORD number_of_waters;					// 0x98
+		PVOID p_n3_water_data;					// 0x9C
+		PVOID p_environment_data;				// 0xA0
+												// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xA4[0x4];					// 0xA4				
+		p_n3_cell_monitor_t p_n3_cell_monitor;	// 0xA8
+		LONG pf_world_x_pos;					// 0xAC
+		LONG pf_world_z_pos;					// 0xB0
+		PVOID p_playfield_area_info;			// 0xB4
+		PVOID p_playfield_district_info;		// 0xB8
+		PVOID p_fight_mode_handler;				// 0xBC
+												// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xC0[0x4];					// 0xC0
+		PVOID p_game_data_land_control_map_t;	// 0xC4
+												// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xC8[0x4];					// 0xC8
+		PVOID p_id_range_remapper;				// 0xCC
+												// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xD0[0x8];					// 0xD0
+		DWORD game_run_mode;					// 0xD8
+												// ReSharper disable once CppInconsistentNaming
+		BYTE unknown_0xDC[0x34];				// 0xDC
+	} acg_building_playfield_t, *p_acg_building_playfield_t;
+
+#pragma endregion
+
 
 }

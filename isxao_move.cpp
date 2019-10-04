@@ -2477,7 +2477,7 @@ namespace isxao
 		if (p_stick_command->cur_distance > p_stick_command->dist + 10.0f && !p_stick_command->snap_roll)
 		{
 			p_movement->stop_move(kill_strafe);
-			p_movement->try_move(go_forward, (p_stick_command->cur_distance > p_stick_command + 20.0f) ? move_walk_off : (p_stick_command->walk ? move_walk_on : move_walk_ignore), new_heading, p_target->get_position().x, p_target->get_position().y);
+			p_movement->try_move(go_forward, (p_stick_command->cur_distance > p_stick_command->dist + 20.0f) ? move_walk_off : (p_stick_command->walk ? move_walk_on : move_walk_ignore), new_heading, p_target->get_position().x, p_target->get_position().y);
 			return;
 		}
 

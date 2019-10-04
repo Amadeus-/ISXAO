@@ -81,6 +81,11 @@ namespace ao
 		return reinterpret_cast<cell_surface*>(get_data()->p_surface_i->p_cell_surface);
 	}
 
+	surface_i* playfield_anarchy::get_surface()
+	{
+		return reinterpret_cast<surface_i*>(get_data()->p_surface_i);
+	}
+
 
 #pragma endregion
 

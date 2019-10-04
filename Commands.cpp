@@ -1,5 +1,5 @@
 #include "isxao_main.h"
-#include "cell_surface.h"
+#include "surface_i.h"
 #include "character.h"
 #include "dynel.h"
 #include "engine_client_anarchy.h"
@@ -13,20 +13,34 @@ int CMD_AO(int argc, char *argv[])
 	// printf("%" PRIX32, P_PLAYFIELD_DIR->get_playfield()->get_cell_surface());
 	//const auto func = reinterpret_cast<int(*)(void*, const ao::vector3_t&, const ao::vector3_t&, ao::vector3_t&, bool, void*)>(ao::cell_surface_t__get_line_intersection);
 	//auto this_ptr = P_PLAYFIELD_DIR->get_playfield()->get_tile_map_surface()->p_cell_surface;
-	//auto v_1 = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_position();
-	//ao::vector3_t east_offset(10.0f, 0.0f, 0.0f);
-	//auto v_2 = ao::vector3_t::add(v_1, east_offset);
-	//ao::vector3_t r_1;
-	//ao::vector3_t r_2;
-	//const auto locality_source = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_vehicle();
-	//auto result = P_PLAYFIELD_DIR->get_playfield()->get_cell_surface()->get_line_intersection(v_1, v_2, r_1, r_2, false, locality_source);
-	//printf("Player Position: x = %.2f, y = %.2f, z = %.2f", v_1.x, v_1.y, v_1.z);
-	//printf("Test Position: x = %.2f, y = %.2f, z = %.2f", v_2.x, v_2.y, v_2.z);
-	//printf("Intersection: x = %.2f, y = %.2f, z = %.2f", r_1.x, r_1.y, r_1.z);
-	//printf("Second Vector: x = %.2f, y = %.2f, z = %.2f", r_2.x, r_2.y, r_2.z);
-	//printf("%" PRIX32, result);
-	std::vector<ao::vector3_t> v;
-	P_PLAYFIELD_DIR->get_playfield()->get_cell_surface()->get_all_triangles(v);
+	const auto v_1 = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_position();
+	const ao::vector3_t offset(0.0f, -1000.0f, 0.0f);
+	const auto v_2 = ao::vector3_t::add(v_1, offset);
+	ao::vector3_t r_1;
+	ao::vector3_t r_2;
+	//float r_3;
+	const auto locality_source = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_vehicle();
+	const auto result = P_PLAYFIELD_DIR->get_playfield()->get_surface()->get_line_intersection(v_1, v_2, r_1, r_2, false, locality_source);
+	printf("Player Position: x = %.2f, y = %.2f, z = %.2f", v_1.x, v_1.y, v_1.z);
+	printf("Test Position: x = %.2f, y = %.2f, z = %.2f", v_2.x, v_2.y, v_2.z);
+	printf("Vector 1: x = %.2f, y = %.2f, z = %.2f", r_1.x, r_1.y, r_1.z);
+	printf("Vector 2: x = %.2f, y = %.2f, z = %.2f", r_2.x, r_2.y, r_2.z);
+	printf("Vector 2: heading = %.2f, pitch = %.2f", r_2.get_yaw(), r_2.get_pitch());
+	//printf("Float: %.2f", r_3);
+	printf("%" PRIX32, result);
+	ao::quaternion_t normal_q(r_2);
+	normal_q.normalize();
+	const auto q = ao::quaternion_t::get_quaternion_from_raw(180.0f * float(M_PI) / 180.0f);
+	printf("Normal Q: w = %.2f, x = %.2f, y = %.2f, z = %.2f", normal_q.w, normal_q.x, normal_q.y, normal_q.z);
+	printf("Normal Q: heading = %.2f, pitch = %.2f, roll = %.2f", normal_q.get_heading(), normal_q.get_pitch(), normal_q.get_roll());
+	printf("Q: w = %.2f, x = %.2f, y = %.2f, z = %.2f", q.w, q.x, q.y, q.z);
+	P_ENGINE_CLIENT_ANARCHY->get_client_char()->set_rotation(q);
+	const auto rot_q = ao::quaternion_t::product(normal_q, q);
+	printf("Rotated Q: w = %.2f, x = %.2f, y = %.2f, z = %.2f", rot_q.w, rot_q.x, rot_q.y, rot_q.z);
+	printf("Rotated Q: heading = %.2f, pitch = %.2f", rot_q.get_heading(), rot_q.get_pitch());
+	ao::quaternion_t actual_q = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_rotation();
+	printf("Actual Q: w = %.2f, x = %.2f, y = %.2f, z = %.2f", actual_q.w, actual_q.x, actual_q.y, actual_q.z);
+	printf("Actual Q: heading = %.2f, pitch = %.2f", actual_q.get_heading(), actual_q.get_pitch());
 	return 0;
 }
 

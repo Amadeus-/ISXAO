@@ -171,6 +171,7 @@
     <ClCompile Include="nano_spell_type.cpp" />
     <ClCompile Include="nano_template.cpp" />
     <ClCompile Include="nano_template_type.cpp" />
+    <ClCompile Include="navigation.cpp" />
     <ClCompile Include="new_inventory.cpp" />
     <ClCompile Include="npc_holder.cpp" />
     <ClCompile Include="isxao_message_parser.cpp" />
@@ -190,6 +191,7 @@
     <ClCompile Include="special_action_template_type.cpp" />
     <ClCompile Include="spell_template_data.cpp" />
     <ClCompile Include="stat_holder.cpp" />
+    <ClCompile Include="surface_i.cpp" />
     <ClCompile Include="targeting_module.cpp" />
     <ClCompile Include="team_entry.cpp" />
     <ClCompile Include="team_entry_type.cpp" />
@@ -264,6 +266,7 @@
     <ClInclude Include="nano_spell_type.h" />
     <ClInclude Include="nano_template.h" />
     <ClInclude Include="nano_template_type.h" />
+    <ClInclude Include="navigation.h" />
     <ClInclude Include="new_inventory.h" />
     <ClInclude Include="npc_holder.h" />
     <ClInclude Include="isxao_message_parser.h" />
@@ -284,6 +287,7 @@
     <ClInclude Include="special_action_template_type.h" />
     <ClInclude Include="spell_template_data.h" />
     <ClInclude Include="stat_holder.h" />
+    <ClInclude Include="surface_i.h" />
     <ClInclude Include="targeting_module.h" />
     <ClInclude Include="team_entry.h" />
     <ClInclude Include="team_entry_type.h" />
