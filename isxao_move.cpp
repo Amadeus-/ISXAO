@@ -4,6 +4,7 @@
 #include "engine_client_anarchy.h"
 #include "flow_control.h"
 #include "isxao_move.h"
+#include "vehicle.h"
 
 namespace isxao
 {
@@ -1158,6 +1159,21 @@ namespace isxao
 		}
 	}
 
+	void movement::new_face(const ao::quaternion_t& new_face)
+	{
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
+			return;
+		switch (p_move_active->head)
+		{
+		case h_loose:
+		case h_true:
+		case h_fast:
+		default:
+			movement::fast_turn(new_face);
+			break;
+		}
+	}
+
 	void movement::stop_heading() const
 	{
 		if (this->change_head != h_inactive)
@@ -1347,6 +1363,14 @@ namespace isxao
 		P_ENGINE_CLIENT_ANARCHY->get_client_char()->face(heading);
 		
 	}
+
+	void movement::fast_turn(const ao::quaternion_t& q)
+	{
+		if (ao::g_game_state != GAMESTATE_IN_GAME)
+			return;
+		P_ENGINE_CLIENT_ANARCHY->get_client_char()->set_rotation(q);
+	}
+
 
 	void movement::loose_turn(const float new_heading) const
 	{
@@ -2352,9 +2376,115 @@ namespace isxao
 		case command_move_to:
 			if (move_to_oor)
 			{
-				// double look_angle = double(atan2f(p_target))
+				if (p_target && p_move_to_command->uw)
+				{
+					const auto position = p_target->get_position();
+					ao::vector3_t steering_result;
+					p_player->get_vehicle()->steering_direction_arrive(position, steering_result);
+					const ao::quaternion_t new_facing(steering_result);
+					movement::new_face(new_facing);
+				}
+				if (p_camp_handler->returning)
+				{
+					new_heading = p_movement->sane_head(atan2f(p_camp_handler->location.x - p_player->to_dynel()->get_position().x, p_camp_handler->location.z - p_player->to_dynel()->get_position().z) * heading_half / float(M_PI));
+					if (p_move_to_command->use_back)
+					{
+						if (p_movement->change_head == h_inactive && p_move_to_command->cur_distance < p_move_to_command->dist_back)
+						{
+							const auto head_diff = p_movement->sane_head(p_player->to_dynel()->get_heading() - new_heading);
+							if (head_diff >= 200.0f && head_diff <= 300.0f)
+							{
+								p_movement->do_move(go_backward, true, p_move_to_command->cur_distance < 20.0f ? move_walk_on : move_walk_off);
+								return;
+							}
+						}
+					}
+					p_movement->new_head(new_heading);
+					p_movement->try_move(go_forward, (p_move_to_command->walk && p_move_to_command->cur_distance < 20.0f) ? move_walk_on : move_walk_off, new_heading, p_camp_handler->location.x, p_camp_handler->location.z);
+					return;
+				}
+				new_heading = p_movement->sane_head(atan2f(p_move_to_command->location.x - p_player->to_dynel()->get_position().x, p_move_to_command->location.z - p_player->to_dynel()->get_position().z) * heading_half / float(M_PI));
+				if (p_move_to_command->use_back)
+				{
+					if (p_movement->change_head == h_inactive && p_move_to_command->cur_distance < p_move_to_command->dist_back)
+					{
+						const auto head_diff = p_movement->sane_head(p_player->to_dynel()->get_heading() - new_heading);
+						if (head_diff >= 200.0f && head_diff <= 300.0f)
+						{
+							p_movement->do_move(go_backward, true, p_move_to_command->cur_distance < 20.0f ? move_walk_on : move_walk_off);
+							return;
+						}
+					}
+				}
+				p_movement->new_head(new_heading);
+				p_movement->try_move(go_forward, (p_move_to_command->walk && p_move_to_command->cur_distance < 20.0f) ? move_walk_on : move_walk_off, new_heading, p_move_to_command->location.x, p_move_to_command->location.z);
+				return;
+			}
+			if (!p_camp_handler->is_auto)
+			{
+				if (p_camp_handler->do_return)
+				{
+					sprintf_s(message, "Arrived at %s", arrive_camp);
+				}
+				else if (p_camp_handler->do_alt)
+				{
+					sprintf_s(message, "Arrived at %s", arrive_alt_camp);
+				}
+				else
+				{
+					sprintf_s(message, "Arrived at %s", arrive_move);
+					p_move_active->stopped_move_to = true;
+				}
+				write_line(message, V_MOVE_TO_V);
+			}
+			p_camp_handler->is_auto = false;
+			p_camp_handler->do_alt = false;
+			p_camp_handler->do_return = false;
+			end_previous_cmd(true);
+			return;
+		default:
+			return;
+		}
+
+		const auto head_diff = p_movement->sane_head(p_player->to_dynel()->get_heading() - new_heading);
+
+		if (p_stick_command->use_back && !p_stick_command->snap_roll && !p_stick_command->healer && p_movement->change_head == h_inactive && p_stick_command->cur_distance < p_stick_command->dist + p_stick_command->dist_back)
+		{
+			if (head_diff >= 200.0f && head_diff <= 300.0f)
+			{
+				p_movement->do_move(go_backward);
+				return;
 			}
 		}
+
+		const auto turn_healer = (!p_stick_command->healer ? true : (p_stick_command->cur_distance > p_stick_command->dist + 10.0f ? true : false));
+		if (turn_healer)
+		{
+			p_movement->new_head(new_heading);
+
+			if (p_stick_command->uw)
+			{
+				const auto position = p_target->get_position();
+				ao::vector3_t steering_result;
+				p_player->get_vehicle()->steering_direction_arrive(position, steering_result);
+				const ao::quaternion_t new_facing(steering_result);
+				movement::new_face(new_facing);
+			}
+		}
+
+		// unducking stuff goes here
+
+		if (p_stick_command->cur_distance > p_stick_command->dist + 10.0f && !p_stick_command->snap_roll)
+		{
+			p_movement->stop_move(kill_strafe);
+			p_movement->try_move(go_forward, (p_stick_command->cur_distance > p_stick_command + 20.0f) ? move_walk_off : (p_stick_command->walk ? move_walk_on : move_walk_ignore), new_heading, p_target->get_position().x, p_target->get_position().y);
+			return;
+		}
+
+		const auto ang_dist = p_movement->ang_dist(p_target->get_heading(), p_player->to_dynel()->get_heading());
+		const auto abs_ang_dist = fabs(ang_dist);
+		const auto three_x_range = (p_stick_command->cur_distance < p_stick_command->dist * 3) ? true : false;
+		const auto any_strafe = (p_stick_command->strafe || p_stick_command->front) ? true : false;
 
 	}
 

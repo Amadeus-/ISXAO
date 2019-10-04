@@ -477,6 +477,7 @@ namespace isxao
 			void auto_head() const;
 			void new_head(float);
 			static void new_face(float);
+			static void new_face(const ao::quaternion_t&);
 			void stop_heading() const;
 			static float sane_head(float heading);
 			void do_root();
@@ -498,6 +499,7 @@ namespace isxao
 			static void timed_strafe(byte);
 			void turn_head(float) const;
 			static void fast_turn(float);
+			static void fast_turn(const ao::quaternion_t&);
 			void loose_turn(float) const;
 			void true_turn(float);
 			static void true_move_on(byte);
