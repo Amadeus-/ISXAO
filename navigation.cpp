@@ -169,7 +169,7 @@ namespace isxao
 			const auto p_character = P_ENGINE_CLIENT_ANARCHY->get_client_char();
 			const auto p_char_as_dynel = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel();
 			this->current_distance_ = this->use_3d_ ? p_char_as_dynel->get_distance_3d_to(this->move_to_loc_) : p_char_as_dynel->get_distance_to(this->move_to_loc_);
-			if (ao::g_pulse_count % 180)
+			if (ao::g_pulse_count % 360 == 0)
 			{
 				sprintf_s(message_, "Current distance to target at <%.2f, %.2f, %.2f> is %.2f.", this->move_to_loc_.x, this->move_to_loc_.y, this->move_to_loc_.z, this->current_distance_);
 				printf(message_);

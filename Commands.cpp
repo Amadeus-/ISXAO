@@ -4,6 +4,7 @@
 #include "dynel.h"
 #include "engine_client_anarchy.h"
 #include "playfield_anarchy.h"
+#include "vehicle.h"
 
 
 #pragma region Testing and Debugging
@@ -14,9 +15,10 @@ int CMD_AO(int argc, char *argv[])
 	//const auto func = reinterpret_cast<int(*)(void*, const ao::vector3_t&, const ao::vector3_t&, ao::vector3_t&, bool, void*)>(ao::cell_surface_t__get_line_intersection);
 	//auto this_ptr = P_PLAYFIELD_DIR->get_playfield()->get_tile_map_surface()->p_cell_surface;
 	const auto v_1 = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_position();
-	const ao::vector3_t offset(20.0f, 20.0f, 0.0f);
-	const auto v_2 = ao::vector3_t::add(v_1, offset);
+	const ao::vector3_t offset(25.0f, 0.0f, 25.0f);
+	const auto v_2 = ao::vector3_t::add(v_1, offset);	
 	ao::vector3_t r_1;
+	ao::quaternion_t q = P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_facing_to(r_1);
 	ao::vector3_t r_2;
 	ao::gp_navigation->set_move_to_loc(v_2);
 	ao::gp_navigation->set_active(true);

@@ -235,8 +235,15 @@ namespace ao
 
 		float get_yaw() const
 		{
+			const auto is_normalized = this->is_normalized();
+			ao_vector3 norm_v;
+			if (!is_normalized)
+			{				
+				norm_v.copy(*this);
+				norm_v.normalize();
+			}			
 			float heading;
-			const auto raw_heading = this->get_raw_yaw();
+			const auto raw_heading = is_normalized ? this->get_raw_yaw() : norm_v.get_raw_yaw();
 			if (raw_heading > 0.0f)
 				heading = float(raw_heading * 180.0f / M_PI);
 			else
@@ -246,12 +253,24 @@ namespace ao
 
 		float get_raw_pitch() const
 		{
-			return asinf(-y);
+			ao_vector3 norm_v;
+			const auto is_normalized = this->is_normalized();
+			if (!is_normalized)
+			{
+				norm_v.copy(*this);
+				norm_v.normalize();
+			}			
+			return asinf(is_normalized ? -this->y : -norm_v.y);
 		}
 
 		float get_pitch() const
 		{
 			return float(this->get_raw_pitch() * 180.0f / M_PI);
+		}
+
+		bool is_normalized() const
+		{
+			return this->x <= 1.0f && this->y <= 1.0f && this->z <= 1.0f;
 		}
 
 		void zero()
@@ -353,16 +372,6 @@ namespace ao
 			q.z = q.z / m;
 
 			return q;
-		}
-
-		float get_raw_roll() const
-		{
-			return float(atan2f(2*y*w - 2*x*z, 1 - 2*y*y - 2*z*z));
-		}
-
-		float get_roll() const
-		{
-			return this->get_raw_roll() * 180.0f / float(M_PI);
 		}
 
 		static struct ao_quaternion get_quaternion_from_raw(const float& raw_yaw)
