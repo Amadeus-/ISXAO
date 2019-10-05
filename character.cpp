@@ -127,6 +127,23 @@ namespace ao
 		this->set_rotation(q);
 	}
 
+	float character::get_heading_to(vector3_t& location)
+	{
+		ao::vector3_t v = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_position();
+		ao::vector3_t dir = ao::vector3_t::subtract(location, v);
+		dir.normalize();
+		return dir.get_yaw();	
+	}
+
+	quaternion_t character::get_facing_to(vector3_t& location)
+	{
+		const auto position = this->to_dynel()->get_position();
+		vector3_t steering_result;
+		P_ENGINE_CLIENT_ANARCHY->get_client_char()->get_vehicle()->steering_direction_arrive(position, steering_result);
+		const ao::quaternion_t q(steering_result);
+		return q;
+	}
+
 	void character::make_team_leader(const identity_t& id)
 	{
 		if (P_ENGINE_CLIENT_ANARCHY && this->is_in_team() && this->is_team_leader())

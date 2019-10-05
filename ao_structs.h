@@ -419,6 +419,14 @@ namespace ao
 			return q;
 		}
 
+		void zero()
+		{
+			this->w = 0.0f;
+			this->x = 0.0f;
+			this->y = 0.0f;
+			this->z = 0.0f;
+		}
+
 		ao_quaternion()
 		{
 			x = 0;
@@ -459,6 +467,11 @@ namespace ao
 			this->x = x;
 			this->y = y;
 			this->z = z;
+		}
+
+		bool operator==(const ao_quaternion& other)
+		{
+			return &*this == &other || (this->w == other.w && this->x == other.x && this->y == other.y && this->z == other.z);
 		}
 
 	} quaternion_t, *p_quaternion_t;	
@@ -3126,6 +3139,11 @@ namespace ao
 			WORD key;
 			WORD modifier;
 		};
+
+		ao_keypress_info()
+		{
+			this->info = 0;
+		}
 
 		explicit ao_keypress_info(const DWORD info)
 		{

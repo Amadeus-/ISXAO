@@ -10,14 +10,6 @@
 namespace isxao
 {
 
-#pragma region Strings
-
-
-
-
-
-#pragma endregion
-
 #pragma region Objects
 
 

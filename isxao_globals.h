@@ -547,6 +547,9 @@ namespace ao
 	AOLIB_VAR bool g_isxao_initialized;
 	AOLIB_VAR isxao_log* gp_isxao_log;
 	// move_to
+	AOLIB_VAR isxao::navigation::move_to* gp_navigation;
+
+
 	AOLIB_VAR bool g_is_moving_to_location;
 	AOLIB_VAR bool g_is_move_to_stuck;
 	AOLIB_VAR float g_distance_moved_since_last;

@@ -515,6 +515,8 @@ namespace ao
 		bool g_events_registered = false;
 		bool g_isxao_initialized = false;
 		isxao_log* gp_isxao_log = nullptr;
+		isxao::navigation::move_to* gp_navigation = nullptr;
+
 		bool g_is_moving_to_location = false;
 		bool g_is_move_to_stuck = false;
 		float g_distance_moved_since_last = 0.0f;

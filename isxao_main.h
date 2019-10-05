@@ -47,6 +47,7 @@
 // #include "ao_classes.h"
 #include "isxao_classes.h"
 #include "isxao_log.h"
+#include "navigation.h"
 #include "isxao_native_defines.h"
 #include "isxao_globals.h"
 #include "isxao_inlines.h"

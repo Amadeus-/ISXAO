@@ -17,6 +17,7 @@ namespace ao
 	typedef ao_quaternion quaternion_t, *p_quaternion_t;
 
 
+	// ReSharper disable once CppImplicitDefaultConstructorNotAvailable
 	class character : public team_member
 	{
 	public:
@@ -39,6 +40,8 @@ namespace ao
 		static void default_attack(identity_t const &);
 		void face(float heading);
 		void face(vector3_t &location);
+		float get_heading_to(vector3_t& location);
+		quaternion_t get_facing_to(vector3_t& location);
 		void make_team_leader(const identity_t &);
 		static bool perform_special_action(const identity_t &);
 		void set_rotation(const quaternion_t&);

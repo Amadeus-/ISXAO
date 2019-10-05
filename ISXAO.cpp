@@ -129,6 +129,7 @@ bool ISXAO::Initialize(ISInterface *p_ISInterface)
 		RegisterTriggers();
 
 		isxao::InitializeISXAO();
+		
 		isxao::move::initialize();
 
 		printf("ISXAO version %s Loaded",AO_Version);
@@ -369,6 +370,12 @@ void __cdecl PulseService(bool Broadcast, unsigned int MSG, void *lpData)
 		 */
 
 		ao::g_pulse_count++;
+
+		if (ao::gp_navigation->get_active())
+		{
+			ao::gp_navigation->on_pulse();
+		}
+
 		while (!ao::g_n3message_queue.empty())
 		{
 			isxao::internal::PN3MESSAGEINFO message_info;

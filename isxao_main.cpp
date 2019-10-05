@@ -73,12 +73,17 @@ namespace isxao
 			ao::g_isxao_initialized = ao::g_events_registered;
 			ao::gp_isxao_log->add_line("Events failed to register.");
 		}
-			
+
+		ao::gp_navigation = new navigation::move_to();
+		ao::gp_navigation->initialize();
+
 	}
 
 	void ShutdownISXAO()
 	{
-
+		ao::gp_navigation->shutdown();
+		delete ao::gp_navigation;
+		ao::gp_navigation = nullptr;
 		detours::shutdown();
 
 		printf("ISXAO unloaded.");
