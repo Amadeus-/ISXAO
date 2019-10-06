@@ -6,6 +6,8 @@
 #include "flow_control.h"
 #include "game_time.h"
 #include "input_config.h"
+#include "playfield_anarchy.h"
+#include "surface_i.h"
 
 namespace isxao
 {
@@ -64,7 +66,9 @@ namespace isxao
 			this->current_distance_ = 0.0f;
 			this->current_facing_.zero();
 			this->current_heading_ = heading_inactive_;
-			this->distance_buffer_ = 5.0f;
+			this->distance_buffer_ = 2.0f;
+			this->heading_error_ = 0.0f;
+			ZeroMemory(&this->message_, sizeof(this->message_));
 			this->move_to_loc_.zero();
 			this->move_to_active_ = false;
 			this->simulate_keypresses_ = false;
@@ -192,9 +196,12 @@ namespace isxao
 				if (this->current_heading_ == this->heading_inactive_)
 				{
 					this->current_heading_ = p_character->get_heading_to(this->move_to_loc_);
+					this->heading_error_ = 0.0f;
 					sprintf_s(message_, "Turning to %.2f degrees to face target at <%.2f, %.2f, %.2f>.", this->current_heading_, this->move_to_loc_.x, this->move_to_loc_.y, this->move_to_loc_.z);
 					printf(message_);
 				}
+				const auto facing_to = p_character->get_facing_to(this->move_to_loc_);
+				const 
 				this->use_3d_ ? this->turn_head(this->current_facing_) : this->turn_head(this->current_heading_);
 				this->do_move(DIR_FORWARD, true);
 			}
@@ -228,7 +235,34 @@ namespace isxao
 
 		void move_to::set_move_to_loc(const ao::vector3_t& loc)
 		{
-			this->move_to_loc_ = loc;
+			if (ao::g_game_state != GAMESTATE_IN_GAME)
+				return;
+			if (this->use_3d_)
+				this->move_to_loc_ = loc;
+			else
+			{
+				const auto p_character = P_ENGINE_CLIENT_ANARCHY->get_client_char();
+				const auto p_char_as_dynel = p_character->to_dynel();
+				const ao::vector3_t offset_down(0.0f, -1000.0f, 0.0f);
+				const ao::vector3_t offset_up(0.0f, 1000.0f, 0.0f);
+				const auto test_down = ao::vector3_t::add(loc, offset_down);
+				const auto test_up = ao::vector3_t::add(loc, offset_up);
+				ao::vector3_t intersection(0.0f, 0.0f, 0.0f);
+				ao::vector3_t normal(0.0f, 0.0f, 0.0f);
+				if (P_PLAYFIELD_DIR->get_playfield()->get_surface()->get_line_intersection(
+					loc, test_down, intersection, normal, false, p_character->get_vehicle()))
+				{
+					this->move_to_loc_.copy(intersection);
+					return;
+				}
+				if (P_PLAYFIELD_DIR->get_playfield()->get_surface()->get_line_intersection(
+					loc, test_up, intersection, normal, false, p_character->get_vehicle()))
+				{
+					this->move_to_loc_.copy(intersection);
+					return;
+				}
+				this->move_to_loc_.copy(loc);
+			}
 		}
 
 		void move_to::set_walk(const bool on) const

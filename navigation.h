@@ -77,14 +77,15 @@ namespace isxao
 			const float circle_quarter_ = 90.0f;
 			const float turn_speed_per_second_ = float(M_PI / 3.0f); // rad s^-1
 
-			char message_[MAX_VARSTRING];
+			char message_[MAX_VARSTRING]{};
 
 			bool command_forward_backward_;
 			bool command_strafe_;
 			float current_distance_;
 			ao::quaternion_t current_facing_;
 			float current_heading_;			
-			float distance_buffer_;		
+			float distance_buffer_;
+			float heading_error_;
 			ao::vector3_t move_to_loc_;
 			bool move_to_active_;
 			bool simulate_keypresses_;
