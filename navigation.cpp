@@ -65,7 +65,7 @@ namespace isxao
 			this->command_strafe_ = false;
 			this->current_distance_ = 0.0f;
 			this->current_facing_.zero();
-			this->current_heading_ = heading_inactive_;
+			this->change_heading_ = heading_inactive_;
 			this->distance_buffer_ = 2.0f;
 			this->heading_error_ = 0.0f;
 			ZeroMemory(&this->message_, sizeof(this->message_));
@@ -76,6 +76,49 @@ namespace isxao
 			this->use_3d_ = false;
 		}
 
+		void move_to::activate(const ao::vector3_t& loc)
+		{
+			if (ao::g_game_state != GAMESTATE_IN_GAME)
+				return;
+			const auto p_character = P_ENGINE_CLIENT_ANARCHY->get_client_char();
+			const auto p_char_as_dynel = p_character->to_dynel();
+			if (this->use_3d_)
+				this->move_to_loc_ = loc;
+			else
+			{
+				
+				const ao::vector3_t offset_down(0.0f, -1000.0f, 0.0f);
+				const ao::vector3_t offset_up(0.0f, 1000.0f, 0.0f);
+				const auto test_down = ao::vector3_t::add(loc, offset_down);
+				const auto test_up = ao::vector3_t::add(loc, offset_up);
+				ao::vector3_t intersection(0.0f, 0.0f, 0.0f);
+				ao::vector3_t normal(0.0f, 0.0f, 0.0f);
+				if (P_PLAYFIELD_DIR->get_playfield()->get_surface()->get_line_intersection(
+					loc, test_down, intersection, normal, false, p_character->get_vehicle()))
+				{
+					this->move_to_loc_.copy(intersection);
+					return;
+				}
+				if (P_PLAYFIELD_DIR->get_playfield()->get_surface()->get_line_intersection(
+					loc, test_up, intersection, normal, false, p_character->get_vehicle()))
+				{
+					this->move_to_loc_.copy(intersection);
+					return;
+				}
+				this->move_to_loc_.copy(loc);
+			}
+			const auto new_heading = p_character->get_heading_to(this->move_to_loc_);
+			printf("Setting heading to %.2f to face move to location < %.2f, %.2f, %.2f>.", new_heading, this->move_to_loc_.x, this->move_to_loc_.y, this->move_to_loc_.z);
+			this->change_heading_ = new_heading;
+			this->set_active(true);
+		}
+
+		void move_to::auto_heading()
+		{
+			if (this->change_heading_ == this->heading_inactive_)
+				return;
+			this->turn_head(this->change_heading_);
+		}
 
 		float move_to::check_heading(const float& heading)
 		{
@@ -130,7 +173,7 @@ namespace isxao
 				if (fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_heading() - new_facing.get_heading()) < this->degrees_rotation_this_frame())
 				{
 					move_to::fast_turn(new_facing);
-					this->current_heading_ = heading_inactive_;
+					this->change_heading_ = heading_inactive_;
 					this->current_facing_ = facing_inactive_;
 				}
 				else
@@ -164,53 +207,47 @@ namespace isxao
 		{
 			if (ao::g_game_state != GAMESTATE_IN_GAME)
 				return;
+
+			this->auto_heading();
+
 			this->process();
 		}
 
 		void move_to::process()
-		{			
-			
+		{		
 			const auto p_character = P_ENGINE_CLIENT_ANARCHY->get_client_char();
 			const auto p_char_as_dynel = P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel();
+			auto new_heading = 0.0f;
 			this->current_distance_ = this->use_3d_ ? p_char_as_dynel->get_distance_3d_to(this->move_to_loc_) : p_char_as_dynel->get_distance_to(this->move_to_loc_);
 			if (ao::g_pulse_count % 360 == 0)
 			{
 				sprintf_s(message_, "Current distance to target at <%.2f, %.2f, %.2f> is %.2f.", this->move_to_loc_.x, this->move_to_loc_.y, this->move_to_loc_.z, this->current_distance_);
 				printf(message_);
 			}
+			// Stop if conditions are met
 			if (this->current_distance_ < this->distance_buffer_)
 			{
-				this->current_heading_ = this->heading_inactive_;
+				this->change_heading_ = this->heading_inactive_;
 				this->current_facing_ = this->facing_inactive_;
 				this->move_to_loc_ = this->move_to_loc_inactive_;
-				this->move_to_active_ = false;
+				this->set_active(false);
 				this->do_move(DIR_ALL, false);
 				sprintf_s(message_, "Made it to within %.2f units (%.2f) of target.", this->distance_buffer_, this->current_distance_);
 				printf(message_);
 				return;
 			}
-			else
-			{				
-				if (this->current_facing_ == this->facing_inactive_)
-					this->current_facing_ = p_character->get_facing_to(this->move_to_loc_);
-				if (this->current_heading_ == this->heading_inactive_)
-				{
-					this->current_heading_ = p_character->get_heading_to(this->move_to_loc_);
-					this->heading_error_ = 0.0f;
-					sprintf_s(message_, "Turning to %.2f degrees to face target at <%.2f, %.2f, %.2f>.", this->current_heading_, this->move_to_loc_.x, this->move_to_loc_.y, this->move_to_loc_.z);
-					printf(message_);
-				}
-				const auto facing_to = p_character->get_facing_to(this->move_to_loc_);
-				const 
-				this->use_3d_ ? this->turn_head(this->current_facing_) : this->turn_head(this->current_heading_);
-				this->do_move(DIR_FORWARD, true);
-			}
+			// Manage any needed change in heading.
+			new_heading = p_character->get_heading_to(this->move_to_loc_);
+			auto const diff_heading = fabs(this->change_heading_ - new_heading);
+			if (diff_heading > 1.0f)
+				this->change_heading_ = new_heading;
+			this->do_move(DIR_FORWARD, true);
 		}		
 
 		void move_to::fast_turn(const float new_heading)
 		{
 			if (ao::g_game_state != GAMESTATE_IN_GAME)
-				return;
+				return;			
 			P_ENGINE_CLIENT_ANARCHY->get_client_char()->face(new_heading);
 		}
 
@@ -232,39 +269,7 @@ namespace isxao
 		{
 			this->move_to_active_ = true;
 		}
-
-		void move_to::set_move_to_loc(const ao::vector3_t& loc)
-		{
-			if (ao::g_game_state != GAMESTATE_IN_GAME)
-				return;
-			if (this->use_3d_)
-				this->move_to_loc_ = loc;
-			else
-			{
-				const auto p_character = P_ENGINE_CLIENT_ANARCHY->get_client_char();
-				const auto p_char_as_dynel = p_character->to_dynel();
-				const ao::vector3_t offset_down(0.0f, -1000.0f, 0.0f);
-				const ao::vector3_t offset_up(0.0f, 1000.0f, 0.0f);
-				const auto test_down = ao::vector3_t::add(loc, offset_down);
-				const auto test_up = ao::vector3_t::add(loc, offset_up);
-				ao::vector3_t intersection(0.0f, 0.0f, 0.0f);
-				ao::vector3_t normal(0.0f, 0.0f, 0.0f);
-				if (P_PLAYFIELD_DIR->get_playfield()->get_surface()->get_line_intersection(
-					loc, test_down, intersection, normal, false, p_character->get_vehicle()))
-				{
-					this->move_to_loc_.copy(intersection);
-					return;
-				}
-				if (P_PLAYFIELD_DIR->get_playfield()->get_surface()->get_line_intersection(
-					loc, test_up, intersection, normal, false, p_character->get_vehicle()))
-				{
-					this->move_to_loc_.copy(intersection);
-					return;
-				}
-				this->move_to_loc_.copy(loc);
-			}
-		}
-
+		
 		void move_to::set_walk(const bool on) const
 		{
 			if (ao::g_game_state != GAMESTATE_IN_GAME)
@@ -284,11 +289,10 @@ namespace isxao
 				}
 			}
 		}
-
-
+		
 		void move_to::shutdown()
 		{
-
+			this->do_move(DIR_ALL, false);
 		}
 
 		void move_to::move_on(const move_direction direction)
@@ -505,7 +509,7 @@ namespace isxao
 			if (fabs(P_ENGINE_CLIENT_ANARCHY->get_client_char()->to_dynel()->get_heading() - new_facing.get_heading()) < this->degrees_rotation_this_frame())
 			{
 				move_to::fast_turn(new_facing);
-				this->current_heading_ = heading_inactive_;
+				this->change_heading_ = heading_inactive_;
 				this->current_facing_ = facing_inactive_;
 			}
 			else
@@ -553,6 +557,8 @@ namespace isxao
 		{
 			if (ao::g_game_state != GAMESTATE_IN_GAME)
 				return;
+			if (ao::g_pulse_count % 180 == 0)
+				printf("Adjusting heading to %.2f to face target location at <%.2f, %.2f, %.2f>.", heading, this->move_to_loc_.x, this->move_to_loc_.y, this->move_to_loc_.z);
 			switch (this->turn_type_)
 			{
 			case TT_LOOSE:

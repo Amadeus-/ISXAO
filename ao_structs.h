@@ -1,5 +1,7 @@
 #pragma once
 
+#include "identity_t.h"
+
 namespace ao
 {
 #pragma region Forward Declarations
@@ -60,23 +62,26 @@ namespace ao
 #pragma region Struct Definitions and Typedefines
 	
 #pragma region Common Structs (by alpha)
-	
+
+#ifndef _IDENTITY_T_H
+#define _IDENTITY_T_H
+
 	// Size = 0x08
 	typedef struct ao_identity
 	{
-		DWORD type;
-		DWORD id;
+		unsigned long type;
+		unsigned long id;
 
-		DWORD64 get_combined_identity() const
+		unsigned long long get_combined_identity() const
 		{
-			return (static_cast<UINT64>(type) << 32) | id;
+			return (static_cast<unsigned long long>(type) << 32) | id;
 		}
 
-		static struct ao_identity get_identity_from_combined(const DWORD64 combined)
+		static struct ao_identity get_identity_from_combined(const unsigned long long combined)
 		{
 			struct ao_identity id;
-			id.type = DWORD(combined >> 32);
-			id.id = DWORD(combined);
+			id.type = unsigned long(combined >> 32);
+			id.id = unsigned long(combined);
 			return id;
 		}
 
@@ -113,14 +118,16 @@ namespace ao
 			id = 0;
 		}
 
-		ao_identity(const DWORD t, const DWORD i)
+		ao_identity(const unsigned long t, const unsigned long i)
 		{
 			type = t;
 			id = i;
 		}
 
 	} identity_t, *p_identity_t;
-	
+
+#endif
+
 	// Size = 0x0C
 	typedef struct ao_vector3
 	{
@@ -1523,7 +1530,11 @@ namespace ao
 		BYTE unknown_0xF4[0x24];							// 0x00F4
 		i_point_t current_mouse_position;					// 0x0118
 		// ReSharper disable once CppInconsistentNaming
-		BYTE unknown_0x0120[0xB0];							// 0x0120
+		short last_key;										// 0x0120
+		short key_modifier_flags;							// 0x0122
+		unsigned char key_status_array[0x7E];				// 0x0124
+		unsigned char unknown_0x1A3[0x2D];					// 0x01A3
+															// 0x01D0
 	} input_config_t, *p_input_config_t;
 
 #pragma endregion

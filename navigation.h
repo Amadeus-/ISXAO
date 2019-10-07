@@ -61,12 +61,12 @@ namespace isxao
 		{
 		public:
 			move_to();
+			void activate(const ao::vector3_t&);
 			bool get_active();
 			void initialize();
 			void on_pulse();
 			void process();
-			void set_active(bool);
-			void set_move_to_loc(const ao::vector3_t&);
+			void set_active(bool);			
 			void shutdown();
 		private:
 			const ao::quaternion_t facing_inactive_ = ao::quaternion_t(FLT_MAX, FLT_MAX, FLT_MAX, FLT_MAX);
@@ -83,7 +83,7 @@ namespace isxao
 			bool command_strafe_;
 			float current_distance_;
 			ao::quaternion_t current_facing_;
-			float current_heading_;			
+			float change_heading_;			
 			float distance_buffer_;
 			float heading_error_;
 			ao::vector3_t move_to_loc_;
@@ -92,6 +92,7 @@ namespace isxao
 			turn_type turn_type_;
 			bool use_3d_;
 
+			void auto_heading();
 			static float check_heading(const float& heading);
 			void do_move(move_direction, bool turn_on, walk_type walk = WT_WALK_OFF);			
 			float degrees_rotation_this_frame() const;

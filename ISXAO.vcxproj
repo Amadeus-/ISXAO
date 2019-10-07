@@ -133,6 +133,7 @@
     <ClCompile Include="flow_control.cpp" />
     <ClCompile Include="graph_path_finder.cpp" />
     <ClCompile Include="html_parser.cpp" />
+    <ClCompile Include="identity.cpp" />
     <ClCompile Include="input_config.cpp" />
     <ClCompile Include="inventory_slot.cpp" />
     <ClCompile Include="isxao_commands.cpp" />
@@ -219,7 +220,10 @@
     <ClInclude Include="flow_control.h" />
     <ClInclude Include="game_object.h" />
     <ClInclude Include="html_parser.h" />
+    <ClInclude Include="identity.h" />
+    <ClInclude Include="identity_t.h" />
     <ClInclude Include="input_config.h" />
+    <ClInclude Include="input_config_t.h" />
     <ClInclude Include="isxao_classes.h" />
     <ClInclude Include="isxao_commands.h" />
     <ClInclude Include="ao_structs.h" />

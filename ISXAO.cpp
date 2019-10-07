@@ -169,6 +169,7 @@ bool ISXAO::Initialize(ISInterface *p_ISInterface)
 void ISXAO::Shutdown()
 {
 	isxao::move::shutdown();
+	
 	isxao::ShutdownLogging();
 	
 

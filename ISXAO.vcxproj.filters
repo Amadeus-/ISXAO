@@ -81,6 +81,12 @@
     <Filter Include="Source Files\Base\AO\Items">
       <UniqueIdentifier>{c920fcec-c08f-4f43-8382-b29e70fe0133}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Base\AO\Structs">
+      <UniqueIdentifier>{179e093e-dbf6-4384-8f94-1bb04ed0a42d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\AO\Structs">
+      <UniqueIdentifier>{a1754e3c-8cf4-444b-8b12-87f4e3e82af0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ISXAO.cpp">
@@ -331,6 +337,9 @@
     </ClCompile>
     <ClCompile Include="navigation.cpp">
       <Filter>Source Files\Base\ISXAO</Filter>
+    </ClCompile>
+    <ClCompile Include="identity.cpp">
+      <Filter>Source Files\Base\AO\Client</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -615,6 +624,15 @@
     </ClInclude>
     <ClInclude Include="navigation.h">
       <Filter>Header Files\Base\ISXAO</Filter>
+    </ClInclude>
+    <ClInclude Include="input_config_t.h">
+      <Filter>Header Files\Base\AO\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="identity_t.h">
+      <Filter>Header Files\Base\AO\Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="identity.h">
+      <Filter>Header Files\Base\AO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

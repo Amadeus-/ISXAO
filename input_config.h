@@ -9,12 +9,13 @@ namespace ao
 	typedef ao_identity identity_t, *p_identity_t;
 	//typedef ao_keypress_info keypress_info_t, *p_keypress_info_t;
 
-	class input_config
+	class input_config : public game_object<ao::input_config_t>
 	{
 	public:
 		void set_current_target(const ao::identity_t&);
 		static const char* get_method_id_name(unsigned long);
 		static const char* get_mode_id_name(unsigned long);
 		char process_input(ao::keypress_info_t, unsigned long);
+		bool is_key_down(ao::input_model_e);
 	};
 }

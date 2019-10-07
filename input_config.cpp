@@ -40,6 +40,15 @@ namespace ao
 	}
 #endif
 
+#if false
+	static_assert(false, "input_config::get_mode_id_name(const DWORD id) does not have a native function.");
+#else
+	bool input_config::is_key_down(const ao::input_model_e key)
+	{
+		return get_data()->key_status_array[key] != 1;
+	}
+#endif
+
 #if true
 	// ReSharper disable once CppMemberFunctionMayBeStatic
 	// ReSharper disable once CppMemberFunctionMayBeConst
