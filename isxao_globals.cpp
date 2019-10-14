@@ -468,13 +468,13 @@ namespace ao
 
 	#pragma endregion
 
-#pragma region Collision
+	#pragma region Collision
 
 		DWORD cell_surface_t__get_all_triangles = 0;
 		DWORD cell_surface_t__get_line_intersection_1 = 0;
 		DWORD cell_surface_t__get_line_intersection_2 = 0;
 
-#pragma endregion
+	#pragma endregion
 
 	#pragma region vTable
 
@@ -953,8 +953,8 @@ namespace ao
 
 	#pragma region Interfaces
 
-				// Module
-				GetModuleInformation(process_handle, interfaces_module_handle, &interfaces_module_info, sizeof(interfaces_module_info));
+			// Module
+			GetModuleInformation(process_handle, interfaces_module_handle, &interfaces_module_info, sizeof(interfaces_module_info));
 			// ReSharper disable once CppLocalVariableMayBeConst
 			auto interfaces_module_base = DWORD(interfaces_module_handle);
 			const auto interfaces_data_begin = reinterpret_cast<unsigned char*>(interfaces_module_base);

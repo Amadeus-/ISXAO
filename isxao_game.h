@@ -2655,6 +2655,8 @@ constexpr DWORD cell_surface_t__get_line_intersection_2_bytes_to_next = 0x0;
 
 #pragma endregion
 
+#pragma endregion
+
 #pragma region EngineClientAnarchy
 
 // #define n3EngineClientAnarchy_t__GetFactionStr_x							0x16942
